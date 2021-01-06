@@ -628,7 +628,7 @@
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">LISTE DES LOTS SAISIS </div></div> 
             <div class="col-md-1 ">
-			 <p:commandLink action="#{daoController.chargeImputationModif()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+			 <p:commandLink action="#{daoController.chargeImputationModif()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":lotlog">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Générer
 			</p:commandLink>
 		</div>
@@ -746,7 +746,7 @@
 				      </p:column>
 				        
                          <p:column width="3%">
-				              <p:commandLink action="#{daoController.chargeImputation()}" oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+				              <p:commandLink action="#{daoController.chargeImputationModif()}" oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update=":dlogLign">
 				              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 							<i class="fa fa-plus"></i>
 						  </p:commandLink>
@@ -754,7 +754,7 @@
                          
 
 				         <p:column headerText="Actions" width="5%">
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLotModif}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
@@ -1765,13 +1765,13 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="natLigne" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeImputations}"
+						 <p:dataTable id="natLigne" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeImputationsModif}"
 						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 				         
 				          <p:column headerText="Imputation" styleClass="col-sm-3" >
-                          <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" update="gnl">				        
+                          <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaireModif()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.lbgImputation}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                           </h:commandLink>
@@ -1826,7 +1826,7 @@
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="empty" />  
-			       <f:selectItems value="#{daoController.listeImputations}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
+			       <f:selectItems value="#{daoController.listeImputationsModif}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -1916,7 +1916,7 @@
 	                
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
+			            <p:commandLink action="#{daoController.genererLotModif()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
               </div>
@@ -2014,7 +2014,7 @@
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":gnl">
+			            <p:commandLink action="#{daoController.saveLotModif()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>

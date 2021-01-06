@@ -127,6 +127,7 @@ public class DaoController {
 	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
 	//private List<VDelaiValiditeOffre> delaiValidite = new ArrayList<VDelaiValiditeOffre>();
 	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
+	 private List<VLigneLot> listeImputationsModif = new ArrayList<VLigneLot>();
 	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
@@ -4087,16 +4088,19 @@ public class DaoController {
 							_logger.info("objetListe size: "+listeLots.size());	
 					}
 				   
-				   public void recupererCaution() {
+				   public void recupererCaution(String dacCode) {
 					   listeDAO.clear();
 					   listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-							   new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+							   new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dacCode));
 						if (!listeDAO.isEmpty()) {
 							caution=listeDAO.get(0);
 						}
 				   }
+				   
+				   
+				  
 				   public void calculCaution() {
-					        recupererCaution();
+					        recupererCaution(dao.getDacCode());
                            // convertir string en long
 					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
 					        // convertir string en double
@@ -4277,7 +4281,7 @@ public class DaoController {
 				     
 				     
 				     public void calculCautionSaisie() {
-					        recupererCaution();
+				    	 recupererCaution(slctdTd.getDacCode());
                             // convertir string en long
 					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
 					        // convertir string en double
@@ -4363,6 +4367,65 @@ public class DaoController {
 				    	 }
 					}
 					 
+					 
+					 //Ajouter manuellement un lot
+					 @Transactional
+				    public void saveLotModif(){
+				    	  //getNbreLotTotal();
+				    	 if(slctdTd.getAaoNbrLot() > lotTotal) {
+				    		 String str = ""+newLot.getLaaMtEst();
+						        Double  mtEstim = Double.parseDouble(str);
+						        
+						        String strMtCaut = ""+newLot.getLaaMtCaut();  
+						        Double  montantCaut = Double.parseDouble(strMtCaut);
+						        
+								cautionMin = caution.getCautValMin() * mtEstim;
+								cautionMax = caution.getCautValMax() * mtEstim;
+								if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
+						    		   panelCaution = false;
+						    		   
+						    		   List<TDacSpecs> DAC  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+						    		   TDacSpecs dao = new TDacSpecs();
+										if(!DAC.isEmpty()) dao = DAC.get(0);
+										
+										List<TAvisAppelOffre> AVI  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+										TAvisAppelOffre avis = new TAvisAppelOffre();
+										if(!AVI.isEmpty()) avis = AVI.get(0);
+										
+				    		 newLot.setTDacSpecs(dao);
+				    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+				    		 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
+				    		 newLot.setLaaCoutLot(coutLot);
+				    		 newLot.setTAvisAppelOffre(avis);
+				        	 iservice.addObject(newLot);
+				        	 chargeLotsModif();
+				        	 montantTotalLotModif();
+				        	 newLot = new TLotAao();
+							 
+							 //Activation du pavet de saisie des pièces des offres 
+				        	 userController.setTexteMsg("Lot enregistré avec succès !");
+							 userController.setRenderMsg(true);
+							 userController.setSevrityMsg("success");
+								}
+								else
+								{
+									cautionMinRound = Math.round(cautionMin);
+									cautionMaxRound = Math.round(cautionMax);
+									 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+									 FacesContext.getCurrentInstance().addMessage(null, msg);
+									 panelCaution = true;
+								}
+				    	 }else {
+				    		
+				    		/* userController.setTexteMsg("Veuillez respecter le nombre de lots renseignÃ¯Â¿Â½ !");
+							 userController.setRenderMsg(true);
+							 userController.setSevrityMsg("success");*/
+							 
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
+							 FacesContext.getCurrentInstance().addMessage(null, msg);
+				    	 }
+					}
+					 
 					 //Mis à  jour du libellé de lot
 				        public void updateLibLot() {
 				        	     lot.setLaaObjet(lot.getLaaObjet());
@@ -4401,6 +4464,22 @@ public class DaoController {
 				   		 }
 				   	 }
 				   	 
+					 public void removeLotModif() {
+				   		 System.out.print("+-------------+ "+getSelectLot().getLaaNum());
+				   		 try {
+				   			 iservice.deleteObject(getSelectLot());
+				   				chargeLotsModif();
+				   				userController.setTexteMsg("Suppression effectuée avec succès !");
+				   				userController.setRenderMsg(true);
+				   				userController.setSevrityMsg("success");
+
+				   		 } catch (org.hibernate.exception.ConstraintViolationException e) {
+				   			 userController.setTexteMsg("Impossible de supprimer le lot !");
+				   			 userController.setRenderMsg(true);
+				   			 userController.setSevrityMsg("danger");	 
+				   		 }
+				   	 }
+				   	 
 				   	 public void onSelectLigneBudgetaire() {
 				         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
 						 recupLigne = new VLigneLot();
@@ -4427,6 +4506,35 @@ public class DaoController {
 						 iservice.updateObject(getSelectLot());
 						 chargeLots();
 						 montantTotalLot();
+						 
+							}
+				   	 //Ecran de modification
+				   	 public void onSelectLigneBudgetaireModif() {
+				         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+						 recupLigne = new VLigneLot();
+						 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
+						 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
+						 recupLigne.setLbgAeTr(ligne.getLbgAeTr());
+						 recupLigne.setLbgAnoCode(ligne.getLbgAnoCode());
+						 recupLigne.setLbgCode(ligne.getLbgCode());
+						 recupLigne.setLbgDesCode(ligne.getLbgDesCode());
+						 recupLigne.setLbgDisDon(ligne.getLbgDisDon());
+						 recupLigne.setLbgDisEmp(ligne.getLbgDisEmp());
+						 recupLigne.setLbgDisTot(ligne.getLbgDisTot());
+						 recupLigne.setLbgDisTre(ligne.getLbgDisTre());
+						 recupLigne.setLbgDteVal(ligne.getLbgDteVal());
+						
+						 recupLigne.setLbgNatCode(ligne.getLbgNatCode());
+						 recupLigne.setLbgImputation(ligne.getLbgImputation());
+						 recupLigne.setLbgGesCode(ligne.getLbgGesCode());
+						 recupLigne.setLbgResDon(ligne.getLbgResDon());
+						 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
+						 recupLigne.setNatLibelle(ligne.getNatLibelle());
+						 selectLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+
+						 iservice.updateObject(getSelectLot());
+						 chargeLotsModif();
+						 montantTotalLotModif();
 						 
 							}
 				   	 
@@ -4874,15 +4982,18 @@ public class DaoController {
 								 listeImputations.clear();
 								 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 										 new WhereClause("DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
-								 recupererCaution();
+								 recupererCaution(dao.getDacCode());
 								
 									} 
 							  
+							  
+							//Chargement des imputations ou lignes budgÃ¯Â¿Â½taires pour le AC
+							  
 							  public void chargeImputationModif() { 
-									 listeImputations.clear();
-									 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+								  listeImputationsModif.clear();
+								  listeImputationsModif =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 											 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
-									 recupererCaution();
+									 recupererCaution(slctdTd.getDacCode());
 									
 										} 
 							  
@@ -13385,6 +13496,14 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 
 	public void setListMargeModif(List<VMargeDePreference> listMargeModif) {
 		this.listMargeModif = listMargeModif;
+	}
+
+	public List<VLigneLot> getListeImputationsModif() {
+		return listeImputationsModif;
+	}
+
+	public void setListeImputationsModif(List<VLigneLot> listeImputationsModif) {
+		this.listeImputationsModif = listeImputationsModif;
 	}
 	
 	
