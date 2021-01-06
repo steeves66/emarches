@@ -13,7 +13,6 @@
       <h3>
        <!-- #{controleController.libelle}  -->
        EXAMEN DU DOSSIER D'APPEL A CONCURRENCE
-       <!-- #{controleController.smallLibelle}  -->
       </h3>
       <ol class="breadcrumb">
       <li>
@@ -419,7 +418,7 @@
 	                 <div class="col-sm-10">
                       <p:selectOneMenu value="#{daoController.resultat}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-						       <f:selectItem  itemLabel="Choisir le resultat" itemValue="empty" />  
+						       <f:selectItem  itemLabel="Choisir le resultat"/>  
 						       <f:selectItem  itemLabel="Validé" itemValue="Validé" />    
 						       <f:selectItem  itemLabel="Rejeté" itemValue="Rejeté" />  
 			       		        </p:selectOneMenu>
@@ -439,7 +438,6 @@
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
               </div>
-	       
 	       
         </div>
         </div>
