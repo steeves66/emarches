@@ -330,6 +330,7 @@ public class DaoController {
 	 private VLigneLot ligne = new VLigneLot();
 	 private VLigneLot recupLigne = new VLigneLot();
 	 private List<VMargeDePreference> listMarge = new ArrayList<VMargeDePreference>();
+	 private List<VMargeDePreference> listMargeModif = new ArrayList<VMargeDePreference>();
 	 private VFonctionMinistere fonction =new VFonctionMinistere();
 	 private TAdresseAvis newAdresse = new TAdresseAvis(); 
 	 private TDetailAdresseAvis newDtailAdresse = new TDetailAdresseAvis(); 
@@ -528,10 +529,69 @@ public class DaoController {
 			     }
 			 
 			 //Pavet Lot
-			 if(event.getOldStep().equals("tabLot") && event.getNewStep().equals("Poffre")) {
+			 if(event.getOldStep().equals("creation") && event.getNewStep().equals("Poffre")) {
 				 controlLotDao();
 				 userController.initMessage();
 			     }
+			 
+			 
+			 ////////////////////ECRAN DE MODIFICATION///////////////////////////////
+			//Controle Pavé création modification
+			 if(event.getOldStep().equals("creationModif") && event.getNewStep().equals("avisModif")) {
+				 if("".equals(daoDetail.getTymCode()) || "".equalsIgnoreCase(daoDetail.getMopCode()) 
+						 ||"".equals(daoDetail.getDppObjet()) ) 
+				 {
+					 FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
+			          return "creationModif";
+					} 
+	               userController.initMessage(); 
+	               actionsPavetCreation();
+			     }
+			      
+			     //Controle Pavé avis modification
+			      if(event.getOldStep().equals("avisModif") && event.getNewStep().equals("tabLotModif")) {
+			    	actionsPavetLot();
+				  }
+			      
+			    //Controle Pavé lot modification
+			      if(event.getOldStep().equals("tabLotModif") && event.getNewStep().equals("critereModif")) {
+				  //Ici
+				  }
+			      
+			    //Controle Pavé criterebylot modification
+			      if(event.getOldStep().equals("critereModif") && event.getNewStep().equals("criterebyLotModif")) {
+			    	  factoriserNext();
+					  listeCritereByLot.clear();
+				  }
+			      
+			    //Controle Pavé criterebylot modification contraire
+			      if(event.getOldStep().equals("criterebyLotModif") && event.getNewStep().equals("critereModif")) {
+			    	  chargeLotConsultation();
+				  }
+			      
+			    //Controle Pavé cojo modification
+			      if(event.getOldStep().equals("criterebyLotModif") && event.getNewStep().equals("cojoModif")) {
+			    	  chargeArticle();
+						 listeLotCritere.clear();
+						 listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+								new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+						 if(!listeLotCritere.isEmpty()) { 
+							 lotCrit=listeLotCritere.get(0);
+							 if(lotCrit.getCritOk() != 0) {
+								 FacesContext.getCurrentInstance().addMessage(null,
+										 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
+								 return "criterebyLotModif";
+							 }
+					     }
+				  }
+			
+			    //Controle Pavé Dossier modification
+			      if(event.getOldStep().equals("cojoModif") && event.getNewStep().equals("DossiersModif")) {
+				  //Ici
+				  }
+			  
+           ////////////////////FIN ECRAN DE MODIFICATION///////////////////////////////
 			
 		      return event.getNewStep();
 		      
@@ -625,6 +685,17 @@ public class DaoController {
 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 	 }
 	 
+	 
+	 
+	 
+	 //Affichage des marges de préférence de l'avis en cours
+	 public void listeMargePrefModif() {
+		 listMargeModif.clear();
+		 listMargeModif = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		 _logger.info("listMarge : "  +""+slctdTd.getDacCode()+" " +listMargeModif.size());
+	 }
+	 
 	 //Gestion des marges de préférence
 	 public void saveMarge (String marge) {
 		 List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+sltMarge.getDacCode()));
@@ -655,6 +726,39 @@ public class DaoController {
 			    }
 		    }
 	 }
+	 
+	 
+	 public void saveMargeModif (String marge) {
+		 List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+sltMarge.getDacCode()));
+		 TDacSpecs dac = new TDacSpecs(); 
+		 if(!LS.isEmpty()) dac = LS.get(0);
+		    if(sltMarge.getOrdre().equalsIgnoreCase("1")) {
+		    	  dac.setDacMargePrefSou(""+marge);
+		    	  dac.setDacMargePrefCom("N");
+		    	  dac.setDacMargePrefArt("N");
+		    	  dac.setDacMargePrefSouVal(sltMarge.getTauxMargePref());
+				  iservice.updateObject(dac);
+				  listeMargePrefModif();
+		    }else {
+		    	if(sltMarge.getOrdre().equalsIgnoreCase("2")) {
+		    		dac.setDacMargePrefCom(""+marge);
+		  		    dac.setDacMargePrefComVal(sltMarge.getTauxMargePref());
+		  		    dac.setDacMargePrefSou("N");
+		  		    iservice.updateObject(dac);
+		  		  listeMargePrefModif();
+			    }else {
+			    	   if(sltMarge.getOrdre().equalsIgnoreCase("3")) {
+			    		   dac.setDacMargePrefArt(""+marge);
+					       dac.setDacMargePrefArtVal(sltMarge.getTauxMargePref());
+					       dac.setDacMargePrefSou("N");
+						   iservice.updateObject(dac);
+						   listeMargePrefModif();
+				      }
+			    }
+		    }
+	 }
+	 
+	 
 	 
 	 //Matérialisation du DAO en statut d'Affectation
 	 public void updateDao() {
@@ -3809,6 +3913,7 @@ public class DaoController {
 							  new WhereClause("ADA_NUM",Comparateur.EQ,""+numDetailAdr)); 
 				  }
 				  
+				  
 				//Enregistrement d'une adresse
 				  public void saveAdresse() {
 					newAdresse.setTFonction(userController.getSlctd().getTFonction());
@@ -3827,6 +3932,19 @@ public class DaoController {
 							 newDtailAdresse.setTLibelleAdresse(new TLibelleAdresse(numLibAdr)); 
 							 iservice.addObject(newDtailAdresse); 
 							 chargeDetailAdresse();
+						  }else {
+							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sélectionnez le type d'adresse!", ""));
+						  }
+						
+					  }
+				  
+				  //Enregistrement d'adresse dans l'ecran de modification
+				  public void saveDetailAdresseModif() {
+						 if(slctdTd.getAdaNum().longValueExact()>0) {
+							 newDtailAdresse.setTAdresseAvis(new TAdresseAvis(slctdTd.getAdaNum().longValueExact()));
+							 newDtailAdresse.setTLibelleAdresse(new TLibelleAdresse(numLibAdr)); 
+							 iservice.addObject(newDtailAdresse); 
+							 chargeDetailAdresseModif();
 						  }else {
 							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sélectionnez le type d'adresse!", ""));
 						  }
@@ -3856,7 +3974,7 @@ public class DaoController {
 							 //getListeDAO().clear();
 							 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
-								_logger.info("objetListe size: "+listeLots.size());	
+								_logger.info("lots size: "+listeLots.size());	
 								//montantTotalLot();
 						}
 					  //Cumul des montants estimatif
@@ -3865,6 +3983,21 @@ public class DaoController {
 						  totalMontantCaution = 0;
 						  listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
 									new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+						 
+							 for(TLotAao n : listeLots) {
+								 totalMontantEstimatif = (totalMontantEstimatif + n.getLaaMtEst()); 
+								 totalMontantCaution = (totalMontantCaution + n.getLaaMtCaut()); 
+							 }
+							 
+						 }
+					  
+					  
+					  //Cumul des montants estimatif
+					  public void montantTotalLotModif() {
+						  totalMontantEstimatif = 0;
+						  totalMontantCaution = 0;
+						  listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
+									new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 						 
 							 for(TLotAao n : listeLots) {
 								 totalMontantEstimatif = (totalMontantEstimatif + n.getLaaMtEst()); 
@@ -3893,6 +4026,17 @@ public class DaoController {
 							 listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 
 									 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+								_logger.info("listeLots size: "+listeLots.size());	
+								//montantTotalLot();
+								lotTotal = getNbreLotTotal();
+						}
+					  
+					  
+					  public void chargeLotsModif(){
+							 //getListeDAO().clear();
+							 listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 
+									 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 								_logger.info("listeLots size: "+listeLots.size());	
 								//montantTotalLot();
 								lotTotal = getNbreLotTotal();
@@ -4039,6 +4183,71 @@ public class DaoController {
 											  //Activation du pavet de saisie des pièces des offres 
 						                      pavet_offre = true; 
 						                      pavet_critere= true;
+							    	   }else {
+							    			cautionMinRound = Math.round(cautionMin);
+											cautionMaxRound = Math.round(cautionMax);
+											
+											DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
+											symbols.setGroupingSeparator(' ');
+
+											DecimalFormat formatter = new DecimalFormat("###,###.##", symbols);
+											System.out.println(formatter.format(cautionMin));
+											System.out.println(formatter.format(cautionMaxRound));
+											
+											
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+formatter.format(cautionMin)+" et "+formatter.format(cautionMax),"");
+											 FacesContext.getCurrentInstance().addMessage(null, msg);
+											 panelCaution = true;
+							    	   }
+							       }
+							       else
+							       {
+										 
+										 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
+										 FacesContext.getCurrentInstance().addMessage(null, msg);
+							       }
+				    	      }
+					 }
+				     
+				     
+                        public void genererLotModif() {  
+				    	 if(imputation.equalsIgnoreCase("")) {
+				    	
+				    		 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir votre imputation ! ","");
+							 FacesContext.getCurrentInstance().addMessage(null, msg);
+				    		 
+				    	    }else {
+				    		 					    	 
+							       if(slctdTd.getAaoNbrLot() > lotTotal) {
+							    	   String str = ""+newVbTemp.getLaaMtEst();
+								        Double  mtEstim = Double.parseDouble(str);
+								        
+								        String strMtCaut = ""+newVbTemp.getTempLaaCautLot();
+								        Double  montantCaut = Double.parseDouble(strMtCaut);
+								        
+										cautionMin = caution.getCautValMin() * mtEstim;
+										cautionMax = caution.getCautValMax() * mtEstim;
+							    	   if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
+							    		   panelCaution = false;
+											  newVbTemp.setTempLaaAaoCode(slctdTd.getAaoCode());
+								        	  newVbTemp.setTempLaaDacCode(slctdTd.getDacCode());
+								    		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
+								    		  //newVbTemp.setTempLaaMtLot("0");
+								    		  //newVbTemp.setTempLaaCautLot("0");
+								    		  newVbTemp.setTempLaaImputation(imputation);
+								    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(slctdTd.getAaoNbrLot()));//Convertir un long en String
+								    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+								    		  newVbTemp.setTempType("LOT");
+								    		  iservice.addObject(newVbTemp);
+								    		  chargeLotsModif();
+								    		  montantTotalLotModif();
+								    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
+								    		  userController.setRenderMsg(true);
+								    		  userController.setSevrityMsg("success");
+											  
+											  //Activation du pavet de saisie des pièces des offres 
+						                     // pavet_offre = true; 
+						                      //pavet_critere= true;
 							    	   }else {
 							    			cautionMinRound = Math.round(cautionMin);
 											cautionMaxRound = Math.round(cautionMax);
@@ -4474,6 +4683,18 @@ public class DaoController {
 						 }
 					 }
 					 
+					 public void checkMargePrefModif() {
+						 if(slctdTd.getDacMargePref().equalsIgnoreCase("O")) { 
+							 majPreference();
+							 etatMargePreference = true;
+							 listeMargePref();
+						 }else 
+						 {
+							 reiniPreference();
+							 etatMargePreference = false; 
+						 }
+					 }
+					 
 					//Variante (OUI/NON)
 					 public void majVariante (String variante) {
 						 List<TLotAao> LOT  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
@@ -4483,6 +4704,17 @@ public class DaoController {
 						 iservice.updateObject(lo);	
 						 //Actualisation des critères
 						 chargeLots();
+					 }
+					 
+					//Variante (OUI/NON) en modification
+					 public void majVarianteModif(String variante) {
+						 List<TLotAao> LOT  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
+						 TLotAao lo = new TLotAao(); 
+						 if(!LOT.isEmpty()) lo = LOT.get(0);
+						 lo.setLaaVariante(""+variante);
+						 iservice.updateObject(lo);	
+						 //Actualisation des critères
+						 chargeLotsModif();
 					 }
 					 
 					 
@@ -4645,6 +4877,14 @@ public class DaoController {
 								 recupererCaution();
 								
 									} 
+							  
+							  public void chargeImputationModif() { 
+									 listeImputations.clear();
+									 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+											 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
+									 recupererCaution();
+									
+										} 
 							  
 							  
 							//Chargement des fonctions Ã  imputer pour le Chef de Service
@@ -4972,8 +5212,8 @@ public class DaoController {
 								 //Chargement des piÃ¯Â¿Â½ces du Dao
 								 public void chargePiecesDao() {
 									 listePiecesDao.clear();
-									 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_LIBELLE")),
-											    new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+updateDac.getDacCode())));
+									 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_CODE")),
+											    new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
 
 								 }	
 								 
@@ -6366,6 +6606,25 @@ public class DaoController {
 					 		   }	
 						     }
 	     //Fin de la methode de Publication
+			  
+			  
+			  
+	 //Ensembles methode Ecran de modification
+			  public void actionsPavetCreation() {
+				 chargeDetailAdresseModif();
+		         chargeAdresse();
+		         listeMargePrefModif();
+		         checkMargePrefModif();
+		         chargeLibelleAdresse();  
+			  }
+			  
+		public void actionsPavetLot() {
+			chargeLotsUpdate();
+			montantTotalLotModif();
+		}
+			
+         
+       //Fin Ensembles methode Ecran de modification
 		     
 		     
 		     
@@ -6452,9 +6711,6 @@ public class DaoController {
                 case "dao11":
                 	chargePiecesDao();
                 	chargePPM();
-                	chargeDetailAdresseModif();
-                	chargeAdresse();
-                	chargeLotsUpdate();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;	
 			    }
@@ -13121,6 +13377,14 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 
 	public void setPlan(String plan) {
 		this.plan = plan;
+	}
+
+	public List<VMargeDePreference> getListMargeModif() {
+		return listMargeModif;
+	}
+
+	public void setListMargeModif(List<VMargeDePreference> listMargeModif) {
+		this.listMargeModif = listMargeModif;
 	}
 	
 	
