@@ -687,6 +687,8 @@ public class CommissionController {
 		 listPiecesOuv.clear();
 		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+				 new WhereClause("DOF_NCC",Comparateur.EQ,""+candidat.getSouNcc()), 
+				 new WhereClause("DOF_TYP",Comparateur.EQ,""+dofTyp), 
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
 	 }
 	 
