@@ -295,7 +295,8 @@ public class PpmController {
 		 private String observation="";
 		 private String natPiece ="";
 		 private String typProce ="";
-		 private String tydCode ="";
+		 //private String tydCode ="";
+		 private String tydCode;
 		 private String pslInf ="30000000";
 		 private String pslSup ="50000000";
 		 private String psoInf ="50000000";
@@ -449,6 +450,7 @@ public class PpmController {
 		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 						        	        creerDetailPassation(pgpm.getMopTypPlan());
+						        	        userController.initMessage();
 		                    		  }
 						        }else {
 						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
@@ -456,6 +458,7 @@ public class PpmController {
 			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 	                    		      }else {
 	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
+	                    		    	  userController.initMessage();
 	                    		      }
 						        	//creerDetailPassation(pgpm.getMopTypPlan());
 						        	//creerDetailPassation(modePassation.getMopTypPlan());
@@ -469,6 +472,7 @@ public class PpmController {
 		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
+		                    		         userController.initMessage();
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
@@ -476,6 +480,7 @@ public class PpmController {
 				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
 		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
+		                    		    	  userController.initMessage();
 		                    		      }
 		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
 		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
@@ -3492,7 +3497,7 @@ public class PpmController {
          	}
          }
          
-         //
+         //Si la source de financement est ETAT alors montant en tresor = montant en devise
          public void recupUpdate() {
         	 if(sourfin.equalsIgnoreCase("ETAT")) {
         		 updatefinance.fppPartTresor = updatefinance.getFppMontantDevise().longValue();
@@ -3799,7 +3804,6 @@ public class PpmController {
 	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
 	  		
              if(controleController.type == "PPM") { 
-            	 
             	 if(marche.getTymCode() == null) {
             	  detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode())); 
             	 }else {
@@ -3841,6 +3845,8 @@ public class PpmController {
      	        		detailPass.setDppDppId(recupPrqDp.getDppId());
           	  		    iservice.addObject(detailPass); 	
      	        	}
+     		    
+
              }else 
                   if(controleController.type == "PSPM"){
                 	
@@ -3951,10 +3957,10 @@ public class PpmController {
 		 }
 	  	 
 	  	 //Mis à jour des dates prévisionnelles
-	  	 @Transactional
+	  	 //@Transactional
 	  	 public void majDate() {
 	  		 
-	  		 if(tydCode == null) {
+	  		 if(tydCode.equalsIgnoreCase("")) {  
        		  FacesContext.getCurrentInstance().addMessage(null,
         	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
        	      }else {

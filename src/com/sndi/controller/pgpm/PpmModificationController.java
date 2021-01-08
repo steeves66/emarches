@@ -183,6 +183,7 @@ public class PpmModificationController {
 		 private List<VModePassationPn> listeModePassationPn = new ArrayList<VModePassationPn>();
 		 private List<VFinancementPpm> listeFinancementAmi = new ArrayList<VFinancementPpm>();
 		 private List<VFinancementPpm> listeFinancementPrq = new ArrayList<VFinancementPpm>();
+		 private List<VTypeMarcheFils> listeTypeMarchesFilsPs = new ArrayList<VTypeMarcheFils>();
 		 //private List<TAffichagePpm> validationListe = new ArrayList<TAffichagePpm>();
 		 private List<VPpmliste> validationListe = new ArrayList<VPpmliste>();
 		 private List<TAffichagePpm>listSelectionTransmission =new ArrayList<TAffichagePpm>();
@@ -1644,6 +1645,8 @@ public class PpmModificationController {
 		 public void deleteFinanacement() {
 			iservice.deleteObject(selectFinance); 
 			chargeFinancement();
+			coutTotal();
+			coutOperation();
 			userController.setTexteMsg("Suppression éffectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
@@ -1814,8 +1817,6 @@ public class PpmModificationController {
 					 userController.setSevrityMsg("success");
 	  	   }
 	  	
-	  	 
-	  	 
 	  	//Methode de récupération de t_detail_plan_passation dans t_affichage_ppm
 		 public void editForm() {
 		    			listUpdate= (List<VUpdatePpm>) iservice.getObjectsByColumn("VUpdatePpm", new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -1825,15 +1826,14 @@ public class PpmModificationController {
 		    				affichageModele();
 		    			}
 		      }
-		 
 		 //Afficher les financements du projet ou pgpm selectionné
 		 public void chargeFinancementUpdate() {
 			 listeFinancement.clear();
 			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
-						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getDppId())));
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+updatePpm.getDppId())));
 			 coutOperation();
+			 coutTotal();
 		 }
-		 
 		//Methode d'enregistrement des financements du ppm
 		 public void saveFinancementppm() {
 			//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
@@ -1841,8 +1841,7 @@ public class PpmModificationController {
 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 			     TDetailPlanPassation pass = new TDetailPlanPassation();
 				 if(!PL.isEmpty()) {pass =PL.get(0);} 
-				     
-			 
+		  //
 		  if(sourfin.equalsIgnoreCase("ETAT")) {
 			 baiCode ="ETAT";
      	     newFinancement.setTBailleur(new TBailleur(baiCode)); 
@@ -1855,8 +1854,6 @@ public class PpmModificationController {
 		    newFinancement.setFppTypeFinance(sourfin);
 		    newFinancement.setTDetailPlanPassation(pass);
 			iservice.addObject(newFinancement);
-			//Actualisation du coût prévisionnel de l'opération
-			coutTotal();
 			
 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
@@ -1866,15 +1863,23 @@ public class PpmModificationController {
 				detPass.setDppMontant(totalMontantPpm);
 				iservice.updateObject(detPass);
 			}
-			
+			//Actualisation du coût prévisionnel de l'opération
+			coutTotal();
+			coutOperation();
 			viderFinancement();
-			
 			//chargeFinancement();
 			chargeFinancementUpdate();
 			userController.setTexteMsg("Enregistrement éffectué avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		 }
+         
+         //Si la source de financement est ETAT alors montant en tresor = montant en devise
+         public void recupUpdate() {
+        	 if(sourfin.equalsIgnoreCase("ETAT")) {
+        		 updatefinance.fppPartTresor = updatefinance.getFppMontantDevise().longValue();
+        	 }
+         }
 		 
 		 
     	 //suppression de financement update
@@ -1884,6 +1889,7 @@ public class PpmModificationController {
 				 iservice.deleteObject(getSelectFinance());
 					chargeFinancementUpdate();
 					coutOperation();
+					coutTotal();
 					userController.setTexteMsg("Suppression effectuée avec succès !");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
@@ -1907,6 +1913,8 @@ public class PpmModificationController {
 			 iservice.updateObject(selectFinance);
 			 
 			 chargeFinancement();
+			 coutTotal();
+			 coutOperation();
 			 userController.setTexteMsg("Suppression éffectuée avec succès!");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");  
@@ -2305,7 +2313,7 @@ public class PpmModificationController {
 			         }
 				 
 				
-				
+				//Methode
 				 public void coutOperation() {
 					 totalMontant = 0;
 					 for(TFinancementPpm n : listeFinancement) {
@@ -4285,6 +4293,16 @@ public class PpmModificationController {
 
 	public void setFinLib(String finLib) {
 		this.finLib = finLib;
+	}
+
+
+	public List<VTypeMarcheFils> getListeTypeMarchesFilsPs() {
+		return listeTypeMarchesFilsPs;
+	}
+
+
+	public void setListeTypeMarchesFilsPs(List<VTypeMarcheFils> listeTypeMarchesFilsPs) {
+		this.listeTypeMarchesFilsPs = listeTypeMarchesFilsPs;
 	}
 
 }

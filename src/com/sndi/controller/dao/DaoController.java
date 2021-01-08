@@ -398,6 +398,7 @@ public class DaoController {
 	  private String nbreDaoTrans ="";
 	  private String sit = "";
 	  private String resultat = "";
+	  private String avisRespo = "";
 	  private String value1 ="N";
 	  private String margePref ;
 	  private String statutSanction = "";
@@ -5505,7 +5506,7 @@ public class DaoController {
 										           if (!listCorrection.isEmpty()) {
 										        	 daoCorr= listCorrection.get(0);
 										        	 daoCorr.setCorObservationRespo(getObservationCor());
-										        	 daoCorr.setCorResultatRespo(resultat);
+										        	 daoCorr.setCorResultatRespo(avisRespo); 
 												     iservice.updateObject(daoCorr);
 												 
 												     //Message de confirmation
@@ -5705,7 +5706,7 @@ public class DaoController {
 				
 				
 									//Validation des corrections
-									  @Transactional 
+									/*@Transactional 
 									 public void resultatCorrection() {
 										  
 										  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
@@ -5722,7 +5723,7 @@ public class DaoController {
 														  statutSanRetour ="0";
 														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
 														      {
-														    	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+														    	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
 																			new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 																			if (!listAvis.isEmpty()) {
 																				                 //Mis ÃƒÂ  jour du statut
@@ -5730,11 +5731,11 @@ public class DaoController {
 																				                 majAvis.setTStatut(new TStatut(statutSanction));
 																				                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
 																				                 iservice.updateObject(majAvis);
-																			                       }*/
+																			                       }
 														    	
 														         }else {
 														        	 
-														        	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+														        	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
 																				new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 																				if (!listAvis.isEmpty()) {
 																					                 //Mis à  jour du statut
@@ -5742,10 +5743,9 @@ public class DaoController {
 																					                 majAvis.setTStatut(new TStatut("APU"));
 																					                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
 																					                 iservice.updateObject(majAvis);
-																				                       }*/
+																				                       }
 														                  }
 														    	
-														
 													                  }else 
 													                     if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour à l'AC")){
 													    	                statutSanction ="D5V";
@@ -5786,8 +5786,6 @@ public class DaoController {
 													     
 													     //MAJ dans T_DAC_SPECS
 													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-													    		    //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-													    		    //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 												 				if (!listDao.isEmpty()) {
 												 					newDao= listDao.get(0);
@@ -5803,7 +5801,87 @@ public class DaoController {
 														 userController.setRenderMsg(true);
 														 userController.setSevrityMsg("success");
 									     }   
-									}					  
+									}					  */
+									
+									
+									
+									//Validation des corrections
+									@Transactional 
+									 public void resultatCorrection() {
+										  
+										  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
+											   statutSanction ="SBO";
+											   statutSanRetour ="0";
+											  
+										        }else{
+                                                        if(resultat.equalsIgnoreCase("Validé")){
+										        	  
+													  
+													        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+														        statutSanction ="DPU";
+														          statutSanRetour ="0";
+														    	
+													                  }else{
+													                         if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour à l'AC")){
+													    	                   statutSanction ="D5V";
+															                   statutSanRetour ="0";
+													                         }
+										                                }
+                                                        
+										                         }else{
+
+										                         	     if(resultat.equalsIgnoreCase("Rejeté")) {
+												                                  statutSanction ="SRO";
+												                                  statutSanRetour ="1";
+											                                }else{
+
+											                                	   if(resultat.equalsIgnoreCase("Retour au binome")) {
+												                                        statutSanction ="D3A";
+												                                        statutSanRetour ="1";
+												                                          
+												                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+												                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												                    							if (!daoBinome.isEmpty()) {
+												                    								//Mis à  jour de tous les DAO dans T_DAO_AFFECTATION
+												                    								for(TDaoAffectation dao : daoBinome) {
+												                    									 dao.setDafStaCode(statutSanction);
+												                    									 dao.setDafStatutRetour(statutSanRetour);
+												                    									 iservice.updateObject(dao);
+												                    								       }
+											                                               }
+										                                        }
+										                                 }
+                                                                  }
+                                                            }
+
+                                            listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+											           if (!listCorrection.isEmpty()) {
+											        	 daoCorr= listCorrection.get(0);
+											        	 daoCorr.setCorObservation(getObservationCor());
+											        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
+											        	 daoCorr.setCorResultat(resultat);
+													     iservice.updateObject(daoCorr);
+													     
+													     //MAJ dans T_DAC_SPECS
+													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												 				if (!listDao.isEmpty()) {
+												 					newDao= listDao.get(0);
+												 					newDao.setTStatut(new TStatut(statutSanction));
+												 					newDao.setDacStatutRetour(slctdTd.getDacStatutRetour());
+												 			        iservice.updateObject(newDao); 
+												 	   	                 }
+													     //Activation du bouton d'édition du PV
+												 		 etatPV = true;
+										     			 etatValiderCsv = false;
+										     				     
+														 userController.setTexteMsg("Votre sanction a été apportée avec succès!");
+														 userController.setRenderMsg(true);
+														 userController.setSevrityMsg("success");
+									     }   
+									}
+								
 			
 									  
 									//Edition du PV de Correction
@@ -13504,6 +13582,14 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 
 	public void setListeImputationsModif(List<VLigneLot> listeImputationsModif) {
 		this.listeImputationsModif = listeImputationsModif;
+	}
+
+	public String getAvisRespo() {
+		return avisRespo;
+	}
+
+	public void setAvisRespo(String avisRespo) {
+		this.avisRespo = avisRespo;
 	}
 	
 	
