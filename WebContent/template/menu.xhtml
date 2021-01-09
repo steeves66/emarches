@@ -486,7 +486,7 @@
            <!-- DEBUT M4 :  -->
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <i class="fa fa-dashboard"></i> <span> <!-- M4-Préparation des Offres --> M3-Préparation des Offres</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -524,7 +524,7 @@
            <!-- DEBUT M4 :  -->
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <i class="fa fa-dashboard"></i> <span><!-- M5-Travaux de la Commission --> M4-Travaux de la Commission</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -626,7 +626,7 @@
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Procédure de Préparation</span>
+            <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -958,7 +958,7 @@
            <!-- DEBUT M3 :  -->
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <i class="fa fa-dashboard"></i> <span><!-- M4-Préparation des Offres -->  M3-Préparation des Offres</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -988,7 +988,7 @@
            <!-- DEBUT M4 :  -->
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <i class="fa fa-dashboard"></i> <span><!-- M5-Travaux de la Commission --> M4-Travaux de la Commission</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -1015,6 +1015,7 @@
          <!-- FIN M4 -->
          
          <!-- DEBUT M5 :  -->
+         <h:panelGroup rendered="false">
          <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M6-Contractualisation</span>
@@ -1048,10 +1049,12 @@
               
           </ul>     
          </li>
+         </h:panelGroup>
          <!-- FIN M5 -->
          
          
          <!-- DEBUT M6 :  -->
+         <h:panelGroup rendered="false">
           <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M7-Archivage</span>
@@ -1074,6 +1077,7 @@
            
           </ul>
         </li>
+        </h:panelGroup>
          <!-- FIN M6 -->
          
     
@@ -1085,7 +1089,7 @@
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Procédure de Préparation</span>
+            <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -1447,7 +1451,7 @@
            <!-- DEBUT M3 :  -->
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <i class="fa fa-dashboard"></i> <span><!-- M4-Préparation des Offres --> M3-Préparation des Offres</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -1465,7 +1469,7 @@
            <!-- DEBUT M4 :  -->
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <i class="fa fa-dashboard"></i> <span><!-- M5-Travaux de la Commission -->   M4-Travaux de la Commission</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -1521,6 +1525,7 @@
          <!-- FIN M4 -->
          
          <!-- DEBUT M5 :  -->
+          <h:panelGroup rendered="false">
          <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M6-Contractualisation</span>
@@ -1554,10 +1559,12 @@
               
           </ul>     
          </li>
+         </h:panelGroup>
          <!-- FIN M5 -->
          
          
          <!-- DEBUT M6 :  -->
+          <h:panelGroup rendered="false">
           <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M7-Archivage</span>
@@ -1580,10 +1587,11 @@
            
           </ul>
         </li>
+        </h:panelGroup>
          <!-- FIN M6 -->
     
        <!-- DEBUT M7 :  -->
-       <h:panelGroup rendered="true">
+       <h:panelGroup rendered="false">
          <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Reporting</span>
