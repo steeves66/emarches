@@ -726,10 +726,60 @@
                                </p:commandLink>
                                </h:panelGroup>
                            
+				         </p:column>   
+    </p:dataTable> 
+    </h:panelGroup>
     
+    
+        
+    <h:panelGroup rendered="#{controleController.panel4}">
+					
+               <p:dataTable id="ndTble51"  styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.pgpmPub}" 
+					  emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                        
+                         <p:column headerText="N° Journal" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgNumJnlPub}" />
+				        </p:column>
+				        
+				          
+				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
+				        </p:column>
+                         
+                        <p:column headerText="Financement" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgLibFin}" />
+				        </p:column>
+
+                         <p:column headerText="Type Marché" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tymLibelle}" />
+				        </p:column>
+				       
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				         
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-2">
+                        
+                              <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-left:3px" title="Editer le PGPM" ajax="false">
+                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
+                              </p:commandLink>
+
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
+    
    </h:panelGroup>
 							
 						</div>
@@ -1194,66 +1244,11 @@
     </h:panelGroup>
     
     
-    <h:panelGroup rendered="#{controleController.panel4}">
-               <h:panelGroup rendered="#{controleController.searchPgpm}">
-						<div class="col-md-4 ">	
-					  <div class="input-group input-group-sm col-md-12">
-					   <span class="input-group-btn">
-				                <p:commandLink  styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink  styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
-					
-               <p:dataTable id="ndTble51" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.pgpmPub}" 
-					  emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
-                        
-                         <p:column headerText="N Journal" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.gpgNumJnlPub}" />
-				        </p:column>
-				        
-				          
-				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.gpgObjet}" />
-				        </p:column>
-                         
-                        <p:column headerText="Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.gpgLibFin}" />
-				        </p:column>
-
-                         <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tymLibelle}" />
-				        </p:column>
-				       
-				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.gpgDateValAc}">
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.gpgDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				         
-				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
-                        
-                              <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-left:3px" title="Editer le PGPM" ajax="false">
-                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
-                              </p:commandLink>
-
-				         </p:column>   
-    </p:dataTable>
-    </h:panelGroup>
+    
+    
+    
+    
+    
             
  <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
