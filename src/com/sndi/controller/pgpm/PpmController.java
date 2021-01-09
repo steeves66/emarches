@@ -483,7 +483,6 @@ public class PpmController {
 		                    		    	  userController.initMessage();
 		                    		      }
 		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
-		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
 		                    	  }
 		                    	  
 		                    	  recupModeleDao();
