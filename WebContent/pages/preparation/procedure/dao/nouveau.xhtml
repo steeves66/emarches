@@ -868,7 +868,7 @@
                   <br/> 
                  <div class="pull-right ">
 			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_offre}" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
 			            
@@ -928,7 +928,7 @@
 	            </div>
 	              <div class="box-footer">
 	              <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.saveCritere()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content, :gnl:critereTest">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Ajouter >>>
 	               </p:commandLink>
 	            </div>
@@ -954,7 +954,7 @@
 			           <div class="col-sm-2">
 				       <p:commandLink  title="Vider la liste des critères sélectionnés" action="#{daoController.viderCritereLot0()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
 					   <span class="btn-label"><i class="fa fa-trash"></i></span><span class="hidden-xs">VIDER LISTE</span>
-					   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
+					   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
 					   </p:commandLink>
 				       </div>
 			   
@@ -999,7 +999,7 @@
                             
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update=":content">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
 			               </h:panelGroup>
@@ -1013,7 +1013,7 @@
                             
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update=":content">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
 			               </h:panelGroup>
@@ -1175,7 +1175,7 @@
                             </p:commandLink>
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritereLot()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
 			                </h:panelGroup>
@@ -1188,7 +1188,7 @@
                             </p:commandLink>
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritereLot()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
 			                </h:panelGroup>
@@ -1277,7 +1277,7 @@
     </div>
     <div class="box-footer">
      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_presence}" action="#{daoController.savePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":gnl:tbMbr, :content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
     
@@ -1325,7 +1325,7 @@
 	                
 			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deletePresence()}" title="Supprimer" update=":content">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />
 			                </p:commandLink>
 					        </p:column>    
@@ -1443,7 +1443,7 @@
 				            </p:commandLink>
 						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeAutorisation()}" title="Supprimer" update="gnl">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
 		                </p:commandLink>
 		 	        </p:column>
@@ -1765,7 +1765,7 @@
 	        
 				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
                    <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
                    <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
                 </p:commandLink>
  	        </p:column>
@@ -1958,7 +1958,7 @@
 	                 <div class="row">
                 <div class="pull-right ">
 			            <p:commandLink action="#{daoController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
               </div>
                 </div>
@@ -2056,7 +2056,7 @@
 	                 <div class="row">
                 <div class="pull-right ">
 			            <p:commandLink action="#{daoController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
               </div>
@@ -2189,7 +2189,7 @@
 					
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveAdresse()}" oncomplete="PF('Adresse').hide()"  update=":gnl:adress">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
                      </div>

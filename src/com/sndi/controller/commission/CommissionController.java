@@ -679,7 +679,7 @@ public class CommissionController {
 		 listPiecesOuv = ((List<VCritereAnalyseDacOuv>)iservice.getObjectsByColumn("VCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
-	 }*/
+	 }*/  
 	 
 	 
 	//Liste des pièces de l'offre
@@ -687,6 +687,7 @@ public class CommissionController {
 		 listPiecesOuv.clear();
 		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+				 new WhereClause("DCAD_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode()),
 				 new WhereClause("DOF_NCC",Comparateur.EQ,""+candidat.getSouNcc()), 
 				 new WhereClause("DOF_TYP",Comparateur.EQ,""+dofTyp), 
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
@@ -1269,7 +1270,6 @@ public class CommissionController {
 					          newcomSpec.setComMarCode(slctdTd.getDacTymCode());
 					          newcomSpec.setTAvisAppelOffre(avis);
 					          newcomSpec.setTDacSpecs(dao);
-	                          //newcomSpec.setTCommissionType(new TCommissionType(""));
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
 					          iservice.addObject(newcomSpec);
 					          
