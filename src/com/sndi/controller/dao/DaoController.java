@@ -9633,372 +9633,303 @@ public class DaoController {
 	 
 	
 	 
-	 //POUR WINDOWS - LAURENT
-	 /*public void chargeDaoFile() throws IOException {	
-		 
-		  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
-		  
+	//POUR WINDOWS - LAURENT
+		 public void chargeDaoFile() throws IOException {	
+			 /*
+			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
+			  */
 
-		 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("01")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("02")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("03")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("04")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("05")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("06")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("07")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("08")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("09")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("0"))  ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("0A")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("01")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("02")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("03")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("04")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("05")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("06")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("07")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("08")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("09"))
-			) {
-			 setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_FOURNITURES_PSL))));
-			 _logger.info("Dossier de référence PSL chargé");
-		 }
-		 
-		if(	(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("2"))  ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("21")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("22")) ||	
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("23")) ||	
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("25")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("26")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("2"))  ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("21")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("22")) ||	
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("23")) ||	
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("25")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("26"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_TRAVAUX_PSL))));
-			_logger.info("Dossier de référence PSL chargé");
-			}
-		
-		if(	(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1"))  ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1A")) ||	
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1B")) ||	
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1C")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1D")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("11")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("12")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("13")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("14")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("15")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("16")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("17")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("18")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("19")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1"))  ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1A")) ||	
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1B")) ||	
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1C")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1D")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("11")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("12")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("13")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("14")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("15")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("16")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("17")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("18")) ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("19"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_SERVICES_COURANTS_PSL))));
-			_logger.info("Dossier de référence PSL chargé");
-			}
-		
-		
-		 * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
-		 
-		
-		if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0A")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("01")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("02")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("03")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("04")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("05")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("06")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("07")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("08")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("09")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("0"))  ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("0A")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("01")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("02")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("03")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("04")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("05")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("06")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("07")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("08")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("09"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_FOURNITURES_PSO))));
-			_logger.info("Dossier de référence PSO chargé");
-		}
-		
-		if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("2"))  ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("21")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("22")) ||	
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("23")) ||	
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("25")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("26")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("2"))  ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("21")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("22")) ||	
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("23")) ||	
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("25")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("26"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_TRAVAUX_PSO))));
-			_logger.info("Dossier de référence PSO chargé");
-		}
-		
-		if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1"))  ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1A")) ||	
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1B")) ||	
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1C")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1D")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("11")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("12")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("13")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("14")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("15")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("16")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("17")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("18")) ||
-			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("19")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1"))  ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1A")) ||	
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1B")) ||	
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1C")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1D")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("11")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("12")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("13")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("14")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("15")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("16")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("17")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("18")) ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("19"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_SERVICES_COURANTS_PSO))));
-			_logger.info("Dossier de référence PSO chargé");
-		}
-		
-		if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("11")) ||
-			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("11"))	
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_PRESTATION_INTELLECTUEL_PS))));
-			_logger.info("Dossier de référence chargé");
-		}
-		
-		
-		  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
-		  
-		 
-		if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("0A") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("01") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("02") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("03") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("04") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("06") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("07") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("08") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("09") && daoAao.getDacMopCode().equals("AOO")) ||
-				(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("0A") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("01") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("02") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("03") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("04") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("06") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("07") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("08") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("09") && daoAao.getDacMopCode().equals("AOR"))
-			
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
-			_logger.info("DAO FOURNITURE chargé");
-			}
-		 
-		if(	(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("21") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("22") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("23") && daoAao.getDacMopCode().equals("AOO")) || 
-			(daoAao.getTymCode().equals("25") && daoAao.getDacMopCode().equals("AOO")) ||
-			(daoAao.getTymCode().equals("26") && daoAao.getDacMopCode().equals("AOO")) ||
-				(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("21") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("22") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("23") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("25") && daoAao.getDacMopCode().equals("AOR")) ||
-				(daoAao.getTymCode().equals("26") && daoAao.getDacMopCode().equals("AOR"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
-			_logger.info("DAO TRAVAUX ROUTES ELECTRICITE chargé");
-			}
-		
-		// CARBURANT
-		if(	daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOO") ||
-				daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOR")) {
-				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER))));
-				_logger.info("DAO CARBURANT chargé");
-				}
-		
-		//Prestation courante 10
-		if( (daoAao.getTymCode().equals("10") && daoAao.getDacMopCode().equals("AOO")) || // PRESTATION
-			(daoAao.getTymCode().equals("18") && daoAao.getDacMopCode().equals("AOO")) || // ORDURES MENAGERES
-			(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOO")) || // ASSURANCES 17
-			(daoAao.getTymCode().equals("12") && daoAao.getDacMopCode().equals("AOO")) || // BLANCHISSERIE 12
-				(daoAao.getTymCode().equals("10") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("18") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOR")) || 
-				(daoAao.getTymCode().equals("12") && daoAao.getDacMopCode().equals("AOR"))
-			) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
-			_logger.info("DAO Prestations courantes chargé");
-			}
-		
-		// Restauration
-		if( daoAao.getTymCode().equals("16") && daoAao.getDacMopCode().equals("AOO") ||
-			daoAao.getTymCode().equals("16") && daoAao.getDacMopCode().equals("AOR")
+			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("01")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("02")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("03")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("04")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("05")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("06")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("07")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("08")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("09")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("0"))  ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("0A")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("01")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("02")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("03")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("04")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("05")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("06")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("07")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("08")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("09"))
 				) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS))));
-			_logger.info("DAO Restauration chargé");
+				 setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_FOURNITURES_PSL))));
+				 _logger.info("Dossier de référence PSL chargé");
+			 }
+			 
+			if(	(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("2"))  ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("21")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("22")) ||	
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("23")) ||	
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("25")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("26")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("2"))  ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("21")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("22")) ||	
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("23")) ||	
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("25")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("26"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_TRAVAUX_PSL))));
+				_logger.info("Dossier de référence PSL chargé");
+				}
+			
+			if(	(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1"))  ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1A")) ||	
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1B")) ||	
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1C")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("1D")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("11")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("12")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("13")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("14")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("15")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("16")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("17")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("18")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("19")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1"))  ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1A")) ||	
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1B")) ||	
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1C")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("1D")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("11")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("12")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("13")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("14")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("15")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("16")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("17")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("18")) ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("19"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_SERVICES_COURANTS_PSL))));
+				_logger.info("Dossier de référence PSL chargé");
+				}
+			
+			/*
+			 * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
+			 */
+			
+			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0A")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("01")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("02")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("03")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("04")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("05")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("06")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("07")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("08")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("09")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("0"))  ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("0A")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("01")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("02")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("03")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("04")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("05")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("06")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("07")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("08")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("09"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_FOURNITURES_PSO))));
+				_logger.info("Dossier de référence PSO chargé");
 			}
-		
-		// LOCATION DE MAIN D'OEUVRES 
-		if(	daoAao.getTymCode().equals("15") && daoAao.getDacMopCode().equals("AOO") ||
-			daoAao.getTymCode().equals("15") && daoAao.getDacMopCode().equals("AOR")) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
-			_logger.info("DAO LOCATION DE MAIN D'OEUVRES chargé");
+			
+			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("2"))  ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("21")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("22")) ||	
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("23")) ||	
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("25")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("26")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("2"))  ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("21")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("22")) ||	
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("23")) ||	
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("25")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("26"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_TRAVAUX_PSO))));
+				_logger.info("Dossier de référence PSO chargé");
 			}
-		
-		// GESTION DE MAIN D'OEUVRES
-		if(	daoAao.getTymCode().equals("19") && daoAao.getDacMopCode().equals("AOO") ||
-			daoAao.getTymCode().equals("19") && daoAao.getDacMopCode().equals("AOR")) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES))));
-			_logger.info("DAO GESTION DE MAIN D'OEUVRES chargé");
+			
+			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1"))  ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1A")) ||	
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1B")) ||	
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1C")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("1D")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("11")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("12")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("13")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("14")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("15")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("16")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("17")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("18")) ||
+				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("19")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1"))  ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1A")) ||	
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1B")) ||	
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1C")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("1D")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("11")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("12")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("13")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("14")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("15")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("16")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("17")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("18")) ||
+					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("19"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_SERVICES_COURANTS_PSO))));
+				_logger.info("Dossier de référence PSO chargé");
 			}
-		
-		// SECURITE PRIVEE 
-		if(	daoAao.getTymCode().equals("14") && daoAao.getDacMopCode().equals("AOO") ||
-			daoAao.getTymCode().equals("14") && daoAao.getDacMopCode().equals("AOR")) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE))));
-			_logger.info("DAO SECURITE PRIVEE chargé");
+			
+			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("11")) ||
+				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("11"))	
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_PRESTATION_INTELLECTUEL_PS))));
+				_logger.info("Dossier de référence chargé");
 			}
-		
-		// ENTRETIENS ESPACES VERTS ET LOCAUX 13
-		if(	daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOO") ||
-			daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOR")) {
-			setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
-			_logger.info("DAO ENTRETIEN DES LOCAUX chargé");
-		}			
-	 }
-	 */
-	 
-	 //POUR LINUX - ANCIEN
-	/* public void chargeDaoFile() throws IOException {		 
-		 switch(daoIter.getTymCode()) {
-			 // FOURNITURE	;
-		 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES_LINUX))));
-			 _logger.info("DAO FOURNITURE chargé");
-			 _logger.info(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES);
-			 break;
+			
+			/*
+			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
+			  */
 			 
-			 // FOURNITURE	
-			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES_LINUX))));
-			 _logger.info("DAO FOURNITURE chargé");
-			 break;
+			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("0A") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("01") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("02") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("03") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("04") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("06") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("07") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("08") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("09") && daoAao.getDacMopCode().equals("AOO")) ||
+					(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("0A") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("01") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("02") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("03") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("04") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("06") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("07") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("08") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("09") && daoAao.getDacMopCode().equals("AOR"))
+				
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
+				_logger.info("DAO FOURNITURE chargé");
+				}
 			 
-			// PRESTATIONS	
-			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX))));
-			 _logger.info("DAO PRESTATIONS chargé");
-			 break;
-			 
-			// PRESTATIONS	
-			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX))));
-			 _logger.info("DAO PRESTATIONS chargé");
-			 break;
-			 
-			// TRAVAUX	
-			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX_LINUX))));
-			 _logger.info("DAO TRAVAUX chargé");
-			 break;
-			 
-			// TRAVAUX	
-			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX_LINUX))));
-			 _logger.info("DAO TRAVAUX chargé");
-			 break;
-			 
-			 // FOURNITURE DE CARBURANT LEGER
-			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER_LINUX))));
-			 _logger.info("DAO FOURNITURE DE CARBURANT chargé");
-			 break;
-			 
-			 // DAO RESTAURATION
-			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS_LINUX))));
-			 _logger.info("DAO RESTAURATION chargé");
-			 break;
-			 
-			 // DAO LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
-			 _logger.info("DAO LOCATION DE MAIN D'OEUVRE chargé");
-			 break;
-			 
-			// DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES_LINUX))));
-			 _logger.info("DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE chargé");
-			 break;
-			 
-			// DAO SECURITE PRIVEE ou GARDIENNAGE - (Services courants)
-			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE_LINUX))));
-			 _logger.info("DAO SECURITE PRIVEE ou GARDIENNAGE chargé");
-			 break;
-			 
-			// DAO ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX))));
-			 _logger.info("DAO ENTRETIENS ESPACES VERTS ET LOCAUX chargé");
-			 break;
+			if(	(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("21") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("22") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("23") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("25") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("26") && daoAao.getDacMopCode().equals("AOO")) ||
+					(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("21") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("22") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("23") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("25") && daoAao.getDacMopCode().equals("AOR")) ||
+					(daoAao.getTymCode().equals("26") && daoAao.getDacMopCode().equals("AOR"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
+				_logger.info("DAO TRAVAUX ROUTES ELECTRICITE chargé");
+				}
+			
+			// CARBURANT
+			if(	daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOO") ||
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOR")) {
+					setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER))));
+					_logger.info("DAO CARBURANT chargé");
+					}
+			
+			//Prestation courante 10
+			if( (daoAao.getTymCode().equals("10") && daoAao.getDacMopCode().equals("AOO")) || // PRESTATION
+				(daoAao.getTymCode().equals("18") && daoAao.getDacMopCode().equals("AOO")) || // ORDURES MENAGERES
+				(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOO")) || // ASSURANCES 17
+				(daoAao.getTymCode().equals("12") && daoAao.getDacMopCode().equals("AOO")) || // BLANCHISSERIE 12
+					(daoAao.getTymCode().equals("10") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("18") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOR")) || 
+					(daoAao.getTymCode().equals("12") && daoAao.getDacMopCode().equals("AOR"))
+				) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
+				_logger.info("DAO Prestations courantes chargé");
+				}
+			
+			// Restauration
+			if( daoAao.getTymCode().equals("16") && daoAao.getDacMopCode().equals("AOO") ||
+				daoAao.getTymCode().equals("16") && daoAao.getDacMopCode().equals("AOR")
+					) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS))));
+				_logger.info("DAO Restauration chargé");
+				}
+			
+			// LOCATION DE MAIN D'OEUVRES 
+			if(	daoAao.getTymCode().equals("15") && daoAao.getDacMopCode().equals("AOO") ||
+				daoAao.getTymCode().equals("15") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
+				_logger.info("DAO LOCATION DE MAIN D'OEUVRES chargé");
+				}
+			
+			// GESTION DE MAIN D'OEUVRES
+			if(	daoAao.getTymCode().equals("19") && daoAao.getDacMopCode().equals("AOO") ||
+				daoAao.getTymCode().equals("19") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES))));
+				_logger.info("DAO GESTION DE MAIN D'OEUVRES chargé");
+				}
+			
+			// SECURITE PRIVEE 
+			if(	daoAao.getTymCode().equals("14") && daoAao.getDacMopCode().equals("AOO") ||
+				daoAao.getTymCode().equals("14") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE))));
+				_logger.info("DAO SECURITE PRIVEE chargé");
+				}
+			
+			// ENTRETIENS ESPACES VERTS ET LOCAUX 13
+			if(	daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOO") ||
+				daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
+				_logger.info("DAO ENTRETIEN DES LOCAUX chargé");
+			}			
 		 }
-	 }*/
-	 
-	 
-	//POUR LINUX - LAURENT
-		 public void chargeDaoFile() throws IOException {		 
+		 
+		 //POUR LINUX - LAURENT
+		/* public void chargeDaoFile() throws IOException {		 
 			 
-			  // Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
+			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
-
 			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00")) ||
@@ -10083,7 +10014,7 @@ public class DaoController {
 				}
 			
 			
-			  //Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
+			  * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			
 			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
@@ -10177,7 +10108,7 @@ public class DaoController {
 			}
 			
 			
-			  // Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
+			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			 
 			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
@@ -10286,301 +10217,15 @@ public class DaoController {
 				
 		 }
 		
-		 
-		 
-	
-	 // methode pour enregistrer le document apres avoir insérer les bookmarks
-	 
-	
-	     //WINDOWS - LAURENT
-		/* public void saveDaoFile() throws IOException {
-			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10") ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSL;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20") ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSL;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSO;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSO;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSO;
-			 }
-			 
-			 if((daoAao.getDacMopCode().equals("PSO") || daoAao.getDacMopCode().equals("PSL")) && daoAao.getTymCode().equals("11")) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES;
-				}
-			 
-			 //TRAVAUX
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("26") ||
-					 										daoAao.getTymCode().equals("21") ||
-					 										daoAao.getTymCode().equals("22") ||
-					 										daoAao.getTymCode().equals("23") ||
-					 										daoAao.getTymCode().equals("25") ||
-					 										daoAao.getTymCode().equals("20")
-					 										))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
-			 }
-			 
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("26") ||
-															daoAao.getTymCode().equals("21") ||
-															daoAao.getTymCode().equals("22") ||
-															daoAao.getTymCode().equals("23") ||
-															daoAao.getTymCode().equals("25") ||
-															daoAao.getTymCode().equals("20")
-						))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
-				}
-			 
-			 //FOURNITURES
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("01") ||
-															daoAao.getTymCode().equals("02") ||
-															daoAao.getTymCode().equals("03") ||
-															daoAao.getTymCode().equals("04") ||
-															daoAao.getTymCode().equals("06") ||
-															daoAao.getTymCode().equals("07") ||
-															daoAao.getTymCode().equals("08") ||
-															daoAao.getTymCode().equals("09") ||
-															daoAao.getTymCode().equals("0A") 
-															))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("01") ||
-															daoAao.getTymCode().equals("02") ||
-															daoAao.getTymCode().equals("03") ||
-															daoAao.getTymCode().equals("04") ||
-															daoAao.getTymCode().equals("06") ||
-															daoAao.getTymCode().equals("07") ||
-															daoAao.getTymCode().equals("08") ||
-															daoAao.getTymCode().equals("09") ||
-															daoAao.getTymCode().equals("0A") 
-						))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
-				}
-			 
-			// PRESTATIONS
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("10") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("10") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
-				}
-			 
-			 // DAO RESTAURATION
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("16") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("16") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;
-				}
-			 
-			 // LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("15") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("15") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
-				}
-			 
-			 // GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("19") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("19") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES;
-				}
-			 
-			 // SECURITE PRIVEE ou GARDIENNAGE
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("14") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("14") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
-				}
-			 
-			// ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("13") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("13") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
-				}
-			 
-			// FOURNITURE DE CARBURANT
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("05") ))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;
-				}
-			 
-			 _logger.info("path: "+DOWNLOAD_PATHNAME);
-			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
-			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-		 }*/
+		 */
 		 
 	 
-		//LINUX
-			 public void saveDaoFile() throws IOException {
-				 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
-					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL_LINUX;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10") ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSL_LINUX;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20") ||
-				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSL_LINUX;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSO_LINUX;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSO_LINUX;
-			 }
-			 
-			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20") ||
-				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20"))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSO_LINUX;
-			 }
-			 
-			 if((daoAao.getDacMopCode().equals("PSO") || daoAao.getDacMopCode().equals("PSL")) && daoAao.getTymCode().equals("11")) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES_LINUX;
-				}
-			 
-			 //TRAVAUX
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("26") ||
-					 										daoAao.getTymCode().equals("21") ||
-					 										daoAao.getTymCode().equals("22") ||
-					 										daoAao.getTymCode().equals("23") ||
-					 										daoAao.getTymCode().equals("25") ||
-					 										daoAao.getTymCode().equals("20")
-					 										))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
-			 }
-			 
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("26") ||
-															daoAao.getTymCode().equals("21") ||
-															daoAao.getTymCode().equals("22") ||
-															daoAao.getTymCode().equals("23") ||
-															daoAao.getTymCode().equals("25") ||
-															daoAao.getTymCode().equals("20")
-						))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
-				}
-			 
-			 //FOURNITURES
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("01") ||
-															daoAao.getTymCode().equals("02") ||
-															daoAao.getTymCode().equals("03") ||
-															daoAao.getTymCode().equals("04") ||
-															daoAao.getTymCode().equals("06") ||
-															daoAao.getTymCode().equals("07") ||
-															daoAao.getTymCode().equals("08") ||
-															daoAao.getTymCode().equals("09") ||
-															daoAao.getTymCode().equals("0A") 
-															))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("01") ||
-															daoAao.getTymCode().equals("02") ||
-															daoAao.getTymCode().equals("03") ||
-															daoAao.getTymCode().equals("04") ||
-															daoAao.getTymCode().equals("06") ||
-															daoAao.getTymCode().equals("07") ||
-															daoAao.getTymCode().equals("08") ||
-															daoAao.getTymCode().equals("09") ||
-															daoAao.getTymCode().equals("0A") 
-						))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
-				}
-			 
-			// PRESTATIONS
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("10") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("10") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
-				}
-			 
-			 // DAO RESTAURATION
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("16") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("16") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;
-				}
-			 
-			 // LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("15") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("15") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
-				}
-			 
-			 // GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("19") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("19") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
-				}
-			 
-			 // SECURITE PRIVEE ou GARDIENNAGE
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("14") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("14") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
-				}
-			 
-			// ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("13") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("13") ))) {
-				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
-				}
-			 
-			// FOURNITURE DE CARBURANT
-			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("05") ))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
-				}
-			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
-				}
-			 
-			 _logger.info("path: "+DOWNLOAD_PATHNAME);
-			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
-			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-				}
+	 
 	
+		 
+		
+	
+	    
 	/* private List<XWPFParagraph> collectParagraphs() {
 		 List<XWPFParagraph> paragraphs = new ArrayList<>();
 		 paragraphs.addAll(getDocument().getParagraphs());
@@ -10652,30 +10297,29 @@ public class DaoController {
 			}
 	 
 	 
-	 public void printBmk() {
-		 List<String> bmkNameL = getBookmarkNames();
-			//List<String> ignore = new ArrayList<String>()
-					
-			for (String i:bmkNameL) {
-				if (i.contains("_Toc")) {
-					continue;
+	    public void printBmk() {
+			 List<String> bmkNameL = getBookmarkNames();
+				//List<String> ignore = new ArrayList<String>()
+						
+				for (String i:bmkNameL) {
+					if (i.contains("_Toc")) {
+						continue;
+					}
+					if (i.contains("Block")) {
+						continue;
+					}
+					if (i.contains("_Hlt")) {
+						continue;
+					}
+					if (i.contains("OLE")) {
+						continue;
+					}
+					if (i.contains("_GoBack")) {
+						continue;
+					}
+					_logger.info(i);
 				}
-				if (i.contains("Block")) {
-					continue;
-				}
-				if (i.contains("_Hlt")) {
-					continue;
-				}
-				if (i.contains("OLE")) {
-					continue;
-				}
-				if (i.contains("_GoBack")) {
-					continue;
-				}
-				_logger.info(i);
-			}
-	 }
-	 
+		 }
 	 
 	 
 	
@@ -12336,11 +11980,11 @@ public class DaoController {
 	}
 	
 	
-	// methode pour telecharger le dao
-	public void telechargerDao() throws IOException {
-		downloadFileServlet.downloadFile(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME, DOWNLOAD_FILENAME); 
-	}
-	
+	/// methode pour telecharger le dao
+		public void telechargerDao() throws IOException {
+			downloadFileServlet.downloadFile(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME, DOWNLOAD_FILENAME); 
+		}
+	//Fin de la Methode
 	
 	
 	public void insertPermStart(String start, String id) {
@@ -12485,6 +12129,7 @@ public class DaoController {
 		System.out.println("protégé");
 	}*/
 	
+	//SetProtect - LAURENT
 	public void setProtect() {
 		if(	(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOO")) || 
 				(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOO")) || 
@@ -12513,6 +12158,295 @@ public class DaoController {
 		System.out.println("protégé");
 		}
 	}
+	
+	//WINDOWS - LAURENT
+		 public void saveDaoFile() throws IOException {
+			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
+				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10") ||
+				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSL;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20") ||
+				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSL;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSO;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSO;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSO;
+			 }
+			 
+			 if((daoAao.getDacMopCode().equals("PSO") || daoAao.getDacMopCode().equals("PSL")) && daoAao.getTymCode().equals("11")) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES;
+				}
+			 
+			 //TRAVAUX
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("26") ||
+					 										daoAao.getTymCode().equals("21") ||
+					 										daoAao.getTymCode().equals("22") ||
+					 										daoAao.getTymCode().equals("23") ||
+					 										daoAao.getTymCode().equals("25") ||
+					 										daoAao.getTymCode().equals("20")
+					 										))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
+			 }
+			 
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("26") ||
+															daoAao.getTymCode().equals("21") ||
+															daoAao.getTymCode().equals("22") ||
+															daoAao.getTymCode().equals("23") ||
+															daoAao.getTymCode().equals("25") ||
+															daoAao.getTymCode().equals("20")
+						))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
+				}
+			 
+			 //FOURNITURES
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("01") ||
+															daoAao.getTymCode().equals("02") ||
+															daoAao.getTymCode().equals("03") ||
+															daoAao.getTymCode().equals("04") ||
+															daoAao.getTymCode().equals("06") ||
+															daoAao.getTymCode().equals("07") ||
+															daoAao.getTymCode().equals("08") ||
+															daoAao.getTymCode().equals("09") ||
+															daoAao.getTymCode().equals("0A") 
+															))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("01") ||
+															daoAao.getTymCode().equals("02") ||
+															daoAao.getTymCode().equals("03") ||
+															daoAao.getTymCode().equals("04") ||
+															daoAao.getTymCode().equals("06") ||
+															daoAao.getTymCode().equals("07") ||
+															daoAao.getTymCode().equals("08") ||
+															daoAao.getTymCode().equals("09") ||
+															daoAao.getTymCode().equals("0A") 
+						))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
+				}
+			 
+			// PRESTATIONS
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("10") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("10") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
+				}
+			 
+			 // DAO RESTAURATION
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("16") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("16") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;
+				}
+			 
+			 // LOCATION DE MAIN D'OEUVRE - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("15") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("15") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
+				}
+			 
+			 // GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("19") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("19") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES;
+				}
+			 
+			 // SECURITE PRIVEE ou GARDIENNAGE
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("14") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("14") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
+				}
+			 
+			// ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("13") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("13") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
+				}
+			 
+			// FOURNITURE DE CARBURANT
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("05") ))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;
+				}
+			 
+			 _logger.info("path: "+DOWNLOAD_PATHNAME);
+			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
+			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
+		 }
+		 
+		//LINUX
+			/* public void saveDaoFile() throws IOException {
+				 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
+					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL_LINUX;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("10") ||
+				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("10"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSL_LINUX;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("20") ||
+				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("20"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSL_LINUX;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("00") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("00"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSO_LINUX;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("10") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("10"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_TRAVAUX_PSO_LINUX;
+			 }
+			 
+			 if(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("20") ||
+				(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("20"))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_SERVICES_COURANTS_PSO_LINUX;
+			 }
+			 
+			 if((daoAao.getDacMopCode().equals("PSO") || daoAao.getDacMopCode().equals("PSL")) && daoAao.getTymCode().equals("11")) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES_LINUX;
+				}
+			 
+			 //TRAVAUX
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("26") ||
+					 										daoAao.getTymCode().equals("21") ||
+					 										daoAao.getTymCode().equals("22") ||
+					 										daoAao.getTymCode().equals("23") ||
+					 										daoAao.getTymCode().equals("25") ||
+					 										daoAao.getTymCode().equals("20")
+					 										))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
+			 }
+			 
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("26") ||
+															daoAao.getTymCode().equals("21") ||
+															daoAao.getTymCode().equals("22") ||
+															daoAao.getTymCode().equals("23") ||
+															daoAao.getTymCode().equals("25") ||
+															daoAao.getTymCode().equals("20")
+						))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
+				}
+			 
+			 //FOURNITURES
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("01") ||
+															daoAao.getTymCode().equals("02") ||
+															daoAao.getTymCode().equals("03") ||
+															daoAao.getTymCode().equals("04") ||
+															daoAao.getTymCode().equals("06") ||
+															daoAao.getTymCode().equals("07") ||
+															daoAao.getTymCode().equals("08") ||
+															daoAao.getTymCode().equals("09") ||
+															daoAao.getTymCode().equals("0A") 
+															))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("01") ||
+															daoAao.getTymCode().equals("02") ||
+															daoAao.getTymCode().equals("03") ||
+															daoAao.getTymCode().equals("04") ||
+															daoAao.getTymCode().equals("06") ||
+															daoAao.getTymCode().equals("07") ||
+															daoAao.getTymCode().equals("08") ||
+															daoAao.getTymCode().equals("09") ||
+															daoAao.getTymCode().equals("0A") 
+						))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
+				}
+			 
+			// PRESTATIONS
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("10") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("10") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
+				}
+			 
+			 // DAO RESTAURATION
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("16") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("16") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;
+				}
+			 
+			 // LOCATION DE MAIN D'OEUVRE - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("15") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("15") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
+				}
+			 
+			 // GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("19") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("19") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
+				}
+			 
+			 // SECURITE PRIVEE ou GARDIENNAGE
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("14") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("14") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
+				}
+			 
+			// ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("13") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("13") ))) {
+				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
+				}
+			 
+			// FOURNITURE DE CARBURANT
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("05") ))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
+				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 
+			 _logger.info("path: "+DOWNLOAD_PATHNAME);
+			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
+			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
+				}*/
+		
 	
 	
 	public void verrouillage() {
@@ -13322,45 +13256,46 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 		if(lBmkNm.contains("DPAO_marche_renouvelable")) {
 		}
 	}
+	//Fin rplBmk
 	
 	
-	
-	//Methode de génération du DAO
-	public void createDaoFile() throws IOException {
+//Methode de génération du DAO
+public void createDaoFile() throws IOException {
 
-		lDA.clear();
-		lDA = (List<VbxDocDaoAao>) iservice.getObjectsByColumn("VbxDocDaoAao", 
-				new ArrayList<String>(Arrays.asList("LAA_NUM")),new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		if(!lDA.isEmpty()) daoAao = lDA.get(0);		
-		
-		lAdr.clear();
-		lAdr = (List<VbxDocAdrRetrait>) iservice.getObjectsByColumn("VbxDocAdrRetrait",
-				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	lDA.clear();
+	lDA = (List<VbxDocDaoAao>) iservice.getObjectsByColumn("VbxDocDaoAao", 
+			new ArrayList<String>(Arrays.asList("LAA_NUM")),new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	if(!lDA.isEmpty()) daoAao = lDA.get(0);		
 	
-		lCom.clear();
-		lCom = (List<VbxDocCommission>) iservice.getObjectsByColumn("VbxDocCommission",
-				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	lAdr.clear();
+	lAdr = (List<VbxDocAdrRetrait>) iservice.getObjectsByColumn("VbxDocAdrRetrait",
+			new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 
-		lLts.clear();
-		lLts=(List<VbxDocLot>) iservice.getObjectsByColumn("VbxDocLot", new ArrayList<String>(Arrays.asList("LAA_NUM")),
-				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		
-		chargeDaoFile();
-		printBmk();
-		_logger.info("Document chargé");
-		lBmkNm = getBookmarkNames();
-		rplBmkByVal(lBmkNm, lLts, lAdr, daoAao, lCom);
-		_logger.info("Bookmark remplacé");
-		verrouillage();
-		_logger.info("Verrou paramétré");
-		setProtect();
-		_logger.info("Document protégé");
-		saveDaoFile();
-		_logger.info("Document enrégistré");
-		telechargerDao();
-		_logger.info("Document téléchargé");
-	}
+	lCom.clear();
+	lCom = (List<VbxDocCommission>) iservice.getObjectsByColumn("VbxDocCommission",
+			new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+
+	lLts.clear();
+	lLts=(List<VbxDocLot>) iservice.getObjectsByColumn("VbxDocLot", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 	
+	chargeDaoFile();
+	printBmk();
+	_logger.info("Document chargé");
+	lBmkNm = getBookmarkNames();
+	rplBmkByVal(lBmkNm, lLts, lAdr, daoAao, lCom);
+	_logger.info("Bookmark remplacé");
+	verrouillage();
+	_logger.info("Verrou paramétré");
+	setProtect();
+	_logger.info("Document protégé");
+	saveDaoFile();
+	_logger.info("Document enrégistré");
+	telechargerDao();
+	_logger.info("Document téléchargé");
+}
+//Fin Methode de génération du DAO	
+
 	//ANCIEN
 /*	public void createDaoFile() throws IOException {
 		infoDao.clear();
