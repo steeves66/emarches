@@ -1772,7 +1772,7 @@ public class CommissionController {
 			 newOffre.setDofLaaId(tlot.getLaaId().toString());
 			 
 			 doftyp();
-			 chargePieces();
+			 //chargePieces();
 			 //chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
