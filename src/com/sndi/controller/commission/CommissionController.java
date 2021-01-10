@@ -1786,7 +1786,6 @@ public class CommissionController {
 			 genPiece.setDofLaaAaoCode(slctdTd.getAaoCode());
 			 genPiece.setDofTyp(dofTyp);
 			 genPiece.setTempType("REC");
-			 
 			 iservice.addObject(genPiece);
 			 //Chargement des pièces
 			 chargePieces();
