@@ -293,6 +293,8 @@ public class ControleController {
 	private boolean nbrepgspm =false;
 	
 	private boolean searchPgpm = false;
+	private boolean searchPubPpm = false;
+	private boolean searchPubPgpm = false;
 	private boolean searchPgspm = false;
     //Zone de Recherche pour le PSPM
 	private boolean searchAcPs = false;
@@ -737,6 +739,7 @@ public class ControleController {
 							panelPgspm = false;
 							searchPgpm = true;
 							searchPgspm = false;
+							searchPubPgpm = false;
 							fermerSaiPgpm = true;
 							fermerValPgpm = false;
 							fermerSaiPgspm = false;
@@ -828,6 +831,9 @@ public class ControleController {
 		                            btn_publier_pgspm = false;
 		                            searchPgpm = true;
 									searchPgspm = false;
+									searchPubPpm = false;
+									searchPubPgpm = false;
+									btn_new_pgpm = false;
 									panel1 =false;
 									panel2 =false;
 									panel3= true;
@@ -882,8 +888,10 @@ public class ControleController {
 					                            btn_valider_pgspm_dmp =false;
 					                            btn_publier_pgpm = false;
 					                            btn_publier_pgspm = false;
-					                            searchPgpm = true;
+					                            searchPgpm = false;
 												searchPgspm = false;
+												searchPubPpm = false;
+												searchPubPgpm = true;
 												btn_new_pgpm = false;
 												panel1 =false;
 												panel2 =false;
@@ -1060,6 +1068,8 @@ public class ControleController {
 		                            btn_publier_pgspm = true;
 		                            searchPgpm = false;
 									searchPgspm = true;
+									searchPubPpm = false;
+									searchPubPgpm = false;
 									panel1 =false;
 									panel2 =false;
 									panel3= true;
@@ -1116,8 +1126,11 @@ public class ControleController {
 					                            btn_valider_pgspm_dmp =false;
 					                            btn_publier_pgpm = false;
 					                            btn_publier_pgspm = false;
-					                            searchPgpm = true;
+					                            searchPgpm = false;
 												searchPgspm = false;
+												searchPubPpm =false;
+												searchPubPgpm =true;
+												btn_new_pgpm = false;
 												panel1 =false;
 												panel2 =false;
 												panel3= false;
@@ -1212,6 +1225,8 @@ public class ControleController {
 			    			 lignedefaut = true;
 							 panel1 =true;
 							 panel2 =false;
+							 panel3 = false;
+							 panel4 = false;
 							 panelPpmTableauBordSai = true;
 							 panelPpmTableauBordVal = false;
 							 selectLovePgpm = true;
@@ -1266,6 +1281,7 @@ public class ControleController {
 							 searchAC = true;
 							 searchCpmp = false;
 							 searchDmp = false;
+							 searchPubPpm = false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPPM")) {
 			    				type = "PPM";
@@ -1379,8 +1395,10 @@ public class ControleController {
 							    			type = "PPM";
 							    			typePlan = "PN";
 							    			fonctionalite ="listePpmPub";
+							    			libelle="PLANS DE PASSATION DE MARCHES PUBLIES";	
 						    				libelleProcedure="PLANS DE PASSATION DE MARCHES PUBLIES";	
 						    				libelle1="PLANS DE PASSATION DE MARCHES PUBLIES ";
+						    				libelleSmall ="Procédure Normale";
 						    				panelDetail=false;
 						    				panelForm=false;
 						   				    panelTraitement=true;
@@ -1388,6 +1406,8 @@ public class ControleController {
 											panel1 =false;
 											panel2 =false;
 											panel3 = true;
+											/*panel3 = true;*/
+											/*panel4= false;*/
 											panel4= false;
 											btn_new_pgpm = false;
 											panelPpmTableauBordSai = false;
@@ -1419,6 +1439,8 @@ public class ControleController {
 											searchAC = false;
 											searchCpmp = true;
 											searchDmp = true;
+											searchPgpm = false;
+											searchPubPpm = true;
 							    			}
 			 //PSPM
 			 if(action.equalsIgnoreCase("ENGPSPM")) {
@@ -1647,16 +1669,17 @@ public class ControleController {
 						    				type = "PSPM";
 							    			typePlan = "PS";
 							    			fonctionalite ="listePpsmPub";
-						    				libelleProcedure="PLANS SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";	
+						    				libelleProcedure="PLANS SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";
 						    				libelle1="PLANS SIMPLIFIES DE PASSATION DE MARCHES PUBLIES ";
+						    				libelleSmall ="Procédure Simplifiée";
 						    				panelDetail=false;
 						    				panelForm=false;
 						   				    panelTraitement=true;
 						    				btn_new =false;
 											panel1 =false;
 											panel2 =false;
-											panel3 = false;
-											panel4 = true;
+											panel3 = true;
+											panel4 = false;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
 											panelPgpmTableauBordPpPub = false;
@@ -1685,8 +1708,15 @@ public class ControleController {
 											btn_publier_ppm = true;
 											btn_publier_pspm = false;
 											searchAC = false;
+											searchCpmp = false;
+											searchDmp = false;
+											/*searchDmp = true;*/
+											/*
+											searchAC = false;
 											searchCpmp = true;
-											searchDmp = true;
+											searchDmp = true;*/
+											searchPgpm = false;
+											searchPubPpm = true;
 							    			}
 				    			//AMI
 				   			 if(action.equalsIgnoreCase("ENGAMI")) {
@@ -10186,6 +10216,26 @@ public class ControleController {
 
 	public void setRecherchePSPM(boolean recherchePSPM) {
 		this.recherchePSPM = recherchePSPM;
+	}
+
+
+	public boolean isSearchPubPpm() {
+		return searchPubPpm;
+	}
+
+
+	public void setSearchPubPpm(boolean searchPubPpm) {
+		this.searchPubPpm = searchPubPpm;
+	}
+
+
+	public boolean isSearchPubPgpm() {
+		return searchPubPgpm;
+	}
+
+
+	public void setSearchPubPgpm(boolean searchPubPgpm) {
+		this.searchPubPgpm = searchPubPgpm;
 	}
 	
 }

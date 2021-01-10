@@ -5186,7 +5186,6 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 					chargeData("PN");
-					
 					chargePpmPUB();
 					 vider();
 					 userController.initMessage();
