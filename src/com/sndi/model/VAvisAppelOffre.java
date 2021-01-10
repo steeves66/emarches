@@ -43,6 +43,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private String avisRetour;
 	private long chechquorum;
 	private long checkEval;
+	private long checkJug;
 	private String dacTymCode;
 
 	public VAvisAppelOffre() {
@@ -56,7 +57,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 			long aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
 			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv, Date aaoDteOuvFin,
 			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,
-			long checkEval,String dacTymCode) {
+			long checkEval,long checkJug,String dacTymCode) {
 		this.aaoCode = aaoCode;
 		this.aaoDacCode = aaoDacCode;
 		this.aaoLibelle = aaoLibelle;
@@ -81,6 +82,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.avisRetour = avisRetour;
 		this.chechquorum = chechquorum;
 		this.checkEval = checkEval;
+		this.checkJug = checkJug;
 		this.dacTymCode = dacTymCode;
 	}
 
@@ -290,6 +292,15 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	public void setChechquorum(long chechquorum) {
 		this.chechquorum = chechquorum;
+	}
+	
+	@Column(name = "CHECK_JUG")
+	public long getCheckJug() {
+		return this.checkJug;
+	}
+
+	public void setCheckJug(long checkJug) {
+		this.checkJug = checkJug;
 	}
 
 	@Column(name = "DAC_TYM_CODE")

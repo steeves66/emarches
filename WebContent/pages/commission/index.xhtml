@@ -155,39 +155,40 @@
                             </p:commandLink>
                             </h:panelGroup>
                              <p:commandLink rendered="#{controleController.btn_apercuJug}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com10','MBRJUG')}"
-				               title="Comité d'évaluation" update=":content">
+				               title="Comité d'évaluation de Jugement" update=":content">
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
                             </p:commandLink>
                               <!--FIN BOUTONS PRESENCE -->
                               
-                              
+                              <h:panelGroup rendered="#{slctdTb.chechquorum == '1'}">
 			         				<p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com6','SAIDEP')}"
 					               title="Séance d'Ouverture" update=":content">
 	                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
 	                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
 	                            </p:commandLink>
-		         				
-		                        
-		                        <h:panelGroup rendered="#{slctdTb.chechquorum == '0'}">
-		         				
-		         				</h:panelGroup> 
-                             
-                            
+		         				</h:panelGroup>
+		                      
+                          
+                          <h:panelGroup rendered="#{slctdTb.checkEval == '1'}">
                              <p:commandLink rendered="#{controleController.btn_apercuAna}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com4','SAIANA')}"
 				               title="Analyse des offres" update=":content">
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
+                            </h:panelGroup>
+                           
                             
                             <!--DEBU  BOUTONS PV -->
                             
                             <!--FIN  BOUTONS PV -->
+                            <h:panelGroup rendered="#{slctdTb.checkJug == '1'}">
 				            <p:commandLink rendered="#{controleController.btn_apercuJug}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com9','RESJUG')}"
 				               title="Jugement des offres" update=":content">
 				               <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" /> 
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>                               
                             </p:commandLink>
+                            </h:panelGroup>
                             
                             <!--BOUTON DE RETOUR -->
                             <p:commandLink rendered="#{controleController.btn_retourJug}" action="#{commissionController.reanalyser()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer pour réanalyse" update=":content">
@@ -200,21 +201,31 @@
                             <!--FIN  BOUTONS COMMISSION -->
                             
                             <!--DEBUT  FIN OUVERTURE -->
+                            
+                            <h:panelGroup rendered="#{slctdTb.chechquorum == '1'}"> 
                             <p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:5px;"  action="#{commissionController.renderPage('com8','LISCOM')}"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
                             </p:commandLink>
+                            </h:panelGroup>
+                            
+                            
+                            <h:panelGroup rendered="#{slctdTb.checkEval == '1'}"> 
                              <p:commandLink rendered="#{controleController.btn_apercuAna}" oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
+                            </h:panelGroup>
+                            
+                             <h:panelGroup rendered="#{slctdTb.checkJug == '1'}">
                             <p:commandLink rendered="#{controleController.btn_apercuJug}" oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
+                            </h:panelGroup>
                             <!--FIN  FIN OUVERTURE -->
                                
 				        </p:column>

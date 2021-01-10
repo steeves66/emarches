@@ -317,7 +317,12 @@ public class CommissionController {
 	 private String aaoRegQual="";
 	 private boolean infoOffre=false;
 	 private boolean reserveOui=false;
-	 private boolean reserveNon=false;
+	 private boolean reserveNon=false; 
+	 private boolean btnPvJug=false;
+	 //Début Ouverture
+	 private boolean pvFin=false;
+	 private boolean btnFinOuv=true;
+	 //Fin Ouverture
 	 private String reserve="NON";
 	 private Boolean boutonEdit=false;
 	 private boolean finOuv = true;
@@ -687,7 +692,7 @@ public class CommissionController {
 		 listPiecesOuv.clear();
 		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
-				 new WhereClause("DCAD_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode()),
+				 //new WhereClause("DCAD_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode()),
 				 new WhereClause("DOF_NCC",Comparateur.EQ,""+candidat.getSouNcc()), 
 				 new WhereClause("DOF_TYP",Comparateur.EQ,""+dofTyp), 
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
@@ -1344,6 +1349,7 @@ public class CommissionController {
 						}
 				
 			    }
+			
 			 public void saveMembre(String typeComm, String typeSeance) {
 				 if (selectionMembresCommite.size()==0) {
 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
@@ -2009,6 +2015,8 @@ public class CommissionController {
 						avis.setAaoDteFinOuv(slctdTd.getAaoDteFinOuv());
 						avis.setAaoObsOuv(slctdTd.getAaoObsOuv());
 						iservice.updateObject(avis);
+						pvFin = true;
+						btnFinOuv = false;
 						userController.setTexteMsg(message);
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
@@ -2173,7 +2181,7 @@ public class CommissionController {
 				}
 		
 		
-		//Ajouter attributaire
+		     //Ajouter un attributaire
 				public void ajouterAttributaire() {
 					
 					/*for(VResultPropAttribLot ligne : selectionAttributaire) {
@@ -2211,6 +2219,9 @@ public class CommissionController {
 		 			iservice.addObject(newAttrib);
 		 			newAttrib = new VbTempParamAtrib();
 					chargeResultaFilter();
+					//Activation du bouton d'édition du pv de Jugement
+					btnPvJug = true;
+					//Message de Confirmation
 					userController.setTexteMsg("Attributaire(s) validé(s) avec succès !");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
@@ -4193,5 +4204,30 @@ public class CommissionController {
 	public void setListPiecesNonRecv(List<VPiecesOffreNonRecev> listPiecesNonRecv) {
 		this.listPiecesNonRecv = listPiecesNonRecv;
 	}
+
+	public boolean isPvFin() {
+		return pvFin;
+	}
+
+	public void setPvFin(boolean pvFin) {
+		this.pvFin = pvFin;
+	}
+
+	public boolean isBtnFinOuv() {
+		return btnFinOuv;
+	}
+
+	public void setBtnFinOuv(boolean btnFinOuv) {
+		this.btnFinOuv = btnFinOuv;
+	}
+
+	public boolean isBtnPvJug() {
+		return btnPvJug;
+	}
+
+	public void setBtnPvJug(boolean btnPvJug) {
+		this.btnPvJug = btnPvJug;
+	}
+
 
 }
