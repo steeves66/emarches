@@ -1717,6 +1717,7 @@ public class ControleController {
 											searchDmp = true;*/
 											searchPgpm = false;
 											searchPubPpm = true;
+											//
 							    			}
 				    			//AMI
 				   			 if(action.equalsIgnoreCase("ENGAMI")) {
