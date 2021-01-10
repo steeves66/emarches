@@ -1351,6 +1351,7 @@ public class ControleController {
 					    			fonctionalite ="listeAttPub";
 				    				libelleProcedure="PUBLICATION DES PLANS DE PASSATION DE MARCHES";	
 				    				libelle1="PUBLICATION DES PLANS DE PASSATION DE MARCHES";
+				    				libelleSmall="Procédure Normale";
 				    				panelDetail=false;
 				    				panelForm=false;
 				   				    panelTraitement=true;
@@ -1388,8 +1389,11 @@ public class ControleController {
 									btn_publier_pspm = false;
 									btn_imprimer = false;
 									searchAC = false;
-									searchCpmp = true;
-									searchDmp = true;
+									searchCpmp = false;
+									searchDmp = false;
+									searchPubPpm = true;
+									recherchePSPM = false;
+									recherchePPM = false;
 					    			}else
 						    			if(action.equalsIgnoreCase("DPUBPPM")) {
 							    			type = "PPM";
@@ -1630,6 +1634,7 @@ public class ControleController {
 					    			fonctionalite ="listeAttPub";
 				    				libelleProcedure="PUBLICATION DES PLANS DE PASSATION DE MARCHES";	
 				    				libelle1="PUBLICATION DES PLANS DE PASSATION DE MARCHES";
+				    				libelleSmall="Procédure Simplifiée";
 				    				panelDetail=false;
 				    				panelForm=false;
 				   				    panelTraitement=true;
@@ -1662,8 +1667,11 @@ public class ControleController {
 									btn_publier_pspm = true;
 									btn_imprimer = false;
 									searchAC = false;
-									searchCpmp = true;
-									searchDmp = true;
+									searchCpmp = false;
+									searchDmp = false;
+									searchPubPpm = true;
+									recherchePSPM = false;
+									recherchePPM = false;
 					    			}else
 						    			if(action.equalsIgnoreCase("DPUBPSPM")) {
 						    				type = "PSPM";
