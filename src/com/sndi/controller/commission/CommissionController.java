@@ -1255,6 +1255,8 @@ public class CommissionController {
 					          //Creation de la séance
 					          newSeance.setSeaLibelle("OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getAaoDacCode());
 					          newSeance.setTTypeSeance(new TTypeSeance("OUV"));
+					          newSeance.setSeaAaoCode(slctdTd.getAaoCode());
+					          newSeance.setSeaDacCode(slctdTd.getAaoDacCode());
 					          newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 					          newSeance.setTFonction(userController.getSlctd().getTFonction());
 					          newSeance.setTOperateur(userController.getSlctd().getTOperateur());
