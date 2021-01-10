@@ -188,7 +188,7 @@ public class VDacliste implements java.io.Serializable {
 	private Date aaoDteOuvTec;
 	private String aaoDteHeurOuv;
 	private Date aaoDteOuvFin;
-	private long aaoNbrLot;
+	private Long aaoNbrLot;
 	private BigDecimal aaoNbrOuv;
 	private BigDecimal aaoDelaiVal;
 	private String aaoFonCodAc;
@@ -2021,12 +2021,12 @@ public class VDacliste implements java.io.Serializable {
 		this.aaoDteOuvFin = aaoDteOuvFin;
 	}
 
-	@Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)
-	public long getAaoNbrLot() {
+	@Column(name = "AAO_NBR_LOT")
+	public Long getAaoNbrLot() {
 		return this.aaoNbrLot;
 	}
 
-	public void setAaoNbrLot(long aaoNbrLot) {
+	public void setAaoNbrLot(Long aaoNbrLot) {
 		this.aaoNbrLot = aaoNbrLot;
 	}
 
