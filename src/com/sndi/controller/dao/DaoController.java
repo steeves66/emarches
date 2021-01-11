@@ -558,7 +558,7 @@ public class DaoController {
 			      
 			    //Controle Pavé lot modification
 			      if(event.getOldStep().equals("tabLotModif") && event.getNewStep().equals("critereModif")) {
-				  //Ici
+				  actionsPavetCritere();
 				  }
 			      
 			    //Controle Pavé criterebylot modification
@@ -632,36 +632,73 @@ public class DaoController {
 	 
 	 //GESTION DES CRITERES
 	//Parametrage des criteres en fonction du type plan et du type dac
-	 public void chargeCritere() { 
-		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
-					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
-		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
+	 public void chargeCritere() {
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
+			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+			 _logger.info("liste affichée: "+listeCritereAnalyse.size());
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacModType()),
+			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+			 _logger.info("liste affichée: "+listeCritereAnalyse.size());  
+		   }
+		
 	 }
 	 
    //Insertion du critère après le choix 
 	public void savePiece() {
-		listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-				 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-			     if (!listDao.isEmpty()) {
-				       newDao= listDao.get(0);
-				       newDao.setDacCraCodeExclus(critere);
-		               iservice.updateObject(newDao); 
-		               //Chargement des pièces
-		               chargeCritere();   
-   	           }
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+					     if (!listDao.isEmpty()) {
+						       newDao= listDao.get(0);
+						       newDao.setDacCraCodeExclus(critere);
+				               iservice.updateObject(newDao); 
+				               //Chargement des pièces
+				               chargeCritere();   
+		   	           }
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					     if (!listDao.isEmpty()) {
+						       newDao= listDao.get(0);
+						       newDao.setDacCraCodeExclus(critere);
+				               iservice.updateObject(newDao); 
+				               //Chargement des pièces
+				               chargeCritere();   
+		   	           } 
+		   }
+		
 	}
 	 
 	 
 	 //Liste des critères saisies
 	 public void chargeCritereSaisie() { 
-	/*	 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
-					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));*/ 
 		 listeCritereSaisie.clear(); 
-		 listeCritereSaisie = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
-				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
-				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode())));
-		 _logger.info("liste critere saisie: "+listeCritereSaisie.size());
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeCritereSaisie = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
+						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
+						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode())));
+				 _logger.info("liste critere saisie: "+listeCritereSaisie.size());
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeCritereSaisie = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
+						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
+						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));
+				 _logger.info("liste critere saisie: "+listeCritereSaisie.size());   
+		   }
+		 
+		
 
 		 afficheOption();
 	 }
@@ -669,16 +706,36 @@ public class DaoController {
 	 
 	 public void chargeLotCritere() {
 		 listeLotCritere.clear();
-		 listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
-				new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		_logger.info("listeLotCritere size: "+listeLotCritere.size());
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+				_logger.info("listeLotCritere size: "+listeLotCritere.size());
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+				_logger.info("listeLotCritere size: "+listeLotCritere.size());   
+		   }
+		
 	 } 
 	 
 	 public void chargeLotConsultation() {
 		 listeLotConsultation.clear();
-	     listeLotConsultation=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
-				new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		_logger.info("listeLotConsultation size: "+listeLotConsultation.size());
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeLotConsultation=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+				_logger.info("listeLotConsultation size: "+listeLotConsultation.size());
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeLotConsultation=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+				_logger.info("listeLotConsultation size: "+listeLotConsultation.size());  
+		   }
+	    
 	 }
 	 //Affichage des marges de préférence de l'avis en cours
 	 public void listeMargePref() {
@@ -1181,10 +1238,21 @@ public class DaoController {
 		 //vider le champ detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
 		 listeEnteteCritere.clear(); 
-		 listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
-				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
-				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
-				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
+						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
+						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
+						 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
+						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
+						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
+						 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacModType())));   
+		   }
+		
 	 }
 	 
 	//Combo box critères Pou l'ecran de factorisation
@@ -1288,7 +1356,15 @@ public class DaoController {
 		 if(!listeEnteteCritere.isEmpty()) { 
 			 newEnteteCrit=listeEnteteCritere.get(0);
 			 
-			 newCritereDac.setDcadDacCode(dao.getDacCode());
+			
+			 //ECRAN DE SAISIE
+			   if(controleController.ecran=="saisie") {
+				   newCritereDac.setDcadDacCode(dao.getDacCode());
+			   }else
+				 //ECRAN DE MODIFICATION
+			   {
+				   newCritereDac.setDcadDacCode(slctdTd.getDacCode());  
+			   }
 			 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
 			 //newCritereDac.setDcadFact("C");
 			 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
@@ -1306,7 +1382,14 @@ public class DaoController {
 			 iservice.addObject(newCritereDac);
 			 
 			 //Insertion dans temp param
-			 newTempCritereDac.setCraDacCode(dao.getDacCode());
+			//ECRAN DE SAISIE
+			   if(controleController.ecran=="saisie") {
+				   newTempCritereDac.setCraDacCode(dao.getDacCode());
+			   }else
+				 //ECRAN DE MODIFICATION
+			   {
+				   newTempCritereDac.setCraDacCode(slctdTd.getDacCode());
+			   }
 	 		 newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
 	 		 newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 	 		 newTempCritereDac.setCraType("CRA");
@@ -1437,9 +1520,19 @@ public class DaoController {
 	 
 	//Contrôle sur les options "Garantie de Soumission et Déclaration de Garantie de Soumission"
 	public void afficheOption() {
-		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
-					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
-		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		 //ECRAN DE SAISIE
+		   if(controleController.ecran=="saisie") {
+			   listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
+			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		   }else
+			 //ECRAN DE MODIFICATION
+		   {
+			   listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacModType()),
+			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));  
+		   }
+		 
 		if(!listeCritereAnalyse.isEmpty()) { 
 			critereObject=listeCritereAnalyse.get(0);
 			
@@ -1476,7 +1569,14 @@ public class DaoController {
 		 			iservice.addObject(newCritereDac);*/
 		 			
 		 			//Insertion en passant par le temp param(trigger)
-		 			newTempCritere.setCriDacCode(dao.getDacCode());
+		 			 //ECRAN DE SAISIE
+					if(controleController.ecran=="saisie") {
+					  newTempCritere.setCriDacCode(dao.getDacCode());
+					}else
+						 //ECRAN DE MODIFICATION
+					{
+				     newTempCritere.setCriDacCode(slctdTd.getDacCode());   
+					}
 		 			newTempCritere.setCriDcadDanCode(ligne.getCodedetail());
 		 			newTempCritere.setCriDcadLaaId("0");
 		 			newTempCritere.setCriDteSaisi(Calendar.getInstance().getTime());
@@ -1893,7 +1993,15 @@ public class DaoController {
 			 newTempFactorise.setTempDcadNum(sltCritereDac.getDcadNum().toString());
 			 newTempFactorise.setTempType("SUP");
 			 iservice.addObject(newTempFactorise);*/
-			 newTempFactSup.setTempCritDac(dao.getDacCode());
+			 
+			 //ECRAN DE SAISIE
+			   if(controleController.ecran=="saisie") {
+				   newTempFactSup.setTempCritDac(dao.getDacCode());
+			   }else
+				 //ECRAN DE MODIFICATION
+			   {
+				   newTempFactSup.setTempCritDac(slctdTd.getDacCode());   
+			   }
 			 newTempFactSup.setTempDcadNum(sltCritereDac.getDcadNum().toString());
 		  	 newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
 		  	 newTempFactSup.setTempLotPlage("");
@@ -4025,12 +4133,24 @@ public class DaoController {
 				  
 					  public void chargeLots(){
 							 //getListeDAO().clear();
-							 listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 
-									 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
-									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
-								_logger.info("listeLots size: "+listeLots.size());	
-								//montantTotalLot();
-								lotTotal = getNbreLotTotal();
+						  //ECRAN DE SAISIE
+						   if(controleController.ecran=="saisie") {
+							   listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 
+										 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+										 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+									_logger.info("listeLots size: "+listeLots.size());	
+									//montantTotalLot();
+									lotTotal = getNbreLotTotal(); 
+						   }else
+							 //ECRAN DE MODIFICATION
+						   {
+							   listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 	
+									     new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+										 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+									_logger.info("lots size: "+listeLots.size());	
+									//montantTotalLot(); 
+						   }
+							
 						}
 					  
 					  
@@ -4287,9 +4407,8 @@ public class DaoController {
 					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
 					        // convertir string en double
 					        String str = ""+newLot.getLaaMtEst();
-					        Double  mtEstim = Double.parseDouble(str);
-					        
-					        String strMtCaut = ""+newLot.getLaaMtCaut();  
+					        String strMtCaut = ""+newLot.getLaaMtCaut(); 
+					        Double  mtEstim = Double.parseDouble(str); 
 					        Double  montantCaut = Double.parseDouble(strMtCaut);
 					        
 							cautionMin = caution.getCautValMin() * mtEstim;
@@ -6679,7 +6798,15 @@ public class DaoController {
 				 chargeCritereSaisie();
 		  		 chargeCritere();*/
 		  		 
-		  		newTempFactSup.setTempCritDac(dao.getDacCode());
+		  		
+		  		 //ECRAN DE SAISIE
+				   if(controleController.ecran=="saisie") {
+					   newTempFactSup.setTempCritDac(dao.getDacCode());
+				   }else
+					 //ECRAN DE MODIFICATION
+				   {
+					   newTempFactSup.setTempCritDac(slctdTd.getDacCode());  
+				   }
 		  		newTempFactSup.setTempDcadNum("");
 		  		newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
 		  		newTempFactSup.setTempLotPlage("0");
@@ -6810,6 +6937,11 @@ public class DaoController {
 		public void actionsPavetLot() {
 			chargeLotsUpdate();
 			montantTotalLotModif();
+		}
+		
+		public void actionsPavetCritere() {
+			chargeCritere();
+			chargeCritereSaisie();
 		}
 			
          

@@ -36,6 +36,7 @@ public class ControleController {
 	private String libellePgpm ="";
 	public String type="";
 	public String typePlan="";
+	public String ecran="";
 	private String libelleValPrq="";
 	private String libelleValami="";
 	private String libelleValP="";
@@ -2985,6 +2986,7 @@ public class ControleController {
 				if(action.equalsIgnoreCase("ENGDAO")) {
 				 typePlan ="PN";
 				  type = "DAC";
+				  ecran="saisie";
 				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL D'OFFRES (DAO)";
 				  libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			       libellesmall ="Saisie d'un nouveau DAC";
@@ -3001,6 +3003,7 @@ public class ControleController {
 			    	if(action.equalsIgnoreCase("MODDAO")) {
 			    		typePlan ="PN";
 			    		type = "DAC";
+			    		ecran="modification";
 			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL D'OFFRES N° ";
 			    		libelle1="Saisie d'un nouveau DAC";
 			    		 update_fermer_dao=true;
@@ -10245,6 +10248,16 @@ public class ControleController {
 
 	public void setSearchPubPgpm(boolean searchPubPgpm) {
 		this.searchPubPgpm = searchPubPgpm;
+	}
+
+
+	public String getEcran() {
+		return ecran;
+	}
+
+
+	public void setEcran(String ecran) {
+		this.ecran = ecran;
 	}
 	
 }
