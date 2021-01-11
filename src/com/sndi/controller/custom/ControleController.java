@@ -1209,10 +1209,14 @@ public class ControleController {
 						 searchAC = true;
 						 searchCpmp = false;
 						 searchDmp = false;
+						 detailP1 = true;
+						 detailP2 = false;
+						 /*validDMP = true;
+						 validCPMP = false;*/
 						 validCPMP = true;
 						 validDMP = false;
-						 /*etatPso = false;
-						 etatPsl = true;*/
+						 //etatPso = false;
+						 //etatPsl = false;
 						 etatPso = false;
 						 etatPsl = false;
 						 etatPsc = false;
@@ -1320,6 +1324,7 @@ public class ControleController {
 								 searchAC = false;
 								 searchCpmp = true;
 								 searchDmp = true;
+								 searchPubPpm = false;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPPM")) {
 				    				type = "PPM";
@@ -1507,8 +1512,22 @@ public class ControleController {
 						 searchAC = true;
 						 searchCpmp = false;
 						 searchDmp = false;
-						 validCPMP = true;
-						 validDMP = false;
+						// validCPMP = true;
+						// validDMP = false;
+						 
+						 validCPMP = false;
+						 validDMP = true;
+						 searchAcPs = true;
+						 searchCpmpPs = false;
+						 searchDmpPs = false;
+						 /*etatPsl = false;
+						 etatPso = false;
+						 //validDMP = false;*/
+						 etatPso = false;
+						 etatPsl = false;
+						 etatPsc = false;
+						 etatPsl_Pso = false;
+						 searchPubPpm= false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";
@@ -1569,6 +1588,7 @@ public class ControleController {
 							 etatPsl = false;
 							 etatPsc = false;
 							 etatPsl_Pso = false;
+							 searchPubPpm = false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";
@@ -1602,6 +1622,7 @@ public class ControleController {
 								searchDmpPs = true;
 								recherchePPM = false;
 								recherchePSPM = true;
+								 searchPubPpm= false;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPSPM")) {
 				    				type = "PSPM";
