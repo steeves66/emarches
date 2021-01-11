@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-26T18:55:01 -->
+<!-- 2021-01-11T10:50:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rapport_analyse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="4b224d21-1f03-4cc6-a934-e8c1708e4915">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -1007,7 +1007,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="1" y="28" width="552" height="22" isRemoveLineWhenBlank="true" uuid="efe5d98c-132f-4847-9f47-96d99ed3bf29"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{LIB_INTRODUCTION}]]></textFieldExpression>
 				</textField>
@@ -1016,7 +1016,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="1" y="0" width="256" height="20" uuid="9b4bb7e2-3e5d-485e-ae68-82693b0c49d9"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11" isBold="true" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[I.	 RAPPEL DE L’OUVERTURE DES PLIS]]></text>
 				</staticText>
@@ -1026,7 +1026,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Source de financement : "+"</b>"+$F{DAC_FINANCEMENT}]]></textFieldExpression>
 				</textField>
@@ -1038,7 +1038,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Identification de l’imputation budgétaire : "+"</b>"+$F{LBG_IMPUTATION}]]></textFieldExpression>
 				</textField>
@@ -1050,7 +1050,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Montant de l’enveloppe budgétaire : "+"</b>"+$F{LBG_TOT_DOT}+" F CFA"]]></textFieldExpression>
 				</textField>
@@ -1060,7 +1060,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Nature des prix : "+"</b>"+$F{AAO_NAT_PRIX}]]></textFieldExpression>
 				</textField>
@@ -1180,7 +1180,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Date et heure de l'ouverure des plis : "+"</b>"+new SimpleDateFormat("EEEE dd MMMMM yyyy").format($F{AAO_DTE_OUV_TEC})+"  à "+$F{AAO_DTE_HEUR_OUV}]]></textFieldExpression>
 				</textField>
@@ -1190,7 +1190,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant retiré le dossier de consultation : "+"</b>"+$F{AAO_NBR_OFF}]]></textFieldExpression>
 				</textField>
@@ -1200,7 +1200,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant déposé une offre dans les délais requis : "+"</b>"+$F{AAO_NBR_OFF_ACCPET}]]></textFieldExpression>
 				</textField>
@@ -1210,7 +1210,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant déposé une offre hors délais : "+"</b>"+$F{AAO_NBR_OFF_HOR_DELAI}]]></textFieldExpression>
 				</textField>
@@ -1220,7 +1220,7 @@ and aao.aao_code=$P{param_code_1}]]>
 					</reportElement>
 					<box leftPadding="3"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-						<font fontName="Times New Roman" size="11" isItalic="false"/>
+						<font fontName="SansSerif" size="11" isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<b>"+"Date et heure limites de réception des plis : "+"</b>"+new SimpleDateFormat("EEEE dd MMMMM yyyy").format($F{AAO_DATE_RECEP})+"  à "+$F{AAO_HEURE_RECEP}]]></textFieldExpression>
 				</textField>
@@ -1229,7 +1229,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="0" y="0" width="552" height="20" uuid="c973a6cc-d118-484a-8b4f-35f9f244d54a"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11" isBold="true" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isUnderline="true"/>
 						<paragraph lineSpacing="Single" lineSpacingSize="0.0"/>
 					</textElement>
 					<text><![CDATA[II.	 ANALYSE DES OFFRES]]></text>
@@ -1252,7 +1252,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<pen lineWidth="0.5"/>
 								</box>
 								<textElement verticalAlignment="Middle" markup="html">
-									<font fontName="Times New Roman" size="11"/>
+									<font fontName="SansSerif" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{STATUT_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{CRA_LIBELLE}+"</b>":$F{CRA_LIBELLE}]]></textFieldExpression>
 							</textField>
@@ -1262,14 +1262,14 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="0" y="20" width="555" height="40" uuid="44e1c03e-0429-473e-804b-7d7a4613c473"/>
 					<textElement>
-						<font fontName="Times New Roman" size="10"/>
+						<font fontName="SansSerif" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA["La séance d’analyse des offres s’est déroulée en deux étapes à savoir : l’examen préliminaire et l’examen détaillé."+"\n"+"\n"+"1)	 EXAMEN PRELIMINAIRE DES OFFRES"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="0" y="65" width="556" height="20" uuid="0709bd5a-9cf8-4a90-915c-b523ef82dfc6"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Cette étape consiste en la vérification de l’existence et de la conformité des éléments suivants :"]]></textFieldExpression>
 				</textField>
@@ -1278,7 +1278,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="1" y="6" width="553" height="20" uuid="34434113-577f-4cc1-9911-e642b07da8c7"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<text><![CDATA[Les résultats de l’examen préliminaire sont consignés dans le tableau ci-après :]]></text>
 				</staticText>
@@ -1324,7 +1324,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement positionType="Float" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="555" height="10" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="a857d95d-fa0f-44ed-beaf-51877d2b84e9"/>
 										<box topPadding="2" leftPadding="3" bottomPadding="2" rightPadding="1"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="10" isBold="true"/>
+											<font fontName="SansSerif" size="10" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{LAA_OBJET}]]></textFieldExpression>
 									</textField>
@@ -1347,7 +1347,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement stretchType="ContainerHeight" x="0" y="0" width="200" height="10" uuid="a657fa75-afe3-4e5d-90f7-753ba20f7862"/>
 											<box leftPadding="3"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}]]></textFieldExpression>
 										</textField>
@@ -1363,7 +1363,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="70" height="10" uuid="1812624c-ebef-4975-a601-5c06d44a18ab"/>
 											<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}.equalsIgnoreCase(" ")?"<b>"+$F{NCC1}+"</b>":$F{NCC1}]]></textFieldExpression>
 										</textField>
@@ -1376,7 +1376,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="70" height="10" uuid="ea6b1ee7-7c2e-4a55-afe9-849c281a5114"/>
 											<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}.equalsIgnoreCase(" ")?"<b>"+$F{NCC2}+"</b>":$F{NCC2}]]></textFieldExpression>
 										</textField>
@@ -1389,7 +1389,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="69" height="10" uuid="1b91977f-7386-48a3-b607-e42327dfd37f"/>
 											<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}.equalsIgnoreCase(" ")?"<b>"+$F{NCC3}+"</b>":$F{NCC3}]]></textFieldExpression>
 										</textField>
@@ -1402,7 +1402,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="68" height="10" uuid="371ff2cb-01e1-41f2-9657-d630d744e8c4"/>
 											<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}.equalsIgnoreCase(" ")?"<b>"+$F{NCC4}+"</b>":$F{NCC4}]]></textFieldExpression>
 										</textField>
@@ -1415,7 +1415,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="78" height="10" uuid="499bb1b2-9aec-4fef-ad90-b2118cbd5a49"/>
 											<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}.equalsIgnoreCase(" ")?"<b>"+$F{NCC5}+"</b>":$F{NCC5}]]></textFieldExpression>
 										</textField>
@@ -1468,7 +1468,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<staticText>
 										<reportElement mode="Opaque" x="0" y="0" width="240" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="304af782-2206-47b2-bf96-f56cb48af705"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="10" isBold="true"/>
+											<font fontName="SansSerif" size="10" isBold="true"/>
 										</textElement>
 										<text><![CDATA[Document examiné]]></text>
 									</staticText>
@@ -1478,7 +1478,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="240" height="10" isRemoveLineWhenBlank="true" uuid="e2f87803-f877-45e0-9024-265183d83efa"/>
 										<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="1"/>
 										<textElement verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{ANALYSE_STATUT}.equalsIgnoreCase("1")?"<b>"+$F{TPO_LIBELLE}+"</b>":$F{TPO_LIBELLE}]]></textFieldExpression>
 									</textField>
@@ -1497,7 +1497,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<staticText>
 										<reportElement mode="Opaque" x="0" y="0" width="110" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="218b502e-78f0-4980-8f97-43eb55d30d5d"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="10" isBold="true"/>
+											<font fontName="SansSerif" size="10" isBold="true"/>
 										</textElement>
 										<text><![CDATA[Résultat de l'examen]]></text>
 									</staticText>
@@ -1507,7 +1507,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement positionType="Float" x="0" y="0" width="110" height="10" uuid="fb9cef3a-8d6a-41d4-98de-616a9c944f87"/>
 										<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="1"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{RESULTAT}]]></textFieldExpression>
 									</textField>
@@ -1528,7 +1528,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<staticText>
 										<reportElement mode="Opaque" x="0" y="0" width="203" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="874eccd1-2f7b-402d-897e-d5b20378955f"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="10" isBold="true"/>
+											<font fontName="SansSerif" size="10" isBold="true"/>
 										</textElement>
 										<text><![CDATA[Observation(s)]]></text>
 									</staticText>
@@ -1538,7 +1538,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement positionType="Float" x="0" y="0" width="203" height="10" uuid="2b07a15a-f1b2-4004-975a-b51b8c5fb75e"/>
 										<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="1"/>
 										<textElement verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{POF_OBS}]]></textFieldExpression>
 									</textField>
@@ -1550,7 +1550,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="1" y="0" width="553" height="20" uuid="b3e8ea8a-6dda-4e91-83b8-5f3b896c3b63"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["A l’issue de cet examen, les soumissionnaires ci-dessous ont été éliminés pour les motifs suivants : "]]></textFieldExpression>
 				</textField>
@@ -1577,7 +1577,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<textField isStretchWithOverflow="true">
 										<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="554" height="10" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="b19eeed1-10a1-43ad-a48a-7800e3493a32"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="9"/>
+											<font fontName="SansSerif" size="9"/>
 										</textElement>
 										<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 									</textField>
@@ -1595,7 +1595,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement x="0" y="0" width="554" height="10" uuid="358e553a-d2a4-4724-af03-72521bee080d"/>
 										<box leftPadding="3"/>
 										<textElement verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA["- "+$F{DOF_SOU_NCC}+" : "+$F{SOU_SIGLE_STE}]]></textFieldExpression>
 									</textField>
@@ -1607,7 +1607,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="0" y="0" width="555" height="20" uuid="3a430eb7-3c97-4684-97d2-55447b5e0c61"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Les offres des soumissionnaires suivants ont été retenues pour l’examen détaillé :"]]></textFieldExpression>
 				</textField>
@@ -1616,7 +1616,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="0" y="58" width="554" height="40" isPrintWhenDetailOverflows="true" uuid="0351a49f-c644-4150-bf91-be7861fb68d7"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["a)	Examen des offres techniques des soumissionnaires"+"\n"+"\n"+
 "Elle consiste à vérifier l’existence et la conformité des documents exigés dans le dossier de consultation démontrant que, le soumissionnaire est qualifié pour exécuter la mission : "+$F{AAO_LIBELLE}]]></textFieldExpression>
@@ -1624,7 +1624,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField isStretchWithOverflow="true">
 					<reportElement stretchType="ContainerHeight" x="0" y="0" width="554" height="40" isPrintWhenDetailOverflows="true" uuid="80500203-d94f-4919-a3cd-04d86587550b"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["2)	 EXAMEN DETAILLE DES OFFRES"+"\n"+"\n"+
 "L’examen détaillé des offres a porté sur les points suivants : l’examen des offres techniques et, l’évaluation et la comparaison des offres financières."]]></textFieldExpression>
@@ -1634,14 +1634,14 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="0" y="20" width="556" height="20" uuid="e047d78a-9f91-4a74-a97f-a178ae7ccb18"/>
 					<textElement markup="html">
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<u>"+"Regime de qualification : "+"</u>"+"<b>"+$F{AAO_REG_QUAL}+"</b>"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="0" y="0" width="554" height="20" uuid="f910cd3e-88a6-485e-a9f3-7b1637df47e0"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Conformément au dossier de consultation, les critères d’évaluation et de qualification se présentent comme suit :"]]></textFieldExpression>
 				</textField>
@@ -1663,7 +1663,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<pen lineWidth="0.5"/>
 								</box>
 								<textElement verticalAlignment="Middle" markup="html">
-									<font fontName="Times New Roman" size="10"/>
+									<font fontName="SansSerif" size="10"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{STATUT_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{CRA_LIBELLE}+"</b>":$F{CRA_LIBELLE}]]></textFieldExpression>
 							</textField>
@@ -1675,14 +1675,14 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="0" y="9" width="30" height="20" uuid="1a1ec234-d825-4690-bcd6-d3aa51de7d6e"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11" isBold="true" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[N.B.: ]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="30" y="9" width="524" height="20" uuid="8b993f65-5c63-470c-a0d7-5fd30b751327"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Toute offre ne remplissant pas ces critères sera jugée non conforme."]]></textFieldExpression>
 				</textField>
@@ -1720,7 +1720,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<reportElement mode="Opaque" x="0" y="0" width="553" height="20" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="6faa06bb-3f13-4c97-a7cb-453e3bf00c89"/>
 												<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 												<textElement verticalAlignment="Middle">
-													<font fontName="Times New Roman" size="10" isBold="true"/>
+													<font fontName="SansSerif" size="10" isBold="true"/>
 												</textElement>
 												<textFieldExpression><![CDATA[$F{SOU_NCC}+" - "+$F{SOU_SIGLE_STE}]]></textFieldExpression>
 											</textField>
@@ -1734,7 +1734,7 @@ and aao.aao_code=$P{param_code_1}]]>
 													<reportElement positionType="Float" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="553" height="20" uuid="cbaead20-1d1d-4ca8-b713-a7fbdfd08f3b"/>
 													<box topPadding="3" bottomPadding="3"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="10" isBold="true"/>
+														<font fontName="SansSerif" size="10" isBold="true"/>
 													</textElement>
 													<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 												</textField>
@@ -1760,7 +1760,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="230" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="4123d1ad-aab9-44eb-8db6-abe257de8a18"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Critère examiné]]></text>
 												</staticText>
@@ -1775,7 +1775,7 @@ and aao.aao_code=$P{param_code_1}]]>
 													<reportElement stretchType="ContainerHeight" x="0" y="0" width="230" height="18" uuid="61c019b0-f6ee-4cba-97be-7dad845a4fb5"/>
 													<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="0"/>
 													<textElement verticalAlignment="Middle" markup="html">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{ANALYSE_STATUT}.equalsIgnoreCase("1")?"<b>"+$F{TPO_LIBELLE}+"</b>":$F{TPO_LIBELLE}]]></textFieldExpression>
 												</textField>
@@ -1800,7 +1800,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="71ecb7e9-fd7e-45ac-82e6-96573c8b2b37"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Résultat]]></text>
 												</staticText>
@@ -1814,7 +1814,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<textField>
 													<reportElement positionType="Float" x="0" y="0" width="100" height="18" uuid="fd64693f-40f8-49e3-8e5e-d6d9f344228c"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{RESULTAT}]]></textFieldExpression>
 												</textField>
@@ -1839,7 +1839,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="223" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="9cac8d34-e24e-4034-be92-476593c2f8e4"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Observation(s)]]></text>
 												</staticText>
@@ -1854,7 +1854,7 @@ and aao.aao_code=$P{param_code_1}]]>
 													<reportElement positionType="Float" x="0" y="0" width="223" height="18" isRemoveLineWhenBlank="true" uuid="906874fd-4283-4038-b6d1-d722d5a2c844"/>
 													<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 													<textElement verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{POF_OBS}]]></textFieldExpression>
 												</textField>
@@ -1869,7 +1869,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="0" y="10" width="556" height="19" uuid="b3fc4d6b-0bde-4f92-bef3-27f567623aa2"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[- Analyse détaillée : ]]></text>
 				</staticText>
@@ -1878,7 +1878,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="0" y="10" width="556" height="19" uuid="0ebcbf8d-c309-4161-9583-79c732d614b8"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[- Synthèse de l'analyse : ]]></text>
 				</staticText>
@@ -1903,7 +1903,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<textField>
 										<reportElement mode="Opaque" x="0" y="0" width="553" height="20" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="c8e8ae35-8fa1-47ae-9afc-690ba23df40a"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" isBold="true"/>
+											<font fontName="SansSerif" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 									</textField>
@@ -1923,7 +1923,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="160" height="20" isRemoveLineWhenBlank="true" uuid="5fde0321-5b75-4ecc-a4d2-d7f65c177b76"/>
 										<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 										<textElement verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{CRA_LIBELLE}+"</b>":$F{CRA_LIBELLE}]]></textFieldExpression>
 									</textField>
@@ -1943,7 +1943,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="2dfdaf31-a73a-49ae-9b93-87c2554cb390"/>
 										<box padding="2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC1}+"</b>":$F{NCC1}]]></textFieldExpression>
 									</textField>
@@ -1963,7 +1963,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="a07ec646-94f3-41ac-aa85-4e258def5618"/>
 										<box padding="2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC2}+"</b>":$F{NCC2}]]></textFieldExpression>
 									</textField>
@@ -1983,7 +1983,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="77" height="20" isRemoveLineWhenBlank="true" uuid="18746443-4268-48bc-a1a1-fb6121966699"/>
 										<box padding="2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC3}+"</b>":$F{NCC3}]]></textFieldExpression>
 									</textField>
@@ -2003,7 +2003,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="79" height="20" isRemoveLineWhenBlank="true" uuid="bc94c15e-e5b6-4f43-aa92-ac7d87dc8ce2"/>
 										<box padding="2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC4}+"</b>":$F{NCC4}]]></textFieldExpression>
 									</textField>
@@ -2023,7 +2023,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="77" height="20" isRemoveLineWhenBlank="true" uuid="47584877-af41-421a-8862-dabe2fa0d310"/>
 										<box padding="2"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-											<font fontName="Times New Roman" size="8"/>
+											<font fontName="SansSerif" size="8"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC5}+"</b>":$F{NCC5}]]></textFieldExpression>
 									</textField>
@@ -2056,7 +2056,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement mode="Opaque" x="0" y="0" width="555" height="19" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="66737ca8-8a6e-4b98-ba01-5dec8987689a"/>
 										<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 										<textElement textAlignment="Left" verticalAlignment="Middle">
-											<font fontName="Times New Roman" isBold="true"/>
+											<font fontName="SansSerif" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA[$F{SOU_NCC}+" - "+$F{SOU_SIGLE_STE}]]></textFieldExpression>
 									</textField>
@@ -2069,7 +2069,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField>
 											<reportElement mode="Opaque" x="0" y="0" width="555" height="20" uuid="87e75a1b-c06a-44a4-a125-8b7e48bc066d"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" isBold="true"/>
+												<font fontName="SansSerif" isBold="true"/>
 											</textElement>
 											<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 										</textField>
@@ -2090,7 +2090,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Transparent" x="0" y="0" width="200" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="9b47b7f1-262f-4bcc-bc01-92ff5b92bf8b"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Critère examiné]]></text>
 										</staticText>
@@ -2100,7 +2100,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="200" height="20" isRemoveLineWhenBlank="true" uuid="cd967122-8548-4921-a053-25d9720a7554"/>
 											<box topPadding="1" leftPadding="3" rightPadding="1"/>
 											<textElement verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{ANALYSE_STATUT}.equalsIgnoreCase("1")?"<b>"+$F{TPO_LIBELLE}+"</b>":$F{TPO_LIBELLE}]]></textFieldExpression>
 										</textField>
@@ -2120,7 +2120,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Transparent" x="0" y="0" width="130" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="0ddbedcd-35e1-436d-acbf-f20d95f2770a"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Résultat]]></text>
 										</staticText>
@@ -2129,7 +2129,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="130" height="20" isRemoveLineWhenBlank="true" uuid="c5b63522-1a52-4355-8076-42539c1b8619"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{RESULTAT}]]></textFieldExpression>
 										</textField>
@@ -2149,7 +2149,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Transparent" x="0" y="0" width="225" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="06a11231-30b0-43f3-9e4d-838b0107a284"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Observation(s)]]></text>
 										</staticText>
@@ -2159,7 +2159,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="225" height="20" isRemoveLineWhenBlank="true" uuid="97117817-5794-486a-9f71-9e5b6d9deb14"/>
 											<box topPadding="1" leftPadding="3" rightPadding="1"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{POF_OBS}]]></textFieldExpression>
 										</textField>
@@ -2172,7 +2172,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="5" y="4" width="548" height="16" uuid="632c3f78-faed-4cf0-8ffd-e988ed7eab58"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["A l’issue de cet examen, les offres des entreprises suivantes ont été déclarées non conformes pour les motifs ci-après: "]]></textFieldExpression>
 				</textField>
@@ -2204,7 +2204,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<reportElement mode="Opaque" x="0" y="0" width="553" height="20" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="7ae89e31-e410-4faf-a1ca-5a8049e7b3c4"/>
 												<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 												<textElement verticalAlignment="Middle">
-													<font fontName="Times New Roman" size="10" isBold="true"/>
+													<font fontName="SansSerif" size="10" isBold="true"/>
 												</textElement>
 												<textFieldExpression><![CDATA[$F{SOU_NCC}+" - "+$F{SOU_SIGLE_STE}]]></textFieldExpression>
 											</textField>
@@ -2217,7 +2217,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 													<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="553" height="20" isRemoveLineWhenBlank="true" uuid="5e448d2a-6604-42bd-ade6-1c2f2bac7399"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" isBold="true"/>
+														<font fontName="SansSerif" isBold="true"/>
 													</textElement>
 													<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 												</textField>
@@ -2241,7 +2241,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="230" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="5388ab34-6e1d-41d2-80c1-5a038edcc6cb"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Critère examiné]]></text>
 												</staticText>
@@ -2256,7 +2256,7 @@ and aao.aao_code=$P{param_code_1}]]>
 													<reportElement stretchType="ContainerHeight" x="0" y="0" width="230" height="18" uuid="fe3b3af0-9f3c-47c4-8092-a871bb336dd0"/>
 													<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="0"/>
 													<textElement verticalAlignment="Middle" markup="html">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{ANALYSE_STATUT}.equalsIgnoreCase("1")?"<b>"+$F{TPO_LIBELLE}+"</b>":$F{TPO_LIBELLE}]]></textFieldExpression>
 												</textField>
@@ -2278,7 +2278,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="10f639a1-4f20-4942-b3c0-4c65906d5503"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Résultat]]></text>
 												</staticText>
@@ -2292,7 +2292,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<textField>
 													<reportElement positionType="Float" x="0" y="0" width="100" height="18" uuid="7ec8c265-0cda-43b2-a060-9aedeabebc46"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{RESULTAT}]]></textFieldExpression>
 												</textField>
@@ -2314,7 +2314,7 @@ and aao.aao_code=$P{param_code_1}]]>
 												<staticText>
 													<reportElement mode="Opaque" x="0" y="0" width="223" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="b4e6507c-dcd3-483d-b2e7-4d1d9c584f2e"/>
 													<textElement textAlignment="Center" verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="11" isBold="true"/>
+														<font fontName="SansSerif" size="11" isBold="true"/>
 													</textElement>
 													<text><![CDATA[Observation(s)]]></text>
 												</staticText>
@@ -2329,7 +2329,7 @@ and aao.aao_code=$P{param_code_1}]]>
 													<reportElement positionType="Float" x="0" y="0" width="223" height="18" isRemoveLineWhenBlank="true" uuid="0310e615-640e-448b-a010-3fede76170fa"/>
 													<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 													<textElement verticalAlignment="Middle">
-														<font fontName="Times New Roman" size="8"/>
+														<font fontName="SansSerif" size="8"/>
 													</textElement>
 													<textFieldExpression><![CDATA[$F{POF_OBS}]]></textFieldExpression>
 												</textField>
@@ -2344,7 +2344,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="1" y="0" width="553" height="20" uuid="bae7353b-5f80-4c39-bc38-c218a49a4b9f"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Les entreprises suivantes ont été retenues pour l’évaluation et la comparaison de leurs offres financières :"]]></textFieldExpression>
 				</textField>
@@ -2393,7 +2393,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="169" height="20" isRemoveLineWhenBlank="true" uuid="0e548fc8-4358-4dde-9bf0-0705501da84e"/>
 											<box leftPadding="3"/>
 											<textElement verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}]]></textFieldExpression>
 										</textField>
@@ -2406,7 +2406,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="78" height="20" isRemoveLineWhenBlank="true" uuid="22e1b911-0bf7-4d0d-bccf-c45e38adc688"/>
 											<box padding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC1}+"</b>":$F{NCC1}]]></textFieldExpression>
 										</textField>
@@ -2419,7 +2419,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="77" height="20" isRemoveLineWhenBlank="true" uuid="ed87979c-c227-43a1-92ea-1814753aa841"/>
 											<box padding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC2}+"</b>":$F{NCC2}]]></textFieldExpression>
 										</textField>
@@ -2432,7 +2432,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="77" height="20" isRemoveLineWhenBlank="true" uuid="1fad2b36-106b-4dbc-bf25-14bb94cc8238"/>
 											<box padding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC3}+"</b>":$F{NCC3}]]></textFieldExpression>
 										</textField>
@@ -2445,7 +2445,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="78" height="20" isRemoveLineWhenBlank="true" uuid="963b2be9-25ba-422a-9c94-19ebf0148b1e"/>
 											<box padding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC4}+"</b>":$F{NCC4}]]></textFieldExpression>
 										</textField>
@@ -2458,7 +2458,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="77" height="20" isRemoveLineWhenBlank="true" uuid="a05a3d45-61f7-4770-bf13-b0492ee43461"/>
 											<box padding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC5}+"</b>":$F{NCC5}]]></textFieldExpression>
 										</textField>
@@ -2471,7 +2471,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField isStretchWithOverflow="true">
 					<reportElement stretchType="ContainerHeight" x="0" y="0" width="554" height="100" uuid="e23447dd-7ceb-4248-99b8-ba1f06dde23b"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["b)	Evaluation et comparaison des offres financières"+"\n"+"\n"+"L’évaluation des offres financières se fait sur la base des critères et de la méthode d’évaluation retenus aux Données Particulières de l’Appel d’Offres (DPAO) ou aux Données d’Evaluation des Offres."+"\n"+"\n"+"1)	Vérification des soumissions  "+"\n"+"\n"+"Les résultats sont consignés dans le tableau suivant : "]]></textFieldExpression>
 				</textField>
@@ -2499,7 +2499,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<reportElement positionType="Float" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="554" height="10" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="b96e4888-cf05-45c9-8e93-4bac11c30ed9"/>
 										<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="9" isBold="true"/>
+											<font fontName="SansSerif" size="9" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 									</textField>
@@ -2518,7 +2518,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="330" height="30" forecolor="#FFFFFF" backcolor="#2DB539" uuid="ecb170c8-dcd1-41c4-8295-33fee7792059"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8" isBold="true"/>
+												<font fontName="SansSerif" size="8" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Soumissionnaires]]></text>
 										</staticText>
@@ -2528,7 +2528,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="330" height="20" isRemoveLineWhenBlank="true" uuid="73b3a5cf-3b8c-45d8-8a9b-498f2b77b942"/>
 											<box leftPadding="3"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_SOU_NCC}+":"+$F{OFF_SOU_SIGLE_STE}]]></textFieldExpression>
 										</textField>
@@ -2540,7 +2540,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FFFFFF" backcolor="#2DB539" uuid="617f6202-6ed7-4d5f-ba49-c50ee2471500"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8" isBold="true"/>
+												<font fontName="SansSerif" size="8" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Montant de l'offre publiquement lu]]></text>
 										</staticText>
@@ -2550,7 +2550,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="90" height="20" isRemoveLineWhenBlank="true" uuid="8dccca6d-8725-47f5-83c4-bd89e1c7c97f"/>
 											<box leftPadding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_MT_OFR})+" F CFA"]]></textFieldExpression>
 										</textField>
@@ -2562,7 +2562,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#2DB539" uuid="dfe93e7f-82d1-4e9a-9cf5-5d8c850c0217"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8" isBold="true"/>
+												<font fontName="SansSerif" size="8" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Montant corrigé de l'offre]]></text>
 										</staticText>
@@ -2572,7 +2572,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="a8ab9221-294f-45f6-804a-df29ba973775"/>
 											<box leftPadding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_MT_COR})+" F CFA"]]></textFieldExpression>
 										</textField>
@@ -2584,7 +2584,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="54" height="30" forecolor="#FFFFFF" backcolor="#2DB539" uuid="4d0713e5-1fd8-4618-b51a-01cf6ff50730"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8" isBold="true"/>
+												<font fontName="SansSerif" size="8" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Rang]]></text>
 										</staticText>
@@ -2594,7 +2594,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="54" height="20" isRemoveLineWhenBlank="true" uuid="a5ce2450-ae81-48fe-a338-598cfdbe17b7"/>
 											<box leftPadding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{RANG}]]></textFieldExpression>
 										</textField>
@@ -2607,14 +2607,14 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="0" y="0" width="555" height="20" uuid="0288523b-57b2-4024-a298-9c014ece38e4"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["2)	Classement des soumissions (corrigées, le cas échéant) "]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="-1" y="22" width="556" height="20" uuid="ffc2a58a-cfd6-485f-95ea-aed40222e0b1"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["A l’issue de cette évaluation détaillée, le classement suivant a été obtenu : "]]></textFieldExpression>
 				</textField>
@@ -2641,7 +2641,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<textField>
 										<reportElement mode="Opaque" x="0" y="0" width="552" height="20" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="81670690-c3f3-4cbb-a9d0-fd77e1554f4c"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="10" isBold="true"/>
+											<font fontName="SansSerif" size="10" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 									</textField>
@@ -2659,7 +2659,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement stretchType="ContainerHeight" x="0" y="0" width="157" height="10" isRemoveLineWhenBlank="true" uuid="76fdec24-9580-461e-b7cc-d276417e031d"/>
 											<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 											<textElement verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{CRA_LIBELLE}]]></textFieldExpression>
 										</textField>
@@ -2675,7 +2675,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="79" height="10" isRemoveLineWhenBlank="true" uuid="638a6ff4-d916-4f5b-84c5-bd517d28bd8c"/>
 											<box padding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC1}+"</b>":$F{NCC1}]]></textFieldExpression>
 										</textField>
@@ -2691,7 +2691,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="79" height="10" isRemoveLineWhenBlank="true" uuid="d1db68bc-dd7f-4ffa-bd3f-6e2aa39a7ba3"/>
 											<box padding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC2}+"</b>":$F{NCC2}]]></textFieldExpression>
 										</textField>
@@ -2707,7 +2707,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="79" height="10" isRemoveLineWhenBlank="true" uuid="0b2489a1-b53b-4953-9a8e-777d611cb1f7"/>
 											<box padding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC3}+"</b>":$F{NCC3}]]></textFieldExpression>
 										</textField>
@@ -2723,7 +2723,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="79" height="10" isRemoveLineWhenBlank="true" uuid="9cc752d8-7f3d-485e-9ab9-7628fac45612"/>
 											<box padding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC4}+"</b>":$F{NCC4}]]></textFieldExpression>
 										</textField>
@@ -2739,7 +2739,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="79" height="10" isRemoveLineWhenBlank="true" uuid="5dd0ead4-940e-4a22-be25-a825769c7558"/>
 											<box padding="3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_CRIT}.equalsIgnoreCase("1")?"<b>"+$F{NCC5}+"</b>":$F{NCC5}]]></textFieldExpression>
 										</textField>
@@ -2752,7 +2752,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="-1" y="0" width="555" height="50" uuid="de53c1d2-5536-45be-9019-1b5fafbf3888"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["3)	 Calcul des seuils des offres financières anormalement basses ou élevées "+"\n"+"\n"+"Conformément au dossier de consultation, les seuils des offres financières anormalement basses ou élevées sont évalués comme suit : "]]></textFieldExpression>
 				</textField>
@@ -2786,7 +2786,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement key="" positionType="Float" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="553" height="20" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="6df7d6a6-2388-4ff5-afb8-7e96d3bbc723"/>
 											<box topPadding="2" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="9" isBold="true"/>
+												<font fontName="SansSerif" size="9" isBold="true"/>
 											</textElement>
 											<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 										</textField>
@@ -2798,7 +2798,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="247" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="80fa635c-ecfc-4efb-8c79-687cb456e6e5"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Soumissionnaire]]></text>
 										</staticText>
@@ -2808,7 +2808,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="247" height="20" isRemoveLineWhenBlank="true" uuid="997bbd14-b3cf-4920-8bc4-972b7d4a8fce"/>
 											<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{OFF_SOU_NCC}+" - "+$F{OFF_SOU_SIGLE_STE}]]></textFieldExpression>
 										</textField>
@@ -2820,7 +2820,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="256" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="5ed2e053-7b06-4239-a67c-afa61e5da91d"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Résultat de l'examen]]></text>
 										</staticText>
@@ -2830,7 +2830,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="256" height="20" isRemoveLineWhenBlank="true" uuid="211a879b-a081-4537-a10d-a5e9214d2985"/>
 											<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{COMMENTAIRE}]]></textFieldExpression>
 										</textField>
@@ -2842,7 +2842,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="50" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="95be3d56-39fa-428d-87c1-4b00973ec7e6"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Décision]]></text>
 										</staticText>
@@ -2851,7 +2851,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 											<reportElement key="" positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="69a3fb62-1403-4808-9c5c-1992c13f94aa"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="8"/>
+												<font fontName="SansSerif" size="8"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{REPECHE}]]></textFieldExpression>
 										</textField>
@@ -2864,7 +2864,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement stretchType="ContainerHeight" x="1" y="0" width="555" height="70" isRemoveLineWhenBlank="true" uuid="3098d43d-4774-40ba-bbea-12a1a98688ab"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["En application des dispositions contenues dans le dossier de consultation, les offres des soumissionnaires anormalement élevés sont rejetées."+"\n"+"En application des dispositions de l’article 73 du Code des marchés publics, suite aux correspondances au(x) soumissionnaire(s) ……… dont l’ (les) offre(s) a (ont) été évaluée(s) anormalement basse(s), la COJO a arrêté les décisions suivantes :"]]></textFieldExpression>
 				</textField>
@@ -2873,7 +2873,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<staticText>
 					<reportElement x="1" y="0" width="554" height="20" uuid="84b46500-fe21-428a-9a25-93bec424074b"/>
 					<textElement markup="html">
-						<font fontName="Times New Roman" size="11" isBold="true" isItalic="false" isUnderline="true"/>
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[III.	PROPOSITION D’ATTRIBUTION]]></text>
 				</staticText>
@@ -2908,7 +2908,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="551" height="20" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="e1f5ebc7-0dab-419d-974a-b9b3a0a637d6"/>
 											<box topPadding="2" bottomPadding="2"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" isBold="true"/>
+												<font fontName="SansSerif" isBold="true"/>
 											</textElement>
 											<textFieldExpression><![CDATA["LOT "+$F{LOT}+" - "+$F{LAA_OBJET}]]></textFieldExpression>
 										</textField>
@@ -2920,7 +2920,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="21" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="a7d0b012-4f97-48ce-bb61-971043d2c5c0"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[N°]]></text>
 										</staticText>
@@ -2929,7 +2929,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField>
 											<reportElement x="0" y="0" width="21" height="20" uuid="b9cfee1b-8eb4-4600-ad3b-4e5a5908282c"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="10" isBold="true"/>
+												<font fontName="SansSerif" size="10" isBold="true"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{ORDRE}]]></textFieldExpression>
 										</textField>
@@ -2941,7 +2941,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="319" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="91872f0e-95c0-4bc7-a3c2-bf6539e13ba0"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Attributaire]]></text>
 										</staticText>
@@ -2951,7 +2951,7 @@ and aao.aao_code=$P{param_code_1}]]>
 											<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="319" height="20" isRemoveLineWhenBlank="true" uuid="aacb48f6-a1d2-405e-a3e7-af9dcd839cf9"/>
 											<box topPadding="1" leftPadding="3" bottomPadding="1"/>
 											<textElement verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="10"/>
+												<font fontName="SansSerif" size="10"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{ENTREPRISE}]]></textFieldExpression>
 										</textField>
@@ -2963,7 +2963,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="120" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="584d6536-626e-44e2-a113-68e51980bd8c"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Montant attribué]]></text>
 										</staticText>
@@ -2972,7 +2972,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField>
 											<reportElement x="0" y="0" width="120" height="20" uuid="1138f2f8-15fa-4b6a-acf8-857a63b686b3"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="10"/>
+												<font fontName="SansSerif" size="10"/>
 											</textElement>
 											<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{MONTANT})+" F CFA"]]></textFieldExpression>
 										</textField>
@@ -2984,7 +2984,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<staticText>
 											<reportElement mode="Opaque" x="0" y="0" width="91" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="b08fb865-9898-4966-8046-e87e098113c5"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="11" isBold="true"/>
+												<font fontName="SansSerif" size="11" isBold="true"/>
 											</textElement>
 											<text><![CDATA[Délai d'exécution]]></text>
 										</staticText>
@@ -2993,7 +2993,7 @@ and aao.aao_code=$P{param_code_1}]]>
 										<textField>
 											<reportElement x="0" y="0" width="91" height="20" uuid="b672e673-554b-484f-a828-16b4d65e51dc"/>
 											<textElement textAlignment="Center" verticalAlignment="Middle">
-												<font fontName="Times New Roman" size="10"/>
+												<font fontName="SansSerif" size="10"/>
 											</textElement>
 											<textFieldExpression><![CDATA[$F{Délai d'exécution}+" jours"]]></textFieldExpression>
 										</textField>
@@ -3006,7 +3006,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="1" y="23" width="554" height="30" uuid="bd59f3f6-2e25-409d-8bec-1d5f5511bd5d"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Le marché étant attribué au soumissionnaire dont l’offre est évaluée conforme et moins disante dans les limites des seuils des offres anormalement basses ou élevées, la proposition d'attribution se présente comme suit :"]]></textFieldExpression>
 				</textField>
@@ -3033,7 +3033,7 @@ and aao.aao_code=$P{param_code_1}]]>
 								<staticText>
 									<reportElement mode="Opaque" x="0" y="0" width="20" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="46eeaaa5-c208-4fb0-a3ff-8f082687e519"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="11" isBold="true"/>
+										<font fontName="SansSerif" size="11" isBold="true"/>
 									</textElement>
 									<text><![CDATA[Lot]]></text>
 								</staticText>
@@ -3042,7 +3042,7 @@ and aao.aao_code=$P{param_code_1}]]>
 								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 									<reportElement stretchType="ContainerHeight" x="0" y="0" width="20" height="20" isRemoveLineWhenBlank="true" uuid="6bbed4aa-a230-489f-8772-6e771dcb6b23"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="10"/>
+										<font fontName="SansSerif" size="10"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{LAA_NUM}]]></textFieldExpression>
 								</textField>
@@ -3054,7 +3054,7 @@ and aao.aao_code=$P{param_code_1}]]>
 								<staticText>
 									<reportElement mode="Opaque" x="0" y="0" width="424" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="2cdfee17-b27a-4306-a0d3-bc7042fa732d"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="11" isBold="true"/>
+										<font fontName="SansSerif" size="11" isBold="true"/>
 									</textElement>
 									<text><![CDATA[Objet]]></text>
 								</staticText>
@@ -3064,7 +3064,7 @@ and aao.aao_code=$P{param_code_1}]]>
 									<reportElement stretchType="ContainerHeight" x="0" y="0" width="424" height="20" isRemoveLineWhenBlank="true" uuid="d3c5b4c6-54f1-4917-ac94-ae52f970a30e"/>
 									<box leftPadding="3"/>
 									<textElement verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="10"/>
+										<font fontName="SansSerif" size="10"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{LAA_OBJET}]]></textFieldExpression>
 								</textField>
@@ -3076,7 +3076,7 @@ and aao.aao_code=$P{param_code_1}]]>
 								<staticText>
 									<reportElement mode="Opaque" x="0" y="0" width="110" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="dfe8321b-dc18-4add-9e91-30840c4adeaa"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="11" isBold="true"/>
+										<font fontName="SansSerif" size="11" isBold="true"/>
 									</textElement>
 									<text><![CDATA[Observation]]></text>
 								</staticText>
@@ -3085,7 +3085,7 @@ and aao.aao_code=$P{param_code_1}]]>
 								<staticText>
 									<reportElement stretchType="ContainerHeight" x="0" y="0" width="110" height="20" isRemoveLineWhenBlank="true" uuid="fc2b2371-746b-4bfa-a878-76e1bca96727"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font fontName="Times New Roman" size="10" isBold="true" isItalic="true"/>
+										<font fontName="SansSerif" size="10" isBold="true" isItalic="true"/>
 									</textElement>
 									<text><![CDATA[Lot infructueux]]></text>
 								</staticText>
@@ -3096,7 +3096,7 @@ and aao.aao_code=$P{param_code_1}]]>
 				<textField>
 					<reportElement x="0" y="0" width="554" height="20" uuid="9d264dea-97c2-4684-a7b2-b9da4ee996d6"/>
 					<textElement>
-						<font fontName="Times New Roman" size="11"/>
+						<font fontName="SansSerif" size="11"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Le(s) lot(s) suivant(s) est/sont déclaré(s) infructueux : "]]></textFieldExpression>
 				</textField>
