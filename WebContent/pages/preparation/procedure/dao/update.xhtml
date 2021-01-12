@@ -1362,14 +1362,14 @@
                     <div class="form-group ">
 	                  <label for="foncode" class="col-sm-4 control-label"><b> Numero d'autorisation <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-8">
-	                    <p:inputText id="autorisationCode" type="text" value="#{daoController.dao.dacAutComSpec}" styleClass="form-control" style="width: 100%">
+	                    <p:inputText id="autorisationCode" type="text" value="#{daoController.slctdTd.dacAutComSpec}" styleClass="form-control" style="width: 100%">
 	                    </p:inputText>
 	                  </div>
 	                </div> 
 	                <div class="form-group ">
 	                  <label for="typeFonction" class="col-sm-4 control-label"><b>Article <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-8">
-	                     <p:selectOneMenu id="typeFonction" value="#{daoController.newAvis.aaoArtComSpec}"
+	                     <p:selectOneMenu id="typeFonction" value="#{daoController.slctdTd.aaoArtComSpec}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir l'article.." itemValue="empty" />  
 			            <f:selectItems value="#{daoController.listeArticle}" var="art" itemLabel="#{art.libart}" itemValue="#{art.codeart}" /> 
@@ -1681,43 +1681,7 @@
             </p:panel>
             </p:tab>        
       
-             <p:tab id="DossiersModif" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
-             <p:panel header="Fichier(s) Joint(s)">
-
-              <div class="row">
-              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-								<div class="col-xs-12 col-sm-12">
-								<p:fileUpload fileUploadListener="#{agpmController.upload}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
-			                      mode="advanced" dragDropSupport="true"
-			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
-								</div>
-              </div>
-              <br/>
-	            <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES FICHIERS DE L'AGPM </div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun Document enrégistré">
-	           <p:column headerText="Nom du document " styleClass="">
-	            <h:outputText value="#{doss.dagCommentaire}" />
-	        </p:column>
-	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
-	        
-				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
-                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-                   <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
-                </p:commandLink>
- 	        </p:column>
-	    </p:dataTable>    
-	            </div>
-	            </div>
-            </p:panel>
-            </p:tab>
+             
              
             
            

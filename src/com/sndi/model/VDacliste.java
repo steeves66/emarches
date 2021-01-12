@@ -189,8 +189,8 @@ public class VDacliste implements java.io.Serializable {
 	private String aaoDteHeurOuv;
 	private Date aaoDteOuvFin;
 	private Long aaoNbrLot;
-	private BigDecimal aaoNbrOuv;
-	private BigDecimal aaoDelaiVal;
+	private long aaoNbrOuv;
+	private long aaoDelaiVal;
 	private String aaoFonCodAc;
 	private String aaoFonCodeCpmp;
 	private String aaoNatInt;
@@ -221,7 +221,7 @@ public class VDacliste implements java.io.Serializable {
 	private Short aaoNbrOffAccpet;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
-	private BigDecimal adaNum;
+	private long adaNum;
 	private BigDecimal dacNbrCopieOff;
 	private String dacModType;
 	private String dacFinancement;
@@ -283,15 +283,15 @@ public class VDacliste implements java.io.Serializable {
 			BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0, String lbgTypBud,
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
 			String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi, String aaoStaCode, Date aaoDtePub,
-			Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, long aaoNbrLot, BigDecimal aaoNbrOuv,
-			BigDecimal aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
+			Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, long aaoNbrLot, long aaoNbrOuv,
+			long aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
 			String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub,
 			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement,
 			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,BigDecimal dacNbrCopieOff,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String dacMargePref, BigDecimal dacMargePrefComVal,
-			BigDecimal dacMargePrefSouVal,BigDecimal adaNum,double cautValMin,
+			BigDecimal dacMargePrefSouVal,long adaNum,double cautValMin,
 			double cautValMax, String aaoOffAnormal,String adaLibelle) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
@@ -2031,20 +2031,20 @@ public class VDacliste implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrOuv() {
+	public long getAaoNbrOuv() {
 		return this.aaoNbrOuv;
 	}
 
-	public void setAaoNbrOuv(BigDecimal aaoNbrOuv) {
+	public void setAaoNbrOuv(long aaoNbrOuv) {
 		this.aaoNbrOuv = aaoNbrOuv;
 	}
 
 	@Column(name = "AAO_DELAI_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoDelaiVal() {
+	public long getAaoDelaiVal() {
 		return this.aaoDelaiVal;
 	}
 
-	public void setAaoDelaiVal(BigDecimal aaoDelaiVal) {
+	public void setAaoDelaiVal(long aaoDelaiVal) {
 		this.aaoDelaiVal = aaoDelaiVal;
 	}
 
@@ -2328,11 +2328,11 @@ public class VDacliste implements java.io.Serializable {
 	}
 	
 	@Column(name = "ADA_NUM", precision = 22, scale = 0)
-	public BigDecimal getAdaNum() {
+	public long getAdaNum() {
 		return this.adaNum;
 	}
 
-	public void setAdaNum(BigDecimal adaNum) {
+	public void setAdaNum(long adaNum) {
 		this.adaNum = adaNum;
 	}
 	
