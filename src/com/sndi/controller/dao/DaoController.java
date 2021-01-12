@@ -3966,36 +3966,11 @@ public class DaoController {
 	        
 	        @Transactional
 	        public void updateAao() {
+	        	List<TAvisAppelOffre> AVIS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+	        	TAvisAppelOffre newAvis = new TAvisAppelOffre(); 
+			    if(!AVIS.isEmpty()) newAvis = AVIS.get(0);
+
 	        	
-	        	if(slctdTd.getAaoLibelle().equalsIgnoreCase("") || slctdTd.getAaoCoutDac() == 0 || slctdTd.getAaoNbrLot() == 0 || 
-	        			slctdTd.getAaoDelaiVal() == 0 ) { 
-	        		
-	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir tous les champs obligatoires! ","");
-					FacesContext.getCurrentInstance().addMessage(null, msg);
-	        		
-	        	    }else {
-	        	    	avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
-	        					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
-	            	       if (!avisTab.isEmpty()) {
-	            	    	      newAvis = avisTab.get(0);
-	            	    	      if(slctdTd.getAaoDelaiVal() < 30 || slctdTd.getAaoDelaiVal() > 180) {
-	            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
-	            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
-	            	 			 }else {
-	            	 				iservice.updateObject(newAvis); 
-	            	 			 }
-	        				      
-	            	            }else { 
-	            	            	      //S'assurer que la delai saisie est compris entre 30 et 180 jours
-			            	            	if(slctdTd.getAaoDelaiVal() < 30 || slctdTd.getAaoDelaiVal() > 180) {
-				            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
-				            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
-				            	 			 }else {
-				            	 				 if(newAvis.getAaoNbrLot()==0) {
-				            	 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le nombre de lot doit etre superieur 0 ","");
-					            	 					FacesContext.getCurrentInstance().addMessage(null, msg); 
-				            	 				 }else
-				            	 				 {
 				            	 					
 				            	 					    newAvis.setAaoLibelle(slctdTd.getAaoLibelle());
 				            	 					    newAvis.setAaoNatPrix(slctdTd.getAaoNatPrix());
@@ -4021,19 +3996,13 @@ public class DaoController {
 						           						 dao.setDacNbrCopieOff(slctdTd.getDacNbrCopieOff());
 						           						 dao.setDacMargePref(slctdTd.getDacMargePref());
 						           						 iservice.updateObject(dao);
-				            	          		  
-			                                             //Charger la liste des pieces de l'offre
-				            	     				     //chargePiecesOffres();
-				                	     				    //Message de confirmation
+				            	         
 				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
 				            	          		            userController.setRenderMsg(true);
 				            	          		            userController.setSevrityMsg("success");
 				            	          		      
-				            	 				 }
 				            	 				 
-				            	 			 }
-	            	                  }
-	        	                   } 
+				            	
 	                     }
 	    
 	        
