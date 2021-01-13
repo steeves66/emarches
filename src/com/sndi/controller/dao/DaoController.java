@@ -133,6 +133,7 @@ public class DaoController {
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
+	 private List<VPpmDao> listePpmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listSelectionPpmDao = new ArrayList<VPpmDao>();
 	 private List<TTypePiecesDac> detailsPieces = new ArrayList<TTypePiecesDac>();
 	 private List<TDaoAffectation> listeDaoChargeValid = new ArrayList<TDaoAffectation>();
@@ -266,6 +267,7 @@ public class DaoController {
 	private VDacliste caution = new VDacliste();
 	private VLotCritere lotCrit = new VLotCritere();
 	private TLotAao lots = new TLotAao();
+	private VPpmDao ppmDac = new VPpmDao();
 	//MARGE DE PREFERENCE
 	private VMargeDePreference marge = new VMargeDePreference();
 	private VMargeDePreferenceSou margeSou = new VMargeDePreferenceSou();
@@ -4066,6 +4068,9 @@ public class DaoController {
 				   } 
 			 }
 			 
+
+
+			 
 			 //Parametrage des PPM ramen� a la saisie
 			 public void chargeOperation(String typePlan) {
 				 ppmDao.clear();
@@ -4081,13 +4086,44 @@ public class DaoController {
 			 }
 			 
 			 //Parametrage des PPM ramen� a la saisie
-			 public void chargeOperation() {
-				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 public void chargeOperations() {
+				 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd)));	
+							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	
 				 _logger.info("dao : "+slctdTd.getDacCode());
+				 _logger.info("liste ppm : "+listePpmDao.size());
 			 }
 			 
+			 
+			 public void onSelectPpm() throws IOException {
+				 renseignerDaoModif();
+				 updateDacCodeToPpm();
+				 
+				 
+			 }
+			 
+			 
+			 public void updateDacCodeToPpm() {
+				 
+				 
+				 List<TDetailPlanPassation> PP  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+ppmDac.getDppId()));
+				 TDetailPlanPassation ppm1 = new TDetailPlanPassation(); 
+				 if(!PP.isEmpty()) ppm1 = PP.get(0);
+				 ppm1.setTDacSpecs(new TDacSpecs(""));
+				 _logger.info("dppId : "+ppmDac.getDppId());	
+				 _logger.info("dacCode : "+slctdTd.getDacCode());	
+				 iservice.updateObject(ppm1);
+				 
+				 List<TDetailPlanPassation> LS  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+ppmDac.getDppId()));
+				 TDetailPlanPassation ppm = new TDetailPlanPassation(); 
+				 if(!LS.isEmpty()) ppm = LS.get(0);
+				 ppm.setTDacSpecs(new TDacSpecs(slctdTd.getDacCode()));
+				 _logger.info("dppId : "+ppmDac.getDppId());	
+				 _logger.info("dacCode : "+slctdTd.getDacCode());	
+				 iservice.updateObject(ppm);
+				 
+				 chargeOperations();
+			 }
 			 
 			 //Parametrage des AMI
 			 public void chargeOperationAmi(String typePlan) {
@@ -4203,12 +4239,29 @@ public class DaoController {
 		            								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+ligne.getDppId()));
 		            							if (!ppmDao.isEmpty()) {
 		            								daoDetail= ppmDao.get(0);
-		            	            		 		detailsPieces =(List<TTypePiecesDac>) iservice.getObjectsByColumn("TTypePiecesDac", new ArrayList<String>(Arrays.asList("TPI_CODE")),
-		            	    								     new WhereClause("TPI_MDT_CODE",WhereClause.Comparateur.EQ,""+daoDetail.getMdtCode()));	
+
+		            									   detailsPieces =(List<TTypePiecesDac>) iservice.getObjectsByColumn("TTypePiecesDac", new ArrayList<String>(Arrays.asList("TPI_CODE")),
+			            	    								     new WhereClause("TPI_MDT_CODE",WhereClause.Comparateur.EQ,""+daoDetail.getMdtCode()));	
+		            								  
+		            	            		 		
 		            						 }
 		            			 		   }
 		            				   }       
 		                            }
+		     
+		     //Rappel des informations du PPM en modification
+		     public void renseignerDaoModif() throws IOException{
+		            		 			//Parcourir la liste et rï¿½cupï¿½re
+		            		 			 ppmDao =(List<VPpmDao>) iservice.getObjectsByColumn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
+		            								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+ppmDac.getDppId()));
+		            							if (!ppmDao.isEmpty()) {
+		            								daoDetail= ppmDao.get(0);
+
+		            									   detailsPieces =(List<TTypePiecesDac>) iservice.getObjectsByColumn("TTypePiecesDac", new ArrayList<String>(Arrays.asList("TPI_CODE")),
+			            	    								     new WhereClause("TPI_MDT_CODE",WhereClause.Comparateur.EQ,""+daoDetail.getMdtCode()));		
+		            						 }   
+		                            }
+		     
 		     
 		     public void filtreFonctionMin() {
 		    	 listeFonctions.clear();
@@ -7315,7 +7368,7 @@ public class DaoController {
 				
                 case "dao11":
                 	chargePiecesDao();
-                	chargeOperation();
+                	chargeOperations();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;	
 			    }
@@ -13941,6 +13994,22 @@ public void createDaoFile() throws IOException {
 
 	public void setAvisRespo(String avisRespo) {
 		this.avisRespo = avisRespo;
+	}
+
+	public List<VPpmDao> getListePpmDao() {
+		return listePpmDao;
+	}
+
+	public void setListePpmDao(List<VPpmDao> listePpmDao) {
+		this.listePpmDao = listePpmDao;
+	}
+
+	public VPpmDao getPpmDac() {
+		return ppmDac;
+	}
+
+	public void setPpmDac(VPpmDao ppmDac) {
+		this.ppmDac = ppmDac;
 	}
 	
 	

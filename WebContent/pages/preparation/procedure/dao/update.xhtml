@@ -65,35 +65,22 @@
        
            <div class="row">
             <div class="col-md-12">
-                    
-               
-          <h:panelGroup rendered="#{controleController.ppmModePn}">     
            <div class="row">
             <div class="col-md-12">
               <div class="box box-success box-solid">
                <div class="box-header with-border">
-                <div class="col-md-12 ">
+                <div class="col-md-11 ">
                    <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE #{controleController.type}</div>
                  </div>
+                 <div class="col-md-1">
+								  <p:commandLink action="#{daoController.chargePPM()}" oncomplete="PF('dlogOperations').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Sélectionnez une nouvelle operation" data-toggle="tooltip"   update=":dlogOperations">
+								<span class="btn-label"><i class="fa fa-pencil"></i></span><span class="hidden-xs">Changer l'operation</span>
+								</p:commandLink>
+				</div>
                 </div>
                <div class="box-body">
-                 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{daoController.multiFiltre}"  placeholder="saisir du PPM"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{daoController.chargeRecherchePPM()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                        
-
-                      <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargePPM()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
+                
+               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePpmDao}" 
 					 emptyMessage="Aucun PPM enregistré" rows="5" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
@@ -128,7 +115,7 @@
              </div>
            </div>
          </div>
-         </h:panelGroup>
+
          
          
         <div class="row">
@@ -2646,6 +2633,72 @@
               
          </div>
          </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="dlogOperations">
+	  <p:dialog  widgetVar="dlogOperations" modal="true"  showEffect="fade" hideEffect="fade" width="85%" closable="true" header="SELECTIONNEZ UNE NOUVELLE OPERATION">
+	     
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+                     
+        <div class="box-header with-border">
+            <div  style="color: #fff">LISTE DES OPERATIONS</div>
+         </div>
+         <div class="box-body">
+              <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
+					 emptyMessage="Aucun PPM enregistré" rows="5" 
+                         scrollable="true" scrollHeight="250" >
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
+                          <h:commandLink  action="#{daoController.onSelectPpm()}">				        
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />
+                                </h:commandLink>
+				        </p:column>
+
+                     
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+				       <h:commandLink  action="#{daoController.onSelectPpm()}">				        
+         				  <h:outputText value="#{slctdTb.lbgImputation}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />
+                                </h:commandLink>
+         				
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-2" >
+				          <h:commandLink  action="#{daoController.onSelectPpm()}">				        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />
+                                </h:commandLink>
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
+         				   <h:commandLink  action="#{daoController.onSelectPpm()}">				        
+         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />
+                                </h:commandLink>
+				        </p:column> 
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
+         				 <h:commandLink  action="#{daoController.onSelectPpm()}">				        
+         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />
+                                </h:commandLink>
+				        </p:column> 
+				        
+				       
+                    </p:dataTable>  
+               <div class="box-footer pull-right">
+                   <p:commandLink rendered="false" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+               </div> 
+             
+         </div>
+         </div>
+         </div>
+		
       </p:dialog>
     </h:form>
 
