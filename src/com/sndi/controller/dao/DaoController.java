@@ -385,6 +385,7 @@ public class DaoController {
 	 private boolean etatPays = true;
 	 private boolean daoCritere = true;
 	 private boolean panelCaution = false;
+	 private boolean btnChangerOperation = false;
 	 
 	//BoolÃ¯Â¿Â½ens
 	  private boolean skip;
@@ -4089,6 +4090,7 @@ public class DaoController {
 			 public void chargeOperations() {
 				 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
 							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	
 				 _logger.info("dao : "+slctdTd.getDacCode());
 				 _logger.info("liste ppm : "+listePpmDao.size());
@@ -4097,15 +4099,12 @@ public class DaoController {
 			 
 			 public void onSelectPpm() throws IOException {
 				 renseignerDaoModif();
-				 updateDacCodeToPpm();
-				 
-				 
+				 updateDacCodeToPpm(); 
 			 }
 			 
 			 
-			 public void updateDacCodeToPpm() {
-				 
-				 
+			 
+			 public void updateDacCodeToPpm() { 
 				 List<TDetailPlanPassation> PP  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+ppmDac.getDppId()));
 				 TDetailPlanPassation ppm1 = new TDetailPlanPassation(); 
 				 if(!PP.isEmpty()) ppm1 = PP.get(0);
@@ -4851,7 +4850,7 @@ public class DaoController {
 				        	     chargeLots();  
 				              }
 				        
-				        //sppression de lot
+				        //suppression de lot
 				   	 public void removeLot() {
 				   		 System.out.print("+-------------+ "+getSelectLot().getLaaNum());
 				   		 try {
@@ -4868,6 +4867,7 @@ public class DaoController {
 				   		 }
 				   	 }
 				   	 
+				   	 
 					 public void removeLotModif() {
 				   		 System.out.print("+-------------+ "+getSelectLot().getLaaNum());
 				   		 try {
@@ -4879,6 +4879,31 @@ public class DaoController {
 
 				   		 } catch (org.hibernate.exception.ConstraintViolationException e) {
 				   			 userController.setTexteMsg("Impossible de supprimer le lot !");
+				   			 userController.setRenderMsg(true);
+				   			 userController.setSevrityMsg("danger");	 
+				   		 }
+				   	 }
+					 
+					 
+					 //suppression du ppm en mode modification
+				   	 public void removePpm() {
+				   		 System.out.print("+-------------+ "+getPpmDac().getDppId());
+				   		 try {
+				   			 List<TDetailPlanPassation> PP  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+ppmDac.getDppId()));
+							 TDetailPlanPassation ppm1 = new TDetailPlanPassation(); 
+							 if(!PP.isEmpty()) ppm1 = PP.get(0);
+							 ppm1.setTDacSpecs(new TDacSpecs(""));
+							 _logger.info("dppId : "+ppmDac.getDppId());	
+							 _logger.info("dacCode : "+slctdTd.getDacCode());	
+							 iservice.updateObject(ppm1);
+							chargeOperations();
+							btnChangerOperation = true;
+				   			userController.setTexteMsg("Suppression effectuée avec succès !");
+				   			userController.setRenderMsg(true);
+				   			userController.setSevrityMsg("success");
+
+				   		 } catch (org.hibernate.exception.ConstraintViolationException e) {
+				   			 userController.setTexteMsg("Impossible de supprimer le ppm !");
 				   			 userController.setRenderMsg(true);
 				   			 userController.setSevrityMsg("danger");	 
 				   		 }
@@ -14010,6 +14035,14 @@ public void createDaoFile() throws IOException {
 
 	public void setPpmDac(VPpmDao ppmDac) {
 		this.ppmDac = ppmDac;
+	}
+
+	public boolean isBtnChangerOperation() {
+		return btnChangerOperation;
+	}
+
+	public void setBtnChangerOperation(boolean btnChangerOperation) {
+		this.btnChangerOperation = btnChangerOperation;
 	}
 	
 	

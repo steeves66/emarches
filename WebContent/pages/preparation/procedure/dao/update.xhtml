@@ -73,7 +73,7 @@
                    <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE #{controleController.type}</div>
                  </div>
                  <div class="col-md-1">
-								  <p:commandLink action="#{daoController.chargePPM()}" oncomplete="PF('dlogOperations').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Sélectionnez une nouvelle operation" data-toggle="tooltip"   update=":dlogOperations">
+								  <p:commandLink rendered="#{daoController.btnChangerOperation}" action="#{daoController.chargePPM()}" oncomplete="PF('dlogOperations').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Sélectionnez une nouvelle operation" data-toggle="tooltip"   update=":dlogOperations">
 								<span class="btn-label"><i class="fa fa-pencil"></i></span><span class="hidden-xs">Changer l'operation</span>
 								</p:commandLink>
 				</div>
@@ -104,6 +104,14 @@
          				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
 				        </p:column> 
 				        
+				        
+				        <p:column headerText="Actions" styleClass="col-sm-1" >
+         				  <p:commandLink styleClass="btn btn-xs btn-danger" action="#{daoController.removePpm()}" style= "margin-left:5px"  title="Supprimer" update="gnl" >
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />  
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />                            
+			              </p:commandLink>
+				        </p:column> 
 				       
                     </p:dataTable>
                     
@@ -2628,9 +2636,7 @@
                    </div>
               </div>
          </div>
-         
-		          
-              
+            
          </div>
          </div>
       </p:dialog>
