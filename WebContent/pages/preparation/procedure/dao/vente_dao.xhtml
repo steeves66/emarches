@@ -294,12 +294,12 @@
 	             
 				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.confirmPaie}" action="#{daoController.payer()}" style="background-color: #036d3b; color:#fff" update=":content">
 				   <p:confirm header="Confirmation" message="Confirmez vous le paiement?" icon="ui-icon-alert" />
-				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer <h:panelGroup rendered="#{daoController.btn_titre_paie}">Paiement</h:panelGroup><h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>										        	
+				   <i class="ace-icon fa fa-save bigger-120"></i> Valider <h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>										        	
 				   </p:commandLink>
 				   
 				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.confirmInter}" action="#{daoController.payerInt()}" style="background-color: #036d3b; color:#fff" update=":content">
 				   <p:confirm header="Confirmation" message="Confirmez vous le paiement?" icon="ui-icon-alert" />
-				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer <h:panelGroup rendered="#{daoController.btn_titre_paie}">Paiement</h:panelGroup><h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>
+				   <i class="ace-icon fa fa-save bigger-120"></i> Valider <h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>
 																        	
 				   </p:commandLink>
 				      
