@@ -2220,7 +2220,7 @@ public class CommissionController {
 		 			newAttrib = new VbTempParamAtrib();
 					chargeResultaFilter();
 					//Activation du bouton d'édition du pv de Jugement
-					btnPvJug = true;
+					//btnPvJug = true;
 					//Message de Confirmation
 					userController.setTexteMsg("Attributaire(s) validé(s) avec succès !");
 					userController.setRenderMsg(true);
