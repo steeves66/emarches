@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-01-11T10:51:13 -->
+<!-- 2021-01-17T18:03:58 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_jugement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="29839d62-7702-40c1-8de1-369c254b0177">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -437,10 +437,10 @@ and vx.att_dof_aao_code=$P{param_code_1}]]>
   pv.lbg_tot_dot,pv.dac_financement,pv.lbg_imputation,pv.min_libelle,pv.fon_libelle
 FROM vx_report_jugement jug,vx_report_data5_piece pv,vb_attributions att,vb_lot_aao lot,vb_avis_appel_offre aao,vb_candidats can
 WHERE jug.aao_code=pv.aao_code
-AND pv.aao_code=att.att_dof_aao_code
-AND att.att_laa_id=lot.laa_id
+AND pv.aao_code=att.att_dof_aao_code(+)
+AND att.att_laa_id=lot.laa_id(+)
 AND lot.laa_aao_code=aao.aao_code
-AND att.ATT_SOU_NCC  = can.CAN_SOU_NCC
+AND att.ATT_SOU_NCC  = can.CAN_SOU_NCC(+)
 AND aao.AAO_CODE=$P{param_code_1}]]>
 	</queryString>
 	<field name="AAO_CODE" class="java.lang.String"/>
