@@ -25,6 +25,7 @@ public class ControleController {
 	
 	private String structureLibAbrege="DGMP";
 	private String application = "SIGOMAP";
+	private String applicationSmall = "Systeme Intégré de Gestion des Opérations de MArchés Publics";
 	private String structureLibLong="Direction Générale des Marchés Publics";
 	//Libellés
 	private String libelle="";
@@ -10290,6 +10291,16 @@ public class ControleController {
 
 	public void setApplication(String application) {
 		this.application = application;
+	}
+
+
+	public String getApplicationSmall() {
+		return applicationSmall;
+	}
+
+
+	public void setApplicationSmall(String applicationSmall) {
+		this.applicationSmall = applicationSmall;
 	}
 	
 }
