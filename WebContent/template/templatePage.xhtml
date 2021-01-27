@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>E-MarchésPublics</title>
+<title>#{controleController.application}</title>
  <meta charset="utf-8"/>
  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
@@ -181,7 +181,7 @@
       <b>Version</b> 1.0.8
     </div>
     <strong>
-    Copyright &copy; E-MarchésPublics <h:outputText value="#{userController.dateCon}"><f:convertDateTime pattern="yyyy" /></h:outputText>
+    Copyright &copy; #{controleController.application} <h:outputText value="#{userController.dateCon}"><f:convertDateTime pattern="yyyy" /></h:outputText>
     </strong>
   </footer>
 

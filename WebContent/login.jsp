@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-MarchésPublics</title>
+    <title>SIGOMAP</title>
     <link rel="shortcut icon" type="image/x-icon" href="resources/portail/img/icons/favicon.png" />
     <link rel="stylesheet" type="text/css" href="resources/portail/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="resources/portail/fonts/font-awesome-4.7.0/css/font-awesome.min.css">

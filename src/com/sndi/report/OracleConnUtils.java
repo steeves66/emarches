@@ -23,8 +23,9 @@ public class OracleConnUtils {
             SQLException, NamingException {
  
     	InitialContext initialContext = new InitialContext();
-    	/*DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapDS");*/
-    	DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapTest"); 
+    	DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapDS");
+    	/*DataSource dataSource = (DataSource)initialContext.lookup("java:/EmapDS");*/
+    	/*DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapTest"); */
     	Connection conn = dataSource.getConnection();
         return conn;
     }
