@@ -181,7 +181,8 @@ a:active {
 
 .content-left {
 	/* Djazz */
-    background: url(../img/dmp_background.jpg) no-repeat; 
+    /*background: url(../img/dmp_background.jpg) no-repeat; */
+    background: url(../img/dmp_background.png) no-repeat; 
     background-size: cover;
     background-position: center center;
     position: absolute;
