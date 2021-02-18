@@ -3031,6 +3031,7 @@ public class DaoController {
 			       					//chargeDaoTabTrans();
 			       					//Actualisation du tableau de bord
 			       					typeActionTb();
+			       					docNature ="";
 			       					//Message de confirmation
 			       					userController.setTexteMsg("Transmission effectuée avec succès!");
 			   						userController.setRenderMsg(true);
@@ -7090,6 +7091,10 @@ public class DaoController {
 		    	 dao = new TDacSpecs();
 		    	 detailsPieces.clear();
 		    	 listSelectionTypePieces.clear();
+		    	 listeMembre.clear();
+		    	 ouvTech = null;
+		    	 docNature = "";
+		    	 dossListe.clear();
 		    	 newAvis = new TAvisAppelOffre();
 		    	 newVbTemp = new VbTempParametreLot();
 		    	 listeLots = new ArrayList<TLotAao>();
