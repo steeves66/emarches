@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-23T15:23:19 -->
+<!-- 2021-02-23T12:09:14 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -227,7 +227,7 @@ and dps.dpp_id= $P{param_code}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{MOP_LIBELLE_LONG}+"  ("+$F{DPP_MOP_CODE}+")"]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="109" y="23" width="445" height="28" uuid="cd177b7a-1484-44c2-afbf-f17d160befaa"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
@@ -244,8 +244,10 @@ and dps.dpp_id= $P{param_code}]]>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Autorité Contractante : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="111" y="46" width="441" height="21" uuid="6cef25e3-c338-4956-84be-4252549a29ac"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="111" y="46" width="441" height="30" uuid="6cef25e3-c338-4956-84be-4252549a29ac">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>

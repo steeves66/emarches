@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-23T19:33:00 -->
+<!-- 2021-02-23T08:40:59 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="operateur1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0e4afdf-aab6-4e2e-a856-4a038b316740">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -124,7 +124,7 @@
 				<textElement textAlignment="Left" markup="html">
 					<font size="11" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Est informé(e) qu'il (elle) peut se connecter sur la plateforme de dématérialisation des MarchésPublics (E-MarchesPublics) : <span style="color:blue;"><u><a href=https://www.e-marchespublics.com>www.e-marchespublics.com</a></u></span>]]></text>
+				<text><![CDATA[Est informé(e) qu'il (elle) peut se connecter sur la plateforme de dématérialisation des MarchésPublics (SIGOMAP) : <span style="color:blue;"><u><a href=https://www.e-marchespublics.com>www.e-marchespublics.ci</a></u></span>]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="40" y="289" width="120" height="20" uuid="73eb92b4-7916-41cd-9cd2-2e26d185929b">
@@ -211,7 +211,7 @@
 				<textElement textAlignment="Left">
 					<font size="11" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Le(s) code(s) fonction E-MAP qui lui a été / ont été attribué :]]></text>
+				<text><![CDATA[Le(s) code(s) fonction SIGOMAP qui lui a été / ont été attribué :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="40" y="569" width="480" height="56" uuid="88dd6bb5-81b3-47e6-9eb3-0e3cc08ad2f2">
@@ -235,10 +235,10 @@
 				<reportElement x="40" y="696" width="480" height="20" uuid="37ab7047-bfb3-496c-b99e-e0c636af8349">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[E-MARCHESPUBLICS (E-MAP)]]></text>
+				<text><![CDATA[Système Intégré de Gestion des Opérations des Marchés Publics (SIGOMAP)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="41" y="680" width="479" height="20" uuid="a257b6e5-f675-424d-9b21-766aacb95ba5"/>
@@ -280,7 +280,7 @@
 				<textFieldExpression><![CDATA["IDENTIFICATION D'OPERATEUR"]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="30" y="472" width="477" height="60" uuid="a27d123f-d260-4f5f-8d3a-89a501daa0c9">
+				<reportElement x="30" y="472" width="477" height="78" uuid="a27d123f-d260-4f5f-8d3a-89a501daa0c9">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -296,6 +296,7 @@
 					</datasetRun>
 					<jr:column width="287" uuid="bd55f427-54e0-4933-aff0-04c10df8bf34">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="287" height="30" forecolor="#FFFFFF" uuid="0651a6e1-ff23-49a2-8f7e-db089dd13706"/>
@@ -305,9 +306,10 @@
 								<text><![CDATA[FONCTION]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
+						<jr:detailCell style="Table_TD" height="45">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<textField>
-								<reportElement x="0" y="0" width="287" height="30" uuid="4acea46a-f71b-43b5-8751-4b06f087641c"/>
+								<reportElement x="0" y="0" width="287" height="45" uuid="4acea46a-f71b-43b5-8751-4b06f087641c"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
 								</textElement>
@@ -326,9 +328,9 @@
 								<text><![CDATA[DEBUT]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
+						<jr:detailCell style="Table_TD" height="45">
 							<textField>
-								<reportElement x="0" y="0" width="95" height="30" uuid="4170ecad-b3ee-4f68-8885-340a87374cf2"/>
+								<reportElement x="0" y="0" width="95" height="45" uuid="4170ecad-b3ee-4f68-8885-340a87374cf2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -347,9 +349,9 @@
 								<text><![CDATA[FIN]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
+						<jr:detailCell style="Table_TD" height="45">
 							<textField>
-								<reportElement x="0" y="0" width="95" height="30" uuid="628addbc-fcc4-4c25-bf26-adcf3c40ed52"/>
+								<reportElement x="0" y="0" width="95" height="45" uuid="628addbc-fcc4-4c25-bf26-adcf3c40ed52"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>

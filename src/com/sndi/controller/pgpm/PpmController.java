@@ -3118,8 +3118,8 @@ public class PpmController {
 							     panelPgpmDp = true;
 							 }else
 						     {
-							 recupPgpm.setGpgTymCode("");
-							 recupPgpm.setTymLibelleCourt("");
+							 //recupPgpm.setGpgTymCode("");
+							 //recupPgpm.setTymLibelleCourt("");
 							 panelTymNormal =true;
 							 panelTymDp=false; 
 							 panelPgpmNormal = true;

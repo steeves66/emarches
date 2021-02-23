@@ -278,7 +278,7 @@
                   <label  class="col-sm-3 control-label">Type Structure Conductrice</label>
 
                   <div class="col-sm-9">
-                  <p:selectOneMenu id="tpcond" required="true" requiredMessage="Veuillez choisir le type de structure conductrice" value="#{ppmController.strucCond}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                  <p:selectOneMenu id="tpcond" value="#{ppmController.strucCond}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type de structure.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
 				  <f:selectItems />				   				    				   
