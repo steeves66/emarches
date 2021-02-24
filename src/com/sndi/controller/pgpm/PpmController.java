@@ -2967,6 +2967,7 @@ public class PpmController {
 		     lignepn= false;
 		     ligneps= false;
 		     
+		     
 		     detailPass.dppPartiePmePmi = pgpm.getGpgPartiePmePmi();
 			 
 			 listeFinancementPgpm =(List<VFinancementPgpm>) iservice.getObjectsByColumn("VFinancementPgpm", new ArrayList<String>(Arrays.asList("FIP_ID")),
@@ -3118,8 +3119,8 @@ public class PpmController {
 							     panelPgpmDp = true;
 							 }else
 						     {
-							 //recupPgpm.setGpgTymCode("");
-							 //recupPgpm.setTymLibelleCourt("");
+							 recupPgpm.setGpgTymCode("");
+							 recupPgpm.setTymLibelleCourt("");
 							 panelTymNormal =true;
 							 panelTymDp=false; 
 							 panelPgpmNormal = true;

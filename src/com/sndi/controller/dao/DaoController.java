@@ -10133,10 +10133,10 @@ public class DaoController {
 	
 	 
 	//POUR WINDOWS - LAURENT
-		 public void chargeDaoFile() throws IOException {	
-			 /*
+		/* public void chargeDaoFile() throws IOException {	
+			 
 			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
-			  */
+			  
 
 			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
@@ -10221,9 +10221,9 @@ public class DaoController {
 				_logger.info("Dossier de référence PSL chargé");
 				}
 			
-			/*
+			
 			 * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
-			 */
+			 
 			
 			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0A")) ||
@@ -10315,9 +10315,9 @@ public class DaoController {
 				_logger.info("Dossier de référence chargé");
 			}
 			
-			/*
+			
 			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
-			  */
+			  
 			 
 			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
 				(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOO")) || 
@@ -10422,7 +10422,7 @@ public class DaoController {
 				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
 				_logger.info("DAO ENTRETIEN DES LOCAUX chargé");
 			}			
-		 }
+		 }*/
 		 //FIN WINDOWS
 		 
 		 
@@ -10721,9 +10721,9 @@ public class DaoController {
 		 //FIN WINDOWS
 		 
 		 //POUR LINUX - LAURENT
-		/* public void chargeDaoFile() throws IOException {		 
+		 public void chargeDaoFile() throws IOException {		 
 			 
-			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
+			  //Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
@@ -10809,7 +10809,7 @@ public class DaoController {
 				}
 			
 			
-			  * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
+			  //Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			
 			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
@@ -10903,7 +10903,7 @@ public class DaoController {
 			}
 			
 			
-			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
+			  // Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			 
 			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
@@ -11012,7 +11012,7 @@ public class DaoController {
 				
 		 }
 		
-		 */
+		 
 		 
 	 
 	 
@@ -12955,7 +12955,7 @@ public class DaoController {
 	}
 	
 	//WINDOWS - LAURENT
-		 public void saveDaoFile() throws IOException {
+		/* public void saveDaoFile() throws IOException {
 			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
 				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
 				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL;
@@ -13096,7 +13096,7 @@ public class DaoController {
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-		 }
+		 }*/
 		 //WINDOWS
 		 
 		 
@@ -13247,7 +13247,7 @@ public class DaoController {
 		 //
 		 
 		//LINUX
-			/* public void saveDaoFile() throws IOException {
+			 public void saveDaoFile() throws IOException {
 				 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
 				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL_LINUX;
@@ -13388,7 +13388,7 @@ public class DaoController {
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-				}*/
+				}
 		
 	
 	
