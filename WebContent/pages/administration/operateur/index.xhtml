@@ -84,7 +84,7 @@
                          rowsPerPageTemplate="5,10,15" >
 
          				<p:column headerText="Matricule" styleClass="col-sm-1" >
-         				<h:outputText value="#{slctdTb.opeMatricule}"/>
+         				<h:outputText value="#{slctdTb.opeMatriculeFonc}"/>
 				        </p:column>
 				        
 				        <p:column headerText="Nom" styleClass="col-sm-2" >
@@ -163,23 +163,6 @@
 
 </h:form>
 
-<h:form id="retourner">
-	        <p:dialog  widgetVar="retour" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
-					<div class="g12">
-						<div class="panel-heading">
-						Motif du retour de la demande N° #{demandeController.slctdTd.demCode}
-						
-						</div> 
-					<div class="panel-body panel-body-nopadding">
-	                  <p:inputTextarea rows="4" value="#{demandeController.demstatut.dehComment}" cols="100" style="width:100%;" readonly="true"/>
-	                  </div>
-	                  <div class="par pull-right"> par:<strong>#{demandeController.demstatut.fonLibelle}</strong></div>
-                     <div class="panel-footer">
-                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('retour').hide()"/>
-                     </div>
-                    </div>
-      </p:dialog>
-    </h:form>
 	
 
 

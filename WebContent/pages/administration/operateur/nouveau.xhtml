@@ -41,6 +41,14 @@
 	                    <p:inputText  value="#{operateurController.newOpe.opeMatricule}" type="text"  styleClass="form-control" readonly="true"  id="mat" style="width: 100%"/>
 	                  </div>
 	                </div> 
+	               
+	               <div class="form-group ">
+	                  <label for="matFonc" class="col-sm-3 control-label"><b> Matricule fonctionnaire </b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText  value="#{operateurController.newOpe.opeMatriculeFonc}" type="text"  styleClass="form-control"  id="matFonc" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                
 	                  <div class="form-group ">
 	                  <label for="civilite" class="col-sm-3 control-label"><b>Civilité</b></label>
 	                  <div class="col-sm-9">
@@ -59,16 +67,25 @@
 	                  </div>
 	                </div>
 	                
-	                <div class="form-group ">
-	                  <label for="minStr" class="col-sm-3 control-label"><b>Structure  <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-9">
-	                    <p:selectOneMenu id="minStr" value="#{operateurController.strCode}"
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir la structure.." itemValue="empty" />  
-			       <f:selectItems value="#{operateurController.listStructure}" var="str" itemLabel="#{str.strLibelleLong}" itemValue="#{str.strCode}" /> 
-       		        </p:selectOneMenu>
-	                  </div>
-	                </div> 
+	              
+	                
+	                     <div class="form-group">
+                  <label for="minStr" class="col-sm-3 control-label"><b>Structure  <span style="color:red;"> *</span></b></label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{operateurController.recupStructure.strLibelleLong}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('structureDlg').show()" action="#{operateurController.chargeStructure()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update=":dlogStructure">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
 	                 <div class="form-group ">
 	                  <label for="fonaAdm" class="col-sm-3 control-label"><b> Fonction Administrative</b></label>
 	                  <div class="col-sm-9">
@@ -125,6 +142,55 @@
        </div>    
     </section>
     </h:form>
+    
+     <h:form id="dlogStructure">
+	        <p:dialog  widgetVar="structureDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la structure">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{operateurController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="ndTbleStructure" />
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreStructLibLong}"  placeholder="saisir la structure" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{operateurController.filtreStructure()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  update="ndTbleStructure"/>
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleStructure" styleClass="table table-bordered table-hover" var="slctdTb" value="#{operateurController.listStructure}"
+						  selectionMode="single" rowKey="#{slctdTb.strCode}"
+			               emptyMessage="Aucune structure" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="Structure" title="Structure" style="font-size:18px;"  action="#{operateurController.onSelectStructure()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.strLibelleLong}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.structure}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     
+    
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

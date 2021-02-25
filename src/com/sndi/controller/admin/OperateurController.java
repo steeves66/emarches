@@ -25,12 +25,18 @@ import com.itextpdf.text.DocumentException;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAssignation;
+import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TFonction;
+import com.sndi.model.THistoAgpm;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeFonction;
+import com.sndi.model.VFinancementPpm;
+import com.sndi.model.VPrqAo;
+import com.sndi.model.VStructure;
+import com.sndi.model.VTypeMarcheFils;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.CustomPasswordEncoder;
 import com.sndi.security.UserController;
@@ -72,12 +78,14 @@ public class OperateurController {
 	private Boolean boutonSupp=false;
 	private String minCode="";
 	private String strCode="";
+	private String filtreStructLibLong="";
+	
 	
 	private TAssignation tmpAssignation = new TAssignation();
 	private List<TAssignation> assignations = new ArrayList<TAssignation>();
 	private List <TTypeFonction> tfonList = new ArrayList<TTypeFonction>();
 	private List<TMinistere> listMinistere = new ArrayList<TMinistere>();
-	private List<TStructure> listStructure = new ArrayList<TStructure>();
+	private List<VStructure> listStructure = new ArrayList<VStructure>();
 	private String tmpFonCod = "";
 
 	//Variables for indexOpeloye
@@ -118,6 +126,8 @@ public class OperateurController {
 	private List<String> sltdActions = new ArrayList<String>();
 	private List<String> test = new ArrayList<String>();
 	private List <HashSet <String>> lockedAction = new ArrayList <HashSet <String>>();//TODO
+	private VStructure recupStructure = new VStructure();
+	private VStructure structure = new VStructure();
 	
 	private Boolean modeCreerAssignation = false;
 //	private Boolean checkTmpTAssignation = false;
@@ -132,10 +142,10 @@ public class OperateurController {
 	public void postConstru() {	
 		chargeData();
 		//chargeStructureData();
-		chargeTypeFonction();
-		chargeMinistere();
-		chargeStructure();
-		chargeTypeFonctionselect();
+		//chargeTypeFonction();
+		//chargeMinistere();
+		//chargeStructure();
+		//chargeTypeFonctionselect();
 		etatBoutoneng=true;
 	    etatBoutonEdit=false;
 	}
@@ -154,8 +164,25 @@ public class OperateurController {
 		} 
 	 
 	 public void chargeStructure() {
-		 listStructure=(List<TStructure>) iservice.getObjectsByColumn("TStructure", new ArrayList<String>(Arrays.asList("strCode")));
+		 //listStructure=(List<TStructure>) iservice.getObjectsByColumn("TStructure", new ArrayList<String>(Arrays.asList("strCode")));
+		 listStructure=new ArrayList<>(constantService.getVlisteStructures());
+		 listStructure.size();
 		}
+	 
+	 //Filtre les marchés en fonction du code Marché
+	 public void filtreStructure() {
+		 listMinistere.clear();
+		listStructure=(List<VStructure>) iservice.getObjectsByColumn("VStructure", new ArrayList<String>(Arrays.asList("strLibelleLong")),
+					new WhereClause("strLibelleLong",WhereClause.Comparateur.LIKE,"%"+filtreStructLibLong+"%"));
+	 }
+	 
+	 
+	 public void onSelectStructure() {
+		 recupStructure.setStrCode(structure.getStrCode());
+		 recupStructure.setStrLibelleCourt(structure.getStrLibelleCourt());
+		 recupStructure.setStrLibelleLong(structure.getStrLibelleLong());
+			}
+
 		
 	public void chargeData(){
 		test.clear();
@@ -444,6 +471,7 @@ public class OperateurController {
 			motPasse2User = "";
 			motPasseOld = "";   
 		    newOpe.setOpeMatricule(keyGen.getOperateurCode());	
+		    //chargeStructure();
 			
 		break;
 		case "ope3":
@@ -500,16 +528,24 @@ public class OperateurController {
 
 	public String creerOperateur() throws IOException{
 		//TODO
-				try {
-					if(checkNewOpeStepI()){
+				//try {
+					//if(checkNewOpeStepI()){
 						//CustomPasswordEncoder cp = new CustomPasswordEncoder();
+		               
 					    newOpe.setOpeMatricule(keyGen.getOperateurCode());
-					    //newOpe.setTMinistere(new TMinistere(minCode));
-					    newOpe.setTStructure(new TStructure(strCode));
-						iservice.addObject(getNewOpe());
+		               
+		              /* List<TOperateur> OPE  = iservice.getObjectsByColumn("TOperateur");
+		               TOperateur operateur = new TOperateur();
+						if(!OPE.isEmpty()) operateur = OPE.get(0);*/
+						
+					    List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+recupStructure.getStrCode()));
+					    TStructure structure = new TStructure();
+						if(!PPM.isEmpty()) structure = PPM.get(0);
+					    newOpe.setTStructure(new TStructure(structure.getStrCode()));
+						iservice.addObject(newOpe);
 						//add Mot de passe
-						TMotdepasse mdp = new TMotdepasse();
-						mdp.setTOperateur(getNewOpe());
+					TMotdepasse mdp = new TMotdepasse();
+						mdp.setTOperateur(newOpe);
 						//mdp.setMdpMotdepasse(cp.encode(motPasse));
 						//mdp.setMdpMotdepasseInit(motPasse);
 						mdp.setMdpMotdepasse(motPasse);
@@ -521,13 +557,13 @@ public class OperateurController {
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 					return renderPage("ope1");
-					}
+				/*	}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				return renderPage("ope2");
+				return renderPage("ope2");*/
 			}
 	
 	
@@ -1498,12 +1534,36 @@ public class OperateurController {
 		this.strCode = strCode;
 	}
 
-	public List<TStructure> getListStructure() {
+	public List<VStructure> getListStructure() {
 		return listStructure;
 	}
 
-	public void setListStructure(List<TStructure> listStructure) {
+	public void setListStructure(List<VStructure> listStructure) {
 		this.listStructure = listStructure;
+	}
+
+	public VStructure getRecupStructure() {
+		return recupStructure;
+	}
+
+	public void setRecupStructure(VStructure recupStructure) {
+		this.recupStructure = recupStructure;
+	}
+
+	public VStructure getStructure() {
+		return structure;
+	}
+
+	public void setStructure(VStructure structure) {
+		this.structure = structure;
+	}
+
+	public String getFiltreStructLibLong() {
+		return filtreStructLibLong;
+	}
+
+	public void setFiltreStructLibLong(String filtreStructLibLong) {
+		this.filtreStructLibLong = filtreStructLibLong;
 	}
 
 	

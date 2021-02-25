@@ -208,11 +208,10 @@ public String getCodePiece( String exo) {
 	return codepiece;
 }
 
-
 public String getOperateurCode() {
 	
-	String pseudo = "EMAP";//4 il reste 5 total 9
-	String code = iservice.getCodeTable(pseudo, 4, 10,
+	String pseudo = "SIGOMAP";//4 il reste 5 total 9
+	String code = iservice.getCodeTable(pseudo, 7, 13,
 			"T_OPERATEUR", "OPE_MATRICULE");
 	System.out.println("****code T_OPERATEUR =" + code);
 	return code;

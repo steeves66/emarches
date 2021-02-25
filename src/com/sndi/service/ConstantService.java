@@ -30,6 +30,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.VDatePub;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
+import com.sndi.model.VStructure;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VTypeStructConduc;
 import com.sndi.model.VbPaysReference;
@@ -78,6 +79,9 @@ public class ConstantService {
 	
 	private List<TStructure> listeStructures = new ArrayList<TStructure>();
 	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>(); 
+	
+	private List<VStructure> VlisteStructures = new ArrayList<VStructure>();
+	private Map<String, VStructure> HM_STRUCTURE= new HashMap<String, VStructure>(); 
 	
 	private List<TTypePieceOffre> listePiecesOffres = new ArrayList<TTypePieceOffre>();
 	private Map<String, TTypePieceOffre> HM_PIECES_OFFRES= new HashMap<String, TTypePieceOffre>();
@@ -134,6 +138,7 @@ public class ConstantService {
 		 chargeTypeStructureTable();
 		 chargePaysTable();
 		//chargeDatepubTable();
+		 chargeVstructure();
 		chargeDataBanqueTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
@@ -346,6 +351,23 @@ public class ConstantService {
 				public TStructure getTStructure(String STR_CODE){
 					return HM_STEUCTURE.get(STR_CODE);
 				}
+				
+				public void chargeVstructure(){
+					VlisteStructures.clear();
+					VlisteStructures =(List<VStructure>) iservice.getObjectsByColumn("VStructure");
+					HashMap<String, VStructure> aMap = new HashMap<String, VStructure>();
+					for (VStructure st: VlisteStructures) {
+						aMap.put(""+st.getStrCode(), st);
+					}
+					HM_STRUCTURE =  Collections.unmodifiableMap(aMap);	
+					_logger.info("HM_STRUCTURE.size :"+ HM_STRUCTURE.size());	
+				}
+				
+				public VStructure getVStructure(String STR_CODE){
+					return HM_STRUCTURE.get(STR_CODE);
+				}
+				
+				
 				
 			//LISTE PIECES OFFRES
 			public void chargePiecesOffresTable(){
@@ -683,5 +705,17 @@ public class ConstantService {
 	public void setHM_LISTE_BANQUES(Map<String, TBanques> hM_LISTE_BANQUES) {
 		HM_LISTE_BANQUES = hM_LISTE_BANQUES;
 	}
-	
+	public List<VStructure> getVlisteStructures() {
+		return VlisteStructures;
+	}
+	public void setVlisteStructures(List<VStructure> vlisteStructures) {
+		VlisteStructures = vlisteStructures;
+	}
+	public Map<String, VStructure> getHM_STRUCTURE() {
+		return HM_STRUCTURE;
+	}
+	public void setHM_STRUCTURE(Map<String, VStructure> hM_STRUCTURE) {
+		HM_STRUCTURE = hM_STRUCTURE;
+	}
+
 }

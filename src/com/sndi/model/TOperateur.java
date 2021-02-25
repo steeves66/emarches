@@ -30,6 +30,7 @@ public class TOperateur implements java.io.Serializable {
 	private String opeLogin;
 	private String opeMinCode;
 	private String opeFonctionAdminist;
+	private String opeMatriculeFonc;
 	private Set<TMotdepasse> TMotdepasses = new HashSet<TMotdepasse>(0);
 	private Set<TRetrait> TRetraits = new HashSet<TRetrait>(0);
 	private Set<TModeleDacType> TModeleDacTypes = new HashSet<TModeleDacType>(0);
@@ -48,7 +49,7 @@ public class TOperateur implements java.io.Serializable {
 	}
 
 	public TOperateur(String opeMatricule, TStructure TStructure, TMinistere TMinistere, String opeNom, String opeContact, String opeEtatCivil,
-			String opeMail, String opeLogin, String opeMinCode, String opeFonctionAdminist, Set<TMotdepasse> TMotdepasses,Set<TRetrait> TRetraits,Set<TModeleDacType> TModeleDacTypes,Set<TTypeSeance> TTypeSeances,Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatricule,Set<TTempParametre> TTempParametres,
+			String opeMail, String opeLogin, String opeMinCode, String opeFonctionAdminist,String opeMatriculeFonc, Set<TMotdepasse> TMotdepasses,Set<TRetrait> TRetraits,Set<TModeleDacType> TModeleDacTypes,Set<TTypeSeance> TTypeSeances,Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatricule,Set<TTempParametre> TTempParametres,
 			Set<TAssignation> TAssignations,/*Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatSaisi,*/ Set<TCommissionType> TCommissionTypes, Set<THistoDac> THistoDacs,Set<TParametres> TParametreses) {
 		this.opeMatricule = opeMatricule;
 		this.TStructure = TStructure;
@@ -59,6 +60,7 @@ public class TOperateur implements java.io.Serializable {
 		this.opeLogin = opeLogin;
 		this.opeMinCode = opeMinCode;
 		this.opeFonctionAdminist = opeFonctionAdminist;
+		this.opeMatriculeFonc = opeMatriculeFonc;
 		this.TMotdepasses = TMotdepasses;
 		this.TRetraits = TRetraits;
 		this.TModeleDacTypes = TModeleDacTypes;
@@ -236,6 +238,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTParametreses(Set<TParametres> TParametreses) {
 		this.TParametreses = TParametreses;
+	}
+
+	@Column(name = "OPE_MATRICULE_FONC")
+	public String getOpeMatriculeFonc() {
+		return opeMatriculeFonc;
+	}
+
+	public void setOpeMatriculeFonc(String opeMatriculeFonc) {
+		this.opeMatriculeFonc = opeMatriculeFonc;
 	}
 
 }
