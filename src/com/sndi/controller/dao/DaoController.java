@@ -15104,7 +15104,7 @@ public class DaoController {
 	
 	chargeDaoFile();
 	printBmk();
-	_logger.info("Document chargÃ©");
+	_logger.info("Document chargé");
 	lBmkNm = getBookmarkNames();
 	replaceBookmarkByValue(lBmkNm, lLts, lAdr, daoAao, lCom);
 	setDocumentCreatorProperty("sigomap");

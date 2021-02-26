@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-24T17:59:06 -->
+<!-- 2021-02-26T11:03:27 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthese_dac" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="12638759-8bdf-4052-99e0-726c9f1ce120">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -278,12 +278,12 @@ where sd.dac_code=$P{param_code_1}]]>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[$F{TYM_LIBELLE_LONG}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement isPrintRepeatedValues="false" x="106" y="20" width="364" height="20" uuid="ee2a01bc-073d-4d43-b092-ebeaf3d085d0"/>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[$F{MOP_LIBELLE_LONG}+" ("+$F{DAC_MOP_CODE}+")"]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement isPrintRepeatedValues="false" x="106" y="40" width="364" height="20" uuid="8ad1c949-f3d1-4ce1-afc1-ee408d30d8a7"/>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{AAO_COUT_DAC})+" F CFA"]]></textFieldExpression>
@@ -319,7 +319,7 @@ where sd.dac_code=$P{param_code_1}]]>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
 						<jr:listContents height="20" width="443">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="440" height="20" uuid="1748beee-da58-4c9a-88d5-c18c420ce8c1"/>
 								<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
 							</textField>
