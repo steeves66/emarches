@@ -75,7 +75,7 @@ public class FonctionController {
 	}
     
 	 public void chargeFonction() {
-		 fonctionListe= iservice.getObjectsByColumn("TFonction", new ArrayList<String>(Arrays.asList("fon_libelle")));
+		 fonctionListe= iservice.getObjectsByColumnDesc("TFonction", new ArrayList<String>(Arrays.asList("FON_DTE_SAISI")));
 	 }
 	 
 	 

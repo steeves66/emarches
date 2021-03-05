@@ -33,7 +33,11 @@ import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeFonction;
+import com.sndi.model.VAssignationOp;
 import com.sndi.model.VFinancementPpm;
+import com.sndi.model.VFonction;
+import com.sndi.model.VFonctionAssignation;
+import com.sndi.model.VLotCritere;
 import com.sndi.model.VPrqAo;
 import com.sndi.model.VStructure;
 import com.sndi.model.VTypeMarcheFils;
@@ -79,6 +83,7 @@ public class OperateurController {
 	private String minCode="";
 	private String strCode="";
 	private String filtreStructLibLong="";
+	private String filtreFonctionLib="";
 	
 	
 	private TAssignation tmpAssignation = new TAssignation();
@@ -86,10 +91,15 @@ public class OperateurController {
 	private List <TTypeFonction> tfonList = new ArrayList<TTypeFonction>();
 	private List<TMinistere> listMinistere = new ArrayList<TMinistere>();
 	private List<VStructure> listStructure = new ArrayList<VStructure>();
+	private List <VFonctionAssignation> fonctionListe = new ArrayList<VFonctionAssignation>();
+	/*private List <VFonction> fonctionListe = new ArrayList<VFonction>();*/
+	private List <VAssignationOp> listeFonctionOp = new ArrayList<VAssignationOp>();
 	private String tmpFonCod = "";
 
 	//Variables for indexOpeloye
 	private TOperateur slctdTd = new TOperateur();
+	private TFonction fonction= new TFonction();
+	private TAssignation assignation= new TAssignation();
 	private OperateurFilter opeFilter = new OperateurFilter();
 	private String filterLetter = "ALL";
 
@@ -106,6 +116,7 @@ public class OperateurController {
 	private String site="";
 	private String slctdTe = "";
 	private Integer newOpeIndex=0;
+	
 	
 	//Visibilité des boutons
 	private boolean etatBoutoneng=true;
@@ -127,11 +138,16 @@ public class OperateurController {
 	private List<String> test = new ArrayList<String>();
 	private List <HashSet <String>> lockedAction = new ArrayList <HashSet <String>>();//TODO
 	private VStructure recupStructure = new VStructure();
+	private VFonctionAssignation recupFonction = new VFonctionAssignation();
+	//private VFonction recupFonction = new VFonction();
+	//private VFonction fonctionAssignation = new VFonction();
+	private VFonctionAssignation fonctionAssignation = new VFonctionAssignation();
 	private VStructure structure = new VStructure();
 	
 	private Boolean modeCreerAssignation = false;
 //	private Boolean checkTmpTAssignation = false;
 	private Boolean selectAllActions = false;
+	private Boolean btnPrintOp = false;
 
 	private String motPasseOld;
 	private String motPasseUser;
@@ -150,15 +166,41 @@ public class OperateurController {
 	    etatBoutonEdit=false;
 	}
 	
-	 public String onFlowProcess(FlowEvent event) {
-	        if(skip) {
-	            skip = false;   //reset in case user goes back
-	            return "confirm";
-	        }
-	        else {
-	            return event.getNewStep();
-	        }
+	 public String onFlowProcess(FlowEvent event) throws IOException {
+		 
+		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+			//Controle Operateur
+			 if(event.getOldStep().equals("operateur") && event.getNewStep().equals("fonction")) {
+				 if("".equals(newOpe.getOpeNom()) || "".equalsIgnoreCase(recupFonction.getFonLibelle()) 
+						 ||"".equals(newOpe.getOpeLogin())||"".equals(motPasse) ||"".equals(motPasse2)) 
+				 {
+					 FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir les champs obligatoire", ""));
+			          return "operateur";
+					} else
+					{
+						creerOperateur();
+						 chargeFonctionByOperateur();	
+						 chargeTypeFonction();
+						 btnPrintOp = false;
+					}
+				
+			     }
+		      return event.getNewStep();
 	    }
+	 
+	 
+	 public void chargeFonction() {
+		 fonctionListe.clear();
+		 if(typefonc=="") {
+			 fonctionListe= iservice.getObjectsByColumn("VFonctionAssignation");	 
+		 }else
+		 {
+			fonctionListe= iservice.getObjectsByColumn("VFonctionAssignation", new WhereClause("FON_TYF_COD",WhereClause.Comparateur.EQ,""+typefonc));	 
+		 }
+		  
+	 }
+	 
 	 public void chargeMinistere() {
 			listMinistere=(List<TMinistere>) iservice.getObjectsByColumn("TMinistere", new ArrayList<String>(Arrays.asList("minCode")));
 		} 
@@ -177,10 +219,31 @@ public class OperateurController {
 	 }
 	 
 	 
+	//Filtre les marchés en fonction du code Marché
+		 public void filtreFonction() {
+			 fonctionListe.clear();
+			 fonctionListe=(List<VFonctionAssignation>) iservice.getObjectsByColumn("VFonctionAssignation",
+						new WhereClause("FON_LIBELLE",WhereClause.Comparateur.LIKE,filtreFonctionLib+"%"));
+		 }
+	 
+	 
+	 public void chargeFonctionByOperateur() {
+		 listeFonctionOp= iservice.getObjectsByColumn("VAssignationOp",
+				 //new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+		 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+		 
+	 }
+	 
+	 
 	 public void onSelectStructure() {
 		 recupStructure.setStrCode(structure.getStrCode());
 		 recupStructure.setStrLibelleCourt(structure.getStrLibelleCourt());
 		 recupStructure.setStrLibelleLong(structure.getStrLibelleLong());
+			}
+	 
+	 public void onSelectFonction() {
+		 recupFonction.setFonCod(fonctionAssignation.getFonCod());
+		 recupFonction.setFonLibelle(fonctionAssignation.getFonLibelle());
 			}
 
 		
@@ -206,7 +269,17 @@ public class OperateurController {
 		}
 	
 	
-	
+
+	 public void genereCodeFonction() {
+		 if(!("empty".equalsIgnoreCase(typefonc) || "".equalsIgnoreCase(typefonc)) && !("empty".equalsIgnoreCase(strCode) || "".equalsIgnoreCase(recupStructure.getStrCode())) ){
+			int i =-1;
+			while( ++i<listTypefonction.size() && !(""+listTypefonction.get(i).getTyfCod()).equalsIgnoreCase(typefonc));
+				fonction.setFonCod(keyGen.getCodeFonction(typefonc,recupStructure.getStrCode()));
+				fonction.setFonLibelle(listTypefonction.get(i).getTyfLibelle());
+		   }else{
+	    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));;
+	      }
+	 }
 	public void chargeTypeFonction(){
 		listTypefonction.clear();
 		listTypefonction =(List<TTypeFonction>) iservice.getObjectsByColumn("TTypeFonction", new ArrayList<String>(Arrays.asList("tyfCod")));
@@ -230,6 +303,13 @@ public class OperateurController {
 			 		//userController.traceSysJournal(" Impression fiche identification: "+slctdTd.getOpeMatricule());
 			    
 	}
+	
+	public void printOperateur() throws IOException, DocumentException{
+		
+ 		projetReport.showOperateurPDF(newOpe.getOpeMatricule())	;
+ 		//userController.traceSysJournal(" Impression fiche identification: "+slctdTd.getOpeMatricule());
+    
+}
 	public void printAllOpe() throws IOException, DocumentException{
 		//projetReport.showOperateursPDF();
 		//userController.traceSysJournal(" Impression des fiches d'identifications: ");
@@ -616,6 +696,50 @@ public class OperateurController {
 	public void restorerOperateur(){
 		//TODO
 		
+	}
+	
+	//@Transactional
+	public void saveFonction() throws IOException {
+		List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+recupStructure.getStrCode()));
+	    TStructure structure = new TStructure();
+		if(!PPM.isEmpty()) structure = PPM.get(0);
+		 if(typefonc.equalsIgnoreCase("")|| structure.getStrCode().equalsIgnoreCase("")) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));
+			}
+		else {
+
+			fonction.setTStructure(new TStructure(structure.getStrCode()));
+			fonction.setFonDatDeb(Calendar.getInstance().getTime());
+			fonction.setFonDteSaisi(Calendar.getInstance().getTime());
+			fonction.setTTypeFonction(new TTypeFonction(typefonc));
+			iservice.addObject(fonction);
+			chargeFonction();
+			fonction=new TFonction();
+			
+			userController.setTexteMsg("Enregistrement effectué avec succès !");
+		    userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
+			//userController.renderPage("fon1");
+		    //return	userController.renderPage("fon1");
+			}
+	
+	}
+	
+	//@Transactional
+	public void saveAssignation() throws IOException {
+		assignation.setTOperateur(new TOperateur(newOpe.getOpeMatricule()));
+		assignation.setTFonction(new TFonction(recupFonction.getFonCod()));
+		iservice.addObject(assignation);
+		btnPrintOp = true;
+		/*assignation=new TAssignation();
+		assignation.setTFonction(new TFonction());
+		assignation.setTOperateur(new TOperateur());*/
+		chargeFonctionByOperateur();
+		/*userController.setTexteMsg("Enregistrement effectué avec succès !");
+	    userController.setRenderMsg(true);
+		userController.setSevrityMsg("success");*/
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Enregistrement effectué avec succés! ", ""));
+		//return userController.renderPage("ass1");
 	}
 	
 	@Transactional
@@ -1565,6 +1689,76 @@ public class OperateurController {
 	public void setFiltreStructLibLong(String filtreStructLibLong) {
 		this.filtreStructLibLong = filtreStructLibLong;
 	}
+
+	public TFonction getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(TFonction fonction) {
+		this.fonction = fonction;
+	}
+
+
+
+	public List<VFonctionAssignation> getFonctionListe() {
+		return fonctionListe;
+	}
+
+	public void setFonctionListe(List<VFonctionAssignation> fonctionListe) {
+		this.fonctionListe = fonctionListe;
+	}
+
+	public TAssignation getAssignation() {
+		return assignation;
+	}
+
+	public void setAssignation(TAssignation assignation) {
+		this.assignation = assignation;
+	}
+
+
+	public VFonctionAssignation getRecupFonction() {
+		return recupFonction;
+	}
+
+	public void setRecupFonction(VFonctionAssignation recupFonction) {
+		this.recupFonction = recupFonction;
+	}
+
+
+	public VFonctionAssignation getFonctionAssignation() {
+		return fonctionAssignation;
+	}
+
+	public void setFonctionAssignation(VFonctionAssignation fonctionAssignation) {
+		this.fonctionAssignation = fonctionAssignation;
+	}
+
+	public List <VAssignationOp> getListeFonctionOp() {
+		return listeFonctionOp;
+	}
+
+	public void setListeFonctionOp(List <VAssignationOp> listeFonctionOp) {
+		this.listeFonctionOp = listeFonctionOp;
+	}
+
+	public String getFiltreFonctionLib() {
+		return filtreFonctionLib;
+	}
+
+	public void setFiltreFonctionLib(String filtreFonctionLib) {
+		this.filtreFonctionLib = filtreFonctionLib;
+	}
+
+	public Boolean getBtnPrintOp() {
+		return btnPrintOp;
+	}
+
+	public void setBtnPrintOp(Boolean btnPrintOp) {
+		this.btnPrintOp = btnPrintOp;
+	}
+
+
 
 	
 	

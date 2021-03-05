@@ -21,11 +21,9 @@ public class VFonctionAssignation implements java.io.Serializable {
 	private String fonCod;
 	private String fonTyfCod;
 	private String fonStrCode;
-	private Date fonDatDeb;
-	private Date fonDatFin;
 	private String fonLibelle;
-	private String fonOpeMatricule;
-
+	private String minCode;
+	private String nb;
 	public VFonctionAssignation() {
 	}
 
@@ -33,15 +31,14 @@ public class VFonctionAssignation implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-	public VFonctionAssignation(String fonCod, String fonTyfCod, String fonStrCode, Date fonDatDeb, Date fonDatFin,
-			String fonLibelle, String fonOpeMatricule) {
+	public VFonctionAssignation(String fonCod, String fonTyfCod, String fonStrCode, String minCode,String nb,
+			String fonLibelle) {
 		this.fonCod = fonCod;
 		this.fonTyfCod = fonTyfCod;
 		this.fonStrCode = fonStrCode;
-		this.fonDatDeb = fonDatDeb;
-		this.fonDatFin = fonDatFin;
+		this.minCode = minCode;
 		this.fonLibelle = fonLibelle;
-		this.fonOpeMatricule = fonOpeMatricule;
+		this.nb = nb;
 	}
 
 	@Id
@@ -72,23 +69,6 @@ public class VFonctionAssignation implements java.io.Serializable {
 		this.fonStrCode = fonStrCode;
 	}
 
-	@Column(name = "FON_DAT_DEB", length = 7)
-	public Date getFonDatDeb() {
-		return this.fonDatDeb;
-	}
-
-	public void setFonDatDeb(Date fonDatDeb) {
-		this.fonDatDeb = fonDatDeb;
-	}
-
-	@Column(name = "FON_DAT_FIN", length = 7)
-	public Date getFonDatFin() {
-		return this.fonDatFin;
-	}
-
-	public void setFonDatFin(Date fonDatFin) {
-		this.fonDatFin = fonDatFin;
-	}
 
 	@Column(name = "FON_LIBELLE", length = 500)
 	public String getFonLibelle() {
@@ -98,14 +78,23 @@ public class VFonctionAssignation implements java.io.Serializable {
 	public void setFonLibelle(String fonLibelle) {
 		this.fonLibelle = fonLibelle;
 	}
-	
-	@Column(name = "FON_OPE_MATRICULE", length = 25)
-	public String getFonOpeMatricule() {
-		return this.fonOpeMatricule;
+
+	@Column(name = "MIN_CODE")
+	public String getMinCode() {
+		return minCode;
 	}
 
-	public void setFonOpeMatricule(String fonOpeMatricule) {
-		this.fonOpeMatricule = fonOpeMatricule;
+	public void setMinCode(String minCode) {
+		this.minCode = minCode;
+	}
+
+	@Column(name = "NB")
+	public String getNb() {
+		return nb;
+	}
+
+	public void setNb(String nb) {
+		this.nb = nb;
 	}
 
 }
