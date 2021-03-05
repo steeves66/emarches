@@ -5580,7 +5580,7 @@ public class DaoController {
 													                           
 													                      constantService.getStatut("DC2");
 												 						  //Historisation du / des retraits
-												 						  historiser("DC2",newDao.getDacCode(),"DAO Corrig par le responsable du binome");	
+												 						  historiser("DC2",newDao.getDacCode(),"DAO Corrig� par le responsable du binome");	
 							 				                              //Actualisation du Tableau de Bord
 											                              typeActionTb();
 											                              //Activation et dï¿½sactivation des boutons valider

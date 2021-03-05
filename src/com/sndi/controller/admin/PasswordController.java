@@ -50,16 +50,25 @@ public class PasswordController {
 		actuelPass="";
 		passConfirme="";
 		listMotPass=(List<TMotdepasse>) iservice.getObjectsByColumn("TMotdepasse", new ArrayList<String>(Arrays.asList("mdpId")),
-				new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getOperateur().getOpeMatricule()),
+				new WhereClause("MDP_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getOperateur().getOpeMatricule()),
 						new WhereClause("MDP_STATUT",WhereClause.Comparateur.EQ,"1"));
 		if(!listMotPass.isEmpty()) {
 			tmotPass=listMotPass.get(0);
 		}
-		
+	}
+	
+	public void recpMotPass() {
+		listMotPass=(List<TMotdepasse>) iservice.getObjectsByColumn("TMotdepasse", new ArrayList<String>(Arrays.asList("mdpId")),
+				new WhereClause("MDP_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getOperateur().getOpeMatricule()),
+						new WhereClause("MDP_STATUT",WhereClause.Comparateur.EQ,"1"));
+		if(!listMotPass.isEmpty()) {
+			tmotPass=listMotPass.get(0);
+		}
 	}
 
 	 @Transactional
 	public void changePassword() {
+		 recpMotPass();
 		if(!actuelPass.equalsIgnoreCase(tmotPass.getMdpMotdepasse())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," Erreur sur le mot de passe courant! ", "")); 
 		}

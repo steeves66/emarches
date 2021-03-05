@@ -2106,6 +2106,9 @@ public class PpmController {
 				// new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				// new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode));
 		 filtreLigne="";
+		 ligneftpgpm = false;
+		 lignepn = false;
+		 ligneps = false;
 			} 
 	  
 	    

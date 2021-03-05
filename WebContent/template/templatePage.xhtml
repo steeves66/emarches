@@ -58,7 +58,7 @@
     <!-- /.content -->
     
     <h:form id="dlg">
-	        <p:dialog  widgetVar="changFonctionDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="E-MAP">
+	        <p:dialog  widgetVar="changFonctionDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="SIGOMAP">
 				<div class="contentpanel">
 					<div class="g12">
 					<div class="panel panel-dark">
@@ -67,12 +67,12 @@
 						</div>
 					</div>			 
 					<div class="panel-body panel-body-nopadding">
-						<h5 class="subtitle">Liste des fonctions!</h5>
+						<h5 class="subtitle">Liste des fonctions</h5>
 					
 						<div class="form-bordered form-horizontal">			
                     <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						<p:dataTable id="ndTble" var="nd" value="#{userController.listeAss}" selectionMode="single" selection="#{userController.slctdTb}" rowKey="#{nd.TFonction.fonCod}" emptyMessage="">
+						<p:dataTable id="ndTble" var="nd" value="#{userController.listeAss}" selectionMode="single" selection="#{userController.slctdTb}" rowKey="#{nd.TFonction.fonCod}" emptyMessage="" scrollable="true" scrollHeight="350" >
 
 							<p:ajax event="rowSelect" listener="#{userController.onRowSelect}" update=":dlg:ndTble"/>
 							<p:ajax event="rowUnselect" listener="#{userController.onRowSelect}" update=":dlg:ndTble"/>	
@@ -131,7 +131,7 @@
            <footer class="main-footer">
            
            <h:form id="dlpass">
-	        <p:dialog  widgetVar="changPasswordDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="E-MAP">
+	        <p:dialog  widgetVar="changPasswordDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="SIGOMAP">
 	        		<p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
 				<div class="contentpanel">
 					
@@ -178,7 +178,7 @@
     </div>
     
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.9
+      <b>Version</b> 1.0.10
     </div>
     <strong>
     Copyright &copy; #{controleController.application} <h:outputText value="#{userController.dateCon}"><f:convertDateTime pattern="yyyy" /></h:outputText>

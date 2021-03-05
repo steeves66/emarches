@@ -400,19 +400,19 @@
 		                 <tr>
 		                 <td style="width: 25%"><p:inputText id="Imput13" type="text" value="#{ppmController.recupLigne.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
-		                  <p:commandLink rendered="#{controleController.lignedefaut}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+		                  <p:commandLink rendered="#{controleController.lignedefaut}" title="Defaut" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 						  
-						  <p:commandLink rendered="#{ppmController.ligneftpgpm}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPg()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+						  <p:commandLink rendered="#{ppmController.ligneftpgpm}" title="pgpm" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPg()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 						  
-						   <p:commandLink rendered="#{ppmController.lignepn}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPn()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+						   <p:commandLink rendered="#{ppmController.lignepn}" title="pn" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPn()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 						  
-						   <p:commandLink rendered="#{ppmController.ligneps}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPros()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign" >
+						   <p:commandLink rendered="#{ppmController.ligneps}" title="ps" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPros()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign" >
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 						  
