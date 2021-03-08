@@ -93,6 +93,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateNotAtt;
 	private long dppNbOuv;
 	private Long dppDppId;
+	private Date dppApprobAnoTec;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -126,7 +127,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
 			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
-			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Long dppDppId,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Long dppDppId,Date dppApprobAnoTec,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -195,6 +196,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
+		this.dppApprobAnoTec = dppApprobAnoTec;
 	}
 
 	@Id
@@ -822,6 +824,16 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppDppId(Long dppDppId) {
 		this.dppDppId = dppDppId;
+	}
+	
+
+	@Column(name = "DPP_APPROB_ANO_TEC", length = 7)
+	public Date getDppApprobAnoTec() {
+		return this.dppApprobAnoTec;
+	}
+
+	public void setDppApprobAnoTec(Date dppApprobAnoTec) {
+		this.dppApprobAnoTec = dppApprobAnoTec;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

@@ -230,6 +230,8 @@ public class ControleController {
 	private boolean selectOneMenuProcedure =false;
 	//Boutons
 	private boolean btn_new =false;
+	private boolean btn_modif_ppm =false;
+	private boolean btn_modif_pspm =false;
 	private boolean btn_affec =false;
 	private boolean btn_exam = false;
 	private boolean btn_retrait = false;
@@ -1168,6 +1170,8 @@ public class ControleController {
 			    	if(action.equalsIgnoreCase("MODPPM")) {
 			    		type = "PPM";
 			    		typePlan ="PN";
+			    		btn_modif_ppm = true;
+			    		btn_modif_pspm = false;
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PPM N°";
 			    		libelle="Modification du";
@@ -1227,6 +1231,8 @@ public class ControleController {
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
 			    			 typePlan = "PN";
+			    			 btn_modif_ppm = true;
+					    	 btn_modif_pspm = false;
 			    			 libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
 			    			 lignedefaut = true;
@@ -1471,6 +1477,8 @@ public class ControleController {
 			    	if(action.equalsIgnoreCase("MODPSPM")) {
 			    		type = "PSPM";
 			    		typePlan = "PS";
+			    		btn_modif_ppm = false;
+			    		btn_modif_pspm = true;
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PSPM N°";
 			    		libelle="Modification du";
@@ -1534,6 +1542,8 @@ public class ControleController {
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";
 			    			 typePlan = "PS";
+			    			 btn_modif_ppm = false;
+					    	 btn_modif_pspm = true;
 			    			 libelle1="Index";
 			    			 libelleProcedure="SAISIE DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
@@ -10475,6 +10485,26 @@ public class ControleController {
 
 	public void setApplicationSmall(String applicationSmall) {
 		this.applicationSmall = applicationSmall;
+	}
+
+
+	public boolean isBtn_modif_ppm() {
+		return btn_modif_ppm;
+	}
+
+
+	public void setBtn_modif_ppm(boolean btn_modif_ppm) {
+		this.btn_modif_ppm = btn_modif_ppm;
+	}
+
+
+	public boolean isBtn_modif_pspm() {
+		return btn_modif_pspm;
+	}
+
+
+	public void setBtn_modif_pspm(boolean btn_modif_pspm) {
+		this.btn_modif_pspm = btn_modif_pspm;
 	}
 	
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-23T12:37:04 -->
+<!-- 2021-03-06T12:54:48 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -60,7 +60,7 @@ and f.fpp_dpp_id = $P{param_code}]]>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[select dps.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_libelle_long,leb.lbg_imputation,nat.nat_libelle
-from t_detail_plan_passation dps, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st,t_l_budgets leb,t_natures nat
+from t_detail_plan_passation dps, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st,vb_l_budgets leb,t_natures@sigmap nat
 where dps.dpp_tym_code = tym.tym_code
 and dps.dpp_mop_code = mop.mop_code
 and dps.dpp_acteur_saisie = f.fon_cod
@@ -131,6 +131,8 @@ and dps.dpp_id= $P{param_code}]]>
 	<field name="DPP_DATE_RECEP_FACT" class="java.sql.Timestamp"/>
 	<field name="DPP_DATE_RECEP_LETTR" class="java.sql.Timestamp"/>
 	<field name="DPP_DATE_NOT_ATT" class="java.sql.Timestamp"/>
+	<field name="DPP_NB_OUV" class="java.math.BigDecimal"/>
+	<field name="DPP_DPP_ID" class="java.math.BigDecimal"/>
 	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>

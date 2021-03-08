@@ -110,7 +110,7 @@
               <!-- <h3>#{tableauBordController.tableauBord.valDmp}</h3> -->
               <h3>#{tableauBordController.ppmDmValideAc}</h3>
 
-              <p>Validé(s) par la DMP</p>
+              <p>Validé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -130,7 +130,7 @@
               <!-- <h3>#{tableauBordController.tableauBord.difPf}</h3> -->
               <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
 
-              <p>Différé(s) par la CPMP</p>
+              <p>Différé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -263,7 +263,7 @@
               <!-- <h3>#{tableauBordController.tableauBord.difDmp}</h3> -->
               <h3>#{tableauBordController.ppmCpDifDmp}</h3>
 
-              <p>Différé(s) par la DMP</p>
+              <p>Différé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -321,7 +321,7 @@
              <!--  <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3> -->
              <h3>#{tableauBordController.ppmDmValide}</h3>
 
-              <p>Validé(s) par la DMP</p>
+              <p>Validé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -343,7 +343,7 @@
               <!-- <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3> -->
               <h3>#{tableauBordController.ppmDmDiff}</h3>
 
-              <p>Différé(s) par la DMP</p>
+              <p>Différé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -396,7 +396,7 @@
               <!-- <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3> -->
               <h3>#{tableauBordController.ppmDmValide}</h3>
 
-              <p>Validé(s) par la DMP</p>
+              <p>Validé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -415,7 +415,7 @@
               <!-- <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3> -->
               <h3>#{tableauBordController.ppmDmDiff}</h3>
 
-              <p>Différé(s) par la DMP</p>
+              <p>Différé(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -462,7 +462,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmPub}</h3>
 
-              <p>Publié(s) par la DMP</p>
+              <p>Publié(s) par la DGMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -779,12 +779,16 @@
                
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                      <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                      <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                      <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'  || slctdTb.dppStatutRetour == '2'}">
                     <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
                           <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
                      <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                     </p:commandLink> 
-               </h:panelGroup>
+                    </h:panelGroup>
+                    
+                    </h:panelGroup>
+                   
                                      
                         <h:panelGroup rendered="#{controleController.detailP1}">
                              <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
@@ -800,7 +804,7 @@
                              </p:commandLink>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ACR'}">
-                             <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                             <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                             <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                               <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
@@ -808,31 +812,28 @@
                             </h:panelGroup>
                           </h:panelGroup>
                             
-                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-                              <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-                                   <p:commandLink action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                            
+                                   <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
                                   <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
                              </p:commandLink> 
-                        </h:panelGroup>
-                       </h:panelGroup>
+                      
+                       
                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                              
-                             <h:panelGroup rendered="#{slctdTb.dppTypePlan == 'PN'}">
-                            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPPM')}"
+                            <p:commandLink rendered="#{controleController.btn_modif_ppm}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px"  action="#{ppmModificationController.renderPage('ppm4','MODPPM')}"
                        title="Modifier ppm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{slctdTb.dppTypePlan == 'PS'}">
-                            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPSPM')}"
-                       title="Modifier pspm" update=":content">
+                                       
+                            <p:commandLink rendered="#{controleController.btn_modif_pspm}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPSPM')}"
+                              title="Modifier pspm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
-                            </h:panelGroup>
+                        
                             
                             </h:panelGroup>
                              

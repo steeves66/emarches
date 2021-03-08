@@ -610,7 +610,7 @@
 		    <div class="form-group">
 		   <label for="moldao27" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao27" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -3053,7 +3053,7 @@
 			            <div class="col-md-4">
 			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
 			            </div>
-			           </p:selectOneRadio>
+			         </p:selectOneRadio>
 		                <br/>
 	                  </div>
 	                </div>
@@ -3108,7 +3108,7 @@
 	                  </div>
 	                </div> 
 	                
-	                  <h:panelGroup id="idTres"> 
+	                <h:panelGroup id="idTres"> 
 	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
 	                <div class="form-group ">
 	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
@@ -3122,7 +3122,7 @@
 	                </h:panelGroup>
 	                </h:panelGroup>
 	                
-	                 <h:panelGroup id="idPartB"> 
+	                <h:panelGroup id="idPartB"> 
 	                <h:panelGroup rendered="#{ppmModificationController.selectPartBai}">
 	                 <div class="form-group ">
 	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
@@ -3230,7 +3230,7 @@
 	                  </div>
 	                </div> 
 	                
-	                  <h:panelGroup id="idTres"> 
+	               <h:panelGroup id="idTres"> 
 	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
 	                <div class="form-group ">
 	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>

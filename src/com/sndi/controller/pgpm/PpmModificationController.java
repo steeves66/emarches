@@ -449,9 +449,17 @@ public class PpmModificationController {
 		 }
 		 
 		 
-		 //liste des dates de publication
+	/*	 //liste des dates de publication
 		 public void chargeDatepub() {
 			 listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+		 }*/
+		 
+		 
+		 //liste des dates de publication
+		 public void chargeDatepub() {
+			 //listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+			 listeDatePub.clear();
+			 listeDatePub= ((List<VDatePub>)iservice.getObjectsByColumn("VDatePub",new ArrayList<String>(Arrays.asList("DATEPUB"))));
 		 }
 		 
 		//Methode de récupération de l'AMI de la DP
@@ -1657,7 +1665,8 @@ public class PpmModificationController {
 			 listeupdatefinance= (List<VUpdateFinancementPpm>) iservice.getObjectsByColumn("VUpdateFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
 					 new WhereClause("FPP_ID",WhereClause.Comparateur.EQ,""+selectFinance.getFppId()));
 			if (!listeupdatefinance.isEmpty()) {
-				updatefinance=listeupdatefinance.get(0); 
+				updatefinance=listeupdatefinance.get(0); 	
+				checkBailleur();
 			}	 
 		 } 
 		  
@@ -1915,7 +1924,7 @@ public class PpmModificationController {
 			 chargeFinancement();
 			 coutTotal();
 			 coutOperation();
-			 userController.setTexteMsg("Suppression éffectuée avec succès!");
+			 userController.setTexteMsg("Modification éffectuée avec succès!");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");  
 		 }
@@ -1947,16 +1956,16 @@ public class PpmModificationController {
 			 }
 		 
 		 
-		 public void checkBailleur() {
+	public void checkBailleur() {
 			 //sourfin="";
-			 if(sourfin.equalsIgnoreCase("Bailleur")) {
+		 if(updatefinance.getFppTypeFinance().equalsIgnoreCase("Bailleur")) {
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
 				 chargeSourceCheck();
 				 //sourfin="";
 			 }else
-			      if(sourfin.equalsIgnoreCase("Cofinance")){
+			      if(updatefinance.getFppTypeFinance().equalsIgnoreCase("Cofinance")){
 				 selectBailleur = true; 
 				 selectTresor = true;
 				 selectPartBai = true;
@@ -1964,7 +1973,7 @@ public class PpmModificationController {
 				 newFinancement = new TFinancementPpm();
 				// sourfin="";
 			 }else 
-				 if(sourfin.equalsIgnoreCase("ETAT")){
+				 if(updatefinance.getFppTypeFinance().equalsIgnoreCase("ETAT")){
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
@@ -1972,7 +1981,7 @@ public class PpmModificationController {
 				 devCode="CFA";
 				 chargeSourceEtat();
 			    }else 
-			         if(sourfin.equalsIgnoreCase("")){
+			         if(updatefinance.getFppTypeFinance().equalsIgnoreCase("")){
 			    	  selectPartBai = false;
 			    	  selectBailleur = false;
 					  selectTresor = false;
