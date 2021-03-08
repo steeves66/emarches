@@ -161,13 +161,6 @@ public class EtatsDaoController {
  		 }
     
     
-  //Afficher les pièces du DAO selectionné
-    public void chargePieces() {
- 	//piecesListe.clear();
- 	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
- 	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
- 		 }
-    
   //Afficher les adresses du DAO selectionné
     public void chargeAdresse() {
     listDetailAdresse.clear();
@@ -184,7 +177,18 @@ public class EtatsDaoController {
  	new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()))); 		 
  		 }
     
-  //Afficher les pièces du DAO affecté
+  //Afficher les pièces du DAO selectionné
+	public void chargePieces() {
+	//piecesListe.clear();
+	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
+	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
+		 }
+
+
+
+
+
+	//Afficher les pièces du DAO affecté
     public void chargePiecesAff() {
  	piecesListe.clear();
  	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
@@ -228,12 +232,14 @@ public class EtatsDaoController {
 	
 	 //Ouverture d'un dossier chargé
     public void openDossier() throws IOException{
-		downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
+		//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION_LINUX+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
+		downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION_LINUX+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 		   }
          
   //Suppression d'un dossier
     public void removeDossierPc(){
-	downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
+    downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION_LINUX+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());	
+	//downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 			//check si le dossier est OM
 			 iservice.deleteObject(selectedDossier);
 			chargeDossier();	 
@@ -246,16 +252,16 @@ public class EtatsDaoController {
   //Téléchargement des DAO type depuis la liste d'affichage
   	public void opendaoType() throws IOException{
   		  if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
-  			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-  			 // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
+  			  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+  			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
   		  }else
   			  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-  			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-  			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+  			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+  		    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
   		  }else
   			 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-  			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-  			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+  			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+  			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
   		    }
   	  }
   	
@@ -263,16 +269,16 @@ public class EtatsDaoController {
   	 //Téléchargement des DAO type par les chargés d'Etude
   	public void opendaoTypeCharge() throws IOException{
   		  if(slctdTda.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
-  			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures);  
-  			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
+  			 // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures);  
+  			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
   		  }else
   			  if(slctdTda.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
-  			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux);  
-  			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+  			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux);  
+  			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
   		  }else
   			 if(slctdTda.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
-  			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-  			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+  			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+  			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
   		    }
   	  }
 	

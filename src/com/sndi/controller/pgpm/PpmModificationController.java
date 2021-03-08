@@ -1885,7 +1885,7 @@ public class PpmModificationController {
          
          //Si la source de financement est ETAT alors montant en tresor = montant en devise
          public void recupUpdate() {
-        	 if(sourfin.equalsIgnoreCase("ETAT")) {
+        	 if(updatefinance.getFppTypeFinance().equalsIgnoreCase("ETAT")) {
         		 updatefinance.fppPartTresor = updatefinance.getFppMontantDevise().longValue();
         	 }
          }
