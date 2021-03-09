@@ -1165,7 +1165,7 @@ public class ControleController {
 				 type = "PPM";
 				 typePlan ="PN";
 				 libelleProcedure="SAISIE D'UN NOUVEAU PLAN DE PASSATION DE MARCHES";
-			     libelle1="Liste des AGPM Saisie par l'autorité Contractante";
+			     libelle1="Liste des PPM / PSPM Saisis par l'autorité Contractante";
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPPM")) {
 			    		type = "PPM";

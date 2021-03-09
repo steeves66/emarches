@@ -2229,47 +2229,59 @@ public class PpmController {
 	  
 	//Réinitialisation sur ligne budgétaire en procédure simplifiée
 		public void chargeImputationPs() {
-			
-			if(pgspm.getGpgTypePlan().equalsIgnoreCase("PSO")) {
-				 listeImputations.clear();
-				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-						 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
-						 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-						 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
-						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
+			if(pgspm.getGpgTypePlan().equalsIgnoreCase("")) {
+				listeImputations.clear();
+				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+				         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
 				 filtreLigne="";
-			  }else 
-				  if(pgspm.getGpgTypePlan().equalsIgnoreCase("PSL")) {
-					  
-					     listeImputations.clear();
-						 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-								 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
-								 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-								 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
-								 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
-						 filtreLigne="";
-				}		
+				 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+				 _logger.info("Type de plan: "+passationListe.getMopTypPlan()); 
+				 _logger.info("Mop_code: "+passationListe.getMopCode()); 
+			}else {
+				 listeImputations.clear();
+				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+				         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+pgspm.getGpgMopCode()),
+						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+				 filtreLigne="";
+				 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+				 _logger.info("Type de plan: "+passationListe.getMopTypPlan()); 
+				 _logger.info("Mop_code: "+passationListe.getMopCode()); 
+			}
+			
+			listeImputations.clear();
+			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+			         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+			 filtreLigne="";
+			 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+			 _logger.info("Type de plan: "+passationListe.getMopTypPlan()); 
+			 _logger.info("Mop_code: "+passationListe.getMopCode()); 
 		}
 	  
 	//Chargement des imputations ou lignes budgétaires en mode PSL pour le AC
 	  public void chargeImputationPsl() {
-		 listeImputations.clear();
-		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
-				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-				 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
-				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
+			listeImputations.clear();
+			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+			         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+			 filtreLigne="";
+			 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+			 _logger.info("Type de plan: "+passationListe.getMopTypPlan()); 
+			 _logger.info("Mop_code: "+passationListe.getMopCode()); 
 			}
 	  
 	  
 	//Chargement des imputations ou lignes budgétaires en mode PSO pour le AC
 	  public void chargeImputationPso() {
-		 listeImputations.clear();
-		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
-				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-				 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
-				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
+			listeImputations.clear();
+			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+			         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+			 filtreLigne="";
+			 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+			 _logger.info("Type de plan: "+passationListe.getMopTypPlan()); 
+			 _logger.info("Mop_code: "+passationListe.getMopCode()); 
 			}
 	
 	//Chargement des imputations ou lignes budgétaires pour CPMP et DMP
@@ -3646,7 +3658,16 @@ public class PpmController {
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
 							iservice.updateObject(detailPass);
-					      			  
+							
+							/* listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+										new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+									if (!listeTsPpm.isEmpty()) {
+										detailPass = listeTsPpm.get(0);
+										String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+										String rechercheAll = search.replace("null","");
+										detailPass.setDppRecherche(rechercheAll);
+										iservice.updateObject(detailPass);
+										//recupDateGenere();*/									
 					      			  
 					      			//Insertion dans T_Financement_PPM
 				    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
@@ -3686,8 +3707,8 @@ public class PpmController {
 				 			/*userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 				 			userController.setRenderMsg(true);
 				 			userController.setSevrityMsg("success");*/
-				 	 		   
-			 	 		  }
+			 	 		  }   
+			 	 		  //}
 			 	 		
 			 	 	  }else {
 			 	 		     planPass.setTGestion(new TGestion(gesCode));
