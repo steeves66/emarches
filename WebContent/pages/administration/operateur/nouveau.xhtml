@@ -254,16 +254,16 @@
 				        </p:column> 
 				        
 				          <p:column headerText="Action" styleClass="col-sm-2" >
-         				     <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:5px;" 
+         				     <p:commandLink oncomplete="PF('modifAssDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:5px;" update=":dlogModifAss"
 				              title="Modifier">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
-                                 
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.assigneOp}" />
                                 </p:commandLink>
                               
-				              <p:commandLink class="btn btn-xs btn-danger" style="margin-left:5px;"
-				              title="Desactiver" update=":gnl">
-                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>  
-                                <p:confirm header="Confirmation" message="Etes vous sur de desactiver l'assgnation ?" icon="ui-icon-alert" />                           
+				              <p:commandLink action="#{operateurController.deleteAssignation()}" class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              title="Suprrimer" update=":gnl:tblAss">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>   
+                                <p:confirm header="Confirmation" message="Confirmez vous la suppression de l'assignation?" icon="ui-icon-alert" />                           
                                 </p:commandLink>
 				        </p:column> 
                     </p:dataTable>
@@ -475,6 +475,73 @@
 					      <div class="pull-right ">
 			            <p:commandLink action="#{operateurController.saveFonction()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('fonctionDlg').hide()" update=":dloglisteFonction:ndTbleFonction">
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="dlogModifAss">
+	  <p:dialog  widgetVar="modifAssDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">MODIFICATION : #{operateurController.assigneOp.fonLibelle}</div>
+         </div>
+         <div class="box-body">
+              
+		                 <div class="row">
+	                <label for="debut" class="col-sm-3 control-label"><b> Du <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	                <p:calendar id="debut" value="#{operateurController.assigneOp.assDatDeb}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+                     <label for="fin" class="col-sm-1 control-label"><b> Au <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-3">
+	                <p:calendar id="fin" value="#{operateurController.assigneOp.assDatFin}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+	                </div>
+	                <br/>
+	                
+	                
+	                
+	                 <div class="row">
+	                <label for="asscstart" class="col-sm-3 control-label"><b> Assignation courante ? <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	               <p:selectOneRadio id="asscstart" value="#{operateurController.assigneOp.assCourant}"> 
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+					    <f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                    </div>
+                     <label for="statut" class="col-sm-2 control-label"><b> Staut <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-4">
+	                 <p:selectOneRadio id="statut" value="#{operateurController.assigneOp.assStatut}"> 
+						<f:selectItem itemLabel="Actif" itemValue="true" />
+					    <f:selectItem itemLabel="Inactif" itemValue="false" />
+					 </p:selectOneRadio>
+                    </div>
+	                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink action="#{operateurController.updateAssignation()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('modifAssDlg').hide()" update=":gnl:tblAss">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			             <p:confirm header="Confirmation" message="Confirmez vous la modification de l'assignation?" icon="ui-icon-alert" />  
 			            </p:commandLink>
                      </div>
                      

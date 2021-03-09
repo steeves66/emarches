@@ -31,6 +31,7 @@ import com.sndi.model.THistoAgpm;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
+import com.sndi.model.TPlanPassation;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeFonction;
 import com.sndi.model.VAssignationOp;
@@ -38,9 +39,11 @@ import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VFonction;
 import com.sndi.model.VFonctionAssignation;
 import com.sndi.model.VLotCritere;
+import com.sndi.model.VOperateur;
 import com.sndi.model.VPrqAo;
 import com.sndi.model.VStructure;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VUpdatePpm;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.CustomPasswordEncoder;
 import com.sndi.security.UserController;
@@ -94,6 +97,7 @@ public class OperateurController {
 	private List <VFonctionAssignation> fonctionListe = new ArrayList<VFonctionAssignation>();
 	/*private List <VFonction> fonctionListe = new ArrayList<VFonction>();*/
 	private List <VAssignationOp> listeFonctionOp = new ArrayList<VAssignationOp>();
+	private List <VOperateur> listeOperateur= new ArrayList<VOperateur>();
 	private String tmpFonCod = "";
 
 	//Variables for indexOpeloye
@@ -106,6 +110,7 @@ public class OperateurController {
 	
 	//Variables for nouvelOpeloye
 	private TOperateur newOpe = new TOperateur();
+	private VOperateur selctOpe = new VOperateur();
 	//private List<Departement> eaList= new ArrayList<Departement>();
 
 	
@@ -143,6 +148,7 @@ public class OperateurController {
 	//private VFonction fonctionAssignation = new VFonction();
 	private VFonctionAssignation fonctionAssignation = new VFonctionAssignation();
 	private VStructure structure = new VStructure();
+	private VAssignationOp assigneOp = new VAssignationOp();
 	
 	private Boolean modeCreerAssignation = false;
 //	private Boolean checkTmpTAssignation = false;
@@ -166,6 +172,15 @@ public class OperateurController {
 	    etatBoutonEdit=false;
 	}
 	
+	public void etatBtnPrintMod() {
+		listeFonctionOp= iservice.getObjectsByColumn("VAssignationOp",
+		 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+selctOpe.getOpeMatricule()));
+		if(listeFonctionOp.size()==0) {
+			btnPrintOp=false;
+		}else {
+			btnPrintOp=true;
+		}
+	}
 	 public String onFlowProcess(FlowEvent event) throws IOException {
 		 
 		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -182,7 +197,23 @@ public class OperateurController {
 						creerOperateur();
 						 chargeFonctionByOperateur();	
 						 chargeTypeFonction();
-						 btnPrintOp = false;
+					}
+				
+			     }
+			 
+			 //MODIFICATION
+			//Controle OperateurMod
+			 if(event.getOldStep().equals("operateurMod") && event.getNewStep().equals("fonctionMod")) {
+				 if("".equals(selctOpe.getOpeNom()) ||"".equals(selctOpe.getOpeLogin())) 
+				 {
+					 FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir les champs obligatoire", ""));
+			          return "operateurMod";
+					} else
+					{
+						modifOperateur();
+						 chargeFonctionByOperateurMod();	
+						 chargeTypeFonction();
 					}
 				
 			     }
@@ -225,12 +256,29 @@ public class OperateurController {
 			 fonctionListe=(List<VFonctionAssignation>) iservice.getObjectsByColumn("VFonctionAssignation",
 						new WhereClause("FON_LIBELLE",WhereClause.Comparateur.LIKE,filtreFonctionLib+"%"));
 		 }
+		 
+		//Methode de récupération de t_detail_plan_passation dans t_affichage_ppm
+		 public void editForm() {
+			 listeOperateur= (List<VOperateur>) iservice.getObjectsByColumn("VOperateur",
+		    					 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+slctdTd.getOpeMatricule()));
+		    			if (!listeOperateur.isEmpty()) {
+		    				selctOpe=listeOperateur.get(0); 
+		    			}
+		    			etatBtnPrintMod();
+		      }
 	 
 	 
 	 public void chargeFonctionByOperateur() {
 		 listeFonctionOp= iservice.getObjectsByColumn("VAssignationOp",
 				 //new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
 		 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+		 
+	 }
+	 
+	 public void chargeFonctionByOperateurMod() {
+		 listeFonctionOp= iservice.getObjectsByColumn("VAssignationOp",
+				 //new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+		 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+selctOpe.getOpeMatricule()));
 		 
 	 }
 	 
@@ -241,12 +289,55 @@ public class OperateurController {
 		 recupStructure.setStrLibelleLong(structure.getStrLibelleLong());
 			}
 	 
+	 public void onSelectStructureMod() {
+		 selctOpe.setOpeStrCode(structure.getStrCode());
+		 selctOpe.setStrLibelleCourt(structure.getStrLibelleCourt());
+		 selctOpe.setStrLibelleLong(structure.getStrLibelleLong());
+			}
 	 public void onSelectFonction() {
 		 recupFonction.setFonCod(fonctionAssignation.getFonCod());
 		 recupFonction.setFonLibelle(fonctionAssignation.getFonLibelle());
 			}
 
+	 public void updateAssignation() {
+		 List<TAssignation> ASS  = iservice.getObjectsByColumn("TAssignation", new WhereClause("ASS_NUM",Comparateur.EQ,""+assigneOp.getAssNum()));
+		 TAssignation assignation = new TAssignation();
+			if(!ASS.isEmpty()) assignation = ASS.get(0);
+			assignation.setAssCourant(assigneOp.getAssCourant()); 
+			assignation.setAssStatut(assigneOp.getAssStatut());
+			assignation.setAssDatDeb(assigneOp.getAssDatDeb());
+			assignation.setAssDatFin(assigneOp.getAssDatFin());
+			iservice.updateObject(assignation);
+			chargeFonctionByOperateur();
+	 }
+	 
+	 public void updateAssignationMod() {
+		 List<TAssignation> ASS  = iservice.getObjectsByColumn("TAssignation", new WhereClause("ASS_NUM",Comparateur.EQ,""+assigneOp.getAssNum()));
+		 TAssignation assignation = new TAssignation();
+			if(!ASS.isEmpty()) assignation = ASS.get(0);
+			assignation.setAssCourant(assigneOp.getAssCourant()); 
+			assignation.setAssStatut(assigneOp.getAssStatut());
+			assignation.setAssDatDeb(assigneOp.getAssDatDeb());
+			assignation.setAssDatFin(assigneOp.getAssDatFin());
+			iservice.updateObject(assignation);
+			chargeFonctionByOperateurMod();
+	 }
 		
+	 public void deleteAssignation() {
+		 List<TAssignation> ASS  = iservice.getObjectsByColumn("TAssignation", new WhereClause("ASS_NUM",Comparateur.EQ,""+assigneOp.getAssNum()));
+		 TAssignation assignation = new TAssignation();
+			if(!ASS.isEmpty()) assignation = ASS.get(0);
+			iservice.deleteObject(assignation);
+			chargeFonctionByOperateur(); 
+	 }
+	 
+	 public void deleteAssignationMod() {
+		 List<TAssignation> ASS  = iservice.getObjectsByColumn("TAssignation", new WhereClause("ASS_NUM",Comparateur.EQ,""+assigneOp.getAssNum()));
+		 TAssignation assignation = new TAssignation();
+			if(!ASS.isEmpty()) assignation = ASS.get(0);
+			iservice.deleteObject(assignation);
+			chargeFonctionByOperateurMod(); 
+	 }
 	public void chargeData(){
 		test.clear();
 		getObjetListe().clear();
@@ -280,6 +371,17 @@ public class OperateurController {
 	    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));;
 	      }
 	 }
+	 
+	 public void genereCodeFonctionMod() {
+		 if(!("empty".equalsIgnoreCase(typefonc) || "".equalsIgnoreCase(typefonc)) && !("empty".equalsIgnoreCase(strCode) || "".equalsIgnoreCase(selctOpe.getStrCode())) ){
+			int i =-1;
+			while( ++i<listTypefonction.size() && !(""+listTypefonction.get(i).getTyfCod()).equalsIgnoreCase(typefonc));
+				fonction.setFonCod(keyGen.getCodeFonction(typefonc,selctOpe.getStrCode()));
+				fonction.setFonLibelle(listTypefonction.get(i).getTyfLibelle());
+		   }else{
+	    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));;
+	      }
+	 }
 	public void chargeTypeFonction(){
 		listTypefonction.clear();
 		listTypefonction =(List<TTypeFonction>) iservice.getObjectsByColumn("TTypeFonction", new ArrayList<String>(Arrays.asList("tyfCod")));
@@ -308,6 +410,12 @@ public class OperateurController {
 		
  		projetReport.showOperateurPDF(newOpe.getOpeMatricule())	;
  		//userController.traceSysJournal(" Impression fiche identification: "+slctdTd.getOpeMatricule());
+    
+}
+	
+	public void printOperateurMod() throws IOException, DocumentException{
+		
+ 		projetReport.showOperateurPDF(selctOpe.getOpeMatricule());
     
 }
 	public void printAllOpe() throws IOException, DocumentException{
@@ -540,6 +648,7 @@ public class OperateurController {
 	    switch(value) {
 	    
 	    case "ope1":
+	    	chargeData();
 		break;
 		case "ope2":
 			newOpe  = new TOperateur();
@@ -555,6 +664,7 @@ public class OperateurController {
 			
 		break;
 		case "ope3":
+			editForm();
 			break;
 	    
 	    }
@@ -606,46 +716,98 @@ public class OperateurController {
 	 }
 
 
-	public String creerOperateur() throws IOException{
-		//TODO
-				//try {
-					//if(checkNewOpeStepI()){
-						//CustomPasswordEncoder cp = new CustomPasswordEncoder();
-		               
-					    newOpe.setOpeMatricule(keyGen.getOperateurCode());
-		               
-		              /* List<TOperateur> OPE  = iservice.getObjectsByColumn("TOperateur");
-		               TOperateur operateur = new TOperateur();
-						if(!OPE.isEmpty()) operateur = OPE.get(0);*/
-						
-					    List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+recupStructure.getStrCode()));
-					    TStructure structure = new TStructure();
-						if(!PPM.isEmpty()) structure = PPM.get(0);
-					    newOpe.setTStructure(new TStructure(structure.getStrCode()));
-						iservice.addObject(newOpe);
-						//add Mot de passe
-					TMotdepasse mdp = new TMotdepasse();
-						mdp.setTOperateur(newOpe);
-						//mdp.setMdpMotdepasse(cp.encode(motPasse));
-						//mdp.setMdpMotdepasseInit(motPasse);
-						mdp.setMdpMotdepasse(motPasse);
-						mdp.setMdpDate(Calendar.getInstance().getTime());
-						mdp.setMdpStatut(true);
-						iservice.addObject(mdp);
-					    chargeData();
-					    userController.setTexteMsg("Enregistrement effectué avec succès !");
-						userController.setRenderMsg(true);
-						userController.setSevrityMsg("success");
-					return renderPage("ope1");
-				/*	}
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return renderPage("ope2");*/
-			}
+	public void creerOperateur() throws IOException{
+		TOperateur operateurs = new TOperateur();
+		objetListe = (List<TOperateur>) iservice.getObjectsByColumn("TOperateur",
+			       new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+	  if (!objetListe.isEmpty()) {
+		  operateurs= objetListe.get(0);
+		  updateOperateur();
+		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," existe! ", "")); 
+	    } else {
+			  saveOperateur();  
+		  }		
+	}
+	public void saveOperateur() {
+		TOperateur operateurs = new TOperateur();
+		objetListe = (List<TOperateur>) iservice.getObjectsByColumn("TOperateur",
+			       new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+	  if (!objetListe.isEmpty()) {
+		  operateurs= objetListe.get(0);
+		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," login existe! ", "")); 
+	  }
+	  else {
+		  newOpe.setOpeMatricule(keyGen.getOperateurCode()); 
+	         List<TOperateur> OPE  = iservice.getObjectsByColumn("TOperateur");
+	         TOperateur operateur = new TOperateur();
+				if(!OPE.isEmpty()) operateur = OPE.get(0);
+				
+			    List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+recupStructure.getStrCode()));
+			    TStructure structure = new TStructure();
+				if(!PPM.isEmpty()) structure = PPM.get(0);
+			    newOpe.setTStructure(new TStructure(structure.getStrCode()));
+				iservice.addObject(newOpe);
+				//add Mot de passe
+			TMotdepasse mdp = new TMotdepasse();
+				mdp.setTOperateur(newOpe);
+				//mdp.setMdpMotdepasse(cp.encode(motPasse));
+				//mdp.setMdpMotdepasseInit(motPasse);
+				mdp.setMdpMotdepasse(motPasse);
+				mdp.setMdpDate(Calendar.getInstance().getTime());
+				mdp.setMdpStatut(true);
+				iservice.addObject(mdp);
+			    chargeData();
+			    userController.setTexteMsg("Enregistrement effectué avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");  
+	  }
+		
+	}
 	
+//Modification du formulaire de saisie
+public void modifOperateur() {
+  List<TOperateur> OPE  = iservice.getObjectsByColumn("TOperateur",
+	       new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+selctOpe.getOpeMatricule()));
+  TOperateur operateur = new TOperateur();
+	if(!OPE.isEmpty()) operateur = OPE.get(0);
+	operateur.setOpeMatriculeFonc(selctOpe.getOpeMatriculeFonc());
+	operateur.setOpeEtatCivil(selctOpe.getOpeEtatCivil());
+	operateur.setOpeNom(selctOpe.getOpeNom());
+	operateur.setTStructure(new TStructure(selctOpe.getStrCode()));
+	operateur.setOpeFonctionAdminist(selctOpe.getOpeFonctionAdminist());
+	operateur.setOpeLogin(selctOpe.getOpeLogin());
+	operateur.setOpeMail(selctOpe.getOpeMail());
+	operateur.setOpeContact(selctOpe.getOpeContact());
+	iservice.updateObject(operateur);
+	etatBtnPrintMod();
+}
+	
+	public void updateOperateur() {
+		   //newOpe.setOpeMatricule(keyGen.getOperateurCode());
+			  newOpe.setOpeMatricule(newOpe.getOpeMatricule());
+	           List<TOperateur> OPE  = iservice.getObjectsByColumn("TOperateur");
+	           TOperateur operateur = new TOperateur();
+				if(!OPE.isEmpty()) operateur = OPE.get(0);
+				
+			    List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+recupStructure.getStrCode()));
+			    TStructure structure = new TStructure();
+				if(!PPM.isEmpty()) structure = PPM.get(0);
+			    newOpe.setTStructure(new TStructure(structure.getStrCode()));
+				iservice.updateObject(newOpe);
+				//add Mot de passe
+			TMotdepasse mdp = new TMotdepasse();
+				mdp.setTOperateur(newOpe);
+				//mdp.setMdpMotdepasse(cp.encode(motPasse));
+				//mdp.setMdpMotdepasseInit(motPasse);
+				mdp.setMdpMotdepasse(motPasse);
+				mdp.setMdpDate(Calendar.getInstance().getTime());
+				mdp.setMdpStatut(true);
+				iservice.updateObject(mdp);
+			    chargeData();
+			    userController.setTexteMsg("Enregistrement effectué avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");	
+	}
 	
 	@Transactional
 	public String update() throws IOException{
@@ -725,12 +887,37 @@ public class OperateurController {
 	
 	}
 	
+	public void saveFonctionMod() throws IOException {
+		List<TStructure> PPM  = iservice.getObjectsByColumn("TStructure", new WhereClause("STR_CODE",Comparateur.EQ,""+selctOpe.getStrCode()));
+	    TStructure structure = new TStructure();
+		if(!PPM.isEmpty()) structure = PPM.get(0);
+		 if(typefonc.equalsIgnoreCase("")|| structure.getStrCode().equalsIgnoreCase("")) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));
+			}
+		else {
+
+			fonction.setTStructure(new TStructure(structure.getStrCode()));
+			fonction.setFonDatDeb(Calendar.getInstance().getTime());
+			fonction.setFonDteSaisi(Calendar.getInstance().getTime());
+			fonction.setTTypeFonction(new TTypeFonction(typefonc));
+			iservice.addObject(fonction);
+			chargeFonction();
+			fonction=new TFonction();
+			
+			userController.setTexteMsg("Enregistrement effectué avec succès !");
+		    userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
+			//userController.renderPage("fon1");
+		    //return	userController.renderPage("fon1");
+			}
+	
+	}
+	
 	//@Transactional
 	public void saveAssignation() throws IOException {
 		assignation.setTOperateur(new TOperateur(newOpe.getOpeMatricule()));
 		assignation.setTFonction(new TFonction(recupFonction.getFonCod()));
 		iservice.addObject(assignation);
-		btnPrintOp = true;
 		/*assignation=new TAssignation();
 		assignation.setTFonction(new TFonction());
 		assignation.setTOperateur(new TOperateur());*/
@@ -741,6 +928,23 @@ public class OperateurController {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Enregistrement effectué avec succés! ", ""));
 		//return userController.renderPage("ass1");
 	}
+	
+	public void updateAssignationModif() throws IOException {
+		assignation.setTOperateur(new TOperateur(selctOpe.getOpeMatricule()));
+		assignation.setTFonction(new TFonction(recupFonction.getFonCod()));
+		iservice.addObject(assignation);
+		etatBtnPrintMod();
+		/*assignation=new TAssignation();
+		assignation.setTFonction(new TFonction());
+		assignation.setTOperateur(new TOperateur());*/
+		chargeFonctionByOperateurMod();
+		/*userController.setTexteMsg("Enregistrement effectué avec succès !");
+	    userController.setRenderMsg(true);
+		userController.setSevrityMsg("success");*/
+		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Enregistrement effectué avec succés! ", ""));
+		//return userController.renderPage("ass1");
+	}
+	
 	
 	@Transactional
 	public void changerMotDePasse(){
@@ -1756,6 +1960,30 @@ public class OperateurController {
 
 	public void setBtnPrintOp(Boolean btnPrintOp) {
 		this.btnPrintOp = btnPrintOp;
+	}
+
+	public VAssignationOp getAssigneOp() {
+		return assigneOp;
+	}
+
+	public void setAssigneOp(VAssignationOp assigneOp) {
+		this.assigneOp = assigneOp;
+	}
+
+	public List <VOperateur> getListeOperateur() {
+		return listeOperateur;
+	}
+
+	public void setListeOperateur(List <VOperateur> listeOperateur) {
+		this.listeOperateur = listeOperateur;
+	}
+
+	public VOperateur getSelctOpe() {
+		return selctOpe;
+	}
+
+	public void setSelctOpe(VOperateur selctOpe) {
+		this.selctOpe = selctOpe;
 	}
 
 

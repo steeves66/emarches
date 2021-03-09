@@ -28,61 +28,21 @@ public class VOperateur implements java.io.Serializable {
 	private String opeFonctionAdminist;
 	private String opeStrCode;
 	private String opeMatriculeFonc;
-	private Long mdpId;
-	private String mdpOpeMatricule;
-	private String mdpMotdepasse;
-	private Boolean mdpStatut;
-	private Date mdpDate;
-	private String fonCod;
-	private String fonTyfCod;
-	private Date fonDatDeb;
-	private Date fonDatFin;
-	private String fonLibelle;
-	private String fonAdr;
-	private String fonTel;
-	private String fonFonCod;
-	private String fonCourriel;
-	private String fonMobil;
-	private String fonStrCode;
-	private String fonOpeMatricule;
-	private Date fonDteSaisi;
-	private String fonMinCode;
-	private String fonLibelleCrt;
-	private String fonCodeDmp;
-	private String fonCodePf;
-	private String fonLibelleLngDmp;
-	private String fonSourceSigmap;
-	private String fonRespo;
-	private String tyfCod;
-	private String tyfLibelle;
-	private Date tyfDteSaisi;
-	private String tyfOpeMatricule;
-	private String tyfLibelleCrt;
-	private Long assNum;
-	private String assFonCod;
-	private String assOpeMatricule;
-	private Date assDatDeb;
-	private Date assDatFin;
-	private String assCourant;
-	private Boolean assStatut;
+	private String strCode;
+	private String strLibelleCourt;
+	private String strLibelleLong;
 
 	public VOperateur() {
 	}
 
-	public VOperateur(String opeMatricule, String fonCod) {
+	public VOperateur(String opeMatricule) {
 		this.opeMatricule = opeMatricule;
-		this.fonCod = fonCod;
 	}
 
 	public VOperateur(String opeMatricule, String opeNom, String opeContact, String opeEtatCivil, String opeMail,
 			String opeLogin, String opeMinCode, String opeFonctionAdminist, String opeStrCode, String opeMatriculeFonc,
 			Long mdpId, String mdpOpeMatricule, String mdpMotdepasse, Boolean mdpStatut, Date mdpDate, String fonCod,
-			String fonTyfCod, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr, String fonTel,
-			String fonFonCod, String fonCourriel, String fonMobil, String fonStrCode, String fonOpeMatricule,
-			Date fonDteSaisi, String fonMinCode, String fonLibelleCrt, String fonCodeDmp, String fonCodePf,
-			String fonLibelleLngDmp, String fonSourceSigmap, String fonRespo, String tyfCod, String tyfLibelle,
-			Date tyfDteSaisi, String tyfOpeMatricule, String tyfLibelleCrt, Long assNum, String assFonCod,
-			String assOpeMatricule, Date assDatDeb, Date assDatFin, String assCourant, Boolean assStatut) {
+			String strCode,String strLibelleCourt,String strLibelleLong) {
 		this.opeMatricule = opeMatricule;
 		this.opeNom = opeNom;
 		this.opeContact = opeContact;
@@ -93,43 +53,9 @@ public class VOperateur implements java.io.Serializable {
 		this.opeFonctionAdminist = opeFonctionAdminist;
 		this.opeStrCode = opeStrCode;
 		this.opeMatriculeFonc = opeMatriculeFonc;
-		this.mdpId = mdpId;
-		this.mdpOpeMatricule = mdpOpeMatricule;
-		this.mdpMotdepasse = mdpMotdepasse;
-		this.mdpStatut = mdpStatut;
-		this.mdpDate = mdpDate;
-		this.fonCod = fonCod;
-		this.fonTyfCod = fonTyfCod;
-		this.fonDatDeb = fonDatDeb;
-		this.fonDatFin = fonDatFin;
-		this.fonLibelle = fonLibelle;
-		this.fonAdr = fonAdr;
-		this.fonTel = fonTel;
-		this.fonFonCod = fonFonCod;
-		this.fonCourriel = fonCourriel;
-		this.fonMobil = fonMobil;
-		this.fonStrCode = fonStrCode;
-		this.fonOpeMatricule = fonOpeMatricule;
-		this.fonDteSaisi = fonDteSaisi;
-		this.fonMinCode = fonMinCode;
-		this.fonLibelleCrt = fonLibelleCrt;
-		this.fonCodeDmp = fonCodeDmp;
-		this.fonCodePf = fonCodePf;
-		this.fonLibelleLngDmp = fonLibelleLngDmp;
-		this.fonSourceSigmap = fonSourceSigmap;
-		this.fonRespo = fonRespo;
-		this.tyfCod = tyfCod;
-		this.tyfLibelle = tyfLibelle;
-		this.tyfDteSaisi = tyfDteSaisi;
-		this.tyfOpeMatricule = tyfOpeMatricule;
-		this.tyfLibelleCrt = tyfLibelleCrt;
-		this.assNum = assNum;
-		this.assFonCod = assFonCod;
-		this.assOpeMatricule = assOpeMatricule;
-		this.assDatDeb = assDatDeb;
-		this.assDatFin = assDatFin;
-		this.assCourant = assCourant;
-		this.assStatut = assStatut;
+		this.strCode = strCode;
+		this.strLibelleCourt = strLibelleCourt;
+		this.strLibelleLong = strLibelleLong;
 	}
 
 	
@@ -224,337 +150,33 @@ public class VOperateur implements java.io.Serializable {
 		this.opeMatriculeFonc = opeMatriculeFonc;
 	}
 
-	@Column(name = "MDP_ID", precision = 10, scale = 0)
-	public Long getMdpId() {
-		return this.mdpId;
-	}
-
-	public void setMdpId(Long mdpId) {
-		this.mdpId = mdpId;
-	}
-
-	@Column(name = "MDP_OPE_MATRICULE", length = 25)
-	public String getMdpOpeMatricule() {
-		return this.mdpOpeMatricule;
-	}
-
-	public void setMdpOpeMatricule(String mdpOpeMatricule) {
-		this.mdpOpeMatricule = mdpOpeMatricule;
-	}
-
-	@Column(name = "MDP_MOTDEPASSE", length = 250)
-	public String getMdpMotdepasse() {
-		return this.mdpMotdepasse;
-	}
-
-	public void setMdpMotdepasse(String mdpMotdepasse) {
-		this.mdpMotdepasse = mdpMotdepasse;
-	}
-
-	@Column(name = "MDP_STATUT", precision = 1, scale = 0)
-	public Boolean getMdpStatut() {
-		return this.mdpStatut;
-	}
-
-	public void setMdpStatut(Boolean mdpStatut) {
-		this.mdpStatut = mdpStatut;
-	}
-
-	@Column(name = "MDP_DATE", length = 7)
-	public Date getMdpDate() {
-		return this.mdpDate;
-	}
-
-	public void setMdpDate(Date mdpDate) {
-		this.mdpDate = mdpDate;
-	}
-
-	@Column(name = "FON_COD", nullable = false, length = 20)
-	public String getFonCod() {
-		return this.fonCod;
-	}
-
-	public void setFonCod(String fonCod) {
-		this.fonCod = fonCod;
-	}
-
-	@Column(name = "FON_TYF_COD", length = 3)
-	public String getFonTyfCod() {
-		return this.fonTyfCod;
-	}
-
-	public void setFonTyfCod(String fonTyfCod) {
-		this.fonTyfCod = fonTyfCod;
-	}
-
-	@Column(name = "FON_DAT_DEB", length = 7)
-	public Date getFonDatDeb() {
-		return this.fonDatDeb;
-	}
-
-	public void setFonDatDeb(Date fonDatDeb) {
-		this.fonDatDeb = fonDatDeb;
-	}
-
-	@Column(name = "FON_DAT_FIN", length = 7)
-	public Date getFonDatFin() {
-		return this.fonDatFin;
-	}
-
-	public void setFonDatFin(Date fonDatFin) {
-		this.fonDatFin = fonDatFin;
-	}
-
-	@Column(name = "FON_LIBELLE", length = 500)
-	public String getFonLibelle() {
-		return this.fonLibelle;
-	}
-
-	public void setFonLibelle(String fonLibelle) {
-		this.fonLibelle = fonLibelle;
-	}
-
-	@Column(name = "FON_ADR", length = 240)
-	public String getFonAdr() {
-		return this.fonAdr;
-	}
-
-	public void setFonAdr(String fonAdr) {
-		this.fonAdr = fonAdr;
-	}
-
-	@Column(name = "FON_TEL", length = 240)
-	public String getFonTel() {
-		return this.fonTel;
-	}
-
-	public void setFonTel(String fonTel) {
-		this.fonTel = fonTel;
-	}
-
-	@Column(name = "FON_FON_COD", length = 12)
-	public String getFonFonCod() {
-		return this.fonFonCod;
-	}
-
-	public void setFonFonCod(String fonFonCod) {
-		this.fonFonCod = fonFonCod;
-	}
-
-	@Column(name = "FON_COURRIEL", length = 100)
-	public String getFonCourriel() {
-		return this.fonCourriel;
-	}
-
-	public void setFonCourriel(String fonCourriel) {
-		this.fonCourriel = fonCourriel;
-	}
-
-	@Column(name = "FON_MOBIL", length = 20)
-	public String getFonMobil() {
-		return this.fonMobil;
-	}
-
-	public void setFonMobil(String fonMobil) {
-		this.fonMobil = fonMobil;
-	}
-
-	@Column(name = "FON_STR_CODE", length = 20)
-	public String getFonStrCode() {
-		return this.fonStrCode;
-	}
-
-	public void setFonStrCode(String fonStrCode) {
-		this.fonStrCode = fonStrCode;
-	}
-
-	@Column(name = "FON_OPE_MATRICULE", length = 25)
-	public String getFonOpeMatricule() {
-		return this.fonOpeMatricule;
-	}
-
-	public void setFonOpeMatricule(String fonOpeMatricule) {
-		this.fonOpeMatricule = fonOpeMatricule;
-	}
-
-	@Column(name = "FON_DTE_SAISI", length = 7)
-	public Date getFonDteSaisi() {
-		return this.fonDteSaisi;
-	}
-
-	public void setFonDteSaisi(Date fonDteSaisi) {
-		this.fonDteSaisi = fonDteSaisi;
-	}
-
-	@Column(name = "FON_MIN_CODE", length = 20)
-	public String getFonMinCode() {
-		return this.fonMinCode;
-	}
-
-	public void setFonMinCode(String fonMinCode) {
-		this.fonMinCode = fonMinCode;
-	}
-
-	@Column(name = "FON_LIBELLE_CRT", length = 500)
-	public String getFonLibelleCrt() {
-		return this.fonLibelleCrt;
-	}
-
-	public void setFonLibelleCrt(String fonLibelleCrt) {
-		this.fonLibelleCrt = fonLibelleCrt;
-	}
-
-	@Column(name = "FON_CODE_DMP", length = 20)
-	public String getFonCodeDmp() {
-		return this.fonCodeDmp;
-	}
-
-	public void setFonCodeDmp(String fonCodeDmp) {
-		this.fonCodeDmp = fonCodeDmp;
-	}
-
-	@Column(name = "FON_CODE_PF", length = 20)
-	public String getFonCodePf() {
-		return this.fonCodePf;
-	}
-
-	public void setFonCodePf(String fonCodePf) {
-		this.fonCodePf = fonCodePf;
-	}
-
-	@Column(name = "FON_LIBELLE_LNG_DMP", length = 500)
-	public String getFonLibelleLngDmp() {
-		return this.fonLibelleLngDmp;
-	}
-
-	public void setFonLibelleLngDmp(String fonLibelleLngDmp) {
-		this.fonLibelleLngDmp = fonLibelleLngDmp;
-	}
-
-	@Column(name = "FON_SOURCE_SIGMAP", length = 1)
-	public String getFonSourceSigmap() {
-		return this.fonSourceSigmap;
-	}
-
-	public void setFonSourceSigmap(String fonSourceSigmap) {
-		this.fonSourceSigmap = fonSourceSigmap;
-	}
-
-	@Column(name = "FON_RESPO", length = 3)
-	public String getFonRespo() {
-		return this.fonRespo;
-	}
-
-	public void setFonRespo(String fonRespo) {
-		this.fonRespo = fonRespo;
-	}
-
-	@Column(name = "TYF_COD", length = 3)
-	public String getTyfCod() {
-		return this.tyfCod;
-	}
-
-	public void setTyfCod(String tyfCod) {
-		this.tyfCod = tyfCod;
-	}
-
-	@Column(name = "TYF_LIBELLE", length = 300)
-	public String getTyfLibelle() {
-		return this.tyfLibelle;
-	}
-
-	public void setTyfLibelle(String tyfLibelle) {
-		this.tyfLibelle = tyfLibelle;
-	}
-
-	@Column(name = "TYF_DTE_SAISI", length = 7)
-	public Date getTyfDteSaisi() {
-		return this.tyfDteSaisi;
-	}
-
-	public void setTyfDteSaisi(Date tyfDteSaisi) {
-		this.tyfDteSaisi = tyfDteSaisi;
-	}
-
-	@Column(name = "TYF_OPE_MATRICULE", length = 25)
-	public String getTyfOpeMatricule() {
-		return this.tyfOpeMatricule;
-	}
-
-	public void setTyfOpeMatricule(String tyfOpeMatricule) {
-		this.tyfOpeMatricule = tyfOpeMatricule;
-	}
-
-	@Column(name = "TYF_LIBELLE_CRT", length = 300)
-	public String getTyfLibelleCrt() {
-		return this.tyfLibelleCrt;
-	}
-
-	public void setTyfLibelleCrt(String tyfLibelleCrt) {
-		this.tyfLibelleCrt = tyfLibelleCrt;
-	}
-
-	@Column(name = "ASS_NUM", precision = 10, scale = 0)
-	public Long getAssNum() {
-		return this.assNum;
-	}
-
-	public void setAssNum(Long assNum) {
-		this.assNum = assNum;
-	}
-
-	@Column(name = "ASS_FON_COD", length = 12)
-	public String getAssFonCod() {
-		return this.assFonCod;
-	}
-
-	public void setAssFonCod(String assFonCod) {
-		this.assFonCod = assFonCod;
-	}
-
-	@Column(name = "ASS_OPE_MATRICULE", length = 25)
-	public String getAssOpeMatricule() {
-		return this.assOpeMatricule;
-	}
-
-	public void setAssOpeMatricule(String assOpeMatricule) {
-		this.assOpeMatricule = assOpeMatricule;
-	}
-
-	@Column(name = "ASS_DAT_DEB", length = 7)
-	public Date getAssDatDeb() {
-		return this.assDatDeb;
-	}
-
-	public void setAssDatDeb(Date assDatDeb) {
-		this.assDatDeb = assDatDeb;
-	}
 
-	@Column(name = "ASS_DAT_FIN", length = 7)
-	public Date getAssDatFin() {
-		return this.assDatFin;
+	@Column(name = "STR_CODE")
+	public String getStrCode() {
+		return strCode;
 	}
 
-	public void setAssDatFin(Date assDatFin) {
-		this.assDatFin = assDatFin;
+	public void setStrCode(String strCode) {
+		this.strCode = strCode;
 	}
 
-	@Column(name = "ASS_COURANT", length = 10)
-	public String getAssCourant() {
-		return this.assCourant;
+	@Column(name = "STR_LIBELLE_COURT")
+	public String getStrLibelleCourt() {
+		return strLibelleCourt;
 	}
 
-	public void setAssCourant(String assCourant) {
-		this.assCourant = assCourant;
+	public void setStrLibelleCourt(String strLibelleCourt) {
+		this.strLibelleCourt = strLibelleCourt;
 	}
 
-	@Column(name = "ASS_STATUT", precision = 1, scale = 0)
-	public Boolean getAssStatut() {
-		return this.assStatut;
+	@Column(name = "STR_LIBELLE_LONG")
+	public String getStrLibelleLong() {
+		return strLibelleLong;
 	}
 
-	public void setAssStatut(Boolean assStatut) {
-		this.assStatut = assStatut;
+	public void setStrLibelleLong(String strLibelleLong) {
+		this.strLibelleLong = strLibelleLong;
 	}
 
+	
 }

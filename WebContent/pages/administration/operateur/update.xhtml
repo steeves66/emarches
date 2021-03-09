@@ -12,7 +12,7 @@
 <section class="content-header">
       <h1>
         Opérateur
-        <small>Modification de l'opérateur #{operateurController.slctdTd.opeMatricule}</small>
+        <small>Modification</small>
       </h1>
       <ol class="breadcrumb">
        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
@@ -23,69 +23,546 @@
     </section>
     
     <section class="content">
+   
      <div class="box"></div>
-       <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
-       <div class="form-group ">
-	                  <label for="mat" class="col-sm-3 control-label"><b> Matricule  <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText  value="#{operateurController.slctdTd.opeMatricule}"  type="text"  styleClass="form-control" readonly="true"  id="mat" style="width: 100%"/>
+      <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+      <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+				<div class="row">
+       <div class="box-body col-md-10 col-md-offset-1 form-horizontal">
+       <p:wizard flowListener="#{operateurController.onFlowProcess}" id="pwz" nextLabel="Enregistrer" backLabel="Précédent" >
+        <p:tab id="operateurMod" title="Informations de l'opérateur" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="form-group ">
+	                  <label for="mat" class="col-sm-2 control-label"><b> Matricule  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText  value="#{operateurController.selctOpe.opeMatricule}" type="text"  styleClass="form-control" readonly="true"  id="mat" style="width: 100%"/>
+	                  </div>
+	                  
+	                  <label for="matFonc" class="col-sm-2 control-label"><b> Matricule fonctionnaire </b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText  value="#{operateurController.selctOpe.opeMatriculeFonc}" type="text"  styleClass="form-control"  id="matFonc" style="width: 100%"/>
 	                  </div>
 	                </div> 
+	               
+	
+	                
 	                  <div class="form-group ">
-	                  <label for="civilite" class="col-sm-3 control-label"><b>Civilité</b></label>
-	                  <div class="col-sm-9">
-	                   	<p:selectOneMenu id="civilite" value="#{operateurController.slctdTd.opeEtatCivil}"   style="width:100%;">
-			            <f:selectItem  itemLabel="Choisir..." itemValue="" />  
+	                  <label for="civilite" class="col-sm-2 control-label"><b>Civilité</b></label>
+	                  <div class="col-sm-4">
+	                   	<p:selectOneMenu id="civilite" value="#{operateurController.selctOpe.opeEtatCivil}"  style="width:100%;">
 			             <f:selectItem  itemLabel="Mr" itemValue="Mr" />  
 			           	  <f:selectItem  itemLabel="Mlle" itemValue="Mlle" /> 
 			           	    <f:selectItem  itemLabel="Mme" itemValue="Mme" />   	
        		        </p:selectOneMenu>
 	                  </div>
+	                   <label for="nom" class="col-sm-2 control-label"><b> Nom et Prenom(s)  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText  value="#{operateurController.selctOpe.opeNom}" type="text"  styleClass="form-control"  id="nom" style="width: 100%"/>
+	                  </div>
 	                </div>  
-	                <div class="form-group ">
-	                  <label for="nom" class="col-sm-3 control-label"><b> Nom et Prenom(s)  <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText  value="#{operateurController.slctdTd.opeNom}" type="text"  styleClass="form-control"  id="nom" style="width: 100%"/>
+	                
+	                
+	              
+	                
+	                     <div class="form-group">
+                  <label for="minStr" class="col-sm-2 control-label"><b>Structure  <span style="color:red;"> *</span></b></label>
+				  <div class="col-sm-10">
+				   <table>
+		                 <tr>
+		                 <td style="width: 970px">
+		                 <p:inputTextarea value="#{operateurController.selctOpe.strLibelleLong}" rows="2" cols="33" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('structureDlg').show()" action="#{operateurController.chargeStructure()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update=":dlogStructure">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+	                 <div class="form-group ">
+	                  <label for="fonaAdm" class="col-sm-2 control-label"><b> Fonction Administrative</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText  value="#{operateurController.selctOpe.opeFonctionAdminist}" type="text"  styleClass="form-control"  id="fonaAdm" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                  <div class="form-group ">
-	                  <label for="Login" class="col-sm-3 control-label"><b>Login<span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText value="#{operateurController.slctdTd.opeLogin}"  type="text"  styleClass="form-control"  id="Login" style="width: 100%" />
+	                  <label for="Login" class="col-sm-2 control-label"><b>Login<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText value="#{operateurController.selctOpe.opeLogin}"  type="text"  styleClass="form-control"  id="Login" style="width: 100%" />
+	                  </div>
+	                </div>
+	                <h:panelGroup rendered="false">
+	                <div class="form-group ">
+	                  <label for="password" class="col-sm-2 control-label"><b>Mot de passe<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText  value="#{operateurController.motPasse}" type="password"  styleClass="form-control"  id="password" style="width: 100%"/>
+	                  </div>
+	                  <label for="Confirmation" class="col-sm-2 control-label"><b>Confirmation<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText value="#{operateurController.motPasse2}" type="password"  styleClass="form-control"  id="Confirmation" style="width: 100%" />
+	                  </div>
+	                </div>
+	                 </h:panelGroup>
+	                 <div class="form-group ">
+	                  <label for="tit" class="col-sm-2 control-label"><b>Email</b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText value="#{operateurController.selctOpe.opeMail}"  type="text"  styleClass="form-control"  id="tit" style="width: 100%" />
+	                  </div>
+	                  
+	                  <label for="contact" class="col-sm-2 control-label"><b>Contact</b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText  value="#{operateurController.selctOpe.opeContact}"  styleClass="form-control"  id="contact" style="width: 100%"/>
+	                  </div>
+	                </div>
+	               
+	     
+           </p:tab>
+           
+           <p:tab id="fonctionMod" title="Assignation de fonctions à l'operateur" titleStyle="background-color: #f88b2e;background-image: none">
+           
+         <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-9">
+                   <div  style="color: #fff">SAISIE DES ASSIGNATIONS DE L'OPERATEUR #{operateurController.selctOpe.opeNom}</div>
+                 </div>
+                 
+                </div>
+               <div class="box-body">
+                <div class="row">
+            <div class="form-group ">
+	                  <label for="nom" class="col-sm-2 control-label"><b> Operateur <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-10">
+	                   <p:inputText value="#{operateurController.selctOpe.opeNom}" type="text"  styleClass="form-control" readonly="true" style="width: 100%"/>
+	                   
 	                  </div>
 	                </div>
 	                 <div class="form-group ">
-	                  <label for="tit" class="col-sm-3 control-label"><b>Email</b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText value="#{operateurController.slctdTd.opeMail}"  type="text"  styleClass="form-control"  id="tit" style="width: 100%" />
+	                  <label for="typeFonction" class="col-sm-2 control-label"><b>Type Fonction <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-10">
+	                     <p:selectOneMenu id="typeFonction" value="#{operateurController.typefonc}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
+			            <f:selectItems value="#{operateurController.listTypefonction}" var="tif" itemLabel="#{tif.tyfCod} : #{tif.tyfLibelle}" itemValue="#{tif.tyfCod}" />
+       		        </p:selectOneMenu> 
 	                  </div>
+	                </div> 
+	                
+	                    <div class="form-group">
+                  <label class="col-sm-2 control-label"><b>Fonction  <span style="color:red;"> *</span></b></label>
+				  <div class="col-sm-10">
+				   <table>
+		                 <tr>
+		                 <td style="width: 800px">
+		                 <p:inputText value="#{operateurController.recupFonction.fonLibelle}" type="text"  styleClass="form-control" readonly="true" style="width: 100%"/>
+		                 </td>
+		                  <td>
+		                  <p:commandLink  oncomplete="PF('listeFonctionDlg').show()" action="#{operateurController.chargeFonction()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update=":dloglisteFonction">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+	                
+	                <div class="row">
+	                <label for="debut" class="col-sm-2 control-label"><b> Du <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-2">
+	                <p:calendar id="debut" value="#{operateurController.assignation.assDatDeb}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+                     <label for="fin" class="col-sm-2 control-label"><b> Au <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-1">
+	                <p:calendar id="fin" value="#{operateurController.assignation.assDatFin}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
 	                </div>
-	                <div class="form-group ">
-	                  <label for="contact" class="col-sm-3 control-label"><b>Contact</b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText  value="#{operateurController.slctdTd.opeContact}"  styleClass="form-control"  id="contact" style="width: 100%"/>
-	                  </div>
+	                <br/>
+	                
+	                
+	                
+	                 <div class="row">
+	                <label for="asscstart" class="col-sm-2 control-label"><b> Assignation courante ? <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	               <p:selectOneRadio id="asscstart" value="#{operateurController.assignation.assCourant}"> 
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+					    <f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                    </div>
+                     <label for="statut" class="col-sm-2 control-label"><b> Staut <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-4">
+	                 <p:selectOneRadio id="statut" value="#{operateurController.assignation.assStatut}"> 
+						<f:selectItem itemLabel="Actif" itemValue="true" />
+					    <f:selectItem itemLabel="Inactif" itemValue="false" />
+					 </p:selectOneRadio>
+                    </div>
 	                </div>
-	     <div class="row">
-	       <div class="col-sm-3"></div> 
-	       <div class="col-sm-9">   
-			 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{operateurController.renderPage('ope1')}"  update=":content">
-		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		     </p:commandLink>
-				      
-		<div class="pull-right ">
-			 <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{operateurController.update()}"  update=":content">
-			    <p:confirm header="Confirmation" message="Confirmez vous la modification?" icon="ui-icon-alert" />
-			    <i class="ace-icon fa fa-save"></i> Modifier
-			 </p:commandLink>
-	     </div>
-		       </div>
-		       </div>
-       
+           </div>
+             </div>
+              <div class="box-footer">
+            
+
+               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{operateurController.updateAssignationModif()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update="tblAss">
+			             <i class="ace-icon fa fa-save"></i>Enregistrer
+	               </p:commandLink>
+	               
+	               
+	               
+              </div>
+           </div>
+         <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-9">
+                   <div  style="color: #fff">LISTE DES ASSIGNATIONS DE L'OPERATEUR #{operateurController.selctOpe.opeNom}</div>
+                 </div>
+                </div>
+               <div class="box-body">
+                 
+               <p:dataTable id="tblAss" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{operateurController.listeFonctionOp}" 
+					 emptyMessage="Aucun PPM enregistré" scrollable="true" scrollHeight="150" >
+                         <p:column headerText="Fonction" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Par defaut?" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.assCourant == 'O'?'OUI':'NON'}"/>
+				        </p:column>
+				       
+         				 <p:column headerText="Actif ?" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.assStatut ?'ACTIF':'INACTIF'}"/>
+				        </p:column> 
+         				<p:column headerText="Debut" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.assDatDeb}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+			                  </h:outputText>
+				        </p:column> 
+				        
+				       <p:column headerText="Fin" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.assDatFin}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+			                  </h:outputText>
+				        </p:column> 
+				        
+				          <p:column headerText="Action" styleClass="col-sm-2" >
+         				     <p:commandLink oncomplete="PF('modifAssDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:5px;" update=":dlogModifAss"
+				              title="Modifier">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.assigneOp}" />
+                                </p:commandLink>
+                              
+				              <p:commandLink action="#{operateurController.deleteAssignationMod()}" class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              title="Suprrimer" update=":gnl:tblAss">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>   
+                                <p:confirm header="Confirmation" message="Confirmez vous la suppression de l'assignation?" icon="ui-icon-alert" />                           
+                                </p:commandLink>
+				        </p:column> 
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+    
+	            
+              
+             </div>
+           </div>
+           </p:tab>
+           
+            
+           </p:wizard>
+      
+       <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{operateurController.renderPage('ope1')}" update=":content">
+		<i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		  <p:commandLink rendered="#{operateurController.btnPrintOp}"  styleClass="btn btn-warning row pull-right"  action="#{operateurController.printOperateurMod()}" title="Editer la fiche operateur" ajax="false" style="background-color: #f88b2e; margin-right:5px;color:#fff">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer fiche operateur
+	               </p:commandLink>
         
-       </div>    
+       </div> 
+       </div> 
+         
     </section>
     </h:form>
+    
+     <h:form id="dlogStructure">
+	        <p:dialog  widgetVar="structureDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la structure">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{operateurController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="ndTbleStructure" />
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreStructLibLong}"  placeholder="saisir la structure" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{operateurController.filtreStructure()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  update="ndTbleStructure"/>
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleStructure" styleClass="table table-bordered table-hover" var="slctdTb" value="#{operateurController.listStructure}"
+						  selectionMode="single" rowKey="#{slctdTb.strCode}"
+			               emptyMessage="Aucune structure" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="Structure" title="Structure" style="font-size:18px;"  action="#{operateurController.onSelectStructureMod()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.strLibelleLong}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.structure}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+      <h:form id="dloglisteFonction">
+	        <p:dialog  widgetVar="listeFonctionDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la fonction">
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-3">
+                   <div  style="color: #fff">LISTE DES FONCTIONS</div>
+                 </div>
+                 <div class="col-md-6">
+                    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{operateurController.chargeFonction()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="ndTbleFonction" />
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreFonctionLib}"  placeholder="saisir la fonction" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{operateurController.filtreFonction()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  update="ndTbleFonction"/>
+                    </span>
+					 </div>
+                 </div>
+                   <div class="col-md-3">
+					 <p:commandLink action="#{operateurController.chargeTypeFonction()}" oncomplete="PF('fonctionDlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":dlogFonction">
+						<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Nouvelle fonction
+					</p:commandLink>
+				</div>
+                </div>
+               <div class="box-body">
+						
+                  <p:dataTable id="ndTbleFonction" styleClass="table table-bordered table-hover" var="slctdTb" value="#{operateurController.fonctionListe}"
+						  selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune fonction trouvée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				        
+				        <p:column headerText="Fonction" styleClass="col-sm-10" >
+				         <h:commandLink id="fonction" title="Fonction" style="font-size:18px;"  action="#{operateurController.onSelectFonction()}">				        
+         				<h:outputText value="#{slctdTb.fonLibelle}"  />
+         				<f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.fonctionAssignation}" />
+         				</h:commandLink>
+				        </p:column>
+				        
+				        <p:column headerText="Nbr assignation" styleClass="col-sm-1" >
+				         <h:commandLink id="nb" title="Nbr assignation" style="font-size:18px;"  action="#{operateurController.onSelectFonction()}">				        
+         				<h:outputText value="#{slctdTb.nb}"  />
+         				<f:setPropertyActionListener value="#{slctdTb}" target="#{operateurController.fonctionAssignation}" />
+         				</h:commandLink>
+				        </p:column>
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-1">
+				              
+				              <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				              action="#{fonctionController.renderPage('fon3')}" title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{fonctionController.slctdTd}" />
+                                </p:commandLink>
+                            
+                                 
+
+				              <p:commandLink  class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              action="#{fonctionController.delete()}" title="Suprimer" update=":gnl">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{fonctionController.slctdTd}" />
+                                   <p:confirm header="Confirmation" message="Confirmez vous la supression de la fonction #{slctdTb.fonCod} : #{slctdTb.fonLibelle} ?" icon="ui-icon-alert" />                           
+                                </p:commandLink>
+                              
+				         </p:column>   	
+						</p:dataTable>
+						
+						
+             </div>
+           </div>
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="dlogFonction">
+	  <p:dialog  widgetVar="fonctionDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">NOUVELLE FONCTION</div>
+         </div>
+         <div class="box-body">
+              
+		          <div class="row">
+             <div class="form-group ">
+	                  <label for="foncode" class="col-sm-3 control-label"><b> Code Fonction  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{operateurController.fonction.fonCod}" type="text"  styleClass="form-control" id="foncode" style="width: 100%"/>
+	                  </div>
+	                </div> 
+               
+	                    <div class="form-group">
+                  <label class="col-sm-3 control-label"><b>Structure  <span style="color:red;"> *</span></b></label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 750px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{operateurController.selctOpe.strLibelleLong}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="typeFonction" class="col-sm-3 control-label"><b>Type Fonction <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                     <p:selectOneMenu id="typeFonction" value="#{operateurController.typefonc}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
+			            <f:selectItems value="#{operateurController.listTypefonction}" var="tif" itemLabel="#{tif.tyfCod} : #{tif.tyfLibelle}" itemValue="#{tif.tyfCod}" />
+			              <p:ajax listener="#{operateurController.genereCodeFonctionMod()}" update=":dlogFonction:foncode"/>	
+       		        </p:selectOneMenu> 
+	                  </div>
+	                </div> 
+	                 
+	                
+	                  <div class="form-group ">
+	                  <label for="fon" class="col-sm-3 control-label"><b> Libelle Fonction  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                   <h:panelGroup id="fonlib">
+	                    <p:inputText value="#{operateurController.fonction.fonLibelle}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/>
+	                    </h:panelGroup>
+	                  </div>
+	                </div> 
+           </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink action="#{operateurController.saveFonctionMod()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('fonctionDlg').hide()" update=":dloglisteFonction:ndTbleFonction">
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="dlogModifAss">
+	  <p:dialog  widgetVar="modifAssDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">MODIFICATION : #{operateurController.assigneOp.fonLibelle}</div>
+         </div>
+         <div class="box-body">
+              
+		                 <div class="row">
+	                <label for="debut" class="col-sm-3 control-label"><b> Du <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	                <p:calendar id="debut" value="#{operateurController.assigneOp.assDatDeb}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+                     <label for="fin" class="col-sm-1 control-label"><b> Au <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-3">
+	                <p:calendar id="fin" value="#{operateurController.assigneOp.assDatFin}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+	                </div>
+	                <br/>
+	                
+	                
+	                
+	                 <div class="row">
+	                <label for="asscstart" class="col-sm-3 control-label"><b> Assignation courante ? <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	               <p:selectOneRadio id="asscstart" value="#{operateurController.assigneOp.assCourant}"> 
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+					    <f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                    </div>
+                     <label for="statut" class="col-sm-2 control-label"><b> Staut <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-4">
+	                 <p:selectOneRadio id="statut" value="#{operateurController.assigneOp.assStatut}"> 
+						<f:selectItem itemLabel="Actif" itemValue="true" />
+					    <f:selectItem itemLabel="Inactif" itemValue="false" />
+					 </p:selectOneRadio>
+                    </div>
+	                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink action="#{operateurController.updateAssignationMod()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('modifAssDlg').hide()" update=":gnl:tblAss">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			             <p:confirm header="Confirmation" message="Confirmez vous la modification de l'assignation?" icon="ui-icon-alert" />  
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+     
+    
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
