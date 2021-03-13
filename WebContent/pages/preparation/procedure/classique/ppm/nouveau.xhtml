@@ -1126,7 +1126,7 @@
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecFin == '3'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecFin == '0'}">
 		                   <p:calendar id="fin3" title="#{ppmController.geneDate.dppJourExecFin} #{ppmController.geneDate.dppDateExecFin}"  value="#{ppmController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateExecFin')}"/>
 		                   </p:calendar> <span style="color:grey;"> #</span>
