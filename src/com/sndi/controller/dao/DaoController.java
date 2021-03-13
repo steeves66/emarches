@@ -4913,7 +4913,11 @@ public class DaoController {
 				   	 }
 				   	 
 				   	 public void onSelectLigneBudgetaire() {
-				         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+				   		/* List<VBl> ASS  = iservice.getObjectsByColumn("TAssignation", new WhereClause("ASS_NUM",Comparateur.EQ,""+assigneOp.getAssNum()));
+						 TAssignation assignation = new TAssignation();
+							if(!ASS.isEmpty()) assignation = ASS.get(0);*/
+				         newLot.setLaaLbgImputation(ligne.getLbgCode());
+				         //newLot
 						 recupLigne = new VLigneLot();
 						 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 						 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
@@ -4933,7 +4937,7 @@ public class DaoController {
 						 recupLigne.setLbgResDon(ligne.getLbgResDon());
 						 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
 						 recupLigne.setNatLibelle(ligne.getNatLibelle());
-						 selectLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+						 selectLot.setLaaLbgImputation(ligne.getLbgCode());
 
 						 iservice.updateObject(getSelectLot());
 						 chargeLots();
@@ -4942,7 +4946,7 @@ public class DaoController {
 							}
 				   	 //Ecran de modification
 				   	 public void onSelectLigneBudgetaireModif() {
-				         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+				         newLot.setLaaLbgImputation(ligne.getLbgCode());
 						 recupLigne = new VLigneLot();
 						 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 						 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
@@ -4962,7 +4966,7 @@ public class DaoController {
 						 recupLigne.setLbgResDon(ligne.getLbgResDon());
 						 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
 						 recupLigne.setNatLibelle(ligne.getNatLibelle());
-						 selectLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+						 selectLot.setLaaLbgImputation(ligne.getLbgCode());
 
 						 iservice.updateObject(getSelectLot());
 						 chargeLotsModif();

@@ -1072,7 +1072,7 @@ public class AmiController1 {
 	 			//Parcourir la liste et faire une mis à jour de chaque ligne
 				TLotAao addLot = new TLotAao();
 				addLot.setLaaObjet(lot.getLaaObjet());
-				addLot.setTLBudgets(lot.getTLBudgets());
+				addLot.setLaaLbgImputation(lot.getLaaLbgImputation());
 				addLot.setLaaMtCaut(lot.getLaaMtCaut());
 				addLot.setLaaCoutLot(lot.getLaaCoutLot());
 				iservice.updateObject(addLot);
@@ -2237,7 +2237,7 @@ public class AmiController1 {
     public void saveLot(){
     	 if(newAvis.getAaoNbrLot() > newLot.getLaaNum()) {
     		 
-    		 newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+    		 newLot.setLaaLbgImputation(ligne.getLbgCode());
     		 newLot.setTAvisAppelOffre(newAvis);
         	 iservice.addObject(newLot);
         	 chargeLots();
@@ -2269,7 +2269,7 @@ public class AmiController1 {
      
      
      public void onSelectLigneBudgetaire() {
-         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+         newLot.setLaaLbgImputation(ligne.getLbgCode());
          
 		 recupLigne = new VLigneImputation();
 		 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
@@ -2290,7 +2290,7 @@ public class AmiController1 {
 		 recupLigne.setLbgResDon(ligne.getLbgResDon());
 		 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
 		 recupLigne.setNatLibelle(ligne.getNatLibelle());
-		 selectLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+		 selectLot.setLaaLbgImputation(ligne.getLbgCode());
 
 		 iservice.updateObject(getSelectLot());
 		 chargeLots();

@@ -31,7 +31,7 @@ import com.sndi.model.TPiecesOffres;
 public class TLotAao implements java.io.Serializable {
 
 	private Long laaId;
-	private TLBudgets TLBudgets;
+	private String laaLbgImputation;
 	private TFonction TFonctionByLaaFonCodSaisi;
 	private TFonction TFonctionByLaaFonCodCpmp;
 	private TAvisAppelOffre TAvisAppelOffre;
@@ -60,13 +60,13 @@ public class TLotAao implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	public TLotAao(Long laaId, TLBudgets TLBudgets, TFonction TFonctionByLaaFonCodSaisi,
+	public TLotAao(Long laaId, String laaLbgImputation, TFonction TFonctionByLaaFonCodSaisi,
 			TFonction TFonctionByLaaFonCodCpmp, TAvisAppelOffre TAvisAppelOffre,TDacSpecs TDacSpecs, String laaObjet, String laaObservation,
 			Long laaMtCaut, long laaMtEst, Date laaDteSaisi, String laaStaCode, String laaOpeMatricule,String laaObservationDmp,
 			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier, Long laaDelaiExe,String laaVariante,String laaAno,
 			Set<TPiecesOffres> TPiecesOffres) {
 		this.laaId = laaId;
-		this.TLBudgets = TLBudgets;
+		this.laaLbgImputation = laaLbgImputation;
 		this.TFonctionByLaaFonCodSaisi = TFonctionByLaaFonCodSaisi;
 		this.TFonctionByLaaFonCodCpmp = TFonctionByLaaFonCodCpmp;
 		this.TAvisAppelOffre = TAvisAppelOffre;
@@ -101,14 +101,13 @@ public class TLotAao implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "LAA_LBG_IMPUTATION")
-	public TLBudgets getTLBudgets() {
-		return this.TLBudgets;
+	@Column(name = "LAA_LBG_IMPUTATION")
+	public String getLaaLbgImputation() {
+		return laaLbgImputation;
 	}
 
-	public void setTLBudgets(TLBudgets TLBudgets) {
-		this.TLBudgets = TLBudgets;
+	public void setLaaLbgImputation(String laaLbgImputation) {
+		this.laaLbgImputation = laaLbgImputation;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)

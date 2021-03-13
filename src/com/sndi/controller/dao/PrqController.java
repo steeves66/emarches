@@ -1990,7 +1990,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 			//Parcourir la liste et faire une mis à jour de chaque ligne
 				TLotAao addLot = new TLotAao();
 				addLot.setLaaObjet(lot.getLaaObjet());
-				addLot.setTLBudgets(lot.getTLBudgets());
+				addLot.setLaaLbgImputation(lot.getLaaLbgImputation());
 				addLot.setLaaMtCaut(lot.getLaaMtCaut());
 				addLot.setLaaCoutLot(lot.getLaaCoutLot());
 				iservice.updateObject(addLot);
@@ -3618,8 +3618,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      
      
      public void onSelectLigneBudgetaire() {
-         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-         
+         newLot.setLaaLbgImputation(ligne.getLbgCode());
 		 //recupLigne = new VLigneImputation();
 		 recupLigne = new VLigneLot();
 		 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
@@ -3640,8 +3639,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 recupLigne.setLbgResDon(ligne.getLbgResDon());
 		 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
 		 recupLigne.setNatLibelle(ligne.getNatLibelle());
-		 selectLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-
+		 selectLot.setLaaLbgImputation(ligne.getLbgCode());
+		 
 		 iservice.updateObject(getSelectLot());
 		 chargeLots();
 		 

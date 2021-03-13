@@ -80,7 +80,6 @@ public class TLBudgets implements java.io.Serializable {
 	private String lbgSigfip;
 	private String lbgFonCodePr;
 	private String lbgFonCodeVerou;
-	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 
 	public TLBudgets() {
@@ -119,7 +118,7 @@ public class TLBudgets implements java.io.Serializable {
 			Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct, String lbgActif,
 			String lbgFonCodeCf, Long lbgDotAnPlus1, Long lbgDotAnPlus2, Long lbgDotAnPlus0,
 			String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr,
-			String lbgFonCodeVerou, Set<TLotAao> TLotAaos,Set<TDetailPlanPassation> TDetailPlanPassations) {
+			String lbgFonCodeVerou,Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.lbgCode = lbgCode;
 		this.TDestinations = TDestinations;
 		this.TNatures = TNatures;
@@ -173,7 +172,6 @@ public class TLBudgets implements java.io.Serializable {
 		this.lbgSigfip = lbgSigfip;
 		this.lbgFonCodePr = lbgFonCodePr;
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
-		this.TLotAaos = TLotAaos;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
 
@@ -668,15 +666,6 @@ public class TLBudgets implements java.io.Serializable {
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLBudgets")
-	public Set<TLotAao> getTLotAaos() {
-		return this.TLotAaos;
-	}
-
-	public void setTLotAaos(Set<TLotAao> TLotAaos) {
-		this.TLotAaos = TLotAaos;
-	}
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLBudgets")
 	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
 		return this.TDetailPlanPassations;

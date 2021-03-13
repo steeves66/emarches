@@ -34,14 +34,10 @@ public class TPlanPassation implements java.io.Serializable {
 	public TPlanPassation() {
 	}
 
-	public TPlanPassation(long plpId, /*TMinistere TMinistere,*/TStructure TStructure, TFonction TFonction, TGestion TGestion) {
+	
+	public TPlanPassation(long plpId) {
 		this.plpId = plpId;
-		//this.TMinistere = TMinistere;
-		this.TStructure = TStructure;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
 	}
-
 	public TPlanPassation(long plpId, /*TMinistere TMinistere,*/TStructure TStructure, TFonction TFonction, TGestion TGestion, String plpCode,
 			String plpLibelle, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.plpId = plpId;

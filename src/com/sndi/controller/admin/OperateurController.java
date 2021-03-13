@@ -181,6 +181,16 @@ public class OperateurController {
 			btnPrintOp=true;
 		}
 	}
+	
+	public void etatBtnPrint() {
+		listeFonctionOp= iservice.getObjectsByColumn("VAssignationOp",
+		 new WhereClause("OPE_MATRICULE",WhereClause.Comparateur.EQ,""+newOpe.getOpeMatricule()));
+		if(listeFonctionOp.size()==0) {
+			btnPrintOp=false;
+		}else {
+			btnPrintOp=true;
+		}
+	}
 	 public String onFlowProcess(FlowEvent event) throws IOException {
 		 
 		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -653,7 +663,7 @@ public class OperateurController {
 		case "ope2":
 			newOpe  = new TOperateur();
 			etatBoutoneng=true;
-		    etatBoutonEdit=false;
+			etatBtnPrint();
 		    motPasse = "";
 			motPasse2 = "";
 			motPasseUser = "";
@@ -759,7 +769,8 @@ public class OperateurController {
 			    chargeData();
 			    userController.setTexteMsg("Enregistrement effectué avec succès !");
 				userController.setRenderMsg(true);
-				userController.setSevrityMsg("success");  
+				userController.setSevrityMsg("success"); 
+				etatBtnPrint();
 	  }
 		
 	}
@@ -918,6 +929,7 @@ public void modifOperateur() {
 		assignation.setTOperateur(new TOperateur(newOpe.getOpeMatricule()));
 		assignation.setTFonction(new TFonction(recupFonction.getFonCod()));
 		iservice.addObject(assignation);
+		etatBtnPrint();
 		/*assignation=new TAssignation();
 		assignation.setTFonction(new TFonction());
 		assignation.setTOperateur(new TOperateur());*/

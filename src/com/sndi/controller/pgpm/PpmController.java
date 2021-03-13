@@ -415,7 +415,9 @@ public class PpmController {
 		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
 				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
-		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
+		                    		    	  //creerDetailPassation(passationListe.getMopTypPlan());
+		                    		    	  creerDetailPassationPs(passationListe.getMopTypPlan());
+		                    		    	  recupModeleDao();
 		                    		      }
 		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
 		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
@@ -1979,7 +1981,7 @@ public class PpmController {
 					 	 		    
 				 	 		  }else
 				 	 		  {
-				 	 			saveDetailPlan(planPass, ""+controleController.typePlan);
+				 	 			saveDetailPlan(""+controleController.typePlan);
 					 	  		
 				 	 			String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 								String rechercheAll = search.replace("null","");
@@ -2006,7 +2008,7 @@ public class PpmController {
 				 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 				 	  		     iservice.addObject(planPass);
 				 	  		     
-				 	  		      saveDetailPlan(planPass, ""+controleController.typePlan);
+				 	  		      saveDetailPlan(""+controleController.typePlan);
 				 		  		 
 				 		  		 
 				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -3650,7 +3652,7 @@ public class PpmController {
 				 	 		    
 			 	 		  }else
 			 	 		  {
-			 	 			saveDetailPlan(planPass, ""+typePlan);
+			 	 			saveDetailPlan(""+typePlan);
 			 	 			bailleurExiste();
 			 	 			anoExiste();
 			 	 			anoTechExiste();
@@ -3716,7 +3718,7 @@ public class PpmController {
 			 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		     iservice.addObject(planPass);
 			 	  		    
-			 	  		    saveDetailPlan(planPass, ""+typePlan);
+			 	  		    saveDetailPlan(""+typePlan);
 			 	  		    bailleurExiste();
 			 	  		    anoExiste();
 			 	  		    anoTechExiste();
@@ -3751,6 +3753,205 @@ public class PpmController {
 			 				//controleController.btn_maj_datePpm = true;
 				 			//controleController.btn_creerDetailPspmDmp=false;
 			 				
+			 				//Actualisation du Tableau de Bord
+			 				//tableauBordController.chargeDataPpm();
+			 				 if(controleController.type == "PPM") {
+									tableauBordController.chargeDataPpm("PN");
+			                }else 
+			                     if(controleController.type == "PSPM"){
+			                    	 tableauBordController.chargeDataPpm("PS");
+			                }
+			 				
+			 			/*	userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
+			 				userController.setRenderMsg(true);
+			 				userController.setSevrityMsg("success");*/
+			 	 	         }
+		  			
+		  	}
+		 
+		 
+		 
+		 
+		//Méthode de création d'un ppm par le AC
+		 public void creerDetailPassationPs(String typePlan)throws IOException{
+	  		 
+		  		/*if(fipPgpm.getFipId() > 0 ) {*/
+		  			
+			  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
+			 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+			 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
+			 					   new WhereClause("PLP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 	 	  if (!listPlan.isEmpty()) {
+			 	 		  planPass= listPlan.get(0);
+			 	 		//Si le plan faire un update du plan  
+			 	 		if(planPass.getPlpId()>0) {
+			 	 			//Si le detail plan (PPM) existe modifier
+			 	 			if(detailPass.getDppId()>0) {
+			 	 				updateDetailPlan(planPass, ""+typePlan);
+					 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+								String rechercheAll = search.replace("null","");
+								detailPass.setDppRecherche(rechercheAll);
+								iservice.updateObject(detailPass);
+								bailleurExiste();
+								anoExiste();
+								anoTechExiste();
+					 		    recupDateGenere();
+					 			chargeData(typePlan);
+					 			boutonEdit =true; 
+					 			boutonEditPspm =false;
+					 			//Actualisation du Tableau de Bord
+					 			//tableauBordController.chargeDataPpm();
+					 			tableauBordbAc();
+
+			 	 			}
+			 	 			
+			 	 			//Sinon si le plan(PPM) nexiste pas creer
+			 	 			else {
+			 	 				_logger.info("id detail plan:"+planPass.getPlpId());
+				 	 			//updateDetailPlan(planPass, ""+typePlan);
+				 	 			 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+				    	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+				    	 		 detailPass.setDppGpgId(pgpm.getGpgId());
+				    	  		 detailPass.setDppTypeStrConduc(strucCond);
+				    	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+				    	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
+				    	  		 detailPass.setTPlanPassation(new TPlanPassation(planPass.getPlpId()));
+				    	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
+				    	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+				    	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+				    	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+				    	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+				    	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+				    	  		 detailPass.setTStatut(new TStatut("S1S"));
+				    	  		 detailPass.setDppStatutRetour("0");
+				    	  		 detailPass.setDppStatutDao("N");
+				    	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
+				    	  		 iservice.addObject(detailPass);
+				    	  		_logger.info("id detail plan:"+detailPass.getDppId());
+				 	  		    
+				 	  		    //saveDetailPlan(planPass, ""+typePlan);
+				 	  		    bailleurExiste();
+				 	  		    anoExiste();
+				 	  		    anoTechExiste();
+				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+								String rechercheAll = search.replace("null","");
+								detailPass.setDppRecherche(rechercheAll);
+								iservice.addObject(detailPass);
+				 		  					  
+				 		  		//Insertion dans T_Financement_PPM
+						    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
+								      		        TFinancementPpm newFinancement = new TFinancementPpm();
+								      		        newFinancement.setTDetailPlanPassation(detailPass);
+								      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
+								      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
+								      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
+								      		        newFinancement.setFppPartTresor(fin.getFipTresor());
+								      		        newFinancement.setTBailleur(new TBailleur(fin.getFipBaiCode()));	
+								      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getFipSouCode()));
+								      		        newFinancement.setTDevise(new TDevise(fin.getFipDevCode()));
+								      				iservice.addObject(newFinancement);
+						    				    }	
+						      	//Historisation
+						    	historiserPs("S1S","PPM enregistré par le AC");
+						    	//Préparation du Tableau de Bord
+		 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+	                            
+				 			   recupDateGenere();
+				 				chargeData(typePlan);
+				 				boutonEdit =true;
+				 				boutonEditPspm =false;
+				 				//controleController.btn_creerDetailPpm =true;
+				 				//controleController.btn_maj_datePpm = true;
+					 			//controleController.btn_creerDetailPspmDmp=false;
+			 	 			}
+			 	 			
+			 				
+			 				
+			 			//Sinon si le plan n'existe pas creer le plan	
+			 	 		}else {
+			 	 			
+			 	 			 planPass.setTGestion(new TGestion(gesCode));
+			 	  		     planPass.setTFonction(userController.getSlctd().getTFonction());
+			 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+			 	  		     iservice.addObject(planPass);
+			 	  		     //Si le detail plan (PPM) existe modifier
+				 	 			if(detailPass.getDppId()>0) {
+				 	 				updateDetailPlan(planPass, ""+typePlan);
+						 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+									String rechercheAll = search.replace("null","");
+									detailPass.setDppRecherche(rechercheAll);
+									iservice.updateObject(detailPass);
+									bailleurExiste();
+									anoExiste();
+									anoTechExiste();
+						 		    recupDateGenere();
+						 			chargeData(typePlan);
+						 			boutonEdit =true; 
+						 			boutonEditPspm =false;
+						 			//Actualisation du Tableau de Bord
+						 			//tableauBordController.chargeDataPpm();
+						 			tableauBordbAc();	
+				 	 			}
+				 	 		//Sinon si le plan(PPM) nexiste pas creer
+				 	 			else {
+				 	 				 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+					    	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+					    	 		 detailPass.setDppGpgId(pgpm.getGpgId());
+					    	  		 detailPass.setDppTypeStrConduc(strucCond);
+					    	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+					    	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
+					    	  		 detailPass.setTPlanPassation(new TPlanPassation(planPass.getPlpId()));
+					    	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
+					    	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+					    	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+					    	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+					    	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+					    	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+					    	  		 detailPass.setTStatut(new TStatut("S1S"));
+					    	  		 detailPass.setDppStatutRetour("0");
+					    	  		 detailPass.setDppStatutDao("N");
+					    	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
+					    	  		 iservice.addObject(detailPass);
+					    	  		_logger.info("id detail plan:"+detailPass.getDppId());
+					 	  		    
+					 	  		    //saveDetailPlan(planPass, ""+typePlan);
+					 	  		    bailleurExiste();
+					 	  		    anoExiste();
+					 	  		    anoTechExiste();
+					 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+									String rechercheAll = search.replace("null","");
+									detailPass.setDppRecherche(rechercheAll);
+									iservice.addObject(detailPass);
+					 		  					  
+					 		  		//Insertion dans T_Financement_PPM
+							    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
+									      		        TFinancementPpm newFinancement = new TFinancementPpm();
+									      		        newFinancement.setTDetailPlanPassation(detailPass);
+									      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
+									      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
+									      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
+									      		        newFinancement.setFppPartTresor(fin.getFipTresor());
+									      		        newFinancement.setTBailleur(new TBailleur(fin.getFipBaiCode()));	
+									      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getFipSouCode()));
+									      		        newFinancement.setTDevise(new TDevise(fin.getFipDevCode()));
+									      				iservice.addObject(newFinancement);
+							    				    }	
+							      	//Historisation
+							    	historiserPs("S1S","PPM enregistré par le AC");
+							    	//Préparation du Tableau de Bord
+			 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+		                            
+					 			   recupDateGenere();
+					 				chargeData(typePlan);
+					 				boutonEdit =true;
+					 				boutonEditPspm =false;
+					 				//controleController.btn_creerDetailPpm =true;
+					 				//controleController.btn_maj_datePpm = true;
+						 			//controleController.btn_creerDetailPspmDmp=false;
+				 	 			}
+			 	  		    
+			 	 			
+			 	 		}
 			 				//Actualisation du Tableau de Bord
 			 				//tableauBordController.chargeDataPpm();
 			 				 if(controleController.type == "PPM") {
@@ -3872,7 +4073,7 @@ public class PpmController {
 	  }	 
 	  	 
 	  	@Transactional
-	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
+	  	 public void saveDetailPlan(String typePlan) {
 	  		
              if(controleController.type == "PPM") { 
             	 if(marche.getTymCode() == null) {
@@ -3894,7 +4095,7 @@ public class PpmController {
     	  		 detailPass.setDppTypeStrConduc(strucCond);
     	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
-    	  		 detailPass.setTPlanPassation(TPlanPassation);
+    	  		 detailPass.setTPlanPassation(new TPlanPassation(planPass.getPlpId()));
     	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
     	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
     	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
@@ -4022,6 +4223,24 @@ public class PpmController {
 			     histoPass.setHppMotif(motif);
 			     histoPass.setTStatut(statuts);
 			     histoPass.setTDetailPlanPassation(TDetailPlanPassation);
+			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
+			     iservice.addObject(histoPass);
+		 }
+		 
+		//Methode d'historisation
+		 public void historiserPs(String statut,String motif) {
+			 /*List<TDetailPlanPassation> DET  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+detailPass.getDppId()));
+			 TDetailPlanPassation detailPlan = new TDetailPlanPassation();
+				if(!DET.isEmpty()) detailPlan = DET.get(0);*/
+				_logger.info("detail pl:"+detailPass.getDppId());
+			     TStatut statuts = constantService.getStatut(statut);
+			  //Historisation des Plans Généraux
+			     THistoPlanPassation histoPass = new THistoPlanPassation();
+			     histoPass.setHppDate(Calendar.getInstance().getTime());
+			     histoPass.setHppMotif(motif);
+			     histoPass.setTStatut(statuts);
+			     histoPass.setTDetailPlanPassation(new TDetailPlanPassation(detailPass.getDppId()));
 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
 			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPass);
