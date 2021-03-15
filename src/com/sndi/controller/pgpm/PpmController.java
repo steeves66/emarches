@@ -52,6 +52,7 @@ import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
 import com.sndi.model.VDetTabBordPgpm;
 import com.sndi.model.VDetTabBordPpm;
+import com.sndi.model.VExistbailleurPpm;
 import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VFonctionMinistere;
@@ -190,6 +191,7 @@ public class PpmController {
 	     private List<VModelePrq> listePrq = new ArrayList<VModelePrq>(); 
 	     private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
 	     private List<VUpdateFinancementPpm> listeupdatefinance = new ArrayList<VUpdateFinancementPpm>();
+	     private List<VExistbailleurPpm> listeExisteBailleur = new ArrayList<VExistbailleurPpm>();
 	    
 	     
 	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
@@ -374,7 +376,7 @@ public class PpmController {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 				//Controle Pavé création pour les ppm / pspm normaux
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
-		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null || /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
@@ -439,7 +441,7 @@ public class PpmController {
 				//Controle Pavé création pour les AMI
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope223")) {
 					 
-		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null
 		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
@@ -508,7 +510,7 @@ public class PpmController {
 				//Controle Pavé création pour les DPAMI
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpami")) {
 					 
-		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null
 		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
@@ -573,7 +575,7 @@ public class PpmController {
 				 
 				//Controle Pavé création pour les PRQ
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope224")) {
-		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null 
 		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
@@ -634,7 +636,7 @@ public class PpmController {
 				 
 				//Controle Pavé création pour les DPPRQ
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpPrq")) {
-		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null 
 		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
@@ -755,6 +757,13 @@ public class PpmController {
 		 }
 		//Fin controle ANO
 		 
+		 public void updateBailleurExiste() {
+		  detailPass.setDppBailleur(detailPass.getDppBailleur());
+		  iservice.updateObject(detailPass);	 
+		  recupModeleDao();
+		  bailleurExiste();
+		 }
+		 
 		 public void controleLibelle() {
 			 if(mode=="AMI") {
 				 libelleDPPRQ= false;
@@ -834,6 +843,15 @@ public class PpmController {
 							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
 				     _logger.info("Nbre PPM: "+listePpmTrans.size());		 		 		 
 		}
+	 
+	 
+	 public void chargeExisteBailleur() { 
+		 listeExisteBailleur.clear(); 
+		 listeExisteBailleur =(List<VExistbailleurPpm>) iservice.getObjectsByColumn("VExistbailleurPpm",
+				 new WhereClause("TYPEM",Comparateur.EQ,""+detailPass.getTTypeMarche().getTymCode()),
+				 new WhereClause("MODEP",WhereClause.Comparateur.EQ,""+detailPass.getTModePassation().getMopCode()));
+				     _logger.info("liste existeBailleur: "+listeExisteBailleur.size());	 
+	 }
 	 
 	 
 	
@@ -3635,7 +3653,7 @@ public class PpmController {
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
 							iservice.updateObject(detailPass);
-							bailleurExiste();
+							//bailleurExiste();
 							anoExiste();
 							anoTechExiste();
 				 		    recupDateGenere();
@@ -3653,7 +3671,7 @@ public class PpmController {
 			 	 		  }else
 			 	 		  {
 			 	 			saveDetailPlan(""+typePlan);
-			 	 			bailleurExiste();
+			 	 			//bailleurExiste();
 			 	 			anoExiste();
 			 	 			anoTechExiste();
 				 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -3719,7 +3737,7 @@ public class PpmController {
 			 	  		     iservice.addObject(planPass);
 			 	  		    
 			 	  		    saveDetailPlan(""+typePlan);
-			 	  		    bailleurExiste();
+			 	  		    //bailleurExiste();
 			 	  		    anoExiste();
 			 	  		    anoTechExiste();
 			 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -3766,7 +3784,7 @@ public class PpmController {
 			 				userController.setRenderMsg(true);
 			 				userController.setSevrityMsg("success");*/
 			 	 	         }
-		  			
+			 	 	chargeExisteBailleur();	
 		  	}
 		 
 		 
@@ -3792,7 +3810,7 @@ public class PpmController {
 								String rechercheAll = search.replace("null","");
 								detailPass.setDppRecherche(rechercheAll);
 								iservice.updateObject(detailPass);
-								bailleurExiste();
+								//bailleurExiste();
 								anoExiste();
 								anoTechExiste();
 					 		    recupDateGenere();
@@ -3830,7 +3848,7 @@ public class PpmController {
 				    	  		_logger.info("id detail plan:"+detailPass.getDppId());
 				 	  		    
 				 	  		    //saveDetailPlan(planPass, ""+typePlan);
-				 	  		    bailleurExiste();
+				 	  		    //bailleurExiste();
 				 	  		    anoExiste();
 				 	  		    anoTechExiste();
 				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -3881,7 +3899,7 @@ public class PpmController {
 									String rechercheAll = search.replace("null","");
 									detailPass.setDppRecherche(rechercheAll);
 									iservice.updateObject(detailPass);
-									bailleurExiste();
+									//bailleurExiste();
 									anoExiste();
 									anoTechExiste();
 						 		    recupDateGenere();
@@ -3915,7 +3933,7 @@ public class PpmController {
 					    	  		_logger.info("id detail plan:"+detailPass.getDppId());
 					 	  		    
 					 	  		    //saveDetailPlan(planPass, ""+typePlan);
-					 	  		    bailleurExiste();
+					 	  		    //bailleurExiste();
 					 	  		    anoExiste();
 					 	  		    anoTechExiste();
 					 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -3965,7 +3983,7 @@ public class PpmController {
 			 				userController.setRenderMsg(true);
 			 				userController.setSevrityMsg("success");*/
 			 	 	         }
-		  			
+			 	 	chargeExisteBailleur();
 		  	}
 		  		
 
@@ -5436,7 +5454,7 @@ public class PpmController {
 		    		 totalMontant=0;
 		    		 totalMontantPpm =0;
 		    		 strucCond = "";
-		    		 controleController.btn_creerDetailPpm = true;
+		    		 //controleController.btn_creerDetailPpm = true;
 		    		 
 		    		 pavetPPM = true;
 				     pavetAMI = false;
@@ -7441,6 +7459,14 @@ public class PpmController {
 
 	public void setPanelAnoTech(boolean panelAnoTech) {
 		this.panelAnoTech = panelAnoTech;
+	}
+
+	public List<VExistbailleurPpm> getListeExisteBailleur() {
+		return listeExisteBailleur;
+	}
+
+	public void setListeExisteBailleur(List<VExistbailleurPpm> listeExisteBailleur) {
+		this.listeExisteBailleur = listeExisteBailleur;
 	}
 	
 	

@@ -256,16 +256,6 @@
                 </div>
                 </h:panelGroup>
                 <div class="form-group">
-                  <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                     <p:selectOneRadio value="#{ppmController.detailPass.dppBailleur}" id="prod">
-						<f:selectItem itemLabel="OUI" itemValue="B" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-                </div> 
-                
-                <div class="form-group">
                   <label  class="col-sm-3 control-label">Appel d'Offres<span style="color:red;"> *</span></label>
 
                   <div class="col-sm-9">
@@ -605,6 +595,17 @@
           <div class="row"> 
       
            <div class="col-md-12">
+           <div class="form-group">
+		   <label class="col-sm-2 control-label">Bailleur<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
+			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
+	         </div>
+	         </div>
 		    <div class="form-group">
 		   <label for="moldao27" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
@@ -1215,6 +1216,17 @@
       
       
            <div class="col-md-12">
+            <div class="form-group">
+		   <label class="col-sm-2 control-label">Bailleur<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
+			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
+	         </div>
+	         </div>
 		    <div class="form-group">
 		   <label for="moldao271Ami" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
@@ -1533,6 +1545,17 @@
       
       
            <div class="col-md-12">
+            <div class="form-group">
+		   <label class="col-sm-2 control-label">Bailleur<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
+			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
+	         </div>
+	         </div>
 		    <div class="form-group">
 		   <label  class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
@@ -2140,6 +2163,17 @@
           <div class="row"> 
       
            <div class="col-md-12">
+            <div class="form-group">
+		   <label class="col-sm-2 control-label">Bailleur<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
+			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
+	         </div>
+	         </div>
 		    <div class="form-group">
 		   <label for="moldaoPrq" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
@@ -2430,6 +2464,17 @@
           <div class="row"> 
       
            <div class="col-md-12">
+            <div class="form-group">
+		   <label class="col-sm-2 control-label">Bailleur<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
+			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
+	         </div>
+	         </div>
 		    <div class="form-group">
 		   <label for="moldaoPrqDp" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">

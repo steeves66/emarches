@@ -1511,7 +1511,7 @@ public class ControleController {
 						 btn_valider_ppm_dmp = false;
 						 selectOneMenuProcedure =true;
 						 selectOneMenuPassation =false;
-						 btn_creerDetailPpm = true;
+						 btn_creerDetailPpm = false;
 						 btn_creerDetailPspm = false;
 						 btn_creerDetailPpmCmp = true;
 						 btn_creerDetailPspmCmp = false;
