@@ -2894,19 +2894,19 @@
             <div class="form-group">
 		                  <label for="attrPrqDp" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagNegociation == '2'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attrPrqDp1" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
-		                    <h:panelGroup rendered="#{ppmController.geneDate.dppFlagNegociation == '1'}">
+		                    <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '1'}">
 		                   <p:calendar id="attrPrqDp2" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
-		                    <h:panelGroup rendered="#{ppmController.geneDate.dppFlagNegociation == '0'}">
+		                    <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '0'}">
 		                   <p:calendar id="attrPrqDp3" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar>

@@ -13369,7 +13369,7 @@ public class DaoController {
 				}
 			 
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
-			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
+			 DOWNLOAD_FILENAME = "DAO_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
 				}
 
