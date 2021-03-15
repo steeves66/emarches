@@ -6103,7 +6103,7 @@ public class DaoController {
 										}
 									
 									 public void openDossier() throws IOException{
-							       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
+							       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION_LINUX+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 							       		   }
 									//Methode de Chargement des Artcles
 									  public void chargeArticle() {
