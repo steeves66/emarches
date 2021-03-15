@@ -54,18 +54,10 @@
                 <!-- /.box-header -->
 	             <div class="box-body">
                <p:dataTable id="ppm" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.ppmListe}"  emptyMessage="Aucun PPM enregistré">
-         				<p:column headerText="N°" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.dppId}"/>
-				        </p:column>
-				        
+         				
 				        <p:column headerText="Objet de l'opération" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
-				        
-				        <p:column headerText="N° DAO" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TDacSpecs.dacCode}" />
-				        </p:column>
-				         
 				        
                  </p:dataTable>     
             </div>
@@ -273,7 +265,7 @@
                   
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" />  </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoHeureRecep}"  style="width: 100%" />  </label>
                   </div>
               
 	             </div>
@@ -284,11 +276,11 @@
 		                <div class="row">
 		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" />   </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLieuExe}"  style="width: 100%" />   </label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteHeurOuv}" style="width: 100%" /> </label>
                   </div>
 	             </div>
 	             
