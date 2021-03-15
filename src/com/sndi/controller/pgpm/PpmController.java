@@ -411,6 +411,7 @@ public class PpmController {
 		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
+		                    		         _logger.info("ouverture:1");
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
@@ -419,6 +420,7 @@ public class PpmController {
 		                    		      }else {
 		                    		    	  //creerDetailPassation(passationListe.getMopTypPlan());
 		                    		    	  creerDetailPassationPs(passationListe.getMopTypPlan());
+		                    		    	  _logger.info("ouverture:2");
 		                    		    	  recupModeleDao();
 		                    		      }
 		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
