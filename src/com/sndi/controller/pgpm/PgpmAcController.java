@@ -367,6 +367,37 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			  dateToday = formatter1.format(date); 
 		  }
 		
+		//Methode de suppression de l'operation
+		     public void deleteOperation() {
+		    	 List<TDetailPlanGeneral> PGPM  = iservice.getObjectsByColumn("TDetailPlanGeneral", new WhereClause("GPG_ID",Comparateur.EQ,""+slctdTd.getGpgId()));
+		    	 TDetailPlanGeneral detplanG = new TDetailPlanGeneral();
+					if(!PGPM.isEmpty()) detplanG = PGPM.get(0);
+					detplanG.setTStatut(new TStatut("SDS"));
+			        iservice.updateObject(detplanG);
+			        historiser("SDS",detplanG,"Opération supprimée par l'autaurite contractante");
+			        //tableauBordbAc();
+			        chargeData();
+			    	userController.setTexteMsg("Supression effectuée avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success"); 
+		     }
+		     
+		   //Methode de suppression de l'operation
+		     public void deleteOperationPg() {
+		    	 List<TDetailPlanGeneral> PGPM  = iservice.getObjectsByColumn("TDetailPlanGeneral", new WhereClause("GPG_ID",Comparateur.EQ,""+slctdTd.getGpgId()));
+		    	 TDetailPlanGeneral detplanG = new TDetailPlanGeneral();
+					if(!PGPM.isEmpty()) detplanG = PGPM.get(0);
+					detplanG.setTStatut(new TStatut("SDS"));
+			        iservice.updateObject(detplanG);
+			        historiser("SDS",detplanG,"Opération supprimée par l'autaurite contractante");
+			        //tableauBordbAc();
+			        chargeDataPgspm();
+			    	userController.setTexteMsg("Supression effectuée avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success"); 
+		     }
+		     
+		     
 		 
 		 public void chargeData(){
 			 getObjetList().clear();

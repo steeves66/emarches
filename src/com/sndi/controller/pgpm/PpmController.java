@@ -4827,6 +4827,27 @@ public class PpmController {
 					     }
 	           }
 	     
+	     //Methode de suppression de l'operation
+	     public void deleteOperation() {
+	    	 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+slctdTd.getDppId()));
+	    	 TDetailPlanPassation detplan = new TDetailPlanPassation();
+				if(!PPM.isEmpty()) detplan = PPM.get(0);
+				detplan.setTStatut(new TStatut("SDS"));
+		        iservice.updateObject(detplan);
+		        historiser("SDS",detplan,"Opération supprimée par l'autaurite contractante");
+		        tableauBordbAc();
+				if(controleController.type == "PPM") {
+					chargePpmTrans();
+					chargeData("PN");
+			          }else 
+			              if(controleController.type == "PSPM"){
+			             	chargePpmTrans();
+			             	chargeData("PS");
+			         }
+		    	userController.setTexteMsg("Supression effectuée avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success"); 
+	     }
 	     
 	     //Transmission par l'AC,CPMP,DMP
 		 //@Transactional

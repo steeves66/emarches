@@ -738,6 +738,14 @@
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                                </p:commandLink>
                                </h:panelGroup>
+                               
+                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">  
+                                <p:commandLink action="#{pgpmAcController.deleteOperationPg()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
+                                <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>
+                                <p:confirm header="Confirmation" message="Confirmez vous la supression de l'operation : #{slctdTb.gpgObjet}?" icon="ui-icon-alert" />                           
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
+                               </p:commandLink>  
+                              </h:panelGroup>
                            
 				         </p:column>   
     </p:dataTable>
