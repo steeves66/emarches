@@ -30,6 +30,7 @@ import com.sndi.model.TBailleur;
 import com.sndi.model.TBesoin;
 import com.sndi.model.TComposante;
 import com.sndi.model.TContenuAgpm;
+import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDeclarant;
 import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDevise;
@@ -346,6 +347,21 @@ public class AgpmController {
 				    }
 	      }
 	  }
+	  
+	  
+		//Methode de suppression de l'operation
+	     public void deleteAgpm() {
+	    	 List<TAgpm> AGP  = iservice.getObjectsByColumn("TAgpm", new WhereClause("AGP_ID",Comparateur.EQ,""+slctdTd.getAgpId()));
+	    	 TAgpm agpm = new TAgpm();
+				if(!AGP.isEmpty()) agpm = AGP.get(0);
+				agpm.setTStatut(new TStatut("SDS"));
+		        iservice.updateObject(agpm);
+		         historiser("SDS",agpm, "Dossier supprimé par l'autaurite contractante");
+		        chargeData();
+		    	userController.setTexteMsg("Supression effectuée avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success"); 
+	     }
 	
 		//Début Nouvelle Methode d'Affichage des AGPM 
 		 public void chargeData() {

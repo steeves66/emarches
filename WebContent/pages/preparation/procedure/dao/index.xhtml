@@ -389,6 +389,15 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{dacModifController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>  
+                            
+                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                               <p:commandLink action="#{daoController.deleteDac()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
+                                <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>
+                                <p:confirm header="Confirmation" message="Confirmez vous la supression du dossier: #{slctdTb.dacObjet}?" icon="ui-icon-alert" />                           
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                               </p:commandLink>  
+                              </h:panelGroup> 
+                            
 				         </p:column>   
 				    </p:dataTable>
 				   </h:panelGroup> 
