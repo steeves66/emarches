@@ -1009,19 +1009,19 @@
 		                  <label for="attr" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                  
-		                   <h:panelGroup rendered="#{ppmController.geneDate.dppJourSignatAttrib == '2'}">
+		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attr1" title="#{ppmController.geneDate.dppJourSignatAttrib} #{ppmController.geneDate.dppDateSignatAttrib}" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                   <h:panelGroup rendered="#{ppmController.geneDate.dppJourSignatAttrib == '1'}">
+		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '1'}">
 		                   <p:calendar id="attr2" title="#{ppmController.geneDate.dppJourSignatAttrib} #{ppmController.geneDate.dppDateSignatAttrib}" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppJourSignatAttrib == '0'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '0'}">
 		                   <p:calendar id="attr3" title="#{ppmController.geneDate.dppJourSignatAttrib} #{ppmController.geneDate.dppDateSignatAttrib}" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSignatAttrib')}"/>
 		                   </p:calendar> 
@@ -1059,19 +1059,19 @@
 		                  <label for="marcheApprob" class="col-sm-6 control-label">Approbation du marché</label>
 		                  <div class="col-sm-6">
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppJourMarcheApprob == '2'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagMarcheApprob == '2'}">
 		                   <p:calendar id="marcheApprob1" title="#{ppmController.geneDate.dppJourMarcheApprob} #{ppmController.geneDate.dppDateMarcheApprob}" value="#{ppmController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateMarcheApprob')}"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppJourMarcheApprob == '1'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagMarcheApprob == '1'}">
 		                   <p:calendar id="marcheApprob2" title="#{ppmController.geneDate.dppJourMarcheApprob} #{ppmController.geneDate.dppDateMarcheApprob}" value="#{ppmController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateMarcheApprob')}"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppJourMarcheApprob == '0'}">
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagMarcheApprob == '0'}">
 		                   <p:calendar id="marcheApprob3" title="#{ppmController.geneDate.dppJourMarcheApprob} #{ppmController.geneDate.dppDateMarcheApprob}" value="#{ppmController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateMarcheApprob')}"/>
 		                   </p:calendar> 

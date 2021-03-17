@@ -3856,7 +3856,8 @@ public class PpmController {
 				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 								String rechercheAll = search.replace("null","");
 								detailPass.setDppRecherche(rechercheAll);
-								iservice.addObject(detailPass);
+								//iservice.addObject(detailPass);
+								iservice.updateObject(detailPass);
 				 		  					  
 				 		  		//Insertion dans T_Financement_PPM
 						    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
@@ -3872,7 +3873,7 @@ public class PpmController {
 								      				iservice.addObject(newFinancement);
 						    				    }	
 						      	//Historisation
-						    	historiserPs("S1S","PPM enregistré par le AC");
+						    	historiserPs("S1S","PSPM enregistré par le AC");
 						    	//Préparation du Tableau de Bord
 		 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
 	                            
@@ -3880,12 +3881,8 @@ public class PpmController {
 				 				chargeData(typePlan);
 				 				boutonEdit =true;
 				 				boutonEditPspm =false;
-				 				//controleController.btn_creerDetailPpm =true;
-				 				//controleController.btn_maj_datePpm = true;
-					 			//controleController.btn_creerDetailPspmDmp=false;
 			 	 			}
-			 	 			
-			 				
+			 	 				
 			 				
 			 			//Sinon si le plan n'existe pas creer le plan	
 			 	 		}else {
@@ -3915,7 +3912,6 @@ public class PpmController {
 				 	 		//Sinon si le plan(PPM) nexiste pas creer
 				 	 			else {
 				 	 				 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-					    	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
 					    	 		 detailPass.setDppGpgId(pgpm.getGpgId());
 					    	  		 detailPass.setDppTypeStrConduc(strucCond);
 					    	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
@@ -3934,14 +3930,13 @@ public class PpmController {
 					    	  		 iservice.addObject(detailPass);
 					    	  		_logger.info("id detail plan:"+detailPass.getDppId());
 					 	  		    
-					 	  		    //saveDetailPlan(planPass, ""+typePlan);
-					 	  		    //bailleurExiste();
+					 	  		  
 					 	  		    anoExiste();
 					 	  		    anoTechExiste();
 					 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 									String rechercheAll = search.replace("null","");
 									detailPass.setDppRecherche(rechercheAll);
-									iservice.addObject(detailPass);
+									iservice.updateObject(detailPass);
 					 		  					  
 					 		  		//Insertion dans T_Financement_PPM
 							    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
@@ -3959,18 +3954,13 @@ public class PpmController {
 							      	//Historisation
 							    	historiserPs("S1S","PPM enregistré par le AC");
 							    	//Préparation du Tableau de Bord
-			 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+			 		      			tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
 		                            
 					 			   recupDateGenere();
 					 				chargeData(typePlan);
 					 				boutonEdit =true;
 					 				boutonEditPspm =false;
-					 				//controleController.btn_creerDetailPpm =true;
-					 				//controleController.btn_maj_datePpm = true;
-						 			//controleController.btn_creerDetailPspmDmp=false;
 				 	 			}
-			 	  		    
-			 	 			
 			 	 		}
 			 				//Actualisation du Tableau de Bord
 			 				//tableauBordController.chargeDataPpm();
