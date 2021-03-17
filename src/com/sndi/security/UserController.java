@@ -38,6 +38,7 @@ import com.sndi.model.TAssignation;
 import com.sndi.model.TFonction;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
+import com.sndi.model.VbTempOperateur;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.AutorityClass;
 import com.sndi.utilitaires.RenderPages;
@@ -103,6 +104,7 @@ public class UserController implements Serializable{
 		//setHmPrivileges(getSlctd().getTFonction());
 		//setTOperateur(userService.getTOperateurs());
 		setDateCon(userService.getDateCons());
+		//traceSysJournal();
 		//traceSysJournal("Une connexion de l'Opérateur");
 		_logger.info("Une connexion de l'Opérateur: "+userService.getTOperateur().getOpeMatricule());
 		
@@ -148,6 +150,16 @@ public class UserController implements Serializable{
 		iservice.addObject(sj);
 		
 	}*/
+	
+	public void traceSysJournal() {
+		VbTempOperateur op = new VbTempOperateur();
+		op.setTempType("OPE");
+		op.setTempOpeMatricule(getSlctd().getTOperateur().getOpeMatricule());
+		op.setTempChamp01(getSlctd().getTFonction().getFonCod());
+		op.setTempChamp02(getSlctd().getTFonction().getFonCod());
+	    iservice.addObject(op);
+	
+}
 	
 	private static String getClientIp(){
 		HttpServletRequest request = (HttpServletRequest)

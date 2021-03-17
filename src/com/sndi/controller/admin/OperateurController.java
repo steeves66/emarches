@@ -85,8 +85,9 @@ public class OperateurController {
 	private Boolean boutonSupp=false;
 	private String minCode="";
 	private String strCode="";
-	private String filtreStructLibLong="";
+	private String filtreCodeStruct="";
 	private String filtreFonctionLib="";
+	private String filtreFonCode="";
 	
 	
 	private TAssignation tmpAssignation = new TAssignation();
@@ -256,7 +257,7 @@ public class OperateurController {
 	 public void filtreStructure() {
 		 listMinistere.clear();
 		listStructure=(List<VStructure>) iservice.getObjectsByColumn("VStructure", new ArrayList<String>(Arrays.asList("strLibelleLong")),
-					new WhereClause("strLibelleLong",WhereClause.Comparateur.LIKE,"%"+filtreStructLibLong+"%"));
+					new WhereClause("STR_CODE",WhereClause.Comparateur.LIKE,"%"+filtreCodeStruct+"%"));
 	 }
 	 
 	 
@@ -264,7 +265,7 @@ public class OperateurController {
 		 public void filtreFonction() {
 			 fonctionListe.clear();
 			 fonctionListe=(List<VFonctionAssignation>) iservice.getObjectsByColumn("VFonctionAssignation",
-						new WhereClause("FON_LIBELLE",WhereClause.Comparateur.LIKE,filtreFonctionLib+"%"));
+						new WhereClause("FON_COD",WhereClause.Comparateur.LIKE,filtreFonCode+"%"));
 		 }
 		 
 		//Methode de récupération de t_detail_plan_passation dans t_affichage_ppm
@@ -1898,14 +1899,6 @@ public void modifOperateur() {
 		this.structure = structure;
 	}
 
-	public String getFiltreStructLibLong() {
-		return filtreStructLibLong;
-	}
-
-	public void setFiltreStructLibLong(String filtreStructLibLong) {
-		this.filtreStructLibLong = filtreStructLibLong;
-	}
-
 	public TFonction getFonction() {
 		return fonction;
 	}
@@ -1996,6 +1989,22 @@ public void modifOperateur() {
 
 	public void setSelctOpe(VOperateur selctOpe) {
 		this.selctOpe = selctOpe;
+	}
+
+	public String getFiltreCodeStruct() {
+		return filtreCodeStruct;
+	}
+
+	public void setFiltreCodeStruct(String filtreCodeStruct) {
+		this.filtreCodeStruct = filtreCodeStruct;
+	}
+
+	public String getFiltreFonCode() {
+		return filtreFonCode;
+	}
+
+	public void setFiltreFonCode(String filtreFonCode) {
+		this.filtreFonCode = filtreFonCode;
 	}
 
 

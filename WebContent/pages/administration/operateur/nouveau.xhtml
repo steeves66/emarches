@@ -300,7 +300,7 @@
 					    <span class="input-group-btn">
 				                <p:commandLink action="#{operateurController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="ndTbleStructure" />
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreStructLibLong}"  placeholder="saisir la structure" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreCodeStruct}"  placeholder="Saisir le code de la structure" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
                       <p:commandLink action="#{operateurController.filtreStructure()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  update="ndTbleStructure"/>
                     </span>
@@ -346,7 +346,7 @@
 					    <span class="input-group-btn">
 				                <p:commandLink action="#{operateurController.chargeFonction()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="ndTbleFonction" />
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreFonctionLib}"  placeholder="saisir la fonction" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{operateurController.filtreFonCode}"  placeholder="saisir le code fonction" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
                       <p:commandLink action="#{operateurController.filtreFonction()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  update="ndTbleFonction"/>
                     </span>
