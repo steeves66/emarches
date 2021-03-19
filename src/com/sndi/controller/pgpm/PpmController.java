@@ -355,11 +355,13 @@ public class PpmController {
 	     public boolean pavetPRQ= false;
 	     public boolean pavetDPAMI= false;
 	     public boolean pavetDPPRQ= false;
+	     public boolean pavetPSC= false;
 	     public boolean libelleDPAMI= false;
 	     public boolean libelleDPPRQ= false;
 	     public boolean libelleAmi= false;
 	     public boolean libellePrq= false;
 	     public boolean libellePpm= false;
+	     public boolean libellePsc= false;
 	     public boolean finPgpm = true;
 	     public boolean finAmi = false;
 	     public boolean finPrq = false;
@@ -773,6 +775,7 @@ public class PpmController {
 			     libelleAmi= true;
 			     libellePrq= false;
 			     libellePpm= false;
+			     libellePsc= false;
 			 }else
 				 if(mode=="PRQ") {
 					 libelleDPPRQ= false;
@@ -780,6 +783,7 @@ public class PpmController {
 				     libelleAmi= false;
 				     libellePrq= true;
 				     libellePpm= false;
+				     libellePsc= false;
 				 }else
 					 if(mode=="DPPRQ") {
 						 libelleDPPRQ= false;
@@ -787,6 +791,7 @@ public class PpmController {
 					     libelleAmi= false;
 					     libellePrq= true;
 					     libellePpm= false; 
+					     libellePsc= false;
 					 }else
 						 if(mode=="DPAMI") {
 							 libelleDPPRQ= false;
@@ -794,14 +799,25 @@ public class PpmController {
 						     libelleAmi= false;
 						     libellePrq= false;
 						     libellePpm= false; 
+						     libellePsc= false;
 						 }else
+							 if(mode=="PSC") {
+								 libelleDPPRQ= false;
+								 libelleDPAMI= false;
+							     libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false; 
+							     libellePsc= true;
+							 }else
 						       {
 								 libelleDPPRQ= false;
 								 libelleDPAMI= false;
 							     libelleAmi= false;
 							     libellePrq= false;
 							     libellePpm= true; 
+							     libellePsc= false;
 							 }
+			               
 			 
 		 }
 		 
@@ -3210,12 +3226,14 @@ public class PpmController {
 				 pavetPRQ = false;
 				 pavetDPAMI= false;
 				 pavetDPPRQ= false;
+				 pavetPSC= false;
 				 
 				 libelleDPAMI = false;
 				 libelleDPPRQ = false;
 			     libelleAmi= true;
 			     libellePrq= false;
 			     libellePpm= false;
+			     libellePsc= false;
 				 
 				 mode ="AMI";
 			 }else {
@@ -3227,11 +3245,13 @@ public class PpmController {
 							 pavetDPPRQ= false;
 							 libelleDPAMI = false;
 							 libelleDPPRQ = false;
+							 pavetPSC= false;
 							 libelleAmi= false;
 						     libellePrq= true;
 						     libellePpm= false;
 							 libelleAmi= false;
 						     libellePrq= true;
+						     libellePsc= false;
 							 mode ="PRQ";
 				    }else 
 				    	  if(modePassation.getMopCode().equalsIgnoreCase("DPA")) {
@@ -3240,13 +3260,30 @@ public class PpmController {
 								 pavetPRQ = false;
 								 pavetDPAMI= true;
 								 pavetDPPRQ= false;
+								 pavetPSC= false;
 								 libelleDPAMI = true;
 								 libelleDPPRQ = false;
 								 libelleAmi= false;
 							     libellePrq= false;
 							     libellePpm= false;
+							     libellePsc= false;
 								 mode ="DP";
 					    }else 
+					    	 if(modePassation.getMopCode().equalsIgnoreCase("PSC")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI= true;
+								 pavetDPPRQ= false;
+								 pavetPSC= false;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = false;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+							     libellePsc= true;
+								 mode ="PSC";
+					    }else
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
@@ -3255,9 +3292,11 @@ public class PpmController {
 								 pavetDPPRQ= true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = true;
+								 pavetPSC= false;
 								 libelleAmi= false;
 							     libellePrq= false;
 							     libellePpm= false;
+							     libellePsc= false;
 								 mode ="DP";
 					    }else 
 				            {
@@ -3268,9 +3307,11 @@ public class PpmController {
 							 pavetDPPRQ= false;
 						     libelleDPAMI = false;
 						     libelleDPPRQ = false;
+						     pavetPSC= false;
 						     libelleAmi= false;
 						     libellePrq= false;
 						     libellePpm= true;
+						     libellePsc= false;
 						     mode="";
 				    }
 			 }
@@ -7480,6 +7521,22 @@ public class PpmController {
 
 	public void setListeExisteBailleur(List<VExistbailleurPpm> listeExisteBailleur) {
 		this.listeExisteBailleur = listeExisteBailleur;
+	}
+
+	public boolean isPavetPSC() {
+		return pavetPSC;
+	}
+
+	public void setPavetPSC(boolean pavetPSC) {
+		this.pavetPSC = pavetPSC;
+	}
+
+	public boolean isLibellePsc() {
+		return libellePsc;
+	}
+
+	public void setLibellePsc(boolean libellePsc) {
+		this.libellePsc = libellePsc;
 	}
 	
 	
