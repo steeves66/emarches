@@ -373,6 +373,8 @@ public class PpmController {
 	     public boolean panelTymNormal = true;
 	     public boolean panelTymDp = false;
 	     public boolean pavetFinancement= false;
+	     public boolean pscOui = true;
+	     public boolean pscNon = true;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -3187,6 +3189,7 @@ public class PpmController {
 								 panelPgpmNormal = false;
 							     panelPgpmDp = true;
 							 }else
+								 
 						     {
 							 recupPgpm.setGpgTymCode("");
 							 recupPgpm.setTymLibelleCourt("");
@@ -3196,6 +3199,7 @@ public class PpmController {
 						     panelPgpmDp = false;
 						 }
 				}
+		 
 		 
 		 //Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PN)
 		 public void affichNbreOuvMode() {
@@ -3273,9 +3277,9 @@ public class PpmController {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
 								 pavetPRQ = false;
-								 pavetDPAMI= true;
+								 pavetDPAMI= false;
 								 pavetDPPRQ= false;
-								 pavetPSC= false;
+								 pavetPSC= true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = false;
 								 libelleAmi= false;
@@ -3325,6 +3329,8 @@ public class PpmController {
 				 pavetPRQ = false;
 				 libelleDPAMI = false;
 				 libelleDPPRQ = false;
+				 pscOui = false; 
+				 pscNon = true;
 				 mode ="AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
@@ -3334,6 +3340,8 @@ public class PpmController {
 							 pavetPRQ = true;
 							 libelleDPAMI = false;
 							 libelleDPPRQ = false;
+							 pscOui = false; 
+							 pscNon = true;
 							 mode ="PRQ";
 							 _logger.info("Panel PRQ Activé: "+pavetPRQ);
 				    }else 
@@ -3341,6 +3349,8 @@ public class PpmController {
 					    	     pavetPPM = false;
 								 pavetAMI = true;
 								 pavetPRQ = false;
+								 pscOui = false; 
+								 pscNon = true;
 								 libelleDPAMI = true;
 								 libelleDPPRQ = false;
 								 mode ="DP";
@@ -3349,19 +3359,40 @@ public class PpmController {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
 								 pavetPRQ = true;
+								 pscOui = false; 
+								 pscNon = true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = true;
 								 mode ="DP";
+					    }else 
+					    	 if(passationListe.getMopCode().equalsIgnoreCase("PSC")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI= false;
+								 pavetDPPRQ= false;
+								 pavetPSC= true;
+								 pscOui = true; 
+								 pscNon = false;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = false;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+							     libellePsc= true;
+								 mode ="PSC";
 					    }else
-				      {
-				    	     pavetPPM = true;
-						     pavetAMI = false;
-						     pavetPRQ = false;
-						     libelleDPAMI = false;
-						     libelleDPPRQ = false;
-						     mode =" ";
-						     _logger.info("Panel PPM Activé: "+pavetPPM);
-				    }
+					      {
+					    	     pavetPPM = true;
+							     pavetAMI = false;
+							     pavetPRQ = false;
+							     libelleDPAMI = false;
+							     libelleDPPRQ = false;
+							     pscOui = false; 
+								 pscNon = true;
+							     mode =" ";
+							     _logger.info("Panel PPM Activé: "+pavetPPM);
+					    }
 			 }
 		 }
 		 
@@ -3901,18 +3932,7 @@ public class PpmController {
 								iservice.updateObject(detailPass);
 				 		  					  
 				 		  		//Insertion dans T_Financement_PPM
-						    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
-								      		        TFinancementPpm newFinancement = new TFinancementPpm();
-								      		        newFinancement.setTDetailPlanPassation(detailPass);
-								      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
-								      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
-								      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
-								      		        newFinancement.setFppPartTresor(fin.getFipTresor());
-								      		        newFinancement.setTBailleur(new TBailleur(fin.getFipBaiCode()));	
-								      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getFipSouCode()));
-								      		        newFinancement.setTDevise(new TDevise(fin.getFipDevCode()));
-								      				iservice.addObject(newFinancement);
-						    				    }	
+								saveFinancementOperation(detailPass);
 						      	//Historisation
 						    	historiserPs("S1S","PSPM enregistré par le AC");
 						    	//Préparation du Tableau de Bord
@@ -3980,18 +4000,7 @@ public class PpmController {
 									iservice.updateObject(detailPass);
 					 		  					  
 					 		  		//Insertion dans T_Financement_PPM
-							    				  for(VFinancementPgpm fin: listeFinancementPgpm) {
-									      		        TFinancementPpm newFinancement = new TFinancementPpm();
-									      		        newFinancement.setTDetailPlanPassation(detailPass);
-									      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
-									      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
-									      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
-									      		        newFinancement.setFppPartTresor(fin.getFipTresor());
-									      		        newFinancement.setTBailleur(new TBailleur(fin.getFipBaiCode()));	
-									      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getFipSouCode()));
-									      		        newFinancement.setTDevise(new TDevise(fin.getFipDevCode()));
-									      				iservice.addObject(newFinancement);
-							    				    }	
+									saveFinancementOperation(detailPass);
 							      	//Historisation
 							    	historiserPs("S1S","PPM enregistré par le AC");
 							    	//Préparation du Tableau de Bord
@@ -4020,7 +4029,23 @@ public class PpmController {
 		  	}
 		  		
 
-	//Fin de la Methode de création d'une opération  		
+	//Fin de la Methode de création d'une opération  
+		 
+		 //Enregistrement des finanacements PPM
+		 public void saveFinancementOperation(TDetailPlanPassation TDetailPlanPassation) {
+			  for(VFinancementPgpm fin: listeFinancementPgpm) {
+    		        TFinancementPpm newFinancement = new TFinancementPpm();
+    		        newFinancement.setTDetailPlanPassation(TDetailPlanPassation);
+    		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
+    		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
+    		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
+    		        newFinancement.setFppPartTresor(fin.getFipTresor());
+    		        newFinancement.setTBailleur(new TBailleur(fin.getFipBaiCode()));	
+    		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getFipSouCode()));
+    		        newFinancement.setTDevise(new TDevise(fin.getFipDevCode()));
+    				iservice.addObject(newFinancement);
+			    }	 
+		 }
 	  	
 		 
 	  	 //Methode detail plan
@@ -5559,6 +5584,8 @@ public class PpmController {
 					chargeSourceFinance();
 					chargeImputation();
 					controlePartpme();
+					 pscOui = false; 
+					 pscNon = true; 
 					vider();
 					userController.initMessage();
 				break;
@@ -7538,6 +7565,22 @@ public class PpmController {
 	public void setLibellePsc(boolean libellePsc) {
 		this.libellePsc = libellePsc;
 	}
-	
+
+	public boolean isPscOui() {
+		return pscOui;
+	}
+
+	public void setPscOui(boolean pscOui) {
+		this.pscOui = pscOui;
+	}
+
+	public boolean isPscNon() {
+		return pscNon;
+	}
+
+	public void setPscNon(boolean pscNon) {
+		this.pscNon = pscNon;
+	}
+
 	
 }
