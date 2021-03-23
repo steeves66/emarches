@@ -626,7 +626,7 @@
 		    <div class="form-group">
 		   <label for="moldao27" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao27" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -660,6 +660,7 @@
 		                  <label  class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar title="#{ppmController.geneDate.dppJourDaoTrans} #{ppmController.geneDate.dppDateDaoTrans}" value="#{ppmController.detailPass.dppDateDaoTrans}" navigator="true" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                      <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -685,7 +686,7 @@
 		       
 		                  <label for="valdao2" class="col-sm-6 control-label">Validation DAO par la #{controleController.structureLibAbrege}<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valdao2" title="#{ppmController.geneDate.dppJourDaoApprobBail} #{ppmController.geneDate.dppDateDaoApprobDmp}" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valdao2" title="#{ppmController.geneDate.dppJourDaoApprobDmp} #{ppmController.geneDate.dppDateDaoApprobDmp}" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobDmp')}"/>
 		                   </p:calendar> 
 		                  </div>
@@ -1247,7 +1248,7 @@
 		    <div class="form-group">
 		   <label for="moldao271Ami" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao271Ami" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao271Ami" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -1576,7 +1577,7 @@
 		    <div class="form-group">
 		   <label  class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu  value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   

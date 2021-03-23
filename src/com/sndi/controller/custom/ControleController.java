@@ -1284,7 +1284,7 @@ public class ControleController {
 							 /*validDMP = true;
 							 validCPMP = false;*/
 							 validCPMP = true;
-							 validDMP = false;
+							 validDMP = true;
 							 //etatPso = false;
 							 //etatPsl = false;
 							 etatPso = false;

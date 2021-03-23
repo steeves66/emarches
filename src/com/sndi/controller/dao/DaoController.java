@@ -3743,8 +3743,7 @@ public class DaoController {
 		 						 String rechercheAll = search.replace("null","");
 		 						 dao.setDacRecherche(rechercheAll);
 		 						 iservice.updateObject(dao);
-		 				         
-		 				         
+		 				        /* 
 		 				    	 listeDetail =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 		 									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+daoDetail.getDppId()));
 		 								if (!listeDetail.isEmpty()) {
@@ -3752,8 +3751,18 @@ public class DaoController {
 		 									demDetail.setDppStatutDao("O");
 		 									demDetail.setTDacSpecs(new TDacSpecs(dao.getDacCode()));
 		 									iservice.updateObject(demDetail);
-		 							      }
+		 							      }*/
 		 								
+		 						 for(VPpmDao vdao  : listSelectionPpmDao) {
+		 							 listeDetail =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+vdao.getDppId()));
+		 							      if (!listeDetail.isEmpty()) {
+		 								     demDetail= listeDetail.get(0);
+	 									     demDetail.setDppStatutDao("O");
+	 									     demDetail.setTDacSpecs(new TDacSpecs(dao.getDacCode()));
+	 									     iservice.updateObject(demDetail);
+		 							   }
+		 						    }
 		 			 			
 		 			 			   for(TTypePiecesDac n : listSelectionTypePieces) {
 		 			 	    		 TPiecesDacs det = new TPiecesDacs();
@@ -4247,30 +4256,29 @@ public class DaoController {
 		     public void renseignerDao() throws IOException{
 		                 	if (listSelectionPpmDao.size()==0) {
 		            				FacesContext.getCurrentInstance().addMessage(null,
-		            						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun PPM selectionn", ""));
+		            						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun PPM selectionn�", ""));
 		            			}
 		            	 		else{
 		            	 			//Parcourir la liste de slection listSelectionPpmDao
 		            		 		for(VPpmDao ligne : listSelectionPpmDao) {
 		            		 			 
-		            		 			//Parcourir la liste et rï¿½cupï¿½re
+		            		 			//Parcourir la liste et r�cup�rer
 		            		 			 ppmDao =(List<VPpmDao>) iservice.getObjectsByColumn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
 		            								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+ligne.getDppId()));
 		            							if (!ppmDao.isEmpty()) {
 		            								daoDetail= ppmDao.get(0);
 
-		            									   detailsPieces =(List<TTypePiecesDac>) iservice.getObjectsByColumn("TTypePiecesDac", new ArrayList<String>(Arrays.asList("TPI_CODE")),
-			            	    								     new WhereClause("TPI_MDT_CODE",WhereClause.Comparateur.EQ,""+daoDetail.getMdtCode()));	
-		            								  
-		            	            		 		
-		            						 }
-		            			 		   }
-		            				   }       
-		                            }
+		            							detailsPieces =(List<TTypePiecesDac>) iservice.getObjectsByColumn("TTypePiecesDac", new ArrayList<String>(Arrays.asList("TPI_CODE")),
+			            	    				new WhereClause("TPI_MDT_CODE",WhereClause.Comparateur.EQ,""+daoDetail.getMdtCode()));	
+		            						          }	
+		            			 		       }
+		            		 		chargePPM();
+		            				 }       
+		                          }
 		     
 		     //Rappel des informations du PPM en modification
 		     public void renseignerDaoModif() throws IOException{
-		            		 			//Parcourir la liste et rï¿½cupï¿½re
+		            		 			//Parcourir la liste et r�cup�rer
 		            		 			 ppmDao =(List<VPpmDao>) iservice.getObjectsByColumn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
 		            								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+ppmDac.getDppId()));
 		            							if (!ppmDao.isEmpty()) {
