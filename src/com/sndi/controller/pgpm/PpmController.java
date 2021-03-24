@@ -514,7 +514,7 @@ public class PpmController {
 				 
 				 
 				 
-					/*//Controle Pavé création pour les PSC
+					//Controle Pavé création pour les PSC
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("psc")) {
 					 
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || recupLigne.getLbgCode() == null || nbreOuv == null)
@@ -548,7 +548,7 @@ public class PpmController {
 		                 
 				     }
 				 //Fin de Contrôle pour les PSC
-*/				 
+				 
 				 
 				 
 				//Controle Pavé création pour les DPAMI

@@ -3078,7 +3078,7 @@
 	</p:tab>
 	
 	
-	<p:tab id="psc" rendered="#{ppmController.pavetPSC}" title="Dates prévisionnelles pour la demande de proposition" titleStyle="background-color: #f88b2e;background-image: none">
+	<p:tab id="psc" rendered="#{ppmController.pavetPSC}" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
 			     
@@ -3138,8 +3138,7 @@
          <div class="form-group">
 		                  <label for="oftPsc" class="col-sm-6 control-label">Sollicitation des factures</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="oftPsc1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   </p:calendar>
+		                   <p:calendar id="oftPsc1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" />
 		                  </div>
 		                  </div>  
          </div>
@@ -3149,8 +3148,8 @@
                         <div class="form-group">
 		                  <label for="offFinPsc" class="col-sm-6 control-label">Réception des factures</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="offFinPsc1" value="#{ppmController.geneDate.dppDateRecepFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   </p:calendar>
+		                    <p:calendar id="offFinPsc1" value="#{ppmController.geneDate.dppDateRecepFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" />
+		                   
 		                    
 		                  </div>
 		                </div>
@@ -3171,8 +3170,8 @@
             <div class="form-group">
 		                  <label class="col-sm-6 control-label">Attributaire</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.geneDate.dppJourSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   </p:calendar>
+		                   <p:calendar value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" />
+		                  
 		                  </div>
 		                  </div>
          </div>
@@ -3181,7 +3180,7 @@
                <div class="form-group">
 		                  <label  class="col-sm-6 control-label">Autorité contractante</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.geneDate.dppJourSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar value="#{ppmController.geneDate.dppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar>
 		                  </div>
 		                  </div>
