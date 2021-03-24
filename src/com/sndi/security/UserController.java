@@ -8,6 +8,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -36,8 +37,10 @@ import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.SysJournal;*/
 import com.sndi.model.TAssignation;
 import com.sndi.model.TFonction;
+import com.sndi.model.TLotAao;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
+import com.sndi.model.VLink;
 import com.sndi.model.VbTempOperateur;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.AutorityClass;
@@ -51,6 +54,7 @@ public class UserController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private File fileProp = new File(getClass().getClassLoader().getResource("sigmicap.properties").getFile());
 	private List<TAssignation> listeAss = new ArrayList<TAssignation>();
+	//private List<VLink> listeLien = new ArrayList<VLink>();
 	private TOperateur operateur = new TOperateur();
 	private TMotdepasse motdepasse = new TMotdepasse();
 	private TFonction fonction = new TFonction();
@@ -106,6 +110,7 @@ public class UserController implements Serializable{
 		setDateCon(userService.getDateCons());
 		//traceSysJournal();
 		//traceSysJournal("Une connexion de l'Opérateur");
+		//chargeLien();
 		_logger.info("Une connexion de l'Opérateur: "+userService.getTOperateur().getOpeMatricule());
 		
 		//setTStatuts();
@@ -126,6 +131,13 @@ public class UserController implements Serializable{
 		 renderMsg = false;
 		
 	}
+	
+	//Chargement des liens
+	/*public void chargeLien() {
+		listeLien = (List<VLink>) iservice.getObjectsByColumn("VLink", 
+				 new WhereClause("LINK_STATUT",WhereClause.Comparateur.EQ,"O"));
+			_logger.info("listeLien size: "+listeLien.size());	
+	}*/
 	
 	public  boolean getPrivillege(String fonCode) {
 		boolean val =false;
@@ -550,6 +562,14 @@ public void afficherMenuAdmin() {
 	public void setSevrityMsg(String sevrityMsg) {
 		this.sevrityMsg = sevrityMsg;
 	}
-	
+
+/*	public List<VLink> getListeLien() {
+		return listeLien;
+	}
+
+	public void setListeLien(List<VLink> listeLien) {
+		this.listeLien = listeLien;
+	}
+	*/
 
 }

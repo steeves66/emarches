@@ -513,6 +513,44 @@ public class PpmController {
 				 
 				 
 				 
+				 
+					/*//Controle Pavé création pour les PSC
+				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("psc")) {
+					 
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || recupLigne.getLbgCode() == null || nbreOuv == null)
+		  			   {
+						 FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
+				          return "ope111";
+						} 
+		                    	  if(passationListe.getMopTypPlan() == null) {
+		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+		                    			  creerDetailPassationPs(pgpm.getMopTypPlan());
+		                    		         userController.initMessage();
+		                    		  }
+		                    	  }else {
+		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
+		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		      }else {
+		                    		    	  creerDetailPassationPs(passationListe.getMopTypPlan());
+		                    		    	  userController.initMessage();
+		                    		      }
+		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
+		                    	  }
+		                    	  
+		                    	  recupModeleDao();
+		                    	 controlPanelPs();
+		                    		     
+		                 
+				     }
+				 //Fin de Contrôle pour les PSC
+*/				 
+				 
+				 
 				//Controle Pavé création pour les DPAMI
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpami")) {
 					 
@@ -3896,8 +3934,13 @@ public class PpmController {
 				 	  		    
 				 	  		    //saveDetailPlan(planPass, ""+typePlan);
 				 	  		    //bailleurExiste();
-				 	  		    anoExiste();
-				 	  		    anoTechExiste();
+				    	  		if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+				    	  			
+				    	  		}else {
+				    	  			anoExiste();
+					 	  		    anoTechExiste();
+				    	  		}
+				 	  		    
 				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 								String rechercheAll = search.replace("null","");
 								detailPass.setDppRecherche(rechercheAll);
@@ -3941,8 +3984,12 @@ public class PpmController {
 					    	 _logger.info("id detail plan:"+detailPass.getDppId());
 					 	  		    
 					 	  		  
-					 	  	 anoExiste();
-					 	  	 anoTechExiste();
+					    	 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+				    	  			
+				    	  		}else {
+				    	  			anoExiste();
+					 	  		    anoTechExiste();
+				    	  		}
 					 	  	 String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 							 String rechercheAll = search.replace("null","");
 							 detailPass.setDppRecherche(rechercheAll);
@@ -3977,6 +4024,118 @@ public class PpmController {
 		  		
 
 	//Fin de la Methode de création d'une opération  
+		 
+		 
+			//Méthode de création d'un ppm par le AC
+		 public void creerDetailPassationPsc(String typePlan)throws IOException{
+		  		/*if(fipPgpm.getFipId() > 0 ) {*/
+		  			
+			  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
+			 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+			 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
+			 					   new WhereClause("PLP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 	 	  if (!listPlan.isEmpty()) {
+			 	 		  planPass= listPlan.get(0);
+			 	 			//Sinon si le plan(PPM) nexiste pas creer
+			 	 				_logger.info("id detail plan:"+planPass.getPlpId());
+				 	 			 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+				    	 		 detailPass.setDppGpgId(pgpm.getGpgId());
+				    	  		 detailPass.setDppTypeStrConduc(strucCond);
+				    	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+				    	  		 detailPass.setTPlanPassation(new TPlanPassation(planPass.getPlpId()));
+				    	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
+				    	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+				    	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+				    	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+				    	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+				    	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+				    	  		 detailPass.setTStatut(new TStatut("S1S"));
+				    	  		 detailPass.setDppStatutRetour("0");
+				    	  		 detailPass.setDppStatutDao("N");
+				    	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
+				    	  		 iservice.addObject(detailPass);
+				    	  		_logger.info("id detail plan:"+detailPass.getDppId());
+				 	  		    
+				 	  		    //saveDetailPlan(planPass, ""+typePlan);
+				 	  		    //bailleurExiste();
+				 	  		    //anoExiste();
+				 	  		    //anoTechExiste();
+				 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+								String rechercheAll = search.replace("null","");
+								detailPass.setDppRecherche(rechercheAll);
+								iservice.updateObject(detailPass);	  
+				 		  		//Insertion dans T_Financement_PPM
+								saveFinancementOperation(detailPass);
+						      	//Historisation
+						    	historiserPs("S1S","PSPM enregistré par le AC");
+						    	//Préparation du Tableau de Bord
+		 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+	                            
+				 			   recupDateGenere();
+				 				chargeData(typePlan);
+				 				boutonEdit =true;
+				 				boutonEditPspm =false;	
+			 			//Sinon si le plan n'existe pas creer le plan	
+			 	 		}else {
+			 	 			
+			 	 			 planPass.setTGestion(new TGestion(gesCode));
+			 	  		     planPass.setTFonction(userController.getSlctd().getTFonction());
+			 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+			 	  		     iservice.addObject(planPass);
+				 	 		//Sinon si le plan(PPM) nexiste pas creer
+				 	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+					    	 detailPass.setDppGpgId(pgpm.getGpgId());
+					    	 detailPass.setDppTypeStrConduc(strucCond);
+					    	 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+					    	 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
+					    	 detailPass.setTPlanPassation(new TPlanPassation(planPass.getPlpId()));
+					    	 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
+					    	 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+					    	 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+					    	 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+					    	 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+					    	 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+					    	 detailPass.setTStatut(new TStatut("S1S"));
+					    	 detailPass.setDppStatutRetour("0");
+					    	 detailPass.setDppStatutDao("N");
+					    	 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
+					    	 iservice.addObject(detailPass);
+					    	 _logger.info("id detail plan:"+detailPass.getDppId());
+					 	  		    
+					 	  		  
+					 	  	 //anoExiste();
+					 	  	 //anoTechExiste();
+					 	  	 String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+							 String rechercheAll = search.replace("null","");
+							 detailPass.setDppRecherche(rechercheAll);
+							 iservice.updateObject(detailPass);
+					 		  					  
+					 		 //Insertion dans T_Financement_PPM
+							 saveFinancementOperation(detailPass);
+							 //Historisation
+							 historiserPs("S1S","PSPM enregistré par le AC");
+							 //Préparation du Tableau de Bord
+			 		      	 tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+		                            
+					 		 recupDateGenere();
+					 		 chargeData(typePlan);
+					 		 boutonEdit =true;
+					 	     boutonEditPspm =false;
+				 	 			
+			 	 		}
+			 				//Actualisation du Tableau de Bord
+			 				//tableauBordController.chargeDataPpm();
+			 			
+			                    	 tableauBordController.chargeDataPpm("PS");
+			                
+			 			/*	userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
+			 				userController.setRenderMsg(true);
+			 				userController.setSevrityMsg("success");*/
+			 	 	chargeExisteBailleur();
+		  	}
+		  		
+
+	//Fin de la Methode de création d'une opération 
 		 
 		 //Enregistrement des finanacements PPM
 		 public void saveFinancementOperation(TDetailPlanPassation TDetailPlanPassation) {
@@ -4272,30 +4431,26 @@ public class PpmController {
 	  	 //Mis à jour des dates prévisionnelles
 	  	 //@Transactional
 	  	 public void majDate() {
-	  		 
-	  		 if(tydCode.equalsIgnoreCase("")) {  
-       		  FacesContext.getCurrentInstance().addMessage(null,
-        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
-       	      }else {
-       	    	      //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
-       	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
-       	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-  		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
-  		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
-  		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
-  		              detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
-  		              detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
-  		              detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
-  		              detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
-  		              detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
-  		              detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
-  		              detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
-  		              detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
-  		              detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
-  		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
-  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
-  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-  		              
+	  		 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+	  			 //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
+    	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
+    	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
+		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
+		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
+		              detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
+		              detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
+		              detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
+		              detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
+		              detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
+		              detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
+		              detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
+		              detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
+		              detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
+		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
+		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+		              
 	  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
 	  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
 	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS") ||
@@ -4316,8 +4471,56 @@ public class PpmController {
 			     
 			          userController.setTexteMsg("Opération enregistrée avec succès!");
 				      userController.setRenderMsg(true);
-				      userController.setSevrityMsg("success");
-       	      }       
+				      userController.setSevrityMsg("success"); 
+	  		 }
+	  		 else {
+	  			 if(tydCode.equalsIgnoreCase("")) {  
+	  	       		  FacesContext.getCurrentInstance().addMessage(null,
+	  	        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
+	  	       	      }else {
+	  	       	    	      //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
+	  	       	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
+	  	       	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+	  	  		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
+	  	  		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
+	  	  		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
+	  	  		              detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
+	  	  		              detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
+	  	  		              detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
+	  	  		              detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
+	  	  		              detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
+	  	  		              detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
+	  	  		              detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
+	  	  		              detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
+	  	  		              detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+	  	  		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
+	  	  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
+	  	  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+	  	  		              
+	  		  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
+	  		  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
+	  		  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS") ||
+	  		  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("PQS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
+	  		  		            	detailPass.setTModeleDacType(new TModeleDacType(modelDac.getMdtCode()));
+	  		     	             }else {*/
+	  		     	            	detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+	  		     	             //}
+
+	  				          iservice.updateObject(detailPass);
+	  				         
+	  				          boutonEdit =true;
+	  				          controleController.btn_creerDetailPpm = false;
+	  				          controleController.btn_creerDetailPspm = false;
+	  				          pavetFinancement = true;
+	  				          //controleController.btn_creerDetailPpm =true;
+	  					      //controleController.btn_maj_datePpm = true;
+	  				     
+	  				          userController.setTexteMsg("Opération enregistrée avec succès!");
+	  					      userController.setRenderMsg(true);
+	  					      userController.setSevrityMsg("success");
+	  	       	      }        
+	  		 }
+	  		
 	  	   }
 	  	
 	  	 
