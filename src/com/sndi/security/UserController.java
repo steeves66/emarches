@@ -40,7 +40,7 @@ import com.sndi.model.TFonction;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
-import com.sndi.model.VLink;
+//import com.sndi.model.VLink;
 import com.sndi.model.VbTempOperateur;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.AutorityClass;

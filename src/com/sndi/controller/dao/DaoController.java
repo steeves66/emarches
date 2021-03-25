@@ -10161,9 +10161,9 @@ public class DaoController {
 	 }
  
 	//POUR WINDOWS - LAURENT
-		/* public void chargeDaoFile() throws IOException {	
+		 public void chargeDaoFileIndex() throws IOException {	
 			 
-			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
+			  //* Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 
 			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
@@ -10250,7 +10250,7 @@ public class DaoController {
 				}
 			
 			
-			 * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
+			 //* Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
 			 
 			
 			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
@@ -10344,7 +10344,7 @@ public class DaoController {
 			}
 			
 			
-			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
+			  //* Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			 
 			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
@@ -10449,8 +10449,14 @@ public class DaoController {
 				daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOR")) {
 				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
 				_logger.info("DAO ENTRETIEN DES LOCAUX charg");
-			}			
-		 }*/
+			}
+			
+			// ASSURANCE 
+			if(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOO") || daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ASSURANCE))));
+				_logger.info("DAO SECURITE PRIVEE charg");
+			}
+		 }
 		 //FIN WINDOWS
 		 
 		 
@@ -11033,6 +11039,12 @@ public class DaoController {
 				daoAao.getTymCode().equals("13") && daoAao.getDacMopCode().equals("AOR")) {
 				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX))));
 				_logger.info("DAO ENTRETIEN DES LOCAUX charg");
+			}
+			
+			// ASSURANCE 
+			if(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOO") || daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOR")) {
+				setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ASSURANCE_LINUX))));
+				_logger.info("DAO SECURITE PRIVEE charg");
 			}
 				
 		 }
@@ -13248,6 +13260,14 @@ public class DaoController {
 				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;
 				}
 			 
+			// ASSURANCE
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("17") ))) {
+			 	DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ASSURANCE;
+			 }
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("17") ))) {
+			 	DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ASSURANCE;
+			 }
+			 
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
@@ -13392,6 +13412,14 @@ public class DaoController {
 			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
 				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
 				}
+			 
+			// ASSURANCE
+			 if((daoAao.getDacMopCode().equals("AOO") && (daoAao.getTymCode().equals("17") ))) {
+			 	DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ASSURANCE_LINUX ;
+			 }
+			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("17") ))) {
+			 	DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ASSURANCE_LINUX ;
+			 }
 			 
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = "DAO_" + dao.getDacCode()+ ".docx";
@@ -15131,7 +15159,8 @@ public class DaoController {
 	lLts=(List<VbxDocLot>) iservice.getObjectsByColumn("VbxDocLot", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 			new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 	
-	chargeDaoFile();
+	//chargeDaoFileIndex(); //Windows
+	chargeDaoFile(); // Linux
 	printBmk();
 	_logger.info("Document chargé");
 	lBmkNm = getBookmarkNames();
@@ -15144,7 +15173,8 @@ public class DaoController {
 	_logger.info("Verrou paramtr");
 	setProtect();
 	_logger.info("Document protg");
-	saveDaoFile();
+	//saveDaoFileIndex(); //Windows
+	saveDaoFile(); // linux
 	_logger.info("Document enrgistr");
 	telechargerDao();
 	_logger.info("Document tlcharg");

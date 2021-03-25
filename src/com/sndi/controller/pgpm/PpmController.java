@@ -4431,7 +4431,7 @@ public class PpmController {
 	  	 //Mis à jour des dates prévisionnelles
 	  	 //@Transactional
 	  	 public void majDate() {
-	  		 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+	     if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSC") ) {
 	  			 //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
     	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
     	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
@@ -4451,12 +4451,12 @@ public class PpmController {
 		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
 		              
-	  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
+	  		            if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
 	  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
 	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS") ||
 	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("PQS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
 	  		            	detailPass.setTModeleDacType(new TModeleDacType(modelDac.getMdtCode()));
-	     	             }else {*/
+	     	             }else {
 	     	            	detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 	     	             //}
 
@@ -4472,8 +4472,9 @@ public class PpmController {
 			          userController.setTexteMsg("Opération enregistrée avec succès!");
 				      userController.setRenderMsg(true);
 				      userController.setSevrityMsg("success"); 
-	  		 }
-	  		 else {
+	  		   }
+	  		            
+	      }else{
 	  			 if(tydCode.equalsIgnoreCase("")) {  
 	  	       		  FacesContext.getCurrentInstance().addMessage(null,
 	  	        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
@@ -4520,7 +4521,6 @@ public class PpmController {
 	  					      userController.setSevrityMsg("success");
 	  	       	      }        
 	  		 }
-	  		
 	  	   }
 	  	
 	  	 

@@ -3477,7 +3477,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeFonctions}"
-						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-3" >
@@ -3545,7 +3545,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleLign" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
-						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
+						  selectionMode="single" rowKey="#{slctdTb.lbgCode}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 	
@@ -3660,7 +3660,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						  selectionMode="single" rowKey="#{slctdTb.dppId}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
@@ -3713,7 +3713,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePgpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePgpm}"
-						  selectionMode="single" rowKey="#{slctdTb.gpgId}"
+						  selectionMode="single" rowKey="#{slctdTb.gpgId}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucun Pgpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
@@ -3765,7 +3765,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePgspm}"
-						  selectionMode="single" rowKey="#{slctdTb.gpgId}"
+						  selectionMode="single" rowKey="#{slctdTb.gpgId}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucun Pgspm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
@@ -3812,7 +3812,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
-						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
+						  selectionMode="single" rowKey="#{slctdTb.lbgCode}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               
@@ -3885,7 +3885,7 @@
                         
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeMode}"
-						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
+						 selectionMode="single" rowKey="#{slctdTb.mopCode}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
@@ -3945,7 +3945,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFils}"
-						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
@@ -3998,7 +3998,7 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFilsPs}"
-						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}" scrollable="true" scrollHeight="400"
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
@@ -4144,7 +4144,7 @@
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeModePassationPn}"
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
-			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun mode de passation enregistré" scrollable="true" scrollHeight="400" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
                         <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
