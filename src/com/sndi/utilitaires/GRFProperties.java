@@ -125,7 +125,7 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX = getProperty("destinationServices","/wildfly8/standalone/Dossiers/DAO/Location_main_doeuvre/");
 	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","/wildfly8/standalone/Dossiers/DAO/Restauration/"); //Pour Laurent
 	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","/wildfly8/standalone/Dossiers/DAO/Securite_privee/");
-	
+	public static final String PARAM_UPLOAD_DAO_ASSURANCE_LINUX = getProperty("destinationPrestations","/wildfly8/standalone/Dossiers/DAO/Assurance/");
 	
 	public static final String PARAM_UPLOAD_FOURNITURES_PSL = "/wildfly8/standalone/Dossiers/DAO/Fournitures_PSL/";
 	public static final String PARAM_UPLOAD_TRAVAUX_PSL = "/wildfly8/standalone/Dossiers/DAO/Travaux_PSL/";
@@ -144,7 +144,7 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_TRAVAUX_PSO_LINUX = "/wildfly8/standalone/Dossiers/DAO/Travaux_PSO/";
 	public static final String PARAM_UPLOAD_SERVICES_COURANTS_PSO_LINUX = "/wildfly8/standalone/Dossiers/DAO/Services_Courants_PSO/";
 	public static final String PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES_LINUX = "/wildfly8/standalone/Dossiers/DAO/Prestations_intellectuelles_PS/";
-	public static final String PARAM_UPLOAD_DAO_ASSURANCE_LINUX = getProperty("destinationPrestations","/wildfly8/standalone/Dossiers/DAO/Assurance/");
+	
 	
 	//FICHIER DE BASE DAO TYPE
 	//WINDOWS
