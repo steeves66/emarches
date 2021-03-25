@@ -280,14 +280,13 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             
-                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-				           <h:panelGroup rendered="#{slctdTb.aaoStaCode == 'D1S' }">
+                          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
 				            <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.renderPage('dao11','MODDAO')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                       
                             </p:commandLink>
-                            </h:panelGroup>
+                            
                             
                               <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Télécharger le DAO type" ajax="false">
