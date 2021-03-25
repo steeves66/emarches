@@ -87,6 +87,8 @@ public class ControleController {
 	private boolean panelAnalyse =false;
 	private boolean panelJugement =false;
 	private boolean selectOneMenuPassation =false;
+	private boolean anoDmp =false;
+	private boolean anoBail =false;
 	
 	private boolean panelDaoTableauBordPslpso = false;
 	private boolean panelAgpmTableauBordSai =false;
@@ -1351,7 +1353,9 @@ public class ControleController {
 				    				detailP1 = true;
 									detailP2 = false;
 									validCPMP = true;
-									 validDMP = false;
+									 validDMP = true;
+									 anoDmp = true;
+									 anoBail = true;
 									 //etatPso = false;
 									 //etatPsl = false;
 									 etatPso = false;
@@ -1652,8 +1656,10 @@ public class ControleController {
 				    				//fermerValPspm = false;
 				    				detailP1 = false;
 									detailP2 = true;
-									 validCPMP = false;
+									validCPMP = false;
 									 validDMP = true;
+									 anoDmp = false;
+									 anoBail = false;
 									 /*etatPsl = false;
 									 etatPso = false;
 									 //validDMP = false;*/
@@ -10506,5 +10512,26 @@ public class ControleController {
 	public void setBtn_modif_pspm(boolean btn_modif_pspm) {
 		this.btn_modif_pspm = btn_modif_pspm;
 	}
+
+
+	public boolean isAnoDmp() {
+		return anoDmp;
+	}
+
+
+	public void setAnoDmp(boolean anoDmp) {
+		this.anoDmp = anoDmp;
+	}
+
+
+	public boolean isAnoBail() {
+		return anoBail;
+	}
+
+
+	public void setAnoBail(boolean anoBail) {
+		this.anoBail = anoBail;
+	}
+	
 	
 }
