@@ -622,7 +622,7 @@ TDacSpecs dao = new TDacSpecs();
   historiser("SDS",""+slctdTd.getDacCode(), "Dossier supprimé par l'autaurite contractante");
   //Update dans TdetailPlan passation
   List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+				new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 	     TDetailPlanPassation detail = new TDetailPlanPassation();
 				if(!PLG.isEmpty()) detail =PLG.get(0); 
 				detail.setDppStatutDao("N");
