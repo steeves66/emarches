@@ -610,21 +610,30 @@ public class DaoController {
 	 }
 	 
 	 
-	//Methode de suppression de l'operation
-     public void deleteDac() {
-    	 _logger.info("code: "+slctdTd.getDacCode());
-    	 List<TDacSpecs> DAC  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
-    	 TDacSpecs dao = new TDacSpecs();
-			if(!DAC.isEmpty()) dao = DAC.get(0);
-			dao.setTStatut(new TStatut("SDS"));
-	        iservice.updateObject(dao);
-	         historiser("SDS",""+slctdTd.getDacCode(), "Dossier supprimé par l'autaurite contractante");
-	         
-	        chargeData();
-	    	userController.setTexteMsg("Supression effectuée avec succès !");
-			userController.setRenderMsg(true);
-			userController.setSevrityMsg("success"); 
-     }
+
+		//Methode de suppression de l'operation
+public void deleteDac() {
+_logger.info("code: "+slctdTd.getDacCode());
+List<TDacSpecs> DAC  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+TDacSpecs dao = new TDacSpecs();
+	if(!DAC.isEmpty()) dao = DAC.get(0);
+	dao.setTStatut(new TStatut("SDS"));
+ iservice.updateObject(dao);
+  historiser("SDS",""+slctdTd.getDacCode(), "Dossier supprimé par l'autaurite contractante");
+  //Update dans TdetailPlan passation
+  List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+	     TDetailPlanPassation detail = new TDetailPlanPassation();
+				if(!PLG.isEmpty()) detail =PLG.get(0); 
+				detail.setDppStatutDao("N");
+				detail.setTDacSpecs(new TDacSpecs("null"));
+				iservice.updateObject(detail);
+				
+ chargeData();
+	userController.setTexteMsg("Supression effectuée avec succès !");
+	userController.setRenderMsg(true);
+	userController.setSevrityMsg("success"); 
+}
 	 
 	 //Appel de la methode d'affichage de la liste dac en lui passant en parametre letype plan et le type DAC
 	 public void chargeData() {
