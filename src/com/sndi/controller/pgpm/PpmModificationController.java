@@ -2664,7 +2664,13 @@ public class PpmModificationController {
 					 //pscNon = true; 
 					//vider();
 				break;
-				
+				case "pspm1": 
+	                    chargeData("PS");
+	                    //chargePpmTrans("PS");
+	                    tableauBordController.ChargeTbProcedure("PS","PPM");
+		 			//chargeDataAvaliderPspm();
+	                    userController.initMessage();
+		 			_logger.info("value: "+value+" action: "+action);		    				
 			    }
 		     return userController.renderPage(value);
 	 }
