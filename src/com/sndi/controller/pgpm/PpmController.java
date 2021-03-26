@@ -4450,7 +4450,8 @@ public class PpmController {
 		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-		              
+		              detailPass.setDppDateSolFact(geneDate.getDppDateSolFact());
+		              detailPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
 	  		            if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
 	  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
 	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS") ||
@@ -4497,6 +4498,8 @@ public class PpmController {
 	  	  		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 	  	  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 	  	  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+	  	  		              detailPass.setDppDateSolFact(geneDate.getDppDateSolFact());
+			                  detailPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
 	  	  		              
 	  		  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
 	  		  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||

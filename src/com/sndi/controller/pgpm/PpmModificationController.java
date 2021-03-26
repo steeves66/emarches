@@ -519,6 +519,7 @@ public class PpmModificationController {
 				             detail.setDppInvEntre(updatePpm.getDppInvEntre());
 				             detail.setDppDateNotAtt(updatePpm.getDppDateNotAtt());
 				             detail.setDppNbOuv(updatePpm.getDppNbOuv());
+				             recupDateGenere();
 				             iservice.updateObject(detail);
 				             chargeExisteBailleur();
 				             userController.setTexteMsg(" Modification effectuée avec succès !");
@@ -768,13 +769,13 @@ public class PpmModificationController {
 	            					newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
 	            				    newFinancement.setTDevise(new TDevise(devCode));
 	            				    newFinancement.setFppTypeFinance(sourfin);
-	            				    newFinancement.setTDetailPlanPassation(detailPass);
+	            				    newFinancement.setTDetailPlanPassation(new TDetailPlanPassation(updatePpm.getDppId()));
 	            					iservice.addObject(newFinancement);
 	            					//Actualisation du coût prévisionnel de l'opération
 	            					coutTotal();
 	            					
 	            					listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-	    									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+	    									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 	            					if (!listeTsPpm.isEmpty()) {
 	            						detPass= listeTsPpm.get(0);
 	            						detPass.setDppSourceFin(newFinancement.getFppTypeFinance());
@@ -1741,7 +1742,7 @@ public class PpmModificationController {
 			 updatePpm.setDppTypePlan(updatePpm.getDppTypePlan());
 			 updatePpm.setMopLibelleLong(updatePpm.getMopLibelleLong());
 
-			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
+			 updatePpm.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
 			 recupPgpm.setGpgMopCode(modePassation.getMopCode());
 			 recupPgpm.setMopLibelleLong(modePassation.getMopLibelleLong());
@@ -2104,7 +2105,7 @@ public class PpmModificationController {
 	  	//Recupertation de la date genérée
 		 public void recupDateGenere() {
 		    			listeDateGenere= (List<VGenerationDate>) iservice.getObjectsByColumn("VGenerationDate", new ArrayList<String>(Arrays.asList("DPP_ID")),
-		    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+		    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 		    			if (!listeDateGenere.isEmpty()) {
 		    				geneDate=listeDateGenere.get(0); 
 		    			}
@@ -2378,7 +2379,9 @@ public class PpmModificationController {
 	  	 //Mis à jour des dates prévisionnelles
 	  	 //@Transactional
 	  	 public void majDate() {
-	  		 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+	  		List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+updatePpm.getDppId()));
+			if(!PPM.isEmpty()) detailPass = PPM.get(0);
+	  		 if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
 	  			 //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
     	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
     	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
@@ -2397,9 +2400,9 @@ public class PpmModificationController {
 		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-
-	     	          detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-	     	            
+		              detailPass.setDppDateSolFact(geneDate.getDppDateSolFact());
+		              detailPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
+	     	          detailPass.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 			          iservice.updateObject(detailPass);
 			         
 			          boutonEdit =true;
@@ -2410,47 +2413,6 @@ public class PpmModificationController {
 			          userController.setTexteMsg("Opération enregistrée avec succès!");
 				      userController.setRenderMsg(true);
 				      userController.setSevrityMsg("success"); 
-	  		 }
-	  		 else {
-	  			 if(tydCode.equalsIgnoreCase("")) {  
-	  	       		  FacesContext.getCurrentInstance().addMessage(null,
-	  	        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
-	  	       	      }else {
-	  	       	    	      //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
-	  	       	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
-	  	       	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-	  	  		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
-	  	  		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
-	  	  		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
-	  	  		              detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
-	  	  		              detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
-	  	  		              detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
-	  	  		              detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
-	  	  		              detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
-	  	  		              detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
-	  	  		              detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
-	  	  		              detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
-	  	  		              detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
-	  	  		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
-	  	  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
-	  	  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-	  	  		              
-	  		     	          detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-	  		     	           
-
-	  				          iservice.updateObject(detailPass);
-	  				         
-	  				          boutonEdit =true;
-	  				          controleController.btn_creerDetailPpm = false;
-	  				          controleController.btn_creerDetailPspm = false;
-	  				          pavetFinancement = true;
-	  				          //controleController.btn_creerDetailPpm =true;
-	  					      //controleController.btn_maj_datePpm = true;
-	  				     
-	  				          userController.setTexteMsg("Opération enregistrée avec succès!");
-	  					      userController.setRenderMsg(true);
-	  					      userController.setSevrityMsg("success");
-	  	       	      }        
 	  		 }
 	  		
 	  	   }
