@@ -2391,8 +2391,16 @@ public class PpmController {
 	
 	//Filtre sur ligne budgétaire en procédure simplifiée
 	public void filtreImputationPs() {
+	 listeImputations.clear();
+	 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+	         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+	         new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"),
+			 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+	 filtreLigne="";
+	 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+	 _logger.info("Type de plan: "+modePassation.getMopTypPlan());
 		
-		if(pgspm.getGpgTypePlan().equalsIgnoreCase("PSO")) {
+		/*if(pgspm.getGpgTypePlan().equalsIgnoreCase("PSO")) {
 			
 			 listeImputations.clear();
 			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
@@ -2411,7 +2419,7 @@ public class PpmController {
 						  // new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 							 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
 							 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));	
-			}		
+			}	*/	
 	}
 	
 	
