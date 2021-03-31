@@ -3208,7 +3208,7 @@ TDacSpecs dao = new TDacSpecs();
 			 		          //Chargement des DAO  raffecter
 			 		          chargeDaoAffectesR();
 			 				  //Message
-			 				  userController.setTexteMsg("DAO retrourn pour affectation !");
+			 				  userController.setTexteMsg("DAO retrourn� pour affectation !");
 			 				  userController.setRenderMsg(true);
 			 				  userController.setSevrityMsg("success");
 			 				  chargeData();
@@ -5871,7 +5871,7 @@ TDacSpecs dao = new TDacSpecs();
 												                                detCor.setDcoRespo("N");
 												                                iservice.addObject(detCor);
 											                                      }
-										                             //Mis Ã  jour du statut de DAO rï¿½cu   
+										                             //Mis � jour du statut de DAO rï¿½cu   
 										                             slctdTda.setDafStaCode("DC1");
 										                             iservice.updateObject(slctdTda);
 										                             //Actualisation de la liste des DAO

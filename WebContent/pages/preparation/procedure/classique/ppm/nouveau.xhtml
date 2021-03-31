@@ -618,7 +618,7 @@
 		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
-			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update="gnl:moldao27"/>			   				   
 				  <f:selectItems />				   				    				   
 		       	 </p:selectOneMenu>
 	         </div>
@@ -660,7 +660,7 @@
 		                  <label  class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar title="#{ppmController.geneDate.dppJourDaoTrans} #{ppmController.geneDate.dppDateDaoTrans}" value="#{ppmController.detailPass.dppDateDaoTrans}" navigator="true" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                      <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
+		                      <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" />
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -2195,7 +2195,7 @@
 		    <div class="form-group">
 		   <label for="moldaoPrq" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		        <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		        <p:selectOneMenu value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -2496,7 +2496,7 @@
 		    <div class="form-group">
 		   <label for="moldaoPrqDp" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldaoPrqDp" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldaoPrqDp" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   

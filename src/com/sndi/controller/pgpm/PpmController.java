@@ -911,10 +911,7 @@ public class PpmController {
 				     _logger.info("liste existeBailleur: "+listeExisteBailleur.size());	 
 	 }
 	 
-	 
-	
-	 
-	 
+
 		 //Liste des Ppm validés par la CPMP : Ancienne Methode
 		 /*public void chargePpmValCp() {
 			 ppmValCp.clear();
@@ -3844,9 +3841,6 @@ public class PpmController {
 				 			//tableauBordController.chargeDataPpm();
 				 			tableauBordbAc();
 				 			
-				 			/*userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
-				 			userController.setRenderMsg(true);
-				 			userController.setSevrityMsg("success");*/
 			 	 		  }   
 			 	 		  //}
 			 	 		
@@ -3900,9 +3894,7 @@ public class PpmController {
 			                    	 tableauBordController.chargeDataPpm("PS");
 			                }
 			 				
-			 			/*	userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
-			 				userController.setRenderMsg(true);
-			 				userController.setSevrityMsg("success");*/
+
 			 	 	         }
 			 	 	chargeExisteBailleur();	
 		  	}
@@ -3960,7 +3952,7 @@ public class PpmController {
 						    	//Préparation du Tableau de Bord
 		 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
 	                            
-				 			   recupDateGenere();
+				 			     recupDateGenere();
 				 				chargeData(typePlan);
 				 				boutonEdit =true;
 				 				boutonEditPspm =false;	
@@ -4888,6 +4880,7 @@ public class PpmController {
 	  	public String fermerPspm(String value ,String action) throws IOException { 
 			 userController.initMessage();
 		     chargeData("PS");
+		     pavetFinancement = false;
 		     //chargeDataPgspm();
 			 //vider();
 			 return userController.renderPage(value);
@@ -4897,6 +4890,7 @@ public class PpmController {
 	  	 public String fermer(String value ,String action) throws IOException { 
 			 userController.initMessage();
 			 chargeData("PN");
+			 pavetFinancement = false;
 		     //chargeDataPgspm();
 			 //vider();
 			 return userController.renderPage(value);
@@ -4950,8 +4944,8 @@ public class PpmController {
 		 
 		 
 		 
-		    //Transmission par l'AC,CPMP,DMP
-		// @Transactional
+		  //Transmission par l'AC,CPMP,DMP
+		 //@Transactional
 	     public void transmettre()throws IOException{
  
 	     	if (listSelectionTransmission.size()==0) {
@@ -4965,9 +4959,9 @@ public class PpmController {
 			 					}else
 			 						 if(userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
 			 							statutTrans ="SPT";  
-			 								}else {
+			 								}/*else {
 			 									  statutTrans ="SPT"; 
-			 								  }
+			 								  }*/
 			 						   }
 		 			
 		 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
@@ -5694,6 +5688,7 @@ public class PpmController {
 		    		 totalMontant=0;
 		    		 totalMontantPpm =0;
 		    		 strucCond = "";
+		    		 controleController.btn_creerDetailPpm = true;
 		    		 //controleController.btn_creerDetailPpm = true;
 		    		 
 		    		 pavetPPM = true;
@@ -5709,6 +5704,7 @@ public class PpmController {
 				     panelTymDp = false;
 				     panelBailleur = false;
 				     panelAno = false;
+				     pavetFinancement = false;
 		    	 }
 				 
 				 
