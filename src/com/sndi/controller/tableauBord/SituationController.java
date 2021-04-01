@@ -210,6 +210,10 @@ public class SituationController {
 				userController.renderPage(value);
 				break;
 				
+			case "sit4":
+				userController.renderPage(value);
+				break;
+				
 			case "per1":
 				userController.renderPage(value);
 				break;

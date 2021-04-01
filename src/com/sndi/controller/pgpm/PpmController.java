@@ -808,6 +808,11 @@ public class PpmController {
 		  bailleurExiste();
 		 }
 		 
+   		 public void updatePieces() {
+			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+			iservice.updateObject(detailPass);	 
+			}
+		 
 		 public void controleLibelle() {
 			 if(mode=="AMI") {
 				 libelleDPPRQ= false;
