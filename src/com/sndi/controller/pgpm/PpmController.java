@@ -3602,14 +3602,14 @@ public class PpmController {
 										         detPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
 									            iservice.updateObject(detPass); 
 									            recupDateGenere();
-									 }else
-										 if(date.equalsIgnoreCase("dppDateDaoApprobBail")) {
+									     }else
+										    if(date.equalsIgnoreCase("dppDateDaoApprobBail")) {
 											 detPass.setDppDateDaoApprobBail(geneDate.getDppDateDaoApprobBail());
 										     iservice.updateObject(detPass); 
 										     recupDateGenere();
 										 }else
 											 if(date.equalsIgnoreCase("dppDateOuvertOt")) {
-												 detPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOf());
+												 detPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 											     iservice.updateObject(detPass); 
 											     recupDateGenere();
 											 }else
