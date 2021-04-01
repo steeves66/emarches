@@ -10775,7 +10775,6 @@ TDacSpecs dao = new TDacSpecs();
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("02")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("03")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("04")) ||
-				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("05")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("06")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("07")) ||
 				(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("08")) ||
@@ -10787,7 +10786,6 @@ TDacSpecs dao = new TDacSpecs();
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("02")) ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("03")) ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("04")) ||
-					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("05")) ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("06")) ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("07")) ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("08")) ||
@@ -10859,7 +10857,6 @@ TDacSpecs dao = new TDacSpecs();
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("02")) ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("03")) ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("04")) ||
-				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("05")) ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("06")) ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("07")) ||
 				(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("08")) ||
@@ -10871,7 +10868,6 @@ TDacSpecs dao = new TDacSpecs();
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("02")) ||
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("03")) ||
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("04")) ||
-					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("05")) ||
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("06")) ||
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("07")) ||
 					(daoAao.getDacMopCode().equals("POR") && daoAao.getTymCode().equals("08")) ||
@@ -10995,7 +10991,11 @@ TDacSpecs dao = new TDacSpecs();
 			
 			// CARBURANT
 			if(	daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOO") ||
-					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOR")) {
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("AOR") ||
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("PSL") ||
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("PLR") ||
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("PSO") ||
+					daoAao.getTymCode().equals("05") && daoAao.getDacMopCode().equals("POR")) {
 					setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER_LINUX))));
 					_logger.info("DAO CARBURANT charg");
 					}
@@ -13420,6 +13420,18 @@ TDacSpecs dao = new TDacSpecs();
 				}
 			 if((daoAao.getDacMopCode().equals("AOR") && (daoAao.getTymCode().equals("05") ))) {
 				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("PSL") && (daoAao.getTymCode().equals("05") ))) {
+					DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("PLR") && (daoAao.getTymCode().equals("05") ))) {
+					DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("PSO") && (daoAao.getTymCode().equals("05") ))) {
+					DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
+				}
+			 if((daoAao.getDacMopCode().equals("POR") && (daoAao.getTymCode().equals("05") ))) {
+					DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;
 				}
 			 
 			// ASSURANCE

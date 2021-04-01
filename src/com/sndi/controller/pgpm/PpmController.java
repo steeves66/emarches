@@ -3618,7 +3618,7 @@ public class PpmController {
 												     iservice.updateObject(detPass); 
 												     recupDateGenere();
 												 }else
-													 if(date.equalsIgnoreCase("dppDateElabRapport")) {
+													 if(date.equalsIgnoreCase("dppDateElabRapport")) { 
 														 detPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
 													     iservice.updateObject(detPass); 
 													     recupDateGenere();
@@ -4432,9 +4432,8 @@ public class PpmController {
 	  	 //@Transactional
 	  	 public void majDate() {
 	     if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSC") ) {
-	  			 //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
-    	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
-    	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+
+    	    	     /* detailPass.setDppApprobAno(geneDate.getDppApprobAno());
 		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
 		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
 		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
@@ -4473,7 +4472,7 @@ public class PpmController {
 			          userController.setTexteMsg("Opération enregistrée avec succès!");
 				      userController.setRenderMsg(true);
 				      userController.setSevrityMsg("success"); 
-	  		   }
+	  		   }*/
 	  		            
 	      }else{
 	  			 if(tydCode.equalsIgnoreCase("")) {  
@@ -4482,7 +4481,7 @@ public class PpmController {
 	  	       	      }else {
 	  	       	    	      //detailPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
 	  	       	    	      //detailPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
-	  	       	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+	  	       	    	     /* detailPass.setDppApprobAno(geneDate.getDppApprobAno());
 	  	  		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
 	  	  		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
 	  	  		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
@@ -4499,7 +4498,7 @@ public class PpmController {
 	  	  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 	  	  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
 	  	  		              detailPass.setDppDateSolFact(geneDate.getDppDateSolFact());
-			                  detailPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
+			                  detailPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());*/
 	  	  		              
 	  		  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
 	  		  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
@@ -4507,10 +4506,10 @@ public class PpmController {
 	  		  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("PQS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
 	  		  		            	detailPass.setTModeleDacType(new TModeleDacType(modelDac.getMdtCode()));
 	  		     	             }else {*/
-	  		     	            	detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+	  		     	            	//detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 	  		     	             //}
 
-	  				          iservice.updateObject(detailPass);
+	  				       /*   iservice.updateObject(detailPass);
 	  				         
 	  				          boutonEdit =true;
 	  				          controleController.btn_creerDetailPpm = false;
@@ -4521,7 +4520,7 @@ public class PpmController {
 	  				     
 	  				          userController.setTexteMsg("Opération enregistrée avec succès!");
 	  					      userController.setRenderMsg(true);
-	  					      userController.setSevrityMsg("success");
+	  					      userController.setSevrityMsg("success");*/
 	  	       	      }        
 	  		 }
 	  	   }
