@@ -3585,19 +3585,19 @@ public class PpmController {
 						_logger.info("Date de Publication : "+detailPass.getDppDateAvisAoPublication());
 							}
 						    if(date.equalsIgnoreCase("dppInvEntre")) {
-							detPass.setDppInvEntre(geneDate.getDppInvEntre());
+							detPass.setDppInvEntre(detailPass.getDppInvEntre());
 							iservice.updateObject(detPass);
 							recupDateGenere();
 							_logger.info("Date d'Invitation des Entreprises : "+geneDate.getDppInvEntre());
 						}else
 							 if(date.equalsIgnoreCase("dppDateRecepFact")) {
-								 detPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
+								 detPass.setDppDateRecepFact(detailPass.getDppDateRecepFact());
 							     iservice.updateObject(detPass); 
 							     recupDateGenere();
 							     _logger.info("Date de reception des Factures : "+geneDate.getDppDateRecepFact());
 							 }else
 								 if(date.equalsIgnoreCase("dppDateRecepLettr")) {
-									 detPass.setDppDateRecepLettr(geneDate.getDppDateRecepLettr());
+									 detPass.setDppDateRecepLettr(detailPass.getDppDateRecepLettr());
 								     iservice.updateObject(detPass); 
 								     recupDateGenere();
 								     _logger.info("Date de reception des Lettres : "+geneDate.getDppDateRecepLettr());
