@@ -68,6 +68,7 @@ public class EtatsPpmController {
 	public boolean fermerAC=false;
 	public boolean fermerCPMP=false;
 	public boolean fermerDMP=false;
+	public boolean visibility = true;
 	
 	
 	
@@ -116,7 +117,14 @@ public class EtatsPpmController {
 				}
 	
 	
-	
+		 public void actionPsPn() {
+			 if(slctdTd.getDppTypePlan().equalsIgnoreCase("PN")) {
+				 visibility = true;
+			 }else {
+				 visibility = false;
+			 }
+		 }
+		 
 	
 	
 	
@@ -177,11 +185,13 @@ public class EtatsPpmController {
 	 		case "ppm3":
 	 			chargeDetailPpm();
 	 			chargeDetailFinancement();
+	 			actionPsPn();
 	  		break;
 	  		
 	 		case "pspm3":
 	 			chargeDetailPpm();
 	 			chargeDetailFinancement();
+	 			actionPsPn();
 	  		break;
 	 		}
 	 		
@@ -269,6 +279,14 @@ public class EtatsPpmController {
 
 	public void setFinancementListe(List<VFinancementPpm> financementListe) {
 		this.financementListe = financementListe;
+	}
+
+	public boolean isVisibility() {
+		return visibility;
+	}
+
+	public void setVisibility(boolean visibility) {
+		this.visibility = visibility;
 	}
 
 	

@@ -218,7 +218,7 @@
       
              <div class="col-md-6">
              <h:panelGroup rendered="#{controleController.validDMP}"> 
-           
+               <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
 		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par DMP : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}"> 
@@ -226,10 +226,11 @@
 			     </h:outputText> 
 			     </b>
 			</div> 
-			
+			</h:panelGroup>
 		    </h:panelGroup> 
 		    
 		    <h:panelGroup rendered="#{controleController.validCPMP}">
+		    <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
 		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par CPMP : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateAttApprobCpmp}"> 
@@ -237,20 +238,23 @@
 			     </h:outputText> 
 			     </b>
 			</div> 
+			</h:panelGroup>
 		   
 		    </h:panelGroup>
 		    
              </div>
              <div class="col-md-6">
               
-		       
+		       <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
 		      <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO Bail : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAttApproBail}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
+			     
 			</div> 
+			</h:panelGroup>
              </div>
              
              <h:panelGroup rendered="#{controleController.etatPsc}">

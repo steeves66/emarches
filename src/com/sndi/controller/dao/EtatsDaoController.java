@@ -248,6 +248,12 @@ public class EtatsDaoController {
 			}
     
     
+
+	 //Edition de la fiche de synthse du DAO
+	 public void imprimeSynthese() {
+			   projetReport.stringparam1(slctdTd.getDacCode(), "synthese_dac", "synthese_dac");       
+		}
+    
   	
   //Téléchargement des DAO type depuis la liste d'affichage
   	public void opendaoType() throws IOException{

@@ -387,6 +387,12 @@
 				</p:commandLink>
 				</h:panelGroup>
 				
+
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-right:5px"  action="#{etatsDaoController.imprimeSynthese()}" ajax="false">
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
+				</p:commandLink>
+
+				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
 				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
