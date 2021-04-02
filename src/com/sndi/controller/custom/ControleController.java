@@ -1206,7 +1206,8 @@ public class ControleController {
 						 btn_valider_ppm_dmp = false;
 						 selectOneMenuProcedure =false;
 						 selectOneMenuPassation =true;
-						 btn_creerDetailPpm = true;
+						 //btn_creerDetailPpm = true;
+						 btn_creerDetailPpm = false;
 						 btn_creerDetailPspm = false;
 						 btn_creerDetailPpmCmp = true;
 						 btn_creerDetailPspmCmp = false;
@@ -1519,9 +1520,9 @@ public class ControleController {
 						 selectOneMenuPassation =false;
 						 btn_creerDetailPpm = false;
 						 btn_creerDetailPspm = false;
-						 btn_creerDetailPpmCmp = true;
+						 btn_creerDetailPpmCmp = false;
 						 btn_creerDetailPspmCmp = false;
-						 btn_creerDetailPpmDmp = true;
+						 btn_creerDetailPpmDmp = false;
 						 btn_creerDetailPspmDmp = false;
 						 detailP1 = true;
 						 detailP2 = false;
