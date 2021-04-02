@@ -2100,7 +2100,7 @@ public class PpmController {
 				 			    chargeFinancement();
 				 				boutonEdit =true;
 				 				boutonEditPspm =false;
-				 				controleController.btn_creerDetailPpm =true;
+				 				//controleController.btn_creerDetailPpm =true;
 				 				userController.setTexteMsg("Financement enrégistré avec succès!");
 				 				userController.setRenderMsg(true);
 				 				userController.setSevrityMsg("success");
@@ -5702,7 +5702,6 @@ public class PpmController {
 		    		 totalMontant=0;
 		    		 totalMontantPpm =0;
 		    		 strucCond = "";
-		    		 controleController.btn_creerDetailPpm = true;
 		    		 //controleController.btn_creerDetailPpm = true;
 		    		 
 		    		 pavetPPM = true;
