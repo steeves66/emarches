@@ -810,7 +810,9 @@ public class PpmController {
 		 
    		 public void updatePieces() {
 			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-			iservice.updateObject(detailPass);	 
+			iservice.updateObject(detailPass);	
+			 recupModeleDao();
+			pavetFinancement = true;
 			}
 		 
 		 public void controleLibelle() {
@@ -3539,6 +3541,8 @@ public class PpmController {
 		    			if (!listeDateGenere.isEmpty()) {
 		    				geneDate=listeDateGenere.get(0); 
 		    			}
+		    			
+		    			recupModeleDao();
 		 }
 		 
 		 
@@ -3553,6 +3557,12 @@ public class PpmController {
 						recupDateGenere();
 					}
 		 }
+		 
+		 
+		 public void majDaotype() {
+			 tydCode = detPass.getTModeleDacType().getMdtCode();
+		 }
+		 
 		 
 		 //Rafraichissement automatique des dates
 		 public void genereDate(String date) {
@@ -3604,7 +3614,7 @@ public class PpmController {
 								            recupDateGenere();
 								          }else
 									          if(date.equalsIgnoreCase("dppDateAttApprobCpmp")) {
-										         detPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
+										         detPass.setDppDateAttApprobCpmp(detailPass.getDppDateAttApprobCpmp());
 									            iservice.updateObject(detPass); 
 									            recupDateGenere();
 									     }else

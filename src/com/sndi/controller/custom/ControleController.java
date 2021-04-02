@@ -1274,7 +1274,8 @@ public class ControleController {
 							 btn_valider_ppm_dmp = false;
 							 selectOneMenuProcedure =false;
 							 selectOneMenuPassation =true;
-							 btn_creerDetailPpm = true;
+							 //btn_creerDetailPpm = true;
+							 btn_creerDetailPpm = false;
 							 btn_creerDetailPspm = false;
 							 btn_creerDetailPpmCmp = false;
 							 btn_creerDetailPspmCmp = false;
@@ -1335,6 +1336,7 @@ public class ControleController {
 								 searchCpmp = true;
 								 searchDmp = true;
 								 searchPubPpm = false;
+								 btn_creerDetailPpm = false;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPPM")) {
 				    				type = "PPM";
@@ -1571,7 +1573,8 @@ public class ControleController {
 							 selectOneMenuProcedure =true;
 							 selectOneMenuPassation =false;
 							 btn_creerDetailPpm = false;
-							 btn_creerDetailPspm = true;
+							 //btn_creerDetailPspm = true;
+							 btn_creerDetailPspm = false;
 							 btn_creerDetailPpmCmp = false;
 							 btn_creerDetailPspmCmp = false;
 							 btn_creerDetailPpmDmp = false;
