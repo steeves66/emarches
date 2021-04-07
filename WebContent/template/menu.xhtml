@@ -36,7 +36,31 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
       
-      
+            <!--DEBUT MENU ENGISTREMENT D'UNE DEMANDE-->
+    
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Suivie d'un dossier</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <h:panelGroup rendered="false">
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Plan de passation
+             </p:commandLink>
+            </li>
+            </h:panelGroup>
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i> DAC
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
       
          <!-- DEBUT TRAITEMENT AUTORITE CONTRACTANTE -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
@@ -2556,39 +2580,25 @@
           
           <!-- DEBUT OBSERVATEUR-->
            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'OBS'}">
-         <li class="treeview">
-          <p:commandLink action="#{situationController.renderPage('sit4')}" update=":content" > 
-            <i class="fa fa-dashboard"></i> <span>Plans de passations</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </p:commandLink> 
-           <ul class="treeview-menu">
             <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Plans de passations
-             </p:commandLink>
-            </li>
-              <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>DAC
-             </p:commandLink>
+            <p:commandLink action="#{situationController.renderPage('sit4')}" update=":content" >
+            <i class="fa fa-circle-o text-red">
+            </i> <span>Plans de passations</span>
+            </p:commandLink>
             </li>
             
-             <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Approbation du Marché
-             </p:commandLink>
-            </li>
-            
-             <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Suivie de l'exécution
-             </p:commandLink>
-            </li>
-              
-          </ul>     
-         </li>
+	        <li>
+	        <p:commandLink action="#{situationController.renderPage('sit4')}" update=":content" >
+	        <i class="fa fa-circle-o text-yellow"></i> 
+	        <span>DAC</span>
+	        </p:commandLink>
+	        </li>
+	        <li>
+	        <p:commandLink action="#{situationController.renderPage('sit4')}" update=":content" >
+	        <i class="fa fa-circle-o text-aqua"></i>
+	         <span>Cojo</span>
+	         </p:commandLink>
+	         </li>
          </h:panelGroup>
          
          

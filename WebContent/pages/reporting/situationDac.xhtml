@@ -5,46 +5,37 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
- <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
-<ui:composition template="/template/templatePage.xhtml">
-  <ui:define name="contents">    
-      
-	
-<section class="content-header">
-      <h1>
-       Dossier d'Appel à Concurrence (DAC)
-        <small>Situation</small>
-      </h1>
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>Suivie d'un dossier d'appel à concurrence(DAC)</h3>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-        <li class="active">Apercu des details</li>
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Suivie d'un dossier | DAC 
+             </p:commandLink>
+        </li>
       </ol>
     </section>
-    
-    
-   <section class="content">
-   <h:form id="gnl">
-<div class="box box-default">
-<div class="panel-primary">
-           <div class="panel-heading" style="background-color: #f88b2e">Situation du Dossier d'Appel à Concurrence
-          
-           </div>
-          </div>
-          
-          <div class="box-body">
-           <div class="widget-box">
-           
-                  <div class="widget-body">
-                 
-                    <div class="widget-main">
-                     
-                       <div id="fuelux-wizard-container">
-                       <div class="form-inline">
+  
+    <section class="content">
+     <div class="box"></div>
+             <div class="row"><div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div></div>
+            
+            <div class="row">
+               <div class="form-inline col-md-4" >
                        <div class="form-group has-feedback">
-   						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #036d3b; border: #036d3b" value="Initialiser"  action="#{situationController.vider()}" update=":gnl"> </p:commandLink>		
+   						  <p:commandLink styleClass="btn btn-success m-r-5" style="background-color: #036d3b; border: #036d3b" value="Initialiser"  action="#{situationController.vider()}" update=":gnl"> </p:commandLink>		
 				   </div>
                        <div class="form-group has-feedback">
-   						    <p:inputText type="text" value="#{situationController.critere}" class="form-control"  placeholder="Code du DAC"  > 
+   						    <p:inputText type="text" value="#{situationController.critere}" class="form-control"  placeholder="Saisire le code du dossier"  > 
 							</p:inputText>
     						<i class="glyphicon glyphicon-search form-control-feedback"></i>		
 				   </div>
@@ -52,252 +43,60 @@
 				    <div class="form-group has-feedback">
    						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #f88b2e; border: #f88b2e" value="Rechercher"  action="#{situationController.rechercheDossier()}" update=":gnl"> </p:commandLink>	
 				   </div>
-				   
-				  
-				
 		         </div>
-		         <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-                    </div>
-                          <fieldset style="border: 1px solid;padding: 10px;">
-					   				 <legend>Informations sur le DAC N #{situationController.detail.dacCode}</legend>
-					   				 <div align="center"><strong>Situation du DAC : </strong> <span style="color: red;font-weight:bold;"> #{situationController.stat.staLibelle}</span> </div><br/>
-				   		
-					   		<!-- Form pour demande -->
-					   	 </fieldset>  
-					   	 
-					   	  <fieldset style="border: 1px solid; padding: 10px;">
-					   	   <legend>Informations sur le DAC</legend>
-					   		  <div class="row">
-					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Code</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  value="#{situationController.detail.dacCode}"/></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Type de Marché</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Mode de Passation</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>	
-							
-							<div class="row">
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Mention</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  value="#{situationController.detail.dacMention}"/></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Taille</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-					   		</div>
-								
-					   		 <div class="row">
-							</div>
-					   	 </fieldset>
-					   	 
-					   	 
-					   	   		 <fieldset style="border: 1px solid; padding: 10px;">
-					   	   <legend>Avis d'Appel D'offres</legend>
-					   		  <div class="row">
-					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Code</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  value="#{situationController.detail.aaocCode}"/></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre de Lots</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Coût du DAO</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Lieu de Reception des Offres</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Date de Reception des Offres</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre d'Ouverture</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Ouverture Technique</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>	
-
-					   		
-					   		<div class="row">
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Ouverture Financière</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-					   		</div>
-						             
-					   	 </fieldset>
-					   	 
-					   	<fieldset style="border: 1px solid; padding: 10px;">
-					   	   <legend>AGPM</legend>
-					   		  <div class="row">
-					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Description du Bailleur</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre de Lots</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Coût du DAO</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>       
-					   	 </fieldset>
-					   	 
-					   	  		 <fieldset style="border: 1px solid; padding: 10px;">
-					   	   <legend>PGPM</legend>
-					   		  <div class="row">
-					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Code</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  value="#{situationController.detail.aaoCode}"/></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-							<div class="row">	
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre de Lots</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Coût du DAO</label></div>
-								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-							</div>
-							
-						             
-					   	 </fieldset>
-			     
-			     <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
-   				 <legend>PPM</legend>
-   				 <p:dataTable id="filia" styleClass="table mb0 dt-on-steroids dataTable" var="d" value="#{situationController.listPpmStat}" emptyMessage="Aucune PPM trouvé">
-				       
-				         <p:column headerText="Objet" styleClass="col-sm-4">
-				            <h:outputText value="#{d.desPrenoms}" />
+		         <div class="col-sm-2"><label class="pull-right">SITUATION ACTUELLE DU DOSSIER :</label></div>
+                    <div class="col-sm-6">
+                    <span style="color:red">
+                    <label><h:outputText  value="#{situationController.stat.staLibelleCourt}" style="width: 100%" /> </label>
+                    </span>
+                  </div>
+            </div>
+            <br/>
+     <div class="row">         
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">HISTORIQUE DE TRAITEMENT DU DOSSIER XXX:AAAAA</div></div>
+            <div class="col-md-2 "><div  style="color: #fff">
+             <label for="gestion1" class="col-sm-5 control-label"></label>
+	              <div class="col-sm-6">
+		                    
+	               </div>
+             </div>
+           </div>
+         </div> 
+         <div class="box-body">
+         <p:dataTable id="ndTbleHisto" value="#{situationController.listHistoDac}" styleClass="table table-bordered table-hover" var="slctdTb" scrollable="true" scrollHeight="460"
+			               emptyMessage="Aucune historique trouvée">
+			               
+					    <p:column headerText="Statuts" styleClass="col-sm-5" >
+         				  <h:outputText value="#{slctdTb.staLibelleLong}" />
 				        </p:column>
-				       
-				        <p:column headerText="Type Marché" styleClass="col-sm-2">
-				                <h:outputText value="#{d.desNat}">
-		              			 </h:outputText>
+						<p:column headerText="Acteurs" styleClass="col-sm-3" >	        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
 				        </p:column>
-				       
-				        <p:column headerText="Mode de Passation" styleClass="col-sm-4">
-		              			 <h:outputText value="#{d.desDateNais}">
-								</h:outputText>
+				        <p:column headerText="Date d'execution" styleClass="col-sm-1" >	        
+         				  <h:outputText value="#{slctdTb.hacDate}">
+         				  <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" type="date" />
+         				  </h:outputText>
 				        </p:column>
 				        
-				    </p:dataTable>
+				        <p:column headerText="Observations" styleClass="col-sm-3" >	        
+         				  <h:outputText  />
+				        </p:column>
+						</p:dataTable>
+         </div>
+       </div>      
+     </div>
+            
+     <div class="row">    
+     <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+	 </p:commandLink>
+     </div>  
+   </section>
+         
+</h:form>
 
-   				 </fieldset>	 
-					   	 
-					   	 
-				  <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
-   				 <legend>Lots</legend>
-   				 <p:dataTable id="filia" styleClass="table mb0 dt-on-steroids dataTable" var="lot" value="#{situationController.listeLotsAvis}" emptyMessage="Aucune filiation trouvée">
-				        <p:column headerText="Ordre" styleClass="col-sm-6">
-				            <h:outputText value="#{lot.laaId}" />
-				        </p:column>
-				       
-				         <p:column headerText="Libelle" styleClass="col-sm-4">
-				            <h:outputText value="#{lot.laaObjet}" />
-				        </p:column>
-				       
-				        <p:column headerText="Imputation" styleClass="col-sm-2">
-				                <h:outputText value="#{lot.TLBudgets.lbgImputation}" />
-		              			 
-				        </p:column>
-				      
-				        
-				    </p:dataTable>
-
-   				 </fieldset>
-					   	 
-					   	 
-					   	    <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
-   				 <legend>Historique des Traitements</legend>
-   				 <p:dataTable id="sttbl" styleClass="table mb0 dt-on-steroids dataTable" var="si" value="#{situationController.listHistoStat}" emptyMessage="Aucun enregistrement trouvé">
-				        <p:column headerText="Statut" styleClass="col-sm-6">
-				            <h:outputText value="#{si.TStatut.staLibelle}" />
-				        </p:column>
-				       
-				         <p:column headerText="Acteur" styleClass="col-sm-4">
-				            <h:outputText value="#{si.TFonction.fonLibelle}" />
-				        </p:column>
-				       
-				        <p:column headerText="Date d'exécution" styleClass="col-sm-2">
-				              <h:outputText value="#{si.hacDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-							  </h:outputText>
-				        </p:column>
-				       
-				        <p:column headerText="Observation" styleClass="col-sm-4">
-				             <h:outputText value="#{si.hacCommentaire}">
-		              			 </h:outputText>
-				        </p:column>
-				        
-				    </p:dataTable>
-				    
-				    
-				    <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
-   				 <legend>Dossiers</legend>
-   				 <p:dataTable id="stretrait" styleClass="table mb0 dt-on-steroids dataTable" var="si" value="#{situationController.listDossierDac}" emptyMessage="Aucun enregistrement trouvé">
-				        <p:column headerText="Titulaire" styleClass="col-sm-6">
-				            <h:outputText value="#{si.ddaNom}" />
-				        </p:column>
-				       
-				       
-				        <p:column headerText="Reference" styleClass="col-sm-4">
-				             <h:outputText value="#{si.ddaReference} ">
-		              			 </h:outputText>
-				        </p:column>
-				        
-				    </p:dataTable>
-				    
-				    
-   				 </fieldset>
-				    
-				    
-				    
-				    
-				    
-   				 </fieldset>
-					   	 
-		               
-		               <div class="col-xs-6 col-sm-2"><label class="control-label"></label></div>
-								<div class="col-xs-6 col-sm-4"><label class="control-label"></label></div>
-								<div class="col-xs-6 col-sm-2"><label class="control-label pull-right">Source :</label></div>
-								<div class="col-xs-6 col-sm-4"><label class="control-label"></label></div>
-
-                        </div>
-                                                <p:commandLink styleClass="btn btn-danger mr10" style="margin-top:60px;margin-left:18px" value="Fermer"   update=":content"/>
-                                               
-                      </div><!-- /.widget-main -->
-                        
-                     </div><!-- /.widget-body -->
-                     
-                   </div>
-                     
-                 </div>
-                 
-             
-             </h:form>
-               </section>
-
-
-    <!-- page specific plugin scripts -->
-
-    <!-- ace scripts -->
-    
-    
-      <!--
-    <script src="../resources/assets/js/ace-elements.min.js"></script>
-    <script src="../resources/assets/js/ace.min.js"></script> -->
-    
-       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
- 		<div align="center">
-        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-        </div>
-    </p:confirmDialog>
-    
 </ui:define>
-</ui:composition>   
+</ui:composition>
 </html>

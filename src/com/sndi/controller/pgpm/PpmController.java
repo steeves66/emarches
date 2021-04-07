@@ -806,13 +806,14 @@ public class PpmController {
 		  iservice.updateObject(detailPass);	 
 		  recupModeleDao();
 		  bailleurExiste();
+		 // controleController.btn_creerDetailPspm=true;
+		  pavetFinancement=true;
 		 }
 		 
    		 public void updatePieces() {
 			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			iservice.updateObject(detailPass);	
 			 recupModeleDao();
-			pavetFinancement = true;
 			}
 		 
 		 public void controleLibelle() {
@@ -3564,6 +3565,16 @@ public class PpmController {
 		 }
 		 
 		 
+		 public void updateDate(){
+			 listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+					if (!listeTsPpm.isEmpty()) {
+						detPass = listeTsPpm.get(0);	
+						detPass.setDppDateSignatAc(detailPass.getDppDateSignatAc());
+						detPass.setDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
+					 iservice.updateObject(detPass);
+					}
+		 }
 		 //Rafraichissement automatique des dates
 		 public void genereDate(String date) {
 			 
@@ -3591,7 +3602,7 @@ public class PpmController {
 							_logger.info("Date d'Invitation des Entreprises : "+geneDate.getDppInvEntre());
 						}else
 							 if(date.equalsIgnoreCase("dppDateRecepFact")) {
-								 detPass.setDppDateRecepFact(detailPass.getDppDateRecepFact());
+								 detPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
 							     iservice.updateObject(detPass); 
 							     recupDateGenere();
 							     _logger.info("Date de reception des Factures : "+geneDate.getDppDateRecepFact());
@@ -3669,14 +3680,16 @@ public class PpmController {
 																			     recupDateGenere();
 																			 }else
 																				 if(date.equalsIgnoreCase("dppDateSignatAttrib")) {
-																					 detPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+																					 detPass.setDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 																				     iservice.updateObject(detPass); 
-																				     recupDateGenere();
+																				     _logger.info("Date Attributaire : "+detailPass.getDppDateSignatAttrib());
+																				     recupDateGenere(); 
 																				 }else
 																					 if(date.equalsIgnoreCase("dppDateSignatAc")) {
-																						 detPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
+																						 detPass.setDppDateSignatAc(detailPass.getDppDateSignatAc());
 																					     iservice.updateObject(detPass); 
 																					     recupDateGenere();
+																					     _logger.info("Date de signature de l'AC : "+detailPass.getDppDateSignatAc());
 																					 }else
 																						 if(date.equalsIgnoreCase("dppDateMarcheApprob")) {
 																							 detPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());

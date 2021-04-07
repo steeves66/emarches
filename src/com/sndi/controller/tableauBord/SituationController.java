@@ -26,6 +26,7 @@ import com.sndi.model.TDossierDacs;
 import com.sndi.model.THistoDac;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TStatut;
+import com.sndi.model.VDacStatut;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VPpmPgpm;
 import com.sndi.report.ProjetReport;
@@ -66,13 +67,14 @@ public class SituationController {
 	private List<TStatut> listStat = new ArrayList<TStatut>();
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	private List<THistoDac> listHistoStat = new ArrayList<THistoDac>();
+	private List<VDacStatut> listHistoDac = new ArrayList<VDacStatut>();
 	private List<TDetailPlanPassation> listPpmStat = new ArrayList<TDetailPlanPassation>();
 	private List<TDossierDacs> listDossierDac = new ArrayList<TDossierDacs>();
 	private List<TLotAao> listeLotsAvis= new ArrayList<TLotAao>();
 	private List<TDacSpecs> listDacPaPeriode = new ArrayList<TDacSpecs>();
 	private List<VPpmPgpm> listPgpmStat = new ArrayList<VPpmPgpm>();
 	private List<TAgpm> listAgpm = new ArrayList<TAgpm>();
-	private TStatut Stat = new TStatut();
+	private TStatut stat = new TStatut();
 	private TDetailPlanPassation ppm = new TDetailPlanPassation();
 	private VDetailDao detail = new VDetailDao(); 
 	private VPpmPgpm repPpm = new VPpmPgpm();
@@ -85,12 +87,8 @@ public class SituationController {
 	private Date dateDeb;
 	private Date dateFin;
 	
-	
-	
-	
-	
-	
-	public void rechercheDossier(){
+
+	public void rechercheDossier1(){
 		objetListe =(List<VDetailDao>) iservice.getObjectsByColumn("VDetailDao", new ArrayList<String>(Arrays.asList("dacCode")),
 				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
 				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -109,11 +107,31 @@ public class SituationController {
 	}
 	
 	
+	public void rechercheDossier(){
+		listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
+				new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
+				new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		recupStat();
+		/*if (!objetListe.isEmpty()) {
+			detail=objetListe.get(0);
+			recupStat();
+			recupHisto();
+			recupPPM();
+			recupDossier();
+			recupLots();
+		}else {
+			vider();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
+		}	*/
+	}
+	
+	
 	public void recupStat() {
 		listStat =(List<TStatut>) iservice.getObjectsByColumn("TStatut", new ArrayList<String>(Arrays.asList("STA_CODE")),
-				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+detail.getDacStaCode()));
+				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+critere));
 		if (!listStat.isEmpty()) {
-			Stat=listStat.get(0);
+			stat=listStat.get(0);
 		}
 	}
 	
@@ -179,19 +197,19 @@ public class SituationController {
 	
 	
 	 public void vider() {
-		 objetListe.clear();
-		 listStat.clear();
+		 listHistoDac.clear();
+		 critere="";
+		 /*listStat.clear();
 		 listHistoStat.clear();
 		 listPpmStat.clear();
 		 detail=new VDetailDao();
 		 Stat = new TStatut();
-		 ppm = new TDetailPlanPassation();
+		 ppm = new TDetailPlanPassation();*/
 	 }
 	
 	
 	
-	 public String renderPage(String value ,String action) throws IOException{ 
-		 controleController.redirectionDynamicProcedures(action);
+	 public String renderPage(String value) throws IOException{ 
 			switch(value) { 
 			
 			case "accueil":
@@ -221,8 +239,7 @@ public class SituationController {
 		    
 		    return userController.renderPage(value);   
 	}
-	
-	
+	 
 	
 	
 	 public List<VDetailDao> getObjetListe() {
@@ -302,13 +319,24 @@ public class SituationController {
 		}
 
 
+
+		public List<THistoDac> getListHistoStat() {
+			return listHistoStat;
+		}
+
+
+		public void setListHistoStat(List<THistoDac> listHistoStat) {
+			this.listHistoStat = listHistoStat;
+		}
+
+
 		public TStatut getStat() {
-			return Stat;
+			return stat;
 		}
 
 
 		public void setStat(TStatut stat) {
-			Stat = stat;
+			this.stat = stat;
 		}
 
 
@@ -419,6 +447,16 @@ public class SituationController {
 
 		public void setListeLotsAvis(List<TLotAao> listeLotsAvis) {
 			this.listeLotsAvis = listeLotsAvis;
+		}
+
+
+		public List<VDacStatut> getListHistoDac() {
+			return listHistoDac;
+		}
+
+
+		public void setListHistoDac(List<VDacStatut> listHistoDac) {
+			this.listHistoDac = listHistoDac;
 		}
 
 }

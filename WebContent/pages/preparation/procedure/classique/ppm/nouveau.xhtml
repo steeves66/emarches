@@ -3117,7 +3117,7 @@
 		         <p:selectOneMenu value="#{ppmController.detailPass.dppBailleur}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Le bailleur existe ?" itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeExisteBailleur}" var="bail" itemLabel="#{bail.libelleb}" itemValue="#{bail.codeb}" />	
-			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update=":gnl"/>			   				   
+			       <p:ajax listener="#{ppmController.updateBailleurExiste()}" update="gnl"/>			   				   
 				  <f:selectItems />				   				    				   
 		       	 </p:selectOneMenu>
 	         </div>
@@ -3151,9 +3151,11 @@
 		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oftPsc" class="col-sm-6 control-label">Sollicitation des factures</label>
+		                  <label for="oftPsc1" class="col-sm-6 control-label">Sollicitation des factures</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="oftPsc1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" />
+		                   <p:calendar id="oftPsc1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%">
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSolFact')}" update="oftPsc1"/>
+		                   </p:calendar>
 		                  </div>
 		                  </div>  
          </div>
@@ -3161,9 +3163,11 @@
          
          <div class="col-md-6">
                         <div class="form-group">
-		                  <label for="offFinPsc" class="col-sm-6 control-label">Réception des factures</label>
+		                  <label for="recFac" class="col-sm-6 control-label">Réception des factures</label>
 		                  <div class="col-sm-6">
-		                    <p:calendar id="offFinPsc1" value="#{ppmController.geneDate.dppDateRecepFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" />
+		                    <p:calendar id="recFac" value="#{ppmController.geneDate.dppDateRecepFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%">
+		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateRecepFact')}" update="recFac" />
+		                    </p:calendar>
 		                   
 		                    
 		                  </div>
@@ -3185,8 +3189,9 @@
             <div class="form-group">
 		                  <label class="col-sm-6 control-label">Attributaire</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" />
-		                  
+		                   <p:calendar id="attributaire" value="#{ppmController.detailPass.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
+		                   <p:ajax event="dateSelect" listener="#{ppmController.updateDate()}" update="attributaire"/>
+		                  </p:calendar>
 		                  </div>
 		                  </div>
          </div>
@@ -3195,7 +3200,8 @@
                <div class="form-group">
 		                  <label  class="col-sm-6 control-label">Autorité contractante</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.geneDate.dppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="autcont" value="#{ppmController.detailPass.dppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.updateDate()}" update="autcont"/>
 		                   </p:calendar>
 		                  </div>
 		                  </div>
@@ -3216,18 +3222,20 @@
 			   <div class="row">
 		         <div class="col-md-6">
 		          <div class="form-group">
-		                  <label for="debutPsc" class="col-sm-6 control-label">Début d'execution</label>
+		                  <label for="debutPsc1" class="col-sm-6 control-label">Début d'execution</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="debutPsc1" value="#{ppmController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateExecDebut')}" update="debutPsc1"/>
 		                   </p:calendar>
 		                  </div>
 		                  </div>
 		         </div>
 		         <div class="col-md-6">
 		         <div class="form-group">
-		                  <label for="finDp" class="col-sm-6 control-label">Fin d'execution</label>
+		                  <label for="finPsc1" class="col-sm-6 control-label">Fin d'execution</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="finPsc1" value="#{ppmController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateExecFin')}" update="finPsc1"/>
 		                   </p:calendar>
 		                 
 
