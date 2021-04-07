@@ -6310,7 +6310,7 @@ TDacSpecs dao = new TDacSpecs();
 											   statutSanRetour ="0";
 											  
 										        }else{
-                                                        if(resultat.equalsIgnoreCase("Valid")){
+                                                        if(resultat.equalsIgnoreCase("Valide")){
 										        	  
 													  
 													        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
@@ -6326,7 +6326,7 @@ TDacSpecs dao = new TDacSpecs();
                                                         
 										                         }else{
 
-										                         	     if(resultat.equalsIgnoreCase("Rejet")) {
+										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
 												                                  statutSanction ="SRO";
 												                                  statutSanRetour ="1";
 											                                }else{
@@ -6367,7 +6367,20 @@ TDacSpecs dao = new TDacSpecs();
 												 					newDao.setTStatut(new TStatut(statutSanction));
 												 					newDao.setDacStatutRetour(slctdTd.getDacStatutRetour());
 												 			        iservice.updateObject(newDao); 
-												 	   	                 }
+												 	   	                 } 
+												 		  //FIN dans T_DAO_AFFECTATION	
+												 				
+												 		daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+							                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+							                    					if (!daoBinome.isEmpty()) {
+							                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+							                    								for(TDaoAffectation dao : daoBinome) {
+							                    									 dao.setDafStaCode(statutSanction);
+							                    									 dao.setDafStatutRetour(statutSanRetour);
+							                    									 iservice.updateObject(dao);
+							                    								  }
+						                                               }
+												 				
 													     //Activation du bouton d'dition du PV
 												 		 etatPV = true;
 										     			 etatValiderCsv = false;
