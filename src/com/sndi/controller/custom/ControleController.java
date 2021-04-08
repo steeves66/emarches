@@ -1510,8 +1510,8 @@ public class ControleController {
 						 btn_trans_pspm = false;
 						 nbreppm = true;
 						 nbrepspm = false;
-						 btn_fermer_saisie_ppm = true;
-						 btn_fermer_saisie_pspm = false;
+						 btn_fermer_saisie_ppm = false;
+						 btn_fermer_saisie_pspm = true;
 						 btn_valider_pspm_cpmp = false;
 						 btn_valider_pspm_dmp = false;
 						 btn_valider_ppm_cpmp = false;

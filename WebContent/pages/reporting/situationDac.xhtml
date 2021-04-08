@@ -47,7 +47,7 @@
 		         <div class="col-sm-2"><label class="pull-right">SITUATION ACTUELLE DU DOSSIER :</label></div>
                     <div class="col-sm-6">
                     <span style="color:red">
-                    <label><h:outputText  value="#{situationController.stat.staLibelleCourt}" style="width: 100%" /> </label>
+                    <label><h:outputText  value="#{situationController.detailHisto.staLibelleCourt}" style="width: 100%" /> </label>
                     </span>
                   </div>
             </div>
@@ -55,7 +55,7 @@
      <div class="row">         
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">HISTORIQUE DE TRAITEMENT DU DOSSIER XXX:AAAAA</div></div>
+            <div class="col-md-10 "><div  style="color: #fff">HISTORIQUE DE TRAITEMENT DU DOSSIER #{situationController.detailHisto.dacCode} : #{situationController.detailHisto.dacObjet} </div></div>
             <div class="col-md-2 "><div  style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label"></label>
 	              <div class="col-sm-6">

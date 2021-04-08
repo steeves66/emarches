@@ -28,6 +28,7 @@ import com.sndi.model.TLotAao;
 import com.sndi.model.TStatut;
 import com.sndi.model.VDacStatut;
 import com.sndi.model.VDetailDao;
+import com.sndi.model.VDetailHistoDac;
 import com.sndi.model.VPpmPgpm;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -65,6 +66,7 @@ public class SituationController {
 
 	private List<VDetailDao> objetListe = new ArrayList<VDetailDao>();
 	private List<TStatut> listStat = new ArrayList<TStatut>();
+	private List<VDetailHistoDac> listDetailHist = new ArrayList<VDetailHistoDac>();
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	private List<THistoDac> listHistoStat = new ArrayList<THistoDac>();
 	private List<VDacStatut> listHistoDac = new ArrayList<VDacStatut>();
@@ -75,6 +77,7 @@ public class SituationController {
 	private List<VPpmPgpm> listPgpmStat = new ArrayList<VPpmPgpm>();
 	private List<TAgpm> listAgpm = new ArrayList<TAgpm>();
 	private TStatut stat = new TStatut();
+	private VDetailHistoDac detailHisto = new VDetailHistoDac();
 	private TDetailPlanPassation ppm = new TDetailPlanPassation();
 	private VDetailDao detail = new VDetailDao(); 
 	private VPpmPgpm repPpm = new VPpmPgpm();
@@ -112,6 +115,7 @@ public class SituationController {
 				new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
 				new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 		recupStat();
+		recupDetailHisto();
 		/*if (!objetListe.isEmpty()) {
 			detail=objetListe.get(0);
 			recupStat();
@@ -132,6 +136,15 @@ public class SituationController {
 				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+critere));
 		if (!listStat.isEmpty()) {
 			stat=listStat.get(0);
+		}
+	}
+	
+	
+	public void recupDetailHisto() {
+		listDetailHist =(List<VDetailHistoDac>) iservice.getObjectsByColumn("VDetailHistoDac",
+				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+critere));
+		if (!listDetailHist.isEmpty()) {
+			detailHisto=listDetailHist.get(0);
 		}
 	}
 	
@@ -199,6 +212,7 @@ public class SituationController {
 	 public void vider() {
 		 listHistoDac.clear();
 		 critere="";
+		 detailHisto=new VDetailHistoDac();
 		 /*listStat.clear();
 		 listHistoStat.clear();
 		 listPpmStat.clear();
@@ -457,6 +471,26 @@ public class SituationController {
 
 		public void setListHistoDac(List<VDacStatut> listHistoDac) {
 			this.listHistoDac = listHistoDac;
+		}
+
+
+		public List<VDetailHistoDac> getListDetailHist() {
+			return listDetailHist;
+		}
+
+
+		public void setListDetailHist(List<VDetailHistoDac> listDetailHist) {
+			this.listDetailHist = listDetailHist;
+		}
+
+
+		public VDetailHistoDac getDetailHisto() {
+			return detailHisto;
+		}
+
+
+		public void setDetailHisto(VDetailHistoDac detailHisto) {
+			this.detailHisto = detailHisto;
 		}
 
 }
