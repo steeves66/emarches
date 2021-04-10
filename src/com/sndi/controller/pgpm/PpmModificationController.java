@@ -364,7 +364,7 @@ public class PpmModificationController {
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope223")) {
 					 
 		  			 if(updatePpm.getDppStructureConduc() == null || updatePpm.getDppStructureBenefi() == null || updatePpm.getDppObjet() == null || updatePpm.getDppNatInt() == null
-		  					|| updatePpm.getDppStatutAno() == null || recupLigne.getLbgCode() == null || updatePpm.getDppNbOuv() == 0)
+		  					|| updatePpm.getDppStatutAno() == null || updatePpm.getLbgCode() == null || updatePpm.getDppNbOuv() == 0)
 			  		  {
 							 FacesContext.getCurrentInstance().addMessage(null,
 							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -372,14 +372,16 @@ public class PpmModificationController {
 					   } else
 					   {
 						   modifierDetailPlan();
+	                        controlPanelPs();
+	                        recupModeleDao();
 						   //Methode update
-						   if(controleController.type == "PPM") {
+						  /* if(controleController.type == "PPM") {
 								
 			                	
 			                 }else 
 			                      if(controleController.type == "PSPM"){
 			                  
-			                 }   
+			                 }   */
 					   }
 		  			 
 		                
@@ -492,6 +494,7 @@ public class PpmModificationController {
 				             detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
 				             }
 				             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+				             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 				             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 				             detail.setDppNatInt(updatePpm.getDppNatInt());
 				             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
