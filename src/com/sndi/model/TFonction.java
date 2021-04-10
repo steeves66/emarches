@@ -41,6 +41,8 @@ public class TFonction implements java.io.Serializable {
 	private String fonLibelleLngDmp;
 	private String fonSourceSigmap;
 	private String fonRespo;
+	private String fonCodeCsv;
+	private String fonCodeSpp;
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
 	private Set<TPlanGeneral> TPlanGenerals = new HashSet<TPlanGeneral>(0);
 	private Set<TAgpm> TAgpms = new HashSet<TAgpm>(0);
@@ -59,7 +61,7 @@ public class TFonction implements java.io.Serializable {
 
 	public TFonction(String fonCod, TStructure TStructure, TTypeFonction TTypeFonction, Date fonDatDeb, Date fonDatFin,
 			String fonLibelle, String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil,Date fonDteSaisi, String fonLibelleCrt,
-			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap, String fonRespo,
+			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap, String fonRespo, String fonCodeCsv, String fonCodeSpp,
 			Set<THistoAgpm> THistoAgpms, Set<TPlanGeneral> TPlanGenerals, Set<TAgpm> TAgpms,
 			Set<THistoPlanGeneral> THistoPlanGenerals, Set<TAssignation> TAssignations,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TAffichageAgpm> TAffichageAgpms,
@@ -82,6 +84,8 @@ public class TFonction implements java.io.Serializable {
 		this.fonLibelleLngDmp = fonLibelleLngDmp;
 		this.fonSourceSigmap = fonSourceSigmap;
 		this.fonRespo = fonRespo;
+		this.fonCodeCsv = fonCodeCsv;
+		this.fonCodeSpp = fonCodeSpp;
 		this.THistoAgpms = THistoAgpms;
 		this.TPlanGenerals = TPlanGenerals;
 		this.TAgpms = TAgpms;
@@ -259,6 +263,24 @@ public class TFonction implements java.io.Serializable {
 	public void setFonRespo(String fonRespo) {
 	    this.fonRespo = fonRespo;
 	  }
+	
+	@Column(name = "FON_CODE_CSV", length = 20)
+	public String getFonCodeCsv() {
+		return this.fonCodeCsv;
+	}
+
+	public void setFonCodeCsv(String fonCodeCsv) {
+		this.fonCodeCsv = fonCodeCsv;
+	}
+
+	@Column(name = "FON_CODE_SPP", length = 20)
+	public String getFonCodeSpp() {
+		return this.fonCodeSpp;
+	}
+
+	public void setFonCodeSpp(String fonCodeSpp) {
+		this.fonCodeSpp = fonCodeSpp;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")
 	public Set<THistoAgpm> getTHistoAgpms() {

@@ -37,6 +37,64 @@
       <ul class="sidebar-menu" data-widget="tree">
       
             <!--DEBUT MENU ENGISTREMENT D'UNE DEMANDE-->
+            
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Tableau de bord</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+             <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Suivie d'un dossier</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <h:panelGroup rendered="false">
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Plan de passation
+             </p:commandLink>
+            </li>
+            </h:panelGroup>
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i> DAC
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
+           
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dossiers par periode</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <h:panelGroup rendered="false">
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Plan de passation
+             </p:commandLink>
+            </li>
+            </h:panelGroup>
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i> DAC
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
+          </ul>     
+         </li>
     
            <li class="treeview">
           <a href="#">
@@ -1117,7 +1175,74 @@
 
           </ul>        
          </li>
-    
+         
+             <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','AFFDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+           
+          </ul> 
+          
+          
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+	           <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','AFFAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','VALAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+
+          </ul>   
+           </li>
+         </li>
+          
+          
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PRQ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+	           <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','AFFPRQ')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','VALPRQ')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          
           </ul>     
          </li>
          
@@ -1131,7 +1256,7 @@
           </a> 
            <ul class="treeview-menu">
              
-               <li class="treeview">
+          <li class="treeview">
           <a href="#">
             <i class="fa fa-list"></i> <span>PGSPM</span>
             <span class="pull-right-container">
@@ -1164,7 +1289,30 @@
             </li>
 
           </ul>     
-         </li>   
+         </li>  
+         
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','AFFDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','VALDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+          
+          </ul>    
+         </li> 
               
           </ul>     
          </li>
@@ -1276,6 +1424,21 @@
             <li>
               <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPPM')}" update=":content" >
             <i class="fa fa-circle-o"></i>PPM
+             </p:commandLink>
+            </li>
+            <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAO
+             </p:commandLink>
+            </li>
+            <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>AMI
+             </p:commandLink>
+            </li>
+            <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBPRQ')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>PRQ
              </p:commandLink>
             </li>
           </ul>  

@@ -232,6 +232,9 @@ public class VDacliste implements java.io.Serializable {
 	private double cautValMax;
 	private String aaoOffAnormal;
 	private String adaLibelle;
+	private String fonCodeDmp;
+	private String fonCodeCsv;
+	private String fonCodeSpp;
 
 	public VDacliste() {
 	}
@@ -292,7 +295,8 @@ public class VDacliste implements java.io.Serializable {
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String dacMargePref, BigDecimal dacMargePrefComVal,
 			BigDecimal dacMargePrefSouVal,Long adaNum,double cautValMin,
-			double cautValMax, String aaoOffAnormal,String adaLibelle) {
+			double cautValMax, String aaoOffAnormal,String adaLibelle,
+			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -506,6 +510,9 @@ public class VDacliste implements java.io.Serializable {
 		this.cautValMax= cautValMax;
 		this.aaoOffAnormal = aaoOffAnormal;
 		this.adaLibelle = adaLibelle;
+		this.fonCodeDmp = fonCodeDmp;
+		this.fonCodeCsv = fonCodeCsv;
+		this.fonCodeSpp = fonCodeSpp;
 	}
 
 	@Id
@@ -2427,5 +2434,30 @@ public class VDacliste implements java.io.Serializable {
 		this.adaLibelle = adaLibelle;
 	}
 
+	@Column(name = "FON_CODE_DMP")
+	public String getFonCodeDmp() {
+		return this.fonCodeDmp;
+	}
+
+	public void setFonCodeDmp(String fonCodeDmp) {
+		this.fonCodeDmp = fonCodeDmp;
+	}
 	
+	@Column(name = "FON_CODE_CSV")
+	public String getFonCodeCsv() {
+		return this.fonCodeCsv;
+	}
+
+	public void setFonCodeCsv(String fonCodeCsv) {
+		this.fonCodeCsv = fonCodeCsv;
+	}
+	
+	@Column(name = "FON_CODE_SPP")
+	public String getFonCodeSpp() {
+		return this.fonCodeSpp;
+	}
+
+	public void setFonCodeSpp(String fonCodeSpp) {
+		this.fonCodeSpp = fonCodeSpp;
+	}
 }

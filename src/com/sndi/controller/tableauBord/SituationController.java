@@ -90,44 +90,47 @@ public class SituationController {
 	private Date dateDeb;
 	private Date dateFin;
 	
-
-	public void rechercheDossier1(){
-		objetListe =(List<VDetailDao>) iservice.getObjectsByColumn("VDetailDao", new ArrayList<String>(Arrays.asList("dacCode")),
-				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
-				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-		if (!objetListe.isEmpty()) {
-			detail=objetListe.get(0);
-			recupStat();
-			recupHisto();
-			recupPPM();
-			recupDossier();
-			recupLots();
-		}else {
-			vider();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
-		}	
-	}
-	
 	
 	public void rechercheDossier(){
-		listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
-				new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
-				new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-		recupStat();
-		recupDetailHisto();
-		/*if (!objetListe.isEmpty()) {
-			detail=objetListe.get(0);
-			recupStat();
-			recupHisto();
-			recupPPM();
-			recupDossier();
-			recupLots();
-		}else {
-			vider();
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
-		}	*/
+		
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
+						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
+						new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				recupStat();
+				recupDetailHisto();
+				/*if (!objetListe.isEmpty()) {
+				 //
+				}else {
+					vider();
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
+				}	*/
+		 }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
+							new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
+							new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					recupStat();
+					recupDetailHisto();
+					/*if (!objetListe.isEmpty()) {
+					 //
+					}else {
+						vider();
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
+					}	*/
+				 
+			 }else {
+					listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
+							new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere));
+					recupStat();
+					recupDetailHisto();
+				
+		 }
+	 
+		 }
+	
 	}
 	
 	
@@ -148,48 +151,15 @@ public class SituationController {
 		}
 	}
 	
-	public void recupHisto() {
-		listHistoStat =(List<THistoDac>) iservice.getObjectsByColumn("THistoDac", new ArrayList<String>(Arrays.asList("HAC_ID")),
-				new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+detail.getDacCode()));	
-	}
+
 	
-	public void recupDossier() {
-		listDossierDac = (List<TDossierDacs>) iservice.getObjectsByColumn("TDossierDacs", new ArrayList<String>(Arrays.asList("DDA_ID")),
-				new WhereClause("DDA_DAC_CODE",WhereClause.Comparateur.EQ,""+detail.getDacCode()));
-	}
-	
-	public void recupLots() {
-		listeLotsAvis = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
-				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+detail.getAaoCode()));
-	}
-	
-	public void recupPPM() {
-		listPpmStat =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-				new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+detail.getDacCode()));
-		if (!listPpmStat.isEmpty()) {
-			ppm=listPpmStat.get(0);
-			recupPGPM();
-		}
-	}
+
 	
 	
-	public void recupPGPM() {
-		listPgpmStat =(List<VPpmPgpm>) iservice.getObjectsByColumn("VPpmPgpm", new ArrayList<String>(Arrays.asList("DPP_ID")),
-				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+ppm.getDppId()));
-		if (!listPgpmStat.isEmpty()) {
-			repPpm=listPgpmStat.get(0);
-			recupAGPM();
-		}
-	}
+
 	
-	public void recupAGPM() {
-		listAgpm =(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
-				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+repPpm.getGpgAgpId()));
-		if (!listAgpm.isEmpty()) {
-			agpm=listAgpm.get(0);
-		}
-	}
-	
+
+
 	
 	public void ReqParPeriode() {
 		DateFormat df = new SimpleDateFormat("dd/MM/yy");
@@ -213,12 +183,6 @@ public class SituationController {
 		 listHistoDac.clear();
 		 critere="";
 		 detailHisto=new VDetailHistoDac();
-		 /*listStat.clear();
-		 listHistoStat.clear();
-		 listPpmStat.clear();
-		 detail=new VDetailDao();
-		 Stat = new TStatut();
-		 ppm = new TDetailPlanPassation();*/
 	 }
 	
 	

@@ -2236,23 +2236,27 @@ TDacSpecs dao = new TDacSpecs();
 	 
 	 //DEBUT AFFICHAGE LISTE DAC DMP
 	//Affichage des DMP en lui passant en parametre le statut concernï¿½ (1 statuts)
-	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1){
+	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1,String condition,String valeur){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				 new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
 		         multiFiltre ="";
+		         _logger.info("colonne: "+condition+" valeur :"+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("listeDAO size: "+listeDAO.size());	
 			typeActionTb(); 
 	 }
 	 
 	//Affichage des DMP en lui passant en parametre les statuts concernï¿½ (2 statuts)
-		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2){
+		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2,String condition,String valeur){
 			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+					 new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
 			         multiFiltre ="";
+			         _logger.info("colonne: "+condition+" valeur :"+valeur);
 				_logger.info("listeDAO size: "+listeDAO.size());	
 				typeActionTb(); 
 		 }
@@ -2359,20 +2363,20 @@ TDacSpecs dao = new TDacSpecs();
 					 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-						 chargeDataDMP2(typeDac,typePlan,"D1S","D1R");
+						 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-							 chargeDataDMP2(typeDac,typePlan,"D1S","D1R");
+							 chargeDataDMP2(typeDac,typePlan,"D1S","D1R","FON_CODE_SPP",userController.getSlctd().getTFonction().getFonCodeSpp());
 							
 						 }else {
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 								 
 								//Affichage des differentes listes de l'AC en fonction de l'action								  
 								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
-									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R");
+									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 chargeDataDMP1(typeDac,typePlan,"D4V");
+										 chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
 									 }else {
 										
 									 }	 
@@ -2387,7 +2391,7 @@ TDacSpecs dao = new TDacSpecs();
 						 }
 					 }
 			     } 
-			   }
+			  }
 					
 		} 
 		 

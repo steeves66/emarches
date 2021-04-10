@@ -732,13 +732,11 @@ public class TableauBordController {
 						_logger.info("CODE_PF: "+userController.getSlctd().getTFonction().getFonCod());
 				 }else {
 					 //DMP, CSV, SPD ET SPP (Acteurs DMP)
-					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
-							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP") 
-							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")
-							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 listeTableauBordDmp.clear();
 						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
 								 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								 //new WhereClause("FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 								 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
 							if (!listeTableauBordDmp.isEmpty()) {
 								tableauBordDmp=listeTableauBordDmp.get(0);
@@ -746,6 +744,48 @@ public class TableauBordController {
 							_logger.info("TYP_PROC: "+typeProc);
 							_logger.info("TYP_DAC: "+typeDac);
 							_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+					 }else {//
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 listeTableauBordDmp.clear();
+							 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+									 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+									 //new WhereClause("FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+									 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+								if (!listeTableauBordDmp.isEmpty()) {
+									tableauBordDmp=listeTableauBordDmp.get(0);
+								}
+								_logger.info("TYP_PROC: "+typeProc);
+								_logger.info("TYP_DAC: "+typeDac);
+								_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+						 }else {//
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+								 listeTableauBordDmp.clear();
+								 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+										 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+										 //new WhereClause("FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+										 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+									if (!listeTableauBordDmp.isEmpty()) {
+										tableauBordDmp=listeTableauBordDmp.get(0);
+									}
+									_logger.info("TYP_PROC: "+typeProc);
+									_logger.info("TYP_DAC: "+typeDac);
+									_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+							 }else {//
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+									 listeTableauBordDmp.clear();
+									 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+											 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+											 //new WhereClause("FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+											 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+										if (!listeTableauBordDmp.isEmpty()) {
+											tableauBordDmp=listeTableauBordDmp.get(0);
+										}
+										_logger.info("TYP_PROC: "+typeProc);
+										_logger.info("TYP_DAC: "+typeDac);
+										_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+								 }
+							 }
+						 }
 					 }
 				 }
 			   }
@@ -2363,7 +2403,7 @@ public int getPpmDiffDossier(String src,String typePlan){
 public int getPpmDiffDmp(String src1, String src2,String typePlan){
 	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			//new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+			new WhereClause("FON_CODE_SPP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 	return	i;	
 }
@@ -2430,8 +2470,8 @@ public int getPpmValideDmpAc(String src,String typePlan){
 public int getPpmValideDmp(String src,String typePlan){
 	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
-			//new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
+			new WhereClause("FON_CODE_SPP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -2450,10 +2490,11 @@ public int getPpmDejaPub(){
 
 
 //ppm en attente de validation par le dmp : Nouvelle Methode
+
 public int getPpmAttValideDmp(String src1, String src2,String typePlan){
 	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			//new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+			new WhereClause("FON_CODE_SPP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 	return	i;	
 }

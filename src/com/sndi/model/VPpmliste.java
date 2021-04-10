@@ -81,7 +81,8 @@ public class VPpmliste implements java.io.Serializable {
 	private long plpGesCode;
 	private Long dppNbOuv;
 	private String cptFinancement;
-
+	private String fonCodeDmp;
+	private String fonCodeSpp;
 	public VPpmliste() {
 	}
 
@@ -109,7 +110,8 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateOuvertOf, Date dppDateOuvertOt, Date dppDateRecepFact, Date dppDateRecepLettr,
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
-			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement) {
+			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
+			String fonCodeDmp,String fonCodeSpp) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -172,6 +174,8 @@ public class VPpmliste implements java.io.Serializable {
 		this.plpGesCode = plpGesCode;
 		this.dppNbOuv = dppNbOuv;
 		this.cptFinancement = cptFinancement;
+		this.fonCodeDmp = fonCodeDmp;
+		this.fonCodeSpp = fonCodeSpp;
 	}
 
 	@Id
@@ -733,6 +737,24 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setCptFinancement(String cptFinancement) {
 		this.cptFinancement = cptFinancement;
+	}
+	
+	@Column(name = "FON_CODE_DMP")
+	public String getFonCodeDmp() {
+		return this.fonCodeDmp;
+	}
+
+	public void setFonCodeDmp(String fonCodeDmp) {
+		this.fonCodeDmp = fonCodeDmp;
+	}
+	
+	@Column(name = "FON_CODE_SPP", length = 150)
+	public String getFonCodeSpp() {
+		return this.fonCodeSpp;
+	}
+
+	public void setFonCodeSpp(String fonCodeSpp) {
+		this.fonCodeSpp = fonCodeSpp;
 	}
 
 }
