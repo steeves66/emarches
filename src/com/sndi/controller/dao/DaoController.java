@@ -2235,26 +2235,28 @@ TDacSpecs dao = new TDacSpecs();
 	 }
 	 
 	 //DEBUT AFFICHAGE LISTE DAC DMP
-	//Affichage des DMP en lui passant en parametre le statut concernÃ¯Â¿Â½ (1 statuts)
+	//Affichage des DMP en lui passant en parametre le statut concerné (1 statut)
 	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1,String condition,String valeur){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-				 new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
+				 //new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
+				 new WhereClause(""+condition,WhereClause.Comparateur.LIKE,valeur+"%"));
 		         multiFiltre ="";
 		         _logger.info("colonne: "+condition+" valeur :"+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("listeDAO size: "+listeDAO.size());	
 			typeActionTb(); 
 	 }
 	 
-	//Affichage des DMP en lui passant en parametre les statuts concernÃ¯Â¿Â½ (2 statuts)
+	//Affichage des DMP en lui passant en parametre les statuts concerné (2 statuts)
 		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2,String condition,String valeur){
 			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-					 new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
+					 //new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur)); 
+					 new WhereClause(""+condition,WhereClause.Comparateur.LIKE,valeur+"%"));
 			         multiFiltre ="";
 			         _logger.info("colonne: "+condition+" valeur :"+valeur);
 				_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2363,20 +2365,24 @@ TDacSpecs dao = new TDacSpecs();
 					 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-						 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+						 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+						 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_DMP",userController.getSlctd().getTFonction().getFonCod()); 
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-							 chargeDataDMP2(typeDac,typePlan,"D1S","D1R","FON_CODE_SPP",userController.getSlctd().getTFonction().getFonCodeSpp());
+							 //chargeDataDMP2(typeDac,typePlan,"D1S","D1R","FON_CODE_SPP",userController.getSlctd().getTFonction().getFonCodeSpp());
+							 chargeDataDMP2(typeDac,typePlan,"D1S","D1R","FON_CODE_SPP",userController.getSlctd().getTFonction().getFonCod());
 							
 						 }else {
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 								 
 								//Affichage des differentes listes de l'AC en fonction de l'action								  
 								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
-									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+									 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
+										 chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
 									 }else {
 										
 									 }	 
@@ -5377,9 +5383,7 @@ TDacSpecs dao = new TDacSpecs();
 										                                                }
 								                                                }
 						
-						//TÃ¯Â¿Â½lÃ¯Â¿Â½chargement des DAO type aprÃ¯Â¿Â½s la saisie du DAO  
-							//TÃ¯Â¿Â½lÃ¯Â¿Â½chargement des DAO type aprÃ¯Â¿Â½s la saisie du DAO  
-						//TÃ¯Â¿Â½lÃ¯Â¿Â½chargement des DAO type aprÃ¯Â¿Â½s la saisie du DAO 
+						//Téléchargement des DAO type aprÃ¯Â¿Â½s la saisie du DAO  
 						 public void opendaoNew() throws IOException{
 								listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 										new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
@@ -5480,12 +5484,12 @@ TDacSpecs dao = new TDacSpecs();
 										} 
 							  
 							  
-							//Chargement des fonctions Ã  imputer pour le Chef de Service
+							//Chargement des fonctions à  imputer par le Chef de Service
 							  public void chargeFonctionImput() { 
 								  listeFonctionsImput.clear();
 								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 										  new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()),
-										 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
+										  new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 									_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
 									typeActionTb();
 									}
@@ -5562,7 +5566,7 @@ TDacSpecs dao = new TDacSpecs();
 								  
 								  constantService.getStatut("DC2");
 	 							  	//Historisation du / des retraits
-	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrig par le responsable du binome");
+	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrige par le responsable du binome");
 										//Actualisation du Tableau de Bord
 										typeActionTb();
 										//Activation et dsactivation des boutons valider
@@ -5630,7 +5634,7 @@ TDacSpecs dao = new TDacSpecs();
 											              				  validCorrection = true;
 											              				  etatDaoCorrige = true;
 							 				                              //Message de confirmation
-							 				                              userController.setTexteMsg("Correction(s) ffectue(s) avec succs!");
+							 				                              userController.setTexteMsg("Correction(s) effectue(s) avec succes!");
 							 				                              userController.setRenderMsg(true);
 							 				                              userController.setSevrityMsg("success");
 							                                   }
@@ -5648,7 +5652,7 @@ TDacSpecs dao = new TDacSpecs();
 								//Insertion des chargs d'tudes choisis 
 									if (listSelectionFonctImput.size()==0) {
 												FacesContext.getCurrentInstance().addMessage(null,
-												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun Charg d'Etudes selectionn", ""));
+												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun Charg d'Etudes selectionné", ""));
 											}
 									 		else{
 									 			    
@@ -5726,7 +5730,7 @@ TDacSpecs dao = new TDacSpecs();
 										 			//Chargement des compteurs du tableau de bord
 										 			typeActionTb();	
 										 			//Message de confirmation
-							    					userController.setTexteMsg("Affectation(s) effectue(s) avec succs!");
+							    					userController.setTexteMsg("Affectation(s) effectue(s) avec succes!");
 													userController.setRenderMsg(true);
 													userController.setSevrityMsg("success");
 
@@ -5845,7 +5849,7 @@ TDacSpecs dao = new TDacSpecs();
 									         }		
 									    }
 								  
-								    //Examen des pices du DAO par le charg d'Etudes du binÃƒÂ´me
+								    //Examen des pices du DAO par le charg d'Etudes du binome
 									@Transactional
 								    public void examinerChar() {
 										  
@@ -5883,7 +5887,7 @@ TDacSpecs dao = new TDacSpecs();
 												                     //Actualisation du Tableau de Bord
 												                     typeActionTb();
 												                     //Message de confirmation
-												                     userController.setTexteMsg("Correction(s) ffectue(s) avec succs!");
+												                     userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
 												                     userController.setRenderMsg(true);
 												                     userController.setSevrityMsg("success");
 												                     
@@ -5925,7 +5929,7 @@ TDacSpecs dao = new TDacSpecs();
 									 				                                //Actualisation du Tableau de Bord
 													                                 typeActionTb();
 									 				                                //Message de confirmation
-									 				                                userController.setTexteMsg("Correction(s) ffectue(s) avec succs!");
+									 				                                userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
 									 				                                userController.setRenderMsg(true);
 									 				                                userController.setSevrityMsg("success");
 									                                         }
@@ -5946,7 +5950,7 @@ TDacSpecs dao = new TDacSpecs();
 										   //chargePiecesByDao();
 										
 											 //Message de confirmation
-											 userController.setTexteMsg("Correction(s)  ffectue(s) avec succs!");
+											 userController.setTexteMsg("Correction(s)  effectuée(s) avec succès!");
 											 userController.setRenderMsg(true);
 											 userController.setSevrityMsg("success");	
 									  }
@@ -5962,9 +5966,9 @@ TDacSpecs dao = new TDacSpecs();
 											dao.setDacStatutRetour(slctdTd.getDacStatutRetour());
 											iservice.updateObject(dao);
 								       
-											  constantService.getStatut("D4V");
-			 							  	//Historisation du / des retraits
-			 						       historiser("D4V",slctdTd.getDacCode()," ");
+										   constantService.getStatut("D4V");
+			 							   //Historisation du / des retraits
+			 						       historiser("D4V",slctdTd.getDacCode(),"DAO Validé");
 											
 			 						      tableauBordController.saveTempTabord("D4V", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 										  chargeData();
@@ -5972,7 +5976,7 @@ TDacSpecs dao = new TDacSpecs();
 										  //Actualisation du tableau de bord
 										  typeActionTb();
 										  //Message de confirmation
-										  userController.setTexteMsg("Validation effectue avec succs!");
+										  userController.setTexteMsg("Validation effectuée avec succès!");
 										  userController.setRenderMsg(true);
 										  userController.setSevrityMsg("success");		
 								    }
@@ -5991,14 +5995,14 @@ TDacSpecs dao = new TDacSpecs();
 												     iservice.updateObject(daoCorr);
 												 
 												     //Message de confirmation
-													 userController.setTexteMsg("Validation ffectue avec succs!");
+													 userController.setTexteMsg("Validation effectuée avec succès!");
 													 userController.setRenderMsg(true);
 													 userController.setSevrityMsg("success");
 										          }	                     
 									   } 
 									  
 									  
-									  //Transmission du DAO par le Responsable du binÃƒÂ´me
+									  //Transmission du DAO par le Responsable du binome
 									  @Transactional
 									  public void transmettreRespo() {
 										  
@@ -6026,7 +6030,7 @@ TDacSpecs dao = new TDacSpecs();
 
 												  constantService.getStatut("D4V");
 								 				  //Historisation du / des retraits
-								 				  historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binÃ´me");
+								 				  historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binome");
 												  
 								 				  tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 												  chargeData();
@@ -6034,7 +6038,7 @@ TDacSpecs dao = new TDacSpecs();
 												   //Actualisation du tableau de bord
 								 					typeActionTb();
 								 					//Message de confirmation
-								 					userController.setTexteMsg("Transmission effectue avec succs!");
+								 					userController.setTexteMsg("Transmission effectuée avec succès!");
 													userController.setRenderMsg(true);
 													userController.setSevrityMsg("success");
 										        }
@@ -6043,9 +6047,9 @@ TDacSpecs dao = new TDacSpecs();
 									  
 									  @Transactional
 										public void uploadCharge(FileUploadEvent event) throws java.io.FileNotFoundException { 
-										 //condition de chargement d'un document : Nature sÃ¯Â¿Â½lectionnÃ¯Â¿Â½e 
+										 //condition de chargement d'un document : Nature sélectionnée
 										 if((docNature == null || "".equals(docNature))){
-											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non slectionne pour le chargement! ","");
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
 											FacesContext.getCurrentInstance().addMessage(null, msg);	
 											 
 											 }else {
@@ -6075,11 +6079,11 @@ TDacSpecs dao = new TDacSpecs();
 											//chargeNatureDocTrans();
 											chargeDossierCharge();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectu!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
 											chargeDossierCharge();
 											}else {
-												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistr, charger  nouveau un document ! ","");
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger  nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
@@ -6129,11 +6133,11 @@ TDacSpecs dao = new TDacSpecs();
 											//chargeNatureDocTrans();
 											chargeDossierAutorisation();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistr!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistré!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
 											//chargeDossierCharge();
 											}else {
-												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistr, charger  nouveau un document ! ","");
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger  nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
@@ -6388,8 +6392,10 @@ TDacSpecs dao = new TDacSpecs();
 													     //Activation du bouton d'dition du PV
 												 		 etatPV = true;
 										     			 etatValiderCsv = false;
-										     				     
-														 userController.setTexteMsg("Votre sanction a t apporte avec succs!");
+										     			
+										     			historiser(statutSanction,newDao.getDacCode(),"DAO validé par le chef de service");
+										     			
+														 userController.setTexteMsg("Dao validé avec succès!");
 														 userController.setRenderMsg(true);
 														 userController.setSevrityMsg("success");
 									     }   
@@ -6440,7 +6446,7 @@ TDacSpecs dao = new TDacSpecs();
 									 				
 									 				  constantService.getStatut(statutUpdate);
 					 							  	//Historisation du / des retraits
-					 						       historiser(""+statutUpdate,newDao.getDacCode()," ");
+					 						       historiser(""+statutUpdate,newDao.getDacCode(),"DAO Publié avec succès");
 					 						       
 					 						      tableauBordController.saveTempTabord(""+statutUpdate, newDao.getTTypeDacSpecs().getTdcCode(), ""+userController.getSlctd().getTFonction().getFonCod(), newDao.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), newDao.getDacCode());
 
