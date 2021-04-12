@@ -3654,10 +3654,7 @@ TDacSpecs dao = new TDacSpecs();
 			    public void saveDao(){	
 			    	 if(controleController.type == "DAC") {
 			    		 saveDac("DAO");	
-					 }else {
-						 if(controleController.type == "DAC") {
-							 saveDac("DAO"); 
-						 }else {
+					 }else { 
 							 if(controleController.type == "AMI") {
 								 saveDac("AMI");
 							 }else {
@@ -3672,7 +3669,7 @@ TDacSpecs dao = new TDacSpecs();
 									 }
 								 }*/
 							 }
-					     } 
+					     
 					   }
 			 		 /*  if(controleController.type == "DAC" && controleController.typePlan == "PN") {
 			 			  saveDac("PN","DAO");
