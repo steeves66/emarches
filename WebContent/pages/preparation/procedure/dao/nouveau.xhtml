@@ -561,6 +561,34 @@
                 </div>
                 
                 </h:panelGroup>
+                <h:panelGroup rendered="#{daoController.ouvertureAmi}">
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Nbre Ouverture</label>
+				  <div class="col-sm-2"> 
+                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
+			            <f:selectItem itemLabel="1" itemValue="1" /> 
+                       <!--  <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/> -->				   	   				    				   
+			       </p:selectOneMenu>
+                     
+                  </div>
+                </div>
+                
+                
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Date</label>
+				  <div class="col-sm-2">    
+                  <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                  </p:calendar>
+                  </div>
+                  
+                  <label  class="col-sm-3 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                
+                </div>
+                
+                </h:panelGroup>
          </div>
          </div>
          </div>
@@ -1778,7 +1806,15 @@
            
             </p:wizard>
      
-      <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+      <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_ami}" action="#{daoController.renderPage('dao1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_prq}" action="#{daoController.renderPage('dao1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 

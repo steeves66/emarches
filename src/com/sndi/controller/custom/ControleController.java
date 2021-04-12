@@ -1823,6 +1823,8 @@ public class ControleController {
 											 panel2 =false;
 											 panel3 = false;
 											panel4 = false;
+											 saisie=true; 
+											 ecran="saisie";
 				   							 venteRecherche = false; 
 				   							 affectationRecherche = false;
 				   							 examenRecherche = false;

@@ -4317,6 +4317,7 @@ public class PpmController {
     	  		 detailPass.setTStatut(new TStatut("S1S"));
     	  		 detailPass.setDppStatutRetour("0");
     	  		 detailPass.setDppStatutDao("N");
+    	  		 detailPass.setDppMotif("Procédure initié par l'AC");
     	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
     	  		 iservice.addObject(detailPass);
     	  		 
@@ -4365,6 +4366,7 @@ public class PpmController {
               		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
               		    detailPass.setTStatut(new TStatut("S1S"));
               		    detailPass.setDppStatutRetour("0");
+              		    detailPass.setDppMotif("");
               		    detailPass.setDppStatutDao("N");
               		    iservice.addObject(detailPass); 
               		    
@@ -5369,31 +5371,13 @@ public class PpmController {
 						 //observation = "PPM retourné par la CPMP";
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-							  if(slctdTd.getDppStrCode().equalsIgnoreCase("02")) {
 									 statutUpdate ="S3D"; 
 									 statutRetour="2";
-								 }else
-									  if(slctdTd.getDppStrCode().equalsIgnoreCase("03")) {
-										  statutUpdate ="SPR"; 
-										  statutRetour="2";
-									  }else {
-										  statutUpdate ="S3D"; 
-										  statutRetour="2";
-									  }
+								
 				      }else {
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-
-							 if(slctdTd.getDppStrCode().equalsIgnoreCase("02")) {
 								 statutUpdate ="S3D"; 
 								 statutRetour="2";
-							 }else
-								  if(slctdTd.getDppStrCode().equalsIgnoreCase("03")) {
-									  statutUpdate ="SPR"; 
-									  statutRetour="2";
-								  }else {
-									  statutUpdate ="S3D"; 
-									  statutRetour="2";
-								  }
 						 }
 				     } 
 				 }
@@ -5405,10 +5389,11 @@ public class PpmController {
 								passDetail= listeTsPpm.get(0);
 								passDetail.setTStatut(new TStatut(statutUpdate));
 								passDetail.setDppStatutRetour(statutRetour);
+								passDetail.setDppMotif(observation);
 						       iservice.updateObject(passDetail);
 			
 							  //Historisation des Plans Généraux
-							   historiser(""+statutUpdate,passDetail,""+getObservation());
+							   //historiser(""+statutUpdate,passDetail,""+getObservation());
 							  //Préparation du Tableau de Bord
 						      tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
 
@@ -5463,6 +5448,7 @@ public class PpmController {
 									passDetail= listeTsPpm.get(0);
 									passDetail.setTStatut(new TStatut(statutUpdate));
 									passDetail.setDppStatutRetour("1");
+									passDetail.setDppMotif(observation);
 							       iservice.updateObject(passDetail);
 					
 			                      
@@ -5474,7 +5460,7 @@ public class PpmController {
 								   }
 			                  
 								     
-								     historiser(""+statutUpdate,passDetail,""+histoPpm.getHppMotif());
+								     //historiser(""+statutUpdate,passDetail,""+histoPpm.getHppMotif());
 								     //Préparation du Tableau de Bord
 							      	tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
 
@@ -5511,27 +5497,11 @@ public class PpmController {
 							 //observation="Opération retournée avec succès";
 						 }else 
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-
-								 if(slctdTd.getDppStrCode().equalsIgnoreCase("02")) {
 									 statutUpdate ="S3D"; 
-								 }else
-									  if(slctdTd.getDppStrCode().equalsIgnoreCase("03")) {
-										  statutUpdate ="SPD";  
-									  }else {
-										  statutUpdate ="S3D"; 
-									  }
+								
 						 }else 
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-								 //statutUpdate ="S3D";
-								 
-								 if(slctdTd.getDppStrCode().equalsIgnoreCase("02")) {
 									 statutUpdate ="S3D"; 
-								 }else
-									  if(slctdTd.getDppStrCode().equalsIgnoreCase("03")) {
-										  statutUpdate ="SPD";  
-									  }else {
-										  statutUpdate ="S3D"; 
-									  }
 							 }
 					      
 					 
@@ -5542,6 +5512,7 @@ public class PpmController {
 									passDetail= listeTsPpm.get(0);
 									passDetail.setTStatut(new TStatut(statutUpdate));
 									passDetail.setDppStatutRetour("1");
+									passDetail.setDppMotif(observation);
 							       iservice.updateObject(passDetail);
 
 									historiser(""+statutUpdate,passDetail,""+getObservation());
@@ -5590,6 +5561,7 @@ public class PpmController {
 									passDetail= listeTsPpm.get(0);
 									passDetail.setTStatut(new TStatut(statutUpdate));
 									passDetail.setDppStatutRetour("1");
+									passDetail.setDppMotif(observation);
 							       iservice.updateObject(passDetail);
 					
 			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
@@ -5600,7 +5572,7 @@ public class PpmController {
 								   }
 			                    
 									 //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
-										List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+									/*	List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 									    TStatut statuts = new TStatut();
 									      if(!LS.isEmpty()) statuts = LS.get(0);
 									//Historisation des Plans Généraux
@@ -5611,7 +5583,7 @@ public class PpmController {
 									histoPass.setTDetailPlanPassation(passDetail);
 									histoPass.setTFonction(userController.getSlctd().getTFonction());
 									histoPass.setTOperateur(userController.getSlctd().getTOperateur());
-									iservice.addObject(histoPass);
+									iservice.addObject(histoPass);*/
 									//Préparation du Tableau de Bord
 								    tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
 

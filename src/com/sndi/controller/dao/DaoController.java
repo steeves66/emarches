@@ -469,6 +469,7 @@ public class DaoController {
 	  private boolean btn_affecter = false;
 	  private boolean btn_corrige = true;
 	  private boolean ouverture = false;
+	  private boolean ouvertureAmi = false;
 	  private boolean pavet_lot = false;
 	  private boolean pavet_offre = false;
 	  private boolean pavet_critere = false;
@@ -507,6 +508,10 @@ public class DaoController {
 	              //listeMarge();
 			     }
 			 
+			//Controle Pav cration
+			 if(event.getOldStep().equals("tabLot") && event.getNewStep().equals("critere")) {
+				 chargeCritere();
+			     }
 			//Controle Pav cration
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
 				 //factoriserLot();
@@ -670,6 +675,8 @@ TDacSpecs dao = new TDacSpecs();
 						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
 			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 			 _logger.info("liste affiche: "+listeCritereAnalyse.size());
+			 _logger.info("DacCode: "+dao.getDacCode());
+			 _logger.info("mdtCode: "+dao.getTModeleDacType().getMdtCode());
 		   }else
 			 //ECRAN DE MODIFICATION
 		   {
@@ -677,6 +684,8 @@ TDacSpecs dao = new TDacSpecs();
 						new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacModType()),
 			            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 			 _logger.info("liste affiche: "+listeCritereAnalyse.size());  
+			 _logger.info("DacCode: "+dao.getDacCode());
+			 _logger.info("mdtCode: "+dao.getTModeleDacType().getMdtCode());
 		   }
 		
 	 }
@@ -3630,9 +3639,11 @@ TDacSpecs dao = new TDacSpecs();
 			 
 			 public void panelOuverture(){	
 		    	 if(controleController.type == "DAC" ||controleController.type == "PRQ") {
-		    		 ouverture = true;	
+		    		 ouverture = true;
+		    		 ouvertureAmi=false;
 				 }else {
 					 ouverture = false;
+					 ouvertureAmi=true;
 				   }
 
 		     }
@@ -15516,6 +15527,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setBtnChangerOperation(boolean btnChangerOperation) {
 		this.btnChangerOperation = btnChangerOperation;
+	}
+
+	public boolean isOuvertureAmi() {
+		return ouvertureAmi;
+	}
+
+	public void setOuvertureAmi(boolean ouvertureAmi) {
+		this.ouvertureAmi = ouvertureAmi;
 	}
 	
 	

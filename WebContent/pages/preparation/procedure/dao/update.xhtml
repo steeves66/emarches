@@ -1682,7 +1682,15 @@
            
             </p:wizard>
      
-      <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+           <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_ami}" action="#{daoController.renderPage('dao1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_prq}" action="#{daoController.renderPage('dao1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		

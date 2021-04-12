@@ -94,6 +94,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private long dppNbOuv;
 	private Long dppDppId;
 	private Date dppApprobAnoTec;
+	private String dppMotif;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -126,7 +127,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
-			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
+			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,String dppMotif,
 			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Long dppDppId,Date dppApprobAnoTec,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
@@ -193,6 +194,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppDateNotAtt = dppDateNotAtt;
 		this.dppNbOuv = dppNbOuv;
 		this.dppDppId = dppDppId;
+		this.dppMotif = dppMotif;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -863,6 +865,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setTFinancementPpms(Set<TFinancementPpm> TFinancementPpms) {
 		this.TFinancementPpms = TFinancementPpms;
+	}
+
+	@Column(name = "DPP_MOTIF")
+	public String getDppMotif() {
+		return dppMotif;
+	}
+
+	public void setDppMotif(String dppMotif) {
+		this.dppMotif = dppMotif;
 	}
 
 }
