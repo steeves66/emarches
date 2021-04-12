@@ -494,7 +494,7 @@ public class PpmModificationController {
 				             detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
 				             }
 				             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
-				             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+				             //detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 				             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 				             detail.setDppNatInt(updatePpm.getDppNatInt());
 				             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
