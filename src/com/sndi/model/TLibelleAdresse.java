@@ -22,7 +22,7 @@ import com.sndi.model.TDetailAdresseAvis;
 @Table(name = "T_LIBELLE_ADRESSE", schema = "EMAP")
 public class TLibelleAdresse implements java.io.Serializable {
 
-	private short liaNum;
+	private long liaNum;
 	private String liaLibelle;
 	private Set<TDetailAdresseAvis> TDetailAdresseAvises = new HashSet<TDetailAdresseAvis>(0);
 
@@ -42,12 +42,12 @@ public class TLibelleAdresse implements java.io.Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_LIAD_Sequence", sequenceName = "SEQ_LIAD", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_LIAD_Sequence")
-	@Column(name = "LIA_NUM", unique = true, nullable = false, precision = 3, scale = 0)
-	public short getLiaNum() {
+	@Column(name = "LIA_NUM")
+	public long getLiaNum() {
 		return this.liaNum;
 	}
 
-	public void setLiaNum(short liaNum) {
+	public void setLiaNum(long liaNum) {
 		this.liaNum = liaNum;
 	}
 
