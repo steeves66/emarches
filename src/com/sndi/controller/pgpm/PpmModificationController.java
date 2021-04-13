@@ -134,6 +134,7 @@ public class PpmModificationController {
 		 chargeModePassation();
 		 chargeTypeProcedures(); 
 		 chargeFonctionDmp();
+		 chargeDatepub();
 	 }
 	
 	 
@@ -475,6 +476,13 @@ public class PpmModificationController {
 		 }
 		 
 		 
+		 //liste des dates de publication
+		 public void chargeDatepub() {
+			 //listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+			 listeDatePub.clear();
+			 listeDatePub= ((List<VDatePub>)iservice.getObjectsByColumn("VDatePub",new ArrayList<String>(Arrays.asList("DATEPUB"))));
+		 }
+		  
 		
 		 public void modifierDetailPlan() throws IOException{
 				 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
