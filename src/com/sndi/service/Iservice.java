@@ -74,6 +74,7 @@ public interface Iservice {
 	public  List getObjects(String objet);
 	
 	public  List getObjects(String objet, List<String> columnList);
+
 	
 	public List getObjectsNotIn(String object, List<String> columnList, String notCondition,  List<String> notList);
 	public List getObjectsIn(String object, List<String> columnList, String inCondition,  List<String> inList);
@@ -98,5 +99,7 @@ public interface Iservice {
 	
 	public String getCodeDossier(String inc, int tailleChar, int size,
 			String T_DOSSIERS, String DOS_CODE);
+
+	public List getObjectByColumnInInstr(String objet, String strSource);
 
 }

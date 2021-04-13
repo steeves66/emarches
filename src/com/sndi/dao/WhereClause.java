@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class WhereClause {
 	public enum Comparateur{ 
-		EQ, NEQ, LIKE, INF, SUP, IS_NULL, IS_NOT_NULL,BET,NOTL,IN;		
+		EQ, NEQ, LIKE, INF, SUP, IS_NULL, IS_NOT_NULL,BET,NOTL,IN, INSTR;		
 	}
 	private String colonne;
 	private String valeur;
@@ -80,7 +80,11 @@ public class WhereClause {
            		break;
            case IN:
           		result=" IN ";
-          		break;		
+          		break;	
+          		
+           case INSTR:
+        	   result = " INSTR ";
+        	   break;
                
            default:
         	   result = " = ";

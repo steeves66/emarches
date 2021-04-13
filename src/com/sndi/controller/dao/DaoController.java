@@ -2271,6 +2271,23 @@ TDacSpecs dao = new TDacSpecs();
 				_logger.info("listeDAO size: "+listeDAO.size());	
 				typeActionTb(); 
 		 }
+		 
+		 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 
+			    reaffectlisteDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+					// new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			     if (!reaffectlisteDAO.isEmpty()) {
+				    caution= reaffectlisteDAO.get(0);
+ 	                 }
+			 
+			 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+			         multiFiltre ="";
+			         //_logger.info("colonne: "+condition+" valeur :"+valeur);
+				_logger.info("listeDAO size: "+listeDAO.size());	
+				typeActionTb(); 
+		 }
 		//FIN AFFICHAGE LISTE DAC DMP
 		 
 		 //DEBUT DETAILS DES COMPTEURS
@@ -2387,7 +2404,8 @@ TDacSpecs dao = new TDacSpecs();
 								//Affichage des differentes listes de l'AC en fonction de l'action								  
 								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
 									 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
-									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
+									 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
+									 chargeDataDMP3("D2T","D5R","DAO","PN");
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
 										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());

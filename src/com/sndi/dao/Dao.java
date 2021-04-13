@@ -144,6 +144,45 @@ public class Dao implements IDao {
 				return 0;
 			}
 		}
+	
+	
+	
+/*	@Override
+	public List<Object>  getObjectByColumnInInstr(String objet, String strSource, List<String> columnList) {
+			// TODO Auto-generated method stub
+			
+			List query = "SELECT * FROM "+tableName ;
+			if(!conditionList.isEmpty()){
+			query += " WHERE INSTR ("+strSource+"."+ columnList.get(0)+")";
+			for(int i=1; i<conditionList.size(); i++){
+				query += " AND "+tableName+"."+ conditionList.get(i).getColonne()+ conditionList.get(i).getComparateur()+"'"+conditionList.get(i).getValeur()+"'";			
+			}}
+			
+			if(!inList.isEmpty()){
+				query += " AND "+inCondition+" IN ('"+inList.get(0)+"'";
+				for(int i=1; i<inList.size(); i++){
+					query += " , '"+inList.get(i)+"'";
+				}
+				query +=")";
+			}
+			if(!columnList.isEmpty()){
+			query += " ORDER BY "+columnList.get(0);
+			for(int i=1; i<columnList.size(); i++){
+				query += " , "+columnList.get(i);
+			}}
+			
+			return list ;
+			
+			// TODO Auto-generated method stub
+			String query = "FROM"+" "+objet;
+			query += " WHERE INSTR ("+strSource+"."+ columnList.get(0)+") > 0 "; 
+			for(int i=1; i<columnList.size(); i++){
+				query += " , "+columnList.get(i);
+			}
+
+			List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+		}*/
 
 	@Override
 	@Transactional
@@ -390,7 +429,14 @@ public class Dao implements IDao {
 	}
 	
 	
+	@Override
+	public List getObjectByColumnInInstr(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND INSTR('"+strSource+"',FON_CODE_CSV) > 0" ; 
 	
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
 	
 	/**
 	 * @author User

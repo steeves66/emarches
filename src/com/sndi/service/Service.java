@@ -145,6 +145,12 @@ public class Service implements Iservice {
 		}
 		
 		@Override
+		public List getObjectByColumnInInstr(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstr(objet,strSource);
+		}
+		
+		@Override
 		public List<Object> getObjectsByColumn(String object, WhereClause ... conditions ) {
 			// TODO Auto-generated method stub
 			return getDao().getObjectsByColumn(object, Arrays.asList(conditions));

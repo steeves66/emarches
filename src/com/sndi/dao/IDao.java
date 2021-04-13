@@ -92,4 +92,6 @@ public interface IDao {
 	public String getCodeDossier(String inc, int tailleChar, int size,
 			String T_DOSSIERS, String DOS_CODE);
 
+	public List getObjectByColumnInInstr(String objet, String strSource);
+
 }
