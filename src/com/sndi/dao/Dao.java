@@ -438,7 +438,7 @@ public class Dao implements IDao {
 	}
 	
 	
-	
+	//Methode de comptage en région
 	@Override
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan) {
 			// TODO Auto-generated method stub

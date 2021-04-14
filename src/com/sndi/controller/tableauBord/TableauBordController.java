@@ -1205,6 +1205,8 @@ public class TableauBordController {
 						 //daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP"); 
 						 daoCsvAttAff = ""+getDaoAttAffCsvReg(typePlan,typeDac);
 						 daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
+						 
+						 
 						 daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
 						 //Publication des DAC
 						 daoCsvAttPub = ""+getAcDaoAttPubDossier(typePlan,typeDac,"D6V","DPU");
@@ -1287,6 +1289,7 @@ public class TableauBordController {
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 								 //Affectation des DAC
 								 daoCsvAttAffPs = ""+getDaoAttAffCsvPs("D2T","D5R","DOP");
+								 //daoCsvAttAffPs = ""+getDaoAttAffCsvReg(typePlan,typeDac);
 								 daoaffectePs = ""+getAcDaoAffecteDossierPs("D3A");
 								 daoCsvDiffPs = ""+getAcDaoDiffCsvPs("D5R");
 								 //Validation des DAC
