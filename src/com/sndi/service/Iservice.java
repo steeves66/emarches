@@ -101,5 +101,6 @@ public interface Iservice {
 			String T_DOSSIERS, String DOS_CODE);
 
 	public List getObjectByColumnInInstr(String objet, String strSource);
+	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan);
 
 }

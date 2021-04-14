@@ -1202,7 +1202,8 @@ public class TableauBordController {
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 						 //Affectation des DAC
-						 daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP");
+						 //daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP"); 
+						 daoCsvAttAff = ""+getDaoAttAffCsvReg(typePlan,typeDac);
 						 daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
 						 daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
 						 //Publication des DAC
@@ -2765,6 +2766,15 @@ public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String sr
 			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
+
+
+
+public int getDaoAttAffCsvReg(String typePlan,String typeDac){ 
+	int i = iservice.countTableByColumnInInstr("V_DACLISTE","DAC_CODE", ""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+		
+	return	i;	
+}
+
 
 //DAO retournés par le cpmp chez le AC en procédure normale : Ancienne Methode
 /*public int getDaoDiffCpmpACDossier(String src){

@@ -145,8 +145,7 @@ public class Dao implements IDao {
 			}
 		}
 	
-	
-	
+
 /*	@Override
 	public List<Object>  getObjectByColumnInInstr(String objet, String strSource, List<String> columnList) {
 			// TODO Auto-generated method stub
@@ -437,6 +436,25 @@ public class Dao implements IDao {
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
 	}
+	
+	
+	
+	@Override
+	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			
+			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D2T','D5R') AND DAC_TD_CODE = '"+typeDac+"' "
+					+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+	
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
 	
 	/**
 	 * @author User

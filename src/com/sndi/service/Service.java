@@ -151,14 +151,18 @@ public class Service implements Iservice {
 		}
 		
 		@Override
+		public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			return getDao().countTableByColumnInInstr(objet,conditionColumn,strSource,typeDac, typePlan);
+		}
+		
+		
+		@Override
 		public List<Object> getObjectsByColumn(String object, WhereClause ... conditions ) {
 			// TODO Auto-generated method stub
 			return getDao().getObjectsByColumn(object, Arrays.asList(conditions));
 		}
 		
-
-		
-	
 
 		
 		@Override
