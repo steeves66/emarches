@@ -429,15 +429,59 @@ public class Dao implements IDao {
 	
 	
 	@Override
-	public List getObjectByColumnInInstr(String objet, String strSource) {
-		// TODO Auto-generated method stub
-		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND INSTR('"+strSource+"',FON_CODE_CSV) > 0" ; 
+public List getObjectByColumnInInstr(String objet, String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='DAO' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
 	
+	public List getObjectByColumnInInstrAmi(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='AMI' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+	public List getObjectByColumnInInstrPrq(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='PRQ' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
 	}
 	
 	
+	public List getObjectByColumnInInstrValDao(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND DAC_TD_CODE='DAO' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+	public List getObjectByColumnInInstrValAmi(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND DAC_TD_CODE='AMI' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+	public List getObjectByColumnInInstrValPrq(String objet, String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND DAC_TD_CODE='PRQ' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+	
+	
+	
+
 	//Methode de comptage en région
 	@Override
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan) {

@@ -101,6 +101,11 @@ public interface Iservice {
 			String T_DOSSIERS, String DOS_CODE);
 
 	public List getObjectByColumnInInstr(String objet, String strSource);
+	public List getObjectByColumnInInstrAmi(String objet, String strSource);
+	public List getObjectByColumnInInstrPrq(String objet, String strSource);
+	public List getObjectByColumnInInstrValDao(String objet, String strSource);
+	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
+	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	//Methode de comptage en région
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan);
 

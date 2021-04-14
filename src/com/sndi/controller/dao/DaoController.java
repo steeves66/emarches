@@ -631,7 +631,7 @@ TDacSpecs dao = new TDacSpecs();
 	     TDetailPlanPassation detail = new TDetailPlanPassation();
 				if(!PLG.isEmpty()) detail =PLG.get(0); 
 				detail.setDppStatutDao("N");
-				detail.setTDacSpecs(new TDacSpecs("null"));
+				detail.setTDacSpecs(new TDacSpecs(""));
 				iservice.updateObject(detail);
 				
  chargeData();
@@ -2258,6 +2258,26 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
+	 
+	 public void chargeDataDMP4(){
+		 if(controleController.type == "DAC") {
+			 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValDao("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+		 }else {
+			 if(controleController.type == "AMI") {
+				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValAmi("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+			 } 
+			 else {
+				 if(controleController.type == "PRQ") {
+					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValPrq("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod()); 
+				 } 
+			 }
+		}
+		         multiFiltre ="";
+		         //_logger.info("colonne: "+condition+" valeur :"+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
 	//Affichage des DMP en lui passant en parametre les statuts concerné (2 statuts)
 		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2,String condition,String valeur){
 			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -2272,17 +2292,20 @@ TDacSpecs dao = new TDacSpecs();
 				typeActionTb(); 
 		 }
 		 
-		 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 
-			    reaffectlisteDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
-					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-					// new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-			     if (!reaffectlisteDAO.isEmpty()) {
-				    caution= reaffectlisteDAO.get(0);
- 	                 }
+		 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 	
+			 if(controleController.type == "DAC") {
+				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+			 }else {
+				 if(controleController.type == "AMI") {
+					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+				 } 
+				 else {
+					 if(controleController.type == "PRQ") {
+						 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod()); 
+					 } 
+				 }
+			}
 			 
-			 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
 			         multiFiltre ="";
 			         //_logger.info("colonne: "+condition+" valeur :"+valeur);
 				_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2408,8 +2431,8 @@ TDacSpecs dao = new TDacSpecs();
 									 chargeDataDMP3("D2T","D5R","DAO","PN");
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
 										 chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
+										 //chargeDataDMP4();
 									 }else {
 										
 									 }	 

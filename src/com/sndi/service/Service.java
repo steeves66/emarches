@@ -219,6 +219,36 @@ public class Service implements Iservice {
 				
 		}
 
+		@Override
+		public List getObjectByColumnInInstrAmi(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List getObjectByColumnInInstrPrq(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List getObjectByColumnInInstrValDao(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List getObjectByColumnInInstrValAmi(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public List getObjectByColumnInInstrValPrq(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 	
 
 		
