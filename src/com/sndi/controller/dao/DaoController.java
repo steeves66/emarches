@@ -2431,8 +2431,8 @@ TDacSpecs dao = new TDacSpecs();
 									 chargeDataDMP3("D2T","D5R","DAO","PN");
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
-										 //chargeDataDMP4();
+										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
+										 chargeDataDMP4();
 									 }else {
 										
 									 }	 
@@ -4831,6 +4831,7 @@ TDacSpecs dao = new TDacSpecs();
 								if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
 						    		   panelCaution = false;
 				    		 newLot.setTDacSpecs(dao);
+				    		 newLot.setLaaLbgImputation(imputation);
 				    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				    		 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
 				    		 newLot.setLaaCoutLot(coutLot);
@@ -6362,11 +6363,11 @@ TDacSpecs dao = new TDacSpecs();
 									@Transactional 
 									 public void resultatCorrection() {
 										  
-										  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
+										/*  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
 											   statutSanction ="SBO";
 											   statutSanRetour ="0";
 											  
-										        }else{
+										        }else{*/
                                                         if(resultat.equalsIgnoreCase("Valide")){
 										        	  
 													  
@@ -6384,7 +6385,7 @@ TDacSpecs dao = new TDacSpecs();
 										                         }else{
 
 										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
-												                                  statutSanction ="SRO";
+												                                  statutSanction ="D2T";
 												                                  statutSanRetour ="1";
 											                                }else{
 
@@ -6405,7 +6406,7 @@ TDacSpecs dao = new TDacSpecs();
 										                                        }
 										                                 }
                                                                   }
-                                                            }
+                                                            
 
                                             listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
 													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -6422,7 +6423,7 @@ TDacSpecs dao = new TDacSpecs();
 												 				if (!listDao.isEmpty()) {
 												 					newDao= listDao.get(0);
 												 					newDao.setTStatut(new TStatut(statutSanction));
-												 					newDao.setDacStatutRetour(slctdTd.getDacStatutRetour());
+												 					newDao.setDacStatutRetour(statutSanRetour);
 												 			        iservice.updateObject(newDao); 
 												 	   	                 } 
 												 		  //FIN dans T_DAO_AFFECTATION	

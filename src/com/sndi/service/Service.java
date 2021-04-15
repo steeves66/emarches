@@ -222,31 +222,31 @@ public class Service implements Iservice {
 		@Override
 		public List getObjectByColumnInInstrAmi(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return null;
+			return getDao().getObjectByColumnInInstrAmi(objet,strSource);
 		}
 
 		@Override
 		public List getObjectByColumnInInstrPrq(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return null;
+			return getDao().getObjectByColumnInInstrPrq(objet,strSource);
 		}
 
 		@Override
 		public List getObjectByColumnInInstrValDao(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return null;
+			return getDao().getObjectByColumnInInstrValDao(objet,strSource);
 		}
 
 		@Override
 		public List getObjectByColumnInInstrValAmi(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return null;
+			return getDao().getObjectByColumnInInstrValAmi(objet,strSource);
 		}
 
 		@Override
 		public List getObjectByColumnInInstrValPrq(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return null;
+			return getDao().getObjectByColumnInInstrValPrq(objet,strSource);
 		}
 
 	

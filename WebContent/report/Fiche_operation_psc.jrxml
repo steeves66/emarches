@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-03-06T12:54:11 -->
+<!-- 2021-04-14T14:50:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -329,11 +329,6 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA["Sollicitation des Factures :"+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SOL_FACT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="363" y="23" width="190" height="21" uuid="454fb39e-652a-4be2-96fd-bcf8634f9b80"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Notification Attribution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_NOT_ATT})]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
 					<reportElement x="177" y="23" width="184" height="21" uuid="66dd425a-5fe2-41ad-85b4-25e5a177cc98"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature de l'AC : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
@@ -363,14 +358,14 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA["Offre Technique : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="363" y="45" width="190" height="21" uuid="beed93a0-8070-42f2-a02f-cffec3aa7d8e">
+					<reportElement x="363" y="22" width="190" height="21" uuid="beed93a0-8070-42f2-a02f-cffec3aa7d8e">
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					</reportElement>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Début d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="364" y="67" width="190" height="21" uuid="4061ab51-8dc4-4b30-a7e3-dc0868bed72b"/>
+					<reportElement x="364" y="44" width="190" height="21" uuid="4061ab51-8dc4-4b30-a7e3-dc0868bed72b"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Fin d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_FIN})]]></textFieldExpression>
 				</textField>

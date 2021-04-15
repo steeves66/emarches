@@ -1,5 +1,6 @@
  package com.sndi.dao;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.sndi.model.TOperateur;
