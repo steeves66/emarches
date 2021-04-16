@@ -70,6 +70,15 @@ public class EtatsPpmController {
 	public boolean fermerDMP=false;
 	public boolean visibility = true;
 	
+	 public boolean ppmNormal = false;
+     public boolean ppmAmi = false;
+     public boolean ppmPso = false;
+     public boolean ppmPsl = false;
+     public boolean ppmPrq = false;
+     public boolean ppmPsc = false;
+     /*public boolean partPspm = false;
+     public boolean partPgspm = false;*/
+	
 	
 	
 	//Afficher les détails du ppm
@@ -90,6 +99,65 @@ public class EtatsPpmController {
 					detail=objetListe.get(0);
 				}
 			}
+		 
+		 
+		 public void recupModePassation() {
+			 if(slctdTd.getDppMopCode().equalsIgnoreCase("AMI")){
+				 ppmNormal = false;
+			     ppmAmi = true;
+			     ppmPso = false;
+			     ppmPsl = false;
+			     ppmPrq = false;
+			     ppmPsc = false;
+			 }else {
+				 
+				 if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
+					 ppmNormal = false;
+				     ppmAmi = false;
+				     ppmPso = false;
+				     ppmPsl = false;
+				     ppmPrq = true;
+				     ppmPsc = false;
+				 }else {
+					 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSL")){
+						 ppmNormal = false;
+					     ppmAmi = false;
+					     ppmPso = false;
+					     ppmPsl = true;
+					     ppmPrq = false;
+					     ppmPsc = false;
+					 }else {
+						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")){
+							 ppmNormal = false;
+						     ppmAmi = false;
+						     ppmPso = false;
+						     ppmPsl = false;
+						     ppmPrq = false;
+						     ppmPsc = true;
+						 }else {
+						 
+						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")){
+							 ppmNormal = false;
+						     ppmAmi = false;
+						     ppmPso = true;
+						     ppmPsl = false;
+						     ppmPrq = false;
+						     ppmPsc = false;
+						 }else {
+							 ppmNormal = true;
+						     ppmAmi = false;
+						     ppmPso = false;
+						     ppmPsl = false;
+						     ppmPrq = false; 
+						     ppmPsc = false;
+						 }
+					 }
+				 }
+			   }
+			 }
+			}
+		 	 
+		 
 		 
 		 
 		 
@@ -186,6 +254,7 @@ public class EtatsPpmController {
 	 			chargeDetailPpm();
 	 			chargeDetailFinancement();
 	 			actionPsPn();
+	 			recupModePassation();
 	  		break;
 	  		
 	 		case "pspm3":
@@ -287,6 +356,54 @@ public class EtatsPpmController {
 
 	public void setVisibility(boolean visibility) {
 		this.visibility = visibility;
+	}
+
+	public boolean isPpmNormal() {
+		return ppmNormal;
+	}
+
+	public void setPpmNormal(boolean ppmNormal) {
+		this.ppmNormal = ppmNormal;
+	}
+
+	public boolean isPpmAmi() {
+		return ppmAmi;
+	}
+
+	public void setPpmAmi(boolean ppmAmi) {
+		this.ppmAmi = ppmAmi;
+	}
+
+	public boolean isPpmPso() {
+		return ppmPso;
+	}
+
+	public void setPpmPso(boolean ppmPso) {
+		this.ppmPso = ppmPso;
+	}
+
+	public boolean isPpmPsl() {
+		return ppmPsl;
+	}
+
+	public void setPpmPsl(boolean ppmPsl) {
+		this.ppmPsl = ppmPsl;
+	}
+
+	public boolean isPpmPrq() {
+		return ppmPrq;
+	}
+
+	public void setPpmPrq(boolean ppmPrq) {
+		this.ppmPrq = ppmPrq;
+	}
+
+	public boolean isPpmPsc() {
+		return ppmPsc;
+	}
+
+	public void setPpmPsc(boolean ppmPsc) {
+		this.ppmPsc = ppmPsc;
 	}
 
 	
