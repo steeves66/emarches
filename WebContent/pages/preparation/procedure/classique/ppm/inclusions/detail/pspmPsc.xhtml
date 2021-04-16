@@ -8,51 +8,7 @@
     <h:panelGroup  layout="block" id="pspmPsc" >  
     <div class="box-body">
 			            <div class="row"> 
-     
-             <div class="col-md-6">
-             <h:panelGroup rendered="#{controleController.validDMP}"> 
-               <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
-		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par DMP : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-			</h:panelGroup>
-		    </h:panelGroup> 
-		    
-		    <h:panelGroup rendered="#{controleController.validCPMP}">
-		    <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
-		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par CPMP : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateAttApprobCpmp}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-			</h:panelGroup>
-		   
-		    </h:panelGroup>
-		    
-             </div>
-             <div class="col-md-6">
-              
-		       <h:panelGroup rendered="#{etatsPpmController.visibility}"> 
-		      <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO Bail : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAttApproBail}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			     
-			</div> 
-			</h:panelGroup>
-             </div>
-             
-            
-            <div class="col-md-6">
-                       
+            <div class="col-md-6">      
              <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Sollicitation des Factures : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateSolFact}"> 
@@ -60,19 +16,18 @@
 			     </h:outputText> 
 			     </b>
 			</div> 
-			
-			<div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Reception des Factures : </label></div>
+	
+            </div>   
+            
+          <div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Signature Attributaire : </label></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateRecepFact}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
-			</div>
-             
-            </div>
-              
-		  
-		                       
+			</div> 
+	</div>              
 		   </div> 
 		   
 		<div class="row">
@@ -88,97 +43,9 @@
 		 </div>
 		 
 	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Ouverture Financière : </label></div>
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de debut : </label></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateOuvertOf}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Rapport d'évaluation : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateElabRapport}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Jugement Technique : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateJugementOffreTec}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-   <h:panelGroup rendered="#{controleController.anoDmp}">
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO de la DMP : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAno}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	</h:panelGroup>
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Notification de l'Attribution : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateNotAtt}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-		
-	
-	<h:panelGroup rendered="#{controleController.anoBail}">
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO du Bailleur : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAttApproBail}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	</h:panelGroup>
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Négociation : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateNegociation}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Jugement Financier : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateJugementOffre}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-	
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Signature Attributaire : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecDebut}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
@@ -195,17 +62,23 @@
 			     </b>
 			</div> 
 	</div>
+	
+	<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de fin : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecFin}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+	</div>
          
          
   
 </div>
 
 
-	                  
-      <div class="row">  
-      
-       	         
- </div>
+
          				 
 	            </div> 
      </h:panelGroup>     
