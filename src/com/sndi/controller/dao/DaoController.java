@@ -5539,7 +5539,7 @@ TDacSpecs dao = new TDacSpecs();
 								  listeFonctionsImput.clear();
 								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 										  new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()),
-										  new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
+										  new WhereClause("STR_CODE",Comparateur.EQ,slctdTd.getLbgStrCode())); 
 									_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
 									typeActionTb();
 									}
@@ -5550,7 +5550,7 @@ TDacSpecs dao = new TDacSpecs();
 							  public void filtrefonction() { 
 								  listeFonctionsImput.clear();
 								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
-										 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+										 new WhereClause("STR_CODE",Comparateur.EQ,slctdTd.getLbgStrCode()),
 										 new WhereClause("FON_LIBELLE",WhereClause.Comparateur.LIKE,"%"+filterCode+"%")); 
 									}
 							  
