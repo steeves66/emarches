@@ -389,6 +389,83 @@ public class PpmModificationController {
 				     }
 				 //Fin de Contrôle pour les AMI
 				 
+				//Controle Pavé Dates Prévisionnelles pour les PPM
+				 if(event.getOldStep().equals("ope222") && event.getNewStep().equals("Financements")) { 
+					 
+		  			 if(updatePpm.getMdtCode() == null)
+			  		  {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez choisir le Type de Dossier!", ""));
+					          return "ope222";
+					   } else
+					   {
+						   updatePieces(); 
+					   }
+				     }
+				 //Fin de Contrôle pour les PPM
+				 
+				 
+				//Controle Pavé Dates Prévisionnelles pour les AMI
+				 if(event.getOldStep().equals("ope223") && event.getNewStep().equals("Financements")) { 
+					 
+		  			 if(updatePpm.getMdtCode() == null)
+			  		  {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez choisir le type de Dossier!", ""));
+					          return "ope223";
+					   } else
+					   {
+						   updatePieces();
+					   }
+				     }
+				 //Fin de Contrôle pour les AMI
+				 
+				//Controle Pavé Dates Prévisionnelles pour les PRQ
+				 if(event.getOldStep().equals("ope224") && event.getNewStep().equals("Financements")) { 
+					 
+		  			 if(updatePpm.getMdtCode() == null)
+			  		  {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez choisir le Type de Dossier!", ""));
+					          return "ope224";
+					   } else
+					   {
+						   updatePieces(); 
+					   }
+				     }
+				 //Fin de Contrôle pour les PRQ
+				 
+				 
+				//Controle Pavé Dates Prévisionnelles pour les DPAMI
+				 if(event.getOldStep().equals("dpami") && event.getNewStep().equals("Financements")) { 
+					 
+		  			 if(updatePpm.getMdtCode() == null)
+			  		  {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez choisir le type de Dossier!", ""));
+					          return "dpami";
+					   } else
+					   {
+						   updatePieces();
+					   }
+				     }
+				 //Fin de Contrôle pour les DPAMI
+				 
+				//Controle Pavé Dates Prévisionnelles pour les DPPRQ
+				 if(event.getOldStep().equals("dpPrq") && event.getNewStep().equals("Financements")) { 
+					 
+		  			 if(updatePpm.getMdtCode() == null)
+			  		  {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez choisir le type de Dossier!", ""));
+					          return "dpPrq";
+					   } else
+					   {
+						   updatePieces();
+					   }
+				     }
+				 //Fin de Contrôle pour les DPPRQ
+				 
 				 
 				 
 				 
@@ -405,8 +482,6 @@ public class PpmModificationController {
 		                    	  
 		                    	  //recupModeleDao();
 		                    	 controlPanelPs();
-		                    		     
-		                 
 				     }
 				 //Fin de Contrôle pour les PSC
 				 
@@ -670,11 +745,18 @@ public class PpmModificationController {
 	 
 	 
 	
-	 
-	 
+	 //MAJ du DAO-TYpe
+	 public void updatePieces() { 
+			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+			    if (!listeTsPpm.isEmpty()) {
+				       detPass= listeTsPpm.get(0);
+				       detPass.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+				       iservice.updateObject(detPass);
+				       recupModeleDao();
+			      }
+			}
 
-
-		 
 		 
 		//Methode de validation des PPM
 		 public void chargeData(String typePlan) {
