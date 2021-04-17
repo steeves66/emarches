@@ -249,6 +249,12 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnInInstrValPrq(objet,strSource);
 		}
 
+		@Override
+		public List getObjectByColumnInInstrDejaAff(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrDejaAff(objet,strSource);
+		}
+
 	
 
 		

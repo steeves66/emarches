@@ -121,6 +121,7 @@ public class DaoController {
 	 private List<VDetailCorrection> listeDetailCorrection = new ArrayList<VDetailCorrection>();
 	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
+	 private List<VChargeEtudeDac>listeChargeEtudeByDac =new ArrayList<VChargeEtudeDac>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
 	 private List<TSeances> listSeances  = new ArrayList<TSeances>();  
 	 
@@ -388,7 +389,8 @@ public class DaoController {
 	 private boolean daoCritere = true;
 	 private boolean panelCaution = false;
 	 private boolean btnChangerOperation = false;
-	 
+	 private boolean btnAffecte = false;
+	 private boolean btnAffecteNormal = true;
 	//BoolÃ¯Â¿Â½ens
 	  private boolean skip;
 	  private long natdoc= 7;
@@ -2278,6 +2280,8 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
+	 
+
 	//Affichage des DMP en lui passant en parametre les statuts concerné (2 statuts)
 		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2,String condition,String valeur){
 			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -2433,9 +2437,16 @@ TDacSpecs dao = new TDacSpecs();
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
 										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
 										 chargeDataDMP4();
-									 }else {
-										
-									 }	 
+									 }else 
+										 if(fonct.equalsIgnoreCase("listeConsultAffectationCsv")) {
+											 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrDejaAff("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+									         multiFiltre ="";
+											_logger.info("listeDAO size: "+listeDAO.size());	
+											typeActionTb(); 
+										 }else {
+											 
+										 }
+											 
 								 }
 								
 								
@@ -3297,6 +3308,14 @@ TDacSpecs dao = new TDacSpecs();
 								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
 								    new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"MBR")));
 								_logger.info("membre size: "+membresCommission.size());			
+					 }
+					 
+					 
+					 //Liste des chargés d'études affectés a un DAC
+					 public void chargeChargeEtudeByDac() {
+						 listeChargeEtudeByDac = ((List<VChargeEtudeDac>)iservice.getObjectsByColumn("VChargeEtudeDac",
+								    new WhereClause("DAF_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
+								_logger.info("nbre charge d'étude: "+listeChargeEtudeByDac.size());			
 					 }
 					 
 
@@ -7426,6 +7445,16 @@ TDacSpecs dao = new TDacSpecs();
          
        //Fin Ensembles methode Ecran de modification
 		     
+		
+		public void visibleAffecte() {
+			if(controleController.getFonctionalite().equalsIgnoreCase("listeConsultAffectationCsv")) {
+				btnAffecte=true;
+				btnAffecteNormal = false;
+			}else {
+				btnAffecte=false;	
+				btnAffecteNormal = true;
+			}
+		}
 		     
 		     
 	 public String renderPage(String value ,String action) throws IOException{ 
@@ -7435,6 +7464,7 @@ TDacSpecs dao = new TDacSpecs();
 					chargeData();
 					chargeDetailTB();
 					chargeNatureDocTrans();
+					visibleAffecte();
 					//chargeDataPs();
 					chargeDaoPUB();
 					btn_corrige = true;
@@ -15574,6 +15604,30 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setOuvertureAmi(boolean ouvertureAmi) {
 		this.ouvertureAmi = ouvertureAmi;
+	}
+
+	public boolean isBtnAffecte() {
+		return btnAffecte;
+	}
+
+	public void setBtnAffecte(boolean btnAffecte) {
+		this.btnAffecte = btnAffecte;
+	}
+
+	public boolean isBtnAffecteNormal() {
+		return btnAffecteNormal;
+	}
+
+	public void setBtnAffecteNormal(boolean btnAffecteNormal) {
+		this.btnAffecteNormal = btnAffecteNormal;
+	}
+
+	public List<VChargeEtudeDac> getListeChargeEtudeByDac() {
+		return listeChargeEtudeByDac;
+	}
+
+	public void setListeChargeEtudeByDac(List<VChargeEtudeDac> listeChargeEtudeByDac) {
+		this.listeChargeEtudeByDac = listeChargeEtudeByDac;
 	}
 	
 	

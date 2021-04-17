@@ -70,7 +70,7 @@ public class EtatsPpmController {
 	public boolean fermerDMP=false;
 	public boolean visibility = true;
 	
-	 public boolean ppmNormal = false;
+	 public boolean ppmNormal = true;
      public boolean ppmAmi = false;
      public boolean ppmPso = false;
      public boolean ppmPsl = false;
@@ -110,8 +110,7 @@ public class EtatsPpmController {
 			     ppmPrq = false;
 			     ppmPsc = false;
 			 }else {
-				 
-				 if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
+				 /*if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
 					 ppmNormal = false;
 				     ppmAmi = false;
 				     ppmPso = false;
@@ -126,7 +125,7 @@ public class EtatsPpmController {
 					     ppmPsl = true;
 					     ppmPrq = false;
 					     ppmPsc = false;
-					 }else {
+					 }else {*/
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")){
 							 ppmNormal = false;
 						     ppmAmi = false;
@@ -134,7 +133,7 @@ public class EtatsPpmController {
 						     ppmPsl = false;
 						     ppmPrq = false;
 						     ppmPsc = true;
-						 }else {
+						 }/*else {
 						 
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")){
 							 ppmNormal = false;
@@ -143,7 +142,7 @@ public class EtatsPpmController {
 						     ppmPsl = false;
 						     ppmPrq = false;
 						     ppmPsc = false;
-						 }else {
+						 }*/else {
 							 ppmNormal = true;
 						     ppmAmi = false;
 						     ppmPso = false;
@@ -152,9 +151,9 @@ public class EtatsPpmController {
 						     ppmPsc = false;
 						 }
 					 }
-				 }
-			   }
-			 }
+				 //}
+			  // }
+			 //}
 			}
 		 	 
 		 

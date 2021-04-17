@@ -3399,7 +3399,81 @@ public class ControleController {
 											 btn_fermer_saisie_ami = false; 
 											 btn_fermer_saisie_prq = false; 
 				    				 }else
-				    					  if(action.equalsIgnoreCase("EXADAO")) {
+					    				 if(action.equalsIgnoreCase("DOSAFF")) {
+					    					 typePlan ="PN";
+					    				        type = "DAC";
+					    				        fonctionalite ="listeConsultAffectationCsv";
+					    				        libelle1="LISTE DES DOSSIERS DEJA AFFECTES";
+								    			 libelleDao3="LISTE DES DOSSIERS DEJA AFFECTES";
+								    			 libelleSmall = "Dossiers deja affectés";
+								    			 libelleA = "DAO";
+								    			 btn_new =false;
+								    			 btn_affec = true;
+								    			 btn_exam = false;
+								    			 btn_retrait = false;
+								    			 btn_valid = false;
+								    			 panel1 =true;
+												 panel2 =false;
+												 panel3 = false;
+												 panel4 = false;
+												 venteRecherche = false; 
+												 affectationRecherche = true;
+												 examenRecherche = false;
+												 publicationRecherche = false;
+												 saisieRecherche = false;
+												 celluleRecherche = false;
+												 validationRecherche = false;
+												 priseRecherche = false;
+												 chargeRecherche = false;
+												 
+												 panelAffectation = true;
+												 affDao=true;
+												 exaDao=false;
+												 panelDaoTableauBordSai = false;
+												 panelDaoTableauBordVal = false;
+												 panelDaoTableauBordTra = false;
+												 panelDaoTableauBordAff =true;
+												 panelDaoTableauBordVet =false;
+												 panelDaoTableauBordRet = false;
+												 panelDaoTableauBordCha = false;
+												 panelDaoTableauBordPub = false;
+												 panelDaoTableauBordPrise = false;
+												 panelDaoTableauBordPubDps = false;
+												 panelDaoTableauBordPubCsv = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordDPubDps = false;
+												 panelDao = true;  
+												 panelPrq = false;
+												 btn_trans_ami =false;
+												 btn_trans_dao =true;
+												 btn_trans_prq =false;
+												 
+												 btn_creerDetailAmi = false;
+												 btn_creerDetailDao = false ;
+												 btn_creerDetailPrq = false;
+												 
+												 btn_creerDetailDaoCmp = true;
+												 btn_creerDetailAmiCmp = false;
+												 btn_creerDetailPrqCmp = false;
+												 btn_creerDetailDaoDmp = false;
+												 btn_creerDetailAmiDmp = false; 
+												 btn_creerDetailPrqDmp = false;
+												 fermerValDao = false;
+												 fermerSaiDao = true;
+												 detailD = false;
+												 detailA= false; 
+												 detailP = false;
+												 btn_valider_dao_cpmp =  false;
+												 btn_valider_dao_dmp = false;
+												 btn_valider_ami_cpmp = false; 
+												 btn_valider_prq_cpmp = false;
+												 btn_valider_ami_dmp = false;
+												 btn_valider_prq_dmp = false;
+												 btn_fermer_saisie_dao = false; 
+												 btn_fermer_saisie_ami = false; 
+												 btn_fermer_saisie_prq = false; 
+					    				 }else
+				    					      if(action.equalsIgnoreCase("EXADAO")) {
 				    						     typePlan ="PN";
 				    						     type = "DAC";
 				    						     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";

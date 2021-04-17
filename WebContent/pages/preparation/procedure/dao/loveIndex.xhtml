@@ -646,6 +646,44 @@
         </div>
         </p:dialog>
         </h:form>
+        
+        
+        
+         <h:form id="dlgChargeEtude">
+	        <p:dialog  widgetVar="chargeEtudeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES CHARGES D'ETUDE DU DOSSIER N°#{daoController.slctdTd.dacCode} : #{daoController.slctdTd.dacObjet}</div></div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleChargeEtude" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeChargeEtudeByDac}"
+						  emptyMessage="Aucun chargé d'étude affecté à ce dossier" scrollable="true" scrollHeight="100px">
+
+                        <p:column headerText="MATRICULE" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dafOpeMatricule}" />
+				        </p:column>
+				        
+				        <p:column headerText="NOM ET PRENOM(S)" styleClass="col-sm-8" >
+         				<h:outputText value="#{slctdTb.opeNom}" />
+				        </p:column>
+				        
+				        <p:column headerText="STATUT" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dafDcsMbmRespo == 'O'?'RESPONSABLE':' '}"/>
+				        </p:column>
+				        
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('chargeEtudeDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
 
   </h:panelGroup>   
 </html>

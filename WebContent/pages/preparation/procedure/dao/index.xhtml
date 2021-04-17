@@ -302,10 +302,12 @@
                              
                              
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+                              <h:panelGroup rendered="#{daoController.btnAffecteNormal}">
                                <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-right: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                               </p:commandLink>
+                              </h:panelGroup>
                               </h:panelGroup>
                               
                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
@@ -319,19 +321,28 @@
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
                              <h:panelGroup rendered="#{controleController.affDao}">   
+                              <h:panelGroup rendered="#{daoController.btnAffecteNormal}">
                              <p:commandLink action="#{daoController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
+                             </h:panelGroup>
                             </h:panelGroup>
                             
-                               
+                              <h:panelGroup rendered="#{daoController.btnAffecteNormal}"> 
                              <p:commandLink rendered="#{controleController.affDao}" action="#{daoController.finAffectation()}" styleClass="btn btn-xs btn-success"  title="Fin de l'Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                  <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Voulez-vous mettre fin à l'affectation du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
-                            
+                             </h:panelGroup>
+                             
+                             <h:panelGroup rendered="#{daoController.btnAffecte}"> 
+                              <p:commandLink oncomplete="PF('chargeEtudeDlg').show()" action="#{daoController.chargeChargeEtudeByDac()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px" title="Chargés d'études" update=":dlgChargeEtude">
+                                <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                            </p:commandLink>
+                            </h:panelGroup>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
                              <p:commandLink rendered="#{controleController.btn_exam}" action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">

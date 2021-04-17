@@ -462,6 +462,14 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 				return list;
 	}
 	
+	
+	public List getObjectByColumnInInstrDejaAff(String objet, String strSource) { 
+		// TODO Auto-generated method stub
+			String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D3A','DC2') AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       
+		 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+}
+	
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource) {
 		// TODO Auto-generated method stub
 		String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND DAC_TD_CODE='AMI' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
