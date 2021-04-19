@@ -18,6 +18,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_FONCTION_IMPUTATION")
 public class VFonctionImputation implements java.io.Serializable {
 
+	private BigDecimal rId;
 	private String dacCode;
 	private BigDecimal nb;
 	private BigDecimal dcsNum;
@@ -45,7 +46,7 @@ public class VFonctionImputation implements java.io.Serializable {
 		this.strCode = strCode;
 	}
 
-	public VFonctionImputation(String dacCode, BigDecimal nb,BigDecimal dcsNum, String opeMatricule, String opeNom, String opeContact,
+	public VFonctionImputation(BigDecimal rId,String dacCode, BigDecimal nb,BigDecimal dcsNum, String opeMatricule, String opeNom, String opeContact,
 			String fonCod, String fonLibelle, String fonRespo, String strCode, String strOpeRespo, BigDecimal nbrTraite,
 			BigDecimal nbrEnCours, BigDecimal nbrValide, String typbinome, String typresp) {
 		this.dacCode = dacCode;
@@ -64,6 +65,17 @@ public class VFonctionImputation implements java.io.Serializable {
 		this.nbrValide = nbrValide;
 		this.typbinome = typbinome;
 		this.typresp = typresp;
+		this.rId = rId;
+	}
+
+	@Id
+	@Column(name = "R_ID")
+	public BigDecimal getrId() {
+		return rId;
+	}
+
+	public void setrId(BigDecimal rId) {
+		this.rId = rId;
 	}
 
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
@@ -120,7 +132,6 @@ public class VFonctionImputation implements java.io.Serializable {
 		this.opeContact = opeContact;
 	}
 
-	@Id
 	@Column(name = "FON_COD", nullable = false, length = 20)
 	public String getFonCod() {
 		return this.fonCod;
