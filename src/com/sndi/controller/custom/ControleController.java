@@ -4449,6 +4449,7 @@ public class ControleController {
 							    														 panel2 =false;
 							    														 panel3 = false;
 							    														 panel4 = false;
+							    														 saisie = true;
 							    													/*	 panel4 = false;
 							    														 panel5 =false;
 							    														 panel6 =false;
