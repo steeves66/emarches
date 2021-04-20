@@ -4430,6 +4430,7 @@ public class ControleController {
 										    							    		nbreAchat = false;
 										    							    	}else
 							    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
+							    									    	        	ecran="saisie";
 							    									    	        	typePlan ="PS";
 							    									    	        	type = "DAC";
 							    									    	        	libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
