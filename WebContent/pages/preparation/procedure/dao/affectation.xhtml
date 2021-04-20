@@ -223,7 +223,7 @@
   
     
     <h:form id="apercuDAOAff">
-	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Réaffectation des DAO">
+	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Réaffectation du dossier">
 	         <div class="row">
                    <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
@@ -236,7 +236,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDAO}"
+                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDAO}" scrollable="true" scrollHeight="500"
                         rowKey="#{slctdTb.dacCode}" selection="#{daoController.reaffectlisteDAO}" emptyMessage="Aucun #{controleController.libelleA} enrégistré">
 			           
 			           
@@ -277,7 +277,7 @@
               </div>
               
                <div class="pull-left">
-			           <p:commandLink styleClass="btn btn-warning" oncomplete="PF('transDaoAff').hide()" action="#{daoController.chargeFonctionImput()}" style="background-color: #f88b2e;margin-top:10px;" update=":gnl">
+			           <p:commandLink styleClass="btn btn-warning" oncomplete="PF('transDaoAff').hide()" action="#{daoController.chargeDataReaffectation()}" style="background-color: #f88b2e;margin-top:10px;" update=":gnl">
                        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		            </p:commandLink>
               </div>

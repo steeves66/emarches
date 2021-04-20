@@ -873,6 +873,14 @@ TDacSpecs dao = new TDacSpecs();
 				   	               }
 	 }
 	 
+	 public void recupDac() {
+			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
+						if (!listDao.isEmpty()) {
+							 newDao= listDao.get(0);
+		}
+	 }
+	 
 	//Affectation Normale d'une fonction
 	 public void saveAffectationRespo(String respo) {   
 		 List<TDetCommissionSeance> DET  = iservice.getObjectsByColumn("TDetCommissionSeance", new WhereClause("DCS_NUM",Comparateur.EQ,""+sltImput.getDcsNum()));
@@ -899,7 +907,7 @@ TDacSpecs dao = new TDacSpecs();
 			            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			       if(!listSeances.isEmpty()) { 
 			    	   sltSeances=listSeances.get(0);
-					    	   //updateDao();
+			    	   recupDac();
 					    	    
 					    	     TCommissionSpecifique com = new TCommissionSpecifique();
 						  	     com.setTStructure(new TStructure(sltImput.getStrCode()));
@@ -963,7 +971,7 @@ TDacSpecs dao = new TDacSpecs();
 								userController.setSevrityMsg("success");
 			       }else {
 			    	   
-			    	   //updateDao();
+			    	   recupDac();
 			    	   
 			    	   String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DOSSIER N";
 			  		   String exo=chaine+newDao.getDacCode();
@@ -2543,6 +2551,10 @@ TDacSpecs dao = new TDacSpecs();
 					
 		} 
 		 
+		 
+		 public void chargeDataReaffectation() {
+			 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrDejaAff("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+		 }
 			//ACombobox Gestions
 		 public void chargeGestions(){
 			 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
@@ -2963,7 +2975,7 @@ TDacSpecs dao = new TDacSpecs();
 					//chargeNatureDocTrans();
 					chargeDossier();
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectu!", "");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				   chargeDossier();
 					}else {
