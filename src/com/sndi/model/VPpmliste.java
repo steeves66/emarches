@@ -83,6 +83,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String cptFinancement;
 	private String fonCodeDmp;
 	private String fonCodeSpp;
+	private String critere;
 	public VPpmliste() {
 	}
 
@@ -111,7 +112,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
 			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
-			String fonCodeDmp,String fonCodeSpp) {
+			String fonCodeDmp,String fonCodeSpp, String critere) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -176,6 +177,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.cptFinancement = cptFinancement;
 		this.fonCodeDmp = fonCodeDmp;
 		this.fonCodeSpp = fonCodeSpp;
+		this.critere = critere;
 	}
 
 	@Id
@@ -755,6 +757,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setFonCodeSpp(String fonCodeSpp) {
 		this.fonCodeSpp = fonCodeSpp;
+	}
+	
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

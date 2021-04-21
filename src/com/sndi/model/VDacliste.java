@@ -225,6 +225,7 @@ public class VDacliste implements java.io.Serializable {
 	private BigDecimal dacNbrCopieOff;
 	private String dacModType;
 	private String dacFinancement;
+	private String critere;
 	private String dacMargePref;
 	private BigDecimal dacMargePrefComVal;
 	private BigDecimal dacMargePrefSouVal;
@@ -293,7 +294,7 @@ public class VDacliste implements java.io.Serializable {
 			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,BigDecimal dacNbrCopieOff,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
-			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String dacMargePref, BigDecimal dacMargePrefComVal,
+			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String critere,String dacMargePref, BigDecimal dacMargePrefComVal,
 			BigDecimal dacMargePrefSouVal,Long adaNum,double cautValMin,
 			double cautValMax, String aaoOffAnormal,String adaLibelle,
 			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp) {
@@ -503,6 +504,7 @@ public class VDacliste implements java.io.Serializable {
 		this.dacNbrCopieOff = dacNbrCopieOff;
 		this.dacModType = dacModType;
 		this.dacFinancement = dacFinancement;
+		this.critere = critere;
 		this.dacMargePrefComVal = dacMargePrefComVal;
 		this.dacMargePref = dacMargePref;
 		this.dacMargePrefSouVal = dacMargePrefSouVal;
@@ -2368,6 +2370,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setDacFinancement(String dacFinancement) {
 		this.dacFinancement = dacFinancement;
+	}
+	
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 	@Column(name = "DAC_MARGE_PREF", length = 1)

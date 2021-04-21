@@ -45,9 +45,8 @@
 
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
 					
-					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{assignationController.assignationListe}" emptyMessage="Aucune Assignation enregistrée" rows="10" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{assignationController.assignationListe}" emptyMessage="Aucune Assignation enregistrée"  
+                         paginator="true" scrollable="true" scrollHeight="450" >
          				
 				        
 				         <p:column headerText="Operateur" styleClass="col-sm-1" >
@@ -87,12 +86,7 @@
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{assignationController.assignation}" />
                                 </p:commandLink>
-                                
-				             <!--  <p:commandLink class="btn btn-xs btn-danger"  action="#{assignationController.delete()}" title="Suprimer" update=":gnl">
-                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>                                
-                                 <f:setPropertyActionListener  value="#{slctdTb}" target="#{assignationController.slctdTd}" />
-                                 <p:confirm header="Confirmation" message="Confirmez vous la supression?" icon="ui-icon-alert" />
-                                </p:commandLink> -->
+                     
                               
                             
 				         </p:column>   
