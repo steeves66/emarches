@@ -77,6 +77,8 @@ public interface IDao {
 	public List getObjectsByColumnIn(String object,String inCondition,  List<String> inList, WhereClause ... conditions);
 	public List getObjectsNotIn(String objet, List<String> columnList, String notCondition,  List<String> notList);
 	public List getObjectsIn(String objet, List<String> columnList, String inCondition,  List<String> inList);
+	//public List getObjectsByColumnNotQuoteDesc(String objet,  List<WhereClause>conditionList, List<String> columnList);
+	public List getObjectsByColumnInNotQuote(String objet,String inCondition, List<String> inList, List<WhereClause>conditionList, List<String> columnList);
 	public int countTableByColumn(String tableName,String conditionColumn, List<WhereClause>conditionList);
 	public int countTableByColumnIn(String tableName,String conditionColumn, List<WhereClause>conditionList,  List<String> columnList, String inCondition,  List<String> inList);
 	public List getObjectsByColumn(String objet,  List<WhereClause>conditionList);

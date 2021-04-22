@@ -27,9 +27,11 @@ import com.sndi.model.THistoDac;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TStatut;
 import com.sndi.model.VDacStatut;
+import com.sndi.model.VDacliste;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VDetailHistoDac;
 import com.sndi.model.VPpmPgpm;
+import com.sndi.model.VPpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -70,16 +72,19 @@ public class SituationController {
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	private List<THistoDac> listHistoStat = new ArrayList<THistoDac>();
 	private List<VDacStatut> listHistoDac = new ArrayList<VDacStatut>();
+	private List<VDacliste> listeDAC = new ArrayList<VDacliste>();
 	private List<TDetailPlanPassation> listPpmStat = new ArrayList<TDetailPlanPassation>();
 	private List<TDossierDacs> listDossierDac = new ArrayList<TDossierDacs>();
 	private List<TLotAao> listeLotsAvis= new ArrayList<TLotAao>();
 	private List<TDacSpecs> listDacPaPeriode = new ArrayList<TDacSpecs>();
 	private List<VPpmPgpm> listPgpmStat = new ArrayList<VPpmPgpm>();
+	private List<VPpmliste> listePpmParPeriode = new ArrayList<VPpmliste>();
 	private List<TAgpm> listAgpm = new ArrayList<TAgpm>();
 	private TStatut stat = new TStatut();
 	private VDetailHistoDac detailHisto = new VDetailHistoDac();
 	private TDetailPlanPassation ppm = new TDetailPlanPassation();
 	private VDetailDao detail = new VDetailDao(); 
+	private VDacliste slctdTd = new VDacliste();
 	private VPpmPgpm repPpm = new VPpmPgpm();
 	private TAgpm agpm = new TAgpm();
 	private String page;
@@ -91,14 +96,66 @@ public class SituationController {
 	private Date dateFin;
 	
 	
-	public void rechercheDossier(){
+	//Afficharge des plans de passations entre deux periodes
+	public void chargePlanPassationByPeriode() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yy");
+		String dated = df.format(dateDeb);
+		String datef = df.format(dateFin);
+		String dd = "TO_DATE('"+dated+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;
+		String dfin = "TO_DATE('"+datef+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;	
+		listePpmParPeriode.clear();
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 listePpmParPeriode =  (List<VPpmliste>)iservice.getObjectsByColumnNotQuote("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DATE_SAISIE")),
+						new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+						new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"'SDS'"),
+						new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+				_logger.info("listePpm size: "+listePpmParPeriode.size());	
+		 }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				/* listePpmParPeriode = (List<VPpmliste>) iservice.getObjectsByColumnNotQuote("VPpmliste", 
+							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
+							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+							new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+					_logger.info("listePpmParPeriode size: "+listePpmParPeriode.size());*/
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+					 listePpmParPeriode =  (List<VPpmliste>)iservice.getObjectsByColumnNotQuote("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DATE_SAISIE")),
+								new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+								new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+						_logger.info("listePpm size: "+listePpmParPeriode.size());	
+			         
+				 }else 
+					  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						  listePpmParPeriode =  (List<VPpmliste>)iservice.getObjectsByColumnNotQuote("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DATE_SAISIE")),
+									new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+									new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+							_logger.info("listePpmParPeriode size: "+listePpmParPeriode.size());	
+		     } 
+		   }
+		 }
+
+		
+		
+
+		if(listePpmParPeriode.isEmpty()){
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN," Opération(s) non trouvé(s) pour la période de ->"+dated+" à ->"+datef, "")); 
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,listePpmParPeriode.size()+" Opération(s) trouveé(s) pour la période du ->"+dated+" au ->"+datef, ""));
+		}
+	}
+	
+	
+	
+	
+	public void rechercheDossier1(){
 		
 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
-						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
-						new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				recupStat();
-				recupDetailHisto();
+			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
+						new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+						new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				//recupStat();
+				//recupDetailHisto();
 				/*if (!objetListe.isEmpty()) {
 				 //
 				}else {
@@ -108,8 +165,8 @@ public class SituationController {
 				}	*/
 		 }else {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
-							new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere),
+				 listeDAC =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+							new WhereClause("CRITERE",WhereClause.Comparateur.EQ,""+critere),
 							new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					recupStat();
 					recupDetailHisto();
@@ -132,11 +189,20 @@ public class SituationController {
 		 }
 	
 	}
+
+
+	public void rechercheDossier(){
+				listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
+						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
+						new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				recupStat();
+				recupDetailHisto();
+	}
 	
 	
 	public void recupStat() {
 		listStat =(List<TStatut>) iservice.getObjectsByColumn("TStatut", new ArrayList<String>(Arrays.asList("STA_CODE")),
-				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+critere));
+				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 		if (!listStat.isEmpty()) {
 			stat=listStat.get(0);
 		}
@@ -145,7 +211,7 @@ public class SituationController {
 	
 	public void recupDetailHisto() {
 		listDetailHist =(List<VDetailHistoDac>) iservice.getObjectsByColumn("VDetailHistoDac",
-				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+critere));
+				new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 		if (!listDetailHist.isEmpty()) {
 			detailHisto=listDetailHist.get(0);
 		}
@@ -210,7 +276,13 @@ public class SituationController {
 				userController.renderPage(value);
 				break;
 				
+			case "sit5":
+				rechercheDossier();
+				userController.renderPage(value);
+				break;
+				
 			case "per1":
+				//chargePlanPassationByPeriode();
 				userController.renderPage(value);
 				break;
 			}  
@@ -455,6 +527,45 @@ public class SituationController {
 
 		public void setDetailHisto(VDetailHistoDac detailHisto) {
 			this.detailHisto = detailHisto;
+		}
+
+
+		public List<VPpmliste> getListePpmParPeriode() {
+			return listePpmParPeriode;
+		}
+
+		public void setListePpmParPeriode(List<VPpmliste> listePpmParPeriode) {
+			this.listePpmParPeriode = listePpmParPeriode;
+		}
+
+
+
+
+
+		public List<VDacliste> getListeDAC() {
+			return listeDAC;
+		}
+
+
+
+
+
+		public void setListeDAC(List<VDacliste> listeDAC) {
+			this.listeDAC = listeDAC;
+		}
+
+
+
+
+		public VDacliste getSlctdTd() {
+			return slctdTd;
+		}
+
+
+
+
+		public void setSlctdTd(VDacliste slctdTd) {
+			this.slctdTd = slctdTd;
 		}
 
 }

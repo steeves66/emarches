@@ -680,6 +680,33 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 		return list;
 	}
 	
+	
+	@Override
+	public List getObjectsByColumnInNotQuote(String objet,String inCondition, List<String> inList, List<WhereClause>conditionList, List<String> columnList) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet ;
+		if(!inList.isEmpty()){
+			query += " WHERE "+inCondition+" IN ('"+inList.get(0)+"'";
+			for(int i=1; i<inList.size(); i++){
+				query += " , '"+inList.get(i)+"'";
+			}
+			query +=")";
+		}
+		if(!conditionList.isEmpty()){
+			query += " AND "+ conditionList.get(0).getColonne()+ conditionList.get(0).getComparateur()+((conditionList.get(0).getValeur() == null)? "" : ""+conditionList.get(0).getValeur()+"");
+			for(int i=1; i<conditionList.size(); i++){
+				query += " AND "+ conditionList.get(i).getColonne()+ conditionList.get(i).getComparateur()+((conditionList.get(i).getValeur() == null)? "" :""+conditionList.get(i).getValeur()+"");			
+			}}
+		if(!columnList.isEmpty()){
+			query += " ORDER BY "+columnList.get(0);
+			for(int i=1; i<columnList.size(); i++){
+				query += " , "+columnList.get(i);
+			}}
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+
 
 	
 }

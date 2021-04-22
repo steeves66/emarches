@@ -255,7 +255,14 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnInInstrDejaAff(objet,strSource);
 		}
 
-	
+		@Override
+		public List getObjectsByColumnInNotQuote(String objet, String inCondition, List<String> inList,
+				List<WhereClause> conditionList, List<String> columnList) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectsByColumnInNotQuote(objet, inCondition, inList, conditionList, columnList);
+		}
+
+		
 
 		
 
