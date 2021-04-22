@@ -3071,6 +3071,7 @@ public class ControleController {
 			    			libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 			    			libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
+			    			libelleSmall="Procédure Normale";
 			    			btn_daoPn =true;
 			    			btn_daoPs =false;
 			    			btn_ami =false;
