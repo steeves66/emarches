@@ -343,6 +343,8 @@ public class PpmModificationController {
 	     public boolean pavetFinancement= false;
 	     public boolean pscOui = true;
 	     public boolean pscNon = true;
+	     public boolean daotype = false;
+	     public boolean daotypeMAJ = false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -747,17 +749,31 @@ public class PpmModificationController {
 	
 	 //MAJ du DAO-TYpe
 	 public void updatePieces() { 
-			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
-			    if (!listeTsPpm.isEmpty()) {
-				       detPass= listeTsPpm.get(0);
-				       detPass.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
-				       iservice.updateObject(detPass);
-				       recupModeleDao();
-			      }
+		      if(tydCode.equalsIgnoreCase("")) {
+		    	  listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+					    if (!listeTsPpm.isEmpty()) {
+						       detPass= listeTsPpm.get(0);
+						       detPass.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+						       iservice.updateObject(detPass);
+						       recupModeleDao();
+					      }
+
+		      }else {
+
+		    	  listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+					    if (!listeTsPpm.isEmpty()) {
+						       detPass= listeTsPpm.get(0);
+						       detPass.setTModeleDacType(new TModeleDacType(tydCode));
+						       iservice.updateObject(detPass);
+						       recupModeleDao();
+					      }
+		        }
+	
 			}
 
-		 
+ 
 		//Methode de validation des PPM
 		 public void chargeData(String typePlan) {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -769,7 +785,6 @@ public class PpmModificationController {
 					_logger.info("listePpm size: "+listePpm.size());
 					_logger.info("type plan: "+typePlan);
 					//Actualisation du Tableau de Bord
-					//tableauBordController.chargeDataPpm();
 					 if(controleController.type == "PPM") {
 							tableauBordController.chargeDataPpm("PN");
 	                }else 
@@ -1320,7 +1335,7 @@ public class PpmModificationController {
 		 public void chargeFinancement() {
 			 listeFinancement.clear();
 			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
-						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+detailPass.getDppId())));	
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+updatePpm.getDppId())));	
 			 coutTotal();
 		 }
 		 
@@ -1588,8 +1603,28 @@ public class PpmModificationController {
 		 }
 		 
 		 
-		 
+		 //Affichage du DAO type
+		 public void controleDaoType() {
+			if(updatePpm.getMdtCode() == null) {
+				daotype = true;
+			    daotypeMAJ = false;
+				}else {
+				daotype = false;
+				daotypeMAJ = true;	
+				}
+			}
 		
+		 //MAJ du Dossier type si le PPM n'est pas renseigné
+		 public void majPieces() {
+			 listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+				    if (!listeTsPpm.isEmpty()) {
+					       detPass= listeTsPpm.get(0);
+					       detPass.setTModeleDacType(new TModeleDacType(tydCode));
+					       iservice.updateObject(detPass);
+					       recupModeleDao();
+				      }
+				}
 		 
 		//Réinitialiser les Types de Marchés
 		 public void razchargeMarches() {
@@ -2740,6 +2775,7 @@ public class PpmModificationController {
 					break;
 				case "ppm4":
 					controlPanel();
+					controleDaoType();
 					editForm();
 					afficheDate();
 					afficheDateModePs();
@@ -4619,6 +4655,22 @@ public class PpmModificationController {
 
 	public void setPscNon(boolean pscNon) {
 		this.pscNon = pscNon;
+	}
+
+	public boolean isDaotype() {
+		return daotype;
+	}
+
+	public void setDaotype(boolean daotype) {
+		this.daotype = daotype;
+	}
+
+	public boolean isDaotypeMAJ() {
+		return daotypeMAJ;
+	}
+
+	public void setDaotypeMAJ(boolean daotypeMAJ) {
+		this.daotypeMAJ = daotypeMAJ;
 	}
 
 	

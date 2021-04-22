@@ -4433,6 +4433,7 @@ public class ControleController {
 							    									    	        	ecran="saisie";
 							    									    	        	typePlan ="PS";
 							    									    	        	type = "DAC";
+							    									    	        	fonctionalite = "listSaisieAc";
 							    									    	        	libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
 							    										    			libelleSmall="Procédure Simplifiée";
@@ -4524,6 +4525,7 @@ public class ControleController {
 								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
 								    									    		   typePlan ="PS";
 								    									    		   type = "DAC";
+								    									    		   fonctionalite ="listeValidationCsv";
 								    									    		   libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL D'OFFRES";
 								    								    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL D'OFFRES";
