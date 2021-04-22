@@ -1224,8 +1224,6 @@ public class ControleController {
 						 validCPMP = false;*/
 						 validCPMP = true;
 						 validDMP = false;
-						 //etatPso = false;
-						 //etatPsl = false;
 						 etatPso = false;
 						 etatPsl = false;
 						 etatPsc = false;
@@ -1237,6 +1235,7 @@ public class ControleController {
 			    			 btn_modif_ppm = true;
 					    	 btn_modif_pspm = false;
 			    			 libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
+			    			 libelleSmall = "Procédure Normale";
 			    			 btn_new =true;
 			    			 lignedefaut = true;
 							 panel1 =true;
@@ -1285,12 +1284,8 @@ public class ControleController {
 							 //btn_maj_datePpm = false;
 							 detailP1 = true;
 							 detailP2 = false;
-							 /*validDMP = true;
-							 validCPMP = false;*/
 							 validCPMP = true;
 							 validDMP = true;
-							 //etatPso = false;
-							 //etatPsl = false;
 							 etatPso = false;
 							 etatPsl = false;
 							 etatPsc = false;
@@ -1552,6 +1547,7 @@ public class ControleController {
 			    			 btn_modif_ppm = false;
 					    	 btn_modif_pspm = true;
 			    			 libelle1="Index";
+			    			 libelleSmall = "Procédure Simplifiée";
 			    			 libelleProcedure="SAISIE DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
 							 panel1 =true;
