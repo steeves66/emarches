@@ -3636,6 +3636,7 @@ public class ControleController {
 				    								     type = "DAC";
 				    								     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
+										    			 libelleSmall = "Procédure Normale";
 										    			 btn_new =false;
 										    			 btn_affec = false;
 										    			 btn_exam = false;
@@ -3649,7 +3650,6 @@ public class ControleController {
 														 panel2 =false;
 														 panel3 = true;
 														 panel4 = false;
-														
 														 venteRecherche = false; 
 														 affectationRecherche = false;
 														 examenRecherche = false;
@@ -4628,19 +4628,14 @@ public class ControleController {
 																			    			 btn_exam = false;
 																			    			 btn_retrait = false;
 																			    			 btn_valid = false;
-																			    			 panel1 =true;
+																			    			 saisie=false;
+																			    			 publication=false;
+																			    			 vente=false;
+																			    			 correction=false;
+																			    			 panel1 =false;
 																							 panel2 =false;
-																							 panel3 = false;
-																							 panel4 =  false;
-																						/*	 panel4 = false;
-																							 panel5 = false;
-																							 panel6 = true;
-																							 panel7 =false;
-																							 panel8 =false;
-																							 panel9 =false;
-																							 panel10 = false;
-																							 panel11 = false;
-																							 panel12 = false;*/
+																							 panel3 = true;
+																							 panel4 = false;
 																							 venteRecherche = false; 
 																							 affectationRecherche = false;
 																							 examenRecherche = false;
@@ -4782,6 +4777,7 @@ public class ControleController {
 											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
 											    									    		     typePlan ="PS";
 											    									    		     type = "DAC";
+											    									    		     fonctionalite ="listeAffectationCsv";
 											    									    		     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 											    									    			 libelleSmall="Procédure Simplifiée";
@@ -5025,6 +5021,7 @@ public class ControleController {
 														    									    	 if(action.equalsIgnoreCase("TRADPS")) {
 														    									    		 typePlan ="PS";
 														    									    		 type = "DAC";
+														    									    		 fonctionalite = "listeDacValCellule";
 														    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																							    			 libelleDao3="TRANSMISSION DU DAO PAR LA CELLULE";
 																							    			 libelleDao1 ="TRANSMISSION DU DAO PAR LA CELLULE";

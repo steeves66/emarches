@@ -588,14 +588,14 @@ public class PpmController {
 		                    	  if(passationListe.getMopTypPlan() == null) {
 		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
 		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
 		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
 		                    		      }
@@ -624,7 +624,7 @@ public class PpmController {
 		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
-						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
 		  			 
@@ -632,14 +632,14 @@ public class PpmController {
 						        if(modePassation.getMopTypPlan() == null) {
 						        	 if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 						        	        creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 						        }else {
 						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
 	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 	                    		      }else {
 	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
 	                    		      }
@@ -651,14 +651,14 @@ public class PpmController {
 		                    	  if(passationListe.getMopTypPlan() == null) {
 		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
 		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
 		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
 		                    		      }
@@ -685,7 +685,7 @@ public class PpmController {
 		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
-						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
 		  			 
@@ -693,14 +693,14 @@ public class PpmController {
 						        if(modePassation.getMopTypPlan() == null) {
 						        	 if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 						        	        creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 						        }else {
 						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
 	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 	                    		      }else {
 	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
 	                    		      }
@@ -711,14 +711,14 @@ public class PpmController {
 		                    	  if(passationListe.getMopTypPlan() == null) {
 		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
 		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
 		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
 		                    		      }

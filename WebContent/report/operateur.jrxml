@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-03-22T15:29:13 -->
+<!-- 2021-04-23T10:59:34 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="operateur" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0e4afdf-aab6-4e2e-a856-4a038b316740">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
@@ -81,6 +81,7 @@
  and fon.fon_cod = ass.ass_fon_cod
   and ope.ope_matricule = ass.ass_ope_matricule
   and ass.ass_courant ='O'
+  and mdp.mdp_statut = '1'
   and ope.ope_matricule = $P{opeMatricule}]]>
 	</queryString>
 	<field name="OPE_MATRICULE" class="java.lang.String"/>
