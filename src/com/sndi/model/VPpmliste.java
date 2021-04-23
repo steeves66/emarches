@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Immutable;
 
@@ -84,6 +86,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String fonCodeDmp;
 	private String fonCodeSpp;
 	private String critere;
+	private Date dppDateDaoTransPub;
 	public VPpmliste() {
 	}
 
@@ -112,7 +115,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
 			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
-			String fonCodeDmp,String fonCodeSpp, String critere) {
+			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -178,6 +181,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.fonCodeDmp = fonCodeDmp;
 		this.fonCodeSpp = fonCodeSpp;
 		this.critere = critere;
+		this.dppDateDaoTransPub = dppDateDaoTransPub;
 	}
 
 	@Id
@@ -767,5 +771,15 @@ public class VPpmliste implements java.io.Serializable {
 	public void setCritere(String critere) {
 		this.critere = critere;
 	}
+	
+	@Column(name = "DPP_DATE_DAO_TRANS_PUB", length = 7)
+	public Date getDppDateDaoTransPub() {
+		return dppDateDaoTransPub;
+	}
+
+	public void setDppDateDaoTransPub(Date dppDateDaoTransPub) {
+		this.dppDateDaoTransPub = dppDateDaoTransPub;
+	}
+
 
 }

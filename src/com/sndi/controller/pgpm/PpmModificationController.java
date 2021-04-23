@@ -2385,7 +2385,12 @@ public class PpmModificationController {
 																										 detPass.setDppDateExecFin(geneDate.getDppDateExecFin());
 																									     iservice.updateObject(detPass); 
 																									     recupDateGenere();
-																									 }
+																									 }else
+																										 if(date.equalsIgnoreCase("dppDateDaoTransPub")) {
+																											 detPass.setDppDateDaoTransPub(geneDate.getDppDateDaoTransPub());
+																										     iservice.updateObject(detPass); 
+																										     recupDateGenere();
+																										 }
 					}
 		 }
 		 

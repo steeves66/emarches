@@ -658,7 +658,7 @@
              
               <div class="form-group">
 		       
-		                  <label  class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <label  class="col-sm-6 control-label">Date de  transmission par la CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar title="#{ppmController.geneDate.dppJourDaoTrans} #{ppmController.geneDate.dppDateDaoTrans}" value="#{ppmController.detailPass.dppDateDaoTrans}" navigator="true" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                      <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -723,6 +723,19 @@
 		                </div>
                
              </div>
+             
+             <div class="col-md-6">
+               <div class="form-group">
+		                  <label for="trDgmp" class="col-sm-6 control-label">Date de transmission à la #{controleController.structureLibAbrege}<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                 <p:calendar id="trDgmp2" title="#{ppmController.geneDate.dppDateDaoTransPub} #{ppmController.geneDate.dppDateDaoTransPub}" style="width: 100%; border-color:grey !important; font-weight:bold;color:white" value="#{ppmController.geneDate.dppDateDaoTransPub}" mask="true" locale="fr" pattern="dd/MM/yyyy">
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTransPub')}" update=":gnl"/>
+		                   </p:calendar>
+		                  </div>
+		                </div>
+             </div>
+             
+             
              
              <h:panelGroup rendered="#{controleController.etatPsc}">
             <div class="col-md-6">
@@ -903,6 +916,9 @@
 		                    
 		                  </div>
 		                </div>
+		                
+		                
+		              
 		                
          </div>
          

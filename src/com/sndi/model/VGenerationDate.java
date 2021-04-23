@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Immutable;
 
@@ -116,6 +118,7 @@ public class VGenerationDate implements java.io.Serializable {
 	private Date dppDateAttApproBail;
 	private String dppJourAttApproBail;
 	private String dppFlagAttApproBail;
+	private Date dppDateDaoTransPub;
 
 	public VGenerationDate() {
 	}
@@ -154,7 +157,7 @@ public class VGenerationDate implements java.io.Serializable {
 			String dppFlagApprobAno, Date dppDateNegociation, String dppJourNegociation,
 			String dppFlagNegociation, Date dppDateMarcheApprob, String dppJourMarcheApprob,
 			String dppFlagMarcheApprob, Date dppDateAttApproBail, String dppJourAttApproBail,
-			String dppFlagAttApproBail) {
+			String dppFlagAttApproBail,Date dppDateDaoTransPub) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -252,6 +255,7 @@ public class VGenerationDate implements java.io.Serializable {
 		this.dppDateAttApproBail = dppDateAttApproBail;
 		this.dppJourAttApproBail = dppJourAttApproBail;
 		this.dppFlagAttApproBail = dppFlagAttApproBail;
+		this.dppDateDaoTransPub = dppDateDaoTransPub;
 	}
 
 	
@@ -1127,6 +1131,15 @@ public class VGenerationDate implements java.io.Serializable {
 
 	public void setDppFlagAttApproBail(String dppFlagAttApproBail) {
 		this.dppFlagAttApproBail = dppFlagAttApproBail;
+	}
+
+	@Column(name = "DPP_DATE_DAO_TRANS_PUB")
+	public Date getDppDateDaoTransPub() {
+		return dppDateDaoTransPub;
+	}
+
+	public void setDppDateDaoTransPub(Date dppDateDaoTransPub) {
+		this.dppDateDaoTransPub = dppDateDaoTransPub;
 	}
 
 
