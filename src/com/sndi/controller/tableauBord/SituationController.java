@@ -30,7 +30,10 @@ import com.sndi.model.VDacStatut;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VDetailHistoDac;
+import com.sndi.model.VDetailHistoPpm;
+import com.sndi.model.VLotCritere;
 import com.sndi.model.VPpmPgpm;
+import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -67,12 +70,14 @@ public class SituationController {
 	
 
 	private List<VDetailDao> objetListe = new ArrayList<VDetailDao>();
+	private List<VPpmStatut> listHistoPpm = new ArrayList<VPpmStatut>();
 	private List<TStatut> listStat = new ArrayList<TStatut>();
 	private List<VDetailHistoDac> listDetailHist = new ArrayList<VDetailHistoDac>();
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	private List<THistoDac> listHistoStat = new ArrayList<THistoDac>();
 	private List<VDacStatut> listHistoDac = new ArrayList<VDacStatut>();
 	private List<VDacliste> listeDAC = new ArrayList<VDacliste>();
+	private List<VPpmliste> listeConsultationPpm = new ArrayList<VPpmliste>();
 	private List<TDetailPlanPassation> listPpmStat = new ArrayList<TDetailPlanPassation>();
 	private List<TDossierDacs> listDossierDac = new ArrayList<TDossierDacs>();
 	private List<TLotAao> listeLotsAvis= new ArrayList<TLotAao>();
@@ -80,10 +85,13 @@ public class SituationController {
 	private List<VPpmPgpm> listPgpmStat = new ArrayList<VPpmPgpm>();
 	private List<VPpmliste> listePpmParPeriode = new ArrayList<VPpmliste>();
 	private List<TAgpm> listAgpm = new ArrayList<TAgpm>();
+	private List<VDetailHistoPpm> listDetailHistPpm = new ArrayList<VDetailHistoPpm>();
 	private TStatut stat = new TStatut();
 	private VDetailHistoDac detailHisto = new VDetailHistoDac();
+	private VDetailHistoPpm detailHistoPpm = new VDetailHistoPpm();
 	private TDetailPlanPassation ppm = new TDetailPlanPassation();
 	private VDetailDao detail = new VDetailDao(); 
+	private VPpmliste slctdTdPpm = new VPpmliste();
 	private VDacliste slctdTd = new VDacliste();
 	private VPpmPgpm repPpm = new VPpmPgpm();
 	private TAgpm agpm = new TAgpm();
@@ -189,6 +197,46 @@ public class SituationController {
 		 }
 	
 	}
+	
+	public void recherchePpmConsultation(){
+		listeConsultationPpm.clear();
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
+						new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+						new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				//recupStat();
+				//recupDetailHisto();
+				if (listeConsultationPpm.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dossier introuvable", ""));
+				}
+		 }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
+							new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					recupStatPpm();
+					recupDetailHistoPpm();
+					/*if (!objetListe.isEmpty()) {
+					 //
+					}else {
+						vider();
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
+					}	*/
+				 
+			 }else {
+				
+				    recupStatPpm();
+					recupDetailHistoPpm();
+				
+		 }
+	 
+		 }
+	
+	}
 
 
 	public void rechercheDossier(){
@@ -198,6 +246,17 @@ public class SituationController {
 				recupStat();
 				recupDetailHisto();
 	}
+	
+	
+	
+	public void recupDetailPpm(){
+		listHistoPpm =(List<VPpmStatut>) iservice.getObjectsByColumn("VPpmStatut",
+				new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTdPpm.getDppId()),
+				new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())
+				);
+		recupStatPpm();
+		recupDetailHistoPpm();
+}
 	
 	
 	public void recupStat() {
@@ -218,7 +277,24 @@ public class SituationController {
 	}
 	
 
+	//Statut ppm
+	public void recupStatPpm() {
+		listStat =(List<TStatut>) iservice.getObjectsByColumn("TStatut", new ArrayList<String>(Arrays.asList("STA_CODE")),
+				new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,""+slctdTdPpm.getDppId()));
+		if (!listStat.isEmpty()) {
+			stat=listStat.get(0);
+		}
+	}
 	
+	
+	//Historique ppm
+	public void recupDetailHistoPpm() {
+		listDetailHistPpm =(List<VDetailHistoPpm>) iservice.getObjectsByColumn("VDetailHistoPpm",
+				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTdPpm.getDppId()));
+		if (!listDetailHistPpm.isEmpty()) {
+			setDetailHistoPpm(listDetailHistPpm.get(0));
+		}
+	}
 
 	
 	
@@ -247,8 +323,12 @@ public class SituationController {
 	
 	 public void vider() {
 		 listHistoDac.clear();
+		 listeDAC.clear();
 		 critere="";
 		 detailHisto=new VDetailHistoDac();
+		 listeDAC = new ArrayList<VDacliste>();
+		 
+		 
 	 }
 	
 	
@@ -281,6 +361,14 @@ public class SituationController {
 				userController.renderPage(value);
 				break;
 				
+			case "sit6":
+				userController.renderPage(value);
+				break;
+				
+			case "sit7":
+				recupDetailPpm();
+				userController.renderPage(value);
+				break;
 			case "per1":
 				//chargePlanPassationByPeriode();
 				userController.renderPage(value);
@@ -566,6 +654,76 @@ public class SituationController {
 
 		public void setSlctdTd(VDacliste slctdTd) {
 			this.slctdTd = slctdTd;
+		}
+
+
+
+
+		public List<VPpmliste> getListeConsultationPpm() {
+			return listeConsultationPpm;
+		}
+
+
+
+
+		public void setListeConsultationPpm(List<VPpmliste> listeConsultationPpm) {
+			this.listeConsultationPpm = listeConsultationPpm;
+		}
+
+
+
+
+		public List<VDetailHistoPpm> getListDetailHistPpm() {
+			return listDetailHistPpm;
+		}
+
+
+
+
+		public void setListDetailHistPpm(List<VDetailHistoPpm> listDetailHistPpm) {
+			this.listDetailHistPpm = listDetailHistPpm;
+		}
+
+
+
+
+		public VDetailHistoPpm getDetailHistoPpm() {
+			return detailHistoPpm;
+		}
+
+
+
+
+		public void setDetailHistoPpm(VDetailHistoPpm detailHistoPpm) {
+			this.detailHistoPpm = detailHistoPpm;
+		}
+
+
+
+
+		public VPpmliste getSlctdTdPpm() {
+			return slctdTdPpm;
+		}
+
+
+
+
+		public void setSlctdTdPpm(VPpmliste slctdTdPpm) {
+			this.slctdTdPpm = slctdTdPpm;
+		}
+
+
+
+
+		public List<VPpmStatut> getListHistoPpm() {
+			return listHistoPpm;
+		}
+
+
+
+
+		public void setListHistoPpm(List<VPpmStatut> listHistoPpm) {
+			this.listHistoPpm = listHistoPpm;
 		}
 
 }

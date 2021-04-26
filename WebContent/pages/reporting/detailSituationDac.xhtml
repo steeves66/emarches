@@ -28,118 +28,57 @@
     <section class="content">
      <div class="box"></div>
              <div class="row"><div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div></div>
-            
-            <div class="row">
-            
-            	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Gestion</label></div>
+		         <div class="col-sm-3"><label class="pull-right">SITUATION ACTUELLE DU DOSSIER :</label></div>
+                    <div class="col-sm-9">
+                    <span style="color:red">
+                    <label><h:outputText  value="#{situationController.detailHisto.staLibelleCourt}" style="width: 100%" /> </label>
+                    </span>
+                  </div>
+           <br/>
+            <br/>
+       
+       
+                    <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Gestion :</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTd.dacGesCode}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{situationController.slctdTd.dacGesCode}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Structure</label></div>
+                  <div class="col-sm-3"><label class="pull-right">Structure : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText value="#{etatsDaoController.slctdTd.strLibelleLong}" styleClass="text-muted" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText value="#{situationController.slctdTd.strLibelleLong}" styleClass="text-muted" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	      
 	             
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Objet de l'opération : </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Objet : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.dacObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{situationController.slctdTd.dacObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de Marché : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTd.tymCode} : #{etatsDaoController.slctdTd.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{situationController.slctdTd.tymCode} : #{situationController.slctdTd.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de Passation : </label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.mopCode} : #{etatsDaoController.slctdTd.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{situationController.slctdTd.mopCode} : #{situationController.slctdTd.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
-	             <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Date Avis Bailleur : </label></div>
-                  <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.dacDateAvisBailleur}"  style="width: 100%" readonly="true"/></label>
-                  </div>
-	             </div>
-	             <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Observation du Bailleur : </label></div>
-                  <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.dacAvisBailleur}"  style="width: 100%" readonly="true"/></label>
-                  </div>
-	             </div>
-	            </div>
-	            
-	              <fieldset>
-		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="450" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
-	        
-	         <p:column headerText="Libelle " styleClass="col-sm-12">
-	            <h:outputText value="#{slctdTb.pidLibelle}" />
-	        </p:column>
-
-	        </p:dataTable>
-		           </fieldset>
-		           
-		           <div>
-	             </div>
-		           
-		            <fieldset>
-		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
-		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun #{controleController.type} enregistré">
-
-				        <p:column headerText="Reférence" styleClass="col-sm-6">
-				            <h:outputText value="#{slctdTb.ddaReference}" />
-				        </p:column>
-				        
-				        <p:column headerText="Type de Document" styleClass="col-sm-4">
-				            <h:outputText value="#{slctdTb.TNatureDocuments.nadLibelle}" />
-				        </p:column>
-				        
-				        <p:column headerText="Action" styleClass="no-sort col-sm-1">
-			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{etatsDaoController.openDossier()}"  title="ouvrir"  ajax="false">
-			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
-				                <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.selectedDossier}" />
-				            </p:commandLink>	
- 	                    </p:column>
-				         
-				        
-                 </p:dataTable> 
-		           </fieldset>
-		           
-	           </div>
-   <br/><br/><br/><br/>
-            </div>
             
-		         <div class="col-sm-2"><label class="pull-right">SITUATION ACTUELLE DU DOSSIER :</label></div>
-                    <div class="col-sm-10">
-                    <span style="color:red">
-                    <label><h:outputText  value="#{situationController.detailHisto.staLibelleCourt}" style="width: 100%" /> </label>
-                    </span>
-                  </div>
-            </div>
-            <br/>
+            
      <div class="row">         
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">HISTORIQUE DE TRAITEMENT DU DOSSIER #{situationController.detailHisto.dacCode} : #{situationController.detailHisto.dacObjet} </div></div>
-            <div class="col-md-2 "><div  style="color: #fff">
-             <label for="gestion1" class="col-sm-5 control-label"></label>
-	              <div class="col-sm-6">
-		                    
-	               </div>
-             </div>
-           </div>
+            <div class="col-md-12 "><div  style="color: #fff">HISTORIQUE DE TRAITEMENT DU DOSSIER #{situationController.detailHisto.dacCode} : #{situationController.detailHisto.dacObjet} </div></div>
          </div> 
          <div class="box-body">
          <p:dataTable id="ndTbleHisto" value="#{situationController.listHistoDac}" styleClass="table table-bordered table-hover" var="slctdTb" scrollable="true" scrollHeight="460"

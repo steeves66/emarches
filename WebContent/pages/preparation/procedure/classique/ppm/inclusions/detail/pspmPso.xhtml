@@ -9,16 +9,18 @@
     <div class="box-body">
 			            <div class="row"> 
      
-             <div class="col-md-6">
-		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Transmission du dossier de consultation à la CPMP: </label></div>
+     
+     <div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de publication  : </label></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAvisAoPublication}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
 			</div> 
-		   
-             </div>
+	</div>
+     
+         
 	
 	
 	  <div class="col-md-6">
@@ -30,6 +32,27 @@
 			     </b>
 			</div> 
 		 </div>
+		 
+		     <div class="col-md-6">
+		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Transmission du dossier de consultation à la CPMP: </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+		   
+             </div>
+             
+             <div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Ouverture Financière : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateOuvertOf}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+	</div>
 		 
 		                       
 		   </div> 
@@ -52,16 +75,15 @@
 		 
 	
 	
-	 <div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Ouverture Financière : </label></div>
+	<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Attribution du marché : </label></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateOuvertOf}"> 
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateMarcheApprob}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
 			</div> 
-	</div>
-		 
+		 </div>
 	
 	  <div class="col-md-6">
 		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Transmission de l'avis à la DGMP: </label></div>
@@ -102,15 +124,15 @@
 
 
 		 
-		<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Attribution du marché : </label></div>
+				<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Notification de l'Attribution : </label></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateMarcheApprob}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateNotAtt}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
 			</div> 
-		 </div>
+	</div>
 	
 	
 
@@ -126,18 +148,7 @@
 	
 	
 	
-			<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Notification de l'Attribution : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateNotAtt}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-
- <div class="col-md-6">
+		<div class="col-md-6">
 		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Signature du marché par l'AC : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
@@ -147,6 +158,7 @@
 			</div> 
 	</div>
 	
+
          
   
 </div>

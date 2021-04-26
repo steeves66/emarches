@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 10 déc. 2019 18:26:42 by Hibernate Tools 4.3.5.Final
+// Generated 26 avr. 2021 17:28:05 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,35 +18,40 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_PPM_STATUT")
 public class VPpmStatut implements java.io.Serializable {
 
-	private String hppStaCode;
-	private long hppDppId;
 	private long hppId;
+	private long hppDppId;
+	private String hppStaCode;
+	private String staLibelleCourt;
+	private String staLibelleLong;
 	private Date hppDate;
 	private String hppMotif;
+	private String fonCod;
+	private String fonCodePf;
 	private String fonLibelle;
-	private String opeNom;
 
 	public VPpmStatut() {
 	}
 
-	public VPpmStatut(String hppStaCode, long hppDppId, long hppId) {
-		this.hppStaCode = hppStaCode;
-		this.hppDppId = hppDppId;
+	public VPpmStatut(long hppId, long hppDppId, String hppStaCode) {
 		this.hppId = hppId;
+		this.hppDppId = hppDppId;
+		this.hppStaCode = hppStaCode;
 	}
 
-	public VPpmStatut(String hppStaCode, long hppDppId, long hppId, Date hppDate, String hppMotif,
-			String fonLibelle,String opeNom) {
-		this.hppStaCode = hppStaCode;
-		this.hppDppId = hppDppId;
+	public VPpmStatut(long hppId, long hppDppId, String hppStaCode, String staLibelleCourt, String staLibelleLong,
+			Date hppDate, String hppMotif, String fonCod, String fonCodePf, String fonLibelle) {
 		this.hppId = hppId;
+		this.hppDppId = hppDppId;
+		this.hppStaCode = hppStaCode;
+		this.staLibelleCourt = staLibelleCourt;
+		this.staLibelleLong = staLibelleLong;
 		this.hppDate = hppDate;
 		this.hppMotif = hppMotif;
+		this.fonCod = fonCod;
+		this.fonCodePf = fonCodePf;
 		this.fonLibelle = fonLibelle;
-		this.opeNom = opeNom;
 	}
-	
-	
+
 	@Id
 	@Column(name = "HPP_ID", nullable = false, precision = 10, scale = 0)
 	public long getHppId() {
@@ -55,16 +60,6 @@ public class VPpmStatut implements java.io.Serializable {
 
 	public void setHppId(long hppId) {
 		this.hppId = hppId;
-	}
-
-
-	@Column(name = "HPP_STA_CODE", nullable = false, length = 3)
-	public String getHppStaCode() {
-		return this.hppStaCode;
-	}
-
-	public void setHppStaCode(String hppStaCode) {
-		this.hppStaCode = hppStaCode;
 	}
 
 	@Column(name = "HPP_DPP_ID", nullable = false, precision = 10, scale = 0)
@@ -76,6 +71,32 @@ public class VPpmStatut implements java.io.Serializable {
 		this.hppDppId = hppDppId;
 	}
 
+	@Column(name = "HPP_STA_CODE", nullable = false, length = 3)
+	public String getHppStaCode() {
+		return this.hppStaCode;
+	}
+
+	public void setHppStaCode(String hppStaCode) {
+		this.hppStaCode = hppStaCode;
+	}
+
+	@Column(name = "STA_LIBELLE_COURT", length = 500)
+	public String getStaLibelleCourt() {
+		return this.staLibelleCourt;
+	}
+
+	public void setStaLibelleCourt(String staLibelleCourt) {
+		this.staLibelleCourt = staLibelleCourt;
+	}
+
+	@Column(name = "STA_LIBELLE_LONG", length = 1000)
+	public String getStaLibelleLong() {
+		return this.staLibelleLong;
+	}
+
+	public void setStaLibelleLong(String staLibelleLong) {
+		this.staLibelleLong = staLibelleLong;
+	}
 
 	@Column(name = "HPP_DATE", length = 7)
 	public Date getHppDate() {
@@ -95,7 +116,25 @@ public class VPpmStatut implements java.io.Serializable {
 		this.hppMotif = hppMotif;
 	}
 
-	@Column(name = "FON_LIBELLE", length = 240)
+	@Column(name = "FON_COD", length = 20)
+	public String getFonCod() {
+		return this.fonCod;
+	}
+
+	public void setFonCod(String fonCod) {
+		this.fonCod = fonCod;
+	}
+
+	@Column(name = "FON_CODE_PF", length = 20)
+	public String getFonCodePf() {
+		return this.fonCodePf;
+	}
+
+	public void setFonCodePf(String fonCodePf) {
+		this.fonCodePf = fonCodePf;
+	}
+
+	@Column(name = "FON_LIBELLE", length = 500)
 	public String getFonLibelle() {
 		return this.fonLibelle;
 	}
@@ -103,15 +142,5 @@ public class VPpmStatut implements java.io.Serializable {
 	public void setFonLibelle(String fonLibelle) {
 		this.fonLibelle = fonLibelle;
 	}
-	
-	@Column(name = "OPE_NOM")
-	public String getOpeNom() {
-		return this.opeNom;
-	}
-
-	public void setOpeNom(String opeNom) {
-		this.opeNom = opeNom;
-	}
-
 
 }
