@@ -2623,8 +2623,8 @@ public class ControleController {
 				   				    									    	 type = "AMI";
 				   				    										     typePlan ="PN";
 				   				    										     libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
-				   												    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
-				   												    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
+				   												    			 libelleDao3="TRANSMISSION DE L'AMI PAR LA CELLULE";
+				   												    			 libelleDao1 ="TRANSMISSION DE L'AMI PAR LA CELLULE";
 				   												    			 btn_new =false;
 				   												    			 btn_affec = false;
 				   												    			 btn_exam = false;
@@ -5023,8 +5023,8 @@ public class ControleController {
 														    									    		 type = "DAC";
 														    									    		 fonctionalite = "listeDacValCellule";
 														    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																							    			 libelleDao3="TRANSMISSION DU DAO PAR LA CELLULE";
-																							    			 libelleDao1 ="TRANSMISSION DU DAO PAR LA CELLULE";
+																							    			 libelleDao3="VALIDATION DU DAO PAR LA CELLULE";
+																							    			 libelleDao1 ="VALIDATION DU DAO PAR LA CELLULE";
 																							    			 libelleSmall="Procédure Simplifiée";
 																							    			 btn_new =false;
 																							    			 btn_affec = false;
@@ -5035,15 +5035,6 @@ public class ControleController {
 																											 panel2 =false;
 																											 panel3 = false;
 																											 panel4 = false;
-																											/* panel4 = false;
-																											 panel5 = false;
-																											 panel6 = false;
-																											 panel7 = false;
-																											 panel8 = true;
-																											 panel9 = false;
-																											 panel10 = false;
-																											 panel11 = false;
-																											 panel12 = false;*/
 																											 affDao=false;
 																											 exaDao=false;
 																											 retDao = true;

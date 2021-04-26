@@ -419,6 +419,7 @@ public class DaoController {
 	  private String statutPub ="";
 	  private String type ="";
 	  private String plan ="";
+	  private String statutTrans ="";
 	  private long lotTotal = 0;
 	  private long coutLot = 0;
 	  private boolean ouvTechnique = true;
@@ -3051,26 +3052,36 @@ TDacSpecs dao = new TDacSpecs();
 		    
 		    
 		    public void transmettreCpmp() {
+		    	
+		    	if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+		    	    statutTrans = "DPU"; 
+		    	     }else
+		    	      {  if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
+		    	    	       statutTrans = "D5V";
+		    	            }else {
+		    	            	 statutTrans = "D2T";
+		    	             } 
+		    	      }
 	        	
 				listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 					if (!listDao.isEmpty()) {
 						newDao= listDao.get(0);
-						newDao.setTStatut(new TStatut("D2T"));
+						newDao.setTStatut(new TStatut(statutTrans));
 						newDao.setDacStatutRetour("0");
 				        iservice.updateObject(newDao); 
 		   	                 }
 			
-				    constantService.getStatut("D2T");
+				    constantService.getStatut(statutTrans);
 	 				//Historisation du DAC
-	 				historiser("D2T",slctdTd.getDacCode(),"DAO transmis par la Cellule de Passation");
+	 				historiser(""+statutTrans,slctdTd.getDacCode(),"");
 						//chargeDataAExaminer();
 						
 						chargeData();
 						//Actualisation du tableau de bord
 						typeActionTb();
 						//Message de confirmation
-						userController.setTexteMsg("Transmission effectue avec succs!");
+						userController.setTexteMsg("Transmission effectuée avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");		
 	     }
@@ -15517,6 +15528,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setListeChargeEtudeByDac(List<VChargeEtudeDac> listeChargeEtudeByDac) {
 		this.listeChargeEtudeByDac = listeChargeEtudeByDac;
+	}
+
+	public String getStatutTrans() {
+		return statutTrans;
+	}
+
+	public void setStatutTrans(String statutTrans) {
+		this.statutTrans = statutTrans;
 	}
 	
 	
