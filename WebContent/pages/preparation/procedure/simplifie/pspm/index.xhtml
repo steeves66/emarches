@@ -570,11 +570,11 @@
                 
                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
                   <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-                <h:outputText value="#{slctdTb.dppLbgCode}" style="color:red; font-weight:bold "/>
+                <h:outputText value="#{slctdTb.lbgImputation}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
                 
                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-                <h:outputText value="#{slctdTb.dppLbgCode}" />
+                <h:outputText value="#{slctdTb.lbgImputation}" />
                 </h:panelGroup>
                 </p:column>
                 

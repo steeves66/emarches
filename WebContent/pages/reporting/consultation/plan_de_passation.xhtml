@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>Suivie des plans de passations</h3>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Suivie des plans de passation | PPM/PSPM 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+             <div class="row"><div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div></div>
+            
+            <div class="row">
+               <div class="form-inline col-md-12" >
+                       <div class="form-group has-feedback">
+   						  <p:commandLink styleClass="btn btn-success m-r-5" style="background-color: #036d3b; border: #036d3b" value="Initialiser"  action="#{situationController.viderPpm()}" update=":gnl"> </p:commandLink>		
+				   </div>
+                       <div class="form-group has-feedback">
+   						    <p:inputText type="text" value="#{situationController.critere}" class="form-control"  placeholder="Saisire le code du dossier"  > 
+							</p:inputText>
+    						<i class="glyphicon glyphicon-search form-control-feedback"></i>		
+				   </div>
+                       
+				    <div class="form-group has-feedback">
+   						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #f88b2e; border: #f88b2e" value="Rechercher"  action="#{situationController.recherchePpmConsultation()}" update=":gnl"> </p:commandLink>	
+				   </div>
+		         </div>
+            </div>
+            <br/>
+     <div class="row">         
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">LISTE DES PLANS DE PASSATIONS</div></div>
+            <div class="col-md-2 "><div  style="color: #fff">
+             <label for="gestion1" class="col-sm-5 control-label"></label>
+	              <div class="col-sm-6">
+		                    
+	               </div>
+             </div>
+           </div>
+         </div> 
+         <div class="box-body">
+         <p:dataTable id="ndTbleHisto" value="#{situationController.listeConsultationPpm}" styleClass="table table-bordered table-hover" var="slctdTb" scrollable="true" scrollHeight="460"
+			               emptyMessage="Aucun plan de passation trouvé">
+                 <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
+                </h:panelGroup>
+                
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppObjet}" />
+                </h:panelGroup>
+                </p:column>
+
+                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </h:panelGroup>
+                </p:column>
+                
+               <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.lbgImputation}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.lbgImputation}" />
+                </h:panelGroup>
+                </p:column>
+                
+                 
+                <p:column headerText="Type Marché" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </h:panelGroup>
+                </p:column>
+                <p:column headerText="Mode de passation" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                </h:panelGroup>
+                </p:column>
+               
+                 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </h:panelGroup>
+                </p:column> 
+                
+               
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </h:panelGroup>
+                </p:column> 
+                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppDateValAc}" style="color:red; font-weight:bold">
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </h:panelGroup>
+                </p:column>
+               </h:panelGroup> 
+                 
+                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                </h:panelGroup>
+               
+				        
+				         <p:column headerText="Actions" styleClass="col-sm-1">
+				         
+				         
+                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
+                             </p:commandLink>
+                              <p:commandLink action="#{situationController.renderPage('sit7')}"   class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px" title="Suivre le dossier" update=":content">
+                                <i class="ace-icon fa fa-line-chart bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{situationController.slctdTdPpm}" />                             
+                            </p:commandLink>
+				         </p:column>   
+						</p:dataTable>
+         </div>
+       </div>      
+     </div>
+            
+     <div class="row">    
+     <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+	 </p:commandLink>
+     </div>  
+   </section>
+         
+</h:form>
+
+</ui:define>
+</ui:composition>
+</html>

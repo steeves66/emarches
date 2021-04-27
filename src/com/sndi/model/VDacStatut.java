@@ -28,6 +28,7 @@ public class VDacStatut implements java.io.Serializable {
 	private String fonCod;
 	private String fonCodePf;
 	private String fonLibelle;
+	private String opeNom;
 
 	public VDacStatut() {
 	}
@@ -39,7 +40,7 @@ public class VDacStatut implements java.io.Serializable {
 	}
 
 	public VDacStatut(long hacId, String hacDacCode, String hacStaCode, String staLibelleCourt, String staLibelleLong,
-			Date hacDate, String hacCommentaire, String fonCod, String fonCodePf, String fonLibelle) {
+			Date hacDate, String hacCommentaire, String fonCod, String fonCodePf, String fonLibelle,String opeNom) {
 		this.hacId = hacId;
 		this.hacDacCode = hacDacCode;
 		this.hacStaCode = hacStaCode;
@@ -50,6 +51,7 @@ public class VDacStatut implements java.io.Serializable {
 		this.fonCod = fonCod;
 		this.fonCodePf = fonCodePf;
 		this.fonLibelle = fonLibelle;
+		this.opeNom = opeNom;
 	}
 
 	@Id
@@ -141,6 +143,15 @@ public class VDacStatut implements java.io.Serializable {
 
 	public void setFonLibelle(String fonLibelle) {
 		this.fonLibelle = fonLibelle;
+	}
+
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
 	}
 
 }

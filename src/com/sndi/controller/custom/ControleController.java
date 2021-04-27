@@ -229,6 +229,9 @@ public class ControleController {
 	
 	private boolean panelPpm =false;
 	private boolean panelPspm =false;
+	private boolean panelHistPlan =false;
+	private boolean panelConsPlan =false;
+	private boolean panelPeriodPlan =false;
 	private boolean selectOneMenuProcedure =false;
 	//Boutons
 	private boolean btn_new =false;
@@ -1192,6 +1195,9 @@ public class ControleController {
 						 lignedefaut = true;
 						 panelPpm = true;
 						 panelPspm = false;
+						 panelHistPlan =false;
+						 panelConsPlan =false;
+						 panelPeriodPlan =false;
 						 fermerVal = false;
 						 fermerSai = true;
 						 btn_trans_ppm = true;
@@ -1256,6 +1262,9 @@ public class ControleController {
 							 selectTypMPgspm = false;
 							 panelPpm = true;
 							 panelPspm = false;
+							 panelHistPlan =false;
+							 panelConsPlan =false;
+							 panelPeriodPlan =false;
 							 fermerVal = false;
 							 fermerSai = true;
 							 fermerValPpm = false;
@@ -1312,6 +1321,9 @@ public class ControleController {
 								panelPpmTableauBordVal = true;
 								panelPpm = true;
 								panelPspm = false;
+								panelHistPlan =false;
+								panelConsPlan =false;
+								panelPeriodPlan =false;
 								fermerVal = true;
 								fermerSai = false;
 								fermerValPpm = true;
@@ -1344,8 +1356,11 @@ public class ControleController {
 				    				libelle="Détail du PPM N°";
 				    				//fermerSai = true;
 				    				//fermerVal = false;
-				    				panelPpm = true;
+				    				/*panelPpm = true;
 				    				panelPspm = false;
+				    				panelHistPlan =false;
+				    				panelConsPlan =false;
+				    				panelPeriodPlan =false;*/
 				    				fermerSaiPspm = false;
 				    				fermerValPspm = false;
 				    				detailP1 = true;
@@ -1361,6 +1376,14 @@ public class ControleController {
 									 etatPsc = false;
 									 etatPsl_Pso = false;
 				    			}else
+					    			if(action.equalsIgnoreCase("HISPLAN")) {
+					    				panelPpm = false;
+										panelPspm = false;
+										panelHistPlan =true;
+										panelConsPlan =false;
+										panelPeriodPlan =false;
+					    			}
+				    			else
 					    			if(action.equalsIgnoreCase("PUBPPM")) {
 					    			type = "PPM";
 					    			typePlan = "PN";
@@ -1385,6 +1408,9 @@ public class ControleController {
 									panelPgpmTableauBordDpsgPub = false;
 									panelPpm = true;
 									panelPspm = false;
+									panelHistPlan =false;
+									panelConsPlan =false;
+									panelPeriodPlan =false;
 									fermerVal = true;
 									fermerSai = false;
 									fermerValPpm = true;
@@ -1437,6 +1463,9 @@ public class ControleController {
 											panelPgpmTableauBordDpgPub = true;
 											panelPpm = true;
 											panelPspm = false;
+											panelHistPlan =false;
+											panelConsPlan =false;
+											panelPeriodPlan =false;
 											fermerVal = true;
 											fermerSai = false;
 											fermerValPpm = true;
@@ -1499,6 +1528,9 @@ public class ControleController {
 						 lignedefaut = true;
 						 panelPpm = true;
 						 panelPspm = false;
+						 panelHistPlan =false;
+						 panelConsPlan =false;
+						 panelPeriodPlan =false;
 						 fermerVal = false;
 						 fermerSai = true;
 						 btn_trans_ppm = true;
@@ -1567,6 +1599,9 @@ public class ControleController {
 							 selectTypMPgspm = true;
 							 panelPpm = false;
 							 panelPspm = true;
+							 panelHistPlan =false;
+							 panelConsPlan =false;
+							 panelPeriodPlan =false;
 							 selectOneMenuProcedure =true;
 							 selectOneMenuPassation =false;
 							 btn_creerDetailPpm = false;
@@ -1621,6 +1656,9 @@ public class ControleController {
 								panelPspmTableauBordVal = true;
 								panelPpm = false;
 								panelPspm = true;
+								panelHistPlan =false;
+								panelConsPlan =false;
+								panelPeriodPlan =false;
 								fermerValPspm = true;
 								fermerSaiPspm = false;
 								fermerValPpm = false;
@@ -1652,6 +1690,9 @@ public class ControleController {
 				    				fermerVal = false;
 				    				panelPpm = false;
 				    				panelPspm = true;
+				    				panelHistPlan =false;
+				    				panelConsPlan =false;
+				    				panelPeriodPlan =false;
 				    				//fermerSaiPspm = true;
 				    				//fermerValPspm = false;
 				    				detailP1 = false;
@@ -1687,6 +1728,9 @@ public class ControleController {
 									panelPgpmTableauBordPspPub = false;
 									panelPpm = true;
 									panelPspm = false;
+									panelHistPlan =false;
+									panelConsPlan =false;
+									panelPeriodPlan =false;
 									fermerVal = true;
 									fermerSai = false;
 									fermerValPpm = true;
@@ -1736,6 +1780,9 @@ public class ControleController {
 											panelPgpmTableauBordDpsgPub = false;
 											panelPpm = true;
 											panelPspm = false;
+											panelHistPlan =false;
+											panelConsPlan =false;
+											panelPeriodPlan =false;
 											fermerVal = true;
 											fermerSai = false;
 											fermerValPpm = true;
@@ -3060,6 +3107,10 @@ public class ControleController {
 					     btn_fermer_saisie_ami = false ;
 					     btn_fermer_saisie_prq = false  ;
 			    	}else
+		    			if(action.equalsIgnoreCase("HISDAC")) {
+		    				
+		    			}
+			    	else
 			    		if(action.equalsIgnoreCase("SAIDAO")) {
 			    			typePlan ="PN";
 			    			type = "DAC";
@@ -10600,6 +10651,36 @@ public class ControleController {
 
 	public void setAnoBail(boolean anoBail) {
 		this.anoBail = anoBail;
+	}
+
+
+	public boolean isPanelHistPlan() {
+		return panelHistPlan;
+	}
+
+
+	public void setPanelHistPlan(boolean panelHistPlan) {
+		this.panelHistPlan = panelHistPlan;
+	}
+
+
+	public boolean isPanelConsPlan() {
+		return panelConsPlan;
+	}
+
+
+	public void setPanelConsPlan(boolean panelConsPlan) {
+		this.panelConsPlan = panelConsPlan;
+	}
+
+
+	public boolean isPanelPeriodPlan() {
+		return panelPeriodPlan;
+	}
+
+
+	public void setPanelPeriodPlan(boolean panelPeriodPlan) {
+		this.panelPeriodPlan = panelPeriodPlan;
 	}
 	
 	

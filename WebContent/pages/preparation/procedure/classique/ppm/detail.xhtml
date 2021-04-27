@@ -262,6 +262,12 @@
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		</h:panelGroup>
+		
+		 <h:panelGroup rendered="#{controleController.panelHistPlan}">
+		<p:commandLink styleClass="btn btn-warning" action="#{situationController.renderPage('sit6','HISPLAN')}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		</h:panelGroup>
     </section>
     </h:form>
     

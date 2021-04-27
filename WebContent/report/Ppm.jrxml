@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-09T13:46:49 -->
+<!-- 2021-04-26T18:43:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ppm" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Table_TH" mode="Opaque" backcolor="#3CA34E">
 		<box>
@@ -33,7 +33,7 @@
 	</style>
 	<subDataset name="Details" whenResourceMissingType="Empty" uuid="1a7b3118-438e-4e55-b3a1-f1a48b0bbbd2">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
 		<parameter name="param_code" class="java.lang.Long">
 			<parameterDescription><![CDATA[]]></parameterDescription>
 			<defaultValueExpression><![CDATA[$P{param_code}]]></defaultValueExpression>
@@ -43,11 +43,11 @@
 			<![CDATA[select *
 from v_ppm_etat_revise vp
 where vp.dpp_type_plan = 'PN'
-and vp.dpp_sta_code ='S1S'
+--and vp.dpp_sta_code ='S1S'
 and vp.plp_ges_code = $P{param_code}
 and vp.lbg_fon_code_ac= $P{param_op}]]>
 		</queryString>
-		<field name="V_ID" class="java.math.BigDecimal"/>
+		<field name="V_ID" class="java.lang.Long"/>
 		<field name="DPP_ID" class="java.lang.Long"/>
 		<field name="DPP_PLP_ID" class="java.lang.Long"/>
 		<field name="DPP_GPG_ID" class="java.lang.Long"/>
@@ -102,6 +102,9 @@ and vp.lbg_fon_code_ac= $P{param_op}]]>
 		<field name="DPP_FON_COD_PF" class="java.lang.String"/>
 		<field name="DPP_FON_COD_DMP" class="java.lang.String"/>
 		<field name="DPP_MONTANT" class="java.math.BigDecimal"/>
+		<field name="DPP_STATUT_ANO" class="java.lang.String"/>
+		<field name="DPP_TYPE_STR_CONDUC" class="java.lang.String"/>
+		<field name="DPP_NAT_INT" class="java.lang.String"/>
 		<field name="FON_LIBELLE" class="java.lang.String"/>
 		<field name="LBG_CODE" class="java.lang.String"/>
 		<field name="LBG_IMPUTATION" class="java.lang.String"/>
