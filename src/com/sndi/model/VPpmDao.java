@@ -74,6 +74,7 @@ public class VPpmDao implements java.io.Serializable {
 	private Long dppMontant;
 	private String dppStatutAno;
 	private Long dppNbOuv;
+	private String critere;
 
 	public VPpmDao() {
 	}
@@ -105,7 +106,7 @@ public class VPpmDao implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur,String dppRecherche ,String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
-			String lbgImputation, String natLibelle, String strTstCode,Long dppMontant, String dppStatutAno,Long dppNbOuv) {
+			String lbgImputation, String natLibelle, String strTstCode,Long dppMontant, String dppStatutAno,Long dppNbOuv,String critere) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -161,6 +162,7 @@ public class VPpmDao implements java.io.Serializable {
 		this.dppMontant = dppMontant;
 		this.dppStatutAno = dppStatutAno;
 		this.dppNbOuv = dppNbOuv;
+		this.critere = critere;
 	}
 
 	
@@ -658,5 +660,14 @@ public class VPpmDao implements java.io.Serializable {
 
 	public void setDppNbOuv(Long dppNbOuv) {
 		this.dppNbOuv = dppNbOuv;
+	}
+	
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 }

@@ -1040,7 +1040,7 @@ TDacSpecs dao = new TDacSpecs();
 			   		   //Chargement des fonctions Ã  imputer
 			   		   chargeFonctionImput();
 			   		  //Message de Confirmation
-			   		  userController.setTexteMsg("Responsabilit Attribue avec succs!");
+			   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 					  userController.setRenderMsg(true);
 					  userController.setSevrityMsg("success");
 			       }
@@ -3697,12 +3697,12 @@ TDacSpecs dao = new TDacSpecs();
 	    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) || dao.getDacFinancement().equalsIgnoreCase("") ) {
 	    		 //Message d'Erreur
 	    		 FacesContext.getCurrentInstance().addMessage(null,
-		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez slectionnez votre PPM, puis faites OK!", ""));
+		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez sélectionnez votre PPM, puis faites OK!", ""));
 	    	 }else 
 		 			    //Insertion des pices constitutives du DAO 
 		 			     if(listSelectionTypePieces.size()==0) {
 		 						FacesContext.getCurrentInstance().addMessage(null,
-		 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pice selectionne", ""));
+		 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 		 					}
 		 			 		else{
 		 			 			String gestion =String.valueOf(gesCode).substring(2,4);
@@ -3760,7 +3760,7 @@ TDacSpecs dao = new TDacSpecs();
 		 			 	    	       }
 		 			 			   
 		 			 			    //Historisation   
-		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorit Contractante");
+		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorité Contractante");
 		 			 			   
 		 			 			   tableauBordController.saveTempTabord("D1S", dao.getTTypeDacSpecs().getTdcCode(), ""+userController.getSlctd().getTFonction().getFonCod(), dao.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), dao.getDacCode());
 		 			 			
@@ -3772,7 +3772,7 @@ TDacSpecs dao = new TDacSpecs();
 		 						     //tableauBordController.chargeDataDao();
 		 			 			    //typeActionTb();
 		 						     
-		 						     userController.setTexteMsg(typeDac+" N "+dao.getDacCode()+" Initi avec succs!");
+		 						     userController.setTexteMsg(typeDac+" N° "+dao.getDacCode()+" Initié avec succès!");
 		 							 userController.setRenderMsg(true);
 		 							 userController.setSevrityMsg("success");
 		 							 
@@ -4200,7 +4200,7 @@ TDacSpecs dao = new TDacSpecs();
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+						    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				 multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
@@ -4215,7 +4215,7 @@ TDacSpecs dao = new TDacSpecs();
 						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"AMI"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+						    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				 multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
@@ -4230,7 +4230,7 @@ TDacSpecs dao = new TDacSpecs();
 						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+						    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				 multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
