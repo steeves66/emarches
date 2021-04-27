@@ -173,7 +173,7 @@
 				      <p:column headerText="Responsable" width="9%">  
                                 
 						<h:panelGroup rendered="#{slctdTb.typresp == '3'}">
-                            <p:commandLink action="#{daoController.saveAffectationRespo('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+                            <p:commandLink action="#{daoController.updateAffectation('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
 				               title="Désigner le responsable">  
                                 <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltImput}" />                              

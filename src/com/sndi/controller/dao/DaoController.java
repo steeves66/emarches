@@ -887,12 +887,12 @@ TDacSpecs dao = new TDacSpecs();
 		 List<TDetCommissionSeance> DET  = iservice.getObjectsByColumn("TDetCommissionSeance", new WhereClause("DCS_NUM",Comparateur.EQ,""+sltImput.getDcsNum()));
 		 TDetCommissionSeance detSeance = new TDetCommissionSeance();
 			if(!DET.isEmpty()) detSeance = DET.get(0);
-			detSeance.setDcsMbmRespo(respo);
+			detSeance.setDcsMbmRespo(""+respo);
 			iservice.updateObject(detSeance);
 		   		   //Chargement des fonctions Ã  imputer
 		   		   chargeFonctionImput();
 		   		  //Message de Confirmation
-		   		  userController.setTexteMsg("Responsabilit Attribue avec succs!");
+		   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 		       
@@ -1072,7 +1072,7 @@ TDacSpecs dao = new TDacSpecs();
 		    	//Chargement des fonctions imputer 
 		   		 chargeFonctionImput();
 		   		//Message de Confirmation 
-		   		userController.setTexteMsg("Responsabilit Attribue avec succs!");
+		   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
 		     }else {
