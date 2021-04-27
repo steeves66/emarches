@@ -298,11 +298,6 @@ public class SituationController {
 
 	
 	
-
-	
-
-
-	
 	public void ReqParPeriode() {
 		DateFormat df = new SimpleDateFormat("dd/MM/yy");
 		String dated = df.format(dateDeb);

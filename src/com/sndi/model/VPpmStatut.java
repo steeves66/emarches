@@ -28,6 +28,7 @@ public class VPpmStatut implements java.io.Serializable {
 	private String fonCod;
 	private String fonCodePf;
 	private String fonLibelle;
+	private String opeNom;
 
 	public VPpmStatut() {
 	}
@@ -39,7 +40,7 @@ public class VPpmStatut implements java.io.Serializable {
 	}
 
 	public VPpmStatut(long hppId, long hppDppId, String hppStaCode, String staLibelleCourt, String staLibelleLong,
-			Date hppDate, String hppMotif, String fonCod, String fonCodePf, String fonLibelle) {
+			Date hppDate, String hppMotif, String fonCod, String fonCodePf, String fonLibelle,String opeNom) {
 		this.hppId = hppId;
 		this.hppDppId = hppDppId;
 		this.hppStaCode = hppStaCode;
@@ -50,6 +51,7 @@ public class VPpmStatut implements java.io.Serializable {
 		this.fonCod = fonCod;
 		this.fonCodePf = fonCodePf;
 		this.fonLibelle = fonLibelle;
+		this.opeNom = opeNom;
 	}
 
 	@Id
@@ -141,6 +143,15 @@ public class VPpmStatut implements java.io.Serializable {
 
 	public void setFonLibelle(String fonLibelle) {
 		this.fonLibelle = fonLibelle;
+	}
+	
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
 	}
 
 }
