@@ -3053,15 +3053,40 @@ TDacSpecs dao = new TDacSpecs();
 		    
 		    public void transmettreCpmp() {
 		    	
-		    	if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
-		    	    statutTrans = "DPU"; 
-		    	     }else
-		    	      {  if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
-		    	    	       statutTrans = "D5V";
-		    	            }else {
-		    	            	 statutTrans = "D2T";
-		    	             } 
-		    	      }
+		    	if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO")) {
+		    		     
+		    		if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+   		    		    statutTrans = "DPU"; 
+   		    	      }else
+   		    	          {  
+   		    	    	       if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
+		    	    	           statutTrans = "D5V";
+		    	                 }
+   		    	          }
+		    		
+		    		listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+							new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+							if (!listAvis.isEmpty()) {
+								//Mis à jour du statut
+								majAvis= listAvis.get(0);
+								majAvis.setTStatut(new TStatut("APU"));
+								majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+								iservice.updateObject(majAvis);
+							}
+							
+		    	      }else {
+
+		   		    	     if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+		   		    		    statutTrans = "DPU"; 
+		   		    		
+		   		    	      }else
+		   		    	          {  if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
+		   		    	    	       statutTrans = "D5V";
+		   		    	            }else {
+		   		    	            	 statutTrans = "D2T";
+		   		    	             } 
+		   		    	       }
+		    	           }
 	        	
 				listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
