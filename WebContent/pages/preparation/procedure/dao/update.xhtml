@@ -188,9 +188,9 @@
 	          </div>
  
           </div>
-          <p:commandLink styleClass="btn btn-success row pull-right" rendered="false" action="#{daoController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+          <p:commandLink styleClass="btn btn-success row pull-right" rendered="true" action="#{daoController.updateDac()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			             <i class="ace-icon fa fa-save"></i> Modifier
 	      </p:commandLink>
 	      
          </div>
@@ -606,9 +606,9 @@
            </div>
              <div class="row">
                 <div class="pull-right ">      
-				  <p:commandLink rendered="#{daoController.btn_save_avis}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.saveAvis()}"  update=":content">
+				  <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.updateAao()}"  update=":content">
 				  <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
-				  <i class="ace-icon fa fa-save"></i> Enregistrer
+				  <i class="ace-icon fa fa-save"></i> Modifier
 				  </p:commandLink>
 			  </div>
            </div>
@@ -1420,7 +1420,7 @@
         
          </p:tab>  
               
-    <p:tab id="confirmation" title="Confirmation" rendered="false" titleStyle="background-color: #f88b2e;background-image: none">
+          <p:tab id="confirmation" title="Confirmation" rendered="false" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
              <div class="row">
              <div class="col-md-6">

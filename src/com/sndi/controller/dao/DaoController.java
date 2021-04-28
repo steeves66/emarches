@@ -3255,9 +3255,7 @@ TDacSpecs dao = new TDacSpecs();
 								listeMbrCommissionSpeciale.clear();
 								selectionMbrCommissionSpeciale.clear();
 								listeMbrCommissionSpeciale = ((List<VCommissionSpeciale>)iservice.getObjectsByColumn("VCommissionSpeciale",new ArrayList<String>(Arrays.asList("TCT_CODE"))));
-									_logger.info("com special size: "+listeMbrCommissionSpeciale.size());	
-									
-										
+									_logger.info("com special size: "+listeMbrCommissionSpeciale.size());				
 						 }
 						 
 
@@ -3310,7 +3308,7 @@ TDacSpecs dao = new TDacSpecs();
 				 	public void savePresence() {
 				 		//COMPOSITION DE LA SEANCE
 						 if (selectionMembres.size()==0) {
-							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Sélectionnez un membre ", "");
 								FacesContext.getCurrentInstance().addMessage(null, msg);
 							}else {
 								
@@ -3343,7 +3341,7 @@ TDacSpecs dao = new TDacSpecs();
 								btn_ad_expert = true;
 								btn_dao = true;
 								 //Message de confirmation
-			  		            userController.setTexteMsg("Membre(s) enregistr(s) avec succs!");
+			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 							}
@@ -4039,7 +4037,7 @@ TDacSpecs dao = new TDacSpecs();
 						           						 dao.setDacMargePref(slctdTd.getDacMargePref());
 						           						 iservice.updateObject(dao);
 				            	         
-				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre cre avec succs!");
+				            	          		            userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
 				            	          		            userController.setRenderMsg(true);
 				            	          		            userController.setSevrityMsg("success");
 				            	          		      
@@ -7335,16 +7333,16 @@ TDacSpecs dao = new TDacSpecs();
 			  
 	 //Ensembles methode Ecran de modification
 			  public void actionsPavetCreation() {
-				  updateDac();
+				 //updateDac();
 				 chargeDetailAdresseModif();
 		         chargeAdresse();
-		         listeMargePrefModif();
 		         checkMargePrefModif();
+		         listeMargePrefModif();
 		         chargeLibelleAdresse();  
 			  }
 			  
 		public void actionsPavetLot() {
-			updateAao();
+			//updateAao();
 			chargeLotsUpdate();
 			montantTotalLotModif();
 		}
@@ -7358,8 +7356,8 @@ TDacSpecs dao = new TDacSpecs();
 		public void actionsPavetCritereByLot() {
 			listeCritereByLot.clear();
 			factoriserNext();
-			  chargeCritereByLot();
-			  recupMessage();
+			chargeCritereByLot();
+			recupMessage();
 		}
 		
 		public void actionPavetCojo() {
