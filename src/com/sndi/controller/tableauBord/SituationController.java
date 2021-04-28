@@ -102,13 +102,15 @@ public class SituationController {
     private Date filterDate;
 	private Date dateDeb;
 	private Date dateFin;
+	private String dated="";
+	private String datef="";
 	
 	
 	//Afficharge des plans de passations entre deux periodes
 	public void chargePlanPassationByPeriode() {
 		DateFormat df = new SimpleDateFormat("dd/MM/yy");
-		String dated = df.format(dateDeb);
-		String datef = df.format(dateFin);
+		 dated = df.format(dateDeb);
+		 datef = df.format(dateFin);
 		String dd = "TO_DATE('"+dated+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;
 		String dfin = "TO_DATE('"+datef+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;	
 		listePpmParPeriode.clear();
@@ -142,9 +144,6 @@ public class SituationController {
 		   }
 		 }
 
-		
-		
-
 		if(listePpmParPeriode.isEmpty()){
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN," Opération(s) non trouvé(s) pour la période de ->"+dated+" à ->"+datef, "")); 
 		}else {
@@ -152,6 +151,54 @@ public class SituationController {
 		}
 	}
 	
+	
+	
+	
+	//Afficharge des plans de passations entre deux periodes
+		public void chargeDacByPeriode() {
+			DateFormat df = new SimpleDateFormat("dd/MM/yy");
+			dated = df.format(dateDeb);
+			datef = df.format(dateFin);
+			String dd = "TO_DATE('"+dated+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;
+			String dfin = "TO_DATE('"+datef+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;	
+			listeDAC.clear();
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 listeDAC =  (List<VDacliste>)iservice.getObjectsByColumnNotQuote("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+							new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+							new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"'SDS'"),
+							new WhereClause("DAC_DTE_SAISI",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+					_logger.info("listePpm size: "+listePpmParPeriode.size());	
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					/* listePpmParPeriode = (List<VPpmliste>) iservice.getObjectsByColumnNotQuote("VPpmliste", 
+								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
+								new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+								new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+						_logger.info("listePpmParPeriode size: "+listePpmParPeriode.size());*/
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 listePpmParPeriode =  (List<VPpmliste>)iservice.getObjectsByColumnNotQuote("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DATE_SAISIE")),
+									new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+									new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+							_logger.info("listePpm size: "+listePpmParPeriode.size());	
+				         
+					 }else 
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							  listePpmParPeriode =  (List<VPpmliste>)iservice.getObjectsByColumnNotQuote("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DATE_SAISIE")),
+										new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
+										new WhereClause("DPP_DATE_SAISIE",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+								_logger.info("listePpmParPeriode size: "+listePpmParPeriode.size());	
+			     } 
+			   }
+			 }
+
+			if(listeDAC.isEmpty()){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN," Dossier(s) non trouvé(s) pour la période de ->"+dated+" à ->"+datef, "")); 
+			}else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,listeDAC.size()+" Dossier(s) trouvé(s) pour la période du ->"+dated+" au ->"+datef, ""));
+			}
+		}
+		
 	
 	
 	
@@ -237,7 +284,52 @@ public class SituationController {
 		 }
 	
 	}
+	
+	public void chargeConsultationPPM() {
+		listeConsultationPpm.clear();
+		critere="";
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+						new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			// 
+		  }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				// 
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+					||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					// 
+				 }
+			 }	 
+		}
+	}
+	
+	
+	public void chargeConsultationDac() {
+		listeDAC.clear();
+		critere="";
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+						new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+						new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			// 
+		  }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				// 
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+					||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					// 
+				 }
+			 }	 
+		}
+	}
 
+	public void viderPpm() {
+		listeConsultationPpm.clear();
+		critere="";
+	}
 
 	public void rechercheDossier(){
 				listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
@@ -336,10 +428,14 @@ public class SituationController {
 				break;
 				
 			case "sit1":
+				critere="";
+				chargeConsultationPPM();
 				userController.renderPage(value);
 				break;
 			
 			case "sit2":
+				critere="";
+				chargeConsultationDac();
 				userController.renderPage(value);
 				break;
 				
@@ -352,20 +448,30 @@ public class SituationController {
 				break;
 				
 			case "sit5":
+				critere="";
 				rechercheDossier();
 				userController.renderPage(value);
 				break;
 				
 			case "sit6":
+				critere="";
 				userController.renderPage(value);
 				break;
 				
 			case "sit7":
+				critere="";
 				recupDetailPpm();
 				userController.renderPage(value);
 				break;
+				
 			case "per1":
-				//chargePlanPassationByPeriode();
+				dated = "";
+				 datef = "";
+				userController.renderPage(value);
+				break;
+			case "per2":
+				dated = "";
+				 datef = "";
 				userController.renderPage(value);
 				break;
 			}  
@@ -719,6 +825,34 @@ public class SituationController {
 
 		public void setListHistoPpm(List<VPpmStatut> listHistoPpm) {
 			this.listHistoPpm = listHistoPpm;
+		}
+
+
+
+
+		public String getDated() {
+			return dated;
+		}
+
+
+
+
+		public void setDated(String dated) {
+			this.dated = dated;
+		}
+
+
+
+
+		public String getDatef() {
+			return datef;
+		}
+
+
+
+
+		public void setDatef(String datef) {
+			this.datef = datef;
 		}
 
 }

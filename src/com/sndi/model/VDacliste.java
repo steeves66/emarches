@@ -236,6 +236,7 @@ public class VDacliste implements java.io.Serializable {
 	private String fonCodeDmp;
 	private String fonCodeCsv;
 	private String fonCodeSpp;
+	private String staLibelleLong;
 
 	public VDacliste() {
 	}
@@ -297,7 +298,7 @@ public class VDacliste implements java.io.Serializable {
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String critere,String dacMargePref, BigDecimal dacMargePrefComVal,
 			BigDecimal dacMargePrefSouVal,Long adaNum,double cautValMin,
 			double cautValMax, String aaoOffAnormal,String adaLibelle,
-			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp) {
+			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp,String staLibelleLong) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -515,6 +516,7 @@ public class VDacliste implements java.io.Serializable {
 		this.fonCodeDmp = fonCodeDmp;
 		this.fonCodeCsv = fonCodeCsv;
 		this.fonCodeSpp = fonCodeSpp;
+		this.staLibelleLong = staLibelleLong;
 	}
 
 	@Id
@@ -2471,4 +2473,14 @@ public class VDacliste implements java.io.Serializable {
 	public void setFonCodeSpp(String fonCodeSpp) {
 		this.fonCodeSpp = fonCodeSpp;
 	}
+	
+	@Column(name = "STA_LIBELLE_LONG")
+	public String getStaLibelleLong() {
+		return this.staLibelleLong;
+	}
+
+	public void setStaLibelleLong(String staLibelleLong) {
+		this.staLibelleLong = staLibelleLong;
+	}
+
 }

@@ -87,6 +87,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String fonCodeSpp;
 	private String critere;
 	private Date dppDateDaoTransPub;
+	private String staLibelleLong;
 	public VPpmliste() {
 	}
 
@@ -115,7 +116,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
 			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
-			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub) {
+			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub,String staLibelleLong) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -182,6 +183,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.fonCodeSpp = fonCodeSpp;
 		this.critere = critere;
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
+		this.staLibelleLong = staLibelleLong;
 	}
 
 	@Id
@@ -779,6 +781,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setDppDateDaoTransPub(Date dppDateDaoTransPub) {
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
+	}
+	
+	@Column(name = "STA_LIBELLE_LONG")
+	public String getStaLibelleLong() {
+		return this.staLibelleLong;
+	}
+
+	public void setStaLibelleLong(String staLibelleLong) {
+		this.staLibelleLong = staLibelleLong;
 	}
 
 
