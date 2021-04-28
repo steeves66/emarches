@@ -1066,7 +1066,7 @@ TDacSpecs dao = new TDacSpecs();
 							new WhereClause("DAF_DCS_NUM",WhereClause.Comparateur.EQ,""+supDetCom.getDcsNum()));
 		    	 if(!listeDaoAff.isEmpty()) { 
 		    		 supDaoAff=listeDaoAff.get(0);
-		    		 supDaoAff.setDafDcsMbmRespo(supDetCom.getDcsMbmRespo());
+		    		 supDaoAff.setDafDcsMbmRespo(""+respo);
 			    	 iservice.updateObject(supDaoAff);
 		    	 }
 		    	//Chargement des fonctions imputer 
@@ -5670,8 +5670,7 @@ TDacSpecs dao = new TDacSpecs();
 									 							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 									 						if (!listDao.isEmpty()) {
 									 							newDao= listDao.get(0);
-									 							//newDao.setTStatut(new TStatut("D3A"));
-									 							//newDao.setDacStatutRetour("0");
+									 							
 									 					        iservice.updateObject(newDao); 
 									 			   	                 }
 									 				  			 				  
@@ -5738,7 +5737,7 @@ TDacSpecs dao = new TDacSpecs();
 										 			//Chargement des compteurs du tableau de bord
 										 			typeActionTb();	
 										 			//Message de confirmation
-							    					userController.setTexteMsg("Affectation(s) effectue(s) avec succes!");
+							    					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 													userController.setRenderMsg(true);
 													userController.setSevrityMsg("success");
 
@@ -6951,7 +6950,7 @@ TDacSpecs dao = new TDacSpecs();
 														String message = "";
 														if(slctdTd.getDacStaCode().equalsIgnoreCase("D2T")) {
 															statUpdate = "D3A";
-															message="Fin de l'affectation du Dossier d'Appel d'Offres N"+slctdTd.getDacCode();
+															message="Fin de l'affectation du Dossier d'Appel d'Offres N° "+slctdTd.getDacCode();
 														 }
 														//Recupration du DAO dans T_DAC_SPECS
 											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -6961,6 +6960,16 @@ TDacSpecs dao = new TDacSpecs();
 								     			  			  newDao.setTStatut(new TStatut(statUpdate));
 										                      iservice.updateObject(newDao);
 								     			  			}
+								     			  		    
+								     			  	    //Changement de Statut dans T_Dao_Affectation
+								     			  		 daoExamen = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+							          	     					 new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+							          	     				   if (!daoExamen.isEmpty()) {
+							          	     					      for(TDaoAffectation ligneDac : daoExamen) {
+							          	     					    	     ligneDac.setDafStaCode("D3A");
+							          	     					    	     iservice.updateObject(ligneDac); 
+							          	     					           }
+							          	     				      }
 													
 														//Chargement de la liste des ventes et celle du tableau de Bord
 														chargeData();
