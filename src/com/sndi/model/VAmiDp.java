@@ -32,6 +32,7 @@ public class VAmiDp implements java.io.Serializable {
 	private String dppTymCode;
 	private String dppMopCode;
 	private String dppNbOuv;
+	private String dppActeurSaisie;
 	private String dppLbgCode;
 	private String natLibelle;
 	private Long dppGpgId;
@@ -52,7 +53,7 @@ public class VAmiDp implements java.io.Serializable {
 
 	public VAmiDp(long dppId, String dppObjet, String dppTypePlan,String dppPartiePmePmi, String dppStructureBenefi,
 			String dppStructureConduc, String dppTypeStrConduc, String dppStatutAno, String dppNatInt,
-			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv, String dppLbgCode,String natLibelle,Long dppGpgId, String gpgObjet, 
+			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv, String dppActeurSaisie, String dppLbgCode,String natLibelle,Long dppGpgId, String gpgObjet, 
 			String lbgImputation,long lbgAeTr, long lbgAeDon,long lbgAeEmp, long lbgTotDot, long lbgDisTot) {
 		this.dppId = dppId;
 		this.dppObjet = dppObjet;
@@ -67,6 +68,7 @@ public class VAmiDp implements java.io.Serializable {
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
 		this.dppNbOuv = dppNbOuv;
+		this.dppActeurSaisie = dppActeurSaisie;
 		this.dppLbgCode = dppLbgCode;
 		this.natLibelle = natLibelle;
 		this.dppGpgId = dppGpgId;
@@ -195,6 +197,15 @@ public class VAmiDp implements java.io.Serializable {
 
 	public void setDppNbOuv(String dppNbOuv) {
 		this.dppNbOuv = dppNbOuv;
+	}
+	
+	@Column(name = "DPP_ACTEUR_SAISIE", length = 12)
+	public String getDppActeurSaisie() {
+		return this.dppActeurSaisie;
+	}
+
+	public void setDppActeurSaisie(String dppActeurSaisie) {
+		this.dppActeurSaisie = dppActeurSaisie;
 	}
 	
 	@Column(name = "DPP_LBG_CODE", length = 50)

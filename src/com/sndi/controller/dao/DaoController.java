@@ -3929,7 +3929,7 @@ TDacSpecs dao = new TDacSpecs();
 	        @Transactional
 	        public void saveAao(String typePlan ,String typeDac) {
 	        	
-	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || newAvis.getAaoCoutDac() == 0 || newAvis.getAaoNbrLot() == 0 || 
+	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || newAvis.getAaoCoutDac() < 0 || newAvis.getAaoNbrLot() == 0 || 
 	        		 newAvis.getAaoDelaiVal() == 0 ) { 
 	        		
 	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir tous les champs obligatoires! ","");
@@ -3941,7 +3941,7 @@ TDacSpecs dao = new TDacSpecs();
 	            	       if (!avisTab.isEmpty()) {
 	            	    	      newAvis = avisTab.get(0);
 	            	    	      if(newAvis.getAaoDelaiVal() < 30 || newAvis.getAaoDelaiVal() > 180) {
-	            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le dlai de validit doit etre compris entre 30 et 180 jours ","");
+	            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
 	            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
 	            	 			 }else {
 	            	 				iservice.updateObject(newAvis); 
@@ -3950,11 +3950,11 @@ TDacSpecs dao = new TDacSpecs();
 	            	            }else { 
 	            	            	      //S'assurer que la delai saisie est compris entre 30 et 180 jours
 			            	            	if(newAvis.getAaoDelaiVal() < 30 || newAvis.getAaoDelaiVal() > 180) {
-				            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le dlai de validit doit etre compris entre 30 et 180 jours ","");
+				            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit être compris entre 30 et 180 jours ","");
 				            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				            	 			 }else {
 				            	 				 if(newAvis.getAaoNbrLot()==0) {
-				            	 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le nombre de lot doit etre superieur 0 ","");
+				            	 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le nombre de lot doit être superieur 0 ","");
 					            	 					FacesContext.getCurrentInstance().addMessage(null, msg); 
 				            	 				 }else
 				            	 				 {

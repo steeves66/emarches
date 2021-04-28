@@ -3776,6 +3776,7 @@ public class PpmController {
 			 //AMI
 			 public void chargeDpAmi(String typlan) {
 				 listeAmiDp = (List<VAmiDp>) iservice.getObjectsByColumn("VAmiDp",
+						 new WhereClause("DPP_ACTEUR_SAISIE",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						 new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typlan)); 
 			 }
 			 
