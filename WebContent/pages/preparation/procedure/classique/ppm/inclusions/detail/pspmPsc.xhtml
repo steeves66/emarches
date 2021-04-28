@@ -7,79 +7,71 @@
       xmlns:p="http://primefaces.org/ui">
     <h:panelGroup  layout="block" id="pspmPsc" >  
     <div class="box-body">
-			            <div class="row"> 
-            <div class="col-md-6">      
-             <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Sollicitation des Factures : </label></div>
+ 	 <div class="row">
+	      <div class="col-md-6">
+	         <div class="row">
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Sollicitation des Factures : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateSolFact}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSolFact}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
-			</div> 
-	
-            </div>   
-            
-          <div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Signature Attributaire : </label></div>
+			</div>
+	   </div> 
+	   
+		<div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Reception des Factures : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateRecepFact}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	 
+
+			<div class="row">
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature de l'AC : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
 			</div> 
-	</div>              
-		   </div> 
-		   
-		<div class="row">
+		</div>	
 		
-		 <div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Reception des Factures : </label></div>
+	      </div>
+	      <div class="col-md-6">
+	        	         <div class="row">
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature Attributaire : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateRecepFact}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
-			</div> 
-		 </div>
-		 
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de debut : </label></div>
+			</div>
+	   </div> 
+	   
+		<div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de debut : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecDebut}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
-			</div> 
-	</div>
-	
+			</div>
+	     </div>	 
 
- <div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Signature de l'AC : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
-			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
-	
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de fin : </label></div>
+			<div class="row">
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de fin : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecFin}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
 			</div> 
-	</div>
-         
-         
-  
-</div>
-
-
-
-         				 
-	            </div> 
+		</div>
+	      </div>
+      </div>
+	 </div> 
      </h:panelGroup>     
 </html>
