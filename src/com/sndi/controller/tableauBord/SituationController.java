@@ -105,6 +105,8 @@ public class SituationController {
 	private String dated="";
 	private String datef="";
 	
+	private String nbrePlan="";
+	
 	
 	//Afficharge des plans de passations entre deux periodes
 	public void chargePlanPassationByPeriode() {
@@ -333,8 +335,7 @@ public class SituationController {
 
 	public void rechercheDossier(){
 				listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
-						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
-						new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 				recupStat();
 				recupDetailHisto();
 	}
@@ -343,12 +344,25 @@ public class SituationController {
 	
 	public void recupDetailPpm(){
 		listHistoPpm =(List<VPpmStatut>) iservice.getObjectsByColumn("VPpmStatut",
-				new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTdPpm.getDppId()),
-				new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())
+				new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTdPpm.getDppId())//,
+				//new WhereClause("FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())
 				);
 		recupStatPpm();
 		recupDetailHistoPpm();
 }
+	
+	
+	public int getNbrPlan(){
+		int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
+				new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+				new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		return	i;	
+	}
+	
+	
+	public void chargeCompteurPlan() {
+		nbrePlan = ""+getNbrPlan();
+	}
 	
 	
 	public void recupStat() {
@@ -429,6 +443,7 @@ public class SituationController {
 				
 			case "sit1":
 				critere="";
+				chargeCompteurPlan();
 				chargeConsultationPPM();
 				userController.renderPage(value);
 				break;
@@ -853,6 +868,20 @@ public class SituationController {
 
 		public void setDatef(String datef) {
 			this.datef = datef;
+		}
+
+
+
+
+		public String getNbrePlan() {
+			return nbrePlan;
+		}
+
+
+
+
+		public void setNbrePlan(String nbrePlan) {
+			this.nbrePlan = nbrePlan;
 		}
 
 }
