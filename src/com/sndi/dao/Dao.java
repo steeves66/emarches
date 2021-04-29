@@ -438,6 +438,34 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 	return list;
 }
 	
+
+	@Override
+	   public List getObjectByColumnInPpmDmpInstr(String objet,String typePlan ,String strSource) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DPP_STA_CODE IN('S2V','SPT') AND DPP_TYPE_PLAN='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_DMP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	  }
+	
+@Override
+  public List getObjectByColumnInPpmInstr(String objet,String typePlan,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE IN('S2V','SPT') AND DPP_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+  }
+
+@Override
+public List getObjectByColumnInPspmInstr(String objet,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE IN('S2V','SPT') AND DPP_TYPE_PLAN='PS' AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+	
 	public List getObjectByColumnInInstrAmi(String objet, String strSource) {
 		// TODO Auto-generated method stub
 		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='AMI' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
@@ -497,6 +525,77 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 			
 			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D2T','D5R') AND DAC_TD_CODE = '"+typeDac+"' "
 					+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+	
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+	
+	//Methode de comptage PPM en région
+	@Override
+	public int countTableByColumnInPmmInstr(String objet,String conditionColumn, String strSource) {
+			// TODO Auto-generated method stub
+			
+			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DPP_STA_CODE IN ('S2V','SPT') AND DPP_TYPE_PLAN = 'PN'"
+					+ " AND INSTR ('"+strSource+"',FON_CODE_SPP) > 0" ;
+	
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+	
+	//Methode de comptage PSPM en région
+	@Override
+	public int countTableByColumnInPspmInstr(String objet,String conditionColumn,String strSource) {
+			// TODO Auto-generated method stub
+			
+			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DPP_STA_CODE IN ('S2V','SPT') AND DPP_TYPE_PLAN = 'PS' AND INSTR ('"+strSource+"',FON_CODE_SPP) > 0" ;
+	
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+	
+	
+	//Methode de comptage PPM en région
+		@Override
+		public int countTableByColumnInPpmValInstr(String objet,String conditionColumn,String statut ,String strSource) {
+				// TODO Auto-generated method stub
+				
+				String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DPP_STA_CODE = '"+statut+"' AND DPP_TYPE_PLAN = 'PN'"
+						+ " AND INSTR ('"+strSource+"',FON_CODE_SPP) > 0" ;
+		
+				try {
+					BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+							.createSQLQuery(query).uniqueResult();
+					if (bv == null) {return 0;} else {return bv.intValue();}
+				} catch (HibernateException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		
+		
+		
+		@Override
+		public int countTableByColumnInPpmDiffInstr(String objet, String conditionColumn, String stat1, String stat2, String typePlan, String strSource) {
+			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DPP_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DPP_TYPE_PLAN = '"+typePlan+"'"
+					+ " AND INSTR ('"+strSource+"',FON_CODE_SPP) > 0" ;
 	
 			try {
 				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
