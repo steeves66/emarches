@@ -106,6 +106,7 @@ public class SituationController {
 	private String datef="";
 	
 	private String nbrePlan="";
+	private String nbreDac="";
 	
 	
 	//Afficharge des plans de passations entre deux periodes
@@ -262,19 +263,14 @@ public class SituationController {
 				}
 		 }else {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-				 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-						    new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
-							new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
-							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-					recupStatPpm();
-					recupDetailHistoPpm();
-					/*if (!objetListe.isEmpty()) {
-					 //
-					}else {
-						vider();
-						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce code de dossier n'est pas attribué", ""));
-					}	*/
+				 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumnNotIn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						 "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("SDS","S1S")),
+						 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
+							new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+							 if (listeConsultationPpm.size()==0) {
+									FacesContext.getCurrentInstance().addMessage(null,
+											new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dossier introuvable", ""));
+						}
 				 
 			 }else {
 				
@@ -297,7 +293,9 @@ public class SituationController {
 			// 
 		  }else {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-				// 
+				 listeConsultationPpm =(List<VPpmliste>) iservice.getObjectsByColumnNotIn("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						 "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("SDS","S1S")),
+							new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
 					||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -312,9 +310,14 @@ public class SituationController {
 		listeDAC.clear();
 		critere="";
 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumnNotIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("SDS")),
+					 new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					 
+			/*		 
+			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumnNotIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 						new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
-						new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));*/
 			// 
 		  }else {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
@@ -351,18 +354,51 @@ public class SituationController {
 		recupDetailHistoPpm();
 }
 	
-	
-	public int getNbrPlan(){
+	//Compteur Ac
+	public int getNbrPlanAc(){
 		int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 				new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
 				new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 		return	i;	
 	}
 	
+	//Compteur cpmp
+		public int getNbrPlanCpmp(){
+			int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
+					new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			return	i;	
+		}
+	
+	
+	public int getNbrDac(){
+		int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
+				new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
+				new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		return	i;	
+	}
+	
 	
 	public void chargeCompteurPlan() {
-		nbrePlan = ""+getNbrPlan();
+		nbrePlan="";
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 nbrePlan = ""+getNbrPlanAc();
+			  }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 nbrePlan = ""+getNbrPlanCpmp();
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+						||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 nbrePlan = ""+getNbrPlanCpmp();
+					 }
+				 }	 
+			}	
 	}
+	
+	public void chargeCompteurDac() {
+		nbreDac = ""+getNbrDac();
+	}
+	
 	
 	
 	public void recupStat() {
@@ -434,7 +470,8 @@ public class SituationController {
 	
 	
 	
-	 public String renderPage(String value) throws IOException{ 
+	 public String renderPage(String value,String action) throws IOException{ 
+		 controleController.redirectionDynamicProcedures(action);	
 			switch(value) { 
 			
 			case "accueil":
@@ -450,6 +487,7 @@ public class SituationController {
 			
 			case "sit2":
 				critere="";
+				chargeCompteurDac();
 				chargeConsultationDac();
 				userController.renderPage(value);
 				break;
@@ -882,6 +920,20 @@ public class SituationController {
 
 		public void setNbrePlan(String nbrePlan) {
 			this.nbrePlan = nbrePlan;
+		}
+
+
+
+
+		public String getNbreDac() {
+			return nbreDac;
+		}
+
+
+
+
+		public void setNbreDac(String nbreDac) {
+			this.nbreDac = nbreDac;
 		}
 
 }

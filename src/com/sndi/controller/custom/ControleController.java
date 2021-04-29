@@ -1356,11 +1356,11 @@ public class ControleController {
 				    				libelle="Détail du PPM N°";
 				    				//fermerSai = true;
 				    				//fermerVal = false;
-				    				/*panelPpm = true;
+				    				panelPpm = true;
 				    				panelPspm = false;
 				    				panelHistPlan =false;
 				    				panelConsPlan =false;
-				    				panelPeriodPlan =false;*/
+				    				panelPeriodPlan =false;
 				    				fermerSaiPspm = false;
 				    				fermerValPspm = false;
 				    				detailP1 = true;
@@ -1377,12 +1377,21 @@ public class ControleController {
 									 etatPsl_Pso = false;
 				    			}else
 					    			if(action.equalsIgnoreCase("HISPLAN")) {
+					    				type = "PPM/PSPM";
 					    				panelPpm = false;
 										panelPspm = false;
 										panelHistPlan =true;
 										panelConsPlan =false;
 										panelPeriodPlan =false;
-					    			}
+					    			}else
+						    			if(action.equalsIgnoreCase("PERPLAN")) {
+						    				type = "PPM/PSPM";
+						    				panelPpm = false;
+											panelPspm = false;
+											panelHistPlan =false;
+											panelConsPlan =false;
+											panelPeriodPlan =true;
+						    			}
 				    			else
 					    			if(action.equalsIgnoreCase("PUBPPM")) {
 					    			type = "PPM";
@@ -3373,6 +3382,13 @@ public class ControleController {
 									fermerApercuAmi = false;
 									fermerApercuPrq = false;
 				    			}else
+					    			if(action.equalsIgnoreCase("APHISDAC")) {
+					    		
+					    			}else
+						    			if(action.equalsIgnoreCase("APERDAC")) {
+								    		
+						    			}
+				    			else
 				    				 if(action.equalsIgnoreCase("AFFDAO")) {
 				    					 typePlan ="PN";
 				    				        type = "DAC";

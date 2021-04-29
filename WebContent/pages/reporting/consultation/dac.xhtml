@@ -10,7 +10,7 @@
 	<ui:define name="contents">
 <h:form id="gnl">	
  <section class="content-header">
-      <h3>Suivie d'un dossier d'appel à concurrence(DAC)</h3>
+      <h3>Consultation des dossiers d'appel à concurrence(DAC)</h3>
       <ol class="breadcrumb">
         <li>
         <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
@@ -19,7 +19,7 @@
             </li>
         <li class="active">
          <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>Suivie d'un dossier | DAC 
+            <i class="fa fa-dashboard"></i>Consultation des dossiers | DAC 
              </p:commandLink>
         </li>
       </ol>
@@ -49,8 +49,8 @@
      <div class="row">         
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS</div></div>
-            <div class="col-md-2 "><div  style="color: #fff">
+            <div class="col-md-10 "><div style="color: #fff">LISTE DES DOSSIERS</div></div>
+            <div class="col-md-2 ">NOMBRE DE DOSSIER(S) :<b> #{situationController.nbreDac}</b><div style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label"></label>
 	              <div class="col-sm-6">
 		                    

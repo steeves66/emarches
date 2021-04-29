@@ -11,10 +11,11 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.type} N° #{etatsPpmController.slctdTd.dppId}
+       DETAIL DE L'OPERATION N°#{etatsPpmController.slctdTd.dppId} : #{etatsPpmController.slctdTd.dppObjet}
+       <!-- #{controleController.type} N° #{etatsPpmController.slctdTd.dppId} -->
        <!--  PPM N° #{etatsPpmController.detail.dppId} -->
         <small>
-         #{controleController.libelle1} 
+         <!-- #{controleController.libelle1}  -->
        <!--  Liste des AGPM Saisis  -->
         <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
         </small>
@@ -50,7 +51,7 @@
             
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size: 15px">INFORMATIONS SUR LE #{controleController.type}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size: 15px">INFORMATIONS SUR L'OPERATION</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -264,7 +265,13 @@
 		</h:panelGroup>
 		
 		 <h:panelGroup rendered="#{controleController.panelHistPlan}">
-		<p:commandLink styleClass="btn btn-warning" action="#{situationController.renderPage('sit6','HISPLAN')}"  style="background-color: #f88b2e;" update=":content">
+		<p:commandLink styleClass="btn btn-warning" action="#{situationController.renderPage('sit1','HISPLAN')}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{controleController.panelPeriodPlan}">
+		<p:commandLink styleClass="btn btn-warning" action="#{situationController.renderPage('per1','PERPLAN')}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		</h:panelGroup>
