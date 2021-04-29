@@ -671,7 +671,7 @@
 		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valcp2" value="#{ppmController.detailPass.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
-		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAttApprobCpmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -743,6 +743,7 @@
              <label for="solEnt1" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="solEnt1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSolFact')}" update=":gnl"/>
 		                   </p:calendar> 
 		                  </div>
              </div>

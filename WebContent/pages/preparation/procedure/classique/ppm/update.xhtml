@@ -685,6 +685,7 @@
 		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valcp2" value="#{ppmModificationController.geneDate.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
+		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAttApprobCpmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -755,6 +756,7 @@
              <label for="solEnt1" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="solEnt1" value="#{ppmModificationController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSolFact')}" update=":gnl"/>
 		                   </p:calendar> 
 		                  </div>
              </div>
@@ -764,7 +766,7 @@
               <label for="solFact1" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="solFact1" value="#{ppmModificationController.geneDate.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateRecepFact')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateRecepFact')}" update=":gnl"/>
 		                   </p:calendar> 
 		                  </div>
              </div>
@@ -778,6 +780,7 @@
 		                  <label for="invAoo1" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="invAoo1" value="#{ppmModificationController.geneDate.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppInvEntre')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		        </div>
@@ -787,9 +790,21 @@
               <label for="repFact1" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar value="#{ppmModificationController.geneDate.dppDateRecepLettr}" id="repFact1"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateRecepLettr')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
              </div>
+             
+                <div class="col-md-6">
+            <div class="form-group">
+		                  <label for="oftPsl1" class="col-sm-6 control-label">Sollicitation des factures</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oftPsl1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%">
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateSolFact')}" update="gnl"/>
+		                   </p:calendar>
+		                  </div>
+		                  </div>  
+         </div>
              </div>
              </h:panelGroup>
 		  
@@ -815,19 +830,19 @@
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="oft1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '1'}">
 		                   <p:calendar id="oft2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '0'}">
 		                   <p:calendar id="oft3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                   </h:panelGroup>
 		                  </div>
@@ -838,19 +853,19 @@
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="off1" title="#{ppmModificationController.geneDate.dppJourOuvertOf} #{ppmModificationController.geneDate.dppDateOuvertOf}" style="width: 100%;background-color:red; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '1'}">
 		                   <p:calendar id="off2" title="#{ppmModificationController.geneDate.dppJourOuvertOf} #{ppmModificationController.geneDate.dppDateOuvertOf}" style="width: 100%;background-color:green; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '0'}">
 		                   <p:calendar id="off3" title="#{ppmModificationController.geneDate.dppJourOuvertOf} #{ppmModificationController.geneDate.dppDateOuvertOf}" style="width: 100%;background-color:grey; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                   </h:panelGroup>
 		                   
@@ -862,19 +877,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                    <p:calendar id="rapp1" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" style="width: 100%;background-color:red; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                  </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                    <p:calendar id="rapp2" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" style="width: 100%;background-color:green; font-weight:bold; color:white" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                  </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                    <p:calendar id="rapp3" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" style="width: 100%; background-color:grey; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </h:panelGroup>
 		                  
@@ -886,19 +901,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '2'}">
 		                   <p:calendar id="jug1" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" style="width: 100%; background-color:red; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '1'}">
 		                   <p:calendar id="jug2" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" style="width: 100%; background-color:green; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '0'}">
 		                   <p:calendar id="jug3" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" style="width: 100%; background-color:grey; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -909,17 +924,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '2'}">
 		                  <p:calendar id="notA3" title="#{ppmModificationController.geneDate.dppJourNotAtt} #{ppmModificationController.geneDate.dppDateNotAtt}" style="width: 100%;background-color:red !important; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar><span style="color:red;"> #</span>
 		                  </h:panelGroup>
 		                 <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '1'}">
 		                 <p:calendar id="notA1" title="#{ppmModificationController.geneDate.dppJourNotAtt} #{ppmModificationController.geneDate.dppDateNotAtt}" style="width: 100%; background-color:green !important; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar><span style="color:green;"> #</span>
 		                 </h:panelGroup>
 		                 <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '0'}">
 		                 <p:calendar id="notA2" title="#{ppmModificationController.geneDate.dppJourNotAtt} #{ppmModificationController.geneDate.dppDateNotAtt}" style="width: 100%; border-color:grey !important; font-weight:bold;color:white" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar>
 		                 </h:panelGroup>
 		                  
@@ -937,7 +952,7 @@
 		                  <label for="approbaAnoTech" class="col-sm-6 control-label">ANO Technique</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="approbaAnoTech" title="#{ppmModificationController.geneDate.dppJourApprobAno} #{ppmModificationController.geneDate.dppApprobAnoTec}" value="#{ppmModificationController.geneDate.dppApprobAnoTec}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAnoTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAnoTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                  </div>
 		                </div>
@@ -949,19 +964,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '2'}">
 		                   <p:calendar id="approbaAno8" title="#{ppmModificationController.geneDate.dppJourApprobAno} #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '1'}">
 		                   <p:calendar id="approbaAno7" title="#{ppmModificationController.geneDate.dppJourApprobAno} #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '0'}">
 		                   <p:calendar id="approbaAno6" title="#{ppmModificationController.geneDate.dppJourApprobAno} #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -972,19 +987,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '2'}">
 		                   <p:calendar id="approba6" title="#{ppmModificationController.geneDate.dppJourAttApproBail} #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '1'}">
 		                   <p:calendar id="approba4" title="#{ppmModificationController.geneDate.dppJourAttApproBail} #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '0'}">
 		                   <p:calendar id="approba5" title="#{ppmModificationController.geneDate.dppJourAttApproBail} #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -996,19 +1011,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '2'}">
 		                   <p:calendar id="neg1" title="#{ppmModificationController.geneDate.dppJourNegociation} #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '1'}">
 		                   <p:calendar id="neg2" title="#{ppmModificationController.geneDate.dppJourNegociation} #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '0'}">
 		                   <p:calendar id="neg3" title="#{ppmModificationController.geneDate.dppJourNegociation} #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                   </h:panelGroup>
 		                  </div>
@@ -1020,19 +1035,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '2'}">
 		                   <p:calendar id="jug22" title="#{ppmModificationController.geneDate.dppJourJugementOffre} #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '1'}">
 		                   <p:calendar id="jug23" title="#{ppmModificationController.geneDate.dppJourJugementOffre} #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '0'}">
 		                   <p:calendar id="jug24" title="#{ppmModificationController.geneDate.dppJourJugementOffre} #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                   </h:panelGroup>
 		                   
@@ -1056,19 +1071,19 @@
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attr1" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '1'}">
 		                   <p:calendar id="attr2" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '0'}">
 		                   <p:calendar id="attr3" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1079,19 +1094,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '2'}">
 		                   <p:calendar id="saiAc1" title="#{ppmModificationController.geneDate.dppJourSignatAc} #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '1'}">
 		                   <p:calendar id="saiAc2" title="#{ppmModificationController.geneDate.dppJourSignatAc} #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '0'}">
 		                   <p:calendar id="saiAc3" title="#{ppmModificationController.geneDate.dppJourSignatAc} #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1106,19 +1121,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '2'}">
 		                   <p:calendar id="marcheApprob1" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '1'}">
 		                   <p:calendar id="marcheApprob2" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '0'}">
 		                   <p:calendar id="marcheApprob3" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1128,7 +1143,7 @@
 		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché par la #{controleController.structureLibAbrege}<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valDmp" mask="true"  pattern="dd/MM/yyyy" value="#{ppmModificationController.geneDate.dppDateAttApprobDmp}" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApprobDmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -1155,19 +1170,19 @@
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '2'}">
 		                   <p:calendar id="debut1" title="#{ppmModificationController.geneDate.dppJourExecDebut}  #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '1'}">
 		                   <p:calendar id="debut2" title="#{ppmModificationController.geneDate.dppJourExecDebut}  #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '0'}">
 		                   <p:calendar id="debut3" title="#{ppmModificationController.geneDate.dppJourExecDebut}  #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -1181,19 +1196,19 @@
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '2'}">
 		                   <p:calendar id="fin1" title="#{ppmModificationController.geneDate.dppJourExecFin} #{ppmModificationController.geneDate.dppDateExecFin}"  value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '1'}">
 		                   <p:calendar id="fin2" title="#{ppmModificationController.geneDate.dppJourExecFin} #{ppmModificationController.geneDate.dppDateExecFin}"  value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '0'}">
 		                   <p:calendar id="fin3" title="#{ppmModificationController.geneDate.dppJourExecFin} #{ppmModificationController.geneDate.dppDateExecFin}"  value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1310,7 +1325,7 @@
 		                  <label for="trAmi" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trAmi" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoTrans')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -1321,19 +1336,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '2'}">
 		                   <p:calendar id="valdao22Ami1" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '1'}">
 		                   <p:calendar id="valdao22Ami2" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '0'}">
 		                   <p:calendar id="valdao22Ami3" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1349,17 +1364,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '2'}">
 		                  <p:calendar id="baildao2Ami1" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '1'}">
 		                  <p:calendar id="baildao2Ami2" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '0'}">
 		                  <p:calendar id="baildao2Ami3" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                </div>
@@ -1413,19 +1428,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oftAmi1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="oftAmi2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="oftAmi3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1436,17 +1451,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmi1" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rappAmi2" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rappAmi3" title="#{ppmModificationController.geneDate.dppJourElabRapport} #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -1461,19 +1476,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '2'}">
 		                   <p:calendar id="jugAmi1" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '1'}">
 		                   <p:calendar id="jugAmi2" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '0'}">
 		                   <p:calendar id="jugAmi3" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -1489,19 +1504,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '2'}">
 		                   <p:calendar id="approbaAnoAmi1" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '1'}">
 		                   <p:calendar id="approbaAnoAmi2" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '0'}">
 		                   <p:calendar id="approbaAnoAmi3" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1514,19 +1529,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '2'}">
 		                  <p:calendar id="approbaAmi1" title="#{ppmModificationController.geneDate.dppJourAttApproBail} le #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '1'}">
 		                  <p:calendar id="approbaAmi2" title="#{ppmModificationController.geneDate.dppJourAttApproBail} le #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '0'}">
 		                  <p:calendar id="approbaAmi3" title="#{ppmModificationController.geneDate.dppJourAttApproBail} le #{ppmModificationController.geneDate.dppDateAttApproBail}" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -1639,6 +1654,7 @@
 		                  <label for="trAmiDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trAmiDp" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoTrans')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -1649,19 +1665,19 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '2'}">
 		                   <p:calendar id="valdao22AmiDp1" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '1'}">
 		                   <p:calendar id="valdao22AmiDp2" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '0'}">
 		                   <p:calendar id="valdao22AmiDp3" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1677,19 +1693,19 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '2'}">
 		                   <p:calendar id="baildao2AmiDp2" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} le #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '1'}">
 		                   <p:calendar id="baildao2AmiDp1" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} le #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '0'}">
 		                   <p:calendar id="baildao2AmiDp3" title="#{ppmModificationController.geneDate.dppJourDaoApprobBail} le #{ppmModificationController.geneDate.dppDateDaoApprobBail}" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                </div>
@@ -1738,17 +1754,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oftDp1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="oftDp2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="oftDp3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -1760,17 +1776,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiDp1" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rappAmiDp5" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rappAmiDp3" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -1786,18 +1802,18 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '2'}">
 		                   <p:calendar id="jugAmiDp1" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} le #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '1'}">
 		                   <p:calendar id="jugAmiDp2" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} le #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '0'}">
 		                   <p:calendar id="jugAmiDp3" title="#{ppmModificationController.geneDate.dppJourJugementOffreTec} le #{ppmModificationController.geneDate.dppDateJugementOffreTec}" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -1810,19 +1826,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoTechDp1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoTechDp2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                     <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoTechDp3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1835,18 +1851,18 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoTechDpBail1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoTechDpBail2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoTechDpBail3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1862,19 +1878,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="offFinDp1" title="#{ppmModificationController.geneDate.dppJourOuvertOf} le #{ppmModificationController.geneDate.dppDateOuvertOf}" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '1'}">
 		                   <p:calendar id="offFinDp2" title="#{ppmModificationController.geneDate.dppJourOuvertOf} le #{ppmModificationController.geneDate.dppDateOuvertOf}" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '0'}">
 		                   <p:calendar id="offFinDp3" title="#{ppmModificationController.geneDate.dppJourOuvertOf} le #{ppmModificationController.geneDate.dppDateOuvertOf}" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"  update="gnl"/>
 		                   </p:calendar>  
 		                   </h:panelGroup>
 		                    
@@ -1886,17 +1902,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiDpFin1" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rappAmiDpFin2" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rappAmiDpFin3" title="#{ppmModificationController.geneDate.dppJourElabRapport} le #{ppmModificationController.geneDate.dppDateElabRapport}" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"  update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1907,17 +1923,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '2'}">
 		                   <p:calendar id="jug2Dp1" title="#{ppmModificationController.geneDate.dppJourJugementOffre} le #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '1'}">
 		                   <p:calendar id="jug2Dp2" title="#{ppmModificationController.geneDate.dppJourJugementOffre} le #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '0'}">
 		                   <p:calendar id="jug2Dp3" title="#{ppmModificationController.geneDate.dppJourJugementOffre} le #{ppmModificationController.geneDate.dppDateJugementOffre}" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1929,19 +1945,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoFinDpX1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoFinDpX2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoFinDpX3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"  update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1953,19 +1969,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoFinDpBauilX1" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoFinDpBauilX2" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoFinDpBauilX3" title="#{ppmModificationController.geneDate.dppJourOuvertOt} le #{ppmModificationController.geneDate.dppDateOuvertOt}" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -1977,17 +1993,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '2'}">
 		                   <p:calendar id="notADp1" title="#{ppmModificationController.geneDate.dppJourNotAtt} le #{ppmModificationController.geneDate.dppDateNotAtt}" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '2'}">
 		                   <p:calendar id="notADp2" title="#{ppmModificationController.geneDate.dppJourNotAtt} le #{ppmModificationController.geneDate.dppDateNotAtt}" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '0'}">
 		                   <p:calendar id="notADp3" title="#{ppmModificationController.geneDate.dppJourNotAtt} le #{ppmModificationController.geneDate.dppDateNotAtt}" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>
 		                   </h:panelGroup>
 		                  </div>
@@ -1998,17 +2014,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '2'}">
 		                   <p:calendar id="negDp1" title="#{ppmModificationController.geneDate.dppJourNegociation} le #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '1'}">
 		                   <p:calendar id="negDp2" title="#{ppmModificationController.geneDate.dppJourNegociation} le #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '0'}">
 		                   <p:calendar id="negDp3" title="#{ppmModificationController.geneDate.dppJourNegociation} le #{ppmModificationController.geneDate.dppDateNegociation}" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2034,17 +2050,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attrDp1" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} le #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '1'}">
 		                   <p:calendar id="attrDp2" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} le #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '0'}">
 		                   <p:calendar id="attrDp3" title="#{ppmModificationController.geneDate.dppJourSignatAttrib} le #{ppmModificationController.geneDate.dppDateSignatAttrib}" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2054,17 +2070,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '2'}">
 		                   <p:calendar id="saiAcDp1" title="#{ppmModificationController.geneDate.dppJourSignatAc} le #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '1'}">
 		                   <p:calendar id="saiAcDp2" title="#{ppmModificationController.geneDate.dppJourSignatAc} le #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '0'}">
 		                   <p:calendar id="saiAcDp3" title="#{ppmModificationController.geneDate.dppJourSignatAc} le #{ppmModificationController.geneDate.dppDateSignatAc}" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2077,17 +2093,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '2'}">
 		                   <p:calendar id="marcheApprobDp1" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} le #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '1'}">
 		                   <p:calendar id="marcheApprobDp2" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} le #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '0'}">
 		                   <p:calendar id="marcheApprobDp3" title="#{ppmModificationController.geneDate.dppJourMarcheApprob} le #{ppmModificationController.geneDate.dppDateMarcheApprob}" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2113,17 +2129,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '2'}">
 		                   <p:calendar id="debutDp1" title="#{ppmModificationController.geneDate.dppJourExecDebut} le #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                     <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '1'}">
 		                   <p:calendar id="debutDp2" title="#{ppmModificationController.geneDate.dppJourExecDebut} le #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '0'}">
 		                   <p:calendar id="debutDp3" title="#{ppmModificationController.geneDate.dppJourExecDebut} le #{ppmModificationController.geneDate.dppDateExecDebut}" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2135,19 +2151,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '2'}">
 		                   <p:calendar id="finDp1" title="#{ppmModificationController.geneDate.dppJourExecFin} le #{ppmModificationController.geneDate.dppDateExecFin}" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '1'}">
 		                   <p:calendar id="finDp2" title="#{ppmModificationController.geneDate.dppJourExecFin} le #{ppmModificationController.geneDate.dppDateExecFin}" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '0'}">
 		                   <p:calendar id="finDp3" title="#{ppmModificationController.geneDate.dppJourExecFin} le #{ppmModificationController.geneDate.dppDateExecFin}" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2257,6 +2273,7 @@
 		                  <label class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar  value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoTrans')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -2266,17 +2283,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '2'}">
 		                   <p:calendar id="valdao2331" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '1'}">
 		                   <p:calendar id="valdao2332" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '0'}">
 		                   <p:calendar id="valdao2333" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2291,19 +2308,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '2'}">
 		                   <p:calendar id="baildaoPrq1" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '1'}">
 		                   <p:calendar id="baildaoPrq2" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '0'}">
 		                   <p:calendar id="baildaoPrq3" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                </div>
@@ -2367,19 +2384,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rapp221" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rapp222" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rapp223" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2389,19 +2406,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '2'}">
 		                   <p:calendar id="jug361" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '1'}">
 		                   <p:calendar id="jug362" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '0'}">
 		                   <p:calendar id="jug363" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -2417,19 +2434,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '2'}">
 		                   <p:calendar id="approbaAnoPrq1" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '1'}">
 		                   <p:calendar id="approbaAnoPrq2" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '0'}">
 		                   <p:calendar id="approbaAnoPrq3" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2440,17 +2457,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '2'}">
 		                   <p:calendar id="approbaPrq1" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '1'}">
 		                   <p:calendar id="approbaPrq2" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagAttApproBail == '0'}">
 		                   <p:calendar id="approbaPrq3" value="#{ppmModificationController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateAttApproBail')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2557,6 +2574,7 @@
 		                  <label for="trPrqDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trPrqDp" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoTrans')}" update="gnl"/>
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -2567,16 +2585,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '2'}">
 		                   <p:calendar id="valdao22PrqDp1" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '1'}">
 		                   <p:calendar id="valdao22PrqDp2" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobDmp == '0'}">
 		                   <p:calendar id="valdao22PrqDp3" value="#{ppmModificationController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobDmp')}" update="gnl"/>
 		                   </p:calendar>  
 		                   </h:panelGroup>
 		                  </div>
@@ -2592,19 +2613,19 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '2'}">
 		                   <p:calendar id="baildao2PrqDp1" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '1'}">
 		                   <p:calendar id="baildao2PrqDp2" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagDaoApprobBail == '0'}">
 		                   <p:calendar id="baildao2PrqDp3" value="#{ppmModificationController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateDaoApprobBail')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                </div>
@@ -2653,18 +2674,18 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oftPrqDp1" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar><span style="color:red;"> #</span>
 		                   </h:panelGroup> 
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="oftPrqDp2" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar><span style="color:green;"> #</span>
 		                   </h:panelGroup> 
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="oftPrqDp3" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup> 
 		                  </div>
@@ -2676,19 +2697,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappPrqDp1" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rappPrqDp2" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rappPrqDp3" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2700,17 +2721,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '2'}">
 		                   <p:calendar id="jugPrqDp1" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '1'}">
 		                   <p:calendar id="jugPrqDp2" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffreTec == '0'}">
 		                   <p:calendar id="jugPrqDp3" value="#{ppmModificationController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffreTec')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2722,17 +2743,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoTechPrqDp1" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoTechPrqDp2" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoTechPrqDp3" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2745,17 +2766,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoTechPrqDpBail1" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoTechPrqDpBail2" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoTechPrqDpBail3" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2771,19 +2792,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="offFinPrqDp1" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '1'}">
 		                   <p:calendar id="offFinPrqDp2" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOf == '0'}">
 		                   <p:calendar id="offFinPrqDp3" value="#{ppmModificationController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOf')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2794,17 +2815,17 @@
 		                  <div class="col-sm-6">
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiPrqDpFin1" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '1'}">
 		                   <p:calendar id="rappAmiPrqDpFin2" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagElabRapport == '0'}">
 		                   <p:calendar id="rappAmiPrqDpFin3" value="#{ppmModificationController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateElabRapport')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2815,17 +2836,17 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '2'}">
 		                   <p:calendar id="jug2PrqDp1" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '1'}">
 		                   <p:calendar id="jug2PrqDp2" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                     <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagJugementOffre == '0'}">
 		                   <p:calendar id="jug2PrqDp3" value="#{ppmModificationController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateJugementOffre')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2837,19 +2858,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoFinPrqDp1" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoFinPrqDp2" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoFinPrqDp3" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2861,18 +2882,18 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="anoFinPrqDpBail1" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="anoFinPrqDpBail2" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="anoFinPrqDpBail3" value="#{ppmModificationController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateOuvertOt')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2884,17 +2905,17 @@
 		                  <div class="col-sm-6">
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '2'}">
 		                   <p:calendar id="notAPrqDp1" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                     <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '1'}">
 		                   <p:calendar id="notAPrqDp2" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                     <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNotAtt == '0'}">
 		                   <p:calendar id="notAPrqDp" value="#{ppmModificationController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNotAtt')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2905,17 +2926,17 @@
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '2'}">
 		                   <p:calendar id="negPrqDp1" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '1'}">
 		                   <p:calendar id="negPrqDp2" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagNegociation == '0'}">
 		                   <p:calendar id="negPrqDp3" value="#{ppmModificationController.geneDate.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateNegociation')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2941,19 +2962,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attrPrqDp1" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '1'}">
 		                   <p:calendar id="attrPrqDp2" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAttrib == '0'}">
 		                   <p:calendar id="attrPrqDp3" value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar>
 		                   </h:panelGroup>
 		                  </div>
@@ -2963,19 +2984,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '2'}">
 		                   <p:calendar id="saiAcPrqDp1" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '1'}">
 		                   <p:calendar id="saiAcPrqDp2" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagSignatAc == '0'}">
 		                   <p:calendar id="saiAcPrqDp3" value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -2988,19 +3009,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '2'}">
 		                   <p:calendar id="marcheApprobPrqDp1" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '1'}">
 		                   <p:calendar id="marcheApprobPrqDp2" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar>  <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                    <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagMarcheApprob == '0'}">
 		                   <p:calendar id="marcheApprobPrqDp3" value="#{ppmModificationController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateMarcheApprob')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -3027,19 +3048,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '2'}">
 		                   <p:calendar id="debutPrqDp1" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"  update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '1'}">
 		                   <p:calendar id="debutPrqDp2" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecDebut == '0'}">
 		                   <p:calendar id="debutPrqDp3" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -3051,19 +3072,19 @@
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '2'}">
 		                   <p:calendar id="finPrqDp1" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '1'}">
 		                   <p:calendar id="finPrqDp2" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
 		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagExecFin == '0'}">
 		                   <p:calendar id="finPrqDp3" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                  <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                  </div>
@@ -3166,7 +3187,7 @@
 		                  <label for="oftPsc1" class="col-sm-6 control-label">Sollicitation des factures</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="oftPsc1" value="#{ppmModificationController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%">
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSolFact')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSolFact')}" update="gnl"/>
 		                   </p:calendar>
 		                  </div>
 		                  </div>  
@@ -3178,7 +3199,7 @@
 		                  <label for="offFinPsc1" class="col-sm-6 control-label">Réception des factures</label>
 		                  <div class="col-sm-6">
 		                    <p:calendar id="offFinPsc1" value="#{ppmModificationController.geneDate.dppDateRecepFact}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%">
-		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateRecepFact')}"/>
+		                    <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateRecepFact')}" update="gnl"/>
 		                   </p:calendar>
 		                    
 		                  </div>
@@ -3201,7 +3222,7 @@
 		                  <label class="col-sm-6 control-label">Attributaire</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar value="#{ppmModificationController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
-		                      <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}"/>
+		                      <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAttrib')}" update="gnl"/>
 		                   </p:calendar>
 		                  
 		                  </div>
@@ -3213,7 +3234,7 @@
 		                  <label  class="col-sm-6 control-label">Autorité contractante</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar value="#{ppmModificationController.geneDate.dppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateSignatAc')}" update="gnl"/>
 		                   </p:calendar>
 		                  </div>
 		                  </div>
@@ -3237,7 +3258,7 @@
 		                  <label for="debutPsc1" class="col-sm-6 control-label">Début d'execution</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="debutPsc1" value="#{ppmModificationController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecDebut')}" update="gnl"/>
 		                   </p:calendar>
 		                  </div>
 		                  </div>
@@ -3247,7 +3268,7 @@
 		                  <label for="finPsc1" class="col-sm-6 control-label">Fin d'execution</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="finPsc1" value="#{ppmModificationController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}"/>
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppDateExecFin')}" update="gnl"/>
 		                   </p:calendar>
 		                 
 

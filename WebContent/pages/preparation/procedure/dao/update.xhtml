@@ -189,7 +189,7 @@
  
           </div>
           <p:commandLink styleClass="btn btn-success row pull-right" rendered="true" action="#{daoController.updateDac()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Modifier
 	      </p:commandLink>
 	      
@@ -607,7 +607,7 @@
              <div class="row">
                 <div class="pull-right ">      
 				  <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.updateAao()}"  update=":content">
-				  <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
+				  <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
 				  <i class="ace-icon fa fa-save"></i> Modifier
 				  </p:commandLink>
 			  </div>
@@ -1226,7 +1226,7 @@
     </div>
     <div class="box-footer">
      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_presence}" action="#{daoController.savePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":gnl:tbMbr, :content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
     
@@ -1896,6 +1896,18 @@
 	<h:form id="NewLotlog" styleClass="form-horizontal"> 
 	       <p:dialog  widgetVar="newLotdlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Saisie des lots">
 				<div class="contentpanel">
+				
+				<div class="form-group ">
+	                  <label for="imp1" class="col-sm-2 control-label"><b>Imputation</b></label>
+	                  <div class="col-sm-10">
+	                   <p:selectOneMenu value="#{daoController.imputation}" id="imp1" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="" />  
+			       <f:selectItems value="#{daoController.listeImputations}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+				
 				
 				  <div class="form-group ">
 	                  <label for="numLt" class="col-sm-2 control-label"><b>Numéro du Lot </b></label>

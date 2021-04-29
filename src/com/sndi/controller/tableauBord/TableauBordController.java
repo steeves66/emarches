@@ -920,9 +920,12 @@ public class TableauBordController {
 								 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
 							 }else {
 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-									 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT",typePlan);
-									 ppmDmValide = ""+getPpmValideDmp("S3V",typePlan);
-									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
+									 //ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT",typePlan);SS 
+									 ppmDmAttenteValide = ""+getPpmAttValideSpp();
+									 //ppmDmValide = ""+getPpmValideDmp("S3V",typePlan);  
+									 ppmDmValide = ""+getPpmValideSpp("S3V");
+									 //ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);  
+									 ppmDmDiff = ""+getPpmDiffSpp("S3D","SPR",typePlan);
 									 ppmDmAttentePub = ""+getPpmValideDmp("S3V",typePlan);
 									 ppmPub = ""+getPpmValideDmp("PPU",typePlan);
 									 ppmdjPub = ""+getPpmDejaPub();
@@ -2778,6 +2781,28 @@ public int getDaoAttAffCsvReg(String typePlan,String typeDac){
 	return	i;	
 }
 
+
+public int getPpmAttValideSpp(){  
+	if(controleController.typePlan == "PN") {
+	int i = iservice.countTableByColumnInPmmInstr("V_PPMLISTE","DPP_ID", ""+userController.getSlctd().getTFonction().getFonCod());
+	return	i;	
+	}else {
+	 int i = iservice.countTableByColumnInPspmInstr("V_PPMLISTE","DPP_ID", ""+userController.getSlctd().getTFonction().getFonCod());
+	 return	i;	
+	}
+}
+
+public int getPpmValideSpp(String statut){  
+	//int i = iservice.countTableByColumnInPspmInstr("V_PPMLISTE","DPP_ID", ""+userController.getSlctd().getTFonction().getFonCod());
+	int i = iservice.countTableByColumnInPpmValInstr("V_PPMLISTE","DPP_ID",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
+	return	i;	
+}
+
+
+public int getPpmDiffSpp(String stat1,String stat2,String typePlan){  
+	int i = iservice.countTableByColumnInPpmDiffInstr("V_PPMLISTE","DPP_ID",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod());
+	return	i;	
+}
 
 //DAO retournés par le cpmp chez le AC en procédure normale : Ancienne Methode
 /*public int getDaoDiffCpmpACDossier(String src){

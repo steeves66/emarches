@@ -105,4 +105,16 @@ public interface IDao {
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
 	//Comptage en region
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan);
+
+	public List getObjectByColumnInPpmInstr(String objet,String typePlan ,String strSource);
+
+	public List getObjectByColumnInPpmDmpInstr(String objet, String typePlan, String strSource);
+
+	public int countTableByColumnInPmmInstr(String objet, String conditionColumn, String strSource);
+	public int countTableByColumnInPspmInstr(String objet, String conditionColumn, String strSource);
+	public List getObjectByColumnInPspmInstr(String objet, String strSource);
+
+	public int countTableByColumnInPpmValInstr(String objet, String conditionColumn, String statut, String strSource);
+
+	public int countTableByColumnInPpmDiffInstr(String objet, String conditionColumn, String stat1, String stat2, String typePlan,String strSource);
 }

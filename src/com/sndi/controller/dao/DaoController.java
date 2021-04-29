@@ -572,6 +572,7 @@ public class DaoController {
 			    //Controle Pav lot modification
 			      if(event.getOldStep().equals("tabLotModif") && event.getNewStep().equals("critereModif")) {
 				  actionsPavetCritere();
+				  
 				  }
 			      
 			    //Controle Pav criterebylot modification
@@ -3852,6 +3853,11 @@ TDacSpecs dao = new TDacSpecs();
 	         String rechercheAll = search.replace("null","");
 		 	 dao.setDacRecherche(rechercheAll);
 		 	 iservice.updateObject(dao);
+		 	 
+		 	 //Message de confirmation
+		 	  userController.setTexteMsg("Dossier d'Appel à la Concurrence modifié avec succès!");
+	          userController.setRenderMsg(true);
+	          userController.setSevrityMsg("success");
 			 }
 	    	        
 	    	        
@@ -3968,7 +3974,7 @@ TDacSpecs dao = new TDacSpecs();
 				            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				            	 			 }else {
 				            	 				 if(newAvis.getAaoNbrLot()==0) {
-				            	 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le nombre de lot doit être superieur 0 ","");
+				            	 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le nombre de lot doit être superieur à 0 ","");
 					            	 					FacesContext.getCurrentInstance().addMessage(null, msg); 
 				            	 				 }else
 				            	 				 {
@@ -4003,7 +4009,7 @@ TDacSpecs dao = new TDacSpecs();
 			                                             //Charger la liste des pieces de l'offre
 				            	     				     chargePiecesOffres();
 				                	     				    //Message de confirmation
-				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre cre avec succs!");
+				            	          		            userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
 				            	          		            userController.setRenderMsg(true);
 				            	          		            userController.setSevrityMsg("success");
 				            	          		            
@@ -4025,8 +4031,6 @@ TDacSpecs dao = new TDacSpecs();
 	        	List<TAvisAppelOffre> AVIS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
 	        	TAvisAppelOffre newAvis = new TAvisAppelOffre(); 
 			    if(!AVIS.isEmpty()) newAvis = AVIS.get(0);
-
-	        	
 				            	 					
 				            	 					    newAvis.setAaoLibelle(slctdTd.getAaoLibelle());
 				            	 					    newAvis.setAaoNatPrix(slctdTd.getAaoNatPrix());
@@ -4053,12 +4057,9 @@ TDacSpecs dao = new TDacSpecs();
 						           						 dao.setDacMargePref(slctdTd.getDacMargePref());
 						           						 iservice.updateObject(dao);
 				            	         
-				            	          		            userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
-				            	          		            userController.setRenderMsg(true);
-				            	          		            userController.setSevrityMsg("success");
-				            	          		      
-				            	 				 
-				            	
+				            	          		         userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
+				            	          		         userController.setRenderMsg(true);
+				            	          		         userController.setSevrityMsg("success");          	
 	                     }
 	    
 	        
@@ -4448,7 +4449,6 @@ TDacSpecs dao = new TDacSpecs();
 								 totalMontantEstimatif = (totalMontantEstimatif + n.getLaaMtEst()); 
 								 totalMontantCaution = (totalMontantCaution + n.getLaaMtCaut()); 
 							 }
-							 
 						 }
 					  
 					  //controle entre le total montant estimatif et le montant de l'operation
@@ -7380,6 +7380,7 @@ TDacSpecs dao = new TDacSpecs();
 		
 		public void actionsPavetCritereByLot() {
 			listeCritereByLot.clear();
+			//factoriserLot();
 			factoriserNext();
 			chargeCritereByLot();
 			recupMessage();

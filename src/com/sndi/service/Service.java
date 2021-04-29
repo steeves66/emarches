@@ -157,6 +157,26 @@ public class Service implements Iservice {
 			return getDao().countTableByColumnInInstr(objet,conditionColumn,strSource,typeDac, typePlan);
 		}
 		
+		public int countTableByColumnInPpmValInstr(String objet,String conditionColumn,String statut ,String strSource) {
+			return getDao().countTableByColumnInPpmValInstr(objet,conditionColumn,statut,strSource);
+		}
+		
+		 public int countTableByColumnInPpmDiffInstr(String objet,String conditionColumn,String stat1,String stat2,String typePlan,String strSource) {
+			 return getDao().countTableByColumnInPpmDiffInstr(objet,conditionColumn,stat1,stat2,typePlan,strSource);
+		 }
+		
+		//Methode de comptage PPM en region
+		@Override
+		public int countTableByColumnInPmmInstr(String objet, String conditionColumn,String strSource) {
+			return getDao().countTableByColumnInPmmInstr(objet,conditionColumn,strSource);
+		}
+		
+		//Methode de comptage PPM en region
+		@Override
+		public int countTableByColumnInPspmInstr(String objet, String conditionColumn, String strSource) {
+		   return getDao().countTableByColumnInPspmInstr(objet,conditionColumn,strSource);
+		}
+				
 		
 		@Override
 		public List<Object> getObjectsByColumn(String object, WhereClause ... conditions ) {
@@ -215,9 +235,27 @@ public class Service implements Iservice {
 		public List getObjectsByColumnIn(String object, String inCondition, List<String> inList,
 				WhereClause... conditions) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectsByColumnIn(object, inCondition, inList, conditions);
-				
+			return getDao().getObjectsByColumnIn(object, inCondition, inList, conditions);	
 		}
+		
+		@Override
+		public List getObjectByColumnInPpmDmpInstr(String objet, String typePlan, String strSource) {
+			return getDao().getObjectByColumnInPpmDmpInstr(objet,typePlan,strSource);
+		}
+		
+		
+		@Override
+		public List getObjectByColumnInPpmInstr(String objet, String typePlan,String strSource) {
+			return getDao().getObjectByColumnInPpmInstr(objet,typePlan,strSource);
+		}
+		
+		//Methode de comptage PSPM en region
+		@Override
+		public List getObjectByColumnInPspmInstr(String objet,String strSource) {
+			return getDao().getObjectByColumnInPspmInstr(objet,strSource);
+		}
+		
+		
 
 		@Override
 		public List getObjectByColumnInInstrAmi(String objet, String strSource) {

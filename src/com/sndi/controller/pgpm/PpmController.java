@@ -1440,11 +1440,12 @@ public class PpmController {
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 listePpm.clear();
-						 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						/* listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
 								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-								_logger.info("listePpm size: "+listePpm.size());
+								_logger.info("listePpm size: "+listePpm.size());*/
+						 listePpm =  (List<VPpmliste>) iservice.getObjectByColumnInPpmDmpInstr("VPpmliste", ""+typePlan ,""+userController.getSlctd().getTFonction().getFonCod());
 								//Actualisation du Tableau de Bord
 								//tableauBordController.chargeDataPpm();
 								 if(controleController.type == "PPM") {
@@ -1455,12 +1456,12 @@ public class PpmController {
 				                }
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-							  listePpm.clear();
-							  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+							  /*listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
 								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("FON_CODE_SPP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-								_logger.info("listePpm size: "+listePpm.size());
+								_logger.info("listePpm size: "+listePpm.size());*/
+							  listePpm =  (List<VPpmliste>) iservice.getObjectByColumnInPpmInstr("VPpmliste", ""+typePlan,""+userController.getSlctd().getTFonction().getFonCod());
 								//Actualisation du Tableau de Bord
 								//tableauBordController.chargeDataPpm(); 
 								 if(controleController.type == "PPM") {
