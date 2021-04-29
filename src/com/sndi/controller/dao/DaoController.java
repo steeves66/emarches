@@ -5889,6 +5889,7 @@ TDacSpecs dao = new TDacSpecs();
 										                             //Mis � jour du statut de DAO rï¿½cu   
 										                             slctdTda.setDafStaCode("DC1");
 										                             iservice.updateObject(slctdTda);
+										                             historiser("DC1",slctdTd.getDacCode(),"");
 										                             //Actualisation de la liste des DAO
 										                             //chargeDaoChargeEtude();
 												                     //Actualisation du Tableau de Bord
@@ -5931,6 +5932,7 @@ TDacSpecs dao = new TDacSpecs();
 										                                             //Mis Ã  jour du statut de DAO en cours de traitement chez le Chargï¿½ d'Etudes  
 										       		                                slctdTda.setDafStaCode("DC1");
 										       		                                iservice.updateObject(slctdTda); 
+										       		                             historiser("DC1",slctdTd.getDacCode(),"");
 										       		                                //Actualisation de la liste des DAO
 										       		                                //chargeDaoChargeEtude();
 									 				                                //Actualisation du Tableau de Bord
@@ -5975,7 +5977,7 @@ TDacSpecs dao = new TDacSpecs();
 								       
 										   constantService.getStatut("D4V");
 			 							   //Historisation du / des retraits
-			 						       historiser("D4V",slctdTd.getDacCode(),"DAO Valid�");
+			 						       historiser("D4V",slctdTd.getDacCode(),"");
 											
 			 						      tableauBordController.saveTempTabord("D4V", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 										  chargeData();
@@ -6037,7 +6039,7 @@ TDacSpecs dao = new TDacSpecs();
 
 												  constantService.getStatut("D4V");
 								 				  //Historisation du / des retraits
-								 				  historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binome");
+								 				  historiser("D4V",newDao.getDacCode(),"");
 												  
 								 				  tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 												  chargeData();
@@ -6970,7 +6972,7 @@ TDacSpecs dao = new TDacSpecs();
 							          	     					    	     iservice.updateObject(ligneDac); 
 							          	     					           }
 							          	     				      }
-													
+							          	     				historiser(""+statUpdate,slctdTd.getDacCode(),"");
 														//Chargement de la liste des ventes et celle du tableau de Bord
 														chargeData();
 														typeActionTb();
