@@ -113,6 +113,8 @@ public interface Iservice {
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan);
 
 	public List getObjectByColumnInPpmInstr(String objet,String typePlan,String strSource);
+	public List getObjectByColumnNotInPpmInstrChVal(String objet,String strSource);
+	public List getObjectByColumnNotInPpmInstrChCritppm(String objet,String strSource,String critere);
 	public List getObjectByColumnInPspmInstr(String objet,String strSource);
 	public List getObjectByColumnInPpmDmpInstr(String objet, String typePlan, String strSource);
 

@@ -307,6 +307,19 @@ public class Service implements Iservice {
 			return getDao().countTableByColumnNotIn(tableName, conditionColumn, conditionList, columnList, notCondition, notList);
 		}
 
+		@Override
+		public List getObjectByColumnNotInPpmInstrChVal(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnNotInPpmInstrChVal(objet, strSource);
+		}
+
+		@Override
+		public List getObjectByColumnNotInPpmInstrChCritppm(String objet, String strSource,
+				String critere) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnNotInPpmInstrChCritppm(objet, strSource, critere);
+		}
+
 		
 
 		

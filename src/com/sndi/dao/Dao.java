@@ -496,6 +496,23 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
   }
 
 @Override
+public List getObjectByColumnNotInPpmInstrChVal(String objet,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S1S','S1T','S2D','S2R','S3D','SDS') AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
+public List getObjectByColumnNotInPpmInstrChCritppm(String objet,String strSource,String critere) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S2V','SPT') AND CRITERE like'%'"+critere+"'%'  AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+@Override
 public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 	// TODO Auto-generated method stub
 	String query = "FROM "+objet+" WHERE DPP_STA_CODE IN('S2V','SPT') AND DPP_TYPE_PLAN='PS' AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 

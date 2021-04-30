@@ -269,15 +269,25 @@ public class SituationController {
 							 if (listeConsultationPpm.size()==0) {
 									FacesContext.getCurrentInstance().addMessage(null,
 											new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dossier introuvable", ""));
-						}
-				 
-			 }else {
+						}else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+									 || userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+								 listeConsultationPpm =  (List<VPpmliste>) iservice.getObjectByColumnNotInPpmInstrChCritppm("VPpmliste", ""+critere,""+userController.getSlctd().getTFonction().getFonCod());
+											 if (listeConsultationPpm.size()==0) {
+													FacesContext.getCurrentInstance().addMessage(null,
+															new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dossier introuvable", ""));
+										}
+								 
+							 } else {
 				
 				    recupStatPpm();
 					recupDetailHistoPpm();
+					
 				
 		 }
 	 
+		 }
+		}
 		 }
 	
 	}
@@ -298,7 +308,7 @@ public class SituationController {
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
 					||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-					// 
+					 listeConsultationPpm =  (List<VPpmliste>) iservice.getObjectByColumnNotInPpmInstrChVal("VPpmliste",""+userController.getSlctd().getTFonction().getFonCod());
 				 }
 			 }	 
 		}
