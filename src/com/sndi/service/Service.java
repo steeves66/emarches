@@ -300,6 +300,13 @@ public class Service implements Iservice {
 			return getDao().getObjectsByColumnInNotQuote(objet, inCondition, inList, conditionList, columnList);
 		}
 
+		@Override
+		public int countTableByColumnNotIn(String tableName, String conditionColumn, List<WhereClause> conditionList,
+				List<String> columnList, String notCondition, List<String> notList) {
+			// TODO Auto-generated method stub
+			return getDao().countTableByColumnNotIn(tableName, conditionColumn, conditionList, columnList, notCondition, notList);
+		}
+
 		
 
 		

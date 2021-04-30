@@ -75,7 +75,7 @@ public interface Iservice {
 	
 	public  List getObjects(String objet, List<String> columnList);
 
-	
+	public int countTableByColumnNotIn(String tableName,String conditionColumn, List<WhereClause>conditionList,  List<String> columnList, String notCondition,  List<String> notList);
 	public List getObjectsNotIn(String object, List<String> columnList, String notCondition,  List<String> notList);
 	public List getObjectsIn(String object, List<String> columnList, String inCondition,  List<String> inList);
 	

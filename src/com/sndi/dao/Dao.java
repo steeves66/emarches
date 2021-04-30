@@ -321,6 +321,44 @@ public class Dao implements IDao {
 	}
 	
 	@Override
+	public int countTableByColumnNotIn(String tableName,String conditionColumn, List<WhereClause>conditionList,  List<String> columnList, String notCondition,  List<String> notList) {
+			// TODO Auto-generated method stub
+			
+			String query = "SELECT TO_NUMBER(count("+tableName+"."+conditionColumn+")) FROM "+tableName ;
+			if(!conditionList.isEmpty()){
+			query += " WHERE "+tableName+"."+ conditionList.get(0).getColonne()+ conditionList.get(0).getComparateur()+"'"+conditionList.get(0).getValeur()+"'";
+			for(int i=1; i<conditionList.size(); i++){
+				query += " AND "+tableName+"."+ conditionList.get(i).getColonne()+ conditionList.get(i).getComparateur()+"'"+conditionList.get(i).getValeur()+"'";			
+			}}
+			
+			if(!notList.isEmpty()){
+				query += " AND "+notCondition+" NOT IN ('"+notList.get(0)+"'";
+				for(int i=1; i<notList.size(); i++){
+					query += " , '"+notList.get(i)+"'";
+				}
+				query +=")";
+			}
+			if(!columnList.isEmpty()){
+			query += " ORDER BY "+columnList.get(0);
+			for(int i=1; i<columnList.size(); i++){
+				query += " , "+columnList.get(i);
+			}}
+			
+			
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		}
+	
+	
+	
+	
+	@Override
 	public List getObjectsByColumnnIn(String objet, List<WhereClause>conditionList, List<String> columnList, String inCondition,  List<String> inList) {
 		// TODO Auto-generated method stub
 		String query = "FROM "+objet ;
