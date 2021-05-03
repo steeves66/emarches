@@ -8,6 +8,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -218,6 +220,12 @@ public class EtatsPpmController {
 			 } 
 		 } 
 	 }
+     
+     //Methode logout a tester
+    /* public String logout(HttpServletRequest request) throws ServletException {
+    	 request.logout();
+    	return "redirect:/"; 
+     }*/
      
      
     /* public void imprimerPpmDet() {

@@ -411,7 +411,7 @@ public class ControleController {
 	private String datevalcpmp="";
 	private String actions="";
 	private String actionPage="";
-	public boolean lignedefaut = false;
+	public boolean lignedefaut = true;
 	//String actionPrivilèges ="";
 	
 	//Colonnes pour les consultations

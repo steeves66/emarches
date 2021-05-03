@@ -636,7 +636,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
                       <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-                    <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                    <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
                           <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
                      <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                     </p:commandLink> 
@@ -707,11 +707,11 @@
           <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
           <div class="g12">
             <div class="panel-heading">
-            Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
+            Motif du rejet de l'opération N° #{ppmController.slctdTd.dppId} : #{ppmController.slctdTd.dppObjet}  
             </div> 
           <div class="panel-body panel-body-nopadding">
            
-                    <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+                    <p:inputTextarea value="#{ppmController.slctdTd.dppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
                     </div>
                     <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
                      <div class="panel-footer">
@@ -1124,11 +1124,11 @@
           <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
           <div class="g12">
             <div class="panel-heading">
-            Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
+            Motif du rejet de l'opération N° #{ppmController.slctdTd.dppId} : #{ppmController.slctdTd.dppObjet}   
             </div> 
           <div class="panel-body panel-body-nopadding">
            
-                    <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+                   <p:inputTextarea value="#{ppmController.slctdTd.dppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
                     </div>
                     <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
                      <div class="panel-footer">

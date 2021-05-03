@@ -813,7 +813,7 @@
                           </h:panelGroup>
                             
                             
-                                   <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                                   <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content">
                                   <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
@@ -1146,11 +1146,11 @@
           <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
           <div class="g12">
             <div class="panel-heading">
-            Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
+            Motif du rejet de l'opération N° #{ppmController.slctdTd.dppId} : #{ppmController.slctdTd.dppObjet}  
             </div> 
           <div class="panel-body panel-body-nopadding">
            
-                    <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+                    <p:inputTextarea value="#{ppmController.slctdTd.dppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
                     </div>
                     <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
                      <div class="panel-footer">
