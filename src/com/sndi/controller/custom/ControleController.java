@@ -1861,6 +1861,7 @@ public class ControleController {
 				   			    		if(action.equalsIgnoreCase("SAIAMI")) {
 				   			    			type = "AMI";
 											 typePlan ="PN";
+											 ecran = "ami";
 											 fonctionalite = "listSaisieAc";
 											 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 				   			    			libelleDao3="SAISIE DES AVIS A MANIFESTATION D'INTERET";
@@ -5532,6 +5533,7 @@ public class ControleController {
 																    											    		if(action.equalsIgnoreCase("SAIPRQ")) {
 																    											    			 type = "PRQ";
 																			    												 typePlan ="PN";
+																			    												 ecran = "prq";
 																			    												 fonctionalite = "listSaisieAc";
 																			    												 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 																			    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";

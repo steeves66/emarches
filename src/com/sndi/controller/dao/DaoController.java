@@ -4128,24 +4128,72 @@ TDacSpecs dao = new TDacSpecs();
 			 
 			 //Parametrage des PPM ramen a la saisie
 			 public void chargeOperation(String typePlan) {
-				 ppmDao.clear();
-				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
-						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
-				  multiFiltre=""; 
+				 if(controleController.ecran=="ami") {
+					 ppmDao.clear();
+					 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+							    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"AMI"),
+							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+							    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+								new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+					  multiFiltre=""; 
+				 }else {
+					    if(controleController.ecran=="prq") {
+					    	ppmDao.clear();
+							 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+									    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+									    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
+									    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+									    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+										new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+							  multiFiltre=""; 
+					   }else {
+						     ppmDao.clear();
+							 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumnNotIn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
+										"DPP_MOP_CODE", new ArrayList<String>(Arrays.asList("AMI","PRQ")),
+									    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+									    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+										new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+							  multiFiltre=""; 
+					   }
+				 }
 				 _logger.info("type plan : "+typePlan);	
 				 _logger.info("mode de passation : "+typePlan);	
-				 _logger.info("Operateur connect : "+userController.getSlctd().getTFonction().getFonCod());	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }
 			 
 			 //Parametrage des PPM ramen a la saisie
 			 public void chargeOperations() {
-				 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+				 
+				 if(controleController.ecran=="ami") {
+					 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+							    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"AMI"),
+							    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
+							    //new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+								new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));
+				 }else {
+					    if(controleController.ecran=="prq") {
+					   	 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+								    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
+								    //new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+									new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));
+					    }else {
+					   	      listePpmDao = iservice.getObjectsByColumnNotIn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
+									"DPP_MOP_CODE", new ArrayList<String>(Arrays.asList("AMI","PRQ")),
+									new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
+								    //new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+									new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					    }
+				 }
+				 
+				/* listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
-							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	
+							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	*/
 				 _logger.info("dao : "+slctdTd.getDacCode());
 				 _logger.info("liste ppm : "+listePpmDao.size());
 			 }
