@@ -212,7 +212,7 @@
 			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer 
 	               </p:commandLink>
 
-               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{operateurController.saveAssignation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update="tblAss">
+               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{operateurController.saveAssignation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update="tblAss, gnl:fonction">
 			             <i class="ace-icon fa fa-save"></i>Enregistrer
 	               </p:commandLink>
 	               
@@ -229,7 +229,7 @@
                <div class="box-body">
                  
                <p:dataTable id="tblAss" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{operateurController.listeFonctionOp}" 
-					 emptyMessage="Aucun PPM enregistré" scrollable="true" scrollHeight="150" >
+					 emptyMessage="Aucune assignation enregistrée" scrollable="true" scrollHeight="150" >
                          <p:column headerText="Fonction" styleClass="col-sm-6" >
          				<h:outputText value="#{slctdTb.fonLibelle}" />
 				        </p:column>

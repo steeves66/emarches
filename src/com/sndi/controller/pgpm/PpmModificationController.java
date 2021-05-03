@@ -2256,21 +2256,21 @@ public class PpmModificationController {
 		 public void genereDate(String date) {
 			 
 			 listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 					if (!listeTsPpm.isEmpty()) {
 						detPass = listeTsPpm.get(0);
 						
 		   if(date.equalsIgnoreCase("dppDateDaoTrans")) {
-			   detPass.setDppDateDaoTrans(detailPass.getDppDateDaoTrans());
+			   detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
 				iservice.updateObject(detPass);
 				recupDateGenere();
 				_logger.info("Date de Transmission : "+detailPass.getDppDateDaoTrans());
 				  }else
 					  if(date.equalsIgnoreCase("dppDateAvisAoPublication")) {
-						detPass.setDppDateAvisAoPublication(detailPass.getDppDateAvisAoPublication());
+						detPass.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
 						iservice.updateObject(detPass);
 						recupDateGenere();
-						_logger.info("Date de Publication : "+detailPass.getDppDateAvisAoPublication());
+						_logger.info("Date de Publication : "+geneDate.getDppDateAvisAoPublication());
 							}
 						    if(date.equalsIgnoreCase("dppInvEntre")) {
 							detPass.setDppInvEntre(geneDate.getDppInvEntre());

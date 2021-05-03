@@ -927,6 +927,7 @@ public class TableauBordController {
 									 //ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);  
 									 ppmDmDiff = ""+getPpmDiffSpp("S3D","SPR",typePlan);
 									 ppmDmAttentePub = ""+getPpmValideDmp("S3V",typePlan);
+									 //ppmPub = ""+getPpmValideDmp("PPU",typePlan);
 									 ppmPub = ""+getPpmValideDmp("PPU",typePlan);
 									 ppmdjPub = ""+getPpmDejaPub();
 							    }
