@@ -1062,13 +1062,13 @@ TDacSpecs dao = new TDacSpecs();
 		    	 supDetCom.setDcsMbmRespo(""+respo);
 		    	 iservice.updateObject(supDetCom);
 		    	 
-		    	 listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-							new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
-							new WhereClause("DAF_DCS_NUM",WhereClause.Comparateur.EQ,""+supDetCom.getDcsNum()));
-		    	 if(!listeDaoAff.isEmpty()) { 
-		    		 supDaoAff=listeDaoAff.get(0);
-		    		 supDaoAff.setDafDcsMbmRespo(""+respo);
-			    	 iservice.updateObject(supDaoAff);
+			    		listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+								new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
+								new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
+			    	              if(!listeDaoAff.isEmpty()) { 
+			    		              supDaoAff=listeDaoAff.get(0);
+			    		              supDaoAff.setDafDcsMbmRespo(""+respo);
+			    		              iservice.updateObject(supDaoAff);
 		    	 }
 		    	//Chargement des fonctions imputer 
 		   		 chargeFonctionImput();
@@ -2163,9 +2163,9 @@ TDacSpecs dao = new TDacSpecs();
 	 
 	 
 	 public void chargeDataDMP4(){
-		 if(controleController.type == "DAC") {
+		 //if(controleController.type == "DAC") {
 			 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValDao("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
-		 }else {
+		/* }else {
 			 if(controleController.type == "AMI") {
 				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValAmi("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
 			 } 
@@ -2174,7 +2174,7 @@ TDacSpecs dao = new TDacSpecs();
 					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrValPrq("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod()); 
 				 } 
 			 }
-		}
+		}*/
 		         multiFiltre ="";
 		         //_logger.info("colonne: "+condition+" valeur :"+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2979,7 +2979,7 @@ TDacSpecs dao = new TDacSpecs();
 					int nat = Integer.valueOf(docNature);
 					//check le dossier s'il existe Ã  faire
 					//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
-					dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
+					//dos.setDdaNom(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
 					dos.setTDacSpecs(newDao);
 					List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 					TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
@@ -4190,10 +4190,6 @@ TDacSpecs dao = new TDacSpecs();
 					    }
 				 }
 				 
-				/* listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
-							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	*/
 				 _logger.info("dao : "+slctdTd.getDacCode());
 				 _logger.info("liste ppm : "+listePpmDao.size());
 			 }
@@ -5937,7 +5933,7 @@ TDacSpecs dao = new TDacSpecs();
 										                             //Mis � jour du statut de DAO rï¿½cu   
 										                             slctdTda.setDafStaCode("DC1");
 										                             iservice.updateObject(slctdTda);
-										                             historiser("DC1",slctdTd.getDacCode(),"");
+										                             historiser("DC1",slctdTda.getDafDacCode(),"");
 										                             //Actualisation de la liste des DAO
 										                             //chargeDaoChargeEtude();
 												                     //Actualisation du Tableau de Bord
@@ -5980,7 +5976,7 @@ TDacSpecs dao = new TDacSpecs();
 										                                             //Mis Ã  jour du statut de DAO en cours de traitement chez le Chargï¿½ d'Etudes  
 										       		                                slctdTda.setDafStaCode("DC1");
 										       		                                iservice.updateObject(slctdTda); 
-										       		                             historiser("DC1",slctdTd.getDacCode(),"");
+										       		                             historiser("DC1",slctdTda.getDafDacCode(),"");
 										       		                                //Actualisation de la liste des DAO
 										       		                                //chargeDaoChargeEtude();
 									 				                                //Actualisation du Tableau de Bord
@@ -6122,13 +6118,13 @@ TDacSpecs dao = new TDacSpecs();
 											int nat = Integer.valueOf(docNature);
 											//check le dossier s'il existe Ã  faire
 											//TDossierDacs dos =new TDossierDacs(); //TNatureDocuments
-											dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+											//dos.setDdaNom(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+											dos.setDdaNom(fileUploadController.getFileName());
 											dos.setTDacSpecs(newDao);
 											List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 											TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
 											if(!LS.isEmpty()) natureDoc = LS.get(0);
 											dos.setTNatureDocuments(natureDoc);
-											dos.setDdaNom(fileUploadController.getFileName());
 											dos.setDdaDteSaisi(Calendar.getInstance().getTime());
 											dos.setDdaReference(fileUploadController.getDocNom());
 											iservice.addObject(dos); 
@@ -6202,6 +6198,7 @@ TDacSpecs dao = new TDacSpecs();
 										}
 									
 									 public void openDossier() throws IOException{
+										 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 							       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION_LINUX+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 							       		   }
 									//Methode de Chargement des Artcles
