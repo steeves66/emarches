@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -105,9 +106,16 @@ public class FileUploadController {
 			String ext = str.substring(str.lastIndexOf('.'), str.length());
 			
 			 // name = name+"-";//+dossierAffaire.getControle().getCotCode()+ext;
-			name = name+demCode;
+			
+			Random random = new Random();
+			int nb;
+			nb = random.nextInt(10000);
+			String s=String.valueOf(nb);  
+			//nb=s.length();
+			//s.substring(5,nb);
+			name = name+demCode+"-";
 			fileCode = name;
-			 fileName = name+ext;
+			 fileName = name+s+ext;
 			System.out.print("getFileName()"+fileName);
 	
 			

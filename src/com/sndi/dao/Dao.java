@@ -540,7 +540,7 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 	
 	public List getObjectByColumnInInstrValDao(String objet, String strSource) { 
 			// TODO Auto-generated method stub
-				String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND DAC_TD_CODE='DAO' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       
+				String query = "FROM "+objet+" WHERE DAC_STA_CODE ='D4V' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       
 			 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 				return list;
 	}
