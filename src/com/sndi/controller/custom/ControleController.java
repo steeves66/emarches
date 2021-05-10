@@ -1836,6 +1836,7 @@ public class ControleController {
 				   			       panelRegister=true;
 				   			       panelUpdate=false;
 				   			       btn_fermer_saisie_dao = false;
+				   			       //btn_fermer_saisie_dao = true;
 				   			       btn_fermer_saisie_daoPs =false;
 				   			       btn_fermer_saisie_ami = true ;
 				   			       btn_fermer_saisie_prq = false;                     
@@ -4472,7 +4473,8 @@ public class ControleController {
 				                                            				   panelTraitement=false;
 				                                            			       panelRegister=true;
 				                                            			       panelUpdate=false;
-				                                            			       btn_fermer_saisie_dao = false;
+				                                            			       //btn_fermer_saisie_dao = false;
+				                                            			       btn_fermer_saisie_dao = true;
 				                            				   			       btn_fermer_saisie_daoPs =true;
 				                            				   			       btn_fermer_saisie_ami = false ;
 				                            				   			       btn_fermer_saisie_prq = false;
@@ -5507,6 +5509,7 @@ public class ControleController {
 																    											       panelRegister=true;
 																    											       panelUpdate=false;
 																    											       btn_fermer_saisie_dao = false;
+																    											       //btn_fermer_saisie_dao = true;
 																    								   			       btn_fermer_saisie_daoPs =false;
 																    								   			       btn_fermer_saisie_ami = false ;
 																    								   			       btn_fermer_saisie_prq = true;   

@@ -106,11 +106,7 @@
         <div class="box-header with-border">
          <div class="col-md-10 "><div  style="color: #fff">COMITE D'EXAMEN</div></div> 
          
-         <div class="col-md-2 ">
-                <p:commandLink oncomplete="PF('transDaoAff').show()" action="#{daoController.chargeDaoAffectesR()}"  data-toggle="modal"   styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
-				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Réaffectation</span>
-		        </p:commandLink>
-		   </div>     
+            
                 
         </div>
         <div class="box-body">
@@ -222,71 +218,7 @@
     
   
     
-    <h:form id="apercuDAOAff">
-	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Réaffectation du dossier">
-	         <div class="row">
-                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
-             </div>
-
-	            
-	            <div class="col-md-12">
-		            <div class="box box-success box-solid" >
-		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.libelleA} DEJA  AFFECTES</div></div>
-			         </div>
-			          <div class="box-body">
-			          
-                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDAO}" scrollable="true" scrollHeight="500"
-                        rowKey="#{slctdTb.dacCode}" selection="#{daoController.reaffectlisteDAO}" emptyMessage="Aucun #{controleController.libelleA} enrégistré">
-			           
-			           
-			           <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dacCode}" />
-				        </p:column>
-				        
-				        <p:column headerText="Objet" styleClass="col-sm-5" >
-         				<h:outputText value="#{slctdTb.dacObjet}" />
-				        </p:column>
-				        
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.tdcLibelle}" />
-				        </p:column>
-				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column> 
-				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
-				        </p:column> 
-				        
-				      
-			    </p:dataTable>  
-			          </div>
-		            </div>
-	            </div>
-	            
-	            
-	             <div class="pull-right ">
-			            <p:commandLink action="#{daoController.reaffecterCsv()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update="apercuDAOAff:tabDossier">
-			            <p:confirm header="Confirmation" message="Confirmez-vous la réaffectation ?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-exchange"></i> Réaffecter 
-			            </p:commandLink>
-              </div>
-              
-               <div class="pull-left">
-			           <p:commandLink styleClass="btn btn-warning" oncomplete="PF('transDaoAff').hide()" action="#{daoController.chargeDataReaffectation()}" style="background-color: #f88b2e;margin-top:10px;" update=":gnl">
-                       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		            </p:commandLink>
-              </div>
-              
-               
-	            
-	            
-      </p:dialog>
-    </h:form>
+   
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">

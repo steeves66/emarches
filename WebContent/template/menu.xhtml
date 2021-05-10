@@ -1986,119 +1986,20 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
-           <ul class="treeview-menu">
+           <ul class="treeview-menu">        
+           <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','AFFDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li> 
             
-            <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>DAO</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
-           
-            <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Procédure Normale</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
             <li>
-            <p:commandLink action="#{daoController.renderPage('dao1','AFFDAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Affectation
-             </p:commandLink>
-            </li>
-            <li>
-            <p:commandLink  action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
+             <p:commandLink  action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Validation
              </p:commandLink>
-            </li>
-           
-          </ul>     
-         </li>
+            </li> 
            
            
-            <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
-            <li>
-            <p:commandLink action="#{daoController.renderPage('dao1','AFFDPS')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Affectation
-             </p:commandLink>
-            </li>
-            <li>
-            <p:commandLink  action="#{daoController.renderPage('dao1','VALDPS')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation
-             </p:commandLink>
-            </li>
-          
-          </ul>     
-         </li>
-
-          </ul>     
-         </li>
-          <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>AMI</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-            <ul class="treeview-menu">
-	           <li>
-            <p:commandLink action="#{daoController.renderPage('dao1','AFFAMI')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Affectation
-             </p:commandLink>
-            </li>
-            <li>
-            <p:commandLink  action="#{daoController.renderPage('dao1','VALAMI')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation
-             </p:commandLink>
-            </li>
-            
-             <li>
-             <p:commandLink  action="#{daoController.renderPage('dao1','PUAMI')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Publication
-             </p:commandLink>
-            </li>
-
-          </ul>   
-           </li>
-           
-           <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>PRQ</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
-	           <li>
-            <p:commandLink action="#{daoController.renderPage('dao1','AFFPRQ')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Affectation
-             </p:commandLink>
-            </li>
-            <li>
-            <p:commandLink  action="#{daoController.renderPage('dao1','VALPRQ')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation
-             </p:commandLink>
-            </li>
-            
-             <li>
-             <p:commandLink  action="#{daoController.renderPage('dao1','PUBPRQ')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Publication
-             </p:commandLink>
-            </li>
-
-          </ul>     
-         </li>
          <li>
              <p:commandLink  action="#{daoController.renderPage('dao1','DOSAFF')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Dossiers affectés
