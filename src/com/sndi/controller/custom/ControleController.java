@@ -3703,6 +3703,7 @@ public class ControleController {
 				    							   if(action.equalsIgnoreCase("CHADAO")) {
 				    								     typePlan ="PN";
 				    								     type = "DAC";
+				    								     fonctionalite ="listeConsultAffectationCet";
 				    								     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
 										    			 libelleSmall = "Procédure Normale";

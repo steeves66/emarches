@@ -390,6 +390,7 @@ public class DaoController {
 	 private boolean panelCaution = false;
 	 private boolean btnChangerOperation = false;
 	 private boolean btnAffecte = false;
+	 private boolean btnAffecte1 = false;
 	 private boolean btnAffecteNormal = true;
 	//Boolï¿½ens
 	  private boolean skip;
@@ -3258,6 +3259,12 @@ TDacSpecs dao = new TDacSpecs();
 								_logger.info("nbre charge d'�tude: "+listeChargeEtudeByDac.size());			
 					 }
 					 
+					 public void chargeChargeEtudeByDac1() {
+						 listeChargeEtudeByDac = ((List<VChargeEtudeDac>)iservice.getObjectsByColumn("VChargeEtudeDac",
+								    new WhereClause("DAF_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode())));
+								_logger.info("nbre charge d'�tude: "+listeChargeEtudeByDac.size());			
+					 }
+					 
 
 						//Liste des membres de la commssions
 						 public void chargeExpert() {
@@ -5823,8 +5830,8 @@ TDacSpecs dao = new TDacSpecs();
 								 
 								//Affichage de zone de mention si le charg d'Etudes est un responsable de binome
 								  public void chargeRespoExiste(){
-									  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
-										              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+									  daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+					           					      "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
 										              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
 										              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 									        if (!daoExamen.isEmpty()) {
@@ -5856,8 +5863,8 @@ TDacSpecs dao = new TDacSpecs();
 									         }		
 									    }
 								  
-								    //Examen des pices du DAO par le charg d'Etudes du binome
-									@Transactional
+								    //Examen des pi�ces du DAO par le charg d'Etudes du binome
+									//@Transactional
 								    public void examinerChar() {
 										  
 									listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -5886,10 +5893,18 @@ TDacSpecs dao = new TDacSpecs();
 												                                detCor.setDcoRespo("N");
 												                                iservice.addObject(detCor);
 											                                      }
-										                             //Mis � jour du statut de DAO rï¿½cu   
-										                             slctdTda.setDafStaCode("DC1");
-										                             iservice.updateObject(slctdTda);
-										                             historiser("DC1",slctdTda.getDafDacCode(),"");
+										                       //Mis � jour du statut de DAO recu
+										              daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+							           					        "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+							           					        new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()),
+										           				new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+										                        if (!daoExamen.isEmpty()) { 
+										                        	 daoAffec= daoExamen.get(0);
+										            	             daoAffec.setDafStaCode("DC1");
+										            	             iservice.updateObject( daoAffec);
+										                             }
+										                        
+										                             historiser("DC1",daoAffec.getDafDacCode(),"");
 										                             //Actualisation de la liste des DAO
 										                             //chargeDaoChargeEtude();
 												                     //Actualisation du Tableau de Bord
@@ -5929,12 +5944,19 @@ TDacSpecs dao = new TDacSpecs();
 												                                        iservice.addObject(detCor);
 											                                              }
 									 				
-										                                             //Mis Ã  jour du statut de DAO en cours de traitement chez le Chargï¿½ d'Etudes  
-										       		                                slctdTda.setDafStaCode("DC1");
-										       		                                iservice.updateObject(slctdTda); 
-										       		                             historiser("DC1",slctdTda.getDafDacCode(),"");
+										                                             //Mis � jour du statut de DAO en cours de traitement chez le Chargï¿½ d'Etudes  
+										                                            //Mis � jour du statut de DAO recu
+																		            daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+															           					        "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+															           					        new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()),
+																		           				new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+																		                        if (!daoExamen.isEmpty()) { 
+																		                        	 daoAffec= daoExamen.get(0);
+																		            	             daoAffec.setDafStaCode("DC1");
+																		            	             iservice.updateObject( daoAffec); 
+																		                             }
 										       		                                //Actualisation de la liste des DAO
-										       		                                //chargeDaoChargeEtude();
+										       		                                chargeDaoChargeEtude();
 									 				                                //Actualisation du Tableau de Bord
 													                                 typeActionTb();
 									 				                                //Message de confirmation
@@ -7407,6 +7429,14 @@ TDacSpecs dao = new TDacSpecs();
 				btnAffecteNormal = true;
 			}
 		}
+		
+		public void visibleAffecteCet() {
+			if(controleController.getFonctionalite().equalsIgnoreCase("listeConsultAffectationCet")) {
+				btnAffecte1=true;
+			}else {
+				btnAffecte1=false;	
+			}
+		}
 		     
 		     
 	 public String renderPage(String value ,String action) throws IOException{ 
@@ -7417,6 +7447,7 @@ TDacSpecs dao = new TDacSpecs();
 					chargeDetailTB();
 					chargeNatureDocTrans();
 					visibleAffecte();
+					visibleAffecteCet();
 					//chargeDataPs();
 					chargeDaoPUB();
 					btn_corrige = true;
@@ -15588,6 +15619,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setStatutTrans(String statutTrans) {
 		this.statutTrans = statutTrans;
+	}
+
+	public boolean isBtnAffecte1() {
+		return btnAffecte1;
+	}
+
+	public void setBtnAffecte1(boolean btnAffecte1) {
+		this.btnAffecte1 = btnAffecte1;
 	}
 	
 	

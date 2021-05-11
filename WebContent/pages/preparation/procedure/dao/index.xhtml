@@ -468,6 +468,13 @@
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />
                            </p:commandLink> 
                            </h:panelGroup>
+                           
+                           <h:panelGroup rendered="#{daoController.btnAffecte1}"> 
+                              <p:commandLink oncomplete="PF('chargeEtudeDlg').show()" action="#{daoController.chargeChargeEtudeByDac1()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px" title="Chargés d'études" update=":dlgChargeEtude">
+                                <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />                             
+                            </p:commandLink>
+                            </h:panelGroup>
                         
 				         </p:column>   
     </p:dataTable>
