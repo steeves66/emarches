@@ -5988,7 +5988,7 @@ TDacSpecs dao = new TDacSpecs();
 
 									  
 								     ////Validation charg d'Etudes
-									  @Transactional
+									  //@Transactional
 									  public void valider() throws IOException {
 								       	List<TDacSpecs> DA  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
 								       	TDacSpecs dao = new TDacSpecs();
@@ -6015,7 +6015,7 @@ TDacSpecs dao = new TDacSpecs();
 									  
 									  
 									//Validation des corrections
-									  @Transactional 
+									  //@Transactional 
 									 public void resultatCorrectionRespo() {
 										 listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
 												  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()));
@@ -6034,7 +6034,7 @@ TDacSpecs dao = new TDacSpecs();
 									  
 									  
 									  //Transmission du DAO par le Responsable du binome
-									  @Transactional
+									  //@Transactional
 									  public void transmettreRespo() {
 										  
 										  if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference())) {
@@ -6044,9 +6044,19 @@ TDacSpecs dao = new TDacSpecs();
 											  
 										        }else {
 											     //Mis Ã  Jour du Statut du DAO dans T_Dao_Affectation, puis dans t_dac_specs
-											      slctdTda.setDafStaCode("D4V");
+										        	   daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+							           					        "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+							           					        new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()),
+										           				new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+										                        if (!daoExamen.isEmpty()) { 
+										                        	 daoAffec= daoExamen.get(0);
+										            	             daoAffec.setDafStaCode("D4V");
+										            	             daoAffec.setDafStatutRetour("0");
+										            	             iservice.updateObject(daoAffec);
+										                             }
+											     /* slctdTda.setDafStaCode("D4V");ss
 											      slctdTda.setDafStatutRetour("0");
-											      iservice.updateObject(slctdTda);
+											      iservice.updateObject(slctdTda);*/
 											  
 											   //Mis Ã  jour du statut et de l'option retour dans TDacSpecs
 											   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -6054,8 +6064,8 @@ TDacSpecs dao = new TDacSpecs();
 														new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
 													         if (!listDao.isEmpty()) {
 														         newDao= listDao.get(0);
-														         newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
-														         newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
+														         newDao.setTStatut(new TStatut("D4V"));
+														         newDao.setDacStatutRetour("0");
 												                 iservice.updateObject(newDao); 
 										   	                        }
 
@@ -6063,8 +6073,9 @@ TDacSpecs dao = new TDacSpecs();
 								 				  //Historisation du / des retraits
 								 				  historiser("D4V",newDao.getDacCode(),"");
 												  
-								 				  tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
+								 				  tableauBordController.saveTempTabord("D4V", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 												  chargeData();
+												  chargeDaoChargeEtude();
 												  
 												   //Actualisation du tableau de bord
 								 					typeActionTb();
