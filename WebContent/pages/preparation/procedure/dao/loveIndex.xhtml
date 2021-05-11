@@ -466,11 +466,15 @@
 			          <div class="box-body">
 			          
                         <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" emptyMessage="Aucun Document enrégistré">
-			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			           <p:column headerText="Nom du document " styleClass="col-md-7">
 			            <h:outputText value="#{doss.ddaReference}" />
 			        </p:column>
-			        <p:column headerText="Nature Document" styleClass="col-md-10">
+			        <p:column headerText="Nature Document" styleClass="col-md-3">
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
+			        </p:column>
+			        
+			        <p:column headerText="Date" styleClass="col-md-3">
+			            <h:outputText value="#{doss.ddaDteSaisi}"/>
 			        </p:column>
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">
@@ -571,11 +575,14 @@
 			          <div class="box-body">
 			          
                         <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
-			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			           <p:column headerText="Nom du document " styleClass="col-md-7">
 			            <h:outputText value="#{doss.ddaReference}" />
 			        </p:column>
-			        <p:column headerText="Nature Document" styleClass="col-md-10">
+			        <p:column headerText="Nature Document" styleClass="col-md-3">
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
+			        </p:column>
+			        <p:column headerText="Date" styleClass="col-md-3">
+			            <h:outputText value="#{doss.ddaDteSaisi}"/>
 			        </p:column>
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">
