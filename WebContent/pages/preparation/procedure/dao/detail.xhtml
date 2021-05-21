@@ -148,6 +148,12 @@
 				            <h:outputText value="#{slctdTb.TNatureDocuments.nadLibelle}" />
 				        </p:column>
 				        
+				        <p:column headerText="Création" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.ddaDteSaisi}" >
+				            <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+				            </h:outputText>
+				        </p:column>
+				        
 				        <p:column headerText="Action" styleClass="no-sort col-sm-1">
 			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{etatsDaoController.openDossier()}"  title="ouvrir"  ajax="false">
 			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 

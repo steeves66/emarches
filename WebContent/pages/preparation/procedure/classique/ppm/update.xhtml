@@ -1391,7 +1391,7 @@
 		                  <div class="col-sm-6">
 		                    <table>
 						      <tr>
-						      <td style="width:50px"><p:calendar id="rr" readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						      <td style="width:50px"><p:calendar title="#{ppmModificationController.geneDate.dppDateAvisAoPublication} #{ppmModificationController.geneDate.dppDateAvisAoPublication}" id="rr" readonly="true" showOn="false" value="#{ppmModificationController.geneDate.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 						       </p:calendar></td>
 						       <td>
 						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
@@ -1502,23 +1502,10 @@
 		                 <div class="form-group">
 		                  <label for="approbaAnoAmi" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege})</label>
 		                  <div class="col-sm-6">
-		                  <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '2'}">
-		                   <p:calendar id="approbaAnoAmi1" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
-		                   </p:calendar>  <span style="color:red;"> #</span>
-		                   </h:panelGroup>
-		                   
-		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '1'}">
-		                   <p:calendar id="approbaAnoAmi2" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
-		                   </p:calendar>  <span style="color:green;"> #</span>
-		                   </h:panelGroup>
-		                   
-		                   <h:panelGroup rendered="#{ppmModificationController.geneDate.dppFlagApprobAno == '0'}">
-		                   <p:calendar id="approbaAnoAmi3" title="#{ppmModificationController.geneDate.dppJourApprobAno} le #{ppmModificationController.geneDate.dppApprobAno}" value="#{ppmModificationController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAno')}" update="gnl"/>
+		                   <p:calendar id="approbaAnoAmi3" value="#{ppmModificationController.geneDate.dppApprobAnoTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmModificationController.genereDate('dppApprobAnoTec')}" update="gnl"/>
 		                   </p:calendar> 
-		                   </h:panelGroup>
+		                   
 		                  </div>
 		                  </div>
 		                  </h:panelGroup>
@@ -1723,7 +1710,8 @@
 		                    <table>
 						      <tr>
 						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-						       </p:calendar></td>
+						       </p:calendar>
+						       </td>
 						       <td>
 						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							   <i class="fa fa-search-plus"></i>

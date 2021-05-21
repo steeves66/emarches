@@ -130,7 +130,7 @@ public class EtatsDaoController {
 	//Afficher les dossiers du DAO selectionné
     public void chargeDossier() {
  	dossListe.clear();
- 	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+ 	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
  	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
     

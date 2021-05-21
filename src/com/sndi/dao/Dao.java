@@ -467,10 +467,10 @@ public class Dao implements IDao {
 	}
 	
 	
-	@Override
-public List getObjectByColumnInInstr(String objet, String strSource) {
+@Override
+public List getObjectByColumnInInstr(String objet,String stat1 ,String stat2 ,String typePlan, String strSource) {
 	// TODO Auto-generated method stub
-	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='DAO' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('"+stat1+"','"+stat2+"') AND DAC_TD_CODE='DAO' AND DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
 
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
@@ -521,17 +521,17 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 	return list;
 }
 	
-	public List getObjectByColumnInInstrAmi(String objet, String strSource) {
+	public List getObjectByColumnInInstrAmi(String objet, String stat1 ,String stat2 ,String typePlan,String strSource) {
 		// TODO Auto-generated method stub
-		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='AMI' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('"+stat1+"','"+stat2+"') AND DAC_TD_CODE='AMI' AND DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
 
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
 	}
 	
-	public List getObjectByColumnInInstrPrq(String objet, String strSource) {
+	public List getObjectByColumnInInstrPrq(String objet,String stat1 ,String stat2 ,String typePlan, String strSource) {
 		// TODO Auto-generated method stub
-		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TD_CODE='PRQ' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+		String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('"+stat1+"','"+stat2+"') AND DAC_TD_CODE='PRQ' DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
 
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
@@ -569,9 +569,6 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 		return list;
 	}
 	
-	
-	
-	
 
 	//Methode de comptage en région
 	@Override
@@ -591,6 +588,79 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 			}
 		}
 	
+	//Methode de comptage en région
+		@Override
+		public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac, String typePlan) {
+				// TODO Auto-generated method stub
+				
+				String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D3A','D3A') AND DAC_TD_CODE = '"+typeDac+"' "
+						+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+		
+				try {
+					BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+							.createSQLQuery(query).uniqueResult();
+					if (bv == null) {return 0;} else {return bv.intValue();}
+				} catch (HibernateException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+	
+	//Methode de comptage des DAO différés par le chef de service DAO en région
+	 @Override
+	 public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			
+			String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D5R','D5R') AND DAC_TD_CODE = '"+typeDac+"' "
+					+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+	
+			try {
+				BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+						.createSQLQuery(query).uniqueResult();
+				if (bv == null) {return 0;} else {return bv.intValue();}
+			} catch (HibernateException e) {
+				e.printStackTrace();
+				return 0;
+			} 
+	 }
+	
+	//Methode de comptage des DAO différés par le chef de service DAO en région
+		 @Override
+		 public int countTableByColumnInInstrValAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+				// TODO Auto-generated method stub
+				
+				String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D4V','D4V') AND DAC_TD_CODE = '"+typeDac+"' "
+						+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+		
+				try {
+					BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+							.createSQLQuery(query).uniqueResult();
+					if (bv == null) {return 0;} else {return bv.intValue();}
+				} catch (HibernateException e) {
+					e.printStackTrace();
+					return 0;
+				} 
+		 }
+		 
+	
+		//Methode de comptage des DAO différés par le chef de service DAO en région
+		 @Override
+		 public int countTableByColumnInInstrValidDao(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+				// TODO Auto-generated method stub
+				
+				String query = "SELECT TO_NUMBER(count("+objet+"."+conditionColumn+")) FROM "+objet+" WHERE DAC_STA_CODE IN ('D5V','DPU') AND DAC_TD_CODE = '"+typeDac+"' "
+						+ " AND DAC_TYPE_PLAN = '"+typePlan+"' AND INSTR ('"+strSource+"',FON_CODE_CSV) > 0" ;
+		
+				try {
+					BigDecimal	bv = (BigDecimal) getSessionFactory().getCurrentSession()
+							.createSQLQuery(query).uniqueResult();
+					if (bv == null) {return 0;} else {return bv.intValue();}
+				} catch (HibernateException e) {
+					e.printStackTrace();
+					return 0;
+				} 
+		 }
+		 
 	//Methode de comptage PPM en région
 	@Override
 	public int countTableByColumnInPmmInstr(String objet,String conditionColumn, String strSource) {

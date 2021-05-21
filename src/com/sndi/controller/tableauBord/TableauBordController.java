@@ -1208,16 +1208,18 @@ public class TableauBordController {
 						 //Affectation des DAC
 						 //daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP"); 
 						 daoCsvAttAff = ""+getDaoAttAffCsvReg(typePlan,typeDac);
-						 daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
-						 
-						 
-						 daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
+						 //daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
+						 daoaffecte =  ""+getDaoAttAffCsvAffec(typePlan,typeDac); 
+						// daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
+						 daoCsvDiff = ""+getDaoAttAffCsvDiffAff(typePlan,typeDac);
 						 //Publication des DAC
 						 daoCsvAttPub = ""+getAcDaoAttPubDossier(typePlan,typeDac,"D6V","DPU");
 						 daoCsvPub = ""+getAcDaoPubDossier(typePlan,typeDac,"DAP");
 						 //Validation des DAC
-						 daoCsvAttVal = ""+getAcDaoValChargeCsv(typePlan,typeDac,"D4V");
-						 daoCsvValidation = ""+getAcDaoValidationCsvDossier(typePlan,typeDac,"D5V","DOP","SBO");
+						 //daoCsvAttVal = ""+getAcDaoValChargeCsv(typePlan,typeDac,"D4V"); 
+						 daoCsvAttVal = ""+getDaoAttAffCsvAttAff(typePlan,typeDac);
+						 //daoCsvValidation = ""+getAcDaoValidationCsvDossier(typePlan,typeDac,"D5V","DOP","SBO"); 
+						 daoCsvValidation = ""+getDaoAttAffCsvValAff(typePlan,typeDac);
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
 							 //Correction du DAC
@@ -2782,6 +2784,25 @@ public int getDaoAttAffCsvReg(String typePlan,String typeDac){
 	return	i;	
 }
 
+public int getDaoAttAffCsvAffec(String typePlan,String typeDac){ 
+	int i = iservice.countTableByColumnInInstrDjAffec("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	return	i;	
+}  
+
+public int getDaoAttAffCsvDiffAff(String typePlan,String typeDac){ 
+	int i = iservice.countTableByColumnInInstrDiffAff("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	return	i;	
+} 
+
+public int getDaoAttAffCsvAttAff(String typePlan,String typeDac){ 
+	int i = iservice.countTableByColumnInInstrValAff("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	return	i;	
+} 
+
+public int getDaoAttAffCsvValAff(String typePlan,String typeDac){ 
+	int i = iservice.countTableByColumnInInstrValidDao("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	return	i;	
+} 
 
 public int getPpmAttValideSpp(){  
 	if(controleController.typePlan == "PN") {

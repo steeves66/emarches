@@ -145,9 +145,9 @@ public class Service implements Iservice {
 		}
 		
 		@Override
-		public List getObjectByColumnInInstr(String objet, String strSource) {
+		public List getObjectByColumnInInstr(String objet,String stat1 ,String stat2 ,String typePlan, String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstr(objet,strSource);
+			return getDao().getObjectByColumnInInstr(objet,stat1 ,stat2 ,typePlan,strSource);
 		}
 		
 		//Methode de comptage en region
@@ -258,15 +258,15 @@ public class Service implements Iservice {
 		
 
 		@Override
-		public List getObjectByColumnInInstrAmi(String objet, String strSource) {
+		public List getObjectByColumnInInstrAmi(String objet, String stat1 ,String stat2 ,String typePlan,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstrAmi(objet,strSource);
+			return getDao().getObjectByColumnInInstrAmi(objet,stat1 ,stat2 ,typePlan,strSource);
 		}
 
 		@Override
-		public List getObjectByColumnInInstrPrq(String objet, String strSource) {
+		public List getObjectByColumnInInstrPrq(String objet,String stat1 ,String stat2 ,String typePlan,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstrPrq(objet,strSource);
+			return getDao().getObjectByColumnInInstrPrq(objet,stat1 ,stat2 ,typePlan,strSource);
 		}
 
 		@Override
@@ -306,6 +306,30 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().countTableByColumnNotIn(tableName, conditionColumn, conditionList, columnList, notCondition, notList);
 		}
+		
+		@Override
+		public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			return getDao().countTableByColumnInInstrDjAffec(objet,conditionColumn,strSource,typeDac,typePlan);
+		}
+		
+		@Override
+		public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			return getDao().countTableByColumnInInstrDiffAff(objet,conditionColumn,strSource,typeDac,typePlan);
+		}
+		
+		@Override
+		public int countTableByColumnInInstrValAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+			// TODO Auto-generated method stub
+			return getDao().countTableByColumnInInstrValAff(objet,conditionColumn,strSource,typeDac,typePlan);
+		}
+		
+		@Override
+		public int countTableByColumnInInstrValidDao(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+		// TODO Auto-generated method stub
+		return getDao().countTableByColumnInInstrValidDao(objet,conditionColumn,strSource, typeDac, typePlan);
+		 }
 
 		@Override
 		public List getObjectByColumnNotInPpmInstrChVal(String objet, String strSource) {

@@ -167,7 +167,7 @@
 					 
 					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
 					<div class="col-md-2 ">
-		                <p:commandLink oncomplete="PF('transDaoAff').show()" action="#{daoController.chargeDaoAffectesR()}"  data-toggle="modal"   styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
+		                <p:commandLink oncomplete="PF('transDaoAff').show()" rendered="#{controleController.btn_reaffectation}" action="#{daoController.chargeDaoAffectesR()}"  data-toggle="modal"   styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
 						<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Réaffectation</span>
 				        </p:commandLink>
 		          </div>  
@@ -255,6 +255,20 @@
                         
                         <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.dacDateValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				        <p:column headerText="Date de Transmission" styleClass="col-sm-1" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">			
+         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dacDteValCpmp}" style="color:red; font-weight:bold " >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dacDteValCpmp}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>

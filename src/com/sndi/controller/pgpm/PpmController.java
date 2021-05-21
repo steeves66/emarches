@@ -3606,6 +3606,13 @@ public class PpmController {
 							recupDateGenere();
 							_logger.info("Date d'Invitation des Entreprises : "+geneDate.getDppInvEntre());
 						}else
+							 if(date.equalsIgnoreCase("dppApprobAnoTec")) {
+								 detPass.setDppDateRecepFact(geneDate.getDppApprobAnoTec());
+							     iservice.updateObject(detPass); 
+							     recupDateGenere();
+							     _logger.info("Date ANO Approb : "+geneDate.getDppApprobAnoTec());
+							 }
+						    else
 							 if(date.equalsIgnoreCase("dppDateRecepFact")) {
 								 detPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
 							     iservice.updateObject(detPass); 

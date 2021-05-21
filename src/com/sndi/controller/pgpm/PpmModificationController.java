@@ -357,6 +357,8 @@ public class PpmModificationController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
+		  			            anoExiste();
+		 	  	                anoTechExiste();
 		  			            modifierDetailPlan();
 		                        controlPanel();
 		                        
@@ -374,9 +376,11 @@ public class PpmModificationController {
 					          return "ope111";
 					   } else
 					   {
+						   anoExiste();
+				 	  	   anoTechExiste();
 						   modifierDetailPlan();
-	                        controlPanelPs();
-	                        recupModeleDao();
+	                       controlPanelPs();
+	                       recupModeleDao();
 						   //Methode update
 						  /* if(controleController.type == "PPM") {
 								
@@ -468,9 +472,7 @@ public class PpmModificationController {
 				     }
 				 //Fin de Contrôle pour les DPPRQ
 				 
-				 
-				 
-				 
+				 			 
 					//Controle Pavé création pour les PSC
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("psc")) {
 					 
@@ -480,10 +482,13 @@ public class PpmModificationController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
+		  			 
+		  			         anoExiste();
+		 	  	             anoTechExiste();
 		  			          modifierDetailPlan();
 		                    	  
-		                    	  //recupModeleDao();
-		                    	 controlPanelPs();
+		                     //recupModeleDao();
+		                      controlPanelPs();
 				     }
 				 //Fin de Contrôle pour les PSC
 				 
@@ -501,6 +506,8 @@ public class PpmModificationController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
+		  			      anoExiste();
+			 	  	      anoTechExiste();
 		  			     modifierDetailPlan();
 		  			     controlPanel();
 		                    	
@@ -517,7 +524,10 @@ public class PpmModificationController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
-		  			    modifierDetailPlan();
+		  			 
+		  			     anoExiste();
+		 	  	         anoTechExiste();
+		  			     modifierDetailPlan();
 		                 controlPanel();
 		                 
 				     }
@@ -534,6 +544,8 @@ public class PpmModificationController {
 				          return "ope111";
 						} 
 		  			 
+		  			    anoExiste();
+		 	  	        anoTechExiste();
 		                controlPanel();
 		               
 				     }
@@ -613,6 +625,7 @@ public class PpmModificationController {
 				             userController.setTexteMsg(" Modification effectuée avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
+							 
 			 }
 		//Methode de récupération de l'AMI de la DP
 		 public void recupPpm(long dppId) {
@@ -1409,15 +1422,22 @@ public class PpmModificationController {
 				recupPass.setDppObjet(passation.getDppObjet());
 					}
 			
+			
+			
+			
+			
 			public void onSelectDatePub() {
-				detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
-				updateDaoTrans();
+				/*listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+					if (!listeTsPpm.isEmpty()) {
+						detPass = listeTsPpm.get(0);
+						detPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+						iservice.updateObject(detPass);
+				}*/
+					updateDaoTrans();
 			}
 			
 	
-	
-			
-			
 			 //Fin cpmp
 			
 			
@@ -2242,11 +2262,12 @@ public class PpmModificationController {
 		 
 		 public void updateDaoTrans() {
 			 listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 					if (!listeTsPpm.isEmpty()) {
 						detPass = listeTsPpm.get(0);
-						detPass.setDppDateDaoTrans(detailPass.getDppDateDaoTrans());
-						detPass.setDppDateAvisAoPublication(detailPass.getDppDateAvisAoPublication());
+						detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+						detPass.setDppDateAvisAoPublication(pubDate.getDatepub());
+						//detPass.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
 						iservice.updateObject(detPass);
 						recupDateGenere();
 					}
@@ -2264,10 +2285,10 @@ public class PpmModificationController {
 			   detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
 				iservice.updateObject(detPass);
 				recupDateGenere();
-				_logger.info("Date de Transmission : "+detailPass.getDppDateDaoTrans());
+				_logger.info("Date de Transmission : "+updatePpm.getDppDateDaoTrans());
 				  }else
 					  if(date.equalsIgnoreCase("dppDateAvisAoPublication")) {
-						detPass.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
+						detPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());
 						iservice.updateObject(detPass);
 						recupDateGenere();
 						_logger.info("Date de Publication : "+geneDate.getDppDateAvisAoPublication());
@@ -2278,6 +2299,12 @@ public class PpmModificationController {
 							recupDateGenere();
 							_logger.info("Date d'Invitation des Entreprises : "+geneDate.getDppInvEntre());
 						}else
+							 if(date.equalsIgnoreCase("dppApprobAnoTec")) {
+								 detPass.setDppDateRecepFact(geneDate.getDppApprobAnoTec());
+							     iservice.updateObject(detPass); 
+							     recupDateGenere();
+							     _logger.info("Date ANO Approb : "+geneDate.getDppApprobAnoTec());
+							 }else
 							 if(date.equalsIgnoreCase("dppDateRecepFact")) {
 								 detPass.setDppDateRecepFact(geneDate.getDppDateRecepFact());
 							     iservice.updateObject(detPass); 

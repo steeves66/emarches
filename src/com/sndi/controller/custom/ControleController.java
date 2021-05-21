@@ -412,6 +412,7 @@ public class ControleController {
 	private String actions="";
 	private String actionPage="";
 	public boolean lignedefaut = true;
+	private boolean btn_reaffectation = false;
 	//String actionPrivilèges ="";
 	
 	//Colonnes pour les consultations
@@ -1941,7 +1942,169 @@ public class ControleController {
 				   							 btn_fermer_saisie_prq = false; 
 				   							 
 				   			    		}else
-				   				    		if(action.equalsIgnoreCase("AMIPS")) {
+					   			    		if(action.equalsIgnoreCase("SAIDP")) {
+					   			    			 type = "DP";
+												 typePlan ="PN";
+												 ecran = "dp";
+												 fonctionalite = "listSaisieAc";
+												 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
+					   			    			libelleDao3="SAISIE DES DEMANDES DE PROPOSITION";
+					   			    			libelle1="LISTE DES DEMANDES DE PROPOSITION (DP)";
+					   			    			btn_daoPn =false;
+								    			btn_daoPs =false;
+								    			btn_ami =true;
+								    			btn_prq =false;
+					   			    			 btn_new =true;
+					   			    			 btn_affec = false;
+					   			    			panel1 =true;
+												 panel2 =false;
+												 panel3 = false;
+												panel4 = false;
+												 saisie=true; 
+					   							 venteRecherche = false; 
+					   							 affectationRecherche = false;
+					   							 examenRecherche = false;
+					   							 publicationRecherche = false;
+					   							 saisieRecherche = true;
+					   							 celluleRecherche = false;
+					   							 validationRecherche = false;
+					   							 priseRecherche = false;
+					   							 chargeRecherche = false;
+					   							 panelDaoTableauBordSai = true;
+					   							 panelDaoTableauBordPslpso = false;
+					   							 panelDaoTableauBordVal = false;
+					   							 panelDaoTableauBordTra = false;
+					   							 panelDaoTableauBordPub = false;
+					   							 pspmModePs = false;
+					   							 ppmModePn = true;
+					   							 btn_dao_pn = true;
+					   							 btn_dao_ps = false;
+					   							 panelDaoTableauBordAff =false;
+					   							 panelDaoTableauBordExa =false; 
+					   							 panelDaoTableauBordRet =false;
+					   							 panelDaoTableauBordVet =false;
+					   							 panelDaoTableauBordCha = false;
+					   							 panelDaoTableauBordPrise = false;
+					   							 panelDaoTableauBordPubCsv = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordPubDps = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordDPubDps = false;
+					   							 panelAmi = false;
+					   							 panelDao = true;  
+					   							 panelPrq = false;
+					   							 btn_trans_ami =false;
+					   							 btn_trans_dao =true;
+					   							 btn_trans_prq =false;
+					   							 
+					   							 btn_creerDetailAmi = false;
+					   							 btn_creerDetailDao = true ;
+					   							 btn_creerDetailPrq = false;
+					   							 
+					   							 btn_creerDetailDaoCmp = true;
+					   							 btn_creerDetailAmiCmp = false;
+					   							 btn_creerDetailPrqCmp = false;
+					   							 btn_creerDetailDaoDmp = true;
+					   							 btn_creerDetailAmiDmp = false; 
+					   							 btn_creerDetailPrqDmp = false;
+					   							 fermerValDao = false;
+					   							 fermerSaiDao = true;
+					   							 detailD = true;
+					   							 detailA= false; 
+					   							 detailP = false;
+					   							 btn_valider_dao_cpmp =  false;
+					   							 btn_valider_dao_dmp = false;
+					   							 btn_valider_ami_cpmp = false; 
+					   							 btn_valider_prq_cpmp = false;
+					   							 btn_valider_ami_dmp = false;
+					   							 btn_valider_prq_dmp = false;
+					   							 btn_fermer_saisie_dao = true; 
+					   							 btn_fermer_saisie_ami = false; 
+					   							 btn_fermer_saisie_prq = false; 
+					   							 
+					   			    		}else
+						   			    		if(action.equalsIgnoreCase("SAIDS")) {
+						   			    			 type = "DP";
+													 typePlan ="PS";
+													 ecran = "dp";
+													 fonctionalite = "listSaisieAc";
+													 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
+						   			    			libelleDao3="SAISIE DES DEMANDES DE PROPOSITION";
+						   			    			libelle1="LISTE DES DEMANDES DE PROPOSITION (DP)";
+						   			    			btn_daoPn =false;
+									    			btn_daoPs =false;
+									    			btn_ami =true;
+									    			btn_prq =false;
+						   			    			 btn_new =true;
+						   			    			 btn_affec = false;
+						   			    			panel1 =true;
+													 panel2 =false;
+													 panel3 = false;
+													panel4 = false;
+													 saisie=true; 
+						   							 venteRecherche = false; 
+						   							 affectationRecherche = false;
+						   							 examenRecherche = false;
+						   							 publicationRecherche = false;
+						   							 saisieRecherche = true;
+						   							 celluleRecherche = false;
+						   							 validationRecherche = false;
+						   							 priseRecherche = false;
+						   							 chargeRecherche = false;
+						   							 panelDaoTableauBordSai = true;
+						   							 panelDaoTableauBordPslpso = false;
+						   							 panelDaoTableauBordVal = false;
+						   							 panelDaoTableauBordTra = false;
+						   							 panelDaoTableauBordPub = false;
+						   							 pspmModePs = false;
+						   							 ppmModePn = true;
+						   							 btn_dao_pn = true;
+						   							 btn_dao_ps = false;
+						   							 panelDaoTableauBordAff =false;
+						   							 panelDaoTableauBordExa =false; 
+						   							 panelDaoTableauBordRet =false;
+						   							 panelDaoTableauBordVet =false;
+						   							 panelDaoTableauBordCha = false;
+						   							 panelDaoTableauBordPrise = false;
+						   							 panelDaoTableauBordPubCsv = false;
+													 panelDaoTableauBordDPubCsv = false;
+													 panelDaoTableauBordPubDps = false;
+													 panelDaoTableauBordDPubCsv = false;
+													 panelDaoTableauBordDPubDps = false;
+						   							 panelAmi = false;
+						   							 panelDao = true;  
+						   							 panelPrq = false;
+						   							 btn_trans_ami =false;
+						   							 btn_trans_dao =true;
+						   							 btn_trans_prq =false;
+						   							 
+						   							 btn_creerDetailAmi = false;
+						   							 btn_creerDetailDao = true ;
+						   							 btn_creerDetailPrq = false;
+						   							 
+						   							 btn_creerDetailDaoCmp = true;
+						   							 btn_creerDetailAmiCmp = false;
+						   							 btn_creerDetailPrqCmp = false;
+						   							 btn_creerDetailDaoDmp = true;
+						   							 btn_creerDetailAmiDmp = false; 
+						   							 btn_creerDetailPrqDmp = false;
+						   							 fermerValDao = false;
+						   							 fermerSaiDao = true;
+						   							 detailD = true;
+						   							 detailA= false; 
+						   							 detailP = false;
+						   							 btn_valider_dao_cpmp =  false;
+						   							 btn_valider_dao_dmp = false;
+						   							 btn_valider_ami_cpmp = false; 
+						   							 btn_valider_prq_cpmp = false;
+						   							 btn_valider_ami_dmp = false;
+						   							 btn_valider_prq_dmp = false;
+						   							 btn_fermer_saisie_dao = true; 
+						   							 btn_fermer_saisie_ami = false; 
+						   							 btn_fermer_saisie_prq = false; 
+						   							 
+						   			    		}else
+				   				    		    if(action.equalsIgnoreCase("AMIPS")) {
 				   				    			 type = "AMI";
 												 typePlan ="PN";
 												 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
@@ -3296,6 +3459,7 @@ public class ControleController {
 			    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL D'OFFRES";
 			    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL D'OFFRES";
 			    				panelDetail=false;
+			    				btn_reaffectation = false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
 			    				btn_new =false;
@@ -3399,6 +3563,7 @@ public class ControleController {
 							    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 							    			 libelleSmall = "Procédure Normale";
 							    			 libelleA = "DAO";
+							    			 btn_reaffectation = true;
 							    			 btn_new =false;
 							    			 btn_affec = true;
 							    			 btn_exam = false;
@@ -3474,6 +3639,7 @@ public class ControleController {
 								    			 libelleSmall = "Dossiers deja affectés";
 								    			 libelleA = "DAO";
 								    			 btn_new =false;
+								    			 btn_reaffectation = false;
 								    			 btn_affec = true;
 								    			 btn_exam = false;
 								    			 btn_retrait = false;
@@ -3498,7 +3664,7 @@ public class ControleController {
 												 panelDaoTableauBordSai = false;
 												 panelDaoTableauBordVal = false;
 												 panelDaoTableauBordTra = false;
-												 panelDaoTableauBordAff =true;
+												 panelDaoTableauBordAff =false;
 												 panelDaoTableauBordVet =false;
 												 panelDaoTableauBordRet = false;
 												 panelDaoTableauBordCha = false;
@@ -4383,6 +4549,7 @@ public class ControleController {
 									    									     btn_prq_dps = false;
 									    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
 																    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
+																    			 libelleSmall = "Procédure Normale";
 																    			 btn_new =false;
 																    			 btn_affec = false;
 																    			 btn_exam = false;
@@ -5413,6 +5580,7 @@ public class ControleController {
 																				    									     btn_prq_dps = false;
 																				    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																											    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
+																											    			 libelleSmall = "Procédure Simplifiée";
 																											    			 btn_new =false;
 																											    			 btn_affec = false;
 																											    			 btn_exam = false;
@@ -10703,6 +10871,16 @@ public class ControleController {
 
 	public void setPanelPeriodPlan(boolean panelPeriodPlan) {
 		this.panelPeriodPlan = panelPeriodPlan;
+	}
+
+
+	public boolean isBtn_reaffectation() {
+		return btn_reaffectation;
+	}
+
+
+	public void setBtn_reaffectation(boolean btn_reaffectation) {
+		this.btn_reaffectation = btn_reaffectation;
 	}
 	
 	

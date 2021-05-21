@@ -402,7 +402,7 @@
     </h:form>  
     
     <h:form id="apercuDAOCharge">
-	        <p:dialog  widgetVar="transDaoChargeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="transDaoChargeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="45%" closable="true" header="">
 	         <div class="row">
                    <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
@@ -465,7 +465,9 @@
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" emptyMessage="Aucun Document enrégistré">
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" scrollable="true" scrollHeight="250"
+                        emptyMessage="Aucun Document enrégistré">
+                        
 			           <p:column headerText="Nom du document " styleClass="col-md-7">
 			            <h:outputText value="#{doss.ddaReference}" />
 			        </p:column>
@@ -473,8 +475,10 @@
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
 			        </p:column>
 			        
-			        <p:column headerText="Date" styleClass="col-md-3">
-			            <h:outputText value="#{doss.ddaDteSaisi}"/>
+			        <p:column headerText="Date" styleClass="col-md-1">
+			            <h:outputText value="#{doss.ddaDteSaisi}">
+			            <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+			            </h:outputText>
 			        </p:column>
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">

@@ -2200,14 +2200,14 @@ TDacSpecs dao = new TDacSpecs();
 		 
 		 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 	
 			 if(controleController.type == "DAC") {
-				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod());
 			 }else {
 				 if(controleController.type == "AMI") {
-					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste",""+stat1,""+stat2,""+typePlan ,""+userController.getSlctd().getTFonction().getFonCod());
 				 } 
 				 else {
 					 if(controleController.type == "PRQ") {
-						 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod()); 
+						 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
 					 } 
 				 }
 			}
@@ -2451,7 +2451,7 @@ TDacSpecs dao = new TDacSpecs();
 									 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 									 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 									 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-									 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+									 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 							         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));			 
 								_logger.info("listeDAO size: "+listeDAO.size());
 						 }else {
@@ -2462,7 +2462,7 @@ TDacSpecs dao = new TDacSpecs();
 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","DOP")),
 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-										 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+										 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 								         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								         multiFiltre ="";
 									_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2474,7 +2474,7 @@ TDacSpecs dao = new TDacSpecs();
 											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
 											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-											 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+											 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 									         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 									         multiFiltre ="";
 										_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2486,7 +2486,7 @@ TDacSpecs dao = new TDacSpecs();
 												 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
 												 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-												 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+												 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 										         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 										         multiFiltre ="";
 											_logger.info("listeDAO size: "+listeDAO.size());	
@@ -2503,7 +2503,7 @@ TDacSpecs dao = new TDacSpecs();
 							 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
 							 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 							 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-							 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+							 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 					         new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listeDAO size: "+listeDAO.size());
 						
@@ -2513,7 +2513,7 @@ TDacSpecs dao = new TDacSpecs();
 						 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 								 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 								 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-								 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+								 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 								 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
 							_logger.info("listeDAO size: "+listeDAO.size());
 						
@@ -2522,7 +2522,7 @@ TDacSpecs dao = new TDacSpecs();
 							 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 									 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 									 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-									 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+									 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 									 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
 								_logger.info("listeDAO size: "+listeDAO.size());
 							
@@ -2534,7 +2534,7 @@ TDacSpecs dao = new TDacSpecs();
 									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-											 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+											 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
 										_logger.info("listeDAO size: "+listeDAO.size()); 
 								 }else {
@@ -2543,7 +2543,7 @@ TDacSpecs dao = new TDacSpecs();
 										 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 												 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V")),
 												 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-												 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+												 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
 											_logger.info("listeDAO size: "+listeDAO.size());
 									 }else {
@@ -2862,7 +2862,7 @@ TDacSpecs dao = new TDacSpecs();
 							 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 							 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					          new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-					          new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+					          new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("daoPriseCompte size: "+listeDAO.size());	
 						typeActionTb();
 					  }
@@ -2872,14 +2872,14 @@ TDacSpecs dao = new TDacSpecs();
 		 //Methode de Chargement des Dossiers chez l'AutoritÃ¯Â¿Â½ Contractante
 		  public void chargeDossier() {
 		 		 dossListe.clear();
-		 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+		 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
 		 	 } 
 		  
 		//Methode de Chargement des Dossiers chez le Charg d'Etudes
 		  public void chargeDossierCharge() {
 		    	 dossDacListe.clear();
-		    	 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+		    	 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));			
 		 	 } 
 		  
@@ -3026,7 +3026,7 @@ TDacSpecs dao = new TDacSpecs();
 			       			                         
 			       			                        constantService.getStatut("D1T");
 						 							//Historisation du / des retraits
-						 						    historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorit Contractante");
+						 						    historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
 						 						    //Tableau de Bord
 			       			                        tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 			       			                         
@@ -4111,8 +4111,12 @@ TDacSpecs dao = new TDacSpecs();
 						 if(controleController.type == "PRQ") {
 							 chargeOperationPrq("PN"); 
 						 }else {
-							 chargeOperation("PN");
-						 }
+							     if(controleController.type == "DP") {
+								     chargeOperationDP("PN");
+							        }else {
+							        	 chargeOperation("PN");
+							        }
+						     }
 					 }
 					 
 				 }else {
@@ -4123,7 +4127,11 @@ TDacSpecs dao = new TDacSpecs();
 							 if(controleController.type == "PRQ") {
 								 chargeOperationPrq("PS"); 
 							 }else {
-								 chargeOperation("PS");
+								 if(controleController.type == "DP") {
+									 chargeOperationDS("PS"); 
+								     }else {
+								    	 chargeOperation("PS");
+								    } 
 							 }
 						 }
 					 }
@@ -4196,7 +4204,35 @@ TDacSpecs dao = new TDacSpecs();
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				  multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
-				 _logger.info("Operateur connect : "+userController.getSlctd().getTFonction().getFonCod());	
+				 _logger.info("Operateur connecte : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
+			//Parametrage des DP en procédure normale
+			 public void chargeOperationDP(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"DPA"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				  multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecte : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
+			//Parametrage des DP en procédure simplifiée
+			 public void chargeOperationDS(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"DPS"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				  multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecte : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }
 			 
 			 //Parametrage des PRQ
@@ -4210,7 +4246,7 @@ TDacSpecs dao = new TDacSpecs();
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				  multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
-				 _logger.info("Operateur connect : "+userController.getSlctd().getTFonction().getFonCod());	
+				 _logger.info("Operateur connecte : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }
 			 
 			 public void chargeRecherchePPM() {
@@ -6200,12 +6236,12 @@ TDacSpecs dao = new TDacSpecs();
 									    	 dossDacListe.clear();
 									    	 //ECRAN DE SAISIE
 											   if(controleController.ecran=="saisie") {
-												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));	
 											   }else
 												 //ECRAN DE MODIFICATION
 											   {
-												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
 											   }
 									    	 		
@@ -6499,7 +6535,7 @@ TDacSpecs dao = new TDacSpecs();
 														//Actualisation du tableau de bord
 														typeActionTb();
 														//Message de confirmation
-														userController.setTexteMsg("DAO Publi!");
+														userController.setTexteMsg("DAO Publié!");
 														userController.setRenderMsg(true);
 														userController.setSevrityMsg("success");		
 									   }
@@ -7094,7 +7130,7 @@ TDacSpecs dao = new TDacSpecs();
 																				chargeDataAPublier("DAO","PN","D6V","DPU");	
 																			 }else {
 																				 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
-																					 //chargeDetailAC1("PN", "DAO", "DEV");
+																					 chargeDataAPublier("DAO","PN","DAP","DAP");	
 																				 }else {
 																					
 																				 }	 
@@ -7111,7 +7147,7 @@ TDacSpecs dao = new TDacSpecs();
 																				      chargeDataAPublier("DAO", "PS","D6V","DPU");	
 																			        }else {
 																				       if(fonct.equalsIgnoreCase("listePubDdpsCsv")) {
-																					        //chargeDetailAC1("PS", "DAO", "");
+																				    	   chargeDataAPublier("DAO", "PS","DAP","DAP");	
 																				     }else {
 																				 }	 
 																			 }
@@ -7343,7 +7379,7 @@ TDacSpecs dao = new TDacSpecs();
 			  public void publierDao() throws IOException{ 
 			 		if (publicationSelection.size()==0) {
 						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun DAC selectionn", ""));
+								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun DAC selectionné", ""));
 					}
 			 		else{
 			 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
