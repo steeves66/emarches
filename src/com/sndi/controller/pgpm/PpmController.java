@@ -5782,6 +5782,13 @@ public class PpmController {
 					
 					userController.initMessage();
 				break;
+				case "ppm5":
+					/*chargeDetailPpm();
+		 			chargeDetailFinancement();
+		 			actionPsPn();
+		 			recupModePassation();*/
+					userController.initMessage();
+				break;
 				case "pspm1": 
 	                    chargeData("PS");
 	                    //chargePpmTrans("PS");
