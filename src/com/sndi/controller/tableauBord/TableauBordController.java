@@ -2779,18 +2779,18 @@ public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String sr
 
 
 public int getDaoAttAffCsvReg(String typePlan,String typeDac){ 
-	int i = iservice.countTableByColumnInInstr("V_DACLISTE","DAC_CODE", ""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	int i = iservice.countTableByColumnInInstr("V_DACLISTE","DAC_CODE", ""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac);
 		
 	return	i;	
 }
 
 public int getDaoAttAffCsvAffec(String typePlan,String typeDac){ 
-	int i = iservice.countTableByColumnInInstrDjAffec("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	int i = iservice.countTableByColumnInInstrDjAffec("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac);
 	return	i;	
 }  
 
 public int getDaoAttAffCsvDiffAff(String typePlan,String typeDac){ 
-	int i = iservice.countTableByColumnInInstrDiffAff("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac, ""+ typePlan);
+	int i = iservice.countTableByColumnInInstrDiffAff("V_DACLISTE","DAC_CODE",""+userController.getSlctd().getTFonction().getFonCod(),""+ typeDac);
 	return	i;	
 } 
 

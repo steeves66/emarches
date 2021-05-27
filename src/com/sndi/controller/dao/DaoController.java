@@ -2200,14 +2200,14 @@ TDacSpecs dao = new TDacSpecs();
 		 
 		 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 	
 			 if(controleController.type == "DAC") {
-				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod());
+				 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
 			 }else {
 				 if(controleController.type == "AMI") {
-					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste",""+stat1,""+stat2,""+typePlan ,""+userController.getSlctd().getTFonction().getFonCod());
+					 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste",""+userController.getSlctd().getTFonction().getFonCod());
 				 } 
 				 else {
 					 if(controleController.type == "PRQ") {
-						 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
+						 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste",""+userController.getSlctd().getTFonction().getFonCod()); 
 					 } 
 				 }
 			}

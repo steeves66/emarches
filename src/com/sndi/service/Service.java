@@ -145,16 +145,16 @@ public class Service implements Iservice {
 		}
 		
 		@Override
-		public List getObjectByColumnInInstr(String objet,String stat1 ,String stat2 ,String typePlan, String strSource) {
+		public List getObjectByColumnInInstr(String objet, String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstr(objet,stat1 ,stat2 ,typePlan,strSource);
+			return getDao().getObjectByColumnInInstr(objet,strSource);
 		}
 		
 		//Methode de comptage en region
 		@Override
-		public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan) {
+		public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac) {
 			// TODO Auto-generated method stub
-			return getDao().countTableByColumnInInstr(objet,conditionColumn,strSource,typeDac, typePlan);
+			return getDao().countTableByColumnInInstr(objet,conditionColumn,strSource,typeDac);
 		}
 		
 		public int countTableByColumnInPpmValInstr(String objet,String conditionColumn,String statut ,String strSource) {
@@ -258,15 +258,15 @@ public class Service implements Iservice {
 		
 
 		@Override
-		public List getObjectByColumnInInstrAmi(String objet, String stat1 ,String stat2 ,String typePlan,String strSource) {
+		public List getObjectByColumnInInstrAmi(String objet,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstrAmi(objet,stat1 ,stat2 ,typePlan,strSource);
+			return getDao().getObjectByColumnInInstrAmi(objet,strSource);
 		}
 
 		@Override
-		public List getObjectByColumnInInstrPrq(String objet,String stat1 ,String stat2 ,String typePlan,String strSource) {
+		public List getObjectByColumnInInstrPrq(String objet,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInInstrPrq(objet,stat1 ,stat2 ,typePlan,strSource);
+			return getDao().getObjectByColumnInInstrPrq(objet,strSource);
 		}
 
 		@Override
@@ -308,15 +308,15 @@ public class Service implements Iservice {
 		}
 		
 		@Override
-		public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac, String typePlan) {
+		public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac) {
 			// TODO Auto-generated method stub
-			return getDao().countTableByColumnInInstrDjAffec(objet,conditionColumn,strSource,typeDac,typePlan);
+			return getDao().countTableByColumnInInstrDjAffec(objet,conditionColumn,strSource,typeDac);
 		}
 		
 		@Override
-		public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
+		public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac) {
 			// TODO Auto-generated method stub
-			return getDao().countTableByColumnInInstrDiffAff(objet,conditionColumn,strSource,typeDac,typePlan);
+			return getDao().countTableByColumnInInstrDiffAff(objet,conditionColumn,strSource,typeDac);
 		}
 		
 		@Override

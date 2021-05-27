@@ -95,16 +95,16 @@ public interface IDao {
 	public String getCodeDossier(String inc, int tailleChar, int size,
 			String T_DOSSIERS, String DOS_CODE);
 
-	public List getObjectByColumnInInstr(String objet,String stat1 ,String stat2 ,String typePlan, String strSource) ;//getObjectByColumnInInstr(String objet,String typePlan ,String strSource);
-	public List getObjectByColumnInInstrAmi(String objet, String stat1 ,String stat2 ,String typePlan,String strSource); //List getObjectByColumnInInstrAmi(String objet,String typePlan, String strSource);
-	public List getObjectByColumnInInstrPrq(String objet,String stat1 ,String stat2 ,String typePlan,String strSource); //public List getObjectByColumnInInstrPrq(String objet,String typePlan,String strSource);
+	public List getObjectByColumnInInstr(String objet, String strSource) ;//getObjectByColumnInInstr(String objet,String typePlan ,String strSource);
+	public List getObjectByColumnInInstrAmi(String objet,String strSource); //List getObjectByColumnInInstrAmi(String objet,String typePlan, String strSource);
+	public List getObjectByColumnInInstrPrq(String objet,String strSource); //public List getObjectByColumnInInstrPrq(String objet,String typePlan,String strSource);
 	
 	public List getObjectByColumnInInstrValDao(String objet, String strSource);
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
 	//Comptage en region
-	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac, String typePlan);
+	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac);
 
 	public List getObjectByColumnInPpmInstr(String objet,String typePlan ,String strSource);
 	public List getObjectByColumnNotInPpmInstrChVal(String objet,String strSource);
@@ -117,8 +117,8 @@ public interface IDao {
 	public int countTableByColumnInPspmInstr(String objet, String conditionColumn, String strSource);
 	public List getObjectByColumnInPspmInstr(String objet, String strSource);
 	
-	public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac, String typePlan);
-	public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan);
+	public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn ,String strSource, String typeDac);
+	public int countTableByColumnInInstrDiffAff(String objet,String conditionColumn,String strSource, String typeDac);
 	public int countTableByColumnInInstrValidDao(String objet,String conditionColumn,String strSource, String typeDac, String typePlan);
 	public int countTableByColumnInInstrValAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan);
 
