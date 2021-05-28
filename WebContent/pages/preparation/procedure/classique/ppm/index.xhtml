@@ -683,22 +683,30 @@
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
+                  <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
                   <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
                 </h:panelGroup>
                 
-                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
+                </h:panelGroup>
+                
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.dppObjet}" />
                 </h:panelGroup>
                 </p:column>
 
-                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
+              <p:column headerText="Source Financement" styleClass="col-sm-2" >
                   <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.dppSourceFin}" />
                 </h:panelGroup>
                 </p:column>
@@ -708,7 +716,11 @@
                 <h:outputText value="#{slctdTb.lbgImputation}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.lbgImputation}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.lbgImputation}" />
                 </h:panelGroup>
                 </p:column>
@@ -719,7 +731,11 @@
                 <h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                 </h:panelGroup>
                 </p:column>
@@ -728,7 +744,11 @@
                 <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.mopLibelleLong}" />
                 </h:panelGroup>
                 </p:column>
@@ -738,7 +758,11 @@
                 <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
                 
-                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.dppStructureConduc}" />
                 </h:panelGroup>
                 </p:column> 
@@ -749,7 +773,11 @@
                 <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.dppStructureBenefi}" />
                 </h:panelGroup>
                 </p:column> 
@@ -760,7 +788,12 @@
                 <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
                 </h:outputText>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.dppDateValAc}" style="color:red; font-weight:bold">
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
                 <h:outputText value="#{slctdTb.dppDateValAc}" >
                 <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
                 </h:outputText>
@@ -779,7 +812,7 @@
                
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                      <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'} || #{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                       <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'  || slctdTb.dppStatutRetour == '2'}">
                     <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
                           <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
@@ -813,17 +846,17 @@
                           </h:panelGroup>
                             
                             
-                                   <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content">
-                                  <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
+                            <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content">
+                               <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
                              </p:commandLink> 
                       
                        
-                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                              
                             <p:commandLink rendered="#{controleController.btn_modif_ppm}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px"  action="#{ppmModificationController.renderPage('ppm4','MODPPM')}"
-                       title="Modifier ppm" update=":content">
+                               title="Modifier ppm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
@@ -833,7 +866,6 @@
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
-                        
                             
                             </h:panelGroup>
                              

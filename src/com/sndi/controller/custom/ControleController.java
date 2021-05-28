@@ -2761,7 +2761,8 @@ public class ControleController {
 				   				    								   if(action.equalsIgnoreCase("PUBAMI")) {
 					   				    									type = "AMI";
 					   				    								    typePlan ="PN";
-					   				    								    fonctionalite="ListePubDacPn";
+					   				    								    //fonctionalite="ListePubDacPn";
+					   				    								    fonctionalite="listeAmiCsv";
 					   				    								    libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   											    			 libelleDao3="AMI EN ATTENTE DE PUBLICATION";
 				   											    			 btn_new =false;
@@ -2774,14 +2775,7 @@ public class ControleController {
 																			 panel2 =false;
 																			 panel3 = false;
 																			 panel4 = false;
-																			 /*panel5 = false;
-																			 panel6 = false;
-																			 panel7 = false;
-																			 panel8 = true;
-																			 panel9 = false;
-																			 panel10 = false;
-																			 panel11 = false;
-																			 panel12 = false;*/
+																			 
 				   															 venteRecherche = false; 
 				   															 affectationRecherche = false;
 				   															 examenRecherche = false;

@@ -2547,7 +2547,17 @@ TDacSpecs dao = new TDacSpecs();
 												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
 											_logger.info("listeDAO size: "+listeDAO.size());
 									 }else {
-										
+										     if(fonct.equalsIgnoreCase("listeAmiCsv") || fonct.equalsIgnoreCase("listePubCsv") || fonct.equalsIgnoreCase("listePubDpsCsv")) {  
+											      listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+													 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
+													 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+													 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+													 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+												_logger.info("listeDAO size: "+listeDAO.size());
+										 }else {
+											 
+											
+										 }
 									 }	 
 								 }
 					       //Fin details CSV
@@ -3141,6 +3151,7 @@ TDacSpecs dao = new TDacSpecs();
 		 				 statutUpdate ="D1R";
 		 			 }else {
 		 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+		 					
 		 					 statutUpdate ="D2R";
 		 				 }
 		 		      } 
@@ -3154,13 +3165,13 @@ TDacSpecs dao = new TDacSpecs();
 		  					newDao.setDacStatutRetour("1");
 		  			        iservice.updateObject(newDao); 
 		  	   	                 }
-		  				       constantService.getStatut("D1T");
+		  				       constantService.getStatut(statutUpdate);
 							  	//Historisation du / des retraits
 						       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
 						       
 						     tableauBordController.saveTempTabord(""+statutUpdate, slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 		 					//Message de confirmation
-		 					 userController.setTexteMsg("DAO retourn !");
+		 					 userController.setTexteMsg("DAO retourné!");
 		 					 userController.setRenderMsg(true);
 		 					 userController.setSevrityMsg("success");
 		 					 //return	null;
@@ -3169,7 +3180,7 @@ TDacSpecs dao = new TDacSpecs();
 		 		          //Actualisation du Tableau de Bord
 		 		          typeActionTb();
 		 			
-		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Dsol, votre DAO a t retourn!", "");
+		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 		 			 FacesContext.getCurrentInstance().addMessage(null, msg);
 		 	 }
 		 	 
@@ -7162,7 +7173,7 @@ TDacSpecs dao = new TDacSpecs();
 																		      chargeDataAPublier("AMI", "PN","D6V","DPU");	
 																	        }else {
 																		       if(fonct.equalsIgnoreCase("listeDamiCsv")) {
-																			        //chargeDetailAC1("PS", "DAO", "");
+																		    	   chargeDataAPublier("AMI","PN","DAP","DAP");
 																		     }else {
 																			
 																		               }	 
@@ -7177,7 +7188,7 @@ TDacSpecs dao = new TDacSpecs();
 																			      chargeDataAPublier("AMI", "PS","D6V","DPU");	
 																		        }else {
 																			       if(fonct.equalsIgnoreCase("listePubAdpsCsv")) {
-																				        //chargeDetailAC1("PS", "DAO", "");
+																			    	   chargeDataAPublier("AMI","PS","DAP","DAP");
 																			     }else {
 																				
 																			               }	 
