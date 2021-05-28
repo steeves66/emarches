@@ -3,6 +3,7 @@ package com.sndi.controller.pgpm;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,15 +17,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sndi.controller.custom.ControleController;
+import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TAffichagePpm;
+import com.sndi.model.TDacSpecs;
+import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TFinancementPpm;
+import com.sndi.model.THistoPlanPassation;
+import com.sndi.model.TStatut;
 import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VPpmDetails;
 import com.sndi.model.VPpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
+import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
@@ -48,6 +55,12 @@ public class EtatsPpmController {
 	 
 	@Autowired
 	DownloadFileServlet downloadFileServlet;
+
+	@Autowired
+	 ConstantService constantService;
+	 
+	 @Autowired
+	 TableauBordController tableauBordController;
 	
 	@PostConstruct
 	 public void postConstru()   {
@@ -71,6 +84,7 @@ public class EtatsPpmController {
 	public boolean fermerCPMP=false;
 	public boolean fermerDMP=false;
 	public boolean visibility = true;
+	private String observation="";
 	
 	 public boolean ppmNormal = true;
      public boolean ppmAmi = false;
@@ -102,6 +116,18 @@ public class EtatsPpmController {
 				}
 			}
 		 
+		 
+		//Afficher les détails de du pspm
+		 public void recuPpm(){
+			 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
+		 				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+		 	            TDetailPlanPassation detail = new TDetailPlanPassation();
+		 				if(!PLG.isEmpty()) detail =PLG.get(0); 
+			}
+		 
+		 
+		 
+			
 		 
 		 public void recupModePassation() {
 			 if(slctdTd.getDppMopCode().equalsIgnoreCase("AMI")){
@@ -250,6 +276,58 @@ public class EtatsPpmController {
     		 }
       }
      
+     //Validation par la DGMP
+     public void validerDgmp() throws IOException {
+    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
+ 				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+ 	            TDetailPlanPassation detail = new TDetailPlanPassation();
+ 				if(!PLG.isEmpty()) detail =PLG.get(0); 
+ 				detail.setTStatut(new TStatut("S3V"));
+ 				detail.setDppStatutRetour("0");
+ 				detail.setDppDateValDmp(Calendar.getInstance().getTime());  
+ 				iservice.updateObject(detail);
+ 				//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
+			     historiser("S3V",detail);
+			    //Préparation du Tableau de Bord
+			     renderPage("VALPPM","ppm1");
+	      		tableauBordController.saveTempTabord("S3V", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detail.getDppId());
+	      		 userController.setTexteMsg("Validation effectuée avec succès !");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("success");
+     }
+     
+     //Differé parlal la DGMP
+     public void differerDgmp() {
+    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
+  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+  	            TDetailPlanPassation detail = new TDetailPlanPassation();
+  				if(!PLG.isEmpty()) detail =PLG.get(0); 
+  				detail.setTStatut(new TStatut("S3D"));
+  				detail.setDppMotif(observation);
+  				detail.setDppStatutRetour("2"); 
+  				iservice.updateObject(detail);
+
+		  //Historisation des Plans Généraux
+  				historiser("S3D",detail);
+		  //Préparation du Tableau de Bord
+	      tableauBordController.saveTempTabord("S3D", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detail.getDppId()); 
+     }
+     
+   	//Methode d'historisation
+ 		 public void historiser(String statut,TDetailPlanPassation TDetailPlanPassation) {
+ 			 
+ 			     TStatut statuts = constantService.getStatut(statut);
+ 			  //Historisation des Plans Généraux
+ 			     THistoPlanPassation histoPass = new THistoPlanPassation();
+ 			     histoPass.setHppDate(Calendar.getInstance().getTime());
+ 			     histoPass.setHppMotif(TDetailPlanPassation.getDppMotif());
+ 			     histoPass.setTStatut(statuts);
+ 			     histoPass.setTDetailPlanPassation(TDetailPlanPassation);
+ 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+ 			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
+ 			     iservice.addObject(histoPass);
+ 			     
+ 		 }
      
      
      
@@ -257,6 +335,11 @@ public class EtatsPpmController {
 	  public String renderPage(String value,String action) throws IOException{
 		  controleController.redirectionDynamicProcedures(action);
 	 		switch(value) {
+	 		case "ppm1":
+				//chargeData("PN");
+				 userController.initMessage();
+				
+				break;
 	 		case "ppm3":
 	 			chargeDetailPpm();
 	 			chargeDetailFinancement();
@@ -269,7 +352,15 @@ public class EtatsPpmController {
 	 			chargeDetailFinancement();
 	 			actionPsPn();
 	  		break;
+	 		case "ppm5":
+	 			chargeDetailPpm();
+	 			chargeDetailFinancement();
+	 			actionPsPn();
+	 			recupModePassation();
+	  		break;
 	 		}
+	 		
+	 		
 	 		
 	 		return userController.renderPage(value);
 	 	}
@@ -411,6 +502,14 @@ public class EtatsPpmController {
 
 	public void setPpmPsc(boolean ppmPsc) {
 		this.ppmPsc = ppmPsc;
+	}
+
+	public String getObservation() {
+		return observation;
+	}
+
+	public void setObservation(String observation) {
+		this.observation = observation;
 	}
 
 	

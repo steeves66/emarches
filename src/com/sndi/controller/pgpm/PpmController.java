@@ -119,6 +119,8 @@ public class PpmController {
 	 
 	 @Autowired
 	 ConstantService constantService;
+	 @Autowired
+		EtatsPpmController etatsPpmController;
 
 
 	 
@@ -192,6 +194,7 @@ public class PpmController {
 	     private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
 	     private List<VUpdateFinancementPpm> listeupdatefinance = new ArrayList<VUpdateFinancementPpm>();
 	     private List<VExistbailleurPpm> listeExisteBailleur = new ArrayList<VExistbailleurPpm>();
+	     private List<VFinancementPpm> financementListe = new ArrayList<VFinancementPpm>();
 	    
 	     
 	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
@@ -744,7 +747,12 @@ public class PpmController {
 		 
 		 //Fin de la Methode OnFlow
 		 
-		 
+		//Afficher les détails du financement
+		 public void chargeDetailFinancement(){
+			 financementListe =(List<VFinancementPpm>) iservice.getObjectsByColumn("VFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
+						new WhereClause("FPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+			}
+		  
 		//Methode de récupération de l'AMI de la DP
 		 public void recupPpm(long dppId) {
 			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+dppId));
@@ -5782,13 +5790,14 @@ public class PpmController {
 					
 					userController.initMessage();
 				break;
-				case "ppm5":
-					/*chargeDetailPpm();
+			/*	case "ppm5":
+					 chargeDetailFinancement();
+					chargeDetailPpm();
 		 			chargeDetailFinancement();
 		 			actionPsPn();
-		 			recupModePassation();*/
+		 			recupModePassation();
 					userController.initMessage();
-				break;
+				break;*/
 				case "pspm1": 
 	                    chargeData("PS");
 	                    //chargePpmTrans("PS");
@@ -7767,6 +7776,14 @@ public class PpmController {
 
 	public void setPscNon(boolean pscNon) {
 		this.pscNon = pscNon;
+	}
+
+	public List<VFinancementPpm> getFinancementListe() {
+		return financementListe;
+	}
+
+	public void setFinancementListe(List<VFinancementPpm> financementListe) {
+		this.financementListe = financementListe;
 	}
 
 	
