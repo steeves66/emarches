@@ -452,6 +452,18 @@
          				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
 				        </p:column> 
 				        
+				        <p:column headerText="Date Affectation" styleClass="col-sm-2" >        			
+         				<h:outputText value="#{slctdTb.dafDteAff}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column> 
+				        
+				        <p:column headerText="Date Transmission" styleClass="col-sm-2" >        			
+         				<h:outputText value="#{slctdTb.dafDteValCpmp}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column> 
+				        
 				         <p:column headerText="Mention" styleClass="col-sm-1" >
 	                    <h:panelGroup rendered="#{slctdTb.dafMention == 'A Valider pour publication'}">
 	                         <span class="badge bg-green">#{slctdTb.dafMention}</span>

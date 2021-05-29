@@ -306,15 +306,15 @@
                 
                         <h:panelGroup rendered="#{daoController.etatBtnValidCharge}"> 
 			            <p:commandLink action="#{daoController.examinerChar()}" rendered="#{daoController.btn_corrige}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Valider
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
 			            </h:panelGroup>
 			            
 			            <h:panelGroup rendered="#{daoController.etatBtnValid}"> 
 			            <p:commandLink action="#{daoController.examinerPieces()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Valider
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
 			            </h:panelGroup>
 			       </h:panelGroup>
