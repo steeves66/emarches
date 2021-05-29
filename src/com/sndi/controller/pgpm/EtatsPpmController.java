@@ -296,10 +296,11 @@ public class EtatsPpmController {
 				 userController.setSevrityMsg("success");
      }
      
+     
      //Differé parlal la DGMP
      public void differerDgmp() {
     	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
-  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detail.getDppId()));
+  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
   	            TDetailPlanPassation detail = new TDetailPlanPassation();
   				if(!PLG.isEmpty()) detail =PLG.get(0); 
   				detail.setTStatut(new TStatut("S3D"));

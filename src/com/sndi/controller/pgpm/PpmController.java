@@ -3588,9 +3588,10 @@ public class PpmController {
 					 iservice.updateObject(detPass);
 					}
 		 }
+		 
+		 
 		 //Rafraichissement automatique des dates
-		 public void genereDate(String date) {
-			 
+		 public void genereDate(String date) { 
 			 listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 					if (!listeTsPpm.isEmpty()) {
