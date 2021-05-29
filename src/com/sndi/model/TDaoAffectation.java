@@ -2,6 +2,7 @@ package com.sndi.model;
 // Generated 26 févr. 2020 16:42:38 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +40,8 @@ public class TDaoAffectation implements java.io.Serializable {
 	private String dafTypePlan;
 	private String dafDacStr;
 	private String dafDacRecherche;
+	private Date dafDteAff;
+	private Date dafDteValCpmp;
 
 	public TDaoAffectation() {
 	}
@@ -49,7 +52,7 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public TDaoAffectation(long dafId, TDetCommissionSeance TDetCommissionSeance,TModePassation TModePassation,
 			TTypeMarche TTypeMarche, String dafDacCode,String dafOpeMatricule, String dafStaCode, String dafDcsMbmRespo, String dafStatutRetour, Long  dafDacGestion, String dafDacObjet,
-			String dafTypeDac,String dafMention, String dafTypePlan,String dafDacStr, String dafDacRecherche) {
+			String dafTypeDac,String dafMention, String dafTypePlan,String dafDacStr, String dafDacRecherche,Date dafDteAff, Date dafDteValCpmp) {
 		this.dafId = dafId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
@@ -66,6 +69,8 @@ public class TDaoAffectation implements java.io.Serializable {
 		this.dafTypePlan = dafTypePlan;
 		this.dafDacStr = dafDacStr;
 		this.dafDacRecherche = dafDacRecherche;
+		this.dafDteAff = dafDteAff;
+		this.dafDteValCpmp = dafDteValCpmp;
 	}
 
 	@Id   
@@ -217,6 +222,24 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public void setDafDacRecherche(String dafDacRecherche) {
 		this.dafDacRecherche = dafDacRecherche;
+	}
+	
+	@Column(name = "DAF_DTE_AFF", length = 7)
+	public Date getDafDteAff() {
+		return this.dafDteAff;
+	}
+
+	public void setDafDteAff(Date dafDteAff) {
+		this.dafDteAff = dafDteAff;
+	}
+
+	@Column(name = "DAF_DTE_VAL_CPMP", length = 7)
+	public Date getDafDteValCpmp() {
+		return this.dafDteValCpmp;
+	}
+
+	public void setDafDteValCpmp(Date dafDteValCpmp) {
+		this.dafDteValCpmp = dafDteValCpmp;
 	}
 
 }
