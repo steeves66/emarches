@@ -5547,7 +5547,7 @@ TDacSpecs dao = new TDacSpecs();
 							//Chargement des fonctions ра imputer par le Chef de Service
 							  public void chargeFonctionImput() { 
 								  listeFonctionsImput.clear();
-								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
+								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation",
 										  new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()),
 										  new WhereClause("STR_CODE",Comparateur.EQ,slctdTd.getLbgStrCode())); 
 								  _logger.info("dacCode: "+slctdTd.getDacCode());
