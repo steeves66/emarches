@@ -112,9 +112,8 @@
         <div class="box-body">
         
 
-          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée" rows="10" 
-                       rowKey="#{slctdTb.fonCod}" selection="#{daoController.listSelectionFonctImput}"   paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
+          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée"
+                       rowKey="#{slctdTb.fonCod}" selection="#{daoController.listSelectionFonctImput}"  scrollable="true" scrollHeight="500" >
                           
 
          				<p:column headerText="Fonction" styleClass="col-sm-1" >
