@@ -5676,15 +5676,7 @@ TDacSpecs dao = new TDacSpecs();
 										                                   slctdTda.setDafStatutRetour("0");
 										                                   iservice.updateObject(slctdTda);
 									   
-												                     /* listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-												                              // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-														                       new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
-													                           if (!listDao.isEmpty()) {
-														                                      newDao= listDao.get(0);
-														                                      newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
-														                                      newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
-												                                              iservice.updateObject(newDao); 
-										   	                                                 }*/
+												                
 													                           
 													                      constantService.getStatut("DC2");
 												 						  //Historisation du / des retraits
