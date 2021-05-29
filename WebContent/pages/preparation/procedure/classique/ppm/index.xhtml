@@ -812,7 +812,7 @@
                
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'} || #{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                       <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'  || slctdTb.dppStatutRetour == '2'}">
                     <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
                           <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
@@ -845,13 +845,13 @@
                             </h:panelGroup>
                           </h:panelGroup>
                             
-                            
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                             <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content">
                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
                              </p:commandLink> 
-                      
+                           </h:panelGroup>
                        
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                              

@@ -5657,6 +5657,10 @@ public class PpmController {
 							new WhereClause("HPP_STA_CODE",WhereClause.Comparateur.EQ,slctdTd.getDppStaCode()));
 					if(!ppmstatutList.isEmpty()) {
 						/*int i=ppmstatutList.size();
+						int baoule=i-1;
+						ppmstatut=ppmstatutList.get(baoule); */
+						
+						/*int i=ppmstatutList.size();
 						int baoule=i-1;*/
 						ppmstatut=ppmstatutList.get(0); 
 					}	
