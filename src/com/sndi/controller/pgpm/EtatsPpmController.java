@@ -299,7 +299,7 @@ public class EtatsPpmController {
      //Differé parlal la DGMP
      public void differerDgmp() {
     	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
-  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detail.getDppId()));
   	            TDetailPlanPassation detail = new TDetailPlanPassation();
   				if(!PLG.isEmpty()) detail =PLG.get(0); 
   				detail.setTStatut(new TStatut("S3D"));
@@ -308,7 +308,7 @@ public class EtatsPpmController {
   				iservice.updateObject(detail);
 
 		  //Historisation des Plans Généraux
-  				historiser("S3D",detail);
+  				//historiser("S3D",detail);
 		  //Préparation du Tableau de Bord
 	      tableauBordController.saveTempTabord("S3D", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detail.getDppId()); 
      }
@@ -345,6 +345,7 @@ public class EtatsPpmController {
 	 			chargeDetailFinancement();
 	 			actionPsPn();
 	 			recupModePassation();
+	 			recuPpm();
 	  		break;
 	  		
 	 		case "pspm3":

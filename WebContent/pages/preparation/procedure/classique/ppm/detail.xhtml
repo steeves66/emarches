@@ -42,6 +42,16 @@
     
     <section class="content">
      <div class="box"></div>
+      <h:panelGroup rendered="#{userController.renderMsg}">
+        <br/>
+        <div class="alert alert-success light alert-dismissable" >
+         <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+          action="#{userController.initMessage()}"  update=":content">
+        <span class="hidden-xs"> x</span>
+        </p:commandLink>
+        <i class="fa fa-check pr10"></i>
+        <strong>Succès!</strong> #{userController.texteMsg}.</div>
+        </h:panelGroup>
     <div class="box box-success">
             
               <div class="box-body">
@@ -246,13 +256,15 @@
             <!-- /.box-body -->
             </div>
             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
-            <p:commandLink action="#{etatsPpmController.validerDgmp()}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px">
+            <p:commandLink action="#{etatsPpmController.validerDgmp()}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px" update=":content">
 				     <i class="ace-icon fa fa-mail-forward"></i> Valider
 				      </p:commandLink>
+				      
 				      <p:commandLink oncomplete="PF('differerDlg').show()" styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" update="differer">
 				      <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
 				     <i class="ace-icon fa fa-mail-reply bigger-120"></i> Différer
 				      </p:commandLink>
+				      
 				</h:panelGroup>      
             <h:panelGroup rendered="#{controleController.panelPpm}">
             <p:commandLink rendered="false" styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsPpmController.imprimerPpmDet()}" ajax="false">
@@ -289,9 +301,7 @@
 		</p:commandLink>
 		</h:panelGroup>
     </section>
-    </h:form>
-    
-     <h:form id="differer">
+      <h:form id="differer">
 	        <p:dialog  widgetVar="differerDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
@@ -300,17 +310,20 @@
 			        </div>
 		            
 		            
-                    <p:inputTextarea placeholder="Veuillez saisir le motif du réjet de l'opération" rows="10" cols="33" styleClass="form-control" value="#{ppmController.detailPass.dppObjet}" id="relalisation" style="width: 100%" />
+                    <p:inputTextarea placeholder="Veuillez saisir le motif du réjet de l'opération" rows="10" cols="33" styleClass="form-control" value="#{etatsPpmController.observation}" id="relalisation" style="width: 100%" />
                   
 		           
 	           </div>
-	              <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px"  action="#{etatsPpmController.imprimerPpmDet()}" ajax="false">
+	              <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px"  action="#{etatsPpmController.differerDgmp()}" update=":content">
 				     <i class="ace-icon fa fa-mail-reply"></i> Différer
 				      </p:commandLink>
 	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('differerDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
+    </h:form>
+    
+   
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
