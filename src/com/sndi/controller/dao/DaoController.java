@@ -2652,70 +2652,72 @@ TDacSpecs dao = new TDacSpecs();
 				 }
 			 
 	 
-		 //Liste des Dao affectï¿½es aux chargï¿½s d'etude
-		 public void chargeDaoChargeEtude(){
+			 //Liste des Dao affectï¿½es aux chargï¿½s d'etude
+				 public void chargeDaoChargeEtude(){
+						 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+							 chargeDaoChargeEtudeByType("PN","D3A","DC2");
+						 }else {
+							 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+								 chargeDaoChargeEtudeByType("PS","D3A","DC2");
+							 }else {
+								 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+									 chargeDaoChargeEtudeByType("PN","D3A","DC2");
+								 }else {
+									 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+										 chargeDaoChargeEtudeByType("PN","D3A","DC2");
+									 }
+								 }
+						     } 
+						   }
+					}
+				 
+				 //Liste des Dao affects aux chargs d'etude
+				 public void chargeDaoChargeEtudeByType(String typePlan, String stat1,String stat2){
+					 daoExamen.clear();
+					  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+							           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+							           //new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+							           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+					  multiFiltre="";
+							_logger.info("daoExamen size: "+daoExamen.size());	
+							//tableauBordController.chargeDataDao();
+							//typeActionTb();
+					}
+		 
+
+				 //Filtre parametrï¿½ en foction du type plan et dac
+				 public void chargeDaoChargeEtudeFilter(){
 				 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-					 chargeDaoChargeEtudeByType("PN","DAO","D3A","DC2");
+					 chargeDaoChargeEtudeByTypeFilter("PN","D3A","DC2");
 				 }else {
 					 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
-						 chargeDaoChargeEtudeByType("PS","DAO","D3A","DC2");
+						 chargeDaoChargeEtudeByTypeFilter("PS","D3A","DC2");
 					 }else {
 						 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-							 chargeDaoChargeEtudeByType("PN","AMI","D3A","DC2");
+							 chargeDaoChargeEtudeByTypeFilter("PN","D3A","DC2");
 						 }else {
 							 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
-								 chargeDaoChargeEtudeByType("PN","PRQ","D3A","DC2");
+								 chargeDaoChargeEtudeByTypeFilter("PN","D3A","DC2");
 							 }
 						 }
 				     } 
 				   }
 			}
 		 
-		 //Liste des Dao affects aux chargs d'etude
-		 public void chargeDaoChargeEtudeByType(String typePlan, String typeDac, String stat1,String stat2){
-			 daoExamen.clear();
-			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
-					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
-					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
-					           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
-			  multiFiltre="";
-					_logger.info("daoExamen size: "+daoExamen.size());	
-					//tableauBordController.chargeDataDao();
-					//typeActionTb();
-			}
-		 
-		 //Filtre parametrï¿½ en foction du type plan et dac
-		 public void chargeDaoChargeEtudeFilter(){
-		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-			 chargeDaoChargeEtudeByTypeFilter("PN","DAO","D3A","DC2");
-		 }else {
-			 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
-				 chargeDaoChargeEtudeByTypeFilter("PS","DAO","D3A","DC2");
-			 }else {
-				 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-					 chargeDaoChargeEtudeByType("PN","AMI","D3A","DC2");
-				 }else {
-					 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
-						 chargeDaoChargeEtudeByTypeFilter("PN","PRQ","D3A","DC2");
-					 }
-				 }
-		     } 
-		   }
-	}
-		 
-		 //Recherche Dao affectï¿½es aux chargï¿½s d'etude 
-		 public void chargeDaoChargeEtudeByTypeFilter(String typePlan, String typeDac, String stat1,String stat2){
-			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
-					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
-					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
-					           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-					           new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
-					_logger.info("daoExamen size: "+daoExamen.size());	
-					//tableauBordController.chargeDataDao();
-					//typeActionTb();
-			}
+				 //Recherche Dao affectï¿½es aux chargï¿½s d'etude 
+				 public void chargeDaoChargeEtudeByTypeFilter(String typePlan, String stat1,String stat2){
+					  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+							           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+							           //new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+							           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+							           new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+							_logger.info("daoExamen size: "+daoExamen.size());	
+							//tableauBordController.chargeDataDao();
+							//typeActionTb();
+					}
+				 
 		 
 		 public void chargeDaoTrans(String typePlan, String typeDac, String stat1,String stat2){
 			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),

@@ -431,9 +431,7 @@
 				   </h:panelGroup> 
 				   <h:panelGroup rendered="#{controleController.panel3}">
   <p:dataTable id="chrTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.daoExamen}"  
-					 emptyMessage="Aucun #{controleController.type}" scrollable="true" scrollHeight="250" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
+					 emptyMessage="Aucun #{controleController.type}" scrollable="true" scrollHeight="250" >
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-1" >                         
          				<h:outputText value="#{slctdTb.dafDacCode}" />
 				        </p:column>
@@ -443,7 +441,7 @@
 				        </p:column>
 				        
 				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >        				
+         				 <p:column headerText="Type Marché" styleClass="col-sm-1" >        				
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column> 
 				        

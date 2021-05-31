@@ -5005,7 +5005,6 @@ public class ControleController {
 											    													 panel2 =false;
 											    													 panel3 = false;
 											    													 panel4 = false;
-											    											
 											    													 venteRecherche = false; 
 											    													 affectationRecherche = true;
 											    													 examenRecherche = false;
@@ -5015,7 +5014,6 @@ public class ControleController {
 											    													 validationRecherche = false;
 											    													 priseRecherche = false;
 											    													 chargeRecherche = false;
-											    													 
 											    													 panelAffectation = true;
 											    													 affDao=true;
 											    													 exaDao=false;
@@ -5081,15 +5079,6 @@ public class ControleController {
 																									 panel2 =false;
 																									 panel3 = false;
 																									 panel4 = false;
-																									/* panel4 = false;
-																									 panel5 = false;
-																									 panel6 = false;
-																									 panel7 = true;
-																									 panel8 = false;
-																									 panel9 =false;
-																									 panel10 = false;
-																									 panel11 = false;
-																									 panel12 = false;*/
 																									 venteRecherche = false; 
 																									 affectationRecherche = false;
 																									 examenRecherche = false;

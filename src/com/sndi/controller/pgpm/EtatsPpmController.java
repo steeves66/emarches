@@ -308,12 +308,16 @@ public class EtatsPpmController {
 				detPass.setDppMotif(observation);
 				detPass.setDppStatutRetour("2"); 
   				iservice.updateObject(detPass);
+  				historiser("S3D",detPass);
   				
-  				 FacesContext.getCurrentInstance().addMessage(null,
+  		       tableauBordController.saveTempTabord("S3D", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+slctdTd.getDppId()); 
+  				/*userController.setTexteMsg("Opération différée avec succès!");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");*/
+  				FacesContext.getCurrentInstance().addMessage(null,
 				          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Opération différée avec succès", ""));
 			}
     
-	      tableauBordController.saveTempTabord("S3D", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detail.getDppId()); 
      }
      
    	//Methode d'historisation
