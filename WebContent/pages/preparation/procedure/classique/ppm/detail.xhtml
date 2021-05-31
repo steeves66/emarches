@@ -263,6 +263,7 @@
             </div>
             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
             <p:commandLink action="#{etatsPpmController.validerDgmp()}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px" update=":content">
+				     <p:confirm header="Confirmation" message="Confirmez-vous la validation de l'opération ?" icon="ui-icon-alert" />
 				     <i class="ace-icon fa fa-mail-forward"></i> Valider
 				      </p:commandLink>
 				      

@@ -312,18 +312,7 @@ public class EtatsPpmController {
   				 FacesContext.getCurrentInstance().addMessage(null,
 				          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Opération différée avec succès", ""));
 			}
-    	/* List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
-  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detail.getDppId()));
-  	            TDetailPlanPassation detail = new TDetailPlanPassation();
-  				if(!PLG.isEmpty()) detail =PLG.get(0); 
-  				detail.setTStatut(new TStatut("S3D"));
-  				detail.setDppMotif(observation);
-  				detail.setDppStatutRetour("2"); 
-  				iservice.updateObject(detail);*/
-
-		  //Historisation des Plans Généraux
-  				//historiser("S3D",detail);
-		  //Préparation du Tableau de Bord
+    
 	      tableauBordController.saveTempTabord("S3D", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detail.getDppId()); 
      }
      

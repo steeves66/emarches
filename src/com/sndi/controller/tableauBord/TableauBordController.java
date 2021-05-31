@@ -1190,7 +1190,7 @@ public class TableauBordController {
 				 daoDaoPub = ""+getAcDaoValidCsvPubDossier(typePlan,typeDac,"DPU");
 				 //Vente ou Retrait du DAO 
 				 //daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DPU","D6V");
-				 daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DAP");
+				 daoAcAttVente = ""+getDaoAttenteRetrait("DAP");
 				 daoAcAttRetrait = ""+getDaoAttenteVente(typePlan,typeDac,"DVE");
 				 daoAcRetire = ""+getDaoAcRetire(typePlan,typeDac,"RET");
 				 //Prise en compte des observations des DAO
@@ -2938,11 +2938,11 @@ public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1, Stri
 }
 
 //DAO en attente de retrait chez l'AC en procédure normale / procédure Simplifiée
-public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1){
+public int getDaoAttenteRetrait(String src1){
 	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src1),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
+			//new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			//new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }

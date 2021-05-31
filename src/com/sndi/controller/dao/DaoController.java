@@ -655,6 +655,7 @@ TDacSpecs dao = new TDacSpecs();
 				 }else {
 					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
 						 chargeDataByAction("AMI","PN");
+						 //chargeDataAc1();
 					 }else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
 							 chargeDataByAction("PRQ","PN");
@@ -2147,6 +2148,16 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
+	 //Affichage des AC en lui passant en parametre les statuts concernï¿½ (1 statut)
+	 public void chargeDataAc1(){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DAP"),
+					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
 	 //DEBUT AFFICHAGE LISTE DAC DMP
 	//Affichage des DMP en lui passant en parametre le statut concern� (1 statut)
 	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1,String condition,String valeur){
@@ -2295,8 +2306,8 @@ TDacSpecs dao = new TDacSpecs();
 								 chargeDataAc2(typeDac,typePlan,"D5V","DOP");
 							 }else {
 								 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
-									 //chargeDataAc2(typeDac,typePlan,"D6V","DPU");
-									 chargeDataAc3(typeDac,typePlan,"DAP");
+									 //chargeDataAc2(typeDac,typePlan,"DAP","DAP");
+									 chargeDataAc1();
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeDaoCorrectionPn")) {
 										 chargeDataAc2(typeDac,typePlan,"SBO","SRO");
@@ -2377,10 +2388,10 @@ TDacSpecs dao = new TDacSpecs();
 					 tableauBordController.chargeDataDao("PS","DAO");
 				 }else {
 					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-						 tableauBordController.ChargeTableauBordDac("PN","AMI");
+						 //tableauBordController.ChargeTableauBordDac("PN","AMI");
 						//Enlever lorsque j'aurai le TB cpmp et DMP
 						 tableauBordController.chargeDataDao("PN","AMI");
-						 ;
+						 
 					 }else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
 							//Enlever lorsque j'aurai le TB cpmp et DMP

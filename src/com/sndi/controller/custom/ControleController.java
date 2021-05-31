@@ -2609,15 +2609,6 @@ public class ControleController {
 																panel2 =false;
 																panel3 = false;
 																panel4 = false;
-																/* panel4 = false;
-																panel5 = false;
-																panel6 = false;
-																panel7 = false;
-																panel8 = true;
-																panel9 = false;
-																panel10 = false;
-																panel11 = false;
-																panel12 = false;*/
 				   												venteRecherche = true; 
 				   												affectationRecherche = false;
 				   												examenRecherche = false;
@@ -3776,9 +3767,9 @@ public class ControleController {
 				    						   if(action.equalsIgnoreCase("VETDAO")) {
 				    							     typePlan ="PN";
 				    							     type = "DAC";
-				    							     libelle="VENTE / RETRAIT DU DAO N°";
-				    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-									    			 libelleDao3="VENTE DES DOSSIERS D'APPEL D'OFFRES";
+				    							     libelle="VENTE / RETRAIT DU DAC N°";
+				    							     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
+									    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A LA CONCURRENCE";
 									    			 fonctionalite="listeDaoVentePn";
 									    			 btn_new =false;
 									    			 btn_affec = false;
@@ -3793,15 +3784,6 @@ public class ControleController {
 													 panel2 =false;
 													 panel3 = false;
 													 panel4 = false;
-												/*	 panel4 = false;
-													 panel5 = false;
-													 panel6 = false;
-													 panel7 = false;
-													 panel8 = false;
-													 panel9 =true;
-													 panel10 = false;
-													 panel11 = false;
-													 panel12 = false;*/
 													 venteRecherche = true; 
 													 affectationRecherche = false;
 													 examenRecherche = false;
