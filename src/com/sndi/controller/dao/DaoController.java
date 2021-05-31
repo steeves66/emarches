@@ -356,6 +356,7 @@ public class DaoController {
 	 private TTiers recupTiers = new TTiers();
 	 private VVenteLot nbreLot = new VVenteLot();
 	 private VUpdateDac updateDac= new VUpdateDac();
+	 TPiecesDacs piece = new TPiecesDacs(); 
 	 private VCritereAnalyseModel critereObject= new VCritereAnalyseModel();
 	//GESTION DES COMMISSIONS
 	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
@@ -1146,6 +1147,17 @@ TDacSpecs dao = new TDacSpecs();
 		         }
 			 }
 	 
+	 public void saveObservation(){
+			
+			 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
+		 if(!LS.isEmpty()) piece = LS.get(0);
+		 piece.setPidObservation(sltPiece.getPidObservation());
+		 iservice.updateObject(piece);
+		 //Rechargement de la liste des pices à corriger
+		 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
+					new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidDacCode()));	
+}
+
 	 
 	 //Afficahe de la liste des critï¿½res en fonction des types pass en parametre
 	/* public void chargeCritere() {
@@ -15688,6 +15700,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setBtnAffecte1(boolean btnAffecte1) {
 		this.btnAffecte1 = btnAffecte1;
+	}
+
+	public TPiecesDacs getPiece() {
+		return piece;
+	}
+
+	public void setPiece(TPiecesDacs piece) {
+		this.piece = piece;
 	}
 	
 	

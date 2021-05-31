@@ -814,19 +814,19 @@
 		                  <label for="oft" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                  
-		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '2'}">
+		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oft1" title="#{ppmController.geneDate.dppJourOuvertOt} #{ppmController.geneDate.dppDateOuvertOt}" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateOuvertOt')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '1'}">
+		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '1'}">
 		                   <p:calendar id="oft2" title="#{ppmController.geneDate.dppJourOuvertOt} #{ppmController.geneDate.dppDateOuvertOt}" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateOuvertOt')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                   
-		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '0'}">
+		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '0'}">
 		                   <p:calendar id="oft3" title="#{ppmController.geneDate.dppJourOuvertOt} #{ppmController.geneDate.dppDateOuvertOt}" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateOuvertOt')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:grey;"> </span>

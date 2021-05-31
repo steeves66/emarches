@@ -263,15 +263,13 @@
 				        </p:column>
 				        
 				          <p:column headerText="Observation" styleClass="col-sm-6" >
-         				<p:cellEditor>
-         				  <f:facet name="output">
-		                  <h:outputText styleClass="pull-left" value="#{slctdTb.pidObservation}" />
-		                </f:facet>
-		                <br/>
-		                 <f:facet name="input"> 
-		                <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.pidObservation}" id="relalisation" style="width: 100%" />
-		                 </f:facet>
-         				</p:cellEditor>
+         				    <p:inputTextarea rows="1" styleClass="form-control" value="#{slctdTb.pidObservation}" id="relalisation" readonly="true" style="width: 100%" />
+				        </p:column>
+				        <p:column headerText="" style="width:50px">  
+				        <p:commandLink oncomplete="PF('ObsDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" title="Saisir l'observation" update=":content">
+                                <i class="ace-icon fa fa-edit bigger-120"  style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                         
+                            </p:commandLink>
 				        </p:column>
 				          
                  </p:dataTable>   
@@ -587,7 +585,26 @@
 	           </div>
       </p:dialog>
     </h:form>
-    
+          <h:form id="observation">
+	        <p:dialog  widgetVar="ObsDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-12"><div  style="color: #fff">OBSERVATIONS : #{daoController.sltPiece.pidLibelle}</div></div>
+			        </div>
+		            
+		            
+                    <p:inputTextarea placeholder="Veuillez saisir vos observations" rows="20" cols="33" styleClass="form-control" value="#{daoController.sltPiece.pidObservation}" id="relalisation" style="width: 100%" />
+                  
+		           
+	           </div>
+	              <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; border-color:#036d3b;margin-left:3px"  action="#{daoController.saveObservation()}" update=":content">
+				     <i class="ace-icon fa fa-save"></i> Enregistrer
+				      </p:commandLink>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('ObsDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
     
     
     
