@@ -72,6 +72,8 @@ public class EtatsPpmController {
 	
 	
 	private List<VPpmDetails> objetListe = new ArrayList<VPpmDetails>(); 
+	private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
+	private TDetailPlanPassation detPass = new TDetailPlanPassation();
 	private VPpmliste slctdTd = new VPpmliste();
 	private VPpmDetails detail = new VPpmDetails(); 
 	private List<VFinancementPpm> financementListe = new ArrayList<VFinancementPpm>();
@@ -124,9 +126,7 @@ public class EtatsPpmController {
 		 	            TDetailPlanPassation detail = new TDetailPlanPassation();
 		 				if(!PLG.isEmpty()) detail =PLG.get(0); 
 			}
-		 
-		 
-		 
+		  
 			
 		 
 		 public void recupModePassation() {
@@ -208,7 +208,7 @@ public class EtatsPpmController {
 				 iservice.deleteObject(selectedDossier);
 				 //chargeDossierPc();	 
 				// FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDpgLibelle()+" supprimé!", "");
-					//FacesContext.getCurrentInstance().addMessage(null, msg);
+				//FacesContext.getCurrentInstance().addMessage(null, msg);
 				}
 	
 	
@@ -298,15 +298,28 @@ public class EtatsPpmController {
      
      
      //Differé parlal la DGMP
-     public void differerDgmp() {
-    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
-  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+     public void differerDgmp() throws IOException {
+    	 
+    	 listeTsPpm  =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+			if (!listeTsPpm.isEmpty()) {
+				detPass=listeTsPpm.get(0);
+				detPass.setTStatut(new TStatut("S3D"));
+				detPass.setDppMotif(observation);
+				detPass.setDppStatutRetour("2"); 
+  				iservice.updateObject(detPass);
+  				
+  				 FacesContext.getCurrentInstance().addMessage(null,
+				          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Opération différée avec succès", ""));
+			}
+    	/* List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation",
+  				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detail.getDppId()));
   	            TDetailPlanPassation detail = new TDetailPlanPassation();
   				if(!PLG.isEmpty()) detail =PLG.get(0); 
   				detail.setTStatut(new TStatut("S3D"));
   				detail.setDppMotif(observation);
   				detail.setDppStatutRetour("2"); 
-  				iservice.updateObject(detail);
+  				iservice.updateObject(detail);*/
 
 		  //Historisation des Plans Généraux
   				//historiser("S3D",detail);
@@ -512,6 +525,22 @@ public class EtatsPpmController {
 
 	public void setObservation(String observation) {
 		this.observation = observation;
+	}
+
+	public List<TDetailPlanPassation> getListeTsPpm() {
+		return listeTsPpm;
+	}
+
+	public void setListeTsPpm(List<TDetailPlanPassation> listeTsPpm) {
+		this.listeTsPpm = listeTsPpm;
+	}
+
+	public TDetailPlanPassation getDetPass() {
+		return detPass;
+	}
+
+	public void setDetPass(TDetailPlanPassation detPass) {
+		this.detPass = detPass;
 	}
 
 	
