@@ -5903,7 +5903,7 @@ TDacSpecs dao = new TDacSpecs();
 											      etatLoveObs = true;
 											      etatBtnValid = true;
 											      etatBtnValidCharge = false;
-											      
+											      validCorrection = true;
 									         }else {
 									        	 etatSanction = false;	
 									        	 etatLoveObs = false;

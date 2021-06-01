@@ -3701,16 +3701,16 @@ public class PpmController {
 																			     recupDateGenere();
 																			 }else
 																				 if(date.equalsIgnoreCase("dppDateSignatAttrib")) {
-																					 detPass.setDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
+																					 detPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
 																				     iservice.updateObject(detPass); 
-																				     _logger.info("Date Attributaire : "+detailPass.getDppDateSignatAttrib());
+																				     _logger.info("Date Attributaire : "+geneDate.getDppDateSignatAttrib());
 																				     recupDateGenere(); 
 																				 }else
 																					 if(date.equalsIgnoreCase("dppDateSignatAc")) {
-																						 detPass.setDppDateSignatAc(detailPass.getDppDateSignatAc());
+																						 detPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 																					     iservice.updateObject(detPass); 
 																					     recupDateGenere();
-																					     _logger.info("Date de signature de l'AC : "+detailPass.getDppDateSignatAc());
+																					     _logger.info("Date de signature de l'AC : "+geneDate.getDppDateSignatAc());
 																					 }else
 																						 if(date.equalsIgnoreCase("dppDateMarcheApprob")) {
 																							 detPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());

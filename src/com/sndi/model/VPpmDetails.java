@@ -53,7 +53,7 @@ public class VPpmDetails implements java.io.Serializable {
 	private String dppTypId;
 	private String plpLibelle;
 	private String gpgObjet;
-	private String chrCommentaire;
+	//private String chrCommentaire;
 	private String strLibelleLong;
 	private String strLibelleCourt;
 	private String strEmail;
@@ -215,7 +215,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.dppTypId = dppTypId;
 		this.plpLibelle = plpLibelle;
 		this.gpgObjet = gpgObjet;
-		this.chrCommentaire = chrCommentaire;
+		//this.chrCommentaire = chrCommentaire;
 		this.strLibelleLong = strLibelleLong;
 		this.strLibelleCourt = strLibelleCourt;
 		this.strEmail = strEmail;
@@ -596,14 +596,14 @@ public class VPpmDetails implements java.io.Serializable {
 		this.gpgObjet = gpgObjet;
 	}
 
-	@Column(name = "CHR_COMMENTAIRE", length = 1000)
+	/*@Column(name = "CHR_COMMENTAIRE", length = 1000)
 	public String getChrCommentaire() {
 		return this.chrCommentaire;
 	}
 
 	public void setChrCommentaire(String chrCommentaire) {
 		this.chrCommentaire = chrCommentaire;
-	}
+	}*/
 
 	@Column(name = "STR_LIBELLE_LONG", length = 1000)
 	public String getStrLibelleLong() {

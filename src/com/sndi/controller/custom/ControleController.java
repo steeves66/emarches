@@ -4835,7 +4835,7 @@ public class ControleController {
 									    									    		  typePlan ="PS";
 									    									    		  type = "DAC";
 									    									    		  libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
+																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A LA CONCURRENCE";
 																			    			 libelleSmall="Procédure Simplifiée";
 																			    			 btn_new =false;
 																			    			 btn_affec = false;
@@ -4869,7 +4869,7 @@ public class ControleController {
 																							 panelDaoTableauBordExa =false; 
 																							 panelDaoTableauBordRet =false; 
 																							 panelDaoTableauBordVet =false;
-																							 panelDaoTableauBordCha = true;
+																							 panelDaoTableauBordCha = false;
 																							 panelDaoTableauBordPub = false;
 																							 panelDaoTableauBordPrise = false;
 																							 panelDaoTableauBordPubDps = false;
