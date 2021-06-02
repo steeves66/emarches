@@ -4432,7 +4432,7 @@ public class ControleController {
 								    									     btn_ami_csv = false;
 								    									     btn_prq_dps = false;
 								    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-															    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
+															    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE EN ATTENTE DE PUBLICATION";
 															    			 btn_new =false;
 															    			 btn_affec = false;
 															    			 btn_exam = false;
@@ -5470,14 +5470,6 @@ public class ControleController {
 																														 panel2 =false;
 																														 panel3 = false;
 																													     panel4 = true;
-																														/* panel5 = false;
-																														 panel6 = false;
-																														 panel7 = true;
-																														 panel8 = false;
-																														 panel9 =false;
-																														 panel10 = false;
-																														 panel11 = false;
-																														 panel12 = false;*/
 																														 venteRecherche = false; 
 																														 affectationRecherche = false;
 																														 examenRecherche = false;

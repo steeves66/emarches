@@ -551,8 +551,6 @@
 					<p:dataTable id="ndTblepub0" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.publicationListe}" 
 					 rowKey="#{slctdTb.dacCode}" selection="#{daoController.publicationSelection}" emptyMessage="Aucun #{controleController.type}" 
 					 scrollable="true" scrollHeight="250" >
-					 
-					 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 
                         <p:column headerText="N° #{controleController.type}" width="9%" >
                            <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">

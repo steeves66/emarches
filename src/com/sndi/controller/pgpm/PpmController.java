@@ -3619,7 +3619,7 @@ public class PpmController {
 								 detPass.setDppDateRecepFact(geneDate.getDppApprobAnoTec());
 							     iservice.updateObject(detPass); 
 							     recupDateGenere();
-							     _logger.info("Date ANO Approb : "+geneDate.getDppApprobAnoTec());
+							     _logger.info("Date ANO Technique : "+geneDate.getDppApprobAnoTec());
 							 }
 						    else
 							 if(date.equalsIgnoreCase("dppDateRecepFact")) {

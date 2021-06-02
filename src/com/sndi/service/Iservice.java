@@ -112,6 +112,7 @@ public interface Iservice {
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
+	public List getObjectByColumnInPubCsvInstr(String objet,String typePlan,String strSource) ;
 	//Methode de comptage en région
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac);
 	public int countTableByColumnInInstrDjAffec(String objet,String conditionColumn,String strSource, String typeDac);

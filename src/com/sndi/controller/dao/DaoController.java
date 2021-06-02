@@ -5613,21 +5613,18 @@ TDacSpecs dao = new TDacSpecs();
 							  //Examen des pices du DAO par le Responsable du binÃƒÂ´me
 							  @Transactional
 							  public void examinerPieces() {
-								  //Mis ÃƒÂ  Jour du Statut du DAO dans T_Dao_Affectation, puis dans t_dac_specs
+								  //Mis à  Jour du Statut du DAO dans T_Dao_Affectation, puis dans t_dac_specs
 								  // slctdTda.setDafStaCode("D4V"); //Ancien Statut
 								   slctdTda.setDafStaCode("DC2");
 								   slctdTda.setDafStatutRetour("0");
 								   iservice.updateObject(slctdTda);
 								   
-								/*   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+								listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 										   new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 											new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
 										if (!listDao.isEmpty()) {
 											 newDao= listDao.get(0);
-											 newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
-											 newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
-									         iservice.updateObject(newDao); 
-							   	                 }*/
+							   	                 }
 											  
 								  
 								  listPieceCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
@@ -5653,7 +5650,7 @@ TDacSpecs dao = new TDacSpecs();
 								  
 								  constantService.getStatut("DC2");
 	 							  	//Historisation du / des retraits
-	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrige par le responsable du binome");
+	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binome");
 										//Actualisation du Tableau de Bord
 										typeActionTb();
 										//Activation et dsactivation des boutons valider
@@ -5661,7 +5658,7 @@ TDacSpecs dao = new TDacSpecs();
 										validCorrection = true;
 										etatDaoCorrige = true;
 										 //Message de confirmation
-										 userController.setTexteMsg("Correction(s) ffectue(s) avec succs!");
+										 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 										 userController.setRenderMsg(true);
 										 userController.setSevrityMsg("success");
 								
@@ -5968,7 +5965,7 @@ TDacSpecs dao = new TDacSpecs();
 										            	             iservice.updateObject( daoAffec);
 										                             }
 										                        
-										                             historiser("DC1",daoAffec.getDafDacCode(),"");
+										                             historiser("DC1",daoAffec.getDafDacCode(),"DAC corrigé par le binome");
 										                             //Actualisation de la liste des DAO
 										                             //chargeDaoChargeEtude();
 												                     //Actualisation du Tableau de Bord
@@ -6021,6 +6018,8 @@ TDacSpecs dao = new TDacSpecs();
 																		                             }
 										       		                                //Actualisation de la liste des DAO
 										       		                                chargeDaoChargeEtude();
+										       		                                //Historisation de la dernière action
+										       		                                historiser("DC1",daoAffec.getDafDacCode(),"DAC corrigé par le binome");
 									 				                                //Actualisation du Tableau de Bord
 													                                 typeActionTb();
 									 				                                //Message de confirmation
@@ -6801,7 +6800,7 @@ TDacSpecs dao = new TDacSpecs();
 											      			  		    
 											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DVE",newDao.getDacCode(),"DAO pay");
+												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				    
 											     			  				   //Activation du bouton dition du rcu
 											     			  				   confirmPaie = true;
@@ -6916,7 +6915,7 @@ TDacSpecs dao = new TDacSpecs();
 											    			 		          
 											     			  				   //Message de Confirmation
 											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											     					           userController.setTexteMsg("Retrait effectu avec succs");
+											     					           userController.setTexteMsg("Retrait effectué avec succès");
 											     							   userController.setRenderMsg(true);
 											     							   userController.setSevrityMsg("success");	
 													         }else {
@@ -6962,7 +6961,7 @@ TDacSpecs dao = new TDacSpecs();
 											      			  		    
 											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DVE",newDao.getDacCode(),"DAO pay");
+												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				 
 												 						       //Activation du bouton Ã¯Â¿Â½dition du rÃ¯Â¿Â½cu
 													 						   confirmPaie = false;
@@ -6975,7 +6974,7 @@ TDacSpecs dao = new TDacSpecs();
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											      					           userController.setTexteMsg("Paiement effectu avec succs");
+											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
 													                 }
@@ -7249,12 +7248,13 @@ TDacSpecs dao = new TDacSpecs();
 													 									typeActionTb(); 
 														 						 }else
 														 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-														 								 publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+														 								 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
+														 								 /* publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 														 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 														 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 														 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
 														 								        // multiFiltre ="";
-														 									_logger.info("publicationListe size: "+publicationListe.size());	
+*/														 									_logger.info("publicationListe size: "+publicationListe.size());	
 														 									typeActionTb(); 
 														 					      }
 														 				     } 

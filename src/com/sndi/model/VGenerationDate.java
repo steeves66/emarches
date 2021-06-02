@@ -120,6 +120,8 @@ public class VGenerationDate implements java.io.Serializable {
 	private String dppFlagAttApproBail;
 	private Date dppDateDaoTransPub;
 	private Date dppApprobAnoTec;
+	private String dppJourApprobAnoTec;
+	private String dppFlagApprobAnoTec;
 
 	public VGenerationDate() {
 	}
@@ -158,7 +160,8 @@ public class VGenerationDate implements java.io.Serializable {
 			String dppFlagApprobAno, Date dppDateNegociation, String dppJourNegociation,
 			String dppFlagNegociation, Date dppDateMarcheApprob, String dppJourMarcheApprob,
 			String dppFlagMarcheApprob, Date dppDateAttApproBail, String dppJourAttApproBail,
-			String dppFlagAttApproBail,Date dppDateDaoTransPub,Date dppApprobAnoTec) {
+			String dppFlagAttApproBail,Date dppDateDaoTransPub,Date dppApprobAnoTec,String dppJourApprobAnoTec,
+			String dppFlagApprobAnoTec) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -258,6 +261,8 @@ public class VGenerationDate implements java.io.Serializable {
 		this.dppFlagAttApproBail = dppFlagAttApproBail;
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
 		this.dppApprobAnoTec = dppApprobAnoTec;
+		this.dppJourApprobAnoTec = dppJourApprobAnoTec;
+		this.dppFlagApprobAnoTec = dppFlagApprobAnoTec;
 	}
 
 	
@@ -1153,4 +1158,24 @@ public class VGenerationDate implements java.io.Serializable {
 	public void setDppApprobAnoTec(Date dppApprobAnoTec) {
 		this.dppApprobAnoTec = dppApprobAnoTec;
 	}
+	
+
+	@Column(name = "DPP_JOUR_APPROB_ANO_TEC", length = 32)
+	public String getDppJourApprobAnoTec() {
+		return this.dppJourApprobAnoTec;
+	}
+
+	public void setDppJourApprobAnoTec(String dppJourApprobAnoTec) {
+		this.dppJourApprobAnoTec = dppJourApprobAnoTec;
+	}
+
+	@Column(name = "DPP_FLAG_APPROB_ANO_TEC")
+	public String getDppFlagApprobAnoTec() {
+		return this.dppFlagApprobAnoTec;
+	}
+
+	public void setDppFlagApprobAnoTec(String dppFlagApprobAnoTec) {
+		this.dppFlagApprobAnoTec = dppFlagApprobAnoTec;
+	}
+
 }
