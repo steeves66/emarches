@@ -5455,8 +5455,8 @@ public class ControleController {
 																			    									     btn_ami_csv = false;
 																			    									     btn_prq_dps = false;
 																			    									     btn_prq_dps = false;
-																			    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																										    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
+																			    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
+																										    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE EN ATTENTE DE PUBLICATION";
 																										    			 btn_new =false;
 																										    			 btn_affec = false;
 																										    			 btn_exam = false;
@@ -5535,8 +5535,8 @@ public class ControleController {
 																				    									     btn_pub_dps = false;
 																				    									     btn_ami_csv = false;
 																				    									     btn_prq_dps = false;
-																				    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																											    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
+																				    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
+																											    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE PUBLIES";
 																											    			 libelleSmall = "Procédure Simplifiée";
 																											    			 btn_new =false;
 																											    			 btn_affec = false;

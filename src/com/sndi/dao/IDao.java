@@ -98,7 +98,7 @@ public interface IDao {
 	public List getObjectByColumnInInstr(String objet, String strSource) ;//getObjectByColumnInInstr(String objet,String typePlan ,String strSource);
 	public List getObjectByColumnInInstrAmi(String objet,String strSource); //List getObjectByColumnInInstrAmi(String objet,String typePlan, String strSource);
 	public List getObjectByColumnInInstrPrq(String objet,String strSource); //public List getObjectByColumnInInstrPrq(String objet,String typePlan,String strSource);
-	public List getObjectByColumnInPubCsvInstr(String objet,String typePlan,String strSource);
+	public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat2,String typePlan,String strSource);
 	
 	public List getObjectByColumnInInstrValDao(String objet, String strSource);
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);

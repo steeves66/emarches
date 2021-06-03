@@ -7248,7 +7248,7 @@ TDacSpecs dao = new TDacSpecs();
 													 									typeActionTb(); 
 														 						 }else
 														 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-														 								 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
+														 								 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
 														 								 /* publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 														 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 														 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
@@ -7264,6 +7264,9 @@ TDacSpecs dao = new TDacSpecs();
 																	     }
 												     //Fin de la methode de Publication
 														  									 
+														  
+														  
+														  
 		     //Methode vider
 		     public void vider() { 
 		    	 listeCritereSaisie.clear();

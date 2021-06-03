@@ -320,9 +320,9 @@ public class Service implements Iservice {
 		}
 		
 		@Override
-		public List getObjectByColumnInPubCsvInstr(String objet,String typePlan,String strSource) {
+		public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat2,String typePlan,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInPubCsvInstr(objet,typePlan,strSource);
+			return getDao().getObjectByColumnInPubCsvInstr(objet,stat1,stat2,typePlan,strSource); 
 		}
 		
 		@Override

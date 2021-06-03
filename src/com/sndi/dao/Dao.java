@@ -477,9 +477,9 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 }
 	
 @Override
-public List getObjectByColumnInPubCsvInstr(String objet,String typePlan,String strSource) {
+public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat2,String typePlan,String strSource) {
 	// TODO Auto-generated method stub
-	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN ('D6V','DPU') AND DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
 
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
