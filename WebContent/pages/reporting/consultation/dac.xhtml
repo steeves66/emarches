@@ -94,10 +94,6 @@
 		                </p:column> 
 				        
 				         <p:column headerText="Actions" styleClass="col-sm-1">
-                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
-                             </p:commandLink>
                               <p:commandLink action="#{situationController.renderPage('sit5','HISDAC')}"   class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px" title="Suivre le dossier" update=":content">
                                 <i class="ace-icon fa fa-line-chart bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{situationController.slctdTd}" />                             

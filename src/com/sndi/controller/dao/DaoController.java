@@ -2355,12 +2355,9 @@ TDacSpecs dao = new TDacSpecs();
 								 
 								//Affichage des differentes listes de l'AC en fonction de l'action								  
 								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
-									 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCodeCsv());
-									 //chargeDataDMP2(typeDac,typePlan,"D2T","D5R","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
 									 chargeDataDMP3("D2T","D5R","DAO","PN");
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 //chargeDataDMP1(typeDac,typePlan,"D4V","FON_CODE_CSV",userController.getSlctd().getTFonction().getFonCod());
 										 chargeDataDMP4();
 									 }else 
 										 if(fonct.equalsIgnoreCase("listeConsultAffectationCsv")) {
@@ -2554,32 +2551,39 @@ TDacSpecs dao = new TDacSpecs();
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 								 //Filtre affectation
 								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
-									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+									 
+							       listeDAO = (List<VDacliste>) iservice.getObjectByColumnInPubRechercheCsvInstr("VDacliste","D2T", "D5R",""+typePlan, 
+							    		   ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod()); 	 
+									/* listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 											 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));*/
 										_logger.info("listeDAO size: "+listeDAO.size()); 
 								 }else {
 									//Filtre validation
 									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+										 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInPubRechercheCsvInstr("VDacliste","D5V", "D5V",
+												 ""+typePlan, ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod()); 
+										/* listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 												 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V")),
 												 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 												 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));*/
 											_logger.info("listeDAO size: "+listeDAO.size());
 									 }else {
 										     if(fonct.equalsIgnoreCase("listeAmiCsv") || fonct.equalsIgnoreCase("listePubCsv") || fonct.equalsIgnoreCase("listePubDpsCsv")) {  
-											      listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+										    	 listeDAO = (List<VDacliste>) iservice.getObjectByColumnInPubRechercheCsvInstr("VDacliste","D6V", "DPU",""+typePlan, 
+										    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());  
+										    	 /*listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 													 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
 													 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 													 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-													 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+													 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));*/
 												_logger.info("listeDAO size: "+listeDAO.size());
 										 }else {
 											 
-											
+											   //Autres
 										 }
 									 }	 
 								 }
@@ -2709,7 +2713,6 @@ TDacSpecs dao = new TDacSpecs();
 				 public void chargeDaoChargeEtudeByTypeFilter(String typePlan, String stat1,String stat2){
 					  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 							           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
-							           //new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
 							           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							           new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));

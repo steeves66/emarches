@@ -326,6 +326,24 @@ public class Service implements Iservice {
 		}
 		
 		@Override
+		public List getObjectByColumnInPubRechercheCsvInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPubRechercheCsvInstr(objet,stat1,stat2,typePlan,critere,strSource);
+		}
+		
+		@Override
+		public List getObjectByColumnInSppRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInSppRechercheInstr(objet,stat1,stat2,typePlan,critere,strSource); 
+		}
+		
+		@Override
+		public List getObjectByColumnInDmpRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInSppRechercheInstr(objet,stat1,stat2,typePlan,critere,strSource); 
+		}
+		
+		@Override
 		public int countTableByColumnInInstrValAff(String objet,String conditionColumn,String strSource, String typeDac, String typePlan) {
 			// TODO Auto-generated method stub
 			return getDao().countTableByColumnInInstrValAff(objet,conditionColumn,strSource,typeDac,typePlan);

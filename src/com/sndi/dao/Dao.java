@@ -486,6 +486,34 @@ public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat
 }
 
 @Override
+public List getObjectByColumnInPubRechercheCsvInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DAC_TYPE_PLAN ='"+typePlan+"' AND CRITERE like'%"+critere+"%' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+
+@Override
+public List getObjectByColumnInDmpRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DPP_TYPE_PLAN ='"+typePlan+"' AND CRITERE like'%"+critere+"%' AND INSTR('"+strSource+"',FON_CODE_DMP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
+public List getObjectByColumnInSppRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DPP_TYPE_PLAN ='"+typePlan+"' AND CRITERE like'%"+critere+"%' AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
 public List getObjectByColumnInPpmDmpInstr(String objet,String typePlan ,String strSource) {
 // TODO Auto-generated method stub
 String query = "FROM "+objet+" WHERE DPP_STA_CODE IN ('S2V','SPT') AND DPP_TYPE_PLAN='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_DMP) > 0 ORDER BY DPP_DTE_MODIF" ; 
