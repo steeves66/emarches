@@ -2265,7 +2265,7 @@ public class PpmModificationController {
 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 					if (!listeTsPpm.isEmpty()) {
 						detPass = listeTsPpm.get(0);
-						detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+						detPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
 						detPass.setDppDateAvisAoPublication(pubDate.getDatepub());
 						//detPass.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
 						iservice.updateObject(detPass);
@@ -2285,7 +2285,7 @@ public class PpmModificationController {
 			   detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
 				iservice.updateObject(detPass);
 				recupDateGenere();
-				_logger.info("Date de Transmission : "+updatePpm.getDppDateDaoTrans());
+				_logger.info("Date de Transmission : "+geneDate.getDppDateDaoTrans());
 				  }else
 					  if(date.equalsIgnoreCase("dppDateAvisAoPublication")) {
 						detPass.setDppDateAvisAoPublication(geneDate.getDppDateAvisAoPublication());

@@ -3152,6 +3152,17 @@ TDacSpecs dao = new TDacSpecs();
 						newDao.setDacStatutRetour("0");
 				        iservice.updateObject(newDao); 
 		   	                 }
+					
+					
+					 daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+ 							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+ 							if (!daoBinome.isEmpty()) {
+ 								//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+ 								for(TDaoAffectation dao : daoBinome) {
+ 									 dao.setDafStaCode(statutTrans);
+ 									 iservice.updateObject(dao);
+ 								       }
+                        }
 			
 				    constantService.getStatut(statutTrans);
 	 				//Historisation du DAC
@@ -6062,6 +6073,8 @@ TDacSpecs dao = new TDacSpecs();
 											dao.setTStatut(new TStatut("D4V"));
 											dao.setDacStatutRetour(slctdTd.getDacStatutRetour());
 											iservice.updateObject(dao);
+											
+											
 								       
 										   constantService.getStatut("D4V");
 			 							   //Historisation du / des retraits
@@ -6421,12 +6434,7 @@ TDacSpecs dao = new TDacSpecs();
 									//Validation des corrections
 									@Transactional 
 									 public void resultatCorrection() {
-										  
-										/*  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
-											   statutSanction ="SBO";
-											   statutSanRetour ="0";
-											  
-										        }else{*/
+										
                                                         if(resultat.equalsIgnoreCase("Valide")){
 										        	  
 													  
@@ -6451,17 +6459,6 @@ TDacSpecs dao = new TDacSpecs();
 											                                	   if(resultat.equalsIgnoreCase("Retour au binome")) {
 												                                        statutSanction ="D3A";
 												                                        statutSanRetour ="1";
-												                                          
-												                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-												                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-												                    							if (!daoBinome.isEmpty()) {
-												                    								//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
-												                    								for(TDaoAffectation dao : daoBinome) {
-												                    									 dao.setDafStaCode(statutSanction);
-												                    									 dao.setDafStatutRetour(statutSanRetour);
-												                    									 iservice.updateObject(dao);
-												                    								       }
-											                                               }
 										                                        }
 										                                 }
                                                                   }
@@ -6504,7 +6501,7 @@ TDacSpecs dao = new TDacSpecs();
 										     			
 										     			historiser(statutSanction,newDao.getDacCode(),"DAO validé par le chef de service");
 										     			
-														 userController.setTexteMsg("Dao validé avec succès!");
+														 userController.setTexteMsg("Dac validé avec succès!");
 														 userController.setRenderMsg(true);
 														 userController.setSevrityMsg("success");
 									     }   
@@ -6516,8 +6513,6 @@ TDacSpecs dao = new TDacSpecs();
 										 public void imprimerPv() {
 												projetReport.stringparam1(slctdTd.getDacCode(), "PV_examen", "PV_examen");
 											}
-										 
-										 
 										 
 										//Publication du DAO
 											//@Transactional
@@ -6553,7 +6548,17 @@ TDacSpecs dao = new TDacSpecs();
 									 			        iservice.updateObject(newDao); 
 									 	   	                 }
 									 				
-									 				  constantService.getStatut(statutUpdate);
+									 				daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+						                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+						                    					if (!daoBinome.isEmpty()) {
+						                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+						                    						for(TDaoAffectation dao : daoBinome) {
+						                    								dao.setDafStaCode(statutUpdate);
+						                    								iservice.updateObject(dao);
+						                    							}
+					                                               }
+									 				
+									 			  constantService.getStatut(statutUpdate);
 					 							  	//Historisation du / des retraits
 					 						       historiser(""+statutUpdate,newDao.getDacCode(),"DAO Publié avec succès");
 					 						       
@@ -6561,13 +6566,13 @@ TDacSpecs dao = new TDacSpecs();
 
 					 						      chargetataPub();
 														
-														//chargeData();
-														//Actualisation du tableau de bord
-														typeActionTb();
-														//Message de confirmation
-														userController.setTexteMsg("DAO Publié!");
-														userController.setRenderMsg(true);
-														userController.setSevrityMsg("success");		
+												  //chargeData();
+												  //Actualisation du tableau de bord
+												  typeActionTb();
+												  //Message de confirmation
+												  userController.setTexteMsg("DAC Publié!");
+												  userController.setRenderMsg(true);
+												  userController.setSevrityMsg("success");		
 									   }
 	
 										  

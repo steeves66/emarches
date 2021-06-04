@@ -315,8 +315,24 @@ public class SituationController {
 	}
 	
 	
+	 public void chargeDataDMP3(String stat1, String stat2, String typeDac, String typePlan){ 	
+		 if(controleController.type == "DAC") {
+			 listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstr("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+		 }else {
+			 if(controleController.type == "AMI") {
+				 listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstrAmi("VDacliste",""+userController.getSlctd().getTFonction().getFonCod());
+			 } 
+			 else {
+				 if(controleController.type == "PRQ") {
+					 listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstrPrq("VDacliste",""+userController.getSlctd().getTFonction().getFonCod()); 
+				 } 
+			 }
+		}
+	 }
+	
 	public void chargeConsultationDac() {
 		listeDAC.clear();
+		String fonct = controleController.getFonctionalite();
 		critere="";
 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 			 listeDAC =(List<VDacliste>) iservice.getObjectsByColumnNotIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -337,6 +353,18 @@ public class SituationController {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
 					||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 					// 
+				 }else {
+					       if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
+									 /*listeDAC =(List<VDacliste>) iservice.getObjectsByColumnNotIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("SDS","D1S")),
+											 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));*/
+								 }else {
+									      if(fonct.equalsIgnoreCase("listeValidationCsv")) {
+										 
+									     }
+								 }
+							 }
 				 }
 			 }	 
 		}
