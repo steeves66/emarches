@@ -3179,48 +3179,55 @@ TDacSpecs dao = new TDacSpecs();
 	     }
 		 
 		     
-		  
 		    //DIFFERER PAR CPMP ET DMP
 		    //Differer
 		 	 public void differer() {
-		 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-		 			 statutUpdate ="";
-		 		 }else {
-		 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-		 				 statutUpdate ="D1R";
-		 			 }else {
-		 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-		 					
-		 					 statutUpdate ="D2R";
-		 				 }
-		 		      } 
-		 		   }
-		 			
-		 			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-		  					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-		  				if (!listDao.isEmpty()) {
-		  					newDao= listDao.get(0);
-		  					newDao.setTStatut(new TStatut(statutUpdate));
-		  					newDao.setDacStatutRetour("1");
-		  			        iservice.updateObject(newDao); 
-		  	   	                 }
-		  				       constantService.getStatut(statutUpdate);
-							  	//Historisation du / des retraits
-						       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
-						       
-						     tableauBordController.saveTempTabord(""+statutUpdate, slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
-		 					//Message de confirmation
-		 					 userController.setTexteMsg("DAO retourné!");
-		 					 userController.setRenderMsg(true);
-		 					 userController.setSevrityMsg("success");
-		 					 //return	null;
-		 					 
-		 				  chargeData();
-		 		          //Actualisation du Tableau de Bord
-		 		          typeActionTb();
-		 			
-		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
-		 			 FacesContext.getCurrentInstance().addMessage(null, msg);
+		 		 
+		 		if(observation.equalsIgnoreCase("")) {
+		 			FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez renseigner le motif, avant de différer!", ""));
+		 		}else {
+		 			 
+			 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 			 statutUpdate ="";
+			 		 }else {
+			 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+			 				 statutUpdate ="D1R";
+			 			 }else {
+			 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+			 					
+			 					 statutUpdate ="D2R";
+			 				 }
+			 		      } 
+			 		   }
+			 			
+			 			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			  					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+			  				if (!listDao.isEmpty()) {
+			  					newDao= listDao.get(0);
+			  					newDao.setTStatut(new TStatut(statutUpdate));
+			  					newDao.setDacMotif(observation);
+			  					newDao.setDacStatutRetour("1");
+			  			        iservice.updateObject(newDao); 
+			  	   	                 }
+			  				       constantService.getStatut(statutUpdate);
+								  	//Historisation du / des retraits
+							       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
+							       
+							     tableauBordController.saveTempTabord(""+statutUpdate, slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
+			 					//Message de confirmation
+			 					 userController.setTexteMsg("DAC retourné!");
+			 					 userController.setRenderMsg(true);
+			 					 userController.setSevrityMsg("success");
+			 					 //return	null;
+			 				  chargeData();
+			 		          //Actualisation du Tableau de Bord
+			 		          typeActionTb();
+
+			 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
+			 			 FacesContext.getCurrentInstance().addMessage(null, msg);
+		 		}
+		 
 		 	 }
 		 	 
 		 	 

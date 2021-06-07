@@ -5395,71 +5395,76 @@ public class PpmController {
 	     //Differer un PPM
 	       // @Transactional
 			 public void differer() {
-				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-					 statutUpdate ="";
+				 
+				 if(observation.equalsIgnoreCase(""))    {
+					 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez renseigner le motif, avant de différer!", ""));
 				 }else {
-					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-						 statutUpdate ="S2D";
-						 statutRetour="1";
-						 //observation = "PPM retourné par la CPMP";
-					 }else
-						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					 
+					 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 statutUpdate ="";
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 statutUpdate ="S2D";
+							 statutRetour="1";
+							 //observation = "PPM retourné par la CPMP";
+						 }else
+							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+										 statutUpdate ="S3D"; 
+										 statutRetour="2";
+									
+					      }else {
+							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 									 statutUpdate ="S3D"; 
 									 statutRetour="2";
-								
-				      }else {
-						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-								 statutUpdate ="S3D"; 
-								 statutRetour="2";
-						 }
-				     } 
-				 }
-				 
-				//Parcourir la liste et récupérer les demande au statut E1T
-		 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-							if (!listeTsPpm.isEmpty()) {
-								passDetail= listeTsPpm.get(0);
-								passDetail.setTStatut(new TStatut(statutUpdate));
-								passDetail.setDppStatutRetour(statutRetour);
-								passDetail.setDppMotif(observation);
-						       iservice.updateObject(passDetail);
-			
-							  //Historisation des Plans Généraux
-							   historiser(""+statutUpdate,passDetail);
-							  //Préparation du Tableau de Bord
-						      tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+							 }
+					     } 
+					 }
+					 
+					//Parcourir la liste et récupérer les demande au statut E1T
+			 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+								if (!listeTsPpm.isEmpty()) {
+									passDetail= listeTsPpm.get(0);
+									passDetail.setTStatut(new TStatut(statutUpdate));
+									passDetail.setDppStatutRetour(statutRetour);
+									passDetail.setDppMotif(observation);
+							       iservice.updateObject(passDetail);
+				
+								  //Historisation des Plans Généraux
+								   historiser(""+statutUpdate,passDetail);
+								  //Préparation du Tableau de Bord
+							      tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
 
-							     tableauBordbAc();
-							     userController.setTexteMsg("Opération retournée avec succès !");
-								 userController.setRenderMsg(true);
-								 userController.setSevrityMsg("success");
-			
-								  if(controleController.type == "PPM") {
-								      //creerDetailPassation();
-									  chargeData("PN");
-				                 }else 
-				                      if(controleController.type == "PSPM"){
-				                    	  chargeData("PS");
-				                 }
-			                   //Chargement des listes 
-					           //chargeDataAvaliderPpm();
-					           //chargeDataAvaliderPspm();
-					     
-					           //chargePpmDifCp();
-					          // chargePpmDifDmp();
-					          //Actualisation du Tableau de Bord
-					          //tableauBordController.chargeDataPpm();
-								  if(controleController.type == "PPM") {
-										tableauBordController.chargeDataPpm("PN");
-				                }else 
-				                     if(controleController.type == "PSPM"){
-				                    	 tableauBordController.chargeDataPpm("PS");
-				                }
-							
-						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
-						 FacesContext.getCurrentInstance().addMessage(null, msg);
-						    }
+								     tableauBordbAc();
+								     userController.setTexteMsg("Opération retournée avec succès !");
+									 userController.setRenderMsg(true);
+									 userController.setSevrityMsg("success");
+				
+									  if(controleController.type == "PPM") {
+									      //creerDetailPassation();
+										  chargeData("PN");
+					                 }else 
+					                      if(controleController.type == "PSPM"){
+					                    	  chargeData("PS");
+					                 }
+				                  
+						           //chargePpmDifCp();
+						          // chargePpmDifDmp();
+						          //Actualisation du Tableau de Bord
+						          //tableauBordController.chargeDataPpm();
+									  if(controleController.type == "PPM") {
+											tableauBordController.chargeDataPpm("PN");
+					                }else 
+					                     if(controleController.type == "PSPM"){
+					                    	 tableauBordController.chargeDataPpm("PS");
+					                }
+								
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
+							 FacesContext.getCurrentInstance().addMessage(null, msg);
+							    }
+				    }
 			 }
 			 
 			 

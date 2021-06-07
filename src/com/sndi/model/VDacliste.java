@@ -81,6 +81,7 @@ public class VDacliste implements java.io.Serializable {
 	private String dppLbgCode;
 	private String dppTypePlan;
 	private String dppCode;
+	private String dacMotif;
 	private Integer dppNumeroOrdre;
 	private Date dppDate;
 	private String dppObjet;
@@ -265,7 +266,7 @@ public class VDacliste implements java.io.Serializable {
 			String strMinCode, String strTstCode, String strRegCode, String strAdrPost, String strAdrGeo, String strTel,
 			String strFax, String strOpeMatricule, Date strDteSaisi, String strOpeRespo, String tdcCode,
 			String tdcLibelle, Long dppId, Long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
+			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, String dacMotif,Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail,
@@ -1067,6 +1068,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setDppCode(String dppCode) {
 		this.dppCode = dppCode;
+	}
+	
+	@Column(name = "DAC_MOTIF", length = 2000)
+	public String getDacMotif() {
+		return this.dacMotif;
+	}
+
+	public void setDacMotif(String dacMotif) {
+		this.dacMotif = dacMotif;
 	}
 
 	@Column(name = "DPP_NUMERO_ORDRE", precision = 8, scale = 0)

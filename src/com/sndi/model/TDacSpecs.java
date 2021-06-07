@@ -65,6 +65,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private BigDecimal dacMargePrefSouVal;
 	private BigDecimal dacMargePrefArtVal;
 	private String dacMargePref;
+	private String dacMotif;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -90,7 +91,7 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,String dacCraCodeExclus,
 			String dacMargePrefCom, String dacMargePrefSou, String dacMargePrefArt, BigDecimal dacMargePrefComVal,
 			BigDecimal dacMargePrefSouVal, BigDecimal dacMargePrefArtVal, String dacMargePref,
-			Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses, String dacMotif,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -133,6 +134,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacMargePrefSouVal = dacMargePrefSouVal;
 		this.dacMargePrefArtVal = dacMargePrefArtVal;
 		this.dacMargePref = dacMargePref;
+		this.dacMotif = dacMotif;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TDossierDacses = TDossierDacses;
 		this.TDetailCorrections = TDetailCorrections;
@@ -596,5 +598,14 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacMargePref(String dacMargePref) {
 		this.dacMargePref = dacMargePref;
+	}
+	
+	@Column(name = "DAC_MOTIF", length = 2000)
+	public String getDacMotif() {
+		return this.dacMotif;
+	}
+
+	public void setDacMotif(String dacMotif) {
+		this.dacMotif = dacMotif;
 	}
 }

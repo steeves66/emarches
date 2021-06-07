@@ -14,11 +14,11 @@
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	         
-	                  <p:inputTextarea value="#{daoController.daostatut.hacCommentaire}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+	                  <p:inputTextarea value="#{daoController.slctdTd.dacMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
 	                  </div>
 	                  <div class="par pull-right"> par:<strong>#{daoController.daostatut.fonLibelle}</strong></div>
                      <div class="panel-footer">
-                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()" update=":gnl"/>
                      </div>
                     </div>
       </p:dialog>
