@@ -105,7 +105,7 @@ public class VDacliste implements java.io.Serializable {
 	private String dppActeurSaisie;
 	private String dppStrCode;
 	private String dppStatutRetour;
-	private Date dppDateSaisie;
+	private Date dppDateSaisie;	
 	private String dppStructureConduc;
 	private String dppStructureBenefi;
 	private String dppPartiePmePmi;

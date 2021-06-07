@@ -88,6 +88,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String critere;
 	private Date dppDateDaoTransPub;
 	private String staLibelleLong;
+	private String dppControlRetour;
 	private String dppMotif;
 	public VPpmliste() {
 	}
@@ -117,7 +118,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
 			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
-			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub,String staLibelleLong,String dppMotif) {
+			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub,String staLibelleLong,String dppControlRetour,String dppMotif) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -185,6 +186,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.critere = critere;
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
 		this.staLibelleLong = staLibelleLong;
+		this.dppControlRetour = dppControlRetour;
 		this.dppMotif = dppMotif;
 	}
 
@@ -792,6 +794,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setStaLibelleLong(String staLibelleLong) {
 		this.staLibelleLong = staLibelleLong;
+	}
+	
+	@Column(name = "DPP_CONTROL_RETOUR")
+	public String getDppControlRetour() {
+		return this.dppControlRetour;
+	}
+
+	public void setDppControlRetour(String dppControlRetour) {
+		this.dppControlRetour = dppControlRetour;
 	}
 
 	@Column(name = "DPP_MOTIF")
