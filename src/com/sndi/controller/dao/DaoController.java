@@ -5915,6 +5915,7 @@ TDacSpecs dao = new TDacSpecs();
 									  daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 					           					      "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
 										              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+										              new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()),
 										              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 									        if (!daoExamen.isEmpty()) {
 											      etatSanction = true;
@@ -5930,6 +5931,28 @@ TDacSpecs dao = new TDacSpecs();
 									        	 validCorrection = false;
 									         }		
 									    }
+								  
+								  public void activePavetRespo() {
+									  daoExamen = ((List<TDaoAffectation>)iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+			           					      "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+								              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+								              new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()),
+								              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+									  if(daoExamen.size()==0) {
+										  etatSanction = false;	
+								        	 etatLoveObs = false;
+								        	 etatBtnValid = false;
+								        	 etatBtnValidCharge = true;
+								        	 validCorrection = false;
+									  }else {
+										  etatSanction = true;
+									      etatLoveObs = true;
+									      etatBtnValid = true;
+									      etatBtnValidCharge = false;
+									      validCorrection = true;
+									  }
+									  _logger.info("affectattion : "+daoExamen.size());
+								  }
 								  
 								  
 								//Affichage de zone de mention si le charg d'Etude est un responsable de binÃ´me
@@ -7594,7 +7617,8 @@ TDacSpecs dao = new TDacSpecs();
                 	//chargePiecesByDao();
                 	chargePiecesByCsv();
                 	chargePiecesByCharges();
-                	chargeRespoExiste();
+                    //chargeRespoExiste();
+                	activePavetRespo();
                 	chargePiecesByBinome();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
