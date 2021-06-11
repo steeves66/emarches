@@ -547,6 +547,34 @@ public class CommissionController {
   			} 
 		 }
 		 
+		 
+		 public void recupMembre() {
+			 listMbrSup = ((List<TDetCommissionSeance>)iservice.getObjectsByColumn("TDetCommissionSeance",
+					    new WhereClause("DCS_NUM",Comparateur.EQ,""+sltMbr.getDcsNum())));
+	    			if (!listMbrSup.isEmpty()) {
+	    				detCom=listMbrSup.get(0); 
+	    			}
+	           }
+		 
+		 /*
+			public void updatePresence() { 
+				listMbrSup= ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
+					    new WhereClause("DCS_NUM",Comparateur.EQ,""+comSpecUpdate.getComNum()))); 
+		 		_logger.info("comNum: "+sltCompsec.getComNum());
+	    			if (!listeComSpecific.isEmpty()) {
+	    				comUpdate=listeComSpecific.get(0); 
+	    				comUpdate.setComTctLibelle(comSpecUpdate.getComTctLibelle());
+	    				iservice.updateObject(comUpdate);
+	    				
+			 			chargeMembres();
+			 			userController.setTexteMsg("Modification éffectué avec succès!");
+	  		            userController.setRenderMsg(true);
+	  		            userController.setSevrityMsg("success");
+	  		            
+	  		      	_logger.info("comNum: "+comSpecUpdate.getComTctLibelle());
+	    			} 
+		 	}*/
+		 
 		 //Methode de Repechage
 		 public void saveRepechage() {
 			 TDetOffres offreRep = new TDetOffres();
