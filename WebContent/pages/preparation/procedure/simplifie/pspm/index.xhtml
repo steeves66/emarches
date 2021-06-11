@@ -574,6 +574,20 @@
                 <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                 </h:panelGroup>
                 </p:column>
+                
+                 <p:column headerText="Mode de passation" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '2'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '0'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                </h:panelGroup>
+                </p:column>
                
                  <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">

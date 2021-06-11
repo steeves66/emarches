@@ -3182,7 +3182,7 @@ TDacSpecs dao = new TDacSpecs();
 		    //DIFFERER PAR CPMP ET DMP
 		    //Differer
 		 	 public void differer() {
-		 		 
+		 		String fonct = controleController.getFonctionalite();
 		 		if(observation.equalsIgnoreCase("")) {
 		 			FacesContext.getCurrentInstance().addMessage(null,
 							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez renseigner le motif, avant de différer!", ""));
@@ -3196,7 +3196,23 @@ TDacSpecs dao = new TDacSpecs();
 			 			 }else {
 			 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 			 					
-			 					 statutUpdate ="D2R";
+			 					 //statutUpdate ="D2R";
+			 					 
+			 					 if(fonct.equalsIgnoreCase("listePubCsv")) {
+			 						statutUpdate ="D4V";
+			 					 }else {
+			 						if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+				 						statutUpdate ="DPU";
+				 					 }else {
+				 						      if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
+				 						    	 statutUpdate ="D2R";
+				 						      }else {
+				 						    	        if(fonct.equalsIgnoreCase("listeValidationCsv")) {
+				 						    	        	statutUpdate ="D4V";
+				 						    	        }
+				 						      }
+				 					 }
+			 					 }
 			 				 }
 			 		      } 
 			 		   }
@@ -3224,7 +3240,7 @@ TDacSpecs dao = new TDacSpecs();
 			 		          //Actualisation du Tableau de Bord
 			 		          typeActionTb();
 
-			 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
+			 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAC a été retourné!", "");
 			 			 FacesContext.getCurrentInstance().addMessage(null, msg);
 		 		}
 		 
@@ -3265,9 +3281,9 @@ TDacSpecs dao = new TDacSpecs();
     			  					          newDao.setDacStatutRetour("1");
     			  			                  iservice.updateObject(newDao); 
     			  			            
-    			  			                 constantService.getStatut("D2T");
+    			  			                 constantService.getStatut(statutUpdate);
 							  	             //Historisation du / des retraits
-						                     historiser(""+statutUpdate,slctdTd.getDacCode(),"DAO retrourn pour affectation");
+						                     historiser(""+statutUpdate,slctdTd.getDacCode(),"DAO retrourné");
 						                     //Construction  du Tableau Bord
 						                     tableauBordController.saveTempTabord(""+statutUpdate, slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
     			  	   	                 }  
@@ -3277,7 +3293,7 @@ TDacSpecs dao = new TDacSpecs();
 			 		          //Chargement des DAO  raffecter
 			 		          chargeDaoAffectesR();
 			 				  //Message
-			 				  userController.setTexteMsg("DAO retrourné pour affectation !");
+			 				  userController.setTexteMsg("DAC retrourné pour affectation !");
 			 				  userController.setRenderMsg(true);
 			 				  userController.setSevrityMsg("success");
 			 				  chargeData();
@@ -4900,7 +4916,7 @@ TDacSpecs dao = new TDacSpecs();
 							 //Activation du pavet de saisie des pices des offres 
 			                 pavet_offre = true;
 			                 pavet_critere= true;
-				        	 userController.setTexteMsg("Lot enregistr avec succs !");
+				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
 								}
@@ -6529,7 +6545,7 @@ TDacSpecs dao = new TDacSpecs();
 												 		 etatPV = true;
 										     			 etatValiderCsv = false;
 										     			
-										     			historiser(statutSanction,newDao.getDacCode(),"DAO validé par le chef de service");
+										     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
 										     			
 														 userController.setTexteMsg("Dac validé avec succès!");
 														 userController.setRenderMsg(true);

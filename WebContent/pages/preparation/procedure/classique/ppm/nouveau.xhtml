@@ -28,7 +28,7 @@
              </p:commandLink>
             </li>
         <li>
-        <p:commandLink action="#{ppmController.renderPage('pgpmAc1')}" update=":content" > 
+        <p:commandLink action="#{ppmController.renderPage('ppm1')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type}| Index
              </p:commandLink>
             </li>
@@ -658,7 +658,7 @@
              
               <div class="form-group">
 		       
-		                  <label  class="col-sm-6 control-label">Date de  transmission à la DGMP<span style="color:red;"> *</span></label>
+		                  <label  class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar title="#{ppmController.geneDate.dppJourDaoTrans} #{ppmController.geneDate.dppDateDaoTrans}" value="#{ppmController.detailPass.dppDateDaoTrans}" navigator="true" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                      <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -668,7 +668,7 @@
 		    
 		     <h:panelGroup rendered="#{controleController.validCPMP}">
 		    <div class="form-group">
-		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP (PS)<span style="color:red;"> </span></label>
+		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP (PS) <span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valcp2" value="#{ppmController.detailPass.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAttApprobCpmp')}" update="gnl"/>
@@ -1328,7 +1328,7 @@
              
               <div class="form-group">
 		       
-		                  <label for="trAmi" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <label for="trAmi" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trAmi" value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -1644,7 +1644,7 @@
              
               <div class="form-group">
 		       
-		                  <label for="trAmiDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <label for="trAmiDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trAmiDp" value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -2264,7 +2264,7 @@
              
              <div class="form-group">
 		       
-		                  <label class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <label class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar  value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -2566,7 +2566,7 @@
              
               <div class="form-group">
 		       
-		                  <label for="trPrqDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <label for="trPrqDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="trPrqDp" value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update=":gnl"/>

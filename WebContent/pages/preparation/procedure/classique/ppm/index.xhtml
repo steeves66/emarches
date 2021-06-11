@@ -76,9 +76,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-           <i class="fa fa-arrow-circle-right"></i>   
-              </p:commandLink>
+  
           </div>
         </div>
         <!-- ./col -->
@@ -95,9 +93,6 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-              Detail <i class="fa fa-arrow-circle-right"></i>
-              </p:commandLink>
           </div>
         </div>
          <!-- ./col -->
@@ -812,14 +807,14 @@
                              </p:commandLink>
                             </h:panelGroup>
                             
-                           
+                           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                             <h:panelGroup rendered="#{slctdTb.dppControlRetour == '0'}">
-                            <p:commandLink oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                            <p:commandLink oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-right: 3px" title="Différer" update=":content">
                               <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                             </p:commandLink>
                           </h:panelGroup>
-                         
+                         </h:panelGroup>
                             
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                             <p:commandLink rendered="#{slctdTb.dppStatutRetour == '2'}" action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content">

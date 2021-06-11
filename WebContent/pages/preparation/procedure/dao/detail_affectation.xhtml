@@ -125,14 +125,21 @@
 		           
 		            <fieldset>
 		               <legend style="font-weight: bold">DAO joint(s)</legend>
-		      <p:dataTable id="DaoDT"  styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="100" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		      <p:dataTable id="DaoDT"  styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="100" var="slctdTb" value="#{etatsDaoController.dossListe}" 
+		       emptyMessage="Aucun DAO enregistré">
 
-				        <p:column headerText="Reférence" styleClass="col-sm-1">
+				        <p:column headerText="Reférence" styleClass="col-sm-6">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
 				        </p:column>
 				        
-				        <p:column headerText="Type de Document" styleClass="col-sm-1">
+				        <p:column headerText="Type de Document" styleClass="col-sm-3">
 				            <h:outputText value="#{slctdTb.TNatureDocuments.nadLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Création" styleClass="col-sm-2">
+				            <h:outputText value="#{slctdTb.ddaDteSaisi}" >
+				            <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+				            </h:outputText>
 				        </p:column>
 				        
 				        <p:column headerText="Action" styleClass="no-sort col-sm-1">

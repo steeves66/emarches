@@ -626,6 +626,11 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
+                           
+                            <p:commandLink rendered="#{controleController.diffPub}" oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                              <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                            </p:commandLink>
                             
                               <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>

@@ -370,6 +370,7 @@ public class ControleController {
 	//Actions de l'AC
 	private boolean saisie=false;
 	private boolean publication=false;
+	private boolean diffPub = false;
 	private boolean vente=false;
 	private boolean correction=false;
 	
@@ -4440,6 +4441,7 @@ public class ControleController {
 															    			 btn_valid = false;
 															    			 saisie=false;
 															    			 publication=true;
+															    			 diffPub = true;
 															    			 vente=false;
 															    			 correction=false;
 															    			 panel1 =false;
@@ -4524,7 +4526,7 @@ public class ControleController {
 									    									     btn_prq_dps = false;
 									    									     btn_prq_dps = false;
 									    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-																    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
+																    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE PUBLIES";
 																    			 libelleSmall = "Procédure Normale";
 																    			 btn_new =false;
 																    			 btn_affec = false;
@@ -4532,7 +4534,7 @@ public class ControleController {
 																    			 btn_retrait = false;
 																    			 btn_valid = false;
 																    			 saisie=false;
-																    			 publication=true;
+																    			 publication=false;
 																    			 vente=false;
 																    			 correction=false;
 																    			 panel1 =false;
@@ -10838,6 +10840,16 @@ public class ControleController {
 
 	public void setBtn_reaffectation(boolean btn_reaffectation) {
 		this.btn_reaffectation = btn_reaffectation;
+	}
+
+
+	public boolean isDiffPub() {
+		return diffPub;
+	}
+
+
+	public void setDiffPub(boolean diffPub) {
+		this.diffPub = diffPub;
 	}
 	
 	
