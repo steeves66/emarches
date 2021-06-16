@@ -30,9 +30,9 @@
 	     </div>	 
 
 			<div class="row">
-			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature de l'AC : " /></b></div>
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature Attributaire :" /></b></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAc}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
@@ -42,9 +42,9 @@
 	      </div>
 	      <div class="col-md-6">
 	        	         <div class="row">
-      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature Attributaire : " /></b></div>
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature de l'AC : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAc}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
@@ -52,7 +52,7 @@
 	   </div> 
 	   
 		<div class="row">
-        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de debut : " /></b></div>
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Debut d'exécution : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecDebut}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
@@ -62,7 +62,7 @@
 	     </div>	 
 
 			<div class="row">
-			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de fin : " /></b></div>
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Fin d'exécution : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecFin}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 

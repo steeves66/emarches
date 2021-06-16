@@ -95,6 +95,9 @@ public class FileUploadController {
  	    
  		case "7": name="AUS-";
  		break;
+ 		
+ 		case "25": name="COR-";
+ 		break;
 			
 		}
 		
@@ -165,6 +168,8 @@ public class FileUploadController {
 	    
 		case "7": name="AUS-";
 		break;
+		case "25": name="COR-";
+ 		break;
 		}
 		
 		
