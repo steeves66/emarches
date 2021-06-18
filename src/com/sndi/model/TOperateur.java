@@ -40,6 +40,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TTempParametre> TTempParametres = new HashSet<TTempParametre>(0);
 	private Set<THistoDac> THistoDacs = new HashSet<THistoDac>(0);
 	private Set<TParametres> TParametreses = new HashSet<TParametres>(0);
+	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 
 	public TOperateur() {
 	}
@@ -50,7 +51,7 @@ public class TOperateur implements java.io.Serializable {
 
 	public TOperateur(String opeMatricule, TStructure TStructure, TMinistere TMinistere, String opeNom, String opeContact, String opeEtatCivil,
 			String opeMail, String opeLogin, String opeMinCode, String opeFonctionAdminist,String opeMatriculeFonc, Set<TMotdepasse> TMotdepasses,Set<TRetrait> TRetraits,Set<TModeleDacType> TModeleDacTypes,Set<TTypeSeance> TTypeSeances,Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatricule,Set<TTempParametre> TTempParametres,
-			Set<TAssignation> TAssignations,/*Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatSaisi,*/ Set<TCommissionType> TCommissionTypes, Set<THistoDac> THistoDacs,Set<TParametres> TParametreses) {
+			Set<TDossierDacs> TDossierDacses,Set<TAssignation> TAssignations,/*Set<TDetCommissionSeance> TDetCommissionSeancesForDcsOpeMatSaisi,*/ Set<TCommissionType> TCommissionTypes, Set<THistoDac> THistoDacs,Set<TParametres> TParametreses) {
 		this.opeMatricule = opeMatricule;
 		this.TStructure = TStructure;
 		this.opeNom = opeNom;
@@ -70,6 +71,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TCommissionTypes = TCommissionTypes;
 		this.THistoDacs = THistoDacs;
 		this.TTempParametres = TTempParametres;
+		this.TDossierDacses = TDossierDacses;
 	}
 
 	@Id
@@ -172,6 +174,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTRetraits(Set<TRetrait> TRetraits) {
 		this.TRetraits = TRetraits;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<TDossierDacs> getTDossierDacses() {
+		return this.TDossierDacses;
+	}
+
+	public void setTDossierDacses(Set<TDossierDacs> TDossierDacses) {
+		this.TDossierDacses = TDossierDacses;
 	}
 	
 

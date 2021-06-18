@@ -462,11 +462,15 @@
             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" scrollable="true" scrollHeight="100"
                         emptyMessage="Aucun Document enrégistré">
                         
-			           <p:column headerText="Nom du document " styleClass="col-md-7">
+			           <p:column headerText="Nom du document " styleClass="col-md-6">
 			            <h:outputText value="#{doss.ddaReference}" />
 			        </p:column>
-			        <p:column headerText="Nature Document" styleClass="col-md-3">
+			        <p:column headerText="Nature Document" styleClass="col-md-2">
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
+			        </p:column>
+			        
+			        <p:column headerText="Auteur" styleClass="col-md-3">
+			            <h:outputText value="#{doss.TOperateur.opeNom}"/>
 			        </p:column>
 			        
 			        <p:column headerText="Date" styleClass="col-md-1">

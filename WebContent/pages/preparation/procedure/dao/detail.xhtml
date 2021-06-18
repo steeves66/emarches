@@ -140,7 +140,7 @@
 		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
 		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun #{controleController.type} enregistré">
 
-				        <p:column headerText="Reférence" styleClass="col-sm-6">
+				        <p:column headerText="Reférence" styleClass="col-sm-5">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
 				        </p:column>
 				        
@@ -148,7 +148,11 @@
 				            <h:outputText value="#{slctdTb.TNatureDocuments.nadLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Création" styleClass="col-sm-2">
+				        <p:column headerText="Auteur" styleClass="col-md-3">
+			            <h:outputText value="#{slctdTb.TOperateur.opeNom}"/>
+			             </p:column>
+				        
+				        <p:column headerText="Création" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaDteSaisi}" >
 				            <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
 				            </h:outputText>
