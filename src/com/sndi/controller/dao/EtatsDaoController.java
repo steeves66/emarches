@@ -62,8 +62,8 @@ public class EtatsDaoController {
 	@Autowired
 	DownloadFileServlet downloadFileServlet;
 	
-	//
-	
+	//ggg
+	//jhjjj
 	private List<VDetailDao> objetListe = new ArrayList<VDetailDao>(); 
 	private List<VDetailDao> objetAffectes = new ArrayList<VDetailDao>();
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
