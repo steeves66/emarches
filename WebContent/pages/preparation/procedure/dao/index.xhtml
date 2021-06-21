@@ -525,21 +525,21 @@
                             <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
                             <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" /> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" /> 
                             </p:commandLink> 
                             </h:panelGroup>
                             
                             <h:panelGroup rendered="#{slctdTb.dafStaCode == 'DC2'}">
                            <p:commandLink action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoChargeDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
-                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />
                            </p:commandLink> 
                            </h:panelGroup>
                            
                            <h:panelGroup rendered="#{daoController.btnAffecte1}"> 
                               <p:commandLink oncomplete="PF('chargeEtudeDlg').show()" action="#{daoController.chargeChargeEtudeByDac1()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px" title="Chargés d'études" update=":dlgChargeEtude">
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />                             
                             </p:commandLink>
                             </h:panelGroup>
                         
