@@ -205,6 +205,7 @@ public class VDacliste implements java.io.Serializable {
 	private String aaoAvisBail;
 	private BigDecimal aaoMtCaut;
 	private String aaoModePaiement;
+	private String dacVendu;
 	private Long aaoCoutDac;
 	private String aaoLieuRecep;
 	private Date aaoDateRecep;
@@ -292,7 +293,7 @@ public class VDacliste implements java.io.Serializable {
 			Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, long aaoNbrLot, Long aaoNbrOuv,
 			Long aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
 			String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub,
-			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement,
+			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement, String dacVendu,
 			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,BigDecimal dacNbrCopieOff,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
@@ -485,6 +486,7 @@ public class VDacliste implements java.io.Serializable {
 		this.aaoAvisBail = aaoAvisBail;
 		this.aaoMtCaut = aaoMtCaut;
 		this.aaoModePaiement = aaoModePaiement;
+		this.dacVendu = dacVendu;
 		this.aaoCoutDac = aaoCoutDac;
 		this.aaoLieuRecep = aaoLieuRecep;
 		this.aaoDateRecep = aaoDateRecep;
@@ -2184,6 +2186,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setAaoModePaiement(String aaoModePaiement) {
 		this.aaoModePaiement = aaoModePaiement;
+	}
+	
+	@Column(name = "DAC_VENDU")
+	public String getDacVendu() {
+		return this.dacVendu;
+	}
+
+	public void setDacVendu(String dacVendu) {
+		this.dacVendu = dacVendu;
 	}
 
 	@Column(name = "AAO_COUT_DAC", precision = 22, scale = 0)

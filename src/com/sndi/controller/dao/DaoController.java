@@ -3917,7 +3917,7 @@ TDacSpecs dao = new TDacSpecs();
 		 							 userController.setSevrityMsg("success");
 		 							 
 		 							 newAvis.aaoLibelle = dao.getDacObjet();
-		 							newAvis.aaoNbrOuv = daoDetail.getDppNbOuv();
+		 							 newAvis.aaoNbrOuv = daoDetail.getDppNbOuv();
 		 							 //Dsactivation du bouton d'enregistrement du DAO
 		 							 controleController.btn_dao_pn = false;
 		 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
@@ -3928,6 +3928,14 @@ TDacSpecs dao = new TDacSpecs();
 		 							  recupDetail();
 		 							  choixTaux = "N";
 		 							  //listeMarge();
+		 							  
+		 							/*  newAvis.setAaoCode(keyGen.getCodeAvis());
+           	          		          newAvis.setTDacSpecs(dao);
+			 						  newAvis.setTStatut(new TStatut("D1S"));
+	          	          		      newAvis.setAvisRetour("0");
+									  //newAvis.setAaoNatInt(value1);
+	          	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
+	          	          		      iservice.addObject(newAvis); */
 		 			      }
 			    					//Insertion des pices
 			          }
@@ -7079,7 +7087,7 @@ TDacSpecs dao = new TDacSpecs();
 											     			  		    
 														  				      constantService.getStatut("RET");
 												 							  //Historisation du / des retraits
-												 						      historiser("RET",newDao.getDacCode(),"DAO retir");
+												 						      historiser("RET",newDao.getDacCode(),"DAO retir�");
 														  				
 											    			  				  //Activation du bouton ï¿½dition du rï¿½cu
 												     			  			  confirmPaie = true;
@@ -7169,7 +7177,7 @@ TDacSpecs dao = new TDacSpecs();
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuï¿½ avec succï¿½s", ""));
-											      					           userController.setTexteMsg("Paiement effectu avec succs");
+											      					           userController.setTexteMsg("Paiement effectu� avec succs");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
 													                 }
@@ -7387,6 +7395,9 @@ TDacSpecs dao = new TDacSpecs();
 								     			  			  newDao.setTStatut(new TStatut(statUpdate));
 										                      iservice.updateObject(newDao);
 								     			  			}
+								     			  		 
+								     			  		//Historisation du / des retraits
+								 						 historiser(""+statUpdate,newDao.getDacCode(),"DAO vendu");
 													
 														//Chargement de la liste des ventes et celle du tableau de Bord
 														chargeData();

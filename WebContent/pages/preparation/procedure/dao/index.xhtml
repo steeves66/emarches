@@ -383,7 +383,7 @@
                              </p:commandLink>
                           </h:panelGroup>
                           
-                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{daoController.finVente()}"
+                          <p:commandLink rendered="#{slctdTb.dacVendu == '1'}" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{daoController.finVente()}"
                                 title="Fin de la vente" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 

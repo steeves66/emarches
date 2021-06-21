@@ -3623,7 +3623,7 @@ public class PpmController {
 							_logger.info("Date d'Invitation des Entreprises : "+geneDate.getDppInvEntre());
 						}else
 							 if(date.equalsIgnoreCase("dppApprobAnoTec")) {
-								 detPass.setDppDateRecepFact(geneDate.getDppApprobAnoTec());
+								 detPass.setDppApprobAnoTec(geneDate.getDppApprobAnoTec());
 							     iservice.updateObject(detPass); 
 							     recupDateGenere();
 							     _logger.info("Date ANO Technique : "+geneDate.getDppApprobAnoTec());

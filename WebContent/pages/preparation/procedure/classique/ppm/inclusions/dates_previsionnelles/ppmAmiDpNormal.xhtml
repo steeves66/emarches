@@ -172,8 +172,8 @@
 		                 <div class="form-group">
 		                  <label for="approbaAnoAmiDp" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege})</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="approbaAnoAmiDp" value="#{ppmController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAno')}"  update=":gnl" />
+		                   <p:calendar id="approbaAnoAmiDp" value="#{ppmController.geneDate.dppApprobAnoTec}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAnoTec')}"  update=":gnl" />
 		                   </p:calendar> 
 		                  </div>
 		                </div>

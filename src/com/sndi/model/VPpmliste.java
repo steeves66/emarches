@@ -87,6 +87,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String fonCodeSpp;
 	private String critere;
 	private Date dppDateDaoTransPub;
+	private Date dppApprobAnoTec;
 	private String staLibelleLong;
 	private String dppControlRetour;
 	private String dppMotif;
@@ -118,7 +119,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
 			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
 			long plpId, long plpGesCode, Long dppNbOuv, String cptFinancement,
-			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub,String staLibelleLong,String dppControlRetour,String dppMotif) {
+			String fonCodeDmp,String fonCodeSpp, String critere,Date dppDateDaoTransPub,Date dppApprobAnoTec,String staLibelleLong,String dppControlRetour,String dppMotif) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -185,6 +186,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.fonCodeSpp = fonCodeSpp;
 		this.critere = critere;
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
+		this.dppApprobAnoTec = dppApprobAnoTec;
 		this.staLibelleLong = staLibelleLong;
 		this.dppControlRetour = dppControlRetour;
 		this.dppMotif = dppMotif;
@@ -785,6 +787,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setDppDateDaoTransPub(Date dppDateDaoTransPub) {
 		this.dppDateDaoTransPub = dppDateDaoTransPub;
+	}
+	
+	@Column(name = "DPP_APPROB_ANO_TEC", length = 7)
+	public Date getDppApprobAnoTec() {
+		return this.dppApprobAnoTec;
+	}
+
+	public void setDppApprobAnoTec(Date dppApprobAnoTec) {
+		this.dppApprobAnoTec = dppApprobAnoTec;
 	}
 	
 	@Column(name = "STA_LIBELLE_LONG")
