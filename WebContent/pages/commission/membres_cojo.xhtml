@@ -304,44 +304,6 @@
     </h:form>
     
     
-       <h:form id="dlogMbrMod">
-	  <p:dialog  widgetVar="dlogMbrMod" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
-		<div class="row">    
-            <div class="col-md-12">
-                    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div  style="color: #fff">Modification du Statut : #{commissionController.detCom.comTctLibelle}</div>
-         </div>
-         <div class="box-body">
-                <div class="form-group">
-                  <label  class="col-sm-1 control-label">Libelle</label>
-				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{commissionController.detCom.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
-                  </div>
-                </div>
-                
-                </div>
-                 <div class="row">    
-	             <div class="col-sm-8"></div>
-	              <div class="col-sm-4">  
-					
-					      <div class="pull-right ">
-			            <p:commandLink action="#{commissionController.updatePresence()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('dlogMbrMod').hide()" update="gnl">
-			             <i class="ace-icon fa fa-save"></i> Modifier
-			            </p:commandLink>
-                     </div>
-                     
-                     
-                   </div>
-              </div>
-         </div>
-         
-		          
-              
-         </div>
-         </div>
-      </p:dialog>
-    </h:form>
 
 
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

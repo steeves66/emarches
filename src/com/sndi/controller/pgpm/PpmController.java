@@ -366,6 +366,7 @@ public class PpmController {
 	     public boolean libellePrq= false;
 	     public boolean libellePpm= false;
 	     public boolean libellePsc= false;
+	     public boolean libellePsl= false;
 	     public boolean finPgpm = true;
 	     public boolean finAmi = false;
 	     public boolean finPrq = false;
@@ -825,6 +826,7 @@ public class PpmController {
 			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			iservice.updateObject(detailPass);	
 			 recupModeleDao();
+			 pavetFinancement=true;
 			}
 		 
 		 public void controleLibelle() {
@@ -835,6 +837,7 @@ public class PpmController {
 			     libellePrq= false;
 			     libellePpm= false;
 			     libellePsc= false;
+			     libellePsl= false;
 			 }else
 				 if(mode=="PRQ") {
 					 libelleDPPRQ= false;
@@ -843,6 +846,7 @@ public class PpmController {
 				     libellePrq= true;
 				     libellePpm= false;
 				     libellePsc= false;
+				     libellePsl= false;
 				 }else
 					 if(mode=="DPPRQ") {
 						 libelleDPPRQ= false;
@@ -851,6 +855,7 @@ public class PpmController {
 					     libellePrq= true;
 					     libellePpm= false; 
 					     libellePsc= false;
+					     libellePsl= false;
 					 }else
 						 if(mode=="DPAMI") {
 							 libelleDPPRQ= false;
@@ -859,6 +864,7 @@ public class PpmController {
 						     libellePrq= false;
 						     libellePpm= false; 
 						     libellePsc= false;
+						     libellePsl= false;
 						 }else
 							 if(mode=="PSC") {
 								 libelleDPPRQ= false;
@@ -867,7 +873,17 @@ public class PpmController {
 							     libellePrq= false;
 							     libellePpm= false; 
 							     libellePsc= true;
+							     libellePsl= false;
 							 }else
+								 if(mode=="PSL") {
+									 libelleDPPRQ= false;
+									 libelleDPAMI= false;
+								     libelleAmi= false;
+								     libellePrq= false;
+								     libellePpm= false; 
+								     libellePsc= false;
+								     libellePsl= true;
+								 }else
 						       {
 								 libelleDPPRQ= false;
 								 libelleDPAMI= false;
@@ -875,6 +891,7 @@ public class PpmController {
 							     libellePrq= false;
 							     libellePpm= true; 
 							     libellePsc= false;
+							     libellePsl= false;
 							 }
 			               
 			 
@@ -3357,7 +3374,24 @@ public class PpmController {
 							     libellePrq= false;
 							     libellePpm= false;
 							     libellePsc= true;
+							     libellePsl= false;
 								 mode ="PSC";
+					    }else 
+					    	 if(modePassation.getMopCode().equalsIgnoreCase("PSL")) {
+					    		 pavetPPM = true;
+							     pavetAMI = false; 
+							     pavetPRQ = false;
+							     pavetDPAMI= false;
+								 pavetDPPRQ= false;
+							     libelleDPAMI = false;
+							     libelleDPPRQ = false;
+							     pavetPSC= false;
+							     libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+							     libellePsc= false;
+							     libellePsl= true;
+							     mode="PSL";
 					    }else
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
 					    	     pavetPPM = false;
@@ -3372,6 +3406,7 @@ public class PpmController {
 							     libellePrq= false;
 							     libellePpm= false;
 							     libellePsc= false;
+							     libellePsl= false;
 								 mode ="DP";
 					    }else 
 				            {
@@ -3385,7 +3420,8 @@ public class PpmController {
 						     pavetPSC= false;
 						     libelleAmi= false;
 						     libellePrq= false;
-						     libellePpm= true;
+						     libellePpm= false;
+						     libellePsl= false;
 						     libellePsc= false;
 						     mode="";
 				    }
@@ -3415,6 +3451,26 @@ public class PpmController {
 							 pscNon = true;
 							 mode ="PRQ";
 							 _logger.info("Panel PRQ Activé: "+pavetPRQ);
+				    }else 
+				    	 if(passationListe.getMopCode().equalsIgnoreCase("PSL")) {
+				    		 pavetPPM = true;
+							 pavetAMI = false;
+							 pavetPRQ = false;
+							 pavetDPAMI= false;
+							 pavetDPPRQ= false;
+							 pavetPSC= false;
+							 pscOui = false; 
+							 pscNon = true;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
+							 libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= false;
+						     libellePsc= false;
+						     libellePsl = true;
+						     mode ="PSL";
+							 _logger.info("Panel PSL Activé: "+pavetPPM);
+						     
 				    }else 
 				    	  if(passationListe.getMopCode().equalsIgnoreCase("DPS")) {
 					    	     pavetPPM = false;
@@ -3451,6 +3507,7 @@ public class PpmController {
 							     libellePrq= false;
 							     libellePpm= false;
 							     libellePsc= true;
+							     libellePsl = false;
 								 mode ="PSC";
 					    }else
 					      {
@@ -7801,6 +7858,14 @@ public class PpmController {
 
 	public void setFinancementListe(List<VFinancementPpm> financementListe) {
 		this.financementListe = financementListe;
+	}
+
+	public boolean isLibellePsl() {
+		return libellePsl;
+	}
+
+	public void setLibellePsl(boolean libellePsl) {
+		this.libellePsl = libellePsl;
 	}
 
 	

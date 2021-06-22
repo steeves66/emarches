@@ -419,7 +419,7 @@
                             </h:panelGroup>  
                             
                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-                               <p:commandLink action="#{daoController.deleteDac()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
+                               <p:commandLink rendered="#{slctdTb.dacStaCode == 'D1S'}" action="#{daoController.deleteDac()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
                                 <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>
                                 <p:confirm header="Confirmation" message="Confirmez vous la supression du dossier: #{slctdTb.dacObjet}?" icon="ui-icon-alert" />                           
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
@@ -518,7 +518,7 @@
                       
                              <p:commandLink  action="#{etatsDaoController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTda}" />
                              </p:commandLink>
                       
                         

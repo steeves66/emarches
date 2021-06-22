@@ -706,8 +706,10 @@
              </div>
              <div class="col-md-6">
              <div class="form-group">
-		                  <label  class="col-sm-6 control-label">Date de Publication / Programmation<span style="color:red;">*</span></label>
-		                  <div class="col-sm-6">
+             
+                 <h:panelGroup rendered="#{ppmController.libellePpm}">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                   <div class="col-sm-6">
 		                    <table>
 						      <tr>
 						      <td style="width:50px"><p:calendar title="#{ppmController.geneDate.dppJourAvisAoPublication}  #{ppmController.geneDate.dppDateAvisAoPublication}" readonly="true" showOn="false" value="#{ppmController.detailPass.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -720,6 +722,17 @@
 						   </tr>
 				          </table>
 		                </div>
+		                  </h:panelGroup>
+		                  
+		                  <h:panelGroup rendered="#{ppmController.libellePsl}">
+		                  <label  class="col-sm-6 control-label">Date de Programmation<span style="color:red;">*</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="solEnt12" value="#{ppmController.detailPass.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAvisAoPublication')}" update=":gnl"/>
+		                   </p:calendar> 
+		                  </div>
+		                  </h:panelGroup>
+		                  
 		                </div>
                
              </div>

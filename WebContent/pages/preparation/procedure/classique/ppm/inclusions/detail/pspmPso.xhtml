@@ -10,7 +10,7 @@
       <div class="col-md-6">
       
       <div class="row">
-      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Transmission du dossier de consultation à la CPMP:" /></b></div>
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Transmission du dossier de consultation à la CPMP : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
@@ -20,9 +20,9 @@
 	   </div> 
 	   
 		<div class="row">
-        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Validation du dossier de consultation par la CPMP" /></b></div>
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Validation du dossier de consultation par la CPMP : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateValCpmp}"> 
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
@@ -40,7 +40,7 @@
 	     </div>	
 		</h:panelGroup>	
 			<div class="row">
-			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Transmission de l'avis à la DGMP: " /></b></div>
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Transmission de l'avis à la DGMP : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
