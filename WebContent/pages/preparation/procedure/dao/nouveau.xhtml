@@ -257,7 +257,7 @@
                <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Nature des Prix</label>
                   <div class="col-sm-9"> 
-                     <p:selectOneRadio value="#{daoController.newAvis.aaoNatPrix}" id="console" >
+                     <p:selectOneRadio value="#{daoController.aaoNatPrix}" id="console" >
 			            <f:selectItem itemLabel="Unitaire" itemValue="Unitaire" />
 			            <f:selectItem itemLabel="Global et forfaitaire" itemValue="Global et forfaitaire" />
 			        </p:selectOneRadio>
@@ -267,7 +267,7 @@
                <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Mode de qualification</label>
                   <div class="col-sm-9"> 
-                     <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" >
+                     <p:selectOneRadio id="consoless" value="#{daoController.aaoRegQual}" >
                      <p:ajax  listener="#{daoController.checkSituation()}" global="false" update="gnl:qualif"></p:ajax>
 			            <f:selectItem itemLabel="Score" itemValue="SCORE" />
 			            <f:selectItem itemLabel="Conformité" itemValue="CONFORMITE" />
@@ -282,7 +282,7 @@
                    <table>
 				     <tr>
 				     <td style="width: 60px"> 
-				     <p:selectOneRadio value="#{daoController.newAvis.aaoAvisBai}" id="console22">
+				     <p:selectOneRadio value="#{daoController.aaoAvisBai}" id="console22">
 				     <p:ajax  listener="#{daoController.avisBailleur()}" global="false" update="gnl:baill"></p:ajax>
 			            <f:selectItem itemLabel="Oui" itemValue="O" />
 			            <f:selectItem itemLabel="Non" itemValue="N" />
@@ -298,7 +298,7 @@
 				     
 				    <td style="width:320px">
 				     <h:panelGroup  rendered="#{daoController.inputBailleur}">
-				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />
+				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.aaoRespBai}"   style="width: 100%" />
 				     </h:panelGroup>
 				    </td>
 				     </h:panelGroup>
@@ -312,7 +312,7 @@
               <div class="form-group">
                   <label for="Anorm" class="col-sm-9 control-label">Attribution du/des marché(s) en tenant compte des seuils anormalement bas ou élévés</label>
                   <div class="col-sm-3"> 
-                     <p:selectOneRadio id="Anorm" value="#{daoController.newAvis.aaoOffAnormal}">
+                     <p:selectOneRadio id="Anorm" value="#{daoController.aaoOffAnormal}">
 			            <f:selectItem itemLabel="Oui" itemValue="O" />
 			            <f:selectItem itemLabel="Non" itemValue="N" />
 			        </p:selectOneRadio>
@@ -325,7 +325,7 @@
           <div class="form-group">
                   <label  class="col-sm-4 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
                   <div class="col-sm-5"> 
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
+                  <p:inputText type="text" value="#{daoController.nbreDelai}" id= "aaodl" styleClass="form-control">
 				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
 				     </p:inputText>
                   </div>
@@ -346,7 +346,7 @@
                 <h:panelGroup  rendered="#{daoController.qualifLabel1}">  <label class="col-sm-4 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
                 <h:panelGroup  rendered="#{daoController.qualifLabel2}">  <label class="col-sm-4 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
 				  <div class="col-sm-5">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoPrecisModEval}"   style="width: 100%" />
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.aaoPrecisModEval}"   style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -355,7 +355,7 @@
                <div class="form-group">
                   <label class="col-sm-4 control-label">Nombre de lot<span style="color:red;"> *</span></label>
 				  <div class="col-sm-5">
-		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%">
+		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.lotNbre}"  style="width: 100%">
 		          </p:inputText>
                   </div>
                 </div>
@@ -363,7 +363,7 @@
                 <div class="form-group">
                  <label class="col-sm-4 control-label">Coût du DAO<span style="color:red;"> *</span></label>
 				  <div class="col-sm-5">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}" id="coutD"  style="width: 100%" >
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.aaoCoutDac}" id="coutD"  style="width: 100%" >
 		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	              <p:ajax event="blur" global="false" process="@this" update="gnl:coutD" />
 	              </p:inputText>
@@ -487,18 +487,18 @@
            <div class="form-group">
                   <label  class="col-sm-1 control-label">Lieu</label>
 				  <div class="col-sm-11">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
                   </div>
              </div>
              
              <div class="form-group">
                   <label  class="col-sm-1 control-label">Date</label>
 				  <div class="col-sm-3">   
-                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" /> 
+                  <p:calendar  value="#{daoController.aaoDateRecep}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" /> 
                   </div>
                   <label  class="col-sm-2 control-label">Heure</label>
 				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputMask mask=" 99:99 " value="#{daoController.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
                   </div>
              </div>
                  
@@ -517,20 +517,16 @@
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Lieu</label>
 				  <div class="col-sm-7">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
                   </div>
-                  
-                  <!--  <label  class="col-sm-1 control-label">Heure</label>
-				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
-                  </div> -->
+                
                 </div>
                </h:panelGroup>  
                 <h:panelGroup rendered="#{daoController.ouverture}">
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Nbre Ouverture</label>
 				  <div class="col-sm-2"> 
-                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
+                  <p:selectOneMenu value="#{daoController.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
 			            <f:selectItem itemLabel="1" itemValue="1" /> 
                         <f:selectItem itemLabel="2" itemValue="2" />
                        <!--  <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/> -->				   	   				    				   
@@ -559,7 +555,7 @@
                   
                   <label  class="col-sm-3 control-label">Heure</label>
 				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputMask mask=" 99:99 " value="#{daoController.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 
                 </div>
@@ -569,9 +565,8 @@
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Nbre Ouverture</label>
 				  <div class="col-sm-2"> 
-                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
-			            <f:selectItem itemLabel="1" itemValue="1" /> 
-                       <!--  <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/> -->				   	   				    				   
+                  <p:selectOneMenu value="#{daoController.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
+			            <f:selectItem itemLabel="1" itemValue="1" /> 			   	   				    				   
 			       </p:selectOneMenu>
                      
                   </div>
@@ -587,7 +582,7 @@
                   
                   <label  class="col-sm-3 control-label">Heure</label>
 				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputMask mask=" 99:99 " value="#{daoController.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 
                 </div>

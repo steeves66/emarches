@@ -331,6 +331,7 @@ public class PpmModificationController {
 	     public boolean libellePpm= false;
 	     public boolean libellePsc= false;
 	     public boolean libellePsl= false;
+	     public boolean libellePsl1= false;
 	     public boolean finPgpm = true;
 	     public boolean finAmi = false;
 	     public boolean finPrq = false;
@@ -2150,6 +2151,8 @@ public class PpmModificationController {
 								 pscNon = true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = true;
+								 libellePsl1= false;
+								 libellePsl= false;
 								 mode ="DP";
 					    }else 
 					    	 if(updatePpm.getDppMopCode().equalsIgnoreCase("PSC")) {
@@ -2167,6 +2170,8 @@ public class PpmModificationController {
 							     libellePrq= false;
 							     libellePpm= false;
 							     libellePsc= true;
+							     libellePsl1= false;
+							     libellePsl= false;
 								 mode ="PSC";
 					    }else 
 					    	 if(updatePpm.getDppMopCode().equalsIgnoreCase("PSL")) {
@@ -2185,8 +2190,9 @@ public class PpmModificationController {
 						         libellePpm= false;
 						         libellePsc= false;
 						         libellePsl = true;
+						         libellePsl1= true;
 						          mode ="PSL";
-							    _logger.info("Panel PSL Activé: "+pavetPRQ);
+							    _logger.info("Panel PSL Activé: "+pavetPPM);
 				          }else
 					      {
 					    	     pavetPPM = true;
@@ -2194,6 +2200,9 @@ public class PpmModificationController {
 							     pavetPRQ = false;
 							     libelleDPAMI = false;
 							     libelleDPPRQ = false;
+							     libellePsl1= false;
+							     libellePsl= false;
+							     libellePpm= true;
 							     pscOui = false; 
 								 pscNon = true;
 							     mode =" ";
@@ -4753,5 +4762,11 @@ public class PpmModificationController {
 		this.libellePsl = libellePsl;
 	}
 
-	
+	public boolean isLibellePsl1() {
+		return libellePsl1;
+	}
+
+	public void setLibellePsl1(boolean libellePsl1) {
+		this.libellePsl1 = libellePsl1;
+	}
 }
