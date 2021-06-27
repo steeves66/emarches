@@ -38,8 +38,8 @@ public class TLotAao implements java.io.Serializable {
 	private TDacSpecs TDacSpecs;
 	private String laaObjet;
 	private String laaObservation;
-	private Long laaMtCaut;
-	private Long laaMtEst;
+	public Long laaMtCaut;
+	public Long laaMtEst;
 	private Date laaDteSaisi;
 	private String laaStaCode;
 	private String laaOpeMatricule;

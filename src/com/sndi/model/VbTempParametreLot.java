@@ -28,14 +28,14 @@ public class VbTempParametreLot implements java.io.Serializable {
 	private String tempLaaNbrLotFin;
 	private String tempLaaLibGenerique;
 	private String tempLaaImputation;
-	private String tempLaaCautLot;
+	public String tempLaaCautLot;
 	private String tempLaaMtLot;
 	private String tempLaaAaoCode;
 	private String tempLaaAutre;
 	private String tempLaaAutre1;
 	private String tempLaaDacCode;
 	private String tempLaaDelaiExe;
-	private String laaMtEst;
+	public String laaMtEst;
 	private String tempLaaLieuExe;
 	private String tempPlage;
 	private String tempLaaVariante;
