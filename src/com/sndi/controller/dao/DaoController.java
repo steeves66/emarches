@@ -4159,8 +4159,7 @@ TDacSpecs dao = new TDacSpecs();
         	                	     		            
         	                	     		           newLot.laaMtCaut = mtCaut; 
         	                					       newLot.laaMtEst = mtEstimR;
-        	                					      _logger.info("valeur montant Caution: "+newLot.laaMtCaut);	
-        	                					      _logger.info("valeur montant Estimatif: "+newLot.laaMtEst);
+
         	            	 				 } 
         	            	 			 
         	            	    	      
