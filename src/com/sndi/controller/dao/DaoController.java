@@ -7164,7 +7164,7 @@ TDacSpecs dao = new TDacSpecs();
 										                         }else{
 
 										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
-												                                  statutSanction ="D2T";
+												                                  statutSanction ="D1S";
 												                                  statutSanRetour ="1";
 											                                }else{
 

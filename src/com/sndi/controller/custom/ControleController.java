@@ -4433,7 +4433,7 @@ public class ControleController {
 								    									     btn_ami_csv = false;
 								    									     btn_prq_dps = false;
 								    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-															    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE EN ATTENTE DE PUBLICATION";
+															    			 libelleDao3="TRANSMISSION DU DAC VALIDE AU SERVICE PUBLICATION";
 															    			 btn_new =false;
 															    			 btn_affec = false;
 															    			 btn_exam = false;
@@ -4526,7 +4526,7 @@ public class ControleController {
 									    									     btn_prq_dps = false;
 									    									     btn_prq_dps = false;
 									    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-																    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE PUBLIES";
+																    			 libelleDao3="DOSSIER D'APPEL A LA CONCURRENCE PUBLIES DANS LE BOMP";
 																    			 libelleSmall = "Procédure Normale";
 																    			 btn_new =false;
 																    			 btn_affec = false;
