@@ -90,6 +90,7 @@ public class EtatsPpmController {
 	
 	 public boolean ppmNormal = true;
      public boolean ppmAmi = false;
+     public boolean ppmAmiPso = false;
      public boolean ppmPso = false;
      public boolean ppmPsl = false;
      public boolean ppmPrq = false;
@@ -137,6 +138,15 @@ public class EtatsPpmController {
 			     ppmPsl = false;
 			     ppmPrq = false;
 			     ppmPsc = false;
+			     ppmAmiPso = false;
+			 } if(slctdTd.getDppMopCode().equalsIgnoreCase("AMS")){
+				 ppmNormal = false;
+			     ppmAmi = false;
+			     ppmAmiPso = true;
+			     ppmPso = false;
+			     ppmPsl = false;
+			     ppmPrq = false;
+			     ppmPsc = false;
 			 }else {
 				 /*if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
 					 ppmNormal = false;
@@ -153,6 +163,7 @@ public class EtatsPpmController {
 					     ppmPsl = true;
 					     ppmPrq = false;
 					     ppmPsc = false;
+					     ppmAmiPso = false;
 					 }else {
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")){
 							 ppmNormal = false;
@@ -161,6 +172,7 @@ public class EtatsPpmController {
 						     ppmPsl = false;
 						     ppmPrq = false;
 						     ppmPsc = true;
+						     ppmAmiPso = false;
 						 }else {
 						 
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")){
@@ -170,6 +182,7 @@ public class EtatsPpmController {
 						     ppmPsl = false;
 						     ppmPrq = false;
 						     ppmPsc = false;
+						     ppmAmiPso = false;
 						 }else {
 							 ppmNormal = true;
 						     ppmAmi = false;
@@ -177,6 +190,7 @@ public class EtatsPpmController {
 						     ppmPsl = false;
 						     ppmPrq = false; 
 						     ppmPsc = false;
+						     ppmAmiPso = false;
 						 }
 					 }
 				 }
@@ -184,9 +198,7 @@ public class EtatsPpmController {
 			 //}
 			}
 		 	 
-		 
-		 
-		 
+			 
 		 
 		//Afficher les détails du financement
 		 public void chargeDetailFinancement(){
@@ -534,6 +546,14 @@ public class EtatsPpmController {
 
 	public void setDetPass(TDetailPlanPassation detPass) {
 		this.detPass = detPass;
+	}
+
+	public boolean isPpmAmiPso() {
+		return ppmAmiPso;
+	}
+
+	public void setPpmAmiPso(boolean ppmAmiPso) {
+		this.ppmAmiPso = ppmAmiPso;
 	}
 
 	

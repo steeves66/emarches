@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="ppmAmiPso" >  
+    <div class="box-body">
+			            <div class="row"> 
+			            
+			  
+         
+             <div class="col-md-6">
+		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Transmission à la CPMP : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+             </div>    
+             
+	            <div class="col-md-6">
+			  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Rapport d'évaluation : </label></div>
+				    <div class="col-xs-6 col-sm-6">
+				    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateElabRapport}"> 
+				       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+				     </h:outputText> 
+				     </b>
+				</div> 
+		     </div>    
+             
+            <div class="col-md-6">
+		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation par la CPMP : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+             </div>
+
+	
+	<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Jugement des manifestations : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateJugementOffreTec}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+	</div>
+	
+		              
+		   </div> 
+		   
+		<div class="row">
+		
+		    <div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Date de publication : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateAvisAoPublication}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+		 </div>
+		 
+		 
+	
+	
+	 <h:panelGroup rendered="#{controleController.anoDmp}">
+	<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege}) : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAnoTec}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+	</div>
+	</h:panelGroup>
+	
+	
+	 <div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Ouverture des manifestations : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateOuvertOt}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+		 </div>
+	
+		 	<h:panelGroup rendered="#{controleController.anoBail}">
+	<div class="col-md-6">
+	<h:panelGroup rendered="false">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO du Bailleur : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAttApproBail}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+			</h:panelGroup>
+	</div>
+	</h:panelGroup>
+	
+         
+         
+  
+</div>
+
+         				 
+	            </div> 
+     </h:panelGroup>     
+</html>

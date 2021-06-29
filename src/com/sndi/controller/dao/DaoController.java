@@ -3015,6 +3015,7 @@ TDacSpecs dao = new TDacSpecs();
 							dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
 							dos.setTDacSpecs(newDao);
 							dos.setTOperateur(userController.getSlctd().getTOperateur());
+							dos.setTFonction(userController.getSlctd().getTFonction());
 							List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 							TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
 							if(!LS.isEmpty()) natureDoc = LS.get(0);
@@ -3042,9 +3043,9 @@ TDacSpecs dao = new TDacSpecs();
 			 
 			  @Transactional
 				public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
-				 //condition de chargement d'un document : Nature sÃ¯Â¿Â½lectionnÃ¯Â¿Â½e 
+				 //condition de chargement d'un document : Nature sélectionnée 
 				 if((docNature == null || "".equals(docNature))){
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non slectionne pour le chargement! ","");
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
 					 
 					 }else {
@@ -3069,6 +3070,8 @@ TDacSpecs dao = new TDacSpecs();
 					dos.setTNatureDocuments(natureDoc);
 					dos.setDdaNom(fileUploadController.getFileName());
 					dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+					dos.setTOperateur(userController.getSlctd().getTOperateur());
+					dos.setTFonction(userController.getSlctd().getTFonction());
 					dos.setDdaReference(fileUploadController.getDocNom());
 					iservice.addObject(dos);
 					
@@ -6854,12 +6857,15 @@ TDacSpecs dao = new TDacSpecs();
 															dos.setDdaNom(fileUploadController.getFileName());
 															dos.setTDacSpecs(newDao);
 															dos.setTOperateur(userController.getSlctd().getTOperateur());
+															dos.setTFonction(userController.getSlctd().getTFonction());
 															List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 															TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
 															if(!LS.isEmpty()) natureDoc = LS.get(0);
 															dos.setTNatureDocuments(natureDoc);
 															dos.setDdaDteSaisi(Calendar.getInstance().getTime());
 															dos.setDdaReference(fileUploadController.getDocNom());
+															dos.setTOperateur(userController.getSlctd().getTOperateur());
+															dos.setTFonction(userController.getSlctd().getTFonction());
 															iservice.addObject(dos); 
 															
 															//chargeNatureDocTrans();
@@ -6890,6 +6896,7 @@ TDacSpecs dao = new TDacSpecs();
 															dos.setDdaNom(fileUploadController.getFileName());
 															dos.setTDacSpecs(newDao);
 															dos.setTOperateur(userController.getSlctd().getTOperateur());
+															dos.setTFonction(userController.getSlctd().getTFonction());
 															List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 															TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
 															if(!LS.isEmpty()) natureDoc = LS.get(0);
@@ -6950,6 +6957,7 @@ TDacSpecs dao = new TDacSpecs();
 											if(!LS.isEmpty()) natureDoc = LS.get(0);
 											dos.setTNatureDocuments(natureDoc);
 											dos.setTOperateur(userController.getSlctd().getTOperateur());
+											dos.setTFonction(userController.getSlctd().getTFonction());
 											dos.setDdaNom(fileUploadController.getFileName());
 											dos.setDdaDteSaisi(Calendar.getInstance().getTime());
 											dos.setDdaReference(fileUploadController.getDocNom());
@@ -7734,7 +7742,19 @@ TDacSpecs dao = new TDacSpecs();
 														String message = "";
 														if(slctdTd.getDacStaCode().equalsIgnoreCase("DAP")) {
 															statUpdate = "DVE";
-															message="Fin de la vente du Dossier d'Appel d'Offres N"+slctdTd.getDacCode();
+															message="Fin de la vente du Dossier d'Appel d'Offres N° "+slctdTd.getDacCode();
+														 }
+														
+														if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL")) {
+															listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+																	new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																	if (!listAvis.isEmpty()) {
+																		//Mis à jour du statut
+																		majAvis= listAvis.get(0);
+																		majAvis.setTStatut(new TStatut("APU"));
+																		majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+																		iservice.updateObject(majAvis);
+																}
 														 }
 														//Recupration du DAO dans T_DAC_SPECS
 											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),

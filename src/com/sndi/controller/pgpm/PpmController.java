@@ -823,6 +823,22 @@ public class PpmController {
 		  pavetFinancement=true;
 		 }
 		 
+		
+		 //Controle sur les
+		 public void proposeFine() {
+			 if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("AMI") || detailPass.getTModePassation().getMopCode().equalsIgnoreCase("AMS")) {
+				            pavetFinancement=true;
+			 }else {
+				      if(detailPass.getDppBailleur().equalsIgnoreCase("") && tydCode.equalsIgnoreCase("")) {
+				    	  pavetFinancement=false;
+				      }else {
+				    	  pavetFinancement=true;
+				      }
+			 }
+		 }
+		 
+		 
+		 
    		 public void updatePieces() {
 			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			iservice.updateObject(detailPass);	

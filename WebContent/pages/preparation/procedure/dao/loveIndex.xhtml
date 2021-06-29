@@ -587,7 +587,9 @@
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
 			        </p:column>
 			        <p:column headerText="Date" styleClass="col-md-3">
-			            <h:outputText value="#{doss.ddaDteSaisi}"/>
+			            <h:outputText value="#{doss.ddaDteSaisi}">
+			            <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+			            </h:outputText>
 			        </p:column>
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">
