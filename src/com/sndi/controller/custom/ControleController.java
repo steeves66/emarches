@@ -414,6 +414,8 @@ public class ControleController {
 	private String actionPage="";
 	public boolean lignedefaut = true;
 	private boolean btn_reaffectation = false;
+	private boolean libelleValid = false;
+	public boolean etatPsoTrans =false;
 	//String actionPrivilèges ="";
 	
 	//Colonnes pour les consultations
@@ -10850,6 +10852,26 @@ public class ControleController {
 
 	public void setDiffPub(boolean diffPub) {
 		this.diffPub = diffPub;
+	}
+
+
+	public boolean isLibelleValid() {
+		return libelleValid;
+	}
+
+
+	public void setLibelleValid(boolean libelleValid) {
+		this.libelleValid = libelleValid;
+	}
+
+
+	public boolean isEtatPsoTrans() {
+		return etatPsoTrans;
+	}
+
+
+	public void setEtatPsoTrans(boolean etatPsoTrans) {
+		this.etatPsoTrans = etatPsoTrans;
 	}
 	
 	

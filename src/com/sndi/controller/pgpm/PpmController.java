@@ -382,6 +382,7 @@ public class PpmController {
 	     public boolean pscOui = true;
 	     public boolean pscNon = true;
 	     
+	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 				//Controle Pavé création pour les ppm / pspm normaux
@@ -821,6 +822,7 @@ public class PpmController {
 		  bailleurExiste();
 		 // controleController.btn_creerDetailPspm=true;
 		  pavetFinancement=true;
+		  //proposeFine();
 		 }
 		 
 		
@@ -829,10 +831,14 @@ public class PpmController {
 			 if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("AMI") || detailPass.getTModePassation().getMopCode().equalsIgnoreCase("AMS")) {
 				            pavetFinancement=true;
 			 }else {
-				      if(detailPass.getDppBailleur().equalsIgnoreCase("") && tydCode.equalsIgnoreCase("")) {
+				      if(detailPass.getDppBailleur().equalsIgnoreCase("")) {
 				    	  pavetFinancement=false;
 				      }else {
-				    	  pavetFinancement=true;
+				    	        if(tydCode.equalsIgnoreCase("")) {
+				    	        	pavetFinancement=false;
+				    	        }else {
+				    	        	pavetFinancement=true; 
+				    	        }
 				      }
 			 }
 		 }
@@ -843,6 +849,7 @@ public class PpmController {
 			detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			iservice.updateObject(detailPass);	
 			 recupModeleDao();
+			 //proposeFine();
 			 pavetFinancement=true;
 			}
 		 
@@ -3076,6 +3083,7 @@ public class PpmController {
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
+						 controleController.etatPsoTrans = true;
 				   }else {
 					   
 					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL") || passationListe.getMopCode().equalsIgnoreCase("PSL")) {
@@ -3083,6 +3091,16 @@ public class PpmController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
+							 controleController.setLibelleValid(true);
+					   }else {
+						   
+						   controleController.setLibelleValid(false);
+						   //controleController.validCPMP = false;
+						   controleController.etatPsoTrans = false;
+						   controleController.etatPsc = false;
+						   controleController.etatPsl = false;
+						   controleController.etatPso = false;
+						   controleController.etatPsl_Pso = false;
 					   }
 				   }
 			 }
@@ -3095,12 +3113,15 @@ public class PpmController {
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
+				 controleController.setLibelleValid(false);
 			 }else {
 				   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
+						 controleController.setLibelleValid(true);
+						 controleController.etatPsoTrans = true;
 				   }else {
 					   
 					   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
@@ -3108,6 +3129,7 @@ public class PpmController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
+							 controleController.setLibelleValid(true);
 					   }
 				   }
 			 }
@@ -5045,6 +5067,7 @@ public class PpmController {
 		     pavetFinancement = false;
 		     //chargeDataPgspm();
 			 //vider();
+		     tydCode = "";
 			 return userController.renderPage(value);
 		 }
 	  	 
@@ -5055,6 +5078,7 @@ public class PpmController {
 			 pavetFinancement = false;
 		     //chargeDataPgspm();
 			 //vider();
+			 tydCode="";
 			 return userController.renderPage(value);
 		 }
 		 

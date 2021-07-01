@@ -659,7 +659,7 @@
               <div class="form-group">
 		       
 		                  <h:panelGroup rendered="#{ppmController.libellePpm}">
-		                  <label  class="col-sm-6 control-label">Date de transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
+		                  <label  class="col-sm-6 control-label">Date de transmission du projet de DAO élaboré #{controleController.structureLibAbrege} <span style="color:red;"> *</span></label>
 		                  </h:panelGroup>
 		                  <h:panelGroup rendered="#{ppmController.libellePsl1}">
 		                  <label  class="col-sm-6 control-label">Date de transmission du dossier de consultation à la CPMP <span style="color:red;"> *</span></label>
@@ -672,9 +672,9 @@
 		                  </div>
 		    </div> 
 		    
-		     <h:panelGroup rendered="#{controleController.validCPMP}">
+		     <h:panelGroup rendered="#{controleController.libelleValid}">
 		    <div class="form-group">
-		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP (PS) <span style="color:red;"> </span></label>
+		                  <label for="valcp2" class="col-sm-6 control-label">Validation par la CPMP (PS) <span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valcp2" value="#{ppmController.detailPass.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
 		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAttApprobCpmp')}" update="gnl"/>
@@ -692,7 +692,7 @@
              <h:panelGroup rendered="#{controleController.validDMP}"> 
 		    <div class="form-group">
 		       
-		                  <label for="valdao2" class="col-sm-6 control-label">Validation DAO par la #{controleController.structureLibAbrege} / CPMP<span style="color:red;"> </span></label>
+		                  <label for="valdao2" class="col-sm-6 control-label">Date d'Approbation du DAO par la #{controleController.structureLibAbrege} / CPMP<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valdao2" title="#{ppmController.geneDate.dppJourDaoApprobDmp} #{ppmController.geneDate.dppDateDaoApprobDmp}" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobDmp')}" update=":gnl"/>
@@ -705,6 +705,7 @@
 		                  <label for="baildao2" class="col-sm-6 control-label">Validation DAO Bail</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="baildao2" title="#{ppmController.geneDate.dppJourDaoApprobBail}  #{ppmController.geneDate.dppDateDaoApprobBail}"  value="#{ppmController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobBail')}" update=":gnl"/>
 		                   </p:calendar> 
 		                </div>
 		                </div> 
@@ -714,7 +715,7 @@
              <div class="form-group">
              
                  <h:panelGroup rendered="#{ppmController.libellePpm}">
-		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  <label  class="col-sm-6 control-label">Date de Publication de l'avis dans le BOMP <span style="color:red;">*</span></label>
 		                   <div class="col-sm-6">
 		                    <table>
 						      <tr>
@@ -743,6 +744,7 @@
                
              </div>
              
+             <h:panelGroup rendered="#{controleController.etatPsoTrans}">
              <div class="col-md-6">
                <div class="form-group">
 		                  <label for="trDgmp" class="col-sm-6 control-label">Date de transmission de l'avis à la #{controleController.structureLibAbrege}<span style="color:red;"></span></label>
@@ -753,7 +755,7 @@
 		                  </div>
 		                </div>
              </div>
-             
+             </h:panelGroup>
              
              
              <h:panelGroup rendered="#{controleController.etatPsc}">
@@ -830,7 +832,7 @@
 		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oft" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> </span></label>
+		                  <label for="oft" class="col-sm-6 control-label">Date d'ouverture des plis techniques<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                  
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '2'}">
@@ -853,7 +855,7 @@
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
-		                  <label for="off" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"></span></label>
+		                  <label for="off" class="col-sm-6 control-label">Date d'ouverture des plis financiers<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '2'}">
@@ -877,7 +879,7 @@
 		                  </div>
 		                </div>
 		                 <div class="form-group">
-		                  <label for="rapp" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
+		                  <label for="rapp" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres</label>
 		                  <div class="col-sm-6">
 		                  
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
@@ -901,7 +903,7 @@
 		                  </div>
 		                </div>
 		                 <div class="form-group">
-		                  <label for="jug" class="col-sm-6 control-label">Jugement Technique<span style="color:red;"></span></label>
+		                  <label for="jug" class="col-sm-6 control-label">Date de jugement des offres<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffreTec == '2'}">
@@ -1029,6 +1031,8 @@
 		                  </div>
 		                </div>
 		                </h:panelGroup>
+		                
+		                <h:panelGroup rendered="#{controleController.etatPsoTrans}">
 		                 <div class="form-group">
 		                  <label for="neg" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
@@ -1052,9 +1056,11 @@
 		                   </h:panelGroup>
 		                  </div>
 		                  </div>
+		                  </h:panelGroup>
+		                  
 		                  
 		                  <div class="form-group">
-		                  <label for="jug2" class="col-sm-6 control-label">Attribution<span style="color:red;"></span></label>
+		                  <label for="jug2" class="col-sm-6 control-label">Date d'approbation de l'attribution ANO DGMP</label>
 		                  <div class="col-sm-6">
 		                  
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '2'}">
@@ -1090,7 +1096,7 @@
          <div class="box-body">
          <div class="col-md-6">
             <div class="form-group">
-		                  <label for="attr" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> </span></label>
+		                  <label for="attr" class="col-sm-6 control-label">Date de la signature du marché Attributaire<span style="color:red;"> </span></label>
 		                  <div class="col-sm-6">
 		                  
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
@@ -1113,7 +1119,7 @@
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
-		                  <label for="saiAc" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"></span></label>
+		                  <label for="saiAc" class="col-sm-6 control-label">Date de la signature du marché AC <span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAc == '2'}">
@@ -1138,7 +1144,7 @@
          </div>
          <div class="col-md-6">
                <h:panelGroup id="psl_inv1">
-				    <h:panelGroup rendered="#{controleController.etatPsl}">
+				    
                    <div class="form-group">
 		                  <label for="marcheApprob" class="col-sm-6 control-label">Approbation du marché</label>
 		                  <div class="col-sm-6">
@@ -1162,7 +1168,8 @@
 		                   </h:panelGroup>
 		                  </div>
 		                </div>
-		                     
+		                
+		              <h:panelGroup rendered="#{controleController.etatPsl}">     
 		                <div class="form-group">
 		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché par la #{controleController.structureLibAbrege}<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
@@ -1189,7 +1196,7 @@
 			   <div class="row">
 		         <div class="col-md-6">
 		          <div class="form-group">
-		                  <label for="debut" class="col-sm-6 control-label">Début d'execution du marché</label>
+		                  <label for="debut" class="col-sm-6 control-label">Début d'exécution du marché</label>
 		                  <div class="col-sm-6">
 		                  
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecDebut == '2'}">
@@ -1215,7 +1222,7 @@
 		         </div>
 		         <div class="col-md-6">
 		         <div class="form-group">
-		                  <label for="fin" class="col-sm-6 control-label">Fin d'execution du marché</label>
+		                  <label for="fin" class="col-sm-6 control-label">Fin d'exécution du marché</label>
 		                  <div class="col-sm-6">
 		                  
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecFin == '2'}">
@@ -1472,7 +1479,7 @@
 		                  </div>
 		                  
 		                 <div class="form-group">
-		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation</label>
+		                  <label for="rappAmi" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres</label>
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmi1" title="#{ppmController.geneDate.dppJourElabRapport} #{ppmController.geneDate.dppDateElabRapport}" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -1762,7 +1769,7 @@
 		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oftDp" class="col-sm-6 control-label">Ouverture Technique</label>
+		                  <label for="oftDp" class="col-sm-6 control-label">Date d'ouverture des plis techniques</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oftDp1" title="#{ppmController.geneDate.dppJourOuvertOt} le #{ppmController.geneDate.dppDateOuvertOt}" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
@@ -1784,7 +1791,7 @@
 		                 
 		                  
 		                 <div class="form-group">
-		                  <label for="rappAmiDp" class="col-sm-6 control-label">Rapport d'évaluation Techinique<span style="color:red;"></span></label>
+		                  <label for="rappAmiDp" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiDp1" title="#{ppmController.geneDate.dppJourElabRapport} le #{ppmController.geneDate.dppDateElabRapport}" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -1809,7 +1816,7 @@
 		                  <label for="jugAmiDp" class="col-sm-6 control-label">Jugement des manifestations</label>
 		                  </h:panelGroup>
 		                    <h:panelGroup rendered="#{ppmController.libelleDPAMI}">
-		                  <label class="col-sm-6 control-label">Jugement offres Techiniques</label>
+		                  <label class="col-sm-6 control-label">Date de jugement des offres</label>
 		                  </h:panelGroup>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffreTec == '2'}">
@@ -1886,7 +1893,7 @@
          
          <div class="col-md-6">
                         <div class="form-group">
-		                  <label for="offFinDp" class="col-sm-6 control-label">Ouverture Financière</label>
+		                  <label for="offFinDp" class="col-sm-6 control-label">Date d'ouverture des plis financiers</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="offFinDp1" title="#{ppmController.geneDate.dppJourOuvertOf} le #{ppmController.geneDate.dppDateOuvertOf}" value="#{ppmController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
@@ -1910,7 +1917,7 @@
 		                </div>
        
 		                  <div class="form-group">
-		                  <label for="rappAmiDpFin" class="col-sm-6 control-label">Rapport d'évaluation Financière</label>
+		                  <label for="rappAmiDpFin" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres</label>
 		                  <div class="col-sm-6">
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiDpFin1" title="#{ppmController.geneDate.dppJourElabRapport} le #{ppmController.geneDate.dppDateElabRapport}" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2058,7 +2065,7 @@
          <div class="box-body">
          <div class="col-md-6">
             <div class="form-group">
-		                  <label for="attrDp" class="col-sm-6 control-label">Signature Attributaire</label>
+		                  <label for="attrDp" class="col-sm-6 control-label">Date de la signature du marché Attributaire</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attrDp1" title="#{ppmController.geneDate.dppJourSignatAttrib} le #{ppmController.geneDate.dppDateSignatAttrib}" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2078,7 +2085,7 @@
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
-		                  <label for="saiAcDp" class="col-sm-6 control-label">Signature de l'AC</label>
+		                  <label for="saiAcDp" class="col-sm-6 control-label">Date de la signature du marché  AC</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAc == '2'}">
 		                   <p:calendar id="saiAcDp1" title="#{ppmController.geneDate.dppJourSignatAc} le #{ppmController.geneDate.dppDateSignatAc}" value="#{ppmController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2101,7 +2108,7 @@
          <div class="col-md-6">
               
                    <div class="form-group">
-		                  <label for="marcheApprobDp" class="col-sm-6 control-label">Approbation du marché</label>
+		                  <label for="marcheApprobDp" class="col-sm-6 control-label">Date d'approbation du marché</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagMarcheApprob == '2'}">
 		                   <p:calendar id="marcheApprobDp1" title="#{ppmController.geneDate.dppJourMarcheApprob} le #{ppmController.geneDate.dppDateMarcheApprob}" value="#{ppmController.geneDate.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2137,7 +2144,7 @@
 			   <div class="row">
 		         <div class="col-md-6">
 		          <div class="form-group">
-		                  <label for="debutDp" class="col-sm-6 control-label">Début d'execution du marché</label>
+		                  <label for="debutDp" class="col-sm-6 control-label">Début d'exécution du marché</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecDebut == '2'}">
 		                   <p:calendar id="debutDp1" title="#{ppmController.geneDate.dppJourExecDebut} le #{ppmController.geneDate.dppDateExecDebut}" value="#{ppmController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2159,7 +2166,7 @@
 		         </div>
 		         <div class="col-md-6">
 		         <div class="form-group">
-		                  <label for="finDp" class="col-sm-6 control-label">Fin d'execution du marché</label>
+		                  <label for="finDp" class="col-sm-6 control-label">Fin d'exécution du marché</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecFin == '2'}">
 		                   <p:calendar id="finDp1" title="#{ppmController.geneDate.dppJourExecFin} le #{ppmController.geneDate.dppDateExecFin}" value="#{ppmController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2283,7 +2290,7 @@
              
              <div class="form-group">
 		       
-		                  <label class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege} / CPMP <span style="color:red;"> *</span></label>
+		                  <label class="col-sm-6 control-label">Date de transmission du projet de DAO à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar  value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}" update="gnl"/>
@@ -2393,7 +2400,7 @@
 		                  </div>
 		                  </div>
 		                 <div class="form-group">
-		                  <label for="rapp22" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
+		                  <label for="rapp22" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rapp221" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2684,7 +2691,7 @@
 		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oftPrqDp" class="col-sm-6 control-label">Ouverture Technique</label>
+		                  <label for="oftPrqDp" class="col-sm-6 control-label">Date d'ouverture des plis techniques</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOt == '2'}">
 		                   <p:calendar id="oftPrqDp1" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
@@ -2707,7 +2714,7 @@
 		                 
 		                  
 		                 <div class="form-group">
-		                  <label for="rappPrqDp" class="col-sm-6 control-label">Rapport d'évaluation Techinique<span style="color:red;"></span></label>
+		                  <label for="rappPrqDp" class="col-sm-6 control-label">Date d'élaboration du Date d'élaboration du rapport d'évaluation des offres des offres <span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappPrqDp1" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2730,7 +2737,7 @@
 		                </div>
 		                 <div class="form-group">
 		                    <h:panelGroup rendered="#{ppmController.libelleDPPRQ}">
-		                  <label class="col-sm-6 control-label">Jugement offres Techiniques<span style="color:red;"></span></label>
+		                  <label class="col-sm-6 control-label">Date de jugement des offres<span style="color:red;"></span></label>
 		                  </h:panelGroup>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffreTec == '2'}">
@@ -2802,7 +2809,7 @@
          
          <div class="col-md-6">
                         <div class="form-group">
-		                  <label for="offFinPrqDp" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"></span></label>
+		                  <label for="offFinPrqDp" class="col-sm-6 control-label">Date d'ouverture des plis financiers<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagOuvertOf == '2'}">
 		                   <p:calendar id="offFinPrqDp1" value="#{ppmController.geneDate.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
@@ -2825,7 +2832,7 @@
 		                </div>
        
 		                  <div class="form-group">
-		                  <label for="rappAmiPrqDpFin" class="col-sm-6 control-label">Rapport d'évaluation Financière<span style="color:red;"></span></label>
+		                  <label for="rappAmiPrqDpFin" class="col-sm-6 control-label">Date d'élaboration du rapport d'évaluation des offres<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                    <h:panelGroup rendered="#{ppmController.geneDate.dppFlagElabRapport == '2'}">
 		                   <p:calendar id="rappAmiPrqDpFin1" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2972,7 +2979,7 @@
          <div class="box-body">
          <div class="col-md-6">
             <div class="form-group">
-		                  <label for="attrPrqDp" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"></span></label>
+		                  <label for="attrPrqDp" class="col-sm-6 control-label">Date de la signature du marché Attributaire</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
 		                   <p:calendar id="attrPrqDp1" value="#{ppmController.geneDate.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -2994,7 +3001,7 @@
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
-		                  <label for="saiAcPrqDp" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"></span></label>
+		                  <label for="saiAcPrqDp" class="col-sm-6 control-label">Date de la signature du marché AC <span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAc == '2'}">
 		                   <p:calendar id="saiAcPrqDp1" value="#{ppmController.geneDate.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
@@ -3082,7 +3089,7 @@
 		         </div>
 		         <div class="col-md-6">
 		         <div class="form-group">
-		                  <label for="finPrqDp" class="col-sm-6 control-label">Fin d'execution du marché<span style="color:red;"></span></label>
+		                  <label for="finPrqDp" class="col-sm-6 control-label">Fin d'execution du marché</label>
 		                  <div class="col-sm-6">
 		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagExecFin == '2'}">
 		                   <p:calendar id="finPrqDp1" value="#{ppmController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
@@ -3270,7 +3277,7 @@
 			   <div class="row">
 		         <div class="col-md-6">
 		          <div class="form-group">
-		                  <label for="debutPsc1" class="col-sm-6 control-label">Début d'execution</label>
+		                  <label for="debutPsc1" class="col-sm-6 control-label">Début d'execution du marché</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="debutPsc1" value="#{ppmController.geneDate.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateExecDebut')}" update="debutPsc1"/>
@@ -3280,7 +3287,7 @@
 		         </div>
 		         <div class="col-md-6">
 		         <div class="form-group">
-		                  <label for="finPsc1" class="col-sm-6 control-label">Fin d'execution</label>
+		                  <label for="finPsc1" class="col-sm-6 control-label">Fin d'execution du marché</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="finPsc1" value="#{ppmController.geneDate.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateExecFin')}" update="finPsc1"/>

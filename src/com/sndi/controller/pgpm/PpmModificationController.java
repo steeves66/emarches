@@ -1733,6 +1733,14 @@ public class PpmModificationController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
+					   }else {
+						   controleController.setLibelleValid(false);
+						   //controleController.validCPMP = false;
+						   controleController.etatPsoTrans = false;
+						   controleController.etatPsc = false;
+						   controleController.etatPsl = false;
+						   controleController.etatPso = false;
+						   controleController.etatPsl_Pso = false;
 					   }
 				   }
 			 }
@@ -1745,12 +1753,15 @@ public class PpmModificationController {
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
+				 controleController.setLibelleValid(false);
 			 }else {
 				   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
+						 controleController.setLibelleValid(true);
+						 controleController.etatPsoTrans = true;
 				   }else {
 					   
 					   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSL")) {
@@ -1758,6 +1769,7 @@ public class PpmModificationController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
+							 controleController.setLibelleValid(true);
 					   }
 				   }
 			 }

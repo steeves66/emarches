@@ -239,6 +239,7 @@ public class VDacliste implements java.io.Serializable {
 	private String fonCodeCsv;
 	private String fonCodeSpp;
 	private String staLibelleLong;
+	private String checkTrans;
 
 	public VDacliste() {
 	}
@@ -300,7 +301,7 @@ public class VDacliste implements java.io.Serializable {
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String dacModType, String dacFinancement,String critere,String dacMargePref, BigDecimal dacMargePrefComVal,
 			BigDecimal dacMargePrefSouVal,Long adaNum,double cautValMin,
 			double cautValMax, String aaoOffAnormal,String adaLibelle,
-			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp,String staLibelleLong) {
+			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp,String staLibelleLong,String checkTrans) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -520,6 +521,7 @@ public class VDacliste implements java.io.Serializable {
 		this.fonCodeCsv = fonCodeCsv;
 		this.fonCodeSpp = fonCodeSpp;
 		this.staLibelleLong = staLibelleLong;
+		this.checkTrans = checkTrans;
 	}
 
 	@Id
@@ -2502,6 +2504,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setStaLibelleLong(String staLibelleLong) {
 		this.staLibelleLong = staLibelleLong;
+	}
+	
+	@Column(name = "CHECK_TRANS")
+	public String getCheckTrans() {
+		return this.checkTrans;
+	}
+
+	public void setCheckTrans(String checkTrans) {
+		this.checkTrans = checkTrans;
 	}
 
 }
