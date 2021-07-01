@@ -515,7 +515,8 @@ public class DaoController {
 	  private boolean clean = false;
 	  private boolean panelMessage = true;
 	  private boolean panelCritereLot = false;
-	  
+	  private String mois = "";
+	  private String statut = "";
 	  private boolean champPub = false;
 	 
 	 @PostConstruct
@@ -8286,20 +8287,23 @@ TDacSpecs dao = new TDacSpecs();
 			}
 		}
 		     
+	
+		public void filterByMois() {
+			publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheMoisCsvInstr("VAvisPublie",""+mois,""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("liste pulier"+publieListe);	
+			_logger.info("mois"+mois);//mois
+		}
+		
+		public void filterByStatut() {
+			publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheStatutCsvInstr("VAvisPublie",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("liste pulier"+publieListe);	
+			_logger.info("Statut"+statut);
+		}
 		     
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
 				case "dao1":
-					String fonct = controleController.getFonctionalite();
-					if(userController.getSlctd().getTFonction().getFonCod().equalsIgnoreCase("CSV")) {
-						if(fonct.equalsIgnoreCase("listeDpubCsv")) {
-							champPub=true;
-					     }else {
-					    	 champPub=false;
-					    }
-						
-					}
 					chargeData();
 					chargeDetailTB();
 					chargeNatureDocTrans();
@@ -16681,6 +16685,23 @@ TDacSpecs dao = new TDacSpecs();
 	public void setPublieListe(List<VAvisPublie> publieListe) {
 		this.publieListe = publieListe;
 	}
+
+	public String getMois() {
+		return mois;
+	}
+
+	public void setMois(String mois) {
+		this.mois = mois;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+	
 	
 	/*******  Fin document  *************/
 }

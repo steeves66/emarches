@@ -381,6 +381,27 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnInPublicationRechercheCsvInstr(objet,stat,critere,strSource);
 		}
 		
+		@Override
+		public List getObjectByColumnInPublicationRechercheStatutMoisCsvInstr(String objet,String stat,String critere,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationRechercheStatutMoisCsvInstr(objet,stat,critere,strSource);
+		}
+		
+		@Override
+		public List getObjectByColumnInPublicationRechercheStatutCsvInstr(String objet,String stat,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationRechercheStatutCsvInstr(objet,stat,strSource);
+		}
+		
+		@Override
+		public List getObjectByColumnInPublicationRechercheMoisCsvInstr(String objet,String mois,String strSource)  {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationRechercheMoisCsvInstr(objet,mois,strSource);
+		}
+		
+		
+		
+	
 		
 
 		/*@Override

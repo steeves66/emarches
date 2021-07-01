@@ -519,6 +519,30 @@ public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String 
 }
 
 @Override
+public List getObjectByColumnInPublicationRechercheStatutMoisCsvInstr(String objet,String stat,String critere,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE = '"+stat+"' AND MOIS = '"+critere+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
+public List getObjectByColumnInPublicationRechercheMoisCsvInstr(String objet,String mois,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE MOIS = '"+mois+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
+public List getObjectByColumnInPublicationRechercheStatutCsvInstr(String objet,String stat,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE = '"+stat+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
 public List getObjectByColumnInPubRechercheCsvInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource) {
 	// TODO Auto-generated method stub
 	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DAC_TYPE_PLAN ='"+typePlan+"' AND CRITERE like'%"+critere+"%' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_MODIF" ; 

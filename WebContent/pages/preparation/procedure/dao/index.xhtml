@@ -644,15 +644,51 @@
 				   
 				   
 				     <h:panelGroup rendered="#{controleController.panel5}">
+				    <div class="col-md-12">
+				    <div class="col-md-7"></div>
+				     <div class="col-md-3">
+				    <div class="col-md-2"> <b class="pull-right">Mention</b></div>
+				    <div class="col-sm-10">
+				       <p:selectOneMenu id="typeFonction" value="#{daoController.statut}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir la mention.." itemValue="" />  
+			            <f:selectItem  itemLabel="En attente de publication" itemValue="DAP" /> 
+			            <f:selectItem  itemLabel="Déja publié dans le BOMP" itemValue="PUB" /> 
+			            <p:ajax listener="#{daoController.filterByStatut()}" update=":gnl:ndTblepub1"/>	
+       		        </p:selectOneMenu> 
+       		        </div>
+				     </div>
+				     
+				     <div class="col-md-2">
+				    <div class="col-md-2"> <b>Mois</b></div>
+				    <div class="col-sm-10">
+				       <p:selectOneMenu value="#{daoController.mois}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			                <f:selectItem  itemLabel="Choisir le mois.." itemValue="" />  
+			            <f:selectItem  itemLabel="JANVIER" itemValue="JANVIER" /> 
+			            <f:selectItem  itemLabel="FEVRIER" itemValue="FEVRIER" /> 
+			            <f:selectItem  itemLabel="MARS" itemValue="MARS" /> 
+			            <f:selectItem  itemLabel="AVRIL" itemValue="AVRIL" /> 
+			            <f:selectItem  itemLabel="MAI" itemValue="MAI" /> 
+			            <f:selectItem  itemLabel="JUIN" itemValue="JUIN" /> 
+			            <f:selectItem  itemLabel="JUILLET" itemValue="JUILLET" /> 
+			            <f:selectItem  itemLabel="AOUT" itemValue="AOUT" /> 
+			            <f:selectItem  itemLabel="SEPTEMBRE" itemValue="SEPTEMBRE" /> 
+			            <f:selectItem  itemLabel="OCTOBRE" itemValue="OCTOBRE" /> 
+			            <f:selectItem  itemLabel="NOVEMBRE" itemValue="NOVEMBRE" /> 
+			            <f:selectItem  itemLabel="DECEMBRE" itemValue="DECEMBRE" /> 
+			            <p:ajax listener="#{daoController.filterByMois()}" update=":gnl:ndTblepub1"/>
+       		        </p:selectOneMenu> 
+       		        </div>
+				     </div>
+				     
+				     
+				     </div>
 					  <p:dataTable id="ndTblepub1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.publieListe}" 
 					  emptyMessage="Aucun #{controleController.type}" 
 					 scrollable="true" scrollHeight="250" >
                          <p:column headerText="Code Avis" styleClass="col-sm-1">  
          				<h:outputText value="#{slctdTb.pubAaoNumFtp}" />
-				        </p:column>
-				        
-				         <p:column headerText="N°BOMP" styleClass="col-sm-1">
-         				<h:outputText value="#{slctdTb.pubBulCode}" />
 				        </p:column>
 				        
                         <p:column headerText="N° #{controleController.type}" width="9%" >
@@ -672,13 +708,17 @@
          				<h:outputText value="#{slctdTb.mopLibelleLong}" />
 				        </p:column> 
 				        
+				          <p:column headerText="N°BOMP" width="4%">
+         				<h:outputText value="#{slctdTb.pubBulCode}" />
+				        </p:column>
+				        
 				        <p:column headerText="Date publication" styleClass="col-sm-1">
          					<h:outputText value="#{slctdTb.pubBulDtePub}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 
-                      <p:column headerText="Actions" width="5%">
+                      <p:column headerText="Actions" width="3%">
                              <p:commandLink  action="#{etatsDaoController.renderPage('dao12','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTdPub}" />
