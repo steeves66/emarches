@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sndi.controller.custom.ControleController;
-import com.sndi.controller.pgpm.PpmController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAffichageDao;
@@ -28,6 +27,7 @@ import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.TLotAao;
 import com.sndi.model.VAdresseAvis;
+import com.sndi.model.VAvisPublie;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoPieces;
 import com.sndi.model.VDetailDao;
@@ -75,6 +75,7 @@ public class EtatsDaoController {
 	private TDossierDacs selectedDossier = new TDossierDacs(); 
 	
 	private VDacliste slctdTd = new VDacliste();
+	private VAvisPublie slctdTdPub = new VAvisPublie();
 	private TDaoAffectation slctdTda = new TDaoAffectation();
 	private VDetailDao detail = new VDetailDao(); 
 	private VDetailDao affectes = new VDetailDao();
@@ -228,6 +229,59 @@ public class EtatsDaoController {
  		 }
     
 	//Fin Détails DAO Affecté 
+    
+    
+    //Debut Dao publie
+  //Afficher les avis du DAO selectionné
+    public void chargeAvisPub() {
+ 	avisListe.clear();
+ 	avisListe = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
+ 	new WhereClause("AAO_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode())));
+ 	if (!avisListe.isEmpty()) {
+ 		avis=avisListe.get(0);
+	       }
+ 		 }
+    
+    
+    
+  //Afficher les pièces du DAO selectionné
+  	public void chargePiecesPub() {
+  	//piecesListe.clear();
+  	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
+  	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+  		 }
+  	
+  	
+    public void chargeAdressePub() {
+    listDetailAdresse.clear();
+    listDetailAdresse = ((List<VAdresseAvis>)iservice.getObjectsByColumn("VAdresseAvis",new ArrayList<String>(Arrays.asList("V_AD")),
+ 	new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+ 		 }
+    
+    
+    //Afficher les lot de l'avis selectionné
+    public void chargeLotPub() {
+ 	lotListe.clear();
+ 	lotListe = ((List<VLotDao>)iservice.getObjectsByColumn("VLotDao",new ArrayList<String>(Arrays.asList("LAA_ID")),
+ 	new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+ 		 }
+    
+    //Afficher le(s) PPM du DAO selectionné
+    public void chargeDaoPpmPub() {
+ 	ppmListe.clear();
+ 	ppmListe = ((List<TDetailPlanPassation>)iservice.getObjectsByColumn("TDetailPlanPassation",new ArrayList<String>(Arrays.asList("DPP_ID")),
+ 	new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+ 		 }
+    
+    
+  //Afficher les dossiers du DAO selectionné
+    public void chargeDossierPub() {
+ 	dossListe.clear();
+ 	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+ 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+ 		 }
+    
+    //Fin DAO PUBLIE
 	
 	
 	 //Ouverture d'un dossier chargé
@@ -253,6 +307,13 @@ public class EtatsDaoController {
 	 public void imprimeSynthese() {
 			   projetReport.stringparam1(slctdTd.getDacCode(), "synthese_dac", "synthese_dac");       
 		}
+	 
+	 
+	 //Edition de la fiche de synthse du DAO
+	 public void imprimeSynthesePub() {
+			   projetReport.stringparam1(slctdTdPub.getDacCode(), "synthese_dac", "synthese_dac");       
+		}
+    
     
   	
   //Téléchargement des DAO type depuis la liste d'affichage
@@ -379,6 +440,15 @@ public class EtatsDaoController {
 				chargeLotAff();
 				chargeDaoPpmAff();
 				chargeDossierAff();
+	   			_logger.info("value: "+value+" action "+action);	
+	    	break;
+	   		case "dao12":
+	   			chargeAvisPub();
+	   			chargePiecesPub();
+				chargeAdressePub();
+				chargeLotPub();
+				chargeDaoPpmPub();
+				chargeDossierPub();
 	   			_logger.info("value: "+value+" action "+action);	
 	    	break;
 	   		}
@@ -559,6 +629,22 @@ public class EtatsDaoController {
 
 	public void setAvis(TAvisAppelOffre avis) {
 		this.avis = avis;
+	}
+
+
+
+
+
+	public VAvisPublie getSlctdTdPub() {
+		return slctdTdPub;
+	}
+
+
+
+
+
+	public void setSlctdTdPub(VAvisPublie slctdTdPub) {
+		this.slctdTdPub = slctdTdPub;
 	}
 	
 }

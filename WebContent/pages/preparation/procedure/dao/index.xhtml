@@ -641,6 +641,51 @@
 				         </p:column>   
 				    </p:dataTable>
 				   </h:panelGroup> 
+				   
+				   
+				     <h:panelGroup rendered="#{controleController.panel5}">
+					  <p:dataTable id="ndTblepub1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.publieListe}" 
+					  emptyMessage="Aucun #{controleController.type}" 
+					 scrollable="true" scrollHeight="250" >
+                         <p:column headerText="Code Avis" styleClass="col-sm-1">  
+         				<h:outputText value="#{slctdTb.pubAaoNumFtp}" />
+				        </p:column>
+				        
+				         <p:column headerText="N°BOMP" styleClass="col-sm-1">
+         				<h:outputText value="#{slctdTb.pubBulCode}" />
+				        </p:column>
+				        
+                        <p:column headerText="N° #{controleController.type}" width="9%" >
+         				<h:outputText value="#{slctdTb.dacCode}" />
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.pubObjetDac}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" width="8%" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" width="11%" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+				        <p:column headerText="Date publication" styleClass="col-sm-1">
+         					<h:outputText value="#{slctdTb.pubBulDtePub}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+
+                      <p:column headerText="Actions" width="5%">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao12','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTdPub}" />
+                             </p:commandLink>
+				         </p:column>   
+				    </p:dataTable>
+				   </h:panelGroup> 
 							
 						 </div>
 					</div> 

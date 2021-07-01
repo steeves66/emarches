@@ -268,6 +268,7 @@ public class DaoController {
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
 	 private VCritAnalDacSousentete newSousEnteteCrit = new VCritAnalDacSousentete();
+	 private List<VAvisPublie> publieListe = new ArrayList<VAvisPublie>();
 	 private VbTempCritere newTempEnteteCrit = new VbTempCritere();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
@@ -514,6 +515,8 @@ public class DaoController {
 	  private boolean clean = false;
 	  private boolean panelMessage = true;
 	  private boolean panelCritereLot = false;
+	  
+	  private boolean champPub = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -2401,7 +2404,10 @@ TDacSpecs dao = new TDacSpecs();
 											_logger.info("listeDAO size: "+listeDAO.size());	
 											typeActionTb(); 
 										 }else {
-											 
+											 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+												 String stat1="PUB";
+				 									publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationCsvInstr("VAvisPublie",""+stat1,""+userController.getSlctd().getTFonction().getFonCod());
+											 }
 										 }
 											 
 								 }
@@ -2451,6 +2457,14 @@ TDacSpecs dao = new TDacSpecs();
 		//Filtre multicritï¿½re pour les DAO en Procï¿½dure Normale
 		 
 		 public void chercherDac() {
+			 String fonct = controleController.getFonctionalite();
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")){
+				 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+					 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie","PUB",
+			    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());   
+				 } 
+			 }
+			
 			 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
 				 chercher("DAO","PN");
 				 }else {
@@ -2496,6 +2510,8 @@ TDacSpecs dao = new TDacSpecs();
 		 public void chercher(String typeDac,String typePlan){
 			 listeDAO.clear();
 			 String fonct = controleController.getFonctionalite();
+			 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie","PUB",
+	    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 
 				//Affichage des differentes listes de l'AC en faction de l'action
@@ -2617,8 +2633,14 @@ TDacSpecs dao = new TDacSpecs();
 													 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));*/
 												_logger.info("listeDAO size: "+listeDAO.size());
 										 }else {
+											 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+											/*	 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie","PUB",
+										    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());   
+											 }else {*/
+												//Autres 
+											 }
 											 
-											   //Autres
+											   
 										 }
 									 }	 
 								 }
@@ -7893,6 +7915,7 @@ TDacSpecs dao = new TDacSpecs();
 																			 }else {
 																				 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
 																					 chargeDataAPublier("DAO","PN","DAP","DAP");	
+																					//chargeDataAPublier("AMI","PS","PUB","PUB");
 																				 }else {
 																					
 																				 }	 
@@ -7910,6 +7933,7 @@ TDacSpecs dao = new TDacSpecs();
 																			        }else {
 																				       if(fonct.equalsIgnoreCase("listePubDdpsCsv")) {
 																				    	   chargeDataAPublier("DAO", "PS","DAP","DAP");	
+																				    	 //chargeDataAPublier("AMI","PS","PUB","PUB");
 																				     }else {
 																				 }	 
 																			 }
@@ -7925,6 +7949,7 @@ TDacSpecs dao = new TDacSpecs();
 																	        }else {
 																		       if(fonct.equalsIgnoreCase("listeDamiCsv")) {
 																		    	   chargeDataAPublier("AMI","PN","DAP","DAP");
+																		    	 //chargeDataAPublier("AMI","PS","PUB","PUB");
 																		     }else {
 																			
 																		               }	 
@@ -7940,6 +7965,7 @@ TDacSpecs dao = new TDacSpecs();
 																		        }else {
 																			       if(fonct.equalsIgnoreCase("listePubAdpsCsv")) {
 																			    	   chargeDataAPublier("AMI","PS","DAP","DAP");
+																			    	 //chargeDataAPublier("AMI","PS","PUB","PUB");
 																			     }else {
 																				
 																			               }	 
@@ -7983,14 +8009,23 @@ TDacSpecs dao = new TDacSpecs();
 													 									typeActionTb(); 
 														 						 }else
 														 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-														 								 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
-														 								 /* publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-														 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
-														 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-														 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-														 								        // multiFiltre ="";
-*/														 									_logger.info("publicationListe size: "+publicationListe.size());	
-														 									typeActionTb(); 
+														 								 String fonct = controleController.getFonctionalite();
+														 								if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+														 									stat1="PUB";
+														 									publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationCsvInstr("VAvisPublie",""+stat1,""+userController.getSlctd().getTFonction().getFonCod());
+														 									_logger.info("action: "+fonct);
+														 									_logger.info("publieListe size: "+publieListe.size());
+														 								}else {
+														 									 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
+															 								 /* publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+															 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+															 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+															 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+															 								        // multiFiltre ="";
+	*/														 									_logger.info("publicationListe size: "+publicationListe.size());	
+															 									typeActionTb(); 	
+														 								}
+														 								
 														 					      }
 														 				     } 
 															 	
@@ -8256,6 +8291,15 @@ TDacSpecs dao = new TDacSpecs();
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
 				case "dao1":
+					String fonct = controleController.getFonctionalite();
+					if(userController.getSlctd().getTFonction().getFonCod().equalsIgnoreCase("CSV")) {
+						if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+							champPub=true;
+					     }else {
+					    	 champPub=false;
+					    }
+						
+					}
 					chargeData();
 					chargeDetailTB();
 					chargeNatureDocTrans();
@@ -16620,6 +16664,22 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setMtEstimR(long mtEstimR) {
 		this.mtEstimR = mtEstimR;
+	}
+
+	public boolean isChampPub() {
+		return champPub;
+	}
+
+	public void setChampPub(boolean champPub) {
+		this.champPub = champPub;
+	}
+
+	public List<VAvisPublie> getPublieListe() {
+		return publieListe;
+	}
+
+	public void setPublieListe(List<VAvisPublie> publieListe) {
+		this.publieListe = publieListe;
 	}
 	
 	/*******  Fin document  *************/
