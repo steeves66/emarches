@@ -113,6 +113,9 @@ public interface Iservice {
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
 	public List getObjectByColumnInPubCsvInstr(String stat1,String stat2,String objet,String typePlan,String strSource) ;
+	//public List getObjectByColumnInPublicationCsvInstr(String objet,String strSource);
+	public List getObjectByColumnInPublicationCsvInstr(String objet,String stat,String strSource);
+	public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource);
 	public List getObjectByColumnInPubRechercheCsvInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource);
 	public List getObjectByColumnInSppRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource);
 	public List getObjectByColumnInDmpRechercheInstr(String objet,String stat1,String stat2,String typePlan,String critere,String strSource);

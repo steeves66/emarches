@@ -181,6 +181,7 @@ public class Service implements Iservice {
 		@Override
 		public List<Object> getObjectsByColumn(String object, WhereClause ... conditions ) {
 			// TODO Auto-generated method stub
+			System.out.println("Service L184");
 			return getDao().getObjectsByColumn(object, Arrays.asList(conditions));
 		}
 		
@@ -368,9 +369,27 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnNotInPpmInstrChCritppm(objet, strSource, critere);
 		}
 
+		@Override
+		public List getObjectByColumnInPublicationCsvInstr(String objet, String stat, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationCsvInstr(objet,stat,strSource);
+		}
+		
+		@Override
+		public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationRechercheCsvInstr(objet,stat,critere,strSource);
+		}
+		
 		
 
-		
+		/*@Override
+		public List getObjectByColumnInPublicationCsvInstr(String objet, String stat1, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInPublicationCsvInstr(objet,stat1,strSource);
+		}*/
+
+
 
 
 }

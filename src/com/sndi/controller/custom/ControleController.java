@@ -3295,6 +3295,7 @@ public class ControleController {
 							 panel2 =false;
 							 panel3 = false;
 							 panel4 = false;
+							 panel5 = false;
 						/*	 panel4 = false;
 							 panel5 =false;
 							 panel6 =false;
@@ -3379,6 +3380,7 @@ public class ControleController {
 								 panel2 =false;
 								 panel3 = false;
 								 panel4 = false;
+								 panel5 = false;
 								/* panel4 = false;
 								 panel5 =false;
 								 panel6 =false;
@@ -3462,6 +3464,7 @@ public class ControleController {
 								panel2 =false;
 								panel3 = false;
 								panel4 = false;
+								panel5 = false;
 					
 								venteRecherche = false; 
 								affectationRecherche = false;
@@ -3561,6 +3564,7 @@ public class ControleController {
 											 panel2 =false;
 											 panel3 = false;
 											 panel4 = false;
+											 panel5 = false;
 											 venteRecherche = false; 
 											 affectationRecherche = true;
 											 examenRecherche = false;
@@ -3636,6 +3640,7 @@ public class ControleController {
 												 panel2 =false;
 												 panel3 = false;
 												 panel4 = false;
+												 panel5 = false;
 												 venteRecherche = false; 
 												 affectationRecherche = true;
 												 examenRecherche = false;
@@ -3710,6 +3715,7 @@ public class ControleController {
 												 panel2 =false;
 												 panel3 = false;
 												 panel4 = false;
+												 panel5 = false;
 											    
 												 venteRecherche = false; 
 												 affectationRecherche = false;
@@ -3787,6 +3793,7 @@ public class ControleController {
 													 panel2 =false;
 													 panel3 = false;
 													 panel4 = false;
+													 panel5 = false;
 													 venteRecherche = true; 
 													 affectationRecherche = false;
 													 examenRecherche = false;
@@ -3865,6 +3872,7 @@ public class ControleController {
 														 panel2 =false;
 														 panel3 = true;
 														 panel4 = false;
+														 panel5 = false;
 														 venteRecherche = false; 
 														 affectationRecherche = false;
 														 examenRecherche = false;
@@ -3943,6 +3951,7 @@ public class ControleController {
 															 panel2 =false;
 															 panel3 = false;
 															 panel4 = false;
+															 panel5 = false;
 														   /*panel4 = false;
 															 panel5 = false;
 															 panel6 = false;
@@ -4030,6 +4039,7 @@ public class ControleController {
 																 panel2 =false;
 																 panel3 = false;
 																 panel4 = false;
+																 panel5 = false;
 															   /*panel4 = false;
 																 panel5 = false;
 																 panel6 = false;
@@ -4117,6 +4127,7 @@ public class ControleController {
 																	 panel2 =false;
 																	 panel3 = false;
 																	 panel4 = false;
+																	 panel5 = false;
 																   /*panel4 = false;
 																	 panel5 = false;
 																	 panel6 = false;
@@ -4204,6 +4215,7 @@ public class ControleController {
 																 panel2 =false;
 																 panel3 = false;
 																 panel4 = false;
+																 panel5 = false;
 															/*	 panel4 = false;
 																 panel5 = false;
 																 panel6 = false;
@@ -4280,6 +4292,7 @@ public class ControleController {
 																	 panel2 =false;
 																	 panel3 = false;
 																	 panel4 = false;
+																	 panel5 = false;
 																/*	 panel4 = false;
 																	 panel5 = false;
 																	 panel6 = false;
@@ -4358,6 +4371,7 @@ public class ControleController {
 																		 panel2 =false;
 																		 panel3 = false;
 																		 panel4 = false;
+																		 panel5 = false;
 																/*		 panel4 = false;
 																		 panel5 = false;
 																		 panel6 = false;
@@ -4450,6 +4464,7 @@ public class ControleController {
 																			 panel2 =false;
 																			 panel3 = false;
 																		     panel4 = true;
+																		     panel5 = false;
 																			/* panel5 = false;
 																			 panel6 = false;
 																			 panel7 = true;
@@ -4542,7 +4557,8 @@ public class ControleController {
 																    			 panel1 =false;
 																				 panel2 =false;
 																				 panel3 = false;
-																			     panel4 = true;
+																			     panel4 = false;
+																			     panel5 = true;
 																				/* panel5 = false;
 																				 panel6 = false;
 																				 panel7 = true;
@@ -4666,6 +4682,7 @@ public class ControleController {
 							    														 panel2 =false;
 							    														 panel3 = false;
 							    														 panel4 = false;
+							    														 panel5 = false;
 							    														 saisie = true;
 							    													/*	 panel4 = false;
 							    														 panel5 =false;
@@ -4756,6 +4773,7 @@ public class ControleController {
 								    													panel2 =false;
 								    													panel3 = false;
 								    													panel4 = false;
+								    													panel5 = false;
 								    												/*	panel4 =false;
 								    													panel5 =false;
 								    													panel6=false;
@@ -4854,6 +4872,7 @@ public class ControleController {
 																							 panel2 =false;
 																							 panel3 = true;
 																							 panel4 = false;
+																							 panel5 = false;
 																							 venteRecherche = false; 
 																							 affectationRecherche = false;
 																							 examenRecherche = false;
@@ -4926,6 +4945,7 @@ public class ControleController {
 										    												 panel2 =false;
 										    												 panel3 = false;
 										    												 panel4 = false;
+										    												 panel5 = false;
 										    											/*	 panel4 = true;
 										    												 panel5 = false;
 										    												 panel6 = false;
@@ -5009,6 +5029,7 @@ public class ControleController {
 											    													 panel2 =false;
 											    													 panel3 = false;
 											    													 panel4 = false;
+											    													 panel5 = false;
 											    													 venteRecherche = false; 
 											    													 affectationRecherche = true;
 											    													 examenRecherche = false;
@@ -5083,6 +5104,7 @@ public class ControleController {
 																									 panel2 =false;
 																									 panel3 = false;
 																									 panel4 = false;
+																									 panel5 = false;
 																									 venteRecherche = false; 
 																									 affectationRecherche = false;
 																									 examenRecherche = false;
@@ -5158,6 +5180,7 @@ public class ControleController {
 																										 panel2 =false;
 																										 panel3 = false;
 																										 panel4 = false;
+																										 panel5 = false;
 																										/* panel4 = false;
 																										 panel5 = false;
 																										 panel6 = false;
@@ -5242,6 +5265,7 @@ public class ControleController {
 																											 panel2 =false;
 																											 panel3 = false;
 																											 panel4 = false;
+																											 panel5 = false;
 																											 affDao=false;
 																											 exaDao=false;
 																											 retDao = true;
@@ -5306,6 +5330,7 @@ public class ControleController {
 																													 panel2 =false;
 																													 panel3 = false;
 																													 panel4 = true;
+																													 panel5 = false;
 																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
@@ -5381,6 +5406,7 @@ public class ControleController {
 																													 panel2 =false;
 																													 panel3 = false;
 																													 panel4 = false;
+																													 panel5 = false;
 																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
@@ -5474,6 +5500,7 @@ public class ControleController {
 																														 panel2 =false;
 																														 panel3 = false;
 																													     panel4 = true;
+																													     panel5 = false;
 																														 venteRecherche = false; 
 																														 affectationRecherche = false;
 																														 examenRecherche = false;
@@ -5555,6 +5582,7 @@ public class ControleController {
 																															 panel2 =false;
 																															 panel3 = false;
 																														     panel4 = true;
+																														     panel5 = false;
 																															/* panel5 = false;
 																															 panel6 = false;
 																															 panel7 = true;

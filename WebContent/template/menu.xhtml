@@ -2013,7 +2013,7 @@
            
            <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Transmission au service publication</span>
+            <i class="fa fa-list"></i> <span>Transmission au service <br/>publication</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -2058,46 +2058,18 @@
          
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Déja publié</span>
+            <i class="fa fa-list"></i> <span>Déja publié dans le BOMP</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
-           <ul class="treeview-menu">
-           
-           <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Procédure Normale</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
+             <ul class="treeview-menu">
             <li>
               <p:commandLink action="#{daoController.renderPage('dao1','DPUBCSV')}" update=":content" >
             <i class="fa fa-circle-o"></i>DAC
              </p:commandLink>
             </li>
-          </ul>  
-         </li>
-         
-         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a> 
-           <ul class="treeview-menu">
-            <li>
-              <p:commandLink action="#{daoController.renderPage('dao1','DDPSPUBCSV')}" update=":content" >
-            <i class="fa fa-circle-o"></i>DAC
-             </p:commandLink>
-            </li>
-          </ul>     
-         </li>
           </ul> 
-          
              
          </li>
           </ul>   

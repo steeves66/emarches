@@ -247,6 +247,7 @@ public class Dao implements IDao {
 	
 	@Override
 	public List getObjectsByColumn(String objet, List<WhereClause>conditionList) {
+		
 		// TODO Auto-generated method stub
 		String query = "FROM "+objet ;
 		if(!conditionList.isEmpty()){
@@ -255,7 +256,11 @@ public class Dao implements IDao {
 			query += " AND "+ conditionList.get(i).getColonne()+ conditionList.get(i).getComparateur()+"'"+conditionList.get(i).getValeur()+"'";			
 		}
 		}
-		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		System.out.println("Query  = "+ query);
+		List list = getSessionFactory()
+				.getCurrentSession()
+				.createQuery(query)
+				.list();
 		return list;
 	}
 	@Override
@@ -481,6 +486,34 @@ public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat
 	// TODO Auto-generated method stub
 	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN ('"+stat1+"','"+stat2+"') AND DAC_TYPE_PLAN ='"+typePlan+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
 
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+/*@Override
+public List getObjectByColumnInPublicationCsvInstr(String objet,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ; 
+	//String query = "FROM "+objet+" WHERE DAC_STA_CODE =NVL('"+stat1+", DAC_STA_CODE)' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}*/
+
+@Override
+public List getObjectByColumnInPublicationCsvInstr(String objet,String stat,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE = '"+stat+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ; 
+	//String query = "FROM "+objet+" WHERE DAC_STA_CODE =NVL('"+stat1+", DAC_STA_CODE)' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
+@Override
+public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE = '"+stat+"' AND CRITERE like'%"+critere+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
 }
