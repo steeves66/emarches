@@ -726,6 +726,7 @@ public class CommissionController {
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
 	 }
 	 
+	 
 	 //liste des attributaires en affichage
 	 public void chargeAffAttributaire() {
 		 listeAttibutaire = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
@@ -762,6 +763,74 @@ public class CommissionController {
 		 //Chargement des pièces
 		 chargePieces();
 	 }
+	 
+	
+	 public void majPres(String presence) {
+		 List<TCritereAnalyseDacOuv> ANA  = iservice.getObjectsByColumn("TCritereAnalyseDacOuv", new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()));
+		 TCritereAnalyseDacOuv offre = new TCritereAnalyseDacOuv(); 
+		 if(!ANA.isEmpty()) offre = ANA.get(0);
+		 offre.setDcadPresence(""+presence);
+		 iservice.updateObject(offre);	
+		 //Chargement des pièces
+		 chargePieces();
+		 panelGarant = false;
+	 }
+	 
+	 
+	 public void majPiecesGarantie(String presence) {
+
+		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
+				 new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()),
+				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
+				 new WhereClause("LAA_NUM",WhereClause.Comparateur.EQ,""+tlot.getLaaNum()),
+				 new WhereClause("DOF_NCC",WhereClause.Comparateur.EQ,""+newOffre.getDofSouNcc()),
+				 new WhereClause("DOF_TYP",WhereClause.Comparateur.EQ,""+dofTyp),
+				 new WhereClause("CRA_LIBELLE",WhereClause.Comparateur.LIKE,"%"+craLibelle+"%")));
+		   if (!listPiecesOuv.isEmpty()) {
+			   majPiece = listPiecesOuv.get(0);
+			   
+			   if(majPiece.getDcadPresence().equalsIgnoreCase("N")) {
+				   majPiece.setDcadPresence("O");
+				   iservice.updateObject(majPiece);
+				   chargePieces();
+				   panelGarant =true;
+			     }else {
+				  majPiece.setDcadPresence("N");
+				  iservice.updateObject(majPiece);
+	    	      chargePieces();
+	    	      panelGarant =false;
+			    }
+			   _logger.info(" présence (O/N) : "+majPiece.getDcadPresence());
+			   _logger.info(" craLibelle: "+majPiece.getCraLibelle());
+			   _logger.info(" garant / montant garantie: "+panelGarant);
+		   }else {
+			   
+			/*   listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
+						 new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()), //LAA_AAO_CODE
+						 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()), //LAA_NUM
+						 new WhereClause("LAA_NUM",WhereClause.Comparateur.EQ,""+tlot.getLaaNum()),
+						 new WhereClause("DOF_TYP",WhereClause.Comparateur.EQ,""+dofTyp), 
+						 new WhereClause("DOF_NCC",WhereClause.Comparateur.EQ,""+newOffre.getDofSouNcc()))); 
+      		         if (!listPiecesOuv.isEmpty()) {
+      		        	majPiece = listPiecesOuv.get(0);
+      		        	if(majPiece.getDcadPresence().equalsIgnoreCase("N")) {
+      					   majPiece.setDcadPresence("O");
+      					   iservice.updateObject(majPiece);
+      					   chargePieces();
+      					   panelGarant =false;
+      				     }else {
+      				       majPiece.setDcadPresence("N");
+      					   iservice.updateObject(majPiece);
+      			    	   chargePieces();
+      			    	   panelGarant =false;
+      				     }
+      			   }*/
+			   
+			   majPres(""+presence);
+		   }
+	 }
+	 
+	 
 	 
 	 
 	 //Contrôle sur le choix de Garantie de soumission

@@ -68,18 +68,8 @@ public class TCritereAnalyseDacOuv implements java.io.Serializable {
 		this.idR = idR;
 	}
 
+	
 	@Id
-	@Column(name = "ID_R", precision = 22, scale = 0)
-	public BigDecimal getIdR() {
-		return this.idR;
-	}
-
-	public void setIdR(BigDecimal idR) {
-		this.idR = idR;
-	}
-	
-	
-	
 	@Column(name = "R_ID", unique = true, nullable = false, precision = 22, scale = 0)
 	public BigDecimal getRId() {
 		return this.RId;
@@ -87,6 +77,15 @@ public class TCritereAnalyseDacOuv implements java.io.Serializable {
 
 	public void setRId(BigDecimal RId) {
 		this.RId = RId;
+	}
+	
+	@Column(name = "ID_R", precision = 22, scale = 0)
+	public BigDecimal getIdR() {
+		return this.idR;
+	}
+
+	public void setIdR(BigDecimal idR) {
+		this.idR = idR;
 	}
 
 	@Column(name = "CRA_CODE", length = 50)

@@ -255,14 +255,15 @@
 		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
          				                           <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                             <h:panelGroup rendered="#{slctdTb.dcadPresence == 'O'}">  
-                                                      <p:commandLink action="#{commissionController.majPiecesByGarantie('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update=":gnl"
+                                                      <p:commandLink action="#{commissionController.majPiecesGarantie('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:pieces"
 				                                        title="Absent">
                                                       <span class="hidden-xs" style="color: white">#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}</span>
                                                        <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.pieceOuv}" />                              
                                                       </p:commandLink>
                                                       </h:panelGroup>
+                                                      
                                                      <h:panelGroup rendered="#{slctdTb.dcadPresence == 'N'}">  
-                                                      <p:commandLink action="#{commissionController.majPiecesByGarantie('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update=":gnl"
+                                                      <p:commandLink action="#{commissionController.majPiecesGarantie('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:pieces"
 				                                      title="Présent">
                                                        <span class="hidden-xs" style="color: white">#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}</span>
                                                      <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.pieceOuv}" />                              
