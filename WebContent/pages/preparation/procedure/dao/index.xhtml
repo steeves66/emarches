@@ -686,7 +686,7 @@
 				     </div>
 					  <p:dataTable id="ndTblepub1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.publieListe}" 
 					  emptyMessage="Aucun #{controleController.type}" 
-					 scrollable="true" scrollHeight="250" >
+					 scrollable="true" scrollHeight="300" >
                          <p:column headerText="Code Avis" styleClass="col-sm-1">  
          				<h:outputText value="#{slctdTb.pubAaoNumFtp}" />
 				        </p:column>
@@ -717,7 +717,14 @@
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
-
+				        <p:column headerText="Mention" width="11%">
+				          <h:panelGroup rendered="#{slctdTb.dacStaCode == 'PUB'}">
+	                         <span class="badge bg-green">Déja publié dans le BOMP</span>
+	                    </h:panelGroup>
+	                     <h:panelGroup rendered="#{slctdTb.dacStaCode == 'DAP'}">
+	                         <span class="badge bg-yellow">En attente de publication</span>
+	                    </h:panelGroup>
+                       </p:column>
                       <p:column headerText="Actions" width="3%">
                              <p:commandLink  action="#{etatsDaoController.renderPage('dao12','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>

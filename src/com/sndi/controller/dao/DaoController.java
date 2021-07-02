@@ -2406,8 +2406,8 @@ TDacSpecs dao = new TDacSpecs();
 											typeActionTb(); 
 										 }else {
 											 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
-												 String stat1="PUB";
-				 									publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationCsvInstr("VAvisPublie",""+stat1,""+userController.getSlctd().getTFonction().getFonCod());
+												 /*String stat1="PUB";
+				 									publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationCsvInstr("VAvisPublie",""+stat1,""+userController.getSlctd().getTFonction().getFonCod());*/
 											 }
 										 }
 											 
@@ -2461,8 +2461,7 @@ TDacSpecs dao = new TDacSpecs();
 			 String fonct = controleController.getFonctionalite();
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")){
 				 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
-					 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie","PUB",
-			    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());   
+					 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie",""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());   
 				 } 
 			 }
 			
@@ -2511,8 +2510,7 @@ TDacSpecs dao = new TDacSpecs();
 		 public void chercher(String typeDac,String typePlan){
 			 listeDAO.clear();
 			 String fonct = controleController.getFonctionalite();
-			 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie","PUB",
-	    			 ""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());
+			 publieListe = (List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheCsvInstr("VAvisPublie",""+multiFiltre,""+userController.getSlctd().getTFonction().getFonCod());
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 
 				//Affichage des differentes listes de l'AC en faction de l'action
@@ -8012,10 +8010,10 @@ TDacSpecs dao = new TDacSpecs();
 														 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 														 								 String fonct = controleController.getFonctionalite();
 														 								if(fonct.equalsIgnoreCase("listeDpubCsv")) {
-														 									stat1="PUB";
+														 								/*	stat1="PUB";
 														 									publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationCsvInstr("VAvisPublie",""+stat1,""+userController.getSlctd().getTFonction().getFonCod());
 														 									_logger.info("action: "+fonct);
-														 									_logger.info("publieListe size: "+publieListe.size());
+														 									_logger.info("publieListe size: "+publieListe.size());*/
 														 								}else {
 														 									 publicationListe =(List<VDacliste>) iservice.getObjectByColumnInPubCsvInstr("VDacliste",""+stat1,""+stat2,""+typePlan,""+userController.getSlctd().getTFonction().getFonCod()); 
 															 								 /* publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -8298,6 +8296,17 @@ TDacSpecs dao = new TDacSpecs();
 			publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheStatutCsvInstr("VAvisPublie",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("liste pulier"+publieListe);	
 			_logger.info("Statut"+statut);
+		}
+		
+		public void filtrePulication() {
+			if(statut.equalsIgnoreCase("")) {
+				filterByMois();	
+			}else {
+				if(mois.equalsIgnoreCase("")) {
+					filterByStatut();	
+				}
+				
+			}
 		}
 		     
 	 public String renderPage(String value ,String action) throws IOException{ 

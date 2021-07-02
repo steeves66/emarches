@@ -101,7 +101,7 @@ public interface IDao {
 	public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat2,String typePlan,String strSource);
 	//public List getObjectByColumnInPublicationCsvInstr(String objet,String strSource);
 	public List getObjectByColumnInPublicationCsvInstr(String objet,String stat,String strSource);
-	public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource);
+	public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String critere,String strSource);
 	public List getObjectByColumnInPublicationRechercheStatutMoisCsvInstr(String objet,String stat,String critere,String strSource);
 	public List getObjectByColumnInPublicationRechercheStatutCsvInstr(String objet,String stat,String strSource);
 	public List getObjectByColumnInPublicationRechercheMoisCsvInstr(String objet,String mois,String strSource);

@@ -491,7 +491,7 @@ public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat
 }
 
 /*@Override
-public List getObjectByColumnInPublicationCsvInstr(String objet,String strSource) {
+public List getObjectByColumnInPublicationCsvInstr1(String objet,String strSource) {
 	// TODO Auto-generated method stub
 	String query = "FROM "+objet+" WHERE INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ; 
 	//String query = "FROM "+objet+" WHERE DAC_STA_CODE =NVL('"+stat1+", DAC_STA_CODE)' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0" ; 
@@ -511,9 +511,10 @@ public List getObjectByColumnInPublicationCsvInstr(String objet,String stat,Stri
 }
 
 @Override
-public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource) {
+public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String critere,String strSource) {
 	// TODO Auto-generated method stub
-	String query = "FROM "+objet+" WHERE DAC_STA_CODE = '"+stat+"' AND CRITERE like'%"+critere+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
+	String crit = critere.replace("'", "''");
+	String query = "FROM "+objet+" WHERE CRITERE like'%"+crit+"%' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 " ;
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
 }

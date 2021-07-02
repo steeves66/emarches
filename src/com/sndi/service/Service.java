@@ -376,9 +376,9 @@ public class Service implements Iservice {
 		}
 		
 		@Override
-		public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String stat,String critere,String strSource) {
+		public List getObjectByColumnInPublicationRechercheCsvInstr(String objet,String critere,String strSource) {
 			// TODO Auto-generated method stub
-			return getDao().getObjectByColumnInPublicationRechercheCsvInstr(objet,stat,critere,strSource);
+			return getDao().getObjectByColumnInPublicationRechercheCsvInstr(objet,critere,strSource);
 		}
 		
 		@Override
