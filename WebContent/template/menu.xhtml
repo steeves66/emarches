@@ -325,8 +325,11 @@
              </p:commandLink>
             </li>
 			 
-       
-         
+             <li>
+            <p:commandLink action="#{saveDataController.renderPage('rat2','ENGDAO')}" update=":content" >
+            <i class="fa fa-circle-o"></i>Rattrapage
+             </p:commandLink>
+            </li>
           </ul>     
          </li>
          
@@ -655,6 +658,39 @@
          <!-- FIN TRAITEMENT AUTORITE CONTRACTANTE -->
          
          
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CEX'}">
+         
+          <!-- DEBUT M1 : OBSERVATEUR  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M1-Rattrapage</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAC</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{saveDataController.renderPage('rat2','ENGDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+                  
+          </ul>     
+         </li>
+         <!-- FIN M1 OBSERVATEUR -->
+         </h:panelGroup>
          
           <!-- DEBUT TRAITEMENT CPMP -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
