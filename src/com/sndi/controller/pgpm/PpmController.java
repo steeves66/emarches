@@ -1161,6 +1161,12 @@ public class PpmController {
 			 filtreModePassation="";
 		 } 
 		 
+		//Liste des Modes de Passation restreint
+		 public void filtreChargeMode() {
+			 listeMode.clear();
+			 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE")),
+					     new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%")));
+		 } 
 		 
 		 //Liste des Pspm transmis par l'acteur connecté
 		 public void chargePspmTrans() {
