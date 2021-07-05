@@ -77,7 +77,7 @@ public class VModePassation implements java.io.Serializable {
 		this.mopTypPlan = mopTypPlan;
 	}
 	
-	@Column(name = "CRITERE", length = 1520)
+	@Column(name = "CRITERE")
 	public String getCritere() {
 		return this.critere;
 	}
