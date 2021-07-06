@@ -278,12 +278,16 @@
 	                    <h:panelGroup rendered="#{slctdTb.dacMention == 'A Valider pour publication'}">
 	                         <span class="badge bg-green">#{slctdTb.dacMention}</span>
 	                    </h:panelGroup>
+	                    
 	                     <h:panelGroup rendered="#{slctdTb.dacMention != 'A Valider pour publication'}">
 	                         <span class="badge bg-yellow">#{slctdTb.dacMention}</span>
 	                    </h:panelGroup>
 				        </p:column> 
-
-
+				        
+				         <p:column headerText=" " styleClass="col-sm-1"  rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+	                         <span style="font-weight: bolder;">#{slctdTb.dacMentionAffecte}</span>
+				        </p:column> 
+                         
                       <p:column headerText="Actions" styleClass="col-sm-1">
                            
                             <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">

@@ -518,6 +518,7 @@ public class DaoController {
 	  private String mois = "";
 	  private String statut = "";
 	  private boolean champPub = false;
+	  private boolean dacMention =false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -1179,8 +1180,7 @@ TDacSpecs dao = new TDacSpecs();
 	 
 	 
 	 
-	 public void saveObservation(){
-			
+	 public void saveObservation(){	
 		 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
 	 if(!LS.isEmpty()) piece = LS.get(0);
 	 piece.setPidObservation(sltPiece.getPidObservation());
@@ -8322,6 +8322,15 @@ TDacSpecs dao = new TDacSpecs();
 					chargeDaoPUB();
 					btn_corrige = true;
 					etatPV = false;
+					if(action.equalsIgnoreCase("DOSAFF")) {
+						dacMention=true;
+						_logger.info("dacMention :"+dacMention);
+						_logger.info("action :"+action);
+					}else {
+						dacMention=false;
+						_logger.info("dacMention :"+dacMention);
+						_logger.info("action :"+action);
+					}
 					vider();
 					_logger.info("value: "+value+" action "+action);	
 					break;
@@ -16709,6 +16718,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setStatut(String statut) {
 		this.statut = statut;
+	}
+
+	public boolean isDacMention() {
+		return dacMention;
+	}
+
+	public void setDacMention(boolean dacMention) {
+		this.dacMention = dacMention;
 	}
 	
 	
