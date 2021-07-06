@@ -3083,6 +3083,7 @@ public class PpmController {
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
+				 controleController.libelleValid =false;
 			 }else {
 				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO") || passationListe.getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
@@ -3090,6 +3091,7 @@ public class PpmController {
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
 						 controleController.etatPsoTrans = true;
+						 controleController.libelleValid =true;
 				   }else {
 					   
 					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL") || passationListe.getMopCode().equalsIgnoreCase("PSL")) {
@@ -3097,10 +3099,10 @@ public class PpmController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
-							 controleController.setLibelleValid(true);
+							 controleController.libelleValid = true;
 					   }else {
 						   
-						   controleController.setLibelleValid(false);
+						   controleController.libelleValid = false;
 						   //controleController.validCPMP = false;
 						   controleController.etatPsoTrans = false;
 						   controleController.etatPsc = false;
@@ -3119,14 +3121,14 @@ public class PpmController {
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
-				 controleController.setLibelleValid(false);
+				 controleController.libelleValid =false;
 			 }else {
 				   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
-						 controleController.setLibelleValid(true);
+						 controleController.libelleValid =true;
 						 controleController.etatPsoTrans = true;
 				   }else {
 					   
@@ -3135,7 +3137,7 @@ public class PpmController {
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
-							 controleController.setLibelleValid(true);
+							 controleController.libelleValid = true;
 					   }
 				   }
 			 }

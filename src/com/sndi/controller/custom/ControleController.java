@@ -414,7 +414,7 @@ public class ControleController {
 	private String actionPage="";
 	public boolean lignedefaut = true;
 	private boolean btn_reaffectation = false;
-	private boolean libelleValid = false;
+	public boolean libelleValid = false;
 	public boolean etatPsoTrans =false;
 	//String actionPrivilèges ="";
 	

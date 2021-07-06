@@ -1063,21 +1063,21 @@
 		                  <label for="jug2" class="col-sm-6 control-label">Date d'approbation de l'attribution ANO DGMP</label>
 		                  <div class="col-sm-6">
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '2'}">
-		                   <p:calendar id="jug22" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagApprobAno == '2'}">
+		                   <p:calendar id="jug22" title="#{ppmController.geneDate.dppJourApprobAno} #{ppmController.geneDate.dppApprobAno}" value="#{ppmController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAno')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:red;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '1'}">
-		                   <p:calendar id="jug23" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagApprobAno == '1'}">
+		                   <p:calendar id="jug23" title="#{ppmController.geneDate.dppJourApprobAno} #{ppmController.geneDate.dppApprobAno}" value="#{ppmController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAno')}" update=":gnl"/>
 		                   </p:calendar> <span style="color:green;"> #</span>
 		                   </h:panelGroup>
 		                  
-		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '0'}">
-		                   <p:calendar id="jug24" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagApprobAno == '0'}">
+		                   <p:calendar id="jug24" title="#{ppmController.geneDate.dppJourApprobAno} #{ppmController.geneDate.dppApprobAno}" value="#{ppmController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAno')}" update=":gnl"/>
 		                   </p:calendar> 
 		                   </h:panelGroup>
 		                   
@@ -1096,7 +1096,7 @@
          <div class="box-body">
          <div class="col-md-6">
             <div class="form-group">
-		                  <label for="attr" class="col-sm-6 control-label">Date de la signature du marché Attributaire<span style="color:red;"> </span></label>
+		                  <label for="attr" class="col-sm-6 control-label">Date de la signature du marché Attributaire</label>
 		                  <div class="col-sm-6">
 		                  
 		                   <h:panelGroup rendered="#{ppmController.geneDate.dppFlagSignatAttrib == '2'}">
@@ -1324,7 +1324,7 @@
 		         <p:selectOneMenu id="moldao271Ami" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />	
-			       <p:ajax listener="#{ppmController.updatePieces()}" />		   				   
+			       <p:ajax listener="#{ppmController.updatePieces()}" update=":gnl"/>		   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
 	         </div>
@@ -1641,7 +1641,7 @@
 		         <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />		
-			       <p:ajax listener="#{ppmController.updatePieces()}" />	   				   
+			       <p:ajax listener="#{ppmController.updatePieces()}" update="gnl"/>	   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
 	         </div>
