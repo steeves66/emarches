@@ -639,7 +639,20 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 				return list;
 	}
 	
+	public List getObjectByColumnInInstrConsultDaoDmp(String objet, String strSource) { 
+		// TODO Auto-generated method stub
+			String query = "FROM "+objet+" WHERE DAC_STA_CODE NOT IN ('SDS','D1S','D1R','D1T') AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       
+		 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+      }
 	
+	public List getObjectByColumnInInstrConsultDaoRechDmp(String objet,String critere, String strSource) { 
+		// TODO Auto-generated method stub
+			String query = "FROM "+objet+" WHERE DAC_STA_CODE NOT IN ('SDS','D1S','D1R','D1T') AND CRITERE like'%"+critere+"%' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       
+		 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+      }
+
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource) { 
 		// TODO Auto-generated method stub
 			String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D3A','D4V') AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ;       

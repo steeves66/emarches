@@ -3540,7 +3540,7 @@ public class ControleController {
 									fermerApercuPrq = false;
 				    			}else
 					    			if(action.equalsIgnoreCase("APHISDAC")) {
-					    		
+					    				fonctionalite ="listeValidationCsv";
 					    			}else
 						    			if(action.equalsIgnoreCase("APERDAC")) {
 								    		

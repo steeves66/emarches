@@ -112,6 +112,8 @@ public interface Iservice {
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
+	public List getObjectByColumnInInstrConsultDaoDmp(String objet, String strSource);
+	public List getObjectByColumnInInstrConsultDaoRechDmp(String objet,String critere, String strSource);
 	public List getObjectByColumnInPubCsvInstr(String stat1,String stat2,String objet,String typePlan,String strSource) ;
 	//public List getObjectByColumnInPublicationCsvInstr(String objet,String strSource);
 	public List getObjectByColumnInPublicationCsvInstr(String objet,String stat,String strSource);

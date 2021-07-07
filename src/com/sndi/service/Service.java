@@ -398,6 +398,20 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnInPublicationRechercheMoisCsvInstr(objet,mois,strSource);
 		}
+
+		@Override
+		public List getObjectByColumnInInstrConsultDaoDmp(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrConsultDaoDmp(objet,strSource);
+		}
+
+		@Override
+		public List getObjectByColumnInInstrConsultDaoRechDmp(String objet, String critere, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrConsultDaoRechDmp(objet,critere,strSource);
+		}
+		
+		
 		
 		
 		

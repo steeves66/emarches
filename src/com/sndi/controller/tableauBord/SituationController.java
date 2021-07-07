@@ -236,6 +236,13 @@ public class SituationController {
 					}	*/
 				 
 			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")
+						 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+					    	  listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstrConsultDaoRechDmp("VDacliste", ""+critere,""+userController.getSlctd().getTFonction().getFonCod());
+					     
+					 
+				 }
+			 else {
 					listHistoDac =(List<VDacStatut>) iservice.getObjectsByColumn("VDacStatut",
 							new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+critere));
 					recupStat();
@@ -244,7 +251,7 @@ public class SituationController {
 		 }
 	 
 		 }
-	
+		 }
 	}
 	
 	public void recherchePpmConsultation(){
@@ -361,7 +368,8 @@ public class SituationController {
 											 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));*/
 								 }else {
 									      if(fonct.equalsIgnoreCase("listeValidationCsv")) {
-										 
+									    	  listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstrConsultDaoDmp("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
+									    	  _logger.info("action a mener "+fonct);
 									     }
 								 }
 							 }
@@ -422,13 +430,22 @@ public class SituationController {
 		return	i;	
 	}
 	
-	//Compteur plan de passation cpmp
+	//Compteur plan de DAC cpmp
 			public void getNbrDacCpmp(){
 				listeDAC.clear();
 				nbreDac=0;
 				 listeDAC =(List<VDacliste>) iservice.getObjectsByColumnNotIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 						 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("SDS","D1S")),
 						 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				 nbreDac=listeDAC.size();
+			}
+			
+			
+			//Compteur DAC DGMP
+			public void getNbrDacDgmp(){
+				listeDAC.clear();
+				nbreDac=0;
+				 listeDAC = (List<VDacliste>) iservice.getObjectByColumnInInstrConsultDaoDmp("VDacliste", ""+userController.getSlctd().getTFonction().getFonCod());
 				 nbreDac=listeDAC.size();
 			}
 	
@@ -462,8 +479,8 @@ public class SituationController {
 					 getNbrDacCpmp();
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
-						||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-						// nbrePlan = getNbrPlanCpmp();
+						||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+						 getNbrDacDgmp();
 					 }
 				 }	 
 			}	

@@ -113,6 +113,8 @@ public interface IDao {
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
+	public List getObjectByColumnInInstrConsultDaoDmp(String objet, String strSource);
+	public List getObjectByColumnInInstrConsultDaoRechDmp(String objet,String critere, String strSource);
 	//Comptage en region
 	public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac);
 

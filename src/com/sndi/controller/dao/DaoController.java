@@ -8322,15 +8322,6 @@ TDacSpecs dao = new TDacSpecs();
 					chargeDaoPUB();
 					btn_corrige = true;
 					etatPV = false;
-					if(action.equalsIgnoreCase("DOSAFF")) {
-						dacMention=true;
-						_logger.info("dacMention :"+dacMention);
-						_logger.info("action :"+action);
-					}else {
-						dacMention=false;
-						_logger.info("dacMention :"+dacMention);
-						_logger.info("action :"+action);
-					}
 					vider();
 					_logger.info("value: "+value+" action "+action);	
 					break;
