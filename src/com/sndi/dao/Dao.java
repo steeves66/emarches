@@ -592,7 +592,7 @@ return list;
 @Override
 public List getObjectByColumnNotInPpmInstrChVal(String objet,String strSource) {
 	// TODO Auto-generated method stub
-	String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S1S','S1T','S2D','S2R','S3D','SDS') AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF" ; 
+	String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S1S','S1T','S2D','S2R','S3D','SDS') AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF DESC" ; 
 
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
@@ -638,6 +638,13 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 			 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 				return list;
 	}
+	
+	public List getObjectByColumnInInstrConsultPpmDmp(String objet, String strSource) { 
+		// TODO Auto-generated method stub
+		String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S1S','S1T','S2V','S2D','S2R') AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF DESC" ;      
+		 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+      }
 	
 	public List getObjectByColumnInInstrConsultDaoDmp(String objet, String strSource) { 
 		// TODO Auto-generated method stub

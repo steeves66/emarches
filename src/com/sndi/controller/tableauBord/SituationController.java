@@ -419,6 +419,16 @@ public class SituationController {
 			nbrePlan=listeConsultationPpm.size();
 			_logger.info(nbrePlan);
 		}
+		
+		//Compteur plan de passation cpmp
+				public void getNbrPlanDgmp(){
+					listeConsultationPpm.clear();
+					nbrePlan=0;
+					listeConsultationPpm =  (List<VPpmliste>) iservice.getObjectByColumnNotInPpmInstrChVal("VPpmliste",""+userController.getSlctd().getTFonction().getFonCod());
+					nbrePlan=listeConsultationPpm.size();
+					_logger.info(nbrePlan);
+				}
+			
 	
 		
 	
@@ -460,7 +470,7 @@ public class SituationController {
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
 						||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-						// nbrePlan = getNbrPlanCpmp();
+						 getNbrPlanDgmp();
 					 }
 				 }	 
 			}	

@@ -410,6 +410,12 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnInInstrConsultDaoRechDmp(objet,critere,strSource);
 		}
+
+		@Override
+		public List getObjectByColumnInInstrConsultPpmDmp(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrConsultPpmDmp(objet,strSource);
+		}
 		
 		
 		
