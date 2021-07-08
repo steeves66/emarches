@@ -19,7 +19,7 @@ import org.hibernate.annotations.Immutable;
 public class VCheckTransDac implements java.io.Serializable {
 
 	private String dacCode;
-	private BigDecimal checkTrans;
+	private String checkTrans;
 	private String checkTransMsg;
 
 	public VCheckTransDac() {
@@ -29,7 +29,7 @@ public class VCheckTransDac implements java.io.Serializable {
 		this.dacCode = dacCode;
 	}
 
-	public VCheckTransDac(String dacCode, BigDecimal checkTrans, String checkTransMsg) {
+	public VCheckTransDac(String dacCode, String checkTrans, String checkTransMsg) {
 		this.dacCode = dacCode;
 		this.checkTrans = checkTrans;
 		this.checkTransMsg = checkTransMsg;
@@ -47,11 +47,11 @@ public class VCheckTransDac implements java.io.Serializable {
 	}
 
 	@Column(name = "CHECK_TRANS")
-	public BigDecimal getCheckTrans() {
+	public String getCheckTrans() {
 		return this.checkTrans;
 	}
 
-	public void setCheckTrans(BigDecimal checkTrans) {
+	public void setCheckTrans(String checkTrans) {
 		this.checkTrans = checkTrans;
 	}
 

@@ -3101,15 +3101,21 @@ public class PpmController {
 							 controleController.etatPsl_Pso = true;
 							 controleController.libelleValid = true;
 					   }else {
-						   
-						   controleController.libelleValid = false;
-						   //controleController.validCPMP = false;
-						   controleController.etatPsoTrans = false;
-						   controleController.etatPsc = false;
-						   controleController.etatPsl = false;
-						   controleController.etatPso = false;
-						   controleController.etatPsl_Pso = false;
+						        if(pgpm.getGpgMopCode().equalsIgnoreCase("PSI") || passationListe.getMopCode().equalsIgnoreCase("PSI")) {
+							         controleController.etatPsc = false;
+								     controleController.etatPsl = true;
+								     controleController.etatPso = false;
+								     controleController.etatPsl_Pso = true;
+								     controleController.libelleValid = true;
+						        }else {
+						                 controleController.libelleValid = false;
+						                 controleController.etatPsoTrans = false;
+						                 controleController.etatPsc = false;
+						                 controleController.etatPsl = false;
+						                 controleController.etatPso = false;
+						                 controleController.etatPsl_Pso = false;
 					   }
+					  }
 				   }
 			 }
 		 }
@@ -3138,7 +3144,15 @@ public class PpmController {
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
 							 controleController.libelleValid = true;
-					   }
+					   }else {
+						       if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSI")) {
+							        controleController.etatPsc = false;
+								    controleController.etatPsl = true;
+								    controleController.etatPso = false;
+								    controleController.etatPsl_Pso = true;
+								    controleController.libelleValid = true;
+						   }
+					   } 
 				   }
 			 }
 		 }

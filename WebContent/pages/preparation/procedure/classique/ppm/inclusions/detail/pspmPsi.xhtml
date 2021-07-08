@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="pspmPsi" >  
+        <div class="box-body">
+ 	 <div class="row">
+	      <div class="col-md-6">
+	         <div class="row">
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Transmission du dossier de Consultation : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateDaoTrans}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	   </div> 
+	   
+		<div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Validation du dossier par la CPMP : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAttApprobCpmp}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	 
+
+			<div class="row">
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Invitation des entreprises : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppInvEntre}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+		</div>	
+		
+		<div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Reception des lettres d'intention : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateRecepLettr}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	     
+	    <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Ouverture Technique : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateOuvertOt}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	     <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Ouverture Financière : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateOuvertOf}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>
+		
+	      </div>
+	      <div class="col-md-6">
+
+	        	         <div class="row">
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Attribution du marché : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateJugementOffre}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	   </div> 
+	   
+		 
+	     
+	     
+
+			<div class="row">
+			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature du marché par l'attributaire : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAttrib}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+		</div>
+		
+		<div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Signature du marché par l'AC : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateSignatAc}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	     
+	     <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Approbation du marché : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateMarcheApprob}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	      <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Début d'exécution : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecDebut}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	      <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Fin d'exécution : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecFin}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	      </div>
+      </div>
+	 </div> 
+     </h:panelGroup>     
+</html>
