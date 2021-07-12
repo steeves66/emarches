@@ -70,8 +70,22 @@
 		
 	      </div>
 	      <div class="col-md-6">
+	      
+	      
+	 <h:panelGroup rendered="#{etatsPpmController.ppmAno}">
+	<div class="row">
+      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date d'approbation de l'attribution ANO DGMP : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAno}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	   </div> 
+	   </h:panelGroup>
 
-	        	         <div class="row">
+    
+	<div class="row">
       <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Attribution du marché : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateJugementOffre}"> 
@@ -81,8 +95,6 @@
 			</div>
 	   </div> 
 	   
-		 
-	     
 	     
 
 			<div class="row">

@@ -97,6 +97,7 @@ public class EtatsPpmController {
      public boolean ppmPsc = false;
      public boolean ppmAor = false;
      public boolean ppmPsi = false;
+     public boolean ppmAno = false;
      /*public boolean partPspm = false;
      public boolean partPgspm = false;*/
 	
@@ -239,7 +240,15 @@ public class EtatsPpmController {
 			 }
 			}
 		 	 
-			 
+		 
+		 //vérification si Ano existe
+		 public void controleAno() {
+			 if(slctdTd.getDppStatutAno().equalsIgnoreCase("O")) {
+				 ppmAno = true;
+			 }else {
+				 ppmAno = false;
+			 }
+		 }
 		 
 		//Afficher les détails du financement
 		 public void chargeDetailFinancement(){
@@ -271,6 +280,8 @@ public class EtatsPpmController {
 			 }else {
 				 visibility = false;
 			 }
+			 
+			 controleAno();
 		 }
 		 
 	
@@ -611,6 +622,14 @@ public class EtatsPpmController {
 
 	public void setPpmPsi(boolean ppmPsi) {
 		this.ppmPsi = ppmPsi;
+	}
+
+	public boolean isPpmAno() {
+		return ppmAno;
+	}
+
+	public void setPpmAno(boolean ppmAno) {
+		this.ppmAno = ppmAno;
 	}
 
 	
