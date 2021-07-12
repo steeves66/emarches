@@ -111,8 +111,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 	}
 
 	@Id
-    @SequenceGenerator(name = "COM_Sequence", sequenceName = "SEQ_COM", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="COM_Sequence")
+    @SequenceGenerator(name = "SEQ_TEMP_PARAM", sequenceName = "SEQ_TEMP_PARAMETRE", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TEMP_PARAM")
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getTempNum() {
 		return this.tempNum;

@@ -288,7 +288,7 @@
 	                    <span style="font-weight: bolder;">#{slctdTb.dacMentionAffecte}</span>
 				        </p:column>  
                          
-                      <p:column headerText="Actions" styleClass="col-sm-1">
+                      <p:column headerText="Actions" width="10%">
                            
                             <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
 	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{daoController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px; margin-bottom:3px" update="motif" >

@@ -2981,8 +2981,7 @@ TDacSpecs dao = new TDacSpecs();
 		    	 }else {
 		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
-		    	 }
-		    	 		
+		    	 } 		
 		 	 } 
 		  
 		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
