@@ -41,6 +41,7 @@ import com.sndi.model.TTypeDemande;
 import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VDaoDemande;
 import com.sndi.model.VDemande;
+import com.sndi.model.VDemandeSoumission;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetOffreAnalyse;
 import com.sndi.model.VDetailDemande;
@@ -105,6 +106,8 @@ public class DemandeController {
 	 private List<TPieceDemande> listePiecesDemande= new ArrayList<TPieceDemande>();
 	 private List<TPieceDemande> listePiecesDem= new ArrayList<TPieceDemande>();
 	 private List<TAvisPresel> listeSoumi= new ArrayList<TAvisPresel>();
+	 private List<VDemandeSoumission> listeSoumission= new ArrayList<VDemandeSoumission>();
+	 
 	 
 	 //Déclaration des Objets
 	 private TDemande newDem = new TDemande();
@@ -132,7 +135,7 @@ public class DemandeController {
 	 private boolean panelDao =false;
 	 private boolean panelPpm =false;
 	 private String daoPpm;
-	 private String numbScc;
+	 private String critere="";
 	 private String observation="";
 	 private Long numPiece;
 	 private long pdmNum;
@@ -194,10 +197,12 @@ public class DemandeController {
 		 if(daoPpm.equalsIgnoreCase("dao")) {
 			 panelDao = true;
 			 panelPpm = false;
+			 chargeDao();
 		 }else
 			 if(daoPpm.equalsIgnoreCase("ppm")) {
 				  panelDao = false;
 				  panelPpm = true;
+				  chargePPM();
 			  }
 	 }
 	 
@@ -210,11 +215,12 @@ public class DemandeController {
 	 
 	 //Filtre sur les entreprises
 	 public void chargeEntreprsesFilter() {
-		 listeEntreprises.clear();
-		 listeEntreprises = ((List<TSoumissions>)iservice.getObjectsByColumn("TSoumissions",new ArrayList<String>(Arrays.asList("SOU_NOM_COM")),
-			     new WhereClause("SOU_NCC",WhereClause.Comparateur.LIKE,"%"+numbScc+"%")  
-				 ));
-			_logger.info("listeEntreprises size: "+listeEntreprises.size());	
+		 listeSoumission.clear();
+		 listeSoumission = ((List<VDemandeSoumission>)iservice.getObjectsByColumn("VDemandeSoumission",
+			     new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"),
+			     new WhereClause("APR_DEM_NUM",WhereClause.Comparateur.EQ,""+newDem.getDemNum()),
+					new WhereClause("APR_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule())));
+			_logger.info("listeSoumission size: "+listeSoumission.size());	
 	 }
 	 
 	 //Methode de chargement 
@@ -228,9 +234,9 @@ public class DemandeController {
 			 panelEclaissisement =false;
 			 panelLigneBudgetaire =false;
 			 panelEntreprise = true;
-			 chargeDao();
-			 chargePPM();
-			 chargeEntreprses();
+			 //chargeDao();
+			 //chargePPM();
+			// chargeEntreprses();
 		 }else
 			 if(tdmCode.equalsIgnoreCase("GAG")) {
 				 panelRestreint =false;
@@ -240,8 +246,8 @@ public class DemandeController {
 				 panelEclaissisement =false;
 				 panelLigneBudgetaire =false;
 				 panelEntreprise = true;
-				 chargePPM();
-				 chargeEntreprses();
+				 //chargePPM();
+				 //chargeEntreprses();
 			 }else
 				 if(tdmCode.equalsIgnoreCase("AVE")) {
 					 panelRestreint =false;
@@ -294,23 +300,34 @@ public class DemandeController {
 	 }
 	 
 	 
+	 
+	  //Verification du numero de vente
+	 public void verifierNumNcc() {
+		 listeEntreprises =(List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions",
+		new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,""+newSoum.getSouNcc()));
+		if (!listeEntreprises.isEmpty()) {
+			newSoum=listeEntreprises.get(0);  
+		}else {
+			//infoNcc=false;
+			newSoum = new TSoumissions();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le NCC n'est pas inscrit dans la base des Marchés Publics! ", "")); 	 
+		}
+	 }
+	 
 	 //Enregistrement de la Demande
 	 public void saveDemande() {
-		 
-		 listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+		 long verifCorNum = 0;
+		 if(newDem.getDemNum() == null) {
+			 verifCorNum = 0;
+		  }else {
+			  verifCorNum = newDem.getDemNum().longValue();
+		  }
+		 listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande",
 				 new WhereClause("DEM_STA_CODE",WhereClause.Comparateur.EQ,"E1S"), 
-				 new WhereClause("DEM_GES_CODE",WhereClause.Comparateur.EQ,""+demGesCode), 
-				 new WhereClause("DEM_TDM_CODE",WhereClause.Comparateur.EQ,""+tdmCode),
+				 new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+verifCorNum),
 				 new WhereClause("DEM_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
-			if(!listeDemande.isEmpty()) {
-				TDemande demUpdate = new TDemande();
-				demUpdate.setDemObjet(newDem.getDemObjet());
-				demUpdate.setDemMotif(newDem.getDemMotif());
-				demUpdate.setDemRef(newDem.getDemRef());
-				demUpdate.setTTypeDemande(new TTypeDemande(tdmCode));
-				iservice.updateObject(demUpdate);
-			}else {
-				   newDem.setDemDteSaisi(Calendar.getInstance().getTime());
+		       if(listeDemande.size()==0) {
+		    	   newDem.setDemDteSaisi(Calendar.getInstance().getTime());
 				   newDem.setDemGesCode(demGesCode);
 				   newDem.setDemStatutRetour("0");
 				   newDem.setTFonction(userController.getSlctd().getTFonction());
@@ -332,15 +349,31 @@ public class DemandeController {
 						 if(tdmCode.equalsIgnoreCase("AVE")) {
 							 saveLigneBugetaire(); 
 						 }
+				 _logger.info("taille de la liste est "+listeDemande);
 				//Enregistrement des pièces de la demande		 
 				 //savePieces();
 				 //Historisation de la demande dans THistoDemande
 				 historiser(""+newDem.getTStatut().getStaCode(),newDem);
-				 vider();	
-				 userController.setTexteMsg("Enregistrement effectué avec succès!");
-				 userController.setRenderMsg(true);
-				 userController.setSevrityMsg("success");
-			}
+				 //vider();	
+				
+		       }else {
+		    	   TDemande demUpdate = new TDemande();
+		    	   listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande",
+		  				 new WhereClause("DEM_STA_CODE",WhereClause.Comparateur.EQ,"E1S"), 
+		  				 new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+verifCorNum),
+		  				 new WhereClause("DEM_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
+		    	   if (!listeDemande.isEmpty()) {
+		    		demUpdate= listeDemande.get(0);
+					demUpdate.setDemObjet(newDem.getDemObjet());
+					demUpdate.setDemMotif(newDem.getDemMotif());
+					demUpdate.setDemRef(newDem.getDemRef());
+					demUpdate.setTTypeDemande(new TTypeDemande(tdmCode));
+					iservice.updateObject(demUpdate);
+		    	   }
+		       }
+		       userController.setTexteMsg("Enregistrement effectué avec succès!");
+			   userController.setRenderMsg(true);
+			   userController.setSevrityMsg("success");
 	 }
 	 
 	 //Suppression d'une entreprise
@@ -383,15 +416,20 @@ public class DemandeController {
 	 //Liste des dao aselectionner
 	 public void chargeDao() {
 		 listeDao.clear();
-		 listeDao = (List<VDaoDemande>) iservice.getObjectsByColumn("VDaoDemande", new ArrayList<String>(Arrays.asList("DAC_DTE_SAISI")));
+		 listeDao = (List<VDaoDemande>) iservice.getObjectsByColumn("VDaoDemande", new ArrayList<String>(Arrays.asList("DAC_DTE_SAISI")),
+				 new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDao size: "+listeDao.size());
 	 }
 	 
 	 //Liste des PPM a selectionner
 	 public void chargePPM() {
 		 listePPM.clear();
-		 listePPM = (List<VPpmDao>) iservice.getObjectsByColumn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")));
+		 listePPM = (List<VPpmDao>) iservice.getObjectsByColumn("VPpmDao", new ArrayList<String>(Arrays.asList("DPP_ID")),
+				 new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+				 new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+				 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listePPM size: "+listePPM.size());
+			
 	 }
 	 
 	 //Liste des ligne budgétaire a selectionner
@@ -512,7 +550,7 @@ public class DemandeController {
 					for(TSoumissions entreprise : selectionEntreprises) {
 						TAvisPresel newPresel = new TAvisPresel();
 						newPresel.setTDemande(newDem);
-						newPresel.setAprDteSaisi(Calendar.getInstance().getTime());
+						//newPresel.setAprDteSaisi(Calendar.getInstance().getTime());
 						newPresel.setTSoumissions(newPresel.getTSoumissions());
 						//newPresel.setAprDetailInvit(entreprise.getSouTel()+" "+entreprise.getSouAdresse());
 						newPresel.setTOperateurByAprOpeMatricule(userController.getSlctd().getTOperateur());
@@ -521,6 +559,23 @@ public class DemandeController {
 						chargeSoumission();
 					}
 				}
+		}
+		
+		
+		//Création des soumissionnaires avec formulaire
+		public void saveEntrepsises() {
+			 //Enregistement des Entreprises dans t_soumission
+			saveDemande();
+						TAvisPresel newPresel = new TAvisPresel();
+						newPresel.setTDemande(newDem);
+						//newPresel.setAprDteSaisi(Calendar.getInstance().getTime());
+						newPresel.setTSoumissions((newSoum));
+						newDem.setTTypeDemande(new TTypeDemande(tdmCode));
+						//newPresel.setAprDetailInvit(entreprise.getSouTel()+" "+entreprise.getSouAdresse());
+						newPresel.setTOperateurByAprOpeMatricule(userController.getSlctd().getTOperateur());
+						iservice.addObject(newPresel);
+						//Chargement des soumissionnaires pour cette demande
+						chargeSoumission();
 		}
 		
 		//Liste des pièces
@@ -709,10 +764,11 @@ public class DemandeController {
 	
 	   //methode Chargement de la liste des soumissionnaires
 		public void chargeSoumission() {
-			listeSoumi.clear();
-			listeSoumi = (List<TAvisPresel>) iservice.getObjectsByColumn("TAvisPresel", new ArrayList<String>(Arrays.asList("APR_NUM")),
-					 new WhereClause("APR_DEM_NUM",WhereClause.Comparateur.EQ,""+newDem));
-				_logger.info("liste des soumisionnaires: "+listeSoumi.size());
+			 listeSoumission.clear();
+			 listeSoumission = (List<VDemandeSoumission>) iservice.getObjectsByColumn("VDemandeSoumission",
+					 new WhereClause("APR_DEM_NUM",WhereClause.Comparateur.EQ,""+newDem.getDemNum()),
+					new WhereClause("APR_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule()));
+				_logger.info("liste des soumisionnaires: "+listeSoumission.size());
 		}
 		
 	
@@ -1267,13 +1323,6 @@ public class DemandeController {
 		this.daoPpm = daoPpm;
 	}
 
-	public String getNumbScc() {
-		return numbScc;
-	}
-
-	public void setNumbScc(String numbScc) {
-		this.numbScc = numbScc;
-	}
 
 	public List<TAvisPresel> getListeSoumi() {
 		return listeSoumi;
@@ -1329,6 +1378,22 @@ public class DemandeController {
 
 	public void setListeTypeDemandes(List<VTypeDemande> listeTypeDemandes) {
 		this.listeTypeDemandes = listeTypeDemandes;
+	}
+
+	public List<VDemandeSoumission> getListeSoumission() {
+		return listeSoumission;
+	}
+
+	public void setListeSoumission(List<VDemandeSoumission> listeSoumission) {
+		this.listeSoumission = listeSoumission;
+	}
+
+	public String getCritere() {
+		return critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

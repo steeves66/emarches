@@ -618,7 +618,7 @@
                    </div>
                    
                    <div class="col-sm-4">
-				    <p:commandLink oncomplete="PF('dlogEntreprise').show()" action="#{demandeController.chargeEntreprses()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				    <p:commandLink oncomplete="PF('dlogEntreprise').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 				      <span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER ENTREPRISE </span>
 				   </p:commandLink>
 			       </div>
@@ -640,12 +640,10 @@
 		                 </div>
                       </div>    
                  
-               <p:dataTable id="tblEntreprises" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeSoumi}" 
-				rowKey="#{slctdTb.souNcc}" scrollable="true" scrollHeight="270" emptyMessage="Aucun soumissionnaire trouvé" rows="5">
+               <p:dataTable id="tblEntreprises" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeSoumission}" 
+				scrollable="true" scrollHeight="270" emptyMessage="Aucun soumissionnaire trouvé" rows="5">
                          
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center">
-                         </p:column>
-                         
+                        
                          <p:column headerText="Ncc" styleClass="col-sm-1" >
          				<h:outputText value="#{slctdTb.souNcc}" />
 				        </p:column>
@@ -730,9 +728,90 @@
     
     
     <h:form id="dlogEntreprise" styleClass="form-horizontal">
-	  <p:dialog  widgetVar="dlogEntreprise" modal="true"  showEffect="fade" hideEffect="fade" height="70%" width="85%" closable="true" header="">
+	  <p:dialog  widgetVar="dlogEntreprise" modal="true"  showEffect="fade" hideEffect="fade" height="80%" width="50%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
+                
+                
+                          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+          <div class="col-md-7">  <div  style="color: #fff">AJOUTER L'ENTREPRISE SOUMISSIONNAIRE</div></div>
+         </div>
+
+        <div class="box-body">
+             <div class="form-group">
+   			<div class="col-md-12 align justify-content-center">
+                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Identification de l'entreprise</small></legend>		                
+                       <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
+		                  <div class="form-group horizontal">
+		                      <label  class="col-sm-2 control-label text-right"><b>Ncc :<span style="color:red;"> *</span></b></label>
+		                      <div class="col-sm-10">
+				                <table>
+							        <tr>
+		                            <td style="width: 800px">
+		                            <p:inputText value="#{demandeController.newSoum.souNcc}" type="text" styleClass="form-control" style="width:100%" />
+		                            </td>		                 
+		                            <td>
+									        <p:commandLink action="#{demandeController.verifierNumNcc()}"  title="Sélectionnez l'entreprise" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update=":dlogEntreprise:infopEnt">
+										    	<i class="fa fa-search"></i>
+										    </p:commandLink>
+								        </td>
+			                       <td style="width:1510px">
+			                       <h:panelGroup id="idncc">
+			                      
+			                       </h:panelGroup>
+			                       </td>
+							        </tr>
+				                </table>
+			                </div>
+		                  </div>
+		                  <h:panelGroup id="infopEnt">
+		                   <div class="form-group horizontal">
+		                      <label  class="col-sm-2 control-label text-right"><b> Sigle :</b></label>
+		                      <div class="col-sm-10">
+		                        <p:inputText value="#{demandeController.newSoum.souSigleSte}" readonly="true" type="text" styleClass="form-control"  style="width: 100%"/>
+		                      </div>
+		                  </div>
+		                   <div class="form-group horizontal">
+		                      <label  class="col-sm-2 control-label text-right"><b> Nom commercial :</b></label>
+		                      <div class="col-sm-10">
+		                        <p:inputText value="#{demandeController.newSoum.souNomCom}" readonly="true" type="text" styleClass="form-control"  style="width: 100%"/>
+		                      </div>
+		                  </div>
+		                   <div class="form-group horizontal">
+		                      <label  class="col-sm-2 control-label text-right"><b> Adresse :</b></label>
+		                      <div class="col-sm-10">
+		                        <p:inputText value="#{demandeController.newSoum.souAdresse}" readonly="true" type="text" styleClass="form-control"  style="width: 100%"/>
+		                      </div>
+		                  </div>
+                         </h:panelGroup>
+		                
+                    </fieldset>
+                  </div>
+                    </div>
+          
+         <div class="row">
+         </div>
+         </div>
+            <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:1px;color:#fff;margin-top:10px" action="#{demandeController.saveEntrepsises()}" oncomplete="PF('dlogEntreprise').hide()" update=":gnl:tblEntreprises" >
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+                     </div>
+         
+         </div>
+                   
+         
+                    
+                  
+                    
+                    
+                    
+            
+            
+            
+            <h:panelGroup rendered="false">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
           <div class="col-md-7">  <div  style="color: #fff">SAISIE DES ENTREPRISES SOUMISSIONNAIRES</div></div>
@@ -746,7 +825,7 @@
 				                <span class="input-group-btn">
 				                <p:commandLink action="#{demandeController.chargeEntreprses()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogEntreprise:ndTbleScc" />
 				                </span>
-			                      <p:inputText value="#{demandeController.numbScc}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                      <p:inputText value="#{demandeController.critere}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
 			                       <span class="input-group-btn">
 			                      <p:commandLink action="#{demandeController.chargeEntreprsesFilter()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update="dlogEntreprise:ndTbleScc" />
 			                    </span>
@@ -798,7 +877,7 @@
               </div>
          </div>
          
-		          
+		</h:panelGroup>          
               
          </div>
          </div>
