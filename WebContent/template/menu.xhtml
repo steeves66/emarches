@@ -324,7 +324,7 @@
             <i class="fa fa-circle-o"></i>Saisie
              </p:commandLink>
             </li>
-            
+			
           </ul>     
          </li>
          
@@ -512,7 +512,7 @@
         </li>
          <!-- FIN M2 -->
          
-         <h:panelGroup rendered="false">
+         <h:panelGroup rendered="false"> 
            <!-- DEBUT M3 :  -->
          <li class="treeview">
           <a href="#">
@@ -531,7 +531,7 @@
          </ul>     
          </li>
          <!-- FIN M3 -->
-         </h:panelGroup>
+       </h:panelGroup> 
          
            <!-- DEBUT M4 :  -->
          <li class="treeview">
@@ -602,6 +602,12 @@
             </li>
           </ul>
         </li>   
+        
+        <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISNUM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Transmission à la numérotation
+             </p:commandLink>
+            </li>
          <!-- FIN M4 -->
 
         

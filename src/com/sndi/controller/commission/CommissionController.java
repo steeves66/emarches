@@ -1366,14 +1366,14 @@ public class CommissionController {
 					          iservice.addObject(newSeance);
 					
 					          //CREATION DE LA COMMISSION SPECIFIQUE
-					          newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
+					        /*  newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
 					          newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
 					          newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 					          newcomSpec.setComMarCode(slctdTd.getDacTymCode());
 					          newcomSpec.setTAvisAppelOffre(avis);
 					          newcomSpec.setTDacSpecs(dao);
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
-					          iservice.addObject(newcomSpec);
+					          iservice.addObject(newcomSpec);*/ //il fait ine insertion dans t_commission_spec alors qu'il ne fallait pas
 					          
 					          //MIS A JOUR DES DATES D'OUVERTURE FINANCIERE ET OUVERTURE TECHNIQUE DE L'AVIS D'APPEL D'OFFRES
 					          List<TAvisAppelOffre> AV  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
@@ -1477,7 +1477,6 @@ public class CommissionController {
 									membre.setDcsSeaTseNum(""+typeSeance); 
 									membre.setDcsDteSea(dateSeance);
 									membre.setDcsHeureDeb(heureDeb);
-									membre.setDcsSeaNum(mbr.getDcsSeaNum().toString());
 									//membre.setDcsHeureFin(heureFin);
 									membre.setDcsSeaLieu(lieuSeance);
 									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());

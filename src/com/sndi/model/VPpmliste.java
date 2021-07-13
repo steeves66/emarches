@@ -56,7 +56,6 @@ public class VPpmliste implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private String dppActeurSaisie;
-	private String dppStatutAno;
 	private Date dppDateAttApprobCpmp;
 	private Date dppDateAvisAoPublication;
 	private Date dppDateDaoApprobBail;
@@ -113,7 +112,7 @@ public class VPpmliste implements java.io.Serializable {
 			String lbgFonCodeCf, String lbgFonCodeCor,String lbgImputation,BigDecimal lbgTotDot, BigDecimal lbgAeTr, BigDecimal lbgDisTot, String lbgFonCodeVal, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
 			String dppPartiePmePmi, Date dppDateSaisie, String dppTypePlan, String tymLibelleCourt,
 			String dppStatutRetour, String dppStructureConduc, String dppStructureBenefi, String dppRecherche,
-			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie,String dppStatutAno,Date dppDateAttApprobCpmp,
+			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie,Date dppDateAttApprobCpmp,
 			Date dppDateAvisAoPublication, Date dppDateDaoApprobBail, Date dppDateDaoApprobDmp, Date dppDateDaoTrans,
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateJugementOffreTec, Date dppDateNotAtt,
 			Date dppDateOuvertOf, Date dppDateOuvertOt, Date dppDateRecepFact, Date dppDateRecepLettr,
@@ -156,7 +155,6 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppActeurSaisie = dppActeurSaisie;
-		this.dppStatutAno = dppStatutAno;
 		this.dppDateAttApprobCpmp = dppDateAttApprobCpmp;
 		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
 		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
@@ -509,15 +507,6 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setDppActeurSaisie(String dppActeurSaisie) {
 		this.dppActeurSaisie = dppActeurSaisie;
-	}
-	
-	@Column(name = "DPP_STATUT_ANO", length = 3)
-	public String getDppStatutAno() {
-		return this.dppStatutAno;
-	}
-
-	public void setDppStatutAno(String dppStatutAno) {
-		this.dppStatutAno = dppStatutAno;
 	}
 	
 	@Column(name = "DPP_DATE_ATT_APPROB_CPMP", length = 7)

@@ -7176,7 +7176,27 @@ public class ControleController {
 															    			if(action.equalsIgnoreCase("TRAIDMP")) {
 																    			type = "Commission";
 																    			libelleDmp="DGMP";
-																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
+																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	//hhh
+																    		}else
+															    			//TRANSMISSION A LA NUMEROTATION
+															    			if(action.equalsIgnoreCase("LISNUM")) {
+																    			type = "Commission";
+																    			fonctionalite = "listNumerotationAc";
+																    			libelleDmp="DGMP";
+																    			libelle="LOTS EN ATTENTE DE TRANSMISSION A LA NUMEROTATION";
+																    			libelleTravaux="Joindre le PV d'ouverture";
+																    			libelle2 = "Date Fin Ouverture";
+																    			typePlan = "L'OUVERTURE";
+																    			libelle1 = "Heure de Fin";
+																    			libelleFinCom = "Fin de la séance d'ouverture";
+																    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
+																				 panel1 =false;
+																				 btn_membre = true;
+																				 btn_apercuOuv =true;
+																				 btn_apercuAna =false;
+																				 btn_apercuJug =false;
+																				 btn_retourJug = false;
+																		
 																    		}
 													    			else
 													    				

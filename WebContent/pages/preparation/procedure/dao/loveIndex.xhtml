@@ -487,15 +487,11 @@
 			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
 				                <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
 				            </p:commandLink>
-				            
-				        <h:panelGroup rendered="#{doss.TFonction.fonCod == userController.getSlctd().getTFonction().getFonCod()}">    
 						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="gnl">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
 		                </p:commandLink>
-		                </h:panelGroup>
-		                
 		 	        </p:column>
 			    </p:dataTable>  
 			          </div>
@@ -601,14 +597,11 @@
 			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
 				                <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
 				            </p:commandLink>
-				            
-				        <h:panelGroup rendered="#{doss.TFonction.fonCod == userController.getSlctd().getTFonction().getFonCod()}">    
 						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="apercuDAO:tabDossier">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
 		                </p:commandLink>
-		                </h:panelGroup>
 		 	        </p:column>
 			    </p:dataTable>  
 			          </div>
