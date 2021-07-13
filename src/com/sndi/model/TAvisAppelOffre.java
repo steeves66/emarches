@@ -76,7 +76,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String aaoArtComSpec;
 	private String aaoMessCritLotExist;
 	private String aaoStatut;
-	private String aaoOffAnormal;
+	public String aaoOffAnormal;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);

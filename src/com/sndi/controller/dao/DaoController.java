@@ -4001,6 +4001,7 @@ TDacSpecs dao = new TDacSpecs();
 		 							  chargeImputation();
 		 							  recupDetail();
 		 							  choixTaux = "N";
+		 							  newAvis.aaoOffAnormal = "N";
 		 							  //listeMarge();
 		 							  
 		 							  //Création de l'avis de l'Appel d'Offres
