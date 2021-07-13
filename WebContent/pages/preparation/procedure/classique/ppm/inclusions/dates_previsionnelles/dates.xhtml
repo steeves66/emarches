@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="dates" >  
+    <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">DATES PREVISIONNELLES</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+            <p:dataTable styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listeDates}"  editable="true" editMode="cell" emptyMessage="Aucune date trouvée">
+         				<p:column styleClass="col-sm-7" style="text-align:right">
+				            <h:outputText value="#{slctdTb.padLibelle}" style="font-weight:bold"/>
+				        </p:column>
+				          
+				    <p:column headerText="DATES PREVISIONNELLES" styleClass="col-sm-3">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText value="#{slctdTb.dplDteValeur}">
+		                <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                  <p:calendar value="#{slctdTb.dplDteValeur}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" > 
+		                  <p:ajax event="dateSelect" listener="#{ppmController.saveDateOp(slctdTb)}" update="gnl"/>
+		                   </p:calendar>
+		                 </f:facet>
+		               </p:cellEditor>
+		               <h:panelGroup rendered="#{slctdTb.champDatePub == '1'}">
+				              <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmController.chargeDatepub}" styleClass="btn btn-warning pull-right"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+							  </h:panelGroup>
+				        </p:column>
+				
+				        	<p:column headerText="JOUR" styleClass="col-sm-2" style="text-align:left">
+				            <h:outputText value="#{slctdTb.jourNom}"/>
+				        </p:column>
+                 </p:dataTable> 
+		  
+          </div>     
+         </div>
+         </div>
+     </h:panelGroup>     
+</html>
