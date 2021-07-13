@@ -50,7 +50,7 @@
 		</div>	
 		
 		<div class="row">
-        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de programmation : " /></b></div>
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date de publication : " /></b></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateAvisAoPublication}"> 
 			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
@@ -95,18 +95,6 @@
 			     </b>
 			</div> 
 		</div>
-		
-    <h:panelGroup rendered="#{etatsPpmController.ppmAno}">
-	<div class="row">
-      <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Date d'approbation de l'attribution ANO DGMP : " /></b></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAno}"> 
-			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div>
-	   </div> 
-	  </h:panelGroup>
 			
 		<div class="row">
 			 <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Notification de l'Attribution : " /></b></div>
