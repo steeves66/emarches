@@ -96,6 +96,8 @@ public class EtatsPpmController {
      public boolean ppmPrq = false;
      public boolean ppmPsc = false;
      public boolean ppmAor = false;
+     public boolean ppmPsi = false;
+     public boolean ppmAno = false;
      /*public boolean partPspm = false;
      public boolean partPgspm = false;*/
 	
@@ -141,6 +143,7 @@ public class EtatsPpmController {
 			     ppmPsc = false;
 			     ppmAmiPso = false;
 			     ppmAor = false;
+			     ppmPsi = false;
 			 }else {
 				 
 				 if(slctdTd.getDppMopCode().equalsIgnoreCase("AMS")){
@@ -152,6 +155,7 @@ public class EtatsPpmController {
 			     ppmPrq = false;
 			     ppmPsc = false;
 			     ppmAor = false;
+			     ppmPsi = false;
 			 }else {
 				 /*if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
 					 ppmNormal = false;
@@ -170,6 +174,7 @@ public class EtatsPpmController {
 					     ppmPsc = false;
 					     ppmAmiPso = false;
 					     ppmAor = false;
+					     ppmPsi = false;
 					 }else {
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")){
 							 ppmNormal = false;
@@ -180,6 +185,7 @@ public class EtatsPpmController {
 						     ppmPsc = true;
 						     ppmAmiPso = false;
 						     ppmAor = false;
+						     ppmPsi = false;
 						 }else {
 						 
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")){
@@ -191,6 +197,7 @@ public class EtatsPpmController {
 						     ppmPrq = false;
 						     ppmPsc = false;
 						     ppmAmiPso = false;
+						     ppmPsi = false;
 						 }else {
 							 
 							 if(slctdTd.getDppMopCode().equalsIgnoreCase("AOR")){
@@ -202,7 +209,19 @@ public class EtatsPpmController {
 							     ppmPrq = false; 
 							     ppmPsc = false;
 							     ppmAmiPso = false;
+							     ppmPsi = false;
 							 }else {   
+								 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSI")){
+									 ppmNormal = false;
+								     ppmAmi = false;
+								     ppmPso = false;
+								     ppmPsl = true;
+								     ppmPrq = false;
+								     ppmPsc = false;
+								     ppmAmiPso = false;
+								     ppmAor = false;
+								     ppmPsi = true;
+								 }else {
 							 ppmNormal = true;
 							 ppmAor = false;
 						     ppmAmi = false;
@@ -211,7 +230,9 @@ public class EtatsPpmController {
 						     ppmPrq = false; 
 						     ppmPsc = false;
 						     ppmAmiPso = false;
+						     ppmPsi = false;
 						 }
+					    }
 					   }
 					 }
 				 }
@@ -219,7 +240,15 @@ public class EtatsPpmController {
 			 }
 			}
 		 	 
-			 
+		 
+		 //vérification si Ano existe
+		 public void controleAno() {
+			 if(slctdTd.getDppStatutAno().equalsIgnoreCase("O")) {
+				 ppmAno = true;
+			 }else {
+				 ppmAno = false;
+			 }
+		 }
 		 
 		//Afficher les détails du financement
 		 public void chargeDetailFinancement(){
@@ -251,6 +280,8 @@ public class EtatsPpmController {
 			 }else {
 				 visibility = false;
 			 }
+			 
+			 controleAno();
 		 }
 		 
 	
@@ -583,6 +614,22 @@ public class EtatsPpmController {
 
 	public void setPpmAor(boolean ppmAor) {
 		this.ppmAor = ppmAor;
+	}
+
+	public boolean isPpmPsi() {
+		return ppmPsi;
+	}
+
+	public void setPpmPsi(boolean ppmPsi) {
+		this.ppmPsi = ppmPsi;
+	}
+
+	public boolean isPpmAno() {
+		return ppmAno;
+	}
+
+	public void setPpmAno(boolean ppmAno) {
+		this.ppmAno = ppmAno;
 	}
 
 	

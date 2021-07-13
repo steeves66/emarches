@@ -153,6 +153,7 @@ public class DaoController {
 	 private List <VDaoStatut> daostatutList = new ArrayList<VDaoStatut>();
 	 private List<VDetTabBordDac> detailTBCpt = new ArrayList<VDetTabBordDac>();
 	 private List<VDacVendu> listeDetailVente= new ArrayList<VDacVendu>();
+	 private List<VCheckTransDac> listCheckTrans = new ArrayList<VCheckTransDac>();
 	//GESTION DES MEMBRES DE LA COMMISSION
 	private List<VbCommissionType> membresCommission = new ArrayList<VbCommissionType>();
 	private List<VbCommissionType> selectionMembres = new ArrayList<VbCommissionType>(); 
@@ -169,6 +170,7 @@ public class DaoController {
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	private VFonctionImputation sltImput = new VFonctionImputation();
 	private VbTempParametreCorDac newTempCor = new VbTempParametreCorDac();
+	private VCheckTransDac newCheckTrans = new VCheckTransDac();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
@@ -2979,8 +2981,7 @@ TDacSpecs dao = new TDacSpecs();
 		    	 }else {
 		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
-		    	 }
-		    	 		
+		    	 } 		
 		 	 } 
 		  
 		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
@@ -3062,6 +3063,15 @@ TDacSpecs dao = new TDacSpecs();
 			 
 			 
 			 
+			 public void verifCheckrans() {
+				 listCheckTrans = (List<VCheckTransDac>) iservice.getObjectsByColumn("VCheckTransDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		 				if (!listCheckTrans.isEmpty()) {
+		 					newCheckTrans= listCheckTrans.get(0); 
+		 	   	          }
+			 }
+			 
+			 		 
 			  @Transactional
 				public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
 				 //condition de chargement d'un document : Nature sélectionnée 
@@ -3070,43 +3080,51 @@ TDacSpecs dao = new TDacSpecs();
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
 					 
 					 }else {
+						 
+						 verifCheckrans();
+						 
+						 if(newCheckTrans.getCheckTrans().equalsIgnoreCase("1")) {
+
+								if(fileUploadController.handleFileUpload(event, ""+slctdTd.getDacCode(), docNature)) {
+									
+									listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+						 				if (!listDao.isEmpty()) {
+						 					newDao= listDao.get(0);
+						 	   	                 }
+									
+									int nat = Integer.valueOf(docNature);
+									//dos.setDdaNom(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
+									dos.setTDacSpecs(newDao);
+									dos.setTOperateur(userController.getSlctd().getTOperateur());
+									List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+									TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+									if(!LS.isEmpty()) natureDoc = LS.get(0);
+									dos.setTNatureDocuments(natureDoc);
+									dos.setDdaNom(fileUploadController.getFileName());
+									dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+									dos.setTOperateur(userController.getSlctd().getTOperateur());
+									dos.setTFonction(userController.getSlctd().getTFonction());
+									dos.setDdaReference(fileUploadController.getDocNom());
+									iservice.addObject(dos);
+									
+									//chargeNatureDocTrans();
+									chargeDossier();
+									
+									FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
+									FacesContext.getCurrentInstance().addMessage(null, msg);
+								   chargeDossier();
+									}else {
+										FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger  nouveau un document ! ","");
+										FacesContext.getCurrentInstance().addMessage(null, msg);	
+										
+									}
+						 }else {
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,""+newCheckTrans.getCheckTransMsg(),"");
+								FacesContext.getCurrentInstance().addMessage(null, msg);
+						 }
+						        
 				
-				if(fileUploadController.handleFileUpload(event, ""+slctdTd.getDacCode(), docNature)) {
-					
-					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-		 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-		 				if (!listDao.isEmpty()) {
-		 					newDao= listDao.get(0);
-		 	   	                 }
-					
-					int nat = Integer.valueOf(docNature);
-					//check le dossier s'il existe ÃƒÂ  faire
-					//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
-					//dos.setDdaNom(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
-					dos.setTDacSpecs(newDao);
-					dos.setTOperateur(userController.getSlctd().getTOperateur());
-					List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
-					TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
-					if(!LS.isEmpty()) natureDoc = LS.get(0);
-					dos.setTNatureDocuments(natureDoc);
-					dos.setDdaNom(fileUploadController.getFileName());
-					dos.setDdaDteSaisi(Calendar.getInstance().getTime());
-					dos.setTOperateur(userController.getSlctd().getTOperateur());
-					dos.setTFonction(userController.getSlctd().getTFonction());
-					dos.setDdaReference(fileUploadController.getDocNom());
-					iservice.addObject(dos);
-					
-					//chargeNatureDocTrans();
-					chargeDossier();
-					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
-					FacesContext.getCurrentInstance().addMessage(null, msg);
-				   chargeDossier();
-					}else {
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger  nouveau un document ! ","");
-						FacesContext.getCurrentInstance().addMessage(null, msg);	
-						
-					}
 				  }
 				}
 		       //Fin Upload
@@ -3118,34 +3136,40 @@ TDacSpecs dao = new TDacSpecs();
 					          FacesContext.getCurrentInstance().addMessage(null,
 				      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier ou choisir la mention avant Transmission du DAO", ""));
 			        	      }else { 
-			        		         
-			       			          listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-			       					      new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-			       				             if (!listDao.isEmpty()) {
-			       					                 newDao= listDao.get(0);
-			                                         newDao.setDacDateValAc(Calendar.getInstance().getTime());
-			       					                 newDao.setTStatut(new TStatut("D1T"));
-			       					                 newDao.setDacStatutRetour("0");
-			       					                 newDao.setDacMention(slctdTd.getDacMention());
-			       			                         iservice.updateObject(newDao); 
-			       			                         
-			       			                        constantService.getStatut("D1T");
-						 							//Historisation du / des retraits
-						 						    historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
-						 						    //Tableau de Bord
-			       			                        tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
-			       			                         
-			       	   	                           } 
-			       				
-			       					chargeData();
-			       					//chargeDaoTabTrans();
-			       					//Actualisation du tableau de bord
-			       					typeActionTb();
-			       					docNature ="";
-			       					//Message de confirmation
-			       					userController.setTexteMsg("Transmission effectue avec succs!");
-			   						userController.setRenderMsg(true);
-			   						userController.setSevrityMsg("success");
+			        	    	     verifCheckrans();
+									 if(newCheckTrans.getCheckTrans().equalsIgnoreCase("1")) {
+										  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					       					      new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					       				             if (!listDao.isEmpty()) {
+					       					                 newDao= listDao.get(0);
+					                                         newDao.setDacDateValAc(Calendar.getInstance().getTime());
+					       					                 newDao.setTStatut(new TStatut("D1T"));
+					       					                 newDao.setDacStatutRetour("0");
+					       					                 newDao.setDacMention(slctdTd.getDacMention());
+					       			                         iservice.updateObject(newDao); 
+					       			                         
+					       			                        constantService.getStatut("D1T");
+								 							//Historisation du / des retraits
+								 						    historiser("D1T",slctdTd.getDacCode(),"");
+								 						    //Tableau de Bord
+					       			                        tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
+					       			                         
+					       	   	                           } 
+					       				
+					       					chargeData();
+					       					//chargeDaoTabTrans();
+					       					//Actualisation du tableau de bord
+					       					typeActionTb();
+					       					docNature ="";
+					       					//Message de confirmation
+					       					userController.setTexteMsg("Transmission effectue avec succs!");
+					   						userController.setRenderMsg(true);
+					   						userController.setSevrityMsg("success");
+									 }else {
+										 
+										 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,""+newCheckTrans.getCheckTransMsg(),"");
+											FacesContext.getCurrentInstance().addMessage(null, msg);
+									 }
 			        	         }
 			                  }
 
@@ -3987,6 +4011,8 @@ TDacSpecs dao = new TDacSpecs();
 				            	       newAvis.setAaoDteSaisi(Calendar.getInstance().getTime()); 
 				            	       newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 				            	       iservice.addObject(newAvis); 
+				            	       //
+				            	       chargeLibelleAdresse();
 		 			      }
 			    					//Insertion des pices
 			          }
@@ -7580,6 +7606,7 @@ TDacSpecs dao = new TDacSpecs();
 											  
 											  //Methode de rÃ¯Â¿Â½cupÃ¯Â¿Â½ration du nombre de vente 
 											  public void detailVente() {
+												listeDetailVente.clear();
 												listeDetailVente = (List<VDacVendu>) iservice.getObjectsByColumn("VDacVendu", new ArrayList<String>(Arrays.asList("DVE_DAC_CODE")),
 								      			  		 new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
 								      			  		 new WhereClause("DVE_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -16717,6 +16744,22 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setDacMention(boolean dacMention) {
 		this.dacMention = dacMention;
+	}
+
+	public List<VCheckTransDac> getListCheckTrans() {
+		return listCheckTrans;
+	}
+
+	public void setListCheckTrans(List<VCheckTransDac> listCheckTrans) {
+		this.listCheckTrans = listCheckTrans;
+	}
+
+	public VCheckTransDac getNewCheckTrans() {
+		return newCheckTrans;
+	}
+
+	public void setNewCheckTrans(VCheckTransDac newCheckTrans) {
+		this.newCheckTrans = newCheckTrans;
 	}
 	
 	

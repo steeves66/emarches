@@ -1477,6 +1477,7 @@ public class CommissionController {
 									membre.setDcsSeaTseNum(""+typeSeance); 
 									membre.setDcsDteSea(dateSeance);
 									membre.setDcsHeureDeb(heureDeb);
+									membre.setDcsSeaNum(mbr.getDcsSeaNum().toString());
 									//membre.setDcsHeureFin(heureFin);
 									membre.setDcsSeaLieu(lieuSeance);
 									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());

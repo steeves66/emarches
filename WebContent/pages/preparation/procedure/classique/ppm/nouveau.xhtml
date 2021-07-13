@@ -1058,7 +1058,7 @@
 		                  </div>
 		                  </h:panelGroup>
 		                  
-		                  
+		                  <h:panelGroup rendered="#{ppmController.panelAno}">
 		                  <div class="form-group">
 		                  <label for="jug2" class="col-sm-6 control-label">Date d'approbation de l'attribution ANO DGMP</label>
 		                  <div class="col-sm-6">
@@ -1083,6 +1083,35 @@
 		                   
 		                  </div>
 		                </div>
+		                </h:panelGroup>
+		                
+		                 
+		                  <div class="form-group">
+		                  <label for="jug2" class="col-sm-6 control-label">Date d'approbation de l'attribution de Marché</label>
+		                  <div class="col-sm-6">
+		                  
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '2'}">
+		                   <p:calendar id="jug224" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                   </p:calendar> <span style="color:red;"> #</span>
+		                   </h:panelGroup>
+		                  
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '1'}">
+		                   <p:calendar id="jug234" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                   </p:calendar> <span style="color:green;"> #</span>
+		                   </h:panelGroup>
+		                  
+		                  <h:panelGroup rendered="#{ppmController.geneDate.dppFlagJugementOffre == '0'}">
+		                   <p:calendar id="jug244" title="#{ppmController.geneDate.dppJourJugementOffre} #{ppmController.geneDate.dppDateJugementOffre}" value="#{ppmController.geneDate.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffre')}" update=":gnl"/>
+		                   </p:calendar> 
+		                   </h:panelGroup>
+		                   
+		                  </div>
+		                </div>
+		                
+		                
 		                  </div>
 		                  </div>
          </div>
