@@ -208,11 +208,11 @@
            </div>
              </div>
               <div class="box-footer">
-              <p:commandLink rendered="#{operateurController.btnPrintOp}"  styleClass="btn btn-warning row pull-right"  action="#{operateurController.printOperateur()}" title="Editer la fiche operateur" ajax="false" style="background-color: #f88b2e; margin-right:5px;color:#fff">
+              <p:commandLink rendered="#{operateurController.btnPrintOp}" id="btn_imp"  styleClass="btn btn-warning row pull-right"  action="#{operateurController.printOperateur()}" title="Editer la fiche operateur" ajax="false" style="background-color: #f88b2e; margin-right:5px;color:#fff">
 			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer 
 	               </p:commandLink>
 
-               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{operateurController.saveAssignation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update="tblAss, gnl:fonction">
+               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{operateurController.saveAssignation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update="tblAss, gnl:btn_imp">
 			             <i class="ace-icon fa fa-save"></i>Enregistrer
 	               </p:commandLink>
 	               

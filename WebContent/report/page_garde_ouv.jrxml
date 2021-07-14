@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-01-11T10:50:05 -->
+<!-- 2021-07-13T13:08:54 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="page_garde_ouv" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" whenResourceMissingType="Empty" uuid="e2847c08-0292-4b44-9655-4416c3ece664">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -207,23 +207,20 @@ order by l.laa_aao_code, l.laa_num]]>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[select distinct a.aao_delai_val,l.laa_num,l.laa_objet,(o.dof_sou_ncc||' - '||o.dof_sigle) sigle,l.laa_mt_caut, o.dof_delai,o.dof_num,
-(o.dof_mt_ofr*(0.18)+o.dof_mt_ofr) dof_Mt_Ttc,o.dof_mt_ofr,
-o.dof_rab,o.dof_sou_ncc,(case when o.dof_typ='V' then 'Variante' else 'Offre de base' end) variante
-from vb_avis_appel_offre a, vb_lot_aao l, vb_det_offres o
-where a.aao_code=l.laa_aao_code
-and l.laa_id=o.dof_laa_id
-and l.laa_aao_code=$P{param_code_1}
-order by l.laa_num,o.dof_sou_ncc]]>
+			<![CDATA[select * from v_lot_soumissionnaire vl 
+where  vl.laa_aao_code=$P{param_code_1}]]>
 		</queryString>
 		<field name="AAO_DELAI_VAL" class="java.math.BigDecimal"/>
 		<field name="LAA_NUM" class="java.math.BigDecimal"/>
 		<field name="LAA_OBJET" class="java.lang.String"/>
 		<field name="SIGLE" class="java.lang.String"/>
 		<field name="LAA_MT_CAUT" class="java.math.BigDecimal"/>
+		<field name="LAA_AAO_CODE" class="java.lang.String"/>
 		<field name="DOF_DELAI" class="java.math.BigDecimal"/>
 		<field name="DOF_NUM" class="java.math.BigDecimal"/>
+		<field name="DOF_DELAI2" class="java.math.BigDecimal"/>
 		<field name="DOF_MT_TTC" class="java.math.BigDecimal"/>
+		<field name="DOF_HT_TTC" class="java.math.BigDecimal"/>
 		<field name="DOF_MT_OFR" class="java.math.BigDecimal"/>
 		<field name="DOF_RAB" class="java.lang.String"/>
 		<field name="DOF_SOU_NCC" class="java.lang.String"/>
@@ -1030,7 +1027,7 @@ and pv.aao_code=$P{param_code_1}]]>
 									<textField>
 										<reportElement x="0" y="0" width="54" height="20" uuid="0f8e90be-72a5-4b81-8a26-77be5fecb820"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
-										<textFieldExpression><![CDATA[$F{DOF_DELAI}+" jrs"]]></textFieldExpression>
+										<textFieldExpression><![CDATA[$F{DOF_DELAI2}+" jrs"]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
@@ -1063,7 +1060,7 @@ and pv.aao_code=$P{param_code_1}]]>
 									<textField>
 										<reportElement x="0" y="0" width="82" height="20" uuid="1bfc0ea2-8375-437a-a47b-0e0a0360df4a"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
-										<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_MT_OFR})]]></textFieldExpression>
+										<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_HT_TTC})]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>
@@ -1115,7 +1112,7 @@ and pv.aao_code=$P{param_code_1}]]>
 									<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 										<reportElement x="0" y="0" width="90" height="20" uuid="8a0d4f5a-8950-405e-b3e6-169e6544f2cb"/>
 										<textElement textAlignment="Center" verticalAlignment="Middle"/>
-										<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_MT_TTC})]]></textFieldExpression>
+										<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DOF_MT_OFR})]]></textFieldExpression>
 									</textField>
 								</jr:detailCell>
 							</jr:column>

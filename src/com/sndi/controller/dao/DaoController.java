@@ -538,7 +538,7 @@ public class DaoController {
 						 ||"".equals(daoDetail.getDppObjet()) ) 
 				 {
 					 FacesContext.getCurrentInstance().addMessage(null,
-					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
+					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez terminer votre Saisie, avant de cliquer sur suivant!", ""));
 			          return "creation";
 					} 
 	              userController.initMessage(); 
@@ -4012,13 +4012,30 @@ TDacSpecs dao = new TDacSpecs();
 				            	       newAvis.setAaoDteSaisi(Calendar.getInstance().getTime()); 
 				            	       newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 				            	       iservice.addObject(newAvis); 
-				            	       //
+				                       //Contrôle sur le mode de qualification et chargement des libellés de référence 
+				            	       controleMode();
 				            	       chargeLibelleAdresse();
 		 			      }
-			    					//Insertion des pices
 			          }
 	     
-	     
+	     //Contrôle sur le mode de qualification
+	     public void controleMode() {
+	    	 if(dao.getTTypeMarche().getTymCode().equalsIgnoreCase("00") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("20") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("F") || 
+	    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("32") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("T") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("21")||
+	    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("22") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("09")) {
+	    		 aaoRegQual = "CONFORMITE";
+	    		 
+	    	 }else {
+	    		    if(dao.getTTypeMarche().getTymCode().equalsIgnoreCase("11") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("10") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("1") || 
+		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("I") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("31") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("41") ||
+		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("17") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("16") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("12") ||
+		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("19") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("13")) {
+	    		    	aaoRegQual = "SCORE";
+		    	 }else {
+		    		 aaoRegQual = "AUTRE";
+		    	 } 
+	    	 }
+	     }
 	     
 	 	//Initiation du DAO en procdure normale 
 	     @Transactional
