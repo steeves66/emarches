@@ -226,7 +226,7 @@ public class DaoController {
 	private VPieces sltPiece = new VPieces();
 	private TSeances sltSeances  = new TSeances();
 	private TLotAao sltLot = new TLotAao();
-	private TPiecesDacs sltPiecesDac =new TPiecesDacs();
+	private VPieceDac sltPiecesDac =new VPieceDac();
 	private TPiecesDacs pieceDac =new TPiecesDacs();
 	//variables
 	private long gesCode;
@@ -4340,48 +4340,59 @@ TDacSpecs dao = new TDacSpecs();
 	        	TAvisAppelOffre newAvis = new TAvisAppelOffre(); 
 			    if(!AVIS.isEmpty()) newAvis = AVIS.get(0);
 				            	 					
-				            	 					    newAvis.setAaoLibelle(slctdTd.getAaoLibelle());
-				            	 					    newAvis.setAaoNatPrix(slctdTd.getAaoNatPrix());
-					            	 					newAvis.setAaoRegQual(slctdTd.getAaoRegQual());
-					            	 					newAvis.setAaoAvisBai(slctdTd.getAaoAvisBai());
-					            	 					newAvis.setAaoRespBai(slctdTd.getAaoRespBai());
-					            	 					newAvis.setAaoOffAnormal(slctdTd.getAaoOffAnormal());
-					            	 					newAvis.setAaoDelaiVal(slctdTd.getAaoDelaiVal());
-					            	 					newAvis.setAaoPrecisModEval(slctdTd.getAaoPrecisModEval());
-					            	 					newAvis.setAaoNbrLot(slctdTd.getAaoNbrLot());
-					            	 					newAvis.setAaoLieuRecep(slctdTd.getAaoLieuRecep());
-					            	 					newAvis.setAaoHeureRecep(slctdTd.getAaoHeureRecep());
-					            	 					newAvis.setAaoNbrOuv(slctdTd.getAaoNbrOuv());
-					            	 					newAvis.setAaoLieuExe(slctdTd.getAaoLieuExe());
-					            	 					newAvis.setAaoDteOuvTec(slctdTd.getAaoDteOuvTec());
-					            	          		    newAvis.setTAdresseAvis(new TAdresseAvis(slctdTd.getAdaNum())); 
-														newAvis.setAaoNatInt(slctdTd.getAaoNatInt());
-					            	          		    iservice.updateObject(newAvis); 
+				newAvis.setAaoLibelle(slctdTd.getAaoLibelle());
+				newAvis.setAaoNatPrix(slctdTd.getAaoNatPrix());
+			    newAvis.setAaoRegQual(slctdTd.getAaoRegQual());
+			    newAvis.setAaoAvisBai(slctdTd.getAaoAvisBai());
+				newAvis.setAaoRespBai(slctdTd.getAaoRespBai());
+				newAvis.setAaoOffAnormal(slctdTd.getAaoOffAnormal());
+				newAvis.setAaoDelaiVal(slctdTd.getAaoDelaiVal());
+				newAvis.setAaoPrecisModEval(slctdTd.getAaoPrecisModEval());
+				newAvis.setAaoNbrLot(slctdTd.getAaoNbrLot());
+				newAvis.setAaoLieuRecep(slctdTd.getAaoLieuRecep());
+				newAvis.setAaoHeureRecep(slctdTd.getAaoHeureRecep());
+				newAvis.setAaoNbrOuv(slctdTd.getAaoNbrOuv());
+				newAvis.setAaoLieuExe(slctdTd.getAaoLieuExe());
+				newAvis.setAaoDteOuvTec(slctdTd.getAaoDteOuvTec());
+				newAvis.setAaoDteHeurOuv(slctdTd.getAaoDteHeurOuv());
+				newAvis.setAaoDteFinOuv(slctdTd.getAaoDteOuvFin());
+			    newAvis.setTAdresseAvis(new TAdresseAvis(slctdTd.getAdaNum())); 
+				newAvis.setAaoNatInt(slctdTd.getAaoNatInt());
+				iservice.updateObject(newAvis); 
 				            	          		      
-					            	          		    List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
-					            	          		     TDacSpecs dao = new TDacSpecs(); 
-						           						 if(!LS.isEmpty()) dao = LS.get(0);
-						           						 dao.setDacNbrCopieOff(slctdTd.getDacNbrCopieOff());
-						           						 dao.setDacMargePref(slctdTd.getDacMargePref());
-						           						 iservice.updateObject(dao);
+			    List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+				TDacSpecs dao = new TDacSpecs(); 
+				if(!LS.isEmpty()) dao = LS.get(0);
+			    dao.setDacNbrCopieOff(slctdTd.getDacNbrCopieOff());
+				dao.setDacMargePref(slctdTd.getDacMargePref());
+				iservice.updateObject(dao);
 				            	         
-				            	          		         userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
-				            	          		         userController.setRenderMsg(true);
-				            	          		         userController.setSevrityMsg("success");          	
+				userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");          	
 	                     }
 	    
 	        
 	        //Verification (un DAO doit avoir au moin un lot)
 	        public void controlLotDao() {
 	        	if(listeLots.size() == 0) {
-	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir ou generer au moins un lot! ","");
+	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir ou générer au moins un lot! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
 	        	}
 	        }
 	     
-	 	//Contrle sur le nombre d'ouverture
+	 	//Controle sur le nombre d'ouverture
 	 	public void verifOuverture() {
 	 		if(newAvis.aaoNbrOuv == 2) {
+	 			ouvTechnique = true;
+	 		  }else {
+	 			  ouvTechnique = false;
+	 		}
+	 	}
+	 	
+	 	//Controle sur le nombre d'ouverture en Modification
+	 	public void verifOuvertureModif() {
+	 		if(slctdTd.getAaoNbrOuv() == 2) {
 	 			ouvTechnique = true;
 	 		  }else {
 	 			  ouvTechnique = false;
@@ -5573,7 +5584,7 @@ TDacSpecs dao = new TDacSpecs();
 							 iservice.updateObject(ppm1);
 							chargeOperations();
 							btnChangerOperation = true;
-				   			userController.setTexteMsg("Suppression effectue avec succs !");
+				   			userController.setTexteMsg("Suppression éffectuée avec succès !");
 				   			userController.setRenderMsg(true);
 				   			userController.setSevrityMsg("success");
 
@@ -8329,7 +8340,9 @@ TDacSpecs dao = new TDacSpecs();
 	 //Ensembles methode Ecran de modification
 			  public void actionsPavetCreation() {
 				 //updateDac();
-				 chargeOperationsExiste();
+				 //chargeOperationsExiste();
+				 panelOuverture();
+				 verifOuvertureModif();
 				 controleModeModif();
 				 chargeDetailAdresseModif();
 		         chargeAdresse();
@@ -16859,11 +16872,11 @@ TDacSpecs dao = new TDacSpecs();
 		this.listePiecesDac = listePiecesDac;
 	}
 
-	public TPiecesDacs getSltPiecesDac() {
+	public VPieceDac getSltPiecesDac() {
 		return sltPiecesDac;
 	}
 
-	public void setSltPiecesDac(TPiecesDacs sltPiecesDac) {
+	public void setSltPiecesDac(VPieceDac sltPiecesDac) {
 		this.sltPiecesDac = sltPiecesDac;
 	}
 
