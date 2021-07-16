@@ -24,6 +24,8 @@ public class VFonctionAssignation implements java.io.Serializable {
 	private String fonLibelle;
 	private String minCode;
 	private String nb;
+	private String critere;
+	
 	public VFonctionAssignation() {
 	}
 
@@ -32,13 +34,14 @@ public class VFonctionAssignation implements java.io.Serializable {
 	}
 
 	public VFonctionAssignation(String fonCod, String fonTyfCod, String fonStrCode, String minCode,String nb,
-			String fonLibelle) {
+			String fonLibelle,String critere) {
 		this.fonCod = fonCod;
 		this.fonTyfCod = fonTyfCod;
 		this.fonStrCode = fonStrCode;
 		this.minCode = minCode;
 		this.fonLibelle = fonLibelle;
 		this.nb = nb;
+		this.critere = critere;
 	}
 
 	@Id
@@ -95,6 +98,16 @@ public class VFonctionAssignation implements java.io.Serializable {
 
 	public void setNb(String nb) {
 		this.nb = nb;
+	}
+	
+
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

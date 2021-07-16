@@ -122,6 +122,7 @@ public class DaoController {
 	 private List<VDetailCorrection> listeDetailCorrection = new ArrayList<VDetailCorrection>();
 	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
+	 private List<TPiecesDacs>listePiecesDac =new ArrayList<TPiecesDacs>();
 	 private List<VChargeEtudeDac>listeChargeEtudeByDac =new ArrayList<VChargeEtudeDac>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
 	 private List<TSeances> listSeances  = new ArrayList<TSeances>();  
@@ -138,6 +139,7 @@ public class DaoController {
 	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listePpmDao = new ArrayList<VPpmDao>();
+	 private List<VPpmDao> listePpmDaoModif = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listSelectionPpmDao = new ArrayList<VPpmDao>();
 	 private List<TTypePiecesDac> detailsPieces = new ArrayList<TTypePiecesDac>();
 	 private List<TDaoAffectation> listeDaoChargeValid = new ArrayList<TDaoAffectation>();
@@ -224,9 +226,11 @@ public class DaoController {
 	private VPieces sltPiece = new VPieces();
 	private TSeances sltSeances  = new TSeances();
 	private TLotAao sltLot = new TLotAao();
-	 
+	private TPiecesDacs sltPiecesDac =new TPiecesDacs();
+	private TPiecesDacs pieceDac =new TPiecesDacs();
 	//variables
 	private long gesCode;
+	private long modifAdr;
 	 private TFonction recupFonction= new TFonction();
 	 private TDetailPlanPassation demDetail = new TDetailPlanPassation();
 	 private List<TDacSpecs> listeDaoCsvValid = new ArrayList<TDacSpecs>();
@@ -566,7 +570,7 @@ public class DaoController {
 					 lotCrit=listeLotCritere.get(0);
 					 if(lotCrit.getCritOk() != 0) {
 						 FacesContext.getCurrentInstance().addMessage(null,
-								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critres", ""));
+								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 						 return "criterebyLot";
 					 }
 			     }
@@ -585,10 +589,10 @@ public class DaoController {
 			 
 			 
 			 ////////////////////ECRAN DE MODIFICATION///////////////////////////////
-			//Controle Pav cration modification
+			//Controle Pave cration modification
 			 if(event.getOldStep().equals("creationModif") && event.getNewStep().equals("avisModif")) {
-				 if("".equals(daoDetail.getTymCode()) || "".equalsIgnoreCase(daoDetail.getMopCode()) 
-						 ||"".equals(daoDetail.getDppObjet()) ) 
+				 if(slctdTd.getDacTymCode() == null || slctdTd.getDacMopCode() == null 
+						 || slctdTd.getDacObjet() == null )  
 				 {
 					 FacesContext.getCurrentInstance().addMessage(null,
 					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez terminer votre Saisie, avant de cliquer sur suivant!", ""));
@@ -629,7 +633,7 @@ public class DaoController {
 							 lotCrit=listeLotCritere.get(0);
 							 if(lotCrit.getCritOk() != 0) {
 								 FacesContext.getCurrentInstance().addMessage(null,
-										 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critres", ""));
+										 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 								 return "criterebyLotModif";
 							 }
 					     }
@@ -1740,7 +1744,7 @@ TDacSpecs dao = new TDacSpecs();
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereSaisie();
-		    userController.setTexteMsg("Modification effectue avec succs!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -1757,7 +1761,7 @@ TDacSpecs dao = new TDacSpecs();
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereByLot();
-		    userController.setTexteMsg("Modification effectue avec succs!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -3737,22 +3741,23 @@ TDacSpecs dao = new TDacSpecs();
 			        	       }
 			        	       
 			        	       iservice.deleteObject(getDetailCom());
-							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression ffectue avec succs", "");
-				 	}	 
+							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+				 	}
+				 	
+				 	
+				 	public void removePieceModif() {
+				 		listePiecesDac = (List<TPiecesDacs>) iservice.getObjectsByColumn("TPiecesDacs", new ArrayList<String>(Arrays.asList("PID_CODE")),
+		    					new WhereClause("PID_CODE",WhereClause.Comparateur.EQ,""+sltPiecesDac.getPidCode()));
+		        	       if (!listePiecesDac.isEmpty()) {
+		        	    	   pieceDac = listePiecesDac.get(0);
+		        	       }
+		        	       iservice.deleteObject(getPieceDac());
+		        	       chargePiecesDao();
+						   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+				 	}
 		 		 
 	//Statistiques pour le chargÃ¯Â¿Â½ d'Etudes
-			 
-			/*//Affichage des DAO en attente chez le C.E
-			 public void chargeDataChargeAtt(){ 
-			 listDaoValCharge = (List<VDaoChargeEtude>) iservice.getObjectsByColumn("VDaoChargeEtude", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
-						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
-						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-						 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
-						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
-					_logger.info("listDaoValCharge  size: "+listDaoValCharge.size());	
-					tableauBordController.chargeDataDao();		
-			}*/
+			
 			 
 			/* 
 			//Affichage des DAO validÃ¯Â¿Â½ par le C.E
@@ -3832,23 +3837,9 @@ TDacSpecs dao = new TDacSpecs();
 							 }else {
 								 if(controleController.type == "PRQ") {
 									 saveDac("PRQ");
-								 }/*else {
-									 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-									 
-									 }else {
-										 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
-										 }
-									 }
-								 }*/
+								 }
 							 }
-					     
 					   }
-			 		 /*  if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-			 			  saveDac("PN","DAO");
-		              }else 
-		                   if(controleController.type == "AMI"){
-		                 	  saveDac("PN","AMI"); 
-		                   }*/
 			     }
 			    
 			    
@@ -4030,6 +4021,26 @@ TDacSpecs dao = new TDacSpecs();
 		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("I") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("31") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("41") ||
 		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("17") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("16") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("12") ||
 		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("19") || dao.getTTypeMarche().getTymCode().equalsIgnoreCase("13")) {
+	    		    	aaoRegQual = "SCORE";
+		    	 }else {
+		    		 aaoRegQual = "AUTRE";
+		    	 } 
+	    	 }
+	     }
+	     
+	     
+	   //Contrôle sur le mode de qualification
+	     public void controleModeModif() {
+	    	 if(slctdTd.getDacTymCode().equalsIgnoreCase("00") || slctdTd.getDacTymCode().equalsIgnoreCase("20") || slctdTd.getDacTymCode().equalsIgnoreCase("F") || 
+	    			 slctdTd.getDacTymCode().equalsIgnoreCase("32") || slctdTd.getDacTymCode().equalsIgnoreCase("T") || slctdTd.getDacTymCode().equalsIgnoreCase("21")||
+	    			 slctdTd.getDacTymCode().equalsIgnoreCase("22") || slctdTd.getDacTymCode().equalsIgnoreCase("09")) {
+	    		 aaoRegQual = "CONFORMITE";
+	    		 
+	    	 }else {
+	    		    if(slctdTd.getDacTymCode().equalsIgnoreCase("11") || slctdTd.getDacTymCode().equalsIgnoreCase("10") || slctdTd.getDacTymCode().equalsIgnoreCase("1") || 
+	    		    		slctdTd.getDacTymCode().equalsIgnoreCase("I") || slctdTd.getDacTymCode().equalsIgnoreCase("31") || slctdTd.getDacTymCode().equalsIgnoreCase("41") ||
+	    		    		slctdTd.getDacTymCode().equalsIgnoreCase("17") || slctdTd.getDacTymCode().equalsIgnoreCase("16") || slctdTd.getDacTymCode().equalsIgnoreCase("12") ||
+		    			 dao.getTTypeMarche().getTymCode().equalsIgnoreCase("19") || slctdTd.getDacTymCode().equalsIgnoreCase("13")) {
 	    		    	aaoRegQual = "SCORE";
 		    	 }else {
 		    		 aaoRegQual = "AUTRE";
@@ -4344,7 +4355,7 @@ TDacSpecs dao = new TDacSpecs();
 					            	 					newAvis.setAaoLieuExe(slctdTd.getAaoLieuExe());
 					            	 					newAvis.setAaoDteOuvTec(slctdTd.getAaoDteOuvTec());
 					            	          		    newAvis.setTAdresseAvis(new TAdresseAvis(slctdTd.getAdaNum())); 
-														newAvis.setAaoNatInt(value1);
+														newAvis.setAaoNatInt(slctdTd.getAaoNatInt());
 					            	          		    iservice.updateObject(newAvis); 
 				            	          		      
 					            	          		    List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -4447,12 +4458,22 @@ TDacSpecs dao = new TDacSpecs();
 			 
 			 //Parametrage des PPM ramen a la saisie
 			 public void chargeOperations() {
+				 listePpmDao.clear();
 				 listePpmDao = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
 							new WhereClause("DPP_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode())));	
-				 _logger.info("dao : "+slctdTd.getDacCode());
+				 _logger.info("dao : "+dao.getDacCode());
 				 _logger.info("liste ppm : "+listePpmDao.size());
+			 }
+			 
+			 
+			 public void chargeOperationsExiste() {
+			 listePpmDaoModif.clear();
+			 listePpmDaoModif = ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
+							new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));	
+				 _logger.info("dao : "+slctdTd.getDacCode());
+				 _logger.info("liste ppm : "+ listePpmDaoModif.size());
 			 }
 			 
 			 
@@ -4755,6 +4776,7 @@ TDacSpecs dao = new TDacSpecs();
 									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 								_logger.info("lots size: "+listeLots.size());	
 								//montantTotalLot();
+								chargeImputationModif();
 						}
 					  //Cumul des montants estimatif
 					  public void montantTotalLot() {
@@ -4986,7 +5008,7 @@ TDacSpecs dao = new TDacSpecs();
 								    		  userController.setRenderMsg(true);
 								    		  userController.setSevrityMsg("success");
 											  
-											  //Activation du pavet de saisie des pices des offres 
+											  //Activatio de saisie des pices des offres 
 						                      pavet_offre = true; 
 						                      pavet_critere= true;
 										}else {
@@ -5178,6 +5200,20 @@ TDacSpecs dao = new TDacSpecs();
 					     _logger.info("valeur montant Estimatif: "+newLot.laaMtEst);
 				     }
 				     
+				     //Recupération des données de saisie des lots en modification
+				     public void recupMtcautModif() { 
+				    	 //long val = 0;
+				    	 newLot.laaMtCaut = mtCaut; 
+					     newLot.laaMtEst = mtEstimR;
+				    	 if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS")) {
+				    		 champMtCaut = false;
+				    	 }else {
+				    		 champMtCaut = true;
+				    	 }
+				    	 _logger.info("valeur montant Caution: "+newLot.laaMtCaut);	
+					     _logger.info("valeur montant Estimatif: "+newLot.laaMtEst);
+				     }
+				     
 				     //Récupération des données de la génartion des lots
 				     public void recupMtcautGen() { 
 				    	 //long val = 0;
@@ -5192,6 +5228,19 @@ TDacSpecs dao = new TDacSpecs();
 					     _logger.info("valeur montant Estimatif: "+newVbTemp.laaMtEst);
 				     }
 				     
+				     //Récupération des données de la génartion des lots
+				     public void recupMtcautGenModif() { 
+				    	 //long val = 0;
+				    	 newVbTemp.tempLaaCautLot = ""+mtCaut; 
+				    	 newVbTemp.laaMtEst = ""+mtEstimR;
+				    	 if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS")) {
+				    		 champMtCaut = false;
+				    	 }else {
+				    		 champMtCaut = true;
+				    	 }
+				    	 _logger.info("valeur montant Caution: "+newVbTemp.tempLaaCautLot);	
+					     _logger.info("valeur montant Estimatif: "+newVbTemp.laaMtEst);
+				     }
 				     //Ajouter manuellement un lot
 					@Transactional
 				    public void saveLot(){
@@ -5328,13 +5377,13 @@ TDacSpecs dao = new TDacSpecs();
 								if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS"))	{
 									 panelCaution = false;
 						    		   
-						    		   List<TDacSpecs> DAC  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
-						    		   TDacSpecs dao = new TDacSpecs();
-										if(!DAC.isEmpty()) dao = DAC.get(0);
+						    	List<TDacSpecs> DAC  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+						    	TDacSpecs dao = new TDacSpecs();
+								if(!DAC.isEmpty()) dao = DAC.get(0);
 										
-										List<TAvisAppelOffre> AVI  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
-										TAvisAppelOffre avis = new TAvisAppelOffre();
-										if(!AVI.isEmpty()) avis = AVI.get(0);
+								List<TAvisAppelOffre> AVI  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+								TAvisAppelOffre avis = new TAvisAppelOffre();
+								if(!AVI.isEmpty()) avis = AVI.get(0);
 										
 				    		 newLot.setTDacSpecs(dao);
 				    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
@@ -5392,7 +5441,7 @@ TDacSpecs dao = new TDacSpecs();
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");*/
 							 
-							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseignés ! ","");
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
 				    	 }
 					}
@@ -6059,9 +6108,13 @@ TDacSpecs dao = new TDacSpecs();
 								  listeImputationsModif =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 											 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
 									 recupererCaution(slctdTd.getDacCode());
-									
 										} 
 							  
+							  //Contrôle sur la génération des lots
+							  public void chargeDonnesModif() {
+								  chargeImputationModif();
+								  recupMtcautGenModif();
+							  }
 							  
 							//Chargement des fonctions à  imputer par le Chef de Service
 							  public void chargeFonctionImput() { 
@@ -8154,7 +8207,7 @@ TDacSpecs dao = new TDacSpecs();
 		  		 chargeCritere();
 		  		 //critere="";
 		  		 //newTempFactorise.getTempLotPlage().equalsIgnoreCase("");
-		  		 userController.setTexteMsg("Liste des critres vide avec succs!");
+		  		 userController.setTexteMsg("Liste des critères vidée avec succès!");
 				 userController.setRenderMsg(true);
 				 userController.setSevrityMsg("success");
 		     }
@@ -8276,6 +8329,8 @@ TDacSpecs dao = new TDacSpecs();
 	 //Ensembles methode Ecran de modification
 			  public void actionsPavetCreation() {
 				 //updateDac();
+				 chargeOperationsExiste();
+				 controleModeModif();
 				 chargeDetailAdresseModif();
 		         chargeAdresse();
 		         checkMargePrefModif();
@@ -8442,8 +8497,8 @@ TDacSpecs dao = new TDacSpecs();
 				break;
 				
                 case "dao11":
+                	chargeOperationsExiste();
                 	chargePiecesDao();
-                	chargeOperations();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;	
 			    }
@@ -16778,6 +16833,46 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setNewCheckTrans(VCheckTransDac newCheckTrans) {
 		this.newCheckTrans = newCheckTrans;
+	}
+
+	public long getModifAdr() {
+		return modifAdr;
+	}
+
+	public void setModifAdr(long modifAdr) {
+		this.modifAdr = modifAdr;
+	}
+
+	public List<VPpmDao> getListePpmDaoModif() {
+		return listePpmDaoModif;
+	}
+
+	public void setListePpmDaoModif(List<VPpmDao> listePpmDaoModif) {
+		this.listePpmDaoModif = listePpmDaoModif;
+	}
+
+	public List<TPiecesDacs> getListePiecesDac() {
+		return listePiecesDac;
+	}
+
+	public void setListePiecesDac(List<TPiecesDacs> listePiecesDac) {
+		this.listePiecesDac = listePiecesDac;
+	}
+
+	public TPiecesDacs getSltPiecesDac() {
+		return sltPiecesDac;
+	}
+
+	public void setSltPiecesDac(TPiecesDacs sltPiecesDac) {
+		this.sltPiecesDac = sltPiecesDac;
+	}
+
+	public TPiecesDacs getPieceDac() {
+		return pieceDac;
+	}
+
+	public void setPieceDac(TPiecesDacs pieceDac) {
+		this.pieceDac = pieceDac;
 	}
 	
 	

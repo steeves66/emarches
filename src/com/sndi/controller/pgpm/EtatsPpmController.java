@@ -64,7 +64,7 @@ public class EtatsPpmController {
 	
 	@PostConstruct
 	 public void postConstru()   {
-		chargeDetailPpm();
+		//chargeDetailPpm();
 		chargeDetailFinancement();
 		fermerDyn();
 	   }
@@ -381,7 +381,7 @@ public class EtatsPpmController {
 				
 				break;
 	 		case "ppm3":
-	 			chargeDetailPpm();
+	 			//chargeDetailPpm();
 	 			chargeDetailFinancement();
 	 			actionPsPn();
 	 			recupModePassation();
@@ -389,12 +389,12 @@ public class EtatsPpmController {
 	  		break;
 	  		
 	 		case "pspm3":
-	 			chargeDetailPpm();
+	 			//chargeDetailPpm();
 	 			chargeDetailFinancement();
 	 			actionPsPn();
 	  		break;
 	 		case "ppm5":
-	 			chargeDetailPpm();
+	 			//chargeDetailPpm();
 	 			chargeDetailFinancement();
 	 			actionPsPn();
 	 			recupModePassation();

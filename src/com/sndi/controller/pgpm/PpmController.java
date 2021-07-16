@@ -5857,7 +5857,7 @@ public class PpmController {
 		    		 strucCond = "";
 		    		 //controleController.btn_creerDetailPpm = true;
 		    		 
-		    		   pavetPPM = true;
+		    		     pavetPPM = true;
 					     pavetAMI = false;
 					     pavetPRQ = false;
 					     pavetDPAMI= false;

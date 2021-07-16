@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-06-30T19:23:04 -->
+<!-- 2021-07-16T17:15:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="operateur" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0e4afdf-aab6-4e2e-a856-4a038b316740">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
@@ -214,10 +214,10 @@
 				<reportElement positionType="Float" x="40" y="482" width="480" height="54" uuid="88dd6bb5-81b3-47e6-9eb3-0e3cc08ad2f2">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Left">
+				<textElement textAlignment="Justified">
 					<font size="11" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[En cas d'anomalie ou d'erreur sur ce document, vous devez contacter sans delai, Monsieur YAPO Alomo, S/Directeur du Système d'Information et de la Communication de la Direction des Marchés Publics  au (225) 20 30 52 52 / p 2170, info@marchespublics.gouv.ci.]]></text>
+				<text><![CDATA[En cas d'anomalie ou d'erreur sur ce document, vous devez contacter sans delai, Monsieur OUATTARA Bassoulamane, S/Directeur de l'Exploitation et du Réseau de la Direction Générale des Marchés Publics  au (225) 27 22 55 88 88 / p 520, info@marchespublics.gouv.ci.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="40" y="551" width="480" height="20" uuid="7ecff2f4-53bb-4a16-8d0d-a18bffe5b041">

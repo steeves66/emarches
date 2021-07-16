@@ -58,7 +58,7 @@
 				</h:panelGroup>
       <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
       
-     <p:wizard flowListener="#{daoController.onFlowProcess}"  id="pwz" nextLabel="Suivant" backLabel="Précédent" >
+     <p:wizard flowListener="#{daoController.onFlowProcess}"  id="pwz1" nextLabel="Suivant" backLabel="Précédent" >
      
      
         <p:tab id="creationModif" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
@@ -80,27 +80,24 @@
                 </div>
                <div class="box-body">
                 
-               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePpmDao}" 
-					 emptyMessage="Aucun PPM enregistré" rows="5" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
+              <p:dataTable id="tblnat" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listePpmDaoModif}"
+		             emptyMessage="Aucun PPM enregistré">
+          
+	                 <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
          				<h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
 
-                     
-				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >
          				<h:outputText value="#{slctdTb.lbgImputation}" />
 				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
+				        <p:column headerText="Type Marché" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.dppStructureConduc}" />
 				        </p:column> 
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
 				        </p:column> 
 				        
@@ -112,8 +109,9 @@
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ppmDac}" />                            
 			              </p:commandLink>
 				        </p:column> 
-				       
-                    </p:dataTable>
+
+
+	        </p:dataTable>
                     
                    <div>
                    
@@ -180,6 +178,15 @@
 	         <p:column headerText="Piece " styleClass="col-sm-10">
 	            <h:outputText value="#{slctdTb.pidLibelle}" />
 	        </p:column>
+	        
+	        <p:column headerText="" width="3%">
+	             <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removePieceModif()}" title="Supprimer" update="gnl">
+			       <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			    <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			     <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiecesDac}" />
+			   </p:commandLink>
+	        </p:column>
+	        
 	        </p:dataTable>
 	        
 		    </fieldset>   
@@ -225,7 +232,7 @@
           <div class="form-group">
                   <label for="objet" class="col-sm-3 control-label"></label>
                   <div class="col-sm-9"> 
-                    <p:selectOneRadio value="#{daoController.value1}" id="natInter1">
+                    <p:selectOneRadio value="#{daoController.slctdTd.aaoNatInt}" id="natInter1">
 			            <f:selectItem itemLabel="NATIONAL" itemValue="N" />
 			            <f:selectItem itemLabel="INTERNATIONAL" itemValue="I" />
 			        </p:selectOneRadio>
@@ -623,13 +630,13 @@
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">LISTE DES LOTS SAISIS </div></div> 
             <div class="col-md-1 ">
-			 <p:commandLink action="#{daoController.chargeImputationModif()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":lotlog">
+			 <p:commandLink action="#{daoController.chargeDonnesModif()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":lotlog">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Générer
 			</p:commandLink>
 		</div>
             
          <div class="col-md-1 ">
-			 <p:commandLink oncomplete="PF('newLotdlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+			 <p:commandLink oncomplete="PF('newLotdlg').show()" action="#{daoController.recupMtcautModif()}"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":NewLotlog">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Saisie
 			</p:commandLink>
 		</div>
@@ -1669,6 +1676,10 @@
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
 				      </p:commandLink>
 				      
+				       <p:commandLink  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; margin-right:5px" action="#{daoController.imprimeSynthese}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
+				      </p:commandLink>
+				      
                    </div>
               </div>
            
@@ -1699,7 +1710,7 @@
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
 				      </p:commandLink>
-			</h:panelGroup>
+			
 			   	      
 				       <p:commandLink rendered = "false" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Générer le DAO
@@ -1708,7 +1719,7 @@
 				        <p:commandLink  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; margin-right:5px" action="#{daoController.imprimeSynthese}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
 				      </p:commandLink>
-
+        </h:panelGroup>
     </section>
     </h:form>
     
@@ -1816,6 +1827,7 @@
 	                </div>
 	                
 	                 <h:panelGroup id="pcaution">
+	                 <h:panelGroup rendered="#{daoController.champMtCaut}"> 
 	                <div class="form-group ">
 	                  <label for="montCaut" class="col-sm-2 control-label"><b></b></label>
 	                  <div class="col-sm-10">
@@ -1841,6 +1853,7 @@
 	                  </p:inputText>
 	                  </div>
 	                </div>
+	                </h:panelGroup>
 	                  </h:panelGroup> 
 	                
 	                <div class="form-group ">
@@ -1884,7 +1897,7 @@
 	                 <div class="row">
                 <div class="pull-right ">
 			            <p:commandLink action="#{daoController.genererLotModif()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
               </div>
                 </div>
@@ -1903,7 +1916,7 @@
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="imp1" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="" />  
-			       <f:selectItems value="#{daoController.listeImputations}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
+			       <f:selectItems value="#{daoController.listeImputationsModif}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -1935,6 +1948,7 @@
 	                
 	                
 	              <h:panelGroup id="pcaution">
+	              <h:panelGroup rendered="#{daoController.champMtCaut}"> 
 	                <div class="form-group ">
 	                  <label for="montCaut" class="col-sm-2 control-label"><b></b></label>
 	                  <div class="col-sm-10">
@@ -1960,6 +1974,7 @@
 	                  </p:inputText>
 	                  </div>
 	                </div>
+	                </h:panelGroup>
 	                  </h:panelGroup> 
 	              
 	              

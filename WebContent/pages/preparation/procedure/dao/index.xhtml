@@ -310,7 +310,7 @@
                             </p:commandLink>
                             
                             
-                              <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+                              <p:commandLink rendered="false" action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Télécharger le DAO type" ajax="false">
                                 <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                      
@@ -424,7 +424,7 @@
                             </h:panelGroup>  
                             
                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-                               <p:commandLink rendered="#{slctdTb.dacStaCode == 'D1S'}" action="#{daoController.deleteDac()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
+                               <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.deleteDac()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
                                 <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>
                                 <p:confirm header="Confirmation" message="Confirmez vous la supression du dossier: #{slctdTb.dacObjet}?" icon="ui-icon-alert" />                           
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />

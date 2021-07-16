@@ -265,7 +265,7 @@ public class OperateurController {
 		 public void filtreFonction() {
 			 fonctionListe.clear();
 			 fonctionListe=(List<VFonctionAssignation>) iservice.getObjectsByColumn("VFonctionAssignation",
-						new WhereClause("FON_COD",WhereClause.Comparateur.LIKE,filtreFonCode+"%"));
+						new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,filtreFonCode+"%"));
 		 }
 		 
 		//Methode de récupération de t_detail_plan_passation dans t_affichage_ppm
