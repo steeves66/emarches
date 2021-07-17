@@ -180,7 +180,7 @@
 	        </p:column>
 	        
 	        <p:column headerText="" width="7%">
-	             <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removePieceModif()}" title="Supprimer" update="gnl">
+	        <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removePieceModif()}" title="Supprimer" update=":content">
 			       <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			    <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			     <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiecesDac}" />
@@ -193,12 +193,15 @@
 	          </div>
 	         
 	          </div>
+          
+          <p:commandLink styleClass="btn btn-success row pull-right" rendered="true" action="#{daoController.updateDac()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			<p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+		<i class="ace-icon fa fa-save"></i> Modifier
+	      </p:commandLink>
+ 
  
           </div>
-          <p:commandLink styleClass="btn btn-success row pull-right" rendered="true" action="#{daoController.updateDac()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Modifier
-	      </p:commandLink>
+          
 	      
          </div>
         </div>
@@ -253,7 +256,7 @@
                   <label for="Prix" class="col-sm-3 control-label">Mode de qualification</label>
                   <div class="col-sm-9"> 
                      <p:selectOneRadio id="consoless" value="#{daoController.slctdTd.aaoRegQual}" >
-                     <p:ajax  listener="#{daoController.checkSituation()}" global="false" update="gnl:qualif"></p:ajax>
+                     <p:ajax  listener="#{daoController.checkSituationModif()}" global="false" update="gnl:qualif"></p:ajax>
 			            <f:selectItem itemLabel="Score" itemValue="SCORE" />
 			            <f:selectItem itemLabel="Conformité" itemValue="CONFORMITE" />
 			            <f:selectItem itemLabel="Autre Mode" itemValue="AUTRE" />
@@ -268,7 +271,7 @@
 				     <tr>
 				     <td style="width: 60px"> 
 				     <p:selectOneRadio value="#{daoController.slctdTd.aaoAvisBai}" id="console22">
-				     <p:ajax  listener="#{daoController.avisBailleur()}" global="false" update="gnl:baill"></p:ajax>
+				     <p:ajax  listener="#{daoController.avisBailleurModif()}" global="false" update="gnl:baill"></p:ajax>
 			            <f:selectItem itemLabel="Oui" itemValue="O" />
 			            <f:selectItem itemLabel="Non" itemValue="N" />
 			        </p:selectOneRadio>
@@ -1762,13 +1765,13 @@
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		
-		 <p:commandLink rendered = "false" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Générer le DAO
-				      </p:commandLink>
+		 <p:commandLink rendered="false" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
+		<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Générer le DAO
+		</p:commandLink>
 				      
-				        <p:commandLink  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; margin-right:5px" action="#{daoController.imprimeSynthese}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
-				      </p:commandLink>
+		<p:commandLink rendered="#{daoController.btn_dao_modif}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; margin-right:5px" action="#{daoController.imprimeSynthese()}" ajax="false">
+		<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
+		</p:commandLink>
 		    
        <h:panelGroup rendered="false">
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">

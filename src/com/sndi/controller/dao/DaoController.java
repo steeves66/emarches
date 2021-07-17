@@ -512,6 +512,7 @@ public class DaoController {
 	  private boolean pavet_critere = false;
 	  private boolean pavet_commission = false;
 	  private boolean btn_dao = false;
+	  private boolean btn_dao_modif = false;
 	  private boolean btn_titre_paie = false;
 	  private boolean btn_titre_retrait = false;
 	  private boolean infoNcc = false;
@@ -3461,12 +3462,16 @@ TDacSpecs dao = new TDacSpecs();
 								   listeMembre = ((List<VCommissionSpecifique>)iservice.getObjectsByColumn("VCommissionSpecifique",
 										    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
 										_logger.info("listeMembre size: "+listeMembre.size());	
+										
+										btn_dao_modif = false;
 							   }else
 								 //ECRAN DE MODIFICATION
 							   {
 								   listeMembre = ((List<VCommissionSpecifique>)iservice.getObjectsByColumn("VCommissionSpecifique",
 										    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
 										_logger.info("listeMembre size: "+listeMembre.size());	   
+										
+										btn_dao_modif = true;
 							   }
 							 			
 						 }
@@ -3753,7 +3758,9 @@ TDacSpecs dao = new TDacSpecs();
 		        	       }
 		        	       iservice.deleteObject(getPieceDac());
 		        	       chargePiecesDao();
-						   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+						   //new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+						   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Suppression éffectuée avec succès!", "");
+							FacesContext.getCurrentInstance().addMessage(null, msg);
 				 	}
 		 		 
 	//Statistiques pour le chargÃ¯Â¿Â½ d'Etudes
@@ -5808,6 +5815,17 @@ TDacSpecs dao = new TDacSpecs();
 				  }
 				  
 				  //
+				  public void avisBailleurModif() {
+					  if(slctdTd.getAaoAvisBai().equalsIgnoreCase("O")) {
+						  libBailleur = true;
+						  inputBailleur = true;
+					  }else {
+						  libBailleur = false;
+						  inputBailleur = false;
+					  }
+				  }
+				  
+				  //
 				  public void checkSituation() {
 						 if(aaoRegQual.equalsIgnoreCase("SCORE")) { 
 							 etatQualif = true;
@@ -5820,6 +5838,24 @@ TDacSpecs dao = new TDacSpecs();
 								  qualifLabel2 = false;
 						 }else
 							 if(aaoRegQual.equalsIgnoreCase("AUTRE")){
+							 etatQualif = true;
+							 qualifLabel1 = false;
+							 qualifLabel2 = true;
+						 }
+					 }
+				  
+				  public void checkSituationModif() {
+						 if(slctdTd.getAaoRegQual().equalsIgnoreCase("SCORE")) { 
+							 etatQualif = true;
+							 qualifLabel1 = true;
+							 qualifLabel2 = false;
+						 }else 
+						      if(slctdTd.getAaoRegQual().equalsIgnoreCase("CONFORMITE")){
+						    	  etatQualif = false;
+						    	  qualifLabel1 = false;
+								  qualifLabel2 = false;
+						 }else
+							 if(slctdTd.getAaoRegQual().equalsIgnoreCase("AUTRE")){
 							 etatQualif = true;
 							 qualifLabel1 = false;
 							 qualifLabel2 = true;
@@ -16886,6 +16922,14 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setPieceDac(TPiecesDacs pieceDac) {
 		this.pieceDac = pieceDac;
+	}
+
+	public boolean isBtn_dao_modif() {
+		return btn_dao_modif;
+	}
+
+	public void setBtn_dao_modif(boolean btn_dao_modif) {
+		this.btn_dao_modif = btn_dao_modif;
 	}
 	
 	
