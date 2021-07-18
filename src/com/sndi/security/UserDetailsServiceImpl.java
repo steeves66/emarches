@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String userName)
             {
-    	
+    	System.out.println("User login: "+userName);
     	//String passcrip = "";
     	TOperateur domainUser = iservice.getUser(userName);
     	
@@ -45,9 +45,37 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     		System.out.println("Utilisateur introuvable ");
     		throw new UsernameNotFoundException(userName);
     	}else{
+    	System.out.println("Login de connexion Opérateur : Login "+domainUser.getOpeLogin()+" Nom "+domainUser.getOpeNom());
+    	userService.setTOperateur(domainUser);
+    	userService.getListeAssignations(domainUser);
+    	userService.getMotPasse(domainUser);
+    	//userService.setPrivileges(domainUser);
+    	userService.setDateCons(Calendar.getInstance().getTime());
+    	//recuperer les menus de la base
+//    	userService.setModules(iservice.getObjects("SysModule", new ArrayList<String>(Arrays.asList("symCode","symLibelle"))));
+    	//userService.setMenus(iservice.getObjectsByColumn("SysTraitement", new ArrayList<String>(Arrays.asList("sytSequence")),  new WhereClause("sysTraitementBySytPere",Comparateur.IS_NULL)));
+
+    	System.out.println("Utilisateur Trouvé ");
+    	
+
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
+
+        return new User(userService.getTOperateur().getOpeLogin(),
+        		userService.getTMotdepasses().getMdpMotdepasse(), enabled, accountNonExpired,
+                credentialsNonExpired, accountNonLocked,
+                getAuthorities("USER"));
+    	}
+    	
+    	/*if(domainUser==null){
+    		System.out.println("Utilisateur introuvable ");
+    		throw new UsernameNotFoundException(userName);
+    	}else{
     		System.out.println("Login de connexion Opérateur : Login "+domainUser.getOpeLogin()+" Nom "+domainUser.getOpeNom());
     		//chck du mdp s'il est nom cripté
-    		/* userService.getMotPasse(domainUser);
+    		 userService.getMotPasse(domainUser);
         	//Ici cryptage de password
     		passcrip = userService.getTMotdepasses().getMdpMotdepasse();
  
@@ -63,7 +91,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				}
     			}
 				
-			}*/
+			}
 		
         	userService.setTOperateur(domainUser);
         	userService.getListeAssignations(domainUser);
@@ -73,28 +101,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         	userService.setDateCons(Calendar.getInstance().getTime());
         
         	System.out.println("Utilisateur Trouvé ");
-    	}
+    	}*/
     	
     	
    
-        boolean enabled = true;
+        /*boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
         
         //Bloc pour crypter password
-        /*userService.getTMotdepasses().getMdpMotdepasse()
+        userService.getTMotdepasses().getMdpMotdepasse()
 
         return new User(userService.getTOperateur().getOpeLogin(),
         		passcrip, enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked,
-                getAuthorities("USER"));*/
+                getAuthorities("USER"));
         
         
         return new User(userService.getTOperateur().getOpeLogin(),
         		userService.getTMotdepasses().getMdpMotdepasse(), enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked,
-                getAuthorities("USER"));
+                getAuthorities("USER"));*/
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities(String role) {

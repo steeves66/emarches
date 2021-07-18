@@ -21,6 +21,7 @@ public class UserService implements IUserService {
 	private TOperateur operateur = new TOperateur();
 	private List<TAssignation> listeAss = new ArrayList<TAssignation>();
 	//private HashMap <String, List<TTypefonctionaction>> hmPrivileges = new HashMap <String , List<TTypefonctionaction>>(); 
+	//private HashMap <String, List<TTypefonctionaction>> hmPrivileges = new HashMap <String , List<TTypefonctionaction>>(); 
 	private TMotdepasse motdepasses = new TMotdepasse();
 	private TFonction fonctions = new TFonction();
 	private Date dateCons;

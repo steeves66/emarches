@@ -3468,12 +3468,12 @@ TDacSpecs dao = new TDacSpecs();
 								 //ECRAN DE MODIFICATION
 							   {
 								   listeMembre = ((List<VCommissionSpecifique>)iservice.getObjectsByColumn("VCommissionSpecifique",
-										    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
+										   //new WhereClause("COM_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+										   new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
 										_logger.info("listeMembre size: "+listeMembre.size());	   
 										
 										btn_dao_modif = true;
-							   }
-							 			
+							   } 			
 						 }
 						 
 												 
@@ -3522,10 +3522,12 @@ TDacSpecs dao = new TDacSpecs();
 									 //ECRAN DE SAISIE
 									   if(controleController.ecran=="saisie") {
 										   newcomSpec.setComDacCode(dao.getDacCode());
+										   newcomSpec.setComAaoCode(newAvis.getAaoCode());
 									   }else
 										 //ECRAN DE MODIFICATION
 									   {
 										   newcomSpec.setComDacCode(slctdTd.getDacCode());  
+										   newcomSpec.setComAaoCode(slctdTd.getAaoCode());
 									   }
 									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 									newcomSpec.setComTcoCode("COJ");
@@ -3592,7 +3594,7 @@ TDacSpecs dao = new TDacSpecs();
 			    				iservice.updateObject(comUpdate);
 			    				
 					 			chargeMembres();
-					 			userController.setTexteMsg("Modification ffectue avec succs!");
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 			  		            
@@ -3618,7 +3620,7 @@ TDacSpecs dao = new TDacSpecs();
 			    				iservice.updateObject(comUpdate);
 					 			//chargeMembres();
 			    				chargeMembresComSpec();
-					 			userController.setTexteMsg("Modification ffectue avec succs!");
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 			  		            
@@ -3634,7 +3636,7 @@ TDacSpecs dao = new TDacSpecs();
 			    				iservice.deleteObject(comSpec);
 						 		chargeMembres();
 						 		activieComboxAutoNorm();
-								userController.setTexteMsg("Suppression ffectue avec succs!");
+								userController.setTexteMsg("Suppression éffectuée avec succès!");
 						  		userController.setRenderMsg(true);
 						  		userController.setSevrityMsg("success");
 			    			}
@@ -3645,7 +3647,7 @@ TDacSpecs dao = new TDacSpecs();
 				 		iservice.deleteObject(sltCompsec);
 				 		chargeMembresComSpec();	
 				 		activieComboxAutoSpec();
-						userController.setTexteMsg("Suppression ffectue avec succs!");
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
 								
