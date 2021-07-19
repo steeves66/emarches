@@ -830,9 +830,15 @@ TDacSpecs dao = new TDacSpecs();
 	 
 	 //Affichage des marges de prfrence de l'avis en cours
 	 public void listeMargePref() {
-		 listMarge.clear();
-		 listMarge = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
-					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		 if(controleController.ecran=="saisie") {
+			 listMarge.clear();
+			 listMarge = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		 }else { //En mode modification
+			 listMarge.clear();
+			 listMarge = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		 }
 	 }
 	 
 	 
@@ -4176,6 +4182,32 @@ TDacSpecs dao = new TDacSpecs();
 			 }
 		 }
 		 
+		/* 
+		 public void controlDealaiModif() {
+			 if(nbreDelai < 30 || slctdTd.getAaoDelaiVal() > 180) {
+				 _logger.info(""+slctdTd.getAaoDelaiVal());
+				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+			 }else
+			 {
+				 _logger.info(""+slctdTd.getAaoDelaiVal());
+			 }
+		 }*/
+		 
+		 public void recupInfo() {
+			  aaoHeureRecep=slctdTd.getAaoHeureRecep(); 
+ 		      aaoCoutDac = slctdTd.getAaoCoutDac() ;
+ 		      aaoNatPrix = slctdTd.getAaoNatPrix() ;
+ 		      aaoRegQual = slctdTd.getAaoRegQual();
+ 		      aaoDateRecep = slctdTd.getAaoDateRecep(); 
+ 		      aaoDteHeurOuv = slctdTd.getAaoDteHeurOuv() ; 
+ 		      aaoLieuRecep= slctdTd.getAaoLieuRecep();
+ 		      aaoNbrOuv = slctdTd.getAaoNbrOuv(); 
+ 		      aaoPrecisModEval = slctdTd.getAaoPrecisModEval();  
+ 		      aaoAvisBai= slctdTd.getAaoAvisBai();
+ 		      aaoRespBai= slctdTd.getAaoRespBai();
+ 		      aaoOffAnormal= slctdTd.getAaoOffAnormal(); 
+		 }
 		 
 	        @Transactional
 	        public void saveAao(String typePlan ,String typeDac) {
@@ -4361,7 +4393,7 @@ TDacSpecs dao = new TDacSpecs();
 			    newAvis.setAaoAvisBai(slctdTd.getAaoAvisBai());
 				newAvis.setAaoRespBai(slctdTd.getAaoRespBai());
 				newAvis.setAaoOffAnormal(slctdTd.getAaoOffAnormal());
-				newAvis.setAaoDelaiVal(slctdTd.getAaoDelaiVal());
+				newAvis.setAaoDelaiVal(nbreDelai);
 				newAvis.setAaoPrecisModEval(slctdTd.getAaoPrecisModEval());
 				newAvis.setAaoNbrLot(slctdTd.getAaoNbrLot());
 				newAvis.setAaoLieuRecep(slctdTd.getAaoLieuRecep());
@@ -5781,7 +5813,7 @@ TDacSpecs dao = new TDacSpecs();
 					 iservice.updateObject(newAvis); 
 					 
 					 //Message de confirmation
-					 userController.setTexteMsg("Avis d'Appel d'offres mis  jour avec succs!");
+					 userController.setTexteMsg("Avis d'Appel d'offres mis à jour avec succès!");
 				     userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 				  }
@@ -5800,7 +5832,7 @@ TDacSpecs dao = new TDacSpecs();
 					  
 					    //Chargement des compteurs du tableau de bord	
 						//Message de confirmation
-						userController.setTexteMsg("DAO mis jour avec succs!");
+						userController.setTexteMsg("DAO mis à jour avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 				    }
@@ -5925,10 +5957,9 @@ TDacSpecs dao = new TDacSpecs();
     	     				        newDao.setDacMargePrefSou(choixTaux);
     	     				        iservice.updateObject(newDao);
         	     				       }
-					         }
+					 }
 					 
-					 
-					 public void reiniPreference() {
+					 private void reiniPreference() {
 						 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
     	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
     	     				       if (!listDao.isEmpty()) {
@@ -5940,6 +5971,34 @@ TDacSpecs dao = new TDacSpecs();
     	     				        iservice.updateObject(newDao);
         	     				       }
 					         }
+			         
+				
+
+							//Mis Ã  Jour dans le T_DAC_SPECS (EN MODIFICATION)
+							 public void majPreferenceModif() {
+								 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		    	     				       if (!listDao.isEmpty()) {
+		    	     					    newDao= listDao.get(0);
+		    	     				        newDao.setDacMargePref(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePrefSou(slctdTd.getDacMargePref());
+		    	     				        iservice.updateObject(newDao);
+		        	     				       }
+							         }
+							 
+							 public void reiniPreferenceModif() {
+								 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		    	     				       if (!listDao.isEmpty()) {
+		    	     					    newDao= listDao.get(0);
+		    	     				        newDao.setDacMargePref(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePrefSou(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePrefArt(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePrefCom(slctdTd.getDacMargePref());
+		    	     				        iservice.updateObject(newDao);
+		        	     				       }
+							         }
+							 //FIN MODIFICATION
 					 
 					 
 					 public void checkMargePref() {
@@ -5954,14 +6013,16 @@ TDacSpecs dao = new TDacSpecs();
 						 }
 					 }
 					 
+					 
+					 //En mode modification
 					 public void checkMargePrefModif() {
 						 if(slctdTd.getDacMargePref().equalsIgnoreCase("O")) { 
-							 majPreference();
+							 majPreferenceModif();
 							 etatMargePreference = true;
 							 listeMargePref();
 						 }else 
 						 {
-							 reiniPreference();
+							 reiniPreferenceModif();
 							 etatMargePreference = false; 
 						 }
 					 }
@@ -8243,6 +8304,7 @@ TDacSpecs dao = new TDacSpecs();
 		    	 newLot = new TLotAao();
 		    	 totalMontantEstimatif = 0;
 		    	 totalMontantCaution = 0;
+		    	 btn_dao_modif = false;
 		     }
 		     
 		     
@@ -8413,6 +8475,7 @@ TDacSpecs dao = new TDacSpecs();
 			  public void actionsPavetCreation() {
 				 //updateDac();
 				 //chargeOperationsExiste();
+				 nbreDelai = slctdTd.getAaoDelaiVal();
 				 panelOuverture();
 				 verifOuvertureModif();
 				 controleModeModif();

@@ -157,7 +157,6 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "AAO_CODE", unique = true, nullable = false, length = 20)
 	public String getAaoCode() {
 		return this.aaoCode;

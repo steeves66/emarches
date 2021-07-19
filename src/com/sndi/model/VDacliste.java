@@ -191,7 +191,7 @@ public class VDacliste implements java.io.Serializable {
 	private Date aaoDteOuvFin;
 	private Long aaoNbrLot;
 	private Long aaoNbrOuv;
-	private Long aaoDelaiVal;
+	private long aaoDelaiVal;
 	private String aaoFonCodAc;
 	private String aaoFonCodeCpmp;
 	private String aaoNatInt;
@@ -294,7 +294,7 @@ public class VDacliste implements java.io.Serializable {
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
 			String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi, String aaoStaCode, Date aaoDtePub,
 			Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, long aaoNbrLot, Long aaoNbrOuv,
-			Long aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
+			long aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
 			String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub,
 			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement, String dacVendu,
 			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,BigDecimal dacNbrCopieOff,
@@ -2070,11 +2070,11 @@ public class VDacliste implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_DELAI_VAL")
-	public Long getAaoDelaiVal() {
+	public long getAaoDelaiVal() {
 		return this.aaoDelaiVal;
 	}
 
-	public void setAaoDelaiVal(Long aaoDelaiVal) {
+	public void setAaoDelaiVal(long aaoDelaiVal) {
 		this.aaoDelaiVal = aaoDelaiVal;
 	}
 

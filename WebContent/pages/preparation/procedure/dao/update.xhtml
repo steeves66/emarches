@@ -313,8 +313,8 @@
           <div class="form-group">
                   <label  class="col-sm-4 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
                   <div class="col-sm-5"> 
-                  <p:inputText type="text" value="#{daoController.slctdTd.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
-				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
+                  <p:inputText type="text" value="#{daoController.nbreDelai}" id= "aaodl" styleClass="form-control">
+				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl" />
 				     </p:inputText>
                   </div>
            </div>
@@ -1879,7 +1879,7 @@
 	                  
 	                  <h:panelGroup rendered="#{daoController.imputationPpm}">
 	                  <div class="col-sm-10">
-	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
+	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail1" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="empty" />  
 			       <f:selectItems value="#{daoController.listeLignePpm}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
@@ -1992,6 +1992,7 @@
 				
 				<div class="form-group ">
 	                  <label for="imp1" class="col-sm-2 control-label"><b>Imputation</b></label>
+	                  <h:panelGroup rendered="#{daoController.imputationLot}">
 	                  <div class="col-sm-10">
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="imp1" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -1999,6 +2000,17 @@
 			       <f:selectItems value="#{daoController.listeImputationsModif}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>
+	                  </h:panelGroup>
+	                  
+	                  <h:panelGroup rendered="#{daoController.imputationPpm}">
+	                  <div class="col-sm-10">
+	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail1240" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="empty" />  
+			       <f:selectItems value="#{daoController.listeLignePpm}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                  </h:panelGroup>
 	                </div>
 				
 				

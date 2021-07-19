@@ -1477,6 +1477,7 @@ public class CommissionController {
 									membre.setDcsSeaTseNum(""+typeSeance); 
 									membre.setDcsDteSea(dateSeance);
 									membre.setDcsHeureDeb(heureDeb);
+									membre.setDcsSeaNum(mbr.getDcsSeaNum().toString());
 									//membre.setDcsHeureFin(heureFin);
 									membre.setDcsSeaLieu(lieuSeance);
 									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
@@ -1485,7 +1486,7 @@ public class CommissionController {
 							
 						}
 						
-						  userController.setTexteMsg("Enregistrement effectué avec succès !");
+						  userController.setTexteMsg("Enregistrement éffectué avec succès !");
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");	
 						

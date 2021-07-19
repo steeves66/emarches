@@ -291,7 +291,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-1">
                            
                             <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
-	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{daoController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{daoController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px; margin-bottom:3px" update="motif" >
 	                              <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
 	                           </p:commandLink> 
@@ -309,20 +309,14 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                       
                             </p:commandLink>
                             
-                            
-                              <p:commandLink rendered="false" action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
-				               title="Télécharger le DAO type" ajax="false">
-                                <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                      
-                            </p:commandLink>
-                            
-                            <h:panelGroup rendered="#{slctdTb.checkTrans == '1'}">
-                              <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
+                        
+                              <p:commandLink rendered="#{controleController.saisie}"  action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" /> 
                                 </p:commandLink>  
                              </h:panelGroup>
-                             </h:panelGroup>
+                             
+                              
                              
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
                               <h:panelGroup rendered="#{daoController.btnAffecteNormal}">
