@@ -170,6 +170,9 @@ public class DaoController {
 	private List<VbCommissionSpecifique> listeComSpecifique = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TCommissionSpecifique> listeComSpecific = new ArrayList<TCommissionSpecifique>();
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
+	//VLignePPM
+	private List<VLignePpm> listeLignePpm = new ArrayList<VLignePpm>();
+	//VLignePPM
 	private VFonctionImputation sltImput = new VFonctionImputation();
 	private VbTempParametreCorDac newTempCor = new VbTempParametreCorDac();
 	private VCheckTransDac newCheckTrans = new VCheckTransDac();
@@ -425,6 +428,9 @@ public class DaoController {
 	 private boolean btnAffecte = false;
 	 private boolean btnAffecte1 = false;
 	 private boolean btnAffecteNormal = true;
+	 //Controle sur les imputations
+	 private boolean imputationLot = true;
+	 private boolean imputationPpm = false;
 	//BoolÃ¯Â¿Â½ens
 	  private boolean skip;
 	  private long natdoc= 7;
@@ -678,7 +684,7 @@ TDacSpecs dao = new TDacSpecs();
 				iservice.updateObject(detail);
 				
  chargeData();
-	userController.setTexteMsg("Supression effectuée avec succès !");
+	userController.setTexteMsg("Supression éffectuée avec succès !");
 	userController.setRenderMsg(true);
 	userController.setSevrityMsg("success"); 
 }
@@ -6135,6 +6141,31 @@ TDacSpecs dao = new TDacSpecs();
 								 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 										 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
 									} */
+						 
+						//Chargement des imputations ou lignes budgÃ¯Â¿Â½taires pour le AC
+						  public void conditImputation() { 
+							  listeImputationsModif.clear();
+							  listeImputationsModif =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+										 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
+									} 
+						  
+						  public void chargeImputationModif() { 
+							  listeImputationsModif.clear();
+							  listeImputationsModif =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+										 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
+								 recupererCaution(slctdTd.getDacCode());
+								 imputationLot = true;
+								 imputationPpm = false;
+									} 
+						  
+						  public void chargeImputationSansLot() { 
+							  listeLignePpm.clear();
+							  listeLignePpm =(List<VLignePpm>) iservice.getObjectsByColumn("VLignePpm", new ArrayList<String>(Arrays.asList("DPP_ID")),
+										 new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
+								 recupererCaution(slctdTd.getDacCode());
+								 imputationPpm = true;
+								 imputationLot = false;
+									} 
 							  
 							//Chargement des imputations ou lignes budgÃ¯Â¿Â½taires pour le AC
 							  public void chargeImputation() { 
@@ -6150,18 +6181,21 @@ TDacSpecs dao = new TDacSpecs();
 								  recupMtcautGen();
 							  }
 							  
-							//Chargement des imputations ou lignes budgÃ¯Â¿Â½taires pour le AC
 							  
-							  public void chargeImputationModif() { 
-								  listeImputationsModif.clear();
-								  listeImputationsModif =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-											 new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())); 
-									 recupererCaution(slctdTd.getDacCode());
-										} 
+							  //Contrôle sur les imputations pour les DAO sans lots et les DAO avec lots en mode modification
+							  public void controleImput() {
+								  conditImputation();
+								  if(listeImputationsModif.size() > 0 ) {
+									  chargeImputationModif();
+								  }else {
+									  chargeImputationSansLot();
+								  }
+							  }
 							  
 							  //Contrôle sur la génération des lots
 							  public void chargeDonnesModif() {
-								  chargeImputationModif();
+								  //chargeImputationModif();
+								  controleImput();
 								  recupMtcautGenModif();
 							  }
 							  
@@ -16932,6 +16966,30 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setBtn_dao_modif(boolean btn_dao_modif) {
 		this.btn_dao_modif = btn_dao_modif;
+	}
+
+	public List<VLignePpm> getListeLignePpm() {
+		return listeLignePpm;
+	}
+
+	public void setListeLignePpm(List<VLignePpm> listeLignePpm) {
+		this.listeLignePpm = listeLignePpm;
+	}
+
+	public boolean isImputationLot() {
+		return imputationLot;
+	}
+
+	public void setImputationLot(boolean imputationLot) {
+		this.imputationLot = imputationLot;
+	}
+
+	public boolean isImputationPpm() {
+		return imputationPpm;
+	}
+
+	public void setImputationPpm(boolean imputationPpm) {
+		this.imputationPpm = imputationPpm;
 	}
 	
 	

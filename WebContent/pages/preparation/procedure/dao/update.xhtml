@@ -1867,6 +1867,7 @@
 				
 				 <div class="form-group ">
 	                  <label for="bail" class="col-sm-2 control-label"><b>Imputation</b></label>
+	                  <h:panelGroup rendered="#{daoController.imputationLot}">
 	                  <div class="col-sm-10">
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -1874,6 +1875,18 @@
 			       <f:selectItems value="#{daoController.listeImputationsModif}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>
+	                  </h:panelGroup>
+	                  
+	                  <h:panelGroup rendered="#{daoController.imputationPpm}">
+	                  <div class="col-sm-10">
+	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="empty" />  
+			       <f:selectItems value="#{daoController.listeLignePpm}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                  </h:panelGroup>
+	                  
 	                </div>
 				
 					 <div class="form-group ">
