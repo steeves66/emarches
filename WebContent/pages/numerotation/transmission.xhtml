@@ -1,0 +1,153 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{numerotationController.slctdTd.aaoCode} : <strong>#{numerotationController.slctdTd.aaoLibelle}</strong>
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>NUMEROTAION | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>NUMEROTAION 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+				 <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+				 <div class="row">
+          
+    <div class="box box-success">
+     
+              <div class="box-body">
+              <div class="row">
+               <div class="col-md-12">
+                <div class="row">
+                
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-12">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{numerotationController.chargeLotByAvis()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
+				                </span>
+			                      <p:inputText value="#{numerotationController.laaNum}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{numerotationController.chargeLotFilterLot()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"/>
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{numerotationController.listeLotNumerotation}" rowKey="#{slctdTb.laaId}"
+                  selection="#{numerotationController.selectionLotNumerotation}" 
+               scrollable="true" scrollHeight="500" editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
+                       <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1">
+                                <span>#{slctdTb.laaNum}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+
+				         <p:column headerText="Objet" styleClass="col-sm-10">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10">
+                            <span>#{slctdTb.laaObjet}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+
+                         <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
+                            
+		 	        </p:column>
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+               </div>
+
+              </div>
+                
+            </div>
+            <!-- /.box-body -->
+          </div>
+         
+				      
+     
+		</div> 
+    
+		 <div class="row">
+		     <p:commandLink  action="#{numerotationController.transmettrePourNumerotation()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+		     <p:confirm header="Confirmation" message="Confirmez-vous la transmission a la numérotation ?" icon="ui-icon-alert" />  
+				     <i class="ace-icon fa fa-exchange bigger-120"></i> Transmettre à la numérotation
+				      </p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning" action="#{numerotationController.renderPage('num1','LISAUTODMP')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+	          </div>
+		
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

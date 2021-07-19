@@ -2027,6 +2027,10 @@ public class CommissionController {
 		}*/
 		
 		//Fin Ouverture/Analyse/Jugement
+		
+		public void updateStatutLotPasAno() {
+			
+		}
 		public void finOuverture() { 
 			String statUpdate = "";
 			String message = "";

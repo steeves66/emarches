@@ -80,6 +80,8 @@ public class AnoController {
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
 	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	 private List<VLotAvisdmp> listeLots = new ArrayList<VLotAvisdmp>();
+	 private List<VLotNumerotation> listeLotNumerotation = new ArrayList<VLotNumerotation>();
+	 private List<VLotNumerotation> selectionLotNumerotation= new ArrayList<VLotNumerotation>();
 	 private List<VHistoDemandeAno> listeHistoDemandeAno = new ArrayList<VHistoDemandeAno>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierAao> dossListe = new ArrayList<TDossierAao>();
@@ -123,6 +125,29 @@ public class AnoController {
 	 }		
 	
 	 
+	 public void transmettrePourNumerotation() {
+		 if (selectionLotNumerotation.size()<=0) {
+				FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez au moin un lot", ""));
+			}
+	 		else{
+		 		for(VLotNumerotation ligne : listeLotNumerotation) {
+		 			List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", 
+		 					new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+		 					new WhereClause("LAA_NUM",Comparateur.EQ,""+ligne.getLaaNum()));
+		 			TLotAao updateLot = new TLotAao();
+					if(!LS.isEmpty()) {
+						updateLot = LS.get(0);	
+						updateLot.setLaaStaCode("L3T");
+		 			iservice.updateObject(updateLot);
+			     }	
+					chargeLotAnumeroter();
+					userController.setTexteMsg("Transmission éffectuée avec succès !");
+			        userController.setRenderMsg(true);
+			        userController.setSevrityMsg("success");
+		 		}
+	         }
+	 }
+	 
 	 public void saveDemande() {
 		 newDem.setDemAaoCode(slctdTd.getAaoCode());
 		 iservice.addObject(newDem);
@@ -131,7 +156,7 @@ public class AnoController {
 	 
 	 public void chargeDemandeDmp() {
 		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp",
-				  new WhereClause("DEM_STA_CODE",Comparateur.EQ,"E1S"));
+				  new WhereClause("DEM_STA_CODE",Comparateur.EQ,"AND"));
 		_logger.info("listeDemande size: "+listeDemande.size()
 		);		
 	 }
@@ -159,7 +184,7 @@ public class AnoController {
 		 newDem.setDemStatutRetour("0");
 		 newDem.setTFonction(userController.getSlctd().getTFonction());
 		 newDem.setTOperateur(userController.getSlctd().getTOperateur());
-		 newDem.setTStatut(new TStatut("E1S"));
+		 newDem.setTStatut(new TStatut("AND"));
 		 newDem.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 		 newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
 		 newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
@@ -191,7 +216,7 @@ public class AnoController {
 			public void finAno() {
 				String statUpdate = "";
 				String message = "";
-				if(slctdTdDem.getDemStaCode().equalsIgnoreCase("E1S")) {
+				if(slctdTdDem.getDemStaCode().equalsIgnoreCase("AND")) {
 					statUpdate = "ARC";
 					message="Fin de la validation de la demande N°"+slctdTdDem.getDemNum();
 				 }
@@ -380,7 +405,7 @@ public class AnoController {
 				 listeAvisAppelOffre = (List<VAvisAppelOffreAno>) iservice.getObjectsByColumnDesc("VAvisAppelOffreAno", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 						 new WhereClause(""+colonne,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 				         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
-				         new WhereClause(""+colonneAno,WhereClause.Comparateur.EQ,"O"));
+				         new WhereClause(""+colonneAno,WhereClause.Comparateur.EQ,"N"));
 				_logger.info("listeAppelOffre size: "+listeAvisAppelOffre.size());	
 					 }
 	      }
@@ -389,9 +414,30 @@ public class AnoController {
 	 public void chargeLot() {
 		 listeLots.clear();
 		 listeLots=(List<VLotAvisdmp>) iservice.getObjectsByColumn("VLotAvisdmp", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+				 new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L2D"),
 				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 		_logger.info("listeLots size: "+listeLots.size());
 	 }
+	 
+	 //Liste des lots à numeroter
+	 public void chargeLotAnumeroter() {
+		 listeLotNumerotation.clear();
+		 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumn("VLotNumerotation", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+				 new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L3A"),
+				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+		_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
+	 }
+	 
+	/* public void saveLotNumerotation() {
+		 listeLotNumerotation.clear();
+		 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumn("VLotNumerotation", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+		 VLotAvisdmp lot = new VLotAvisdmp();
+			if(!LS.isEmpty()) lot = LS.get(0);
+			for(VLotAvisdmp lots : LS) {
+				
+			}
+	 }*/
 	 
 	 public void chargeLotDmp() {
 		 listeLots.clear();
@@ -452,6 +498,9 @@ public class AnoController {
 				TLotAao lot = new TLotAao();
 				if(!LS.isEmpty()) lot = LS.get(0);
 				lot.setLaaAno(""+avis);
+				if(avis.equalsIgnoreCase("O")) {
+					lot.setLaaStaCode("L3A");
+				}
 				lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
 			    iservice.updateObject(lot);
 			    chargeLotDmp();
@@ -864,7 +913,11 @@ public class AnoController {
 								 if(fonct.equalsIgnoreCase("listDemAnoDmp")) {
 									 chargeDemandeDmp();
 								 }else {
-									//ICI
+									 if(fonct.equalsIgnoreCase("listNumerotationAc")) {
+										 _logger.info("value: "+value+" action: "+action);
+											chargeData("JUG", "AAO_FON_COD_AC","AAO_ANO");
+										 //chargeDemandeDmp();
+									 }
 								 }	 
 							 }
 						 }
@@ -905,7 +958,7 @@ public class AnoController {
 		
 					break;
 				case "ano6":
-
+					chargeLotAnumeroter();
 					break;
 				case "ano7":
 				
@@ -1369,6 +1422,26 @@ public class AnoController {
 
 	public void setObservations(List<VObservationAno> observations) {
 		this.observations = observations;
+	}
+
+
+	public List<VLotNumerotation> getListeLotNumerotation() {
+		return listeLotNumerotation;
+	}
+
+
+	public void setListeLotNumerotation(List<VLotNumerotation> listeLotNumerotation) {
+		this.listeLotNumerotation = listeLotNumerotation;
+	}
+
+
+	public List<VLotNumerotation> getSelectionLotNumerotation() {
+		return selectionLotNumerotation;
+	}
+
+
+	public void setSelectionLotNumerotation(List<VLotNumerotation> selectionLotNumerotation) {
+		this.selectionLotNumerotation = selectionLotNumerotation;
 	}
 
 	

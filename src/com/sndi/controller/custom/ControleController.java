@@ -7178,12 +7178,12 @@ public class ControleController {
 																    			libelleDmp="DGMP";
 																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	//hhh
 																    		}else
-															    			//TRANSMISSION A LA NUMEROTATION
+															    			//LISTE TRANSMISSION A LA NUMEROTATION
 															    			if(action.equalsIgnoreCase("LISNUM")) {
 																    			type = "Commission";
 																    			fonctionalite = "listNumerotationAc";
 																    			libelleDmp="DGMP";
-																    			libelle="LOTS EN ATTENTE DE TRANSMISSION A LA NUMEROTATION";
+																    			libelle=" LISTE DES AVIS D'APPEL D'OFFRE";
 																    			libelleTravaux="Joindre le PV d'ouverture";
 																    			libelle2 = "Date Fin Ouverture";
 																    			typePlan = "L'OUVERTURE";
@@ -7198,8 +7198,27 @@ public class ControleController {
 																				 btn_retourJug = false;
 																		
 																    		}
-													    			else
+													    		      	else
 													    				
+													    				
+													    				//DEBUT MODULE NUMEROTATION
+													    				//Liste des avis d'appel d'offres
+															    			if(action.equalsIgnoreCase("LISAVINUM")) {
+															    				libelleDmp="DGMP";
+																    			type = "Numérotation";
+																    			//fonctionalite = "listAutoSaiDmp";
+																    			//libelleFinCom = "Validation éffectuée avec succès !";
+																    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
+																    			//libelleTitle = "Prévalidation";
+																    			libelle="LISTE DES AVIS D'APPELS D'OFFRES";	
+																    		}else
+													    				//TRANSMISSION A LA NUMEROTATION
+														    			if(action.equalsIgnoreCase("TRANSNUM")) {
+														    				libelleDmp="DGMP";
+															    			type = "Numérotation";
+															    			libelle="TRANSMISSION A LA NUMEROTATION";	
+															    		}else
+														    			//FIN MODULE NUMEROTATION
 											    			
 											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {
