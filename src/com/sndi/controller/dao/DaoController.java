@@ -234,6 +234,7 @@ public class DaoController {
 	//variables
 	private long gesCode;
 	private long modifAdr;
+	private BigDecimal dacNbrCopieOff;
 	 private TFonction recupFonction= new TFonction();
 	 private TDetailPlanPassation demDetail = new TDetailPlanPassation();
 	 private List<TDacSpecs> listeDaoCsvValid = new ArrayList<TDacSpecs>();
@@ -313,7 +314,8 @@ public class DaoController {
 	 private String observation="";
 	 //Avis d'Appel d'Offres
 	 private String aaoLieuExe;
-	 private String aaoHeureRecep; 
+	 private String aaoHeureRecep;
+	 private String aaoLibelle;
 	 private String aaoDteHeurOuv;
 	 private String aaoLieuRecep;
 	 private String aaoPrecisModEval;
@@ -460,6 +462,7 @@ public class DaoController {
 	  private String type ="";
 	  private String plan ="";
 	  private String statutTrans ="";
+	  private String dacMargePref = "";
 	  private long lotTotal = 0;
 	  private long coutLot = 0;
 	  private boolean ouvTechnique = true;
@@ -4071,7 +4074,32 @@ TDacSpecs dao = new TDacSpecs();
 	     
 	 	//Initiation du DAO en procdure normale 
 	     @Transactional
-	     public void updateDac() {
+	     public void updateDac() { 
+	    	 
+	    	   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+			       if (!listDao.isEmpty()) {
+			    	      dao = listDao.get(0);
+			    	      dao.setDacDteSaisi(Calendar.getInstance().getTime());
+			 			  dao.setDacObjet(slctdTd.getDacObjet());
+			 			  dao.setTModePassation(new TModePassation(slctdTd.getMopCode()));
+			 			  dao.setTTypeMarche(new TTypeMarche(slctdTd.getDacTymCode()));
+			 			  dao.setTModeleDacType(new TModeleDacType(""+slctdTd.getDppPieceDao()));
+			 			  dao.setDacFinancement(slctdTd.getDacFinancement());
+			    	      iservice.updateObject(dao);
+			    	      
+			    	      //Recherche
+			             String search = slctdTd.getDacObjet();
+			 	         String rechercheAll = search.replace("null","");
+			 		 	 dao.setDacRecherche(rechercheAll);
+			 		 	 iservice.updateObject(dao);
+			 		 	 
+			 		 	 //Message de confirmation
+			 		 	  userController.setTexteMsg("Dossier d'Appel à la Concurrence modifié avec succès!");
+			 	          userController.setRenderMsg(true);
+			 	          userController.setSevrityMsg("success");
+			            }	
+	    	 /*
 	    	 List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
 	    	 TDacSpecs dao = new TDacSpecs(); 
 			 if(!LS.isEmpty()) dao = LS.get(0);
@@ -4092,11 +4120,17 @@ TDacSpecs dao = new TDacSpecs();
 		 	 //Message de confirmation
 		 	  userController.setTexteMsg("Dossier d'Appel à la Concurrence modifié avec succès!");
 	          userController.setRenderMsg(true);
-	          userController.setSevrityMsg("success");
+	          userController.setSevrityMsg("success");*/
 			 }
 	    	        
-	    	        
-	      
+	    	//Dans le  cas ou le DAC n'a pas été modifié
+	      public void infoDao() {
+	     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		       if (!listDao.isEmpty()) {
+		    	      dao = listDao.get(0);
+		        }
+		     }
 	     
 	 	//Methode d'historisation
 		 public void historiser(String statut,String dacCode, String motif) {
@@ -4195,6 +4229,7 @@ TDacSpecs dao = new TDacSpecs();
 		 }*/
 		 
 		 public void recupInfo() {
+			  aaoLibelle = slctdTd.getAaoLibelle();
 			  aaoHeureRecep=slctdTd.getAaoHeureRecep(); 
  		      aaoCoutDac = slctdTd.getAaoCoutDac() ;
  		      aaoNatPrix = slctdTd.getAaoNatPrix() ;
@@ -4206,7 +4241,38 @@ TDacSpecs dao = new TDacSpecs();
  		      aaoPrecisModEval = slctdTd.getAaoPrecisModEval();  
  		      aaoAvisBai= slctdTd.getAaoAvisBai();
  		      aaoRespBai= slctdTd.getAaoRespBai();
- 		      aaoOffAnormal= slctdTd.getAaoOffAnormal(); 
+ 		      aaoOffAnormal= slctdTd.getAaoOffAnormal();
+ 		      lotNbre = slctdTd.getAaoNbrLot();
+ 		      nbreDelai = slctdTd.getAaoDelaiVal();
+ 		      ouvFin = slctdTd.getAaoDteOuvFin();
+ 		      ouvTech = slctdTd.getAaoDteOuvTec();
+ 		      aaoLieuExe = slctdTd.getAaoLieuExe();
+ 		      adaNum   = slctdTd.getAdaNum();
+ 		      value1 = slctdTd.getAaoNatInt();
+ 		      choixTaux = slctdTd.getDacMargePref();
+ 		      dacNbrCopieOff = dao.getDacNbrCopieOff();
+ 		      
+ 		     _logger.info("aaoLibelle: "+aaoLibelle);	
+ 		     _logger.info("aaoHeureRecep: "+aaoHeureRecep);	
+ 		     _logger.info("Coût du DAC: "+aaoCoutDac);	
+ 		     _logger.info("Nature des Prix: "+aaoNatPrix);	
+ 		     _logger.info("Mode de qualification: "+aaoRegQual);	
+ 		     _logger.info("Date de recetion: "+aaoDateRecep);	
+ 		     _logger.info("Heure de recption: "+aaoDteHeurOuv);
+ 		     _logger.info("Lieu de reception: "+aaoLieuRecep);	
+ 		     _logger.info("Nbre Ouverture: "+aaoNbrOuv);	
+ 		     _logger.info("Avis du Bailleur: "+aaoAvisBai);	
+ 		     _logger.info("Responsable des bailleurs: "+aaoRespBai);
+ 		     _logger.info("aaoOffAnormal: "+aaoOffAnormal);	
+ 		     _logger.info("lotNbre: "+lotNbre);	
+ 		    _logger.info("nbreDelai: "+nbreDelai);	
+ 		    _logger.info("ouvFin: "+ouvFin);	
+ 		    _logger.info("ouvTech: "+ouvTech);	
+ 		    _logger.info("aaoLieuExe: "+aaoLieuExe);
+ 		    _logger.info("adaNum: "+adaNum);
+ 		    _logger.info("value1: "+value1);
+ 		   _logger.info("choixTaux : "+choixTaux );
+ 		  _logger.info("Nbre de copies : "+dacNbrCopieOff);
 		 }
 		 
 	        @Transactional
@@ -4418,7 +4484,115 @@ TDacSpecs dao = new TDacSpecs();
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");          	
 	                     }
+	        
+	        
+	        
+	        //Mis à jour de l'avis d'appel d'Offres
+	        public void aaoModif() {
+	        	avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
+    					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+        	       if (!avisTab.isEmpty()) {
+        	    	       newAvis = avisTab.get(0);
+        	    	       
+        	    	      newAvis.setTAdresseAvis(new TAdresseAvis(adaNum)); 
+ 	          		      if(newAvis.aaoNbrOuv == 1) {
+ 	            		  newAvis.setAaoDteOuvFin(ouvTech);
+   	          		      newAvis.setAaoDteOuvTec(ouvTech);
+ 	            		  }else {
+ 	            		  newAvis.setAaoDteOuvFin(ouvFin);
+     	          		  newAvis.setAaoDteOuvTec(ouvTech);
+ 	            		  }
+ 	          		      newAvis.setAaoLibelle(aaoLibelle);
+ 	          		      newAvis.setAaoHeureRecep(aaoHeureRecep);
+ 	          		      newAvis.setAaoCoutDac(aaoCoutDac);
+ 	          		      newAvis.setAaoNatPrix(aaoNatPrix);
+ 	          		      newAvis.setAaoRegQual(aaoRegQual);
+ 	          		      newAvis.setAaoDateRecep(aaoDateRecep);
+ 	          		      newAvis.setAaoDteHeurOuv(aaoDteHeurOuv);
+ 	          		      newAvis.setAaoLieuRecep(aaoLieuRecep);
+ 	          		      newAvis.setAaoNbrOuv(aaoNbrOuv);
+ 	          		      newAvis.setAaoPrecisModEval(aaoPrecisModEval); 
+ 	          		      newAvis.setAaoAvisBail(aaoAvisBai);
+ 	          		      newAvis.setAaoRespBai(aaoRespBai);
+ 	          		      newAvis.setAaoOffAnormal(aaoOffAnormal);
+ 	          		      newAvis.setAaoLieuExe(aaoLieuExe);
+						  newAvis.setAaoNatInt(value1);
+						  newAvis.setAaoDelaiVal(nbreDelai);
+						  newAvis.setAaoNbrLot(lotNbre);
+ 	          		      iservice.updateObject(newAvis);
+ 	          		      //Mis à jour dans T_DAC_SPECS
+ 	          		     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+ 	   	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+ 	   	     				       if (!listDao.isEmpty()) {
+ 	   	     					    newDao= listDao.get(0);
+ 	   	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+ 	   	     					    newDao.setDacNbrCopieOff(dacNbrCopieOff);
+ 	   	     			            iservice.updateObject(newDao); 
+ 	   	     	   	                 }
+             	         //Message de confirmation
+ 	     				userController.setTexteMsg("Avis d'Appel d'Offres modifié avec succès!");
+ 	     				userController.setRenderMsg(true);
+ 	     				userController.setSevrityMsg("success");   
+        	       }else {
+        	    	   
+        	    	      newAvis.setAaoCode(keyGen.getCodeAvis());
+	            	      newAvis.setTDacSpecs(dao);
+	            	      newAvis.setAaoLibelle(aaoLibelle);
+        	    	      newAvis.setTAdresseAvis(new TAdresseAvis(adaNum)); 
+	          		      if(slctdTd.getAaoNbrOuv() == 1) {
+	            		  newAvis.setAaoDteOuvFin(ouvTech);
+	          		      newAvis.setAaoDteOuvTec(ouvTech);
+	            		  }else {
+	            		  newAvis.setAaoDteOuvFin(ouvFin);
+  	          		      newAvis.setAaoDteOuvTec(ouvTech);
+	            		  }
+	          		      newAvis.setAaoHeureRecep(aaoHeureRecep);
+	          		      newAvis.setAaoCoutDac(aaoCoutDac);
+	          		      newAvis.setAaoNatPrix(aaoNatPrix);
+	          		      newAvis.setAaoRegQual(aaoRegQual);
+	          		      newAvis.setAaoDateRecep(aaoDateRecep);
+	          		      newAvis.setAaoDteHeurOuv(aaoDteHeurOuv);
+	          		      newAvis.setAaoLieuRecep(aaoLieuRecep);
+	          		      newAvis.setAaoNbrOuv(aaoNbrOuv);
+	          		      newAvis.setAaoPrecisModEval(aaoPrecisModEval); 
+	          		      newAvis.setAaoAvisBail(aaoAvisBai);
+	          		      newAvis.setAaoRespBai(aaoRespBai);
+	          		      newAvis.setAaoOffAnormal(aaoOffAnormal);
+	          		      newAvis.setAaoLieuExe(aaoLieuExe);
+						  newAvis.setAaoNatInt(value1);
+						  newAvis.setAaoDelaiVal(nbreDelai);
+						  newAvis.setAaoNbrLot(lotNbre);
+						  newAvis.setTStatut(new TStatut("D1S")); 
+	            	      newAvis.setAvisRetour("0");
+	            	      newAvis.setAaoDteSaisi(Calendar.getInstance().getTime()); 
+	            	      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod()); 
+	          		      iservice.addObject(newAvis);
+	          		      //Mis à jour dans T_Dac_Specs
+	          		    listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+   	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+   	     				   if (!listDao.isEmpty()) {
+   	     					    newDao= listDao.get(0);
+   	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+   	     					    newDao.setDacNbrCopieOff(dacNbrCopieOff);
+   	     			            iservice.updateObject(newDao); 
+   	     	   	                 }
+	          		      //Rafraichissement de VDacliste
+	          		      actualiseVue();
+	          		     //Message de confirmation
+	          		     userController.setTexteMsg("Avis d'Appel d'Offres modifié avec succès!");
+ 	     				 userController.setRenderMsg(true);
+ 	     				 userController.setSevrityMsg("success");  
+        	       }
+	        }
 	    
+	        
+	        public void actualiseVue() {
+	        	 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						   new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+					if (!listeDAO.isEmpty()) {
+						slctdTd=listeDAO.get(0);
+					}
+	        }
 	        
 	        //Verification (un DAO doit avoir au moin un lot)
 	        public void controlLotDao() {
@@ -4825,7 +4999,7 @@ TDacSpecs dao = new TDacSpecs();
 						  listDetailAdresse.clear();
 						  listDetailAdresse =(List<VDetailAdresse>) iservice.getObjectsByColumn("VDetailAdresse", new ArrayList<String>(Arrays.asList("V_ID")),
 								  new WhereClause("ADA_FON_COD",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-								  new WhereClause("ADA_NUM",Comparateur.EQ,""+slctdTd.getAaoAdaNum())); 
+								  new WhereClause("ADA_NUM",Comparateur.EQ,""+adaNum)); 
 					  }
 					  
 					  public void chargeLotsUpdate(){
@@ -5980,8 +6154,8 @@ TDacSpecs dao = new TDacSpecs();
 		    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 		    	     				       if (!listDao.isEmpty()) {
 		    	     					    newDao= listDao.get(0);
-		    	     				        newDao.setDacMargePref(slctdTd.getDacMargePref());
-		    	     				        newDao.setDacMargePrefSou(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePref(choixTaux);
+		    	     				        newDao.setDacMargePrefSou(choixTaux);
 		    	     				        iservice.updateObject(newDao);
 		        	     				       }
 							         }
@@ -5991,10 +6165,10 @@ TDacSpecs dao = new TDacSpecs();
 		    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 		    	     				       if (!listDao.isEmpty()) {
 		    	     					    newDao= listDao.get(0);
-		    	     				        newDao.setDacMargePref(slctdTd.getDacMargePref());
-		    	     				        newDao.setDacMargePrefSou(slctdTd.getDacMargePref());
-		    	     				        newDao.setDacMargePrefArt(slctdTd.getDacMargePref());
-		    	     				        newDao.setDacMargePrefCom(slctdTd.getDacMargePref());
+		    	     				        newDao.setDacMargePref(choixTaux);
+		    	     				        newDao.setDacMargePrefSou(choixTaux);
+		    	     				        newDao.setDacMargePrefArt(choixTaux);
+		    	     				        newDao.setDacMargePrefCom(choixTaux);
 		    	     				        iservice.updateObject(newDao);
 		        	     				       }
 							         }
@@ -6016,7 +6190,7 @@ TDacSpecs dao = new TDacSpecs();
 					 
 					 //En mode modification
 					 public void checkMargePrefModif() {
-						 if(slctdTd.getDacMargePref().equalsIgnoreCase("O")) { 
+						 if(choixTaux.equalsIgnoreCase("O")) { 
 							 majPreferenceModif();
 							 etatMargePreference = true;
 							 listeMargePref();
@@ -8473,9 +8647,9 @@ TDacSpecs dao = new TDacSpecs();
 			  
 	 //Ensembles methode Ecran de modification
 			  public void actionsPavetCreation() {
-				 //updateDac();
 				 //chargeOperationsExiste();
-				 nbreDelai = slctdTd.getAaoDelaiVal();
+				 infoDao();
+				 recupInfo();
 				 panelOuverture();
 				 verifOuvertureModif();
 				 controleModeModif();
@@ -17054,7 +17228,30 @@ TDacSpecs dao = new TDacSpecs();
 	public void setImputationPpm(boolean imputationPpm) {
 		this.imputationPpm = imputationPpm;
 	}
-	
-	
+
+	public String getDacMargePref() {
+		return dacMargePref;
+	}
+
+	public void setDacMargePref(String dacMargePref) {
+		this.dacMargePref = dacMargePref;
+	}
+
+	public String getAaoLibelle() {
+		return aaoLibelle;
+	}
+
+	public void setAaoLibelle(String aaoLibelle) {
+		this.aaoLibelle = aaoLibelle;
+	}
+
+	public BigDecimal getDacNbrCopieOff() {
+		return dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
+	}
+
 	/*******  Fin document  *************/
 }
