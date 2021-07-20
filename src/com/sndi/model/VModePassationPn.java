@@ -21,6 +21,7 @@ public class VModePassationPn implements java.io.Serializable {
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
 	private String mopTypPlan;
+	private String critere;
 
 	public VModePassationPn() {
 	}
@@ -30,11 +31,12 @@ public class VModePassationPn implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 	}
 
-	public VModePassationPn(String mopCode, String mopLibelleCourt, String mopLibelleLong, String mopTypPlan) {
+	public VModePassationPn(String mopCode, String mopLibelleCourt, String mopLibelleLong, String mopTypPlan,String critere) {
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
 		this.mopTypPlan = mopTypPlan;
+		this.critere = critere;
 	}
 
 	
@@ -75,6 +77,15 @@ public class VModePassationPn implements java.io.Serializable {
 
 	public void setMopTypPlan(String mopTypPlan) {
 		this.mopTypPlan = mopTypPlan;
+	}
+	
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

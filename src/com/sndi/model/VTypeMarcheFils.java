@@ -21,6 +21,7 @@ public class VTypeMarcheFils implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String tymLibelleLong;
 	private String tymTymCode;
+	private String critere;
 
 	public VTypeMarcheFils() {
 	}
@@ -29,11 +30,12 @@ public class VTypeMarcheFils implements java.io.Serializable {
 		this.tymCode = tymCode;
 	}
 
-	public VTypeMarcheFils(String tymCode,String tymLibelleCourt, String tymLibelleLong, String tymTymCode) {
+	public VTypeMarcheFils(String tymCode,String tymLibelleCourt, String tymLibelleLong, String tymTymCode,String critere) {
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymLibelleLong = tymLibelleLong;
 		this.tymTymCode = tymTymCode;
+		this.critere = critere;
 	}
 
 	@Id
@@ -71,6 +73,15 @@ public class VTypeMarcheFils implements java.io.Serializable {
 
 	public void setTymTymCode(String tymTymCode) {
 		this.tymTymCode = tymTymCode;
+	}
+	
+	@Column(name = "CRITERE")
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

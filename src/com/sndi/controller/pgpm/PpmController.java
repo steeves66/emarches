@@ -2690,7 +2690,7 @@ public class PpmController {
 		 public void filtreMarche() {
 			 listeTypeMarchesFils.clear();
 			 listeTypeMarchesFils = (List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")),
-						new WhereClause("TYM_LIBELLE_COURT",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
+						new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
 		 }
 		 
 		 
@@ -2699,7 +2699,7 @@ public class PpmController {
 		 public void filtreModePassation() {
 			 listeModePassationPn.clear();
 			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("MOP_CODE")),
-					 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%"));
+					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%"));
 			}
 		 
 		 
