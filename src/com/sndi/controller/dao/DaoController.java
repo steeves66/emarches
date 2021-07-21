@@ -6918,6 +6918,26 @@ TDacSpecs dao = new TDacSpecs();
 									                                       }
 									  
 									//Enregistrement des corrections
+									/*  @Transactional
+									  public void examiner() {
+										  for(VPieces n : listePices) {
+											  newCorrection.setDcoPidCode(String.valueOf(n.getPidCode()));
+											  newCorrection.setDcoDacCode(n.getPidDacCode());
+											  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+											  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+											  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+											  newCorrection.setTempType("DAC_CORRECTION");
+											  iservice.addObject(newCorrection);
+										       } 
+										   //chargePiecesByDao();
+										
+											 //Message de confirmation
+											 userController.setTexteMsg("Correction(s)  effectuée(s) avec succès!");
+											 userController.setRenderMsg(true);
+											 userController.setSevrityMsg("success");	
+									  }*/
+									  
+									//Enregistrement des corrections
 									  @Transactional
 									  public void examiner() {
 										  for(VPieces n : listePices) {
@@ -7478,105 +7498,85 @@ TDacSpecs dao = new TDacSpecs();
 										}
 									}
 				
-				
-									//Validation des corrections
-									/*@Transactional 
-									 public void resultatCorrection() {
-										  
-										  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
-											   statutSanction ="SBO";
-											   statutSanRetour ="0";
-											  
-										        }else 
-										            if(resultat.equalsIgnoreCase("Valide")){
-										        	  //statutSanction ="";
-													  //statutSanRetour ="";
-													  
-													  if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
-														  statutSanction ="DPU";
-														  statutSanRetour ="0";
-														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
-														      {
-														    	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-																			new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-																			if (!listAvis.isEmpty()) {
-																				                 //Mis ÃƒÂ  jour du statut
-																				                 majAvis= listAvis.get(0);
-																				                 majAvis.setTStatut(new TStatut(statutSanction));
-																				                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-																				                 iservice.updateObject(majAvis);
-																			                       }
-														    	
-														         }else {
-														        	 
-														        	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-																				new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-																				if (!listAvis.isEmpty()) {
-																					                 //Mis  jour du statut
-																					                 majAvis= listAvis.get(0);
-																					                 majAvis.setTStatut(new TStatut("APU"));
-																					                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-																					                 iservice.updateObject(majAvis);
-																				                       }
-														                  }
-														    	
-													                  }else 
-													                     if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")){
-													    	                statutSanction ="D5V";
-															                statutSanRetour ="0";
-													                         }
-											  
-										                                }else 
-										                	                if(resultat.equalsIgnoreCase("Rejet")) {
-												                                  statutSanction ="SRO";
-												                                  statutSanRetour ="1";
-											                                    }else 
-											                    	                if(resultat.equalsIgnoreCase("Retour au binome")) {
-												                                        statutSanction ="D3A";
-												                                        statutSanRetour ="1";
-												                                          
-												                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-												                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-												                    							if (!daoBinome.isEmpty()) {
-												                    								//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
-												                    								for(TDaoAffectation dao : daoBinome) {
-												                    									 dao.setDafStaCode(statutSanction);
-												                    									 dao.setDafStatutRetour(statutSanRetour);
-												                    									 iservice.updateObject(dao);
-												                    								       }
-												                    							}
-												                                             
-											                                                }
-							
-										  
-											  listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
-													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
-											           if (!listCorrection.isEmpty()) {
-											        	 daoCorr= listCorrection.get(0);
-											        	 daoCorr.setCorObservation(getObservationCor());
-											        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
-											        	 daoCorr.setCorResultat(resultat);
-													     iservice.updateObject(daoCorr);
-													     
-													     //MAJ dans T_DAC_SPECS
-													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-												 				if (!listDao.isEmpty()) {
-												 					newDao= listDao.get(0);
-												 					newDao.setTStatut(new TStatut(statutSanction));
-												 					newDao.setDacStatutRetour(slctdTd.getDacStatutRetour());
-												 			        iservice.updateObject(newDao); 
-												 	   	                 }
-													     //Activation du bouton d'Ã¯Â¿Â½dition du PV
-												 		 etatPV = true;
-										     			 etatValiderCsv = false;
-										     				     
-														 userController.setTexteMsg("Votre sanction a t apporte avec succs!");
-														 userController.setRenderMsg(true);
-														 userController.setSevrityMsg("success");
-									     }   
-									}					  */
 									
+									//Methode de validation après correction
+									public void correction() {
+										   listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+										   
+										   if(listCorrection.size()>0) {
+											     daoCorr= listCorrection.get(0);
+									        	 daoCorr.setCorObservation(getObservationCor());
+									        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
+									        	 daoCorr.setCorResultat(resultat);
+											     iservice.updateObject(daoCorr);
+											     
+											     //MAJ dans T_DAC_SPECS
+											     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+										 				if (!listDao.isEmpty()) {
+										 					newDao= listDao.get(0);
+										 					newDao.setTStatut(new TStatut(statutSanction));
+										 					newDao.setDacStatutRetour(statutSanRetour);
+										 			        iservice.updateObject(newDao); 
+										 	   	                 } 
+										 		  //FIN dans T_DAO_AFFECTATION	
+										 				
+										 		daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+					                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					                    					if (!daoBinome.isEmpty()) {
+					                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+					                    								for(TDaoAffectation dao : daoBinome) {
+					                    									 dao.setDafStaCode(statutSanction);
+					                    									 dao.setDafStatutRetour(statutSanRetour);
+					                    									 iservice.updateObject(dao);
+					                    								  }
+				                                               }
+										 				
+											     //Activation du bouton d'dition du PV
+										 		 etatPV = true;
+								     			 etatValiderCsv = false;
+								     			//Methode d'historisation 
+								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
+								     			//Mesage de confirmation
+												 userController.setTexteMsg("Dac validé avec succès!");
+												 userController.setRenderMsg(true);
+												 userController.setSevrityMsg("success");
+										   }else {
+											     //MAJ dans T_DAC_SPECS
+											     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+										 				if (!listDao.isEmpty()) {
+										 					newDao= listDao.get(0);
+										 					newDao.setTStatut(new TStatut(statutSanction));
+										 					newDao.setDacStatutRetour(statutSanRetour);
+										 			        iservice.updateObject(newDao); 
+										 	   	                 } 
+										 		  //FIN dans T_DAO_AFFECTATION	
+										 				
+										 		daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+					                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					                    					if (!daoBinome.isEmpty()) {
+					                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+					                    								for(TDaoAffectation dao : daoBinome) {
+					                    									 dao.setDafStaCode(statutSanction);
+					                    									 dao.setDafStatutRetour(statutSanRetour);
+					                    									 iservice.updateObject(dao);
+					                    								  }
+				                                               }
+										 				
+											     //Activation du bouton d'dition du PV
+										 		 etatPV = true;
+								     			 etatValiderCsv = false;
+								     			
+								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC rejeté par le chef de service");
+								     			
+												 userController.setTexteMsg("Dac validé avec succès!");
+												 userController.setRenderMsg(true);
+												 userController.setSevrityMsg("success");
+										   }  
+									}
+				
 									
 									
 									//Validation des corrections
@@ -7610,52 +7610,12 @@ TDacSpecs dao = new TDacSpecs();
 										                                        }
 										                                 }
                                                                   }
-                                                            
-
-                                            listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
-													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
-											           if (!listCorrection.isEmpty()) {
-											        	 daoCorr= listCorrection.get(0);
-											        	 daoCorr.setCorObservation(getObservationCor());
-											        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
-											        	 daoCorr.setCorResultat(resultat);
-													     iservice.updateObject(daoCorr);
-													     
-													     //MAJ dans T_DAC_SPECS
-													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-												 				if (!listDao.isEmpty()) {
-												 					newDao= listDao.get(0);
-												 					newDao.setTStatut(new TStatut(statutSanction));
-												 					newDao.setDacStatutRetour(statutSanRetour);
-												 			        iservice.updateObject(newDao); 
-												 	   	                 } 
-												 		  //FIN dans T_DAO_AFFECTATION	
-												 				
-												 		daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-							                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-							                    					if (!daoBinome.isEmpty()) {
-							                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
-							                    								for(TDaoAffectation dao : daoBinome) {
-							                    									 dao.setDafStaCode(statutSanction);
-							                    									 dao.setDafStatutRetour(statutSanRetour);
-							                    									 iservice.updateObject(dao);
-							                    								  }
-						                                               }
-												 				
-													     //Activation du bouton d'dition du PV
-												 		 etatPV = true;
-										     			 etatValiderCsv = false;
-										     			
-										     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
-										     			
-														 userController.setTexteMsg("Dac validé avec succès!");
-														 userController.setRenderMsg(true);
-														 userController.setSevrityMsg("success");
-									     }   
+                                                   //Appel de la methode de correction         
+                                                        correction();
 									}
-								
+								//Fin de la validation des corrections
 			
+									
 									  
 									//Edition du PV de Correction
 										 public void imprimerPv() {

@@ -25,6 +25,7 @@ public class VDetailOffres implements java.io.Serializable {
 	private BigDecimal dofLaaId;
 	private String aaoCode;
 	private String offSouSigleSte;
+	private String dofSouNcc;
 	private BigDecimal dofMtOfr;
 	private String dofTyp;
 	private String dofStatut;
@@ -43,7 +44,7 @@ public class VDetailOffres implements java.io.Serializable {
 	}
 
 	public VDetailOffres(BigDecimal RId, BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId,
-			String aaoCode, String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut,
+			String aaoCode, String offSouSigleSte, String dofSouNcc, BigDecimal dofMtOfr, String dofTyp, String dofStatut,
 			BigDecimal dofMtRab, String dofObsVariante, String dofOpeMatricule) {
 		this.RId = RId;
 		this.dofNum = dofNum;
@@ -52,6 +53,7 @@ public class VDetailOffres implements java.io.Serializable {
 		this.dofLaaId = dofLaaId;
 		this.aaoCode = aaoCode;
 		this.offSouSigleSte = offSouSigleSte;
+		this.dofSouNcc = dofSouNcc;
 		this.dofMtOfr = dofMtOfr;
 		this.dofTyp = dofTyp;
 		this.dofStatut = dofStatut;
@@ -122,6 +124,15 @@ public class VDetailOffres implements java.io.Serializable {
 
 	public void setOffSouSigleSte(String offSouSigleSte) {
 		this.offSouSigleSte = offSouSigleSte;
+	}
+	
+	@Column(name = "DOF_SOU_NCC")
+	public String getDofSouNcc() {
+		return this.dofSouNcc;
+	}
+
+	public void setDofSouNcc(String dofSouNcc) {
+		this.dofSouNcc = dofSouNcc;
 	}
 
 	@Column(name = "DOF_MT_OFR", precision = 20, scale = 0)

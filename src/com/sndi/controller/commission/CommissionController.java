@@ -33,6 +33,7 @@ import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCommissionType;
 import com.sndi.model.TCritereAnalyseDacOuv;
 import com.sndi.model.TDacSpecs;
+import com.sndi.model.TDaoAffectation;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetCritAnalyseDac;
@@ -226,7 +227,8 @@ public class CommissionController {
 	 private List<TBanques> listBanque = new ArrayList<TBanques>();
 	 private List<TDetOffres> listDetOffre = new ArrayList<TDetOffres>();
 	 private List<TPiecesOffres> listePieceOffreDelete = new ArrayList<TPiecesOffres>();
-	 private List<TAnalyseOffre> listeAnalyseOffreDelete = new ArrayList<TAnalyseOffre>();
+	 private List<TAnalyseOffre> listeAnalyseOffreDelete = new ArrayList<TAnalyseOffre>(); 
+	 private List<TCritereAnalyseDacOuv> listeTcritereOuvDelete = new ArrayList<TCritereAnalyseDacOuv>();
 	 private List<TAnalyseOffre> listeAnalyse = new ArrayList<TAnalyseOffre>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
@@ -1956,7 +1958,7 @@ public class CommissionController {
 		//Fin de la methode SaveOuverture()
 		
 		//debut suppression detail offre
-				public void removedetOffre() {
+				public void removedetOffre() { 
 					listePieceOffreDelete = ((List<TPiecesOffres>)iservice.getObjectsByColumn("TPiecesOffres",
 						    new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
 		    				for(TPiecesOffres ligne : listePieceOffreDelete) {	
@@ -1979,7 +1981,15 @@ public class CommissionController {
 		        		  		userController.setRenderMsg(true);
 		        		  		userController.setSevrityMsg("success");
 		    			}	
-		    				
+		    			
+		    			
+		    			listeTcritereOuvDelete =(List<TCritereAnalyseDacOuv>) iservice.getObjectsByColumn("TCritereAnalyseDacOuv", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+                				new WhereClause("DOF_NCC",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofSouNcc()),
+                				new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofLaaId()),
+                				new WhereClause("DOF_TYP",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofTyp()));
+                						for(TCritereAnalyseDacOuv ouv : listeTcritereOuvDelete) {
+                								iservice.updateObject(ouv);
+                							}	
 				}
 		
 		
@@ -2655,7 +2665,6 @@ public class CommissionController {
 	 
 	public void test(String value ,String action) {
 		if(value.equalsIgnoreCase("")) {
-			
 		}
 	}
 
@@ -4329,6 +4338,14 @@ public class CommissionController {
 
 	public void setBtnPvJug(boolean btnPvJug) {
 		this.btnPvJug = btnPvJug;
+	}
+
+	public List<TCritereAnalyseDacOuv> getListeTcritereOuvDelete() {
+		return listeTcritereOuvDelete;
+	}
+
+	public void setListeTcritereOuvDelete(List<TCritereAnalyseDacOuv> listeTcritereOuvDelete) {
+		this.listeTcritereOuvDelete = listeTcritereOuvDelete;
 	}
 
 
