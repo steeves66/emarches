@@ -150,9 +150,20 @@
 				<div class="col-md-12">
 					<div class="box box-success box-solid">
 						<div class="box-header with-border"> 
-						<div class="col-md-5 ">
-					   <div style="color: #fff">#{controleController.libelle1}</div>
-					 </div>
+					
+					<h:panelGroup rendered="#{controleController.affDao}">	   
+				    <div class="col-md-2"> <b class="pull-right">Procédure : </b></div>
+				    <div class="col-sm-3">
+				       <p:selectOneMenu id="typeProcedure" value="#{daoController.statut}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+	                    <f:selectItem  itemLabel="Choisir la procédure...." itemValue="" />  
+			            <f:selectItem  itemLabel="Procédure Normale" itemValue="PN" /> 
+			            <f:selectItem  itemLabel="Procédure Simplifiée" itemValue="PS" /> 
+			            <p:ajax listener="#{daoController.filterByProcedure()}" update=":gnl:ndTble0"/>	
+       		        </p:selectOneMenu> 
+       		        </div>
+				     </h:panelGroup>
+					 
 						<div class="col-md-5 ">	
 					  <div class="input-group input-group-sm col-md-12">
 					   <span class="input-group-btn">

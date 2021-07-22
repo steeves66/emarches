@@ -150,6 +150,12 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnInInstr(objet,strSource);
 		}
 		
+		@Override
+		public List getObjectByColumnInInstrFiltre(String objet, String statut, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrFiltre(objet,statut,strSource);
+		}
+		
 		//Methode de comptage en region
 		@Override
 		public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac) {

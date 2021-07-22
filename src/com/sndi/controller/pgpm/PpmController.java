@@ -1729,7 +1729,7 @@ public class PpmController {
 							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
 							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-							new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+							new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
 						//tableauBordController.chargeDataPpm();

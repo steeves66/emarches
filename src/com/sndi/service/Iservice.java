@@ -104,6 +104,7 @@ public interface Iservice {
 
 	//public List getObjectByColumnInInstr(String objet, String typePlan, String strSource);
 	public List getObjectByColumnInInstr(String objet,String strSource);
+	public List getObjectByColumnInInstrFiltre(String objet, String statut, String strSource);
 	//public List getObjectByColumnInInstrAmi(String objet, String typePlan, String strSource);
 	public List getObjectByColumnInInstrAmi(String objet,String strSource);
 	public List getObjectByColumnInInstrPrq(String objet, String strSource);

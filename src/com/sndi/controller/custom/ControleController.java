@@ -3702,10 +3702,10 @@ public class ControleController {
 						    			}
 				    			else
 				    				 if(action.equalsIgnoreCase("AFFDAO")) {
-				    					 typePlan ="PN";
-				    				        type = "DAC";
-				    				        fonctionalite ="listeAffectationCsv";
-				    				        libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
+				    					     typePlan ="PN";
+				    				         type = "DAC";
+				    				         fonctionalite ="listeAffectationCsv";
+				    				         libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 							    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 							    			 libelleSmall = "Procédure Normale";
 							    			 libelleA = "DAO";

@@ -1976,20 +1976,25 @@ public class CommissionController {
 		    			if (!listDetOffre.isEmpty()) {
 		    				detOffre=listDetOffre.get(0); 
 		    				iservice.deleteObject(detOffre);
-		            			chargeOffres();
-		        				userController.setTexteMsg("Suppression éffectuée avec succès!");
-		        		  		userController.setRenderMsg(true);
-		        		  		userController.setSevrityMsg("success");
+		            			//chargeOffres();
 		    			}	
 		    			
 		    			
-		    			listeTcritereOuvDelete =(List<TCritereAnalyseDacOuv>) iservice.getObjectsByColumn("TCritereAnalyseDacOuv", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+		    			listeTcritereOuvDelete =(List<TCritereAnalyseDacOuv>) iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
                 				new WhereClause("DOF_NCC",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofSouNcc()),
                 				new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofLaaId()),
+                				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+selectdetOffre.getAaoCode()),
                 				new WhereClause("DOF_TYP",WhereClause.Comparateur.EQ,""+selectdetOffre.getDofTyp()));
                 						for(TCritereAnalyseDacOuv ouv : listeTcritereOuvDelete) {
-                								iservice.updateObject(ouv);
+                								iservice.deleteObject(ouv);
                 							}	
+                						
+                		chargeOffres();
+                		//Message de Suppression
+                		userController.setTexteMsg("Suppression éffectuée avec succès!");
+        		  		userController.setRenderMsg(true);
+        		  		userController.setSevrityMsg("success");
+                			
 				}
 		
 		

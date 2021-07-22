@@ -480,6 +480,15 @@ public List getObjectByColumnInInstr(String objet, String strSource) {
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
 }
+
+@Override
+public List getObjectByColumnInInstrFiltre(String objet,String statut, String strSource) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE DAC_STA_CODE IN('D2T','D5R') AND DAC_TYPE_PLAN ='"+statut+"' AND INSTR('"+strSource+"',FON_CODE_CSV) > 0 ORDER BY DAC_DTE_SAISI" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
 	
 @Override
 public List getObjectByColumnInPubCsvInstr(String objet,String stat1,String stat2,String typePlan,String strSource) {

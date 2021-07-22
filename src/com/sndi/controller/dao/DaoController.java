@@ -7576,6 +7576,59 @@ TDacSpecs dao = new TDacSpecs();
 												 userController.setSevrityMsg("success");
 										   }  
 									}
+									
+									
+									//Methode de validation après correction
+									public void correctionVal() {
+										   listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+										   
+										   if(listCorrection.size()>0) {
+											     daoCorr= listCorrection.get(0);
+									        	 daoCorr.setCorObservation(getObservationCor());
+									        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
+									        	 daoCorr.setCorResultat(resultat);
+											     iservice.updateObject(daoCorr);
+											     
+											     //MAJ dans T_DAC_SPECS
+											     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+										 				if (!listDao.isEmpty()) {
+										 					newDao= listDao.get(0);
+										 					newDao.setTStatut(new TStatut(statutSanction));
+										 					newDao.setDacStatutRetour(statutSanRetour);
+										 			        iservice.updateObject(newDao); 
+										 	   	                 } 
+										 		  //FIN dans T_DAO_AFFECTATION	
+										 				
+										 		daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+					                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					                    					if (!daoBinome.isEmpty()) {
+					                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+					                    								for(TDaoAffectation dao : daoBinome) {
+					                    									 dao.setDafStaCode(statutSanction);
+					                    									 dao.setDafStatutRetour(statutSanRetour);
+					                    									 iservice.updateObject(dao);
+					                    								  }
+				                                               }
+										 				
+											     //Activation du bouton d'dition du PV
+										 		 etatPV = true;
+								     			 etatValiderCsv = false;
+								     			//Methode d'historisation 
+								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
+								     			//Mesage de confirmation
+												 userController.setTexteMsg("Dac validé avec succès!");
+												 userController.setRenderMsg(true);
+												 userController.setSevrityMsg("success");
+										   }else {
+											     //MAJ dans T_DAC_SPECS
+											 //Message d'erreur
+												FacesContext.getCurrentInstance().addMessage(null,
+														new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce dossier d'appel à la concurrence n'a pas fait l'objet de correction", ""));
+											  
+										   }  
+									}
 				
 									
 									
@@ -7596,22 +7649,29 @@ TDacSpecs dao = new TDacSpecs();
 															                   statutSanRetour ="0";
 													                         }
 										                                }
-                                                        
+                                                                          
+													        correctionVal();
+													        
 										                         }else{
 
 										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
 												                                  statutSanction ="D1S";
 												                                  statutSanRetour ="1";
+												                                  
+												                                //Appel de la methode de correction         
+							                                                        correction();
 											                                }else{
 
 											                                	   if(resultat.equalsIgnoreCase("Retour au binome")) {
 												                                        statutSanction ="D3A";
 												                                        statutSanRetour ="1";
+												                                      //Appel de la methode de correction         
+								                                                        correction();
 										                                        }
 										                                 }
                                                                   }
                                                    //Appel de la methode de correction         
-                                                        correction();
+                                                       // correction();
 									}
 								//Fin de la validation des corrections
 			
@@ -7852,7 +7912,7 @@ TDacSpecs dao = new TDacSpecs();
 													                    	  
 											     			  				   //Message de Confirmation
 											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											     					           userController.setTexteMsg("Retrait effectu avec succs");
+											     					           userController.setTexteMsg("Retrait éffectué avec succès");
 											     							   userController.setRenderMsg(true);
 											     							   userController.setSevrityMsg("success");	
 													         }else {
@@ -8678,6 +8738,12 @@ TDacSpecs dao = new TDacSpecs();
 			publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheStatutCsvInstr("VAvisPublie",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("liste pulier"+publieListe);	
 			_logger.info("Statut"+statut);
+		}
+		
+		public void filterByProcedure() {
+			listeDAO =(List<VDacliste>) iservice.getObjectByColumnInInstrFiltre("VDacliste",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("liste dao à l'affectation : "+listeDAO);	
+			_logger.info("Statut : "+statut);
 		}
 		
 		public void filtrePulication() {
