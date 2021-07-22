@@ -86,9 +86,11 @@ Logger _logger = Logger.getLogger(AnoController.class);
 			 			TLotAao updateLot = new TLotAao();
 						if(!LS.isEmpty()) {
 							updateLot = LS.get(0);	
-							updateLot.setLaaStaCode("L3T");
+							updateLot.setLaaStaCode("LAD");
 			 			iservice.updateObject(updateLot);
 				     }	
+						
+						//Mettre l'attribution ATD
 						chargeLotAnumeroter();
 						userController.setTexteMsg("Transmission éffectuée avec succès !");
 				        userController.setRenderMsg(true);

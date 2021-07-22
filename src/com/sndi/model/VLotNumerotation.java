@@ -41,6 +41,9 @@ public class VLotNumerotation implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaDacCode;
+	private String attSouNcc;
+	private BigDecimal attMtAttr;
+	private String souSigleSte;
 
 	public VLotNumerotation() {
 	}
@@ -56,7 +59,7 @@ public class VLotNumerotation implements java.io.Serializable {
 			BigDecimal laaMtCaut, BigDecimal laaMtEst, String laaAno, BigDecimal checktrt, String laaObservationDmp,
 			String libAno, String libAo, String liblotnara, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi,
 			String laaFonCodCpmp, String laaOpeMatricule, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
-			BigDecimal laaCoutLot, String laaDacCode) {
+			BigDecimal laaCoutLot, String laaDacCode, String attSouNcc, BigDecimal attMtAttr, String souSigleSte) {
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
@@ -79,6 +82,9 @@ public class VLotNumerotation implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaDacCode = laaDacCode;
+		this.attSouNcc = attSouNcc;
+		this.attMtAttr = attMtAttr;
+		this.souSigleSte = souSigleSte;
 	}
 
 	@Id
@@ -279,96 +285,32 @@ public class VLotNumerotation implements java.io.Serializable {
 	public void setLaaDacCode(String laaDacCode) {
 		this.laaDacCode = laaDacCode;
 	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof VLotNumerotation))
-			return false;
-		VLotNumerotation castOther = (VLotNumerotation) other;
-
-		return ((this.getLaaId() == castOther.getLaaId()) || (this.getLaaId() != null && castOther.getLaaId() != null
-				&& this.getLaaId().equals(castOther.getLaaId())))
-				&& ((this.getLaaAaoCode() == castOther.getLaaAaoCode()) || (this.getLaaAaoCode() != null
-						&& castOther.getLaaAaoCode() != null && this.getLaaAaoCode().equals(castOther.getLaaAaoCode())))
-				&& ((this.getLaaObjet() == castOther.getLaaObjet()) || (this.getLaaObjet() != null
-						&& castOther.getLaaObjet() != null && this.getLaaObjet().equals(castOther.getLaaObjet())))
-				&& ((this.getLaaObservation() == castOther.getLaaObservation())
-						|| (this.getLaaObservation() != null && castOther.getLaaObservation() != null
-								&& this.getLaaObservation().equals(castOther.getLaaObservation())))
-				&& ((this.getLaaMtCaut() == castOther.getLaaMtCaut()) || (this.getLaaMtCaut() != null
-						&& castOther.getLaaMtCaut() != null && this.getLaaMtCaut().equals(castOther.getLaaMtCaut())))
-				&& ((this.getLaaMtEst() == castOther.getLaaMtEst()) || (this.getLaaMtEst() != null
-						&& castOther.getLaaMtEst() != null && this.getLaaMtEst().equals(castOther.getLaaMtEst())))
-				&& ((this.getLaaAno() == castOther.getLaaAno()) || (this.getLaaAno() != null
-						&& castOther.getLaaAno() != null && this.getLaaAno().equals(castOther.getLaaAno())))
-				&& ((this.getChecktrt() == castOther.getChecktrt()) || (this.getChecktrt() != null
-						&& castOther.getChecktrt() != null && this.getChecktrt().equals(castOther.getChecktrt())))
-				&& ((this.getLaaObservationDmp() == castOther.getLaaObservationDmp())
-						|| (this.getLaaObservationDmp() != null && castOther.getLaaObservationDmp() != null
-								&& this.getLaaObservationDmp().equals(castOther.getLaaObservationDmp())))
-				&& ((this.getLibAno() == castOther.getLibAno()) || (this.getLibAno() != null
-						&& castOther.getLibAno() != null && this.getLibAno().equals(castOther.getLibAno())))
-				&& ((this.getLibAo() == castOther.getLibAo()) || (this.getLibAo() != null
-						&& castOther.getLibAo() != null && this.getLibAo().equals(castOther.getLibAo())))
-				&& ((this.getLiblotnara() == castOther.getLiblotnara()) || (this.getLiblotnara() != null
-						&& castOther.getLiblotnara() != null && this.getLiblotnara().equals(castOther.getLiblotnara())))
-				&& ((this.getLaaDteSaisi() == castOther.getLaaDteSaisi())
-						|| (this.getLaaDteSaisi() != null && castOther.getLaaDteSaisi() != null
-								&& this.getLaaDteSaisi().equals(castOther.getLaaDteSaisi())))
-				&& ((this.getLaaStaCode() == castOther.getLaaStaCode()) || (this.getLaaStaCode() != null
-						&& castOther.getLaaStaCode() != null && this.getLaaStaCode().equals(castOther.getLaaStaCode())))
-				&& ((this.getLaaFonCodSaisi() == castOther.getLaaFonCodSaisi())
-						|| (this.getLaaFonCodSaisi() != null && castOther.getLaaFonCodSaisi() != null
-								&& this.getLaaFonCodSaisi().equals(castOther.getLaaFonCodSaisi())))
-				&& ((this.getLaaFonCodCpmp() == castOther.getLaaFonCodCpmp())
-						|| (this.getLaaFonCodCpmp() != null && castOther.getLaaFonCodCpmp() != null
-								&& this.getLaaFonCodCpmp().equals(castOther.getLaaFonCodCpmp())))
-				&& ((this.getLaaOpeMatricule() == castOther.getLaaOpeMatricule())
-						|| (this.getLaaOpeMatricule() != null && castOther.getLaaOpeMatricule() != null
-								&& this.getLaaOpeMatricule().equals(castOther.getLaaOpeMatricule())))
-				&& ((this.getLaaLieuExe() == castOther.getLaaLieuExe()) || (this.getLaaLieuExe() != null
-						&& castOther.getLaaLieuExe() != null && this.getLaaLieuExe().equals(castOther.getLaaLieuExe())))
-				&& ((this.getLaaLbgImputation() == castOther.getLaaLbgImputation())
-						|| (this.getLaaLbgImputation() != null && castOther.getLaaLbgImputation() != null
-								&& this.getLaaLbgImputation().equals(castOther.getLaaLbgImputation())))
-				&& ((this.getLaaNum() == castOther.getLaaNum()) || (this.getLaaNum() != null
-						&& castOther.getLaaNum() != null && this.getLaaNum().equals(castOther.getLaaNum())))
-				&& ((this.getLaaCoutLot() == castOther.getLaaCoutLot()) || (this.getLaaCoutLot() != null
-						&& castOther.getLaaCoutLot() != null && this.getLaaCoutLot().equals(castOther.getLaaCoutLot())))
-				&& ((this.getLaaDacCode() == castOther.getLaaDacCode())
-						|| (this.getLaaDacCode() != null && castOther.getLaaDacCode() != null
-								&& this.getLaaDacCode().equals(castOther.getLaaDacCode())));
+	
+	@Column(name = "ATT_SOU_NCC", length = 20)
+	public String getAttSouNcc() {
+		return this.attSouNcc;
 	}
 
-	public int hashCode() {
-		int result = 17;
+	public void setAttSouNcc(String attSouNcc) {
+		this.attSouNcc = attSouNcc;
+	}
 
-		result = 37 * result + (getLaaId() == null ? 0 : this.getLaaId().hashCode());
-		result = 37 * result + (getLaaAaoCode() == null ? 0 : this.getLaaAaoCode().hashCode());
-		result = 37 * result + (getLaaObjet() == null ? 0 : this.getLaaObjet().hashCode());
-		result = 37 * result + (getLaaObservation() == null ? 0 : this.getLaaObservation().hashCode());
-		result = 37 * result + (getLaaMtCaut() == null ? 0 : this.getLaaMtCaut().hashCode());
-		result = 37 * result + (getLaaMtEst() == null ? 0 : this.getLaaMtEst().hashCode());
-		result = 37 * result + (getLaaAno() == null ? 0 : this.getLaaAno().hashCode());
-		result = 37 * result + (getChecktrt() == null ? 0 : this.getChecktrt().hashCode());
-		result = 37 * result + (getLaaObservationDmp() == null ? 0 : this.getLaaObservationDmp().hashCode());
-		result = 37 * result + (getLibAno() == null ? 0 : this.getLibAno().hashCode());
-		result = 37 * result + (getLibAo() == null ? 0 : this.getLibAo().hashCode());
-		result = 37 * result + (getLiblotnara() == null ? 0 : this.getLiblotnara().hashCode());
-		result = 37 * result + (getLaaDteSaisi() == null ? 0 : this.getLaaDteSaisi().hashCode());
-		result = 37 * result + (getLaaStaCode() == null ? 0 : this.getLaaStaCode().hashCode());
-		result = 37 * result + (getLaaFonCodSaisi() == null ? 0 : this.getLaaFonCodSaisi().hashCode());
-		result = 37 * result + (getLaaFonCodCpmp() == null ? 0 : this.getLaaFonCodCpmp().hashCode());
-		result = 37 * result + (getLaaOpeMatricule() == null ? 0 : this.getLaaOpeMatricule().hashCode());
-		result = 37 * result + (getLaaLieuExe() == null ? 0 : this.getLaaLieuExe().hashCode());
-		result = 37 * result + (getLaaLbgImputation() == null ? 0 : this.getLaaLbgImputation().hashCode());
-		result = 37 * result + (getLaaNum() == null ? 0 : this.getLaaNum().hashCode());
-		result = 37 * result + (getLaaCoutLot() == null ? 0 : this.getLaaCoutLot().hashCode());
-		result = 37 * result + (getLaaDacCode() == null ? 0 : this.getLaaDacCode().hashCode());
-		return result;
+	@Column(name = "ATT_MT_ATTR", precision = 22, scale = 0)
+	public BigDecimal getAttMtAttr() {
+		return this.attMtAttr;
+	}
+
+	public void setAttMtAttr(BigDecimal attMtAttr) {
+		this.attMtAttr = attMtAttr;
+	}
+
+	@Column(name = "SOU_SIGLE_STE", length = 300)
+	public String getSouSigleSte() {
+		return this.souSigleSte;
+	}
+
+	public void setSouSigleSte(String souSigleSte) {
+		this.souSigleSte = souSigleSte;
 	}
 
 }
