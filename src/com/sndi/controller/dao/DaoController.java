@@ -2231,6 +2231,15 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
+	 
+	 //Affichage des AC en lui passant en parametre les statuts concernÃ¯Â¿Â½ (1 statut)
+	 public void chargeDataAc1Filtre(){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DAP"),
+					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+statut));
+			_logger.info("listeDAO size: "+listeDAO.size());	
+	 }
 	 //DEBUT AFFICHAGE LISTE DAC DMP
 	//Affichage des DMP en lui passant en parametre le statut concerné (1 statut)
 	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1,String condition,String valeur){
@@ -8736,12 +8745,18 @@ TDacSpecs dao = new TDacSpecs();
 		
 		public void filterByStatut() {
 			publieListe =(List<VAvisPublie>) iservice.getObjectByColumnInPublicationRechercheStatutCsvInstr("VAvisPublie",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
-			_logger.info("liste pulier"+publieListe);	
+			_logger.info("liste pulier"+publieListe.size());	
 			_logger.info("Statut"+statut);
 		}
 		
 		public void filterByProcedure() {
 			listeDAO =(List<VDacliste>) iservice.getObjectByColumnInInstrFiltre("VDacliste",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("liste dao à l'affectation : "+listeDAO.size());	
+			_logger.info("Statut : "+statut);
+		}
+		
+		public void filterByProcedureVal() {
+			listeDAO =(List<VDacliste>) iservice.getObjectByColumnInInstrValDaoFiltre("VDacliste",""+statut,""+userController.getSlctd().getTFonction().getFonCod());
 			_logger.info("liste dao à l'affectation : "+listeDAO);	
 			_logger.info("Statut : "+statut);
 		}

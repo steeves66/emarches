@@ -163,6 +163,32 @@
        		        </p:selectOneMenu> 
        		        </div>
 				     </h:panelGroup>
+				     
+				     <h:panelGroup rendered="#{controleController.valDao}">	   
+				    <div class="col-md-2"> <b class="pull-right">Procédure : </b></div>
+				    <div class="col-sm-3">
+				       <p:selectOneMenu id="typeProcedureVal" value="#{daoController.statut}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+	                    <f:selectItem  itemLabel="Choisir la procédure...." itemValue="" />  
+			            <f:selectItem  itemLabel="Procédure Normale" itemValue="PN" /> 
+			            <f:selectItem  itemLabel="Procédure Simplifiée" itemValue="PS" /> 
+			            <p:ajax listener="#{daoController.filterByProcedureVal()}" update=":gnl:ndTble0"/>	
+       		        </p:selectOneMenu> 
+       		        </div>
+				     </h:panelGroup>
+				     
+				      <h:panelGroup rendered="#{controleController.vetDao}">	   
+				    <div class="col-md-2"> <b class="pull-right">Procédure : </b></div>
+				    <div class="col-sm-3">
+				       <p:selectOneMenu id="typeProcedureVente" value="#{daoController.statut}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+	                    <f:selectItem  itemLabel="Choisir la procédure...." itemValue="" />  
+			            <f:selectItem  itemLabel="Procédure Normale" itemValue="PN" /> 
+			            <f:selectItem  itemLabel="Procédure Simplifiée" itemValue="PS" /> 
+			            <p:ajax listener="#{daoController.chargeDataAc1Filtre()}" update=":gnl:ndTble0"/>	
+       		        </p:selectOneMenu> 
+       		        </div>
+				     </h:panelGroup>
 					 
 						<div class="col-md-5 ">	
 					  <div class="input-group input-group-sm col-md-12">

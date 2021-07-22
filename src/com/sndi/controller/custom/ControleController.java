@@ -331,8 +331,10 @@ public class ControleController {
 	public boolean fermerValPspm=false;
 	
 	private boolean affDao=false;
+	private boolean valDao=false;
 	private boolean exaDao=false;
 	private boolean retDao=false;
+	private boolean vetDao=false;
 	private boolean btn_retourner=false;
 	
 	private boolean update_fermer_dao=false;
@@ -2843,14 +2845,7 @@ public class ControleController {
 																				 panel2 =false;
 																				 panel3 = false;
 																				 panel4 = false;
-																				 /*panel5 = false;
-																				 panel6 = false;
-																				 panel7 = false;
-																				 panel8 = true;
-																				 panel9 = false;
-																				 panel10 = false;
-																				 panel11 = false;
-																				 panel12 = false;*/
+																				
 				   																 affDao=false;
 				   																 exaDao=false;
 				   																 retDao = true;
@@ -2914,14 +2909,6 @@ public class ControleController {
 																					 panel2 =false;
 																					 panel3 = false;
 																					 panel4 = false;
-																					 /*panel5 = false;
-																					 panel6 = false;
-																					 panel7 = false;
-																					 panel8 = true;
-																					 panel9 = false;
-																					 panel10 = false;
-																					 panel11 = false;
-																					 panel12 = false;*/
 				   																	 affDao=false;
 				   																	 exaDao=false;
 				   																	 retDao = true;
@@ -3290,6 +3277,7 @@ public class ControleController {
 			    			 saisie=true;
 			    			 publication=false;
 			    			 vente=false;
+			    			 valDao = false;
 			    			 correction=false;
 			    			 panel1 =true;
 							 panel2 =false;
@@ -3631,6 +3619,7 @@ public class ControleController {
 								priseRecherche = false;
 								chargeRecherche = false;
 								affDao=false;
+								valDao = true;
 								exaDao=false;
 								btn_exam = true;
 								panelDaoTableauBordAff =false;
@@ -3732,7 +3721,9 @@ public class ControleController {
 											 
 											 panelAffectation = true;
 											 affDao=true;
+											 valDao = false;
 											 exaDao=false;
+											 vetDao = false;
 											 panelDaoTableauBordSai = false;
 											 panelDaoTableauBordVal = false;
 											 panelDaoTableauBordTra = false;
@@ -3884,6 +3875,8 @@ public class ControleController {
 												 panelAffectation = false;
 												 affDao=false;
 												 exaDao=true;
+												 valDao = false;
+												 vetDao = false;
 												 panelDaoTableauBordSai = false;
 												 panelDaoTableauBordVal = false;
 												 panelDaoTableauBordTra = false;
@@ -3958,9 +3951,11 @@ public class ControleController {
 													 validationRecherche = false;
 													 priseRecherche = false;
 													 chargeRecherche = false;
-													 affDao=false;
-													 exaDao=false;
+													 affDao = false;
+													 exaDao = false;
 													 retDao = true;
+													 valDao = false;
+													 vetDao = true;
 													 panelDaoTableauBordSai = false;
 													 panelDaoTableauBordVal = false;
 													 panelDaoTableauBordTra = false;
@@ -4040,6 +4035,7 @@ public class ControleController {
 														 affDao=false;
 														 exaDao=false;
 														 retDao = true;
+														 valDao = true;
 														 panelDaoTableauBordSai = false;
 														 panelDaoTableauBordVal = false;
 														 panelDaoTableauBordTra = false;
@@ -4101,21 +4097,12 @@ public class ControleController {
 											    			 saisie=false;
 											    			 publication=true;
 											    			 vente=false;
-											    			  correction=false;
+											    			 correction=false;
 											    			 panel1 =true;
 															 panel2 =false;
 															 panel3 = false;
 															 panel4 = false;
 															 panel5 = false;
-														   /*panel4 = false;
-															 panel5 = false;
-															 panel6 = false;
-															 panel7 = true;
-															 panel8 = false;
-															 panel9 =false;
-															 panel10 = false;
-															 panel11 = false;
-															 panel12 = false;*/
 															 venteRecherche = false; 
 															 affectationRecherche = false;
 															 examenRecherche = false;
@@ -4128,6 +4115,7 @@ public class ControleController {
 															 affDao=false;
 															 exaDao=false;
 															 retDao = false;
+															 valDao = true;
 															 panelDaoTableauBordSai = false;
 															 panelDaoTableauBordVal = false;
 															 panelDaoTableauBordTra = false;
@@ -4195,15 +4183,6 @@ public class ControleController {
 																 panel3 = false;
 																 panel4 = false;
 																 panel5 = false;
-															   /*panel4 = false;
-																 panel5 = false;
-																 panel6 = false;
-																 panel7 = true;
-																 panel8 = false;
-																 panel9 =false;
-																 panel10 = false;
-																 panel11 = false;
-																 panel12 = false;*/
 																 venteRecherche = false; 
 																 affectationRecherche = false;
 																 examenRecherche = false;
@@ -4216,6 +4195,7 @@ public class ControleController {
 																 affDao=false;
 																 exaDao=false;
 																 retDao = false;
+																 valDao = true;
 																 panelDaoTableauBordSai = false;
 																 panelDaoTableauBordVal = false;
 																 panelDaoTableauBordTra = false;
@@ -4371,18 +4351,11 @@ public class ControleController {
 																 panel3 = false;
 																 panel4 = false;
 																 panel5 = false;
-															/*	 panel4 = false;
-																 panel5 = false;
-																 panel6 = false;
-																 panel7 = false;
-																 panel8 = true;
-																 panel9 = false;
-																 panel10 = false;
-																 panel11 = false;
-																 panel12 = false;*/
 																 affDao=false;
 																 exaDao=false;
 																 retDao = true;
+																 valDao = true;
+																 vetDao = false;
 																 panelDaoTableauBordSai = false;
 																 panelDaoTableauBordVal = false;
 																 panelDaoTableauBordTra = true;
@@ -4448,18 +4421,10 @@ public class ControleController {
 																	 panel3 = false;
 																	 panel4 = false;
 																	 panel5 = false;
-																/*	 panel4 = false;
-																	 panel5 = false;
-																	 panel6 = false;
-																	 panel7 = false;
-																	 panel8 = false;
-																	 panel9 = false;
-																	 panel10 =false;
-																	 panel11 = true;
-																	 panel12 = false;*/
 																	 affDao=false;
 																	 exaDao=false;
 																	 retDao = true;
+																	 valDao = true;
 																	 panelDaoTableauBordSai = false;
 																	 panelDaoTableauBordVal = false;
 																	 panelDaoTableauBordTra = false;
@@ -4527,15 +4492,6 @@ public class ControleController {
 																		 panel3 = false;
 																		 panel4 = false;
 																		 panel5 = false;
-																/*		 panel4 = false;
-																		 panel5 = false;
-																		 panel6 = false;
-																		 panel7 = false;
-																		 panel8 = false;
-																		 panel9 = false;
-																		 panel10 =false;
-																		 panel11 = false;
-																		 panel12 = true;*/
 																		 venteRecherche = false; 
 																		 affectationRecherche = false;
 																		 examenRecherche = false;
@@ -4548,6 +4504,7 @@ public class ControleController {
 																		 affDao=false;
 																		 exaDao=false;
 																		 retDao = true;
+																		 valDao = true;
 																		 panelDaoTableauBordSai = false;
 																		 panelDaoTableauBordVal = false;
 																		 panelDaoTableauBordTra = false;
@@ -4620,14 +4577,6 @@ public class ControleController {
 																			 panel3 = false;
 																		     panel4 = true;
 																		     panel5 = false;
-																			/* panel5 = false;
-																			 panel6 = false;
-																			 panel7 = true;
-																			 panel8 = false;
-																			 panel9 =false;
-																			 panel10 = false;
-																			 panel11 = false;
-																			 panel12 = false;*/
 																			 venteRecherche = false; 
 																			 affectationRecherche = false;
 																			 examenRecherche = false;
@@ -4640,6 +4589,7 @@ public class ControleController {
 																			 affDao=false;
 																			 exaDao=false;
 																			 retDao = false;
+																			 valDao = true;
 																			 panelDaoTableauBordSai = false;
 																			 panelDaoTableauBordVal = false;
 																			 panelDaoTableauBordTra = false;
@@ -4929,15 +4879,6 @@ public class ControleController {
 								    													panel3 = false;
 								    													panel4 = false;
 								    													panel5 = false;
-								    												/*	panel4 =false;
-								    													panel5 =false;
-								    													panel6=false;
-								    													panel7 = false;
-								    													panel8 = false;
-								    													panel9 = false;
-								    													panel10=false;
-								    													panel11 = false;
-								    													panel12 = false;*/
 								    													venteRecherche = false; 
 								    													affectationRecherche = false;
 								    													examenRecherche = false;
@@ -4949,6 +4890,7 @@ public class ControleController {
 								    													chargeRecherche = false;
 								    													affDao=false;
 								    													exaDao=false;
+								    													valDao = true;
 								    													panelDaoTableauBordAff =false;
 								    													panelDaoTableauBordRet = false;
 								    													panelDaoTableauBordSai = false;
@@ -5040,6 +4982,8 @@ public class ControleController {
 																							 affDao=false;
 																							 exaDao=false;
 																							 retDao = true;
+																							 valDao = false;
+																							 vetDao = false;
 																							 panelDaoTableauBordSai = false;
 																							 panelDaoTableauBordVal = false;
 																							 panelDaoTableauBordTra = false;
@@ -5101,15 +5045,7 @@ public class ControleController {
 										    												 panel3 = false;
 										    												 panel4 = false;
 										    												 panel5 = false;
-										    											/*	 panel4 = true;
-										    												 panel5 = false;
-										    												 panel6 = false;
-										    												 panel7=false;
-										    												 panel8 =false;
-										    												 panel9 =false;
-										    												 panel10 = false;
-										    												 panel11 = false;
-										    												 panel12 = false;*/
+			
 										    												 venteRecherche = false; 
 										    												 affectationRecherche = false;
 										    												 examenRecherche = true;
@@ -5122,6 +5058,8 @@ public class ControleController {
 										    												 panelAffectation = false;
 										    												 affDao=false;
 										    												 exaDao=true;
+										    												 valDao = false;
+										    												 vetDao = false;
 										    												 panelDaoTableauBordSai = false;
 										    												 panelDaoTableauBordVal = false;
 										    												 panelDaoTableauBordTra = false;
@@ -5197,6 +5135,8 @@ public class ControleController {
 											    													 panelAffectation = true;
 											    													 affDao=true;
 											    													 exaDao=false;
+											    													 valDao = false;
+											    													 vetDao = false;
 											    													 panelDaoTableauBordSai = false;
 											    													 panelDaoTableauBordVal = false;
 											    													 panelDaoTableauBordTra = false;
@@ -5272,6 +5212,8 @@ public class ControleController {
 																									 affDao=false;
 																									 exaDao=false;
 																									 retDao = false;
+																									 valDao = false;
+																									 vetDao = false;
 																									 panelDaoTableauBordSai = false;
 																									 panelDaoTableauBordVal = false;
 																									 panelDaoTableauBordTra = false;
@@ -5336,15 +5278,6 @@ public class ControleController {
 																										 panel3 = false;
 																										 panel4 = false;
 																										 panel5 = false;
-																										/* panel4 = false;
-																										 panel5 = false;
-																										 panel6 = false;
-																										 panel7 = false;
-																										 panel8 = false;
-																										 panel9 =true;
-																										 panel10 = false;
-																										 panel11 = false;
-																										 panel12 = false;*/
 																										 venteRecherche = true; 
 																										 affectationRecherche = false;
 																										 examenRecherche = false;
@@ -5357,6 +5290,8 @@ public class ControleController {
 																										 affDao=false;
 																										 exaDao=false;
 																										 retDao = true;
+																										 valDao = false;
+																										 vetDao = true;
 																										 panelDaoTableauBordSai = false;
 																										 panelDaoTableauBordVal = false;
 																										 panelDaoTableauBordTra = false;
@@ -5424,6 +5359,8 @@ public class ControleController {
 																											 affDao=false;
 																											 exaDao=false;
 																											 retDao = true;
+																											 valDao = false;
+																											 vetDao = false;
 																											 panelDaoTableauBordSai = false;
 																											 panelDaoTableauBordVal = false;
 																											 panelDaoTableauBordTra = true;
@@ -5486,18 +5423,11 @@ public class ControleController {
 																													 panel3 = false;
 																													 panel4 = true;
 																													 panel5 = false;
-																													/* panel4 = false;
-																													 panel5 = false;
-																													 panel6 = false;
-																													 panel7 = false;
-																													 panel8 = true;
-																													 panel9 = false;
-																													 panel10 = false;
-																													 panel11 = false;
-																													 panel12 = false;*/
 																													 affDao=false;
 																													 exaDao=false;
 																													 retDao = true;
+																													 valDao = false;
+																													 vetDao = false;
 																													 panelDaoTableauBordSai = false;
 																													 panelDaoTableauBordVal = false;
 																													 panelDaoTableauBordTra = false;
@@ -5562,15 +5492,6 @@ public class ControleController {
 																													 panel3 = false;
 																													 panel4 = false;
 																													 panel5 = false;
-																													/* panel4 = false;
-																													 panel5 = false;
-																													 panel6 = false;
-																													 panel7 = false;
-																													 panel8 = true;
-																													 panel9 = false;
-																													 panel10 = false;
-																													 panel11 = false;
-																													 panel12 = false;*/
 																													 venteRecherche = false; 
 																													 affectationRecherche = false;
 																													 examenRecherche = false;
@@ -5583,6 +5504,8 @@ public class ControleController {
 																													 affDao=false;
 																													 exaDao=false;
 																													 retDao = true;
+																													 valDao = false;
+																													 vetDao = false;
 																													 panelDaoTableauBordSai = false;
 																													 panelDaoTableauBordVal = false;
 																													 panelDaoTableauBordTra = false;
@@ -5668,6 +5591,8 @@ public class ControleController {
 																														 affDao=false;
 																														 exaDao=false;
 																														 retDao = false;
+																														 valDao = false;
+																														 vetDao = false;
 																														 panelDaoTableauBordSai = false;
 																														 panelDaoTableauBordVal = false;
 																														 panelDaoTableauBordTra = false;
@@ -5738,14 +5663,6 @@ public class ControleController {
 																															 panel3 = false;
 																														     panel4 = true;
 																														     panel5 = false;
-																															/* panel5 = false;
-																															 panel6 = false;
-																															 panel7 = true;
-																															 panel8 = false;
-																															 panel9 =false;
-																															 panel10 = false;
-																															 panel11 = false;
-																															 panel12 = false;*/
 																															 venteRecherche = false; 
 																															 affectationRecherche = false;
 																															 examenRecherche = false;
@@ -5758,6 +5675,8 @@ public class ControleController {
 																															 affDao=false;
 																															 exaDao=false;
 																															 retDao = false;
+																															 valDao = false;
+																															 vetDao = false;
 																															 panelDaoTableauBordSai = false;
 																															 panelDaoTableauBordVal = false;
 																															 panelDaoTableauBordTra = false;
@@ -5853,17 +5772,16 @@ public class ControleController {
 																			    												 fonctionalite = "listSaisieAc";
 																			    												 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 																			    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
-																    											    			libelleDao3="SAISIE DES PREQUALIFICATIONS";
-																    											    			btn_daoPn =false;
-																    											    			btn_daoPs =false;
-																    											    			btn_ami =false;
-																    											    			btn_prq =true;
+																    											    			 libelleDao3="SAISIE DES PREQUALIFICATIONS";
+																    											    			 btn_daoPn =false;
+																    											    			 btn_daoPs =false;
+																    											    			 btn_ami =false;
+																    											    			 btn_prq =true;
 																    											    			 btn_new =true;
 																    											    			 btn_affec = false;
 																    											    			 panel1 =true;
 																																 panel2 =false;
 																																 panel3 = false;
-																																
 																    															 venteRecherche = false; 
 																    															 affectationRecherche = false;
 																    															 examenRecherche = false;
@@ -5886,6 +5804,7 @@ public class ControleController {
 																    															 ppmModePn = true;
 																    															 btn_dao_pn = true;
 																    															 btn_dao_ps = false;
+																    															 valDao = false;
 																    															 panelDaoTableauBordAff =false;
 																    															 panelDaoTableauBordExa =false; 
 																    															 panelDaoTableauBordRet =false;
@@ -5936,15 +5855,7 @@ public class ControleController {
 																    												    			 panel1 =true;
 																																	 panel2 =false;
 																																	 panel3 = false;
-																																	/* panel4 = false;
-																																	 panel5 = false;
-																																	 panel6 = false;
-																																	 panel7 = false;
-																																	 panel8 = true;
-																																	 panel9 = false;
-																																	 panel10 = false;
-																																	 panel11 = false;
-																																	 panel12 = false;*/
+																																	 valDao = false;
 																    																 panelDaoTableauBordSai = false;
 																    																 panelDaoTableauBordPslpso = true;
 																    																 panelDaoTableauBordVal = false;
@@ -6014,15 +5925,6 @@ public class ControleController {
 																    											    				panel1 =true;
 																																	 panel2 =false;
 																																	 panel3 = false;
-																																	/* panel4 = false;
-																																	 panel5 = false;
-																																	 panel6 = false;
-																																	 panel7 = false;
-																																	 panel8 = true;
-																																	 panel9 = false;
-																																	 panel10 = false;
-																																	 panel11 = false;
-																																	 panel12 = false;*/
 																    																venteRecherche = false; 
 																    																affectationRecherche = false;
 																    																examenRecherche = false;
@@ -6034,6 +5936,8 @@ public class ControleController {
 																    																chargeRecherche = false;
 																    																affDao=false;
 																    																exaDao=false;
+																    																valDao = true;
+																    																vetDao = false;
 																    																panelDaoTableauBordAff =false;
 																    																panelDaoTableauBordRet = false;
 																    																panelDaoTableauBordSai = false;
@@ -6120,10 +6024,11 @@ public class ControleController {
 																    																			 validationRecherche = false;
 																    																			 priseRecherche = false;
 																    																			 chargeRecherche = false;
-																    																			 
 																    																			 panelAffectation = true;
 																    																			 affDao=true;
 																    																			 exaDao=false;
+																    																			 valDao = false;
+																    																			 vetDao = false;
 																    																			 panelDaoTableauBordSai = false;
 																    																			 panelDaoTableauBordVal = false;
 																    																			 panelDaoTableauBordTra = false;
@@ -6181,15 +6086,7 @@ public class ControleController {
 																    																    			 panel1 =true;
 																																					 panel2 =false;
 																																					 panel3 = false;
-																																					/* panel4 = false;
-																																					 panel5 = false;
-																																					 panel6 = false;
-																																					 panel7 = false;
-																																					 panel8 = true;
-																																					 panel9 = false;
-																																					 panel10 = false;
-																																					 panel11 = false;
-																																					 panel12 = false;*/
+																																				
 																    																				 venteRecherche = false; 
 																    																				 affectationRecherche = false;
 																    																				 examenRecherche = true;
@@ -6202,6 +6099,9 @@ public class ControleController {
 																    																				 panelAffectation = false;
 																    																				 affDao=false;
 																    																				 exaDao=true;
+																    																				 valDao = false;
+																    																				 vetDao=false;
+																    																				 
 																    																				 panelDaoTableauBordSai = false;
 																    																				 panelDaoTableauBordVal = false;
 																    																				 panelDaoTableauBordTra = false;
@@ -6261,16 +6161,7 @@ public class ControleController {
 																    																	    			 btn_valid = false;
 																    																	    			 panel1 =true;
 																																						 panel2 =false;
-																																						 panel3 = false;
-																																						/* panel4 = false;
-																																						 panel5 = false;
-																																						 panel6 = false;
-																																						 panel7 = false;
-																																						 panel8 = true;
-																																						 panel9 = false;
-																																						 panel10 = false;
-																																						 panel11 = false;
-																																						 panel12 = false;*/
+																																						 panel3 = false;																																					
 																    																					 venteRecherche = true; 
 																    																					 affectationRecherche = false;
 																    																					 examenRecherche = false;
@@ -6283,6 +6174,8 @@ public class ControleController {
 																    																					 affDao=false;
 																    																					 exaDao=false;
 																    																					 retDao = true;
+																    																					 valDao = false;
+																    																					 vetDao = true;
 																    																					 panelDaoTableauBordSai = false;
 																    																					 panelDaoTableauBordVal = false;
 																    																					 panelDaoTableauBordTra = false;
@@ -6342,15 +6235,6 @@ public class ControleController {
 																    																		    			 panel1 =false;
 																																							 panel2 =false;
 																																							 panel3 = true;
-																																							/* panel4 = false;
-																																							 panel5 = false;
-																																							 panel6 = false;
-																																							 panel7 = false;
-																																							 panel8 = true;
-																																							 panel9 = false;
-																																							 panel10 = false;
-																																							 panel11 = false;
-																																							 panel12 = false;*/
 																    																						 venteRecherche = false; 
 																    																						 affectationRecherche = false;
 																    																						 examenRecherche = false;
@@ -6363,6 +6247,8 @@ public class ControleController {
 																    																						 affDao=false;
 																    																						 exaDao=false;
 																    																						 retDao = true;
+																    																						 valDao = false;
+																    																						 vetDao = false;
 																    																						 panelDaoTableauBordSai = false;
 																    																						 panelDaoTableauBordVal = false;
 																    																						 panelDaoTableauBordTra = false;
@@ -6424,15 +6310,7 @@ public class ControleController {
 																    																			    			 panel1 =true;
 																																								 panel2 =false;
 																																								 panel3 = false;
-																																								/* panel4 = false;
-																																								 panel5 = false;
-																																								 panel6 = false;
-																																								 panel7 = false;
-																																								 panel8 = true;
-																																								 panel9 = false;
-																																								 panel10 = false;
-																																								 panel11 = false;
-																																								 panel12 = false;*/
+										
 																    																							 venteRecherche = false; 
 																    																							 affectationRecherche = false;
 																    																							 examenRecherche = false;
@@ -6445,6 +6323,8 @@ public class ControleController {
 																    																							 affDao=false;
 																    																							 exaDao=false;
 																    																							 retDao = false;
+																    																							 valDao = false;
+																    																							 vetDao = false;
 																    																							 panelDaoTableauBordSai = false;
 																    																							 panelDaoTableauBordVal = false;
 																    																							 panelDaoTableauBordTra = false;
@@ -6505,18 +6385,11 @@ public class ControleController {
 																    																				    			 panel1 =true;
 																																									 panel2 =false;
 																																									 panel3 = false;
-																																									/* panel4 = false;
-																																									 panel5 = false;
-																																									 panel6 = false;
-																																									 panel7 = false;
-																																									 panel8 = true;
-																																									 panel9 = false;
-																																									 panel10 = false;
-																																									 panel11 = false;
-																																									 panel12 = false;*/
 																    																								 affDao=false;
 																    																								 exaDao=false;
 																    																								 retDao = true;
+																    																								 valDao = false;
+																    																								 vetDao = false;
 																    																								 panelDaoTableauBordSai = false;
 																    																								 panelDaoTableauBordVal = false;
 																    																								 panelDaoTableauBordTra = true;
@@ -6576,18 +6449,11 @@ public class ControleController {
 																    																					    			 panel1 =true;
 																																										 panel2 =false;
 																																										 panel3 = false;
-																																										/* panel4 = false;
-																																										 panel5 = false;
-																																										 panel6 = false;
-																																										 panel7 = false;
-																																										 panel8 = true;
-																																										 panel9 = false;
-																																										 panel10 = false;
-																																										 panel11 = false;
-																																										 panel12 = false;*/
+																																										
 																    																									 affDao=false;
 																    																									 exaDao=false;
 																    																									 retDao = true;
+																    																									 vetDao = false;
 																    																									 panelDaoTableauBordSai = false;
 																    																									 panelDaoTableauBordVal = false;
 																    																									 panelDaoTableauBordTra = false;
@@ -6649,15 +6515,6 @@ public class ControleController {
 																    																						    			 panel1 =true;
 																																											 panel2 =false;
 																																											 panel3 = false;
-																																											/* panel4 = false;
-																																											 panel5 = false;
-																																											 panel6 = false;
-																																											 panel7 = false;
-																																											 panel8 = true;
-																																											 panel9 = false;
-																																											 panel10 = false;
-																																											 panel11 = false;
-																																											 panel12 = false;*/
 																    																										 venteRecherche = false; 
 																    																										 affectationRecherche = false;
 																    																										 examenRecherche = false;
@@ -6670,6 +6527,7 @@ public class ControleController {
 																    																										 affDao=false;
 																    																										 exaDao=false;
 																    																										 retDao = true;
+																    																										 valDao = false;
 																    																										 panelDaoTableauBordSai = false;
 																    																										 panelDaoTableauBordVal = false;
 																    																										 panelDaoTableauBordTra = false;
@@ -6742,14 +6600,6 @@ public class ControleController {
 																    																											 panel2 =false;
 																    																											 panel3 = false;
 																    																										     panel4 = true;
-																    																											/* panel5 = false;
-																    																											 panel6 = false;
-																    																											 panel7 = true;
-																    																											 panel8 = false;
-																    																											 panel9 =false;
-																    																											 panel10 = false;
-																    																											 panel11 = false;
-																    																											 panel12 = false;*/
 																    																											 venteRecherche = false; 
 																    																											 affectationRecherche = false;
 																    																											 examenRecherche = false;
@@ -6762,6 +6612,8 @@ public class ControleController {
 																    																											 affDao=false;
 																    																											 exaDao=false;
 																    																											 retDao = false;
+																    																											 valDao = false;
+																    																											 vetDao = false;
 																    																											 panelDaoTableauBordSai = false;
 																    																											 panelDaoTableauBordVal = false;
 																    																											 panelDaoTableauBordTra = false;
@@ -6832,14 +6684,6 @@ public class ControleController {
 																    																												 panel2 =false;
 																    																												 panel3 = false;
 																    																											     panel4 = true;
-																    																												/* panel5 = false;
-																    																												 panel6 = false;
-																    																												 panel7 = true;
-																    																												 panel8 = false;
-																    																												 panel9 =false;
-																    																												 panel10 = false;
-																    																												 panel11 = false;
-																    																												 panel12 = false;*/
 																    																												 venteRecherche = false; 
 																    																												 affectationRecherche = false;
 																    																												 examenRecherche = false;
@@ -6852,6 +6696,7 @@ public class ControleController {
 																    																												 affDao=false;
 																    																												 exaDao=false;
 																    																												 retDao = false;
+																    																												 vetDao = false;
 																    																												 panelDaoTableauBordSai = false;
 																    																												 panelDaoTableauBordVal = false;
 																    																												 panelDaoTableauBordTra = false;
@@ -6925,14 +6770,6 @@ public class ControleController {
 																    																													 panel2 =false;
 																    																													 panel3 = false;
 																    																												     panel4 = true;
-																    																													/* panel5 = false;
-																    																													 panel6 = false;
-																    																													 panel7 = true;
-																    																													 panel8 = false;
-																    																													 panel9 =false;
-																    																													 panel10 = false;
-																    																													 panel11 = false;
-																    																													 panel12 = false;*/
 																    																													 venteRecherche = false; 
 																    																													 affectationRecherche = false;
 																    																													 examenRecherche = false;
@@ -6945,6 +6782,7 @@ public class ControleController {
 																    																													 affDao=false;
 																    																													 exaDao=false;
 																    																													 retDao = false;
+																    																													 vetDao = false;
 																    																													 panelDaoTableauBordSai = false;
 																    																													 panelDaoTableauBordVal = false;
 																    																													 panelDaoTableauBordTra = false;
@@ -7016,14 +6854,7 @@ public class ControleController {
 																    																														 panel2 =false;
 																    																														 panel3 = false;
 																    																													     panel4 = true;
-																    																														/* panel5 = false;
-																    																														 panel6 = false;
-																    																														 panel7 = true;
-																    																														 panel8 = false;
-																    																														 panel9 =false;
-																    																														 panel10 = false;
-																    																														 panel11 = false;
-																    																														 panel12 = false;*/
+																    																													
 																    																														 venteRecherche = false; 
 																    																														 affectationRecherche = false;
 																    																														 examenRecherche = false;
@@ -7036,6 +6867,7 @@ public class ControleController {
 																    																														 affDao=false;
 																    																														 exaDao=false;
 																    																														 retDao = false;
+																    																														 vetDao = false;
 																    																														 panelDaoTableauBordSai = false;
 																    																														 panelDaoTableauBordVal = false;
 																    																														 panelDaoTableauBordTra = false;
@@ -11094,6 +10926,26 @@ public class ControleController {
 
 	public void setEtatPsoTrans(boolean etatPsoTrans) {
 		this.etatPsoTrans = etatPsoTrans;
+	}
+
+
+	public boolean isValDao() {
+		return valDao;
+	}
+
+
+	public void setValDao(boolean valDao) {
+		this.valDao = valDao;
+	}
+
+
+	public boolean isVetDao() {
+		return vetDao;
+	}
+
+
+	public void setVetDao(boolean vetDao) {
+		this.vetDao = vetDao;
 	}
 	
 	
