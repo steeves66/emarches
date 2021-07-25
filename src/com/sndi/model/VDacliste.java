@@ -79,6 +79,7 @@ public class VDacliste implements java.io.Serializable {
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
+	private String dppStatutAno;
 	private String dppLbgCode;
 	private String dppTypePlan;
 	private String dppCode;
@@ -271,7 +272,7 @@ public class VDacliste implements java.io.Serializable {
 			String strMinCode, String strTstCode, String strRegCode, String strAdrPost, String strAdrGeo, String strTel,
 			String strFax, String strOpeMatricule, Date strDteSaisi, String strOpeRespo, String tdcCode,
 			String tdcLibelle, Long dppId, Long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, String dacMotif,Integer dppNumeroOrdre,
+			String dppMopCode, String dppStatutAno,String dppLbgCode, String dppTypePlan, String dppCode, String dacMotif,Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail,
@@ -366,6 +367,7 @@ public class VDacliste implements java.io.Serializable {
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
+		this.dppStatutAno = dppStatutAno;
 		this.dppLbgCode = dppLbgCode;
 		this.dppTypePlan = dppTypePlan;
 		this.dppCode = dppCode;
@@ -1061,6 +1063,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setDppMopCode(String dppMopCode) {
 		this.dppMopCode = dppMopCode;
+	}
+	
+	@Column(name = "DPP_STATUT_ANO")
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
 	}
 
 	@Column(name = "DPP_LBG_CODE", length = 50)

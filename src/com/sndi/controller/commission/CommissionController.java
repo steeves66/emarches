@@ -771,7 +771,7 @@ public class CommissionController {
 		 List<TCritereAnalyseDacOuv> ANA  = iservice.getObjectsByColumn("TCritereAnalyseDacOuv", new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()));
 		 TCritereAnalyseDacOuv offre = new TCritereAnalyseDacOuv(); 
 		 if(!ANA.isEmpty()) offre = ANA.get(0);
-		 offre.setDcadPresence(""+presence);
+		 offre.setDcadPresence(presence);
 		 iservice.updateObject(offre);	
 		 //Chargement des pièces
 		 chargePieces();
@@ -1367,16 +1367,16 @@ public class CommissionController {
 					          newSeance.setTOperateur(userController.getSlctd().getTOperateur());
 					          iservice.addObject(newSeance);
 					
-					          //CREATION DE LA COMMISSION SPECIFIQUE
-					        /*  newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
+					        /*  //CREATION DE LA COMMISSION SPECIFIQUE
+					          newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
 					          newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
 					          newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 					          newcomSpec.setComMarCode(slctdTd.getDacTymCode());
 					          newcomSpec.setTAvisAppelOffre(avis);
 					          newcomSpec.setTDacSpecs(dao);
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
-					          iservice.addObject(newcomSpec);*/ //il fait ine insertion dans t_commission_spec alors qu'il ne fallait pas
-					          
+					          iservice.addObject(newcomSpec); //il fait ine insertion dans t_commission_spec alors qu'il ne fallait pas
+*/					          
 					          //MIS A JOUR DES DATES D'OUVERTURE FINANCIERE ET OUVERTURE TECHNIQUE DE L'AVIS D'APPEL D'OFFRES
 					          List<TAvisAppelOffre> AV  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 					          TAvisAppelOffre offre = new TAvisAppelOffre();
@@ -1415,7 +1415,7 @@ public class CommissionController {
 								newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 								newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
 								newDetailSeance.setTDacSpecs(dao);
-								newDetailSeance.setTCommissionSpecifique(newcomSpec);
+								newDetailSeance.setTCommissionSpecifique(new TCommissionSpecifique(mbr.getComNum().longValue()));
 								newDetailSeance.setTOperateur(userController.getSlctd().getTOperateur());
 								iservice.addObject(newDetailSeance);
 							}

@@ -72,8 +72,8 @@ public class TCommissionSpecifique implements java.io.Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name = "SEQ_COMS_Sequence", sequenceName = "SEQ_COMS", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_COMS_Sequence")
+	@SequenceGenerator(name = "SEQ_COM_SPEC_Sequence", sequenceName = "SEQ_COM_SPEC", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_COM_SPEC_Sequence")
 	@Column(name = "COM_NUM", unique = true, nullable = false, precision = 22, scale = 0)
 	public long  getComNum() {
 		return this.comNum;
