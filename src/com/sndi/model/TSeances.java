@@ -76,8 +76,8 @@ public class TSeances implements java.io.Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name = "SEQ_SEA_NUM_Sequence", sequenceName = "SEQ_SEA_NUM", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_SEA_NUM_Sequence")
+	@SequenceGenerator(name = "SEQ_SEA_Sequence", sequenceName = "SEQ_SEA", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_SEA_Sequence")
 	@Column(name = "SEA_NUM", unique = true, nullable = false, precision = 22, scale = 0)
 	public long getSeaNum() {
 		return this.seaNum;
