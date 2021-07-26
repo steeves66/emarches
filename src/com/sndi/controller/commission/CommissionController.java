@@ -2047,6 +2047,20 @@ public class CommissionController {
 		public void updateStatutLotPasAno() {
 			
 		}
+		
+		public void updateStatulot() {
+			List<TLotAao> listeLots  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+			for(TLotAao lot : listeLots) {
+				//String ano=lot.getLaaAno();
+		    	if(lot.getLaaAno().equalsIgnoreCase("N")) {
+					lot.setLaaStaCode("L3A");
+				}else{
+						lot.setLaaStaCode("L2D");	
+				}
+		    	_logger.info("ano:"+lot.getLaaAno());
+				iservice.updateObject(lot);	
+		     }
+		}
 		public void finOuverture() { 
 			String statUpdate = "";
 			String message = "";
@@ -2060,6 +2074,7 @@ public class CommissionController {
 						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
 					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
+						 updateStatulot();
 						 statUpdate = "JUG";
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {	 
