@@ -405,7 +405,7 @@ public class AnoController {
 				 listeAvisAppelOffre = (List<VAvisAppelOffreAno>) iservice.getObjectsByColumnDesc("VAvisAppelOffreAno", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 						 new WhereClause(""+colonne,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 				         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
-				         new WhereClause(""+colonneAno,WhereClause.Comparateur.EQ,"N"));
+				         new WhereClause(""+colonneAno,WhereClause.Comparateur.EQ,"O"));
 				_logger.info("listeAppelOffre size: "+listeAvisAppelOffre.size());	
 					 }
 	      }
