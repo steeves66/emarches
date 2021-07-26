@@ -1023,7 +1023,7 @@ TDacSpecs dao = new TDacSpecs();
 						   		//Chargement des fonctions Ã  imputer 
 						   		 chargeFonctionImput();
 						   		//Message de Confirmation 
-						   		userController.setTexteMsg("Responsabilité Attribue avec succès!");
+						   		userController.setTexteMsg("Responsabilité Attribu2E avec succès!");
 								userController.setRenderMsg(true);
 								userController.setSevrityMsg("success");
 			       }else {
