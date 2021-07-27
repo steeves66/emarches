@@ -461,6 +461,18 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                                </p:commandLink>  
                               </h:panelGroup> 
+                              
+                               <p:commandLink rendered="#{controleController.btn_rat_mod}" action="#{daoController.renderPage('dao11','MODDAO')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-right:3px" 
+				               title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                       
+                            </p:commandLink>
+                            
+                          <p:commandLink rendered="#{controleController.btn_rat}" oncomplete="PF('rattrapeDlg').show()"  class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  
+                                title="Insuffisance du DAC" update=":content">
+                              <i class="ace-icon fa fa-eye bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                          </p:commandLink>
                             
 				         </p:column>   
 				    </p:dataTable>

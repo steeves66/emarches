@@ -675,6 +675,36 @@
         </h:form>
         
         
+    <h:form id="rattrapeDlg">
+	  <p:dialog  widgetVar="rattrapeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">DAC N° #{daoController.slctdTd.dacCode}</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	            <div class="form-group ">
+	                  <div class="col-sm-12">
+	                      <div class="box box-danger box-solid">
+				            <div class="box-header">
+				              <div  style="color: #fff">#{daoController.slctdTd.checkTransMsg}</div>
+				            </div>
+				           </div>
+	                  </div>
+	                </div>
+	            
+	             </div>
+	             </div>
+        </div>
+        </div>
+        </p:dialog>
+    </h:form>
+        
+        
         
          <h:form id="dlgChargeEtude">
 	        <p:dialog  widgetVar="chargeEtudeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
