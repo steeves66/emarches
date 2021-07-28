@@ -124,6 +124,8 @@ public class ControleController {
 	public boolean fermerSaiAmi=false;
 	public boolean fermerValAmi=false;
 	private boolean panelAmi =false;
+	private boolean btn_mod = false;
+	private boolean btn_ratt = false;
 	private boolean btn_creerDetailAmiCmp = false;
 	private boolean btn_creerDetailAmiDmp = false;
 	private boolean btn_creerDetailAmi = false;
@@ -3236,6 +3238,8 @@ public class ControleController {
 					     btn_fermer_saisie_dao = true;
 					     btn_fermer_saisie_ami = false ;
 					     btn_fermer_saisie_prq = false  ;
+					     btn_mod = true;
+					 	 btn_ratt = false;
 			    	}else
 		    			if(action.equalsIgnoreCase("HISDAC")) {
 		    				
@@ -3492,6 +3496,8 @@ public class ControleController {
 									 btn_fermer_saisie_prq = false; 
 									 btn_rat = true;
 								     btn_rat_mod =true;
+								     btn_mod = false;
+								 	 btn_ratt = true;
 					    		}else
 				    		        if(action.equalsIgnoreCase("DAOPS")) {
 				    			     typePlan ="PN";
@@ -11003,6 +11009,26 @@ public class ControleController {
 
 	public void setBtn_rat_mod(boolean btn_rat_mod) {
 		this.btn_rat_mod = btn_rat_mod;
+	}
+
+
+	public boolean isBtn_mod() {
+		return btn_mod;
+	}
+
+
+	public void setBtn_mod(boolean btn_mod) {
+		this.btn_mod = btn_mod;
+	}
+
+
+	public boolean isBtn_ratt() {
+		return btn_ratt;
+	}
+
+
+	public void setBtn_ratt(boolean btn_ratt) {
+		this.btn_ratt = btn_ratt;
 	}
 	
 	

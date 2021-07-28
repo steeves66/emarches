@@ -4631,6 +4631,116 @@ TDacSpecs dao = new TDacSpecs();
  	     				 userController.setSevrityMsg("success");  
         	       }
 	        }
+	        
+	        
+	        //Mis à jour de l'avis d'appel d'Offres
+	        public void aaoModifRat() {
+	        	avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
+    					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+        	       if (!avisTab.isEmpty()) {
+        	    	       newAvis = avisTab.get(0);
+        	    	       
+        	    	      newAvis.setTAdresseAvis(new TAdresseAvis(adaNum)); 
+ 	          		      if(newAvis.aaoNbrOuv == 1) {
+ 	            		  newAvis.setAaoDteOuvFin(ouvTech);
+   	          		      newAvis.setAaoDteOuvTec(ouvTech);
+ 	            		  }else {
+ 	            		  newAvis.setAaoDteOuvFin(ouvFin);
+     	          		  newAvis.setAaoDteOuvTec(ouvTech);
+ 	            		  }
+ 	          		      newAvis.setAaoLibelle(aaoLibelle);
+ 	          		      newAvis.setAaoHeureRecep(aaoHeureRecep);
+ 	          		      newAvis.setAaoCoutDac(aaoCoutDac);
+ 	          		      newAvis.setAaoNatPrix(aaoNatPrix);
+ 	          		      newAvis.setAaoRegQual(aaoRegQual);
+ 	          		      newAvis.setAaoDateRecep(aaoDateRecep);
+ 	          		      newAvis.setAaoDteHeurOuv(aaoDteHeurOuv);
+ 	          		      newAvis.setAaoLieuRecep(aaoLieuRecep);
+ 	          		      newAvis.setAaoNbrOuv(aaoNbrOuv);
+ 	          		      newAvis.setAaoPrecisModEval(aaoPrecisModEval); 
+ 	          		      newAvis.setAaoAvisBail(aaoAvisBai);
+ 	          		      newAvis.setAaoRespBai(aaoRespBai);
+ 	          		      newAvis.setAaoOffAnormal(aaoOffAnormal);
+ 	          		     if(newAvis.getTStatut().getStaCode().equalsIgnoreCase("DPU") || newAvis.getTStatut().getStaCode().equalsIgnoreCase("DAP") || 
+ 	          				newAvis.getTStatut().getStaCode().equalsIgnoreCase("DVE")) {
+ 								  newAvis.setTStatut(new TStatut("APU")); 
+ 							  }else {
+ 								  newAvis.setTStatut(new TStatut("D1S")); 
+ 							  }
+ 	          		      newAvis.setAaoLieuExe(aaoLieuExe);
+						  newAvis.setAaoNatInt(value1);
+						  newAvis.setAaoDelaiVal(nbreDelai);
+						  newAvis.setAaoNbrLot(lotNbre);
+ 	          		      iservice.updateObject(newAvis);
+ 	          		      //Mis à jour dans T_DAC_SPECS
+ 	          		     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+ 	   	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+ 	   	     				       if (!listDao.isEmpty()) {
+ 	   	     					    newDao= listDao.get(0);
+ 	   	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+ 	   	     					    newDao.setDacNbrCopieOff(dacNbrCopieOff);
+ 	   	     			            iservice.updateObject(newDao); 
+ 	   	     	   	                 }
+             	         //Message de confirmation
+ 	     				userController.setTexteMsg("Avis d'Appel d'Offres modifié avec succès!");
+ 	     				userController.setRenderMsg(true);
+ 	     				userController.setSevrityMsg("success");   
+        	       }else {
+        	    	   
+        	    	      newAvis.setAaoCode(keyGen.getCodeAvis());
+	            	      newAvis.setTDacSpecs(dao);
+	            	      newAvis.setAaoLibelle(aaoLibelle);
+        	    	      newAvis.setTAdresseAvis(new TAdresseAvis(adaNum)); 
+	          		      if(slctdTd.getAaoNbrOuv() == 1) {
+	            		  newAvis.setAaoDteOuvFin(ouvTech);
+	          		      newAvis.setAaoDteOuvTec(ouvTech);
+	            		  }else {
+	            		  newAvis.setAaoDteOuvFin(ouvFin);
+  	          		      newAvis.setAaoDteOuvTec(ouvTech);
+	            		  }
+	          		      newAvis.setAaoHeureRecep(aaoHeureRecep);
+	          		      newAvis.setAaoCoutDac(aaoCoutDac);
+	          		      newAvis.setAaoNatPrix(aaoNatPrix);
+	          		      newAvis.setAaoRegQual(aaoRegQual);
+	          		      newAvis.setAaoDateRecep(aaoDateRecep);
+	          		      newAvis.setAaoDteHeurOuv(aaoDteHeurOuv);
+	          		      newAvis.setAaoLieuRecep(aaoLieuRecep);
+	          		      newAvis.setAaoNbrOuv(aaoNbrOuv);
+	          		      newAvis.setAaoPrecisModEval(aaoPrecisModEval); 
+	          		      newAvis.setAaoAvisBail(aaoAvisBai);
+	          		      newAvis.setAaoRespBai(aaoRespBai);
+	          		      newAvis.setAaoOffAnormal(aaoOffAnormal);
+	          		      newAvis.setAaoLieuExe(aaoLieuExe);
+						  newAvis.setAaoNatInt(value1);
+						  newAvis.setAaoDelaiVal(nbreDelai);
+						  newAvis.setAaoNbrLot(lotNbre);
+						  if(dao.getTStatut().getStaCode().equalsIgnoreCase("DPU") || dao.getTStatut().getStaCode().equalsIgnoreCase("DAP") || 
+							dao.getTStatut().getStaCode().equalsIgnoreCase("DVE")) {
+							  newAvis.setTStatut(new TStatut("APU")); 
+						  }else {
+							  newAvis.setTStatut(new TStatut("D1S")); 
+						  }
+	            	      newAvis.setAvisRetour("0");
+	            	      newAvis.setAaoDteSaisi(Calendar.getInstance().getTime()); 
+	            	      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod()); 
+	          		      iservice.addObject(newAvis);
+	          		      //Mis à jour dans T_Dac_Specs
+	          		    listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+   	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+   	     				   if (!listDao.isEmpty()) {
+   	     					    newDao= listDao.get(0);
+   	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+   	     					    newDao.setDacNbrCopieOff(dacNbrCopieOff);
+   	     			            iservice.updateObject(newDao); 
+   	     	   	                 }
+	          		      //Rafraichissement de VDacliste
+	          		      actualiseVue();
+	          		     //Message de confirmation
+	          		     userController.setTexteMsg("Avis d'Appel d'Offres crée avec succès!");
+ 	     				 userController.setRenderMsg(true);
+ 	     				 userController.setSevrityMsg("success");  
+        	       }
+	        }
 	    
 	        
 	        public void actualiseVue() {
