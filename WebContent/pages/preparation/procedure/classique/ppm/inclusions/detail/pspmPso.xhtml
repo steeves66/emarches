@@ -68,10 +68,7 @@
 			     </b>
 			</div> 
 		</div>
-			 
-			
-			 
-			
+			 	
 			
       </div>
       <div class="col-md-6">
@@ -125,6 +122,26 @@
 			     </b>
 			</div> 
 		</div>	
+		
+	 <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Début d'exécution : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecDebut}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
+	     
+	      <div class="row">
+        <div class="col-xs-6 col-sm-6"><b><h:outputText styleClass="pull-right" value="Fin d'exécution : " /></b></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateExecFin}"> 
+			       <f:convertDateTime pattern="dd/MM/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+	     </div>	
 				
       </div>
     </div>

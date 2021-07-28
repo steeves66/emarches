@@ -136,7 +136,9 @@ public class DaoController {
 	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
+	 //private List<VDossierDac> dossListe = new ArrayList<VDossierDac>();
 	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
+	 //private List<VDossierDac> dossDacListe = new ArrayList<VDossierDac>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listePpmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listePpmDaoModif = new ArrayList<VPpmDao>();
@@ -706,7 +708,11 @@ TDacSpecs dao = new TDacSpecs();
 					 }else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
 							 chargeDataByAction("PRQ","PN");
-						 }/*else {
+						    }else{
+						    	if(controleController.type == "RAT" && controleController.typePlan == "PN") {
+									 chargeDataByAction("PRQ","PN");
+								    }
+						    }/*else { {
 							 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
 							 
 							 }else {
@@ -2209,7 +2215,16 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
-	 //Affichage des AC en lui passant en parametre les statuts concernï¿½ (1 statut)
+	 public void chargeDataRat(){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+				 new WhereClause("CHECK_TRANS",WhereClause.Comparateur.EQ,"0"),
+		         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			//typeActionTb(); 
+	 }
+	 
+	 //Affichage des AC en lui passant en parametre les statuts concern�s(1 statut)
 	 public void chargeDataAc3(String typeDac,String typePlan,String stat1){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,""+stat1),
@@ -2393,6 +2408,10 @@ TDacSpecs dao = new TDacSpecs();
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeDaoCorrectionPn")) {
 										 chargeDataAc2(typeDac,typePlan,"SBO","SRO");
+									 }else { 
+										 if(fonct.equalsIgnoreCase("listSaisieRat")) {
+											 chargeDataRat();
+										 }
 									 }
 								 }	 
 							 }	 
@@ -2995,14 +3014,21 @@ TDacSpecs dao = new TDacSpecs();
 		 
 		
 		 //Methode de Chargement des Dossiers chez l'Autoritï¿½ Contractante
-		  public void chargeDossier() {
+		public void chargeDossier() {
 		 		 dossListe.clear();
 		 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
 		 	 } 
 		  
+		  //Methode de Chargement des Dossiers chez l'Autoritï¿½ Contractante
+		 /* public void chargeDossier() {
+		 		 dossListe.clear();
+		 			 dossListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
+		 	 } */
+		  
 		//Methode de Chargement des Dossiers chez le Charg d'Etudes
-		  public void chargeDossierCharge() {
+	  public void chargeDossierCharge() {
 		    	 dossDacListe.clear();
 		    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
 		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
@@ -3012,6 +3038,18 @@ TDacSpecs dao = new TDacSpecs();
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
 		    	 } 		
 		 	 } 
+		  
+		/*//Methode de Chargement des Dossiers chez le Charg d'Etudes
+		  public void chargeDossierCharge() {
+		    	 dossDacListe.clear();
+		    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));	
+		    	 }else {
+		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
+		    	 } 		
+		 	 } */
 		  
 		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
 		  public void chargeNatureDocTrans() {
@@ -7456,8 +7494,8 @@ TDacSpecs dao = new TDacSpecs();
 										  listeArticle.clear();
 										  listeArticle = ((List<VArticlesCom>)iservice.getObjectsByColumn("VArticlesCom"));		
 									 	 } 
-									//Methode de Chargement des Dossiers chez le Chargï¿½ d'Etudes
-									  public void chargeDossierAutorisation() {
+									//Methode de Chargement des Dossiers chez le Charg�s d'Etudes
+									public void chargeDossierAutorisation() {
 									    	 dossDacListe.clear();
 									    	 //ECRAN DE SAISIE
 											   if(controleController.ecran=="saisie") {
@@ -7468,9 +7506,23 @@ TDacSpecs dao = new TDacSpecs();
 											   {
 												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
-											   }
-									    	 		
+											   }		
 									 	 } 
+									  
+									//Methode de Chargement des Dossiers chez le Charg� d'Etudes
+									/*  public void chargeDossierAutorisation() {
+									    	 dossDacListe.clear();
+									    	 //ECRAN DE SAISIE
+											   if(controleController.ecran=="saisie") {
+												   dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));	
+											   }else
+												 //ECRAN DE MODIFICATION
+											   {
+												   dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
+											   }		
+									 	 }*/ 
 									
 									public void addCodeAutorisation() {
 										if((dao.getDacAutComSpec() == null || "".equals(dao.getDacAutComSpec()))){
@@ -7503,6 +7555,23 @@ TDacSpecs dao = new TDacSpecs();
 											norm=false;
 										}
 									}
+									
+								/*	public void activieComboxAutoSpec() {
+										if(listeMembreComSpec.size()==0) {
+											dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumn("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_ID")),
+											new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));
+											
+											for(VDossierDac doss : dossDacListe) {	
+												iservice.deleteObject(doss);	
+											}
+											chargeDossierAutorisation();
+											dao.setDacAutComSpec("");
+											iservice.updateObject(dao);
+											comboboxCom =true;
+											spec = false;
+											norm=false;
+										}
+									}*/
 									
 									public void activieComboxAutoNorm() {
 										if(listeMembre.size()==0) {
@@ -10165,13 +10234,13 @@ TDacSpecs dao = new TDacSpecs();
 		this.listePiecesDao = listePiecesDao;
 	}
 
-	public List<TDossierDacs> getDossListe() {
+/*	public List<TDossierDacs> getDossListe() {
 		return dossListe;
 	}
 
 	public void setDossListe(List<TDossierDacs> dossListe) {
 		this.dossListe = dossListe;
-	}
+	}*/
 
 	public List<TDaoAffectation> getListeDaoChargeValid() {
 		return listeDaoChargeValid;
@@ -10180,7 +10249,7 @@ TDacSpecs dao = new TDacSpecs();
 	public void setListeDaoChargeValid(List<TDaoAffectation> listeDaoChargeValid) {
 		this.listeDaoChargeValid = listeDaoChargeValid;
 	}
-
+/*
 	public List<TDossierDacs> getDossDacListe() {
 		return dossDacListe;
 	}
@@ -10188,7 +10257,7 @@ TDacSpecs dao = new TDacSpecs();
 	public void setDossDacListe(List<TDossierDacs> dossDacListe) {
 		this.dossDacListe = dossDacListe;
 	}
-
+*/
 	public List<VDacliste> getDetailTB() {
 		return detailTB;
 	}
@@ -15307,7 +15376,7 @@ TDacSpecs dao = new TDacSpecs();
 			XWPFRun run01 = getDocument().createParagraph().createRun();
 			run01.setBold(true);
 			run01.setFontSize(12);
-			run01.setFontFamily("Times New Roman");
+			run01.setFontFamily("Times New Roman");	
 			run01.setCapitalized(false);
 			run01.setColor("001173");
 			run01.setText(getDayNow());	
@@ -17299,5 +17368,39 @@ TDacSpecs dao = new TDacSpecs();
 		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
+	public List<TDossierDacs> getDossListe() {
+		return dossListe;
+	}
+
+	public void setDossListe(List<TDossierDacs> dossListe) {
+		this.dossListe = dossListe;
+	}
+
+	public List<TDossierDacs> getDossDacListe() {
+		return dossDacListe;
+	}
+
+	public void setDossDacListe(List<TDossierDacs> dossDacListe) {
+		this.dossDacListe = dossDacListe;
+	}
+
+	/*public List<VDossierDac> getDossListe() {
+		return dossListe;
+	}
+
+	public void setDossListe(List<VDossierDac> dossListe) {
+		this.dossListe = dossListe;
+	}
+
+	public List<VDossierDac> getDossDacListe() {
+		return dossDacListe;
+	}
+
+	public void setDossDacListe(List<VDossierDac> dossDacListe) {
+		this.dossDacListe = dossDacListe;
+	}*/
+	
+	
+	
 	/*******  Fin document  *************/
 }

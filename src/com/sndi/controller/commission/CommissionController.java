@@ -1943,6 +1943,7 @@ public class CommissionController {
 			 			analyseOffre.setAnfDofNum(detOffre.getDofNum());
 			 			analyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			analyseOffre.setAnfValeurConf(ligne.getAnfValeurConf());
+			 			//analyseOffre.setAnfValeurScore(ligne.getAnfValeurScore().longValue());
 			 			analyseOffre.setAnfNumTrav(seq.getFoSeqTravail());
 			 			iservice.addObject(analyseOffre);
 				     }
