@@ -7270,7 +7270,7 @@ TDacSpecs dao = new TDacSpecs();
 									       } 
 									  
 									 
-									  public void examinerCsv() {		
+						/*			  public void examinerCsv() {		
 									    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
 									    		 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 													        new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
@@ -7300,7 +7300,7 @@ TDacSpecs dao = new TDacSpecs();
 																	    	iservice.addObject(newTempCor);
 												                           
 												                           
-												                                 /* for(VPieces n : listePicesCsv) {
+												                                  for(VPieces n : listePicesCsv) {
 														                                TDetailCorrection detCor = new TDetailCorrection();
 														                                detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
 														                                detCor.setDcoObservation(n.getPidObservation());
@@ -7314,7 +7314,7 @@ TDacSpecs dao = new TDacSpecs();
 														                                detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
 														                                detCor.setDcoRespo("N");
 														                                iservice.addObject(detCor);
-													                                      }*/
+													                                      }
 
 														                     //Message de confirmation
 														                     userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
@@ -7343,7 +7343,7 @@ TDacSpecs dao = new TDacSpecs();
 																					    	newTempCor.setTempType("COR");
 																					    	iservice.addObject(newTempCor);
 												     
-												                                           /* for(VPieces n : listePicesCsv) {
+												                                            for(VPieces n : listePicesCsv) {
 														                                         TDetailCorrection detCor = new TDetailCorrection();
 														                                         detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
 														                                         detCor.setDcoObservation(n.getPidObservation());
@@ -7357,7 +7357,7 @@ TDacSpecs dao = new TDacSpecs();
 														                                         detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
 														                                         detCor.setDcoRespo("N");
 														                                        iservice.addObject(detCor);
-													                                              }*/
+													                                              }
 											 				                                //Message de confirmation
 											 				                                userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
 											 				                                userController.setRenderMsg(true);
@@ -7378,7 +7378,7 @@ TDacSpecs dao = new TDacSpecs();
 																	    	iservice.addObject(newTempCor);
 												                           
 												                           
-												                                 /* for(VPieces n : listePicesCsv) {
+												                                  for(VPieces n : listePicesCsv) {
 														                                TDetailCorrection detCor = new TDetailCorrection();
 														                                detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
 														                                detCor.setDcoObservation(n.getPidObservation());
@@ -7392,7 +7392,7 @@ TDacSpecs dao = new TDacSpecs();
 														                                detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
 														                                detCor.setDcoRespo("N");
 														                                iservice.addObject(detCor);
-													                                      }*/
+													                                      }
 
 														                     //Message de confirmation
 														                     userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
@@ -7421,7 +7421,7 @@ TDacSpecs dao = new TDacSpecs();
 																					    	newTempCor.setTempType("COR");
 																					    	iservice.addObject(newTempCor);
 												     
-												                                           /* for(VPieces n : listePicesCsv) {
+												                                            for(VPieces n : listePicesCsv) {
 														                                         TDetailCorrection detCor = new TDetailCorrection();
 														                                         detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
 														                                         detCor.setDcoObservation(n.getPidObservation());
@@ -7435,7 +7435,7 @@ TDacSpecs dao = new TDacSpecs();
 														                                         detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
 														                                         detCor.setDcoRespo("N");
 														                                        iservice.addObject(detCor);
-													                                              }*/
+													                                              }
 											 				                                //Message de confirmation
 											 				                                userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
 											 				                                userController.setRenderMsg(true);
@@ -7443,14 +7443,110 @@ TDacSpecs dao = new TDacSpecs();
 											                                         }
 											 }
 									    	 
-									    
-													  
-										  
-										  
 									   }
-
-											 
+*/
+										//Fin de la fonctionnalité	 
+									  
+									  
+									  
+									//Début de la methode examinerCsv()
+									  public void examinerCsv() {		
+									    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+									    		 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+													        new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+												                if (!listDao.isEmpty()) {newDao= listDao.get(0); }
+											 }else {
+												 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+													        new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												                if (!listDao.isEmpty()) {newDao= listDao.get(0); } 
+											 }
 									    	 
+									    	 
+									    	 
+									    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+									    		 listPieceCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+														   new WhereClause("COR_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+											                        if (!listPieceCorrection.isEmpty()) {
+												                           correction = listPieceCorrection.get(0);
+												                     
+												                             newCorrection.setDcoPidCode(String.valueOf(sltPiece.getPidCode()));
+																			  newCorrection.setDcoDacCode(newDao.getDacCode());
+																			  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+																			  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+																			  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+																			  newCorrection.setTempType("DAC_CORRECTION");
+																			  iservice.addObject(newCorrection);
+												                       
+
+														                     //Message de confirmation
+														                     userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
+														                     userController.setRenderMsg(true);
+														                     userController.setSevrityMsg("success");
+														                     
+											                          }else { 
+											        	 
+												                                  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+															                                 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+														                                  if (!listDao.isEmpty()) { newDao= listDao.get(0);}
+												                                        
+																					    	
+																					    	  newCorrection.setDcoPidCode(String.valueOf(sltPiece.getPidCode()));
+																							  newCorrection.setDcoDacCode(newDao.getDacCode());
+																							  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+																							  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+																							  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+																							  newCorrection.setTempType("DAC_CORRECTION");
+																							  iservice.addObject(newCorrection);
+												     
+											 				                                //Message de confirmation
+											 				                                userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
+											 				                                userController.setRenderMsg(true);
+											 				                                userController.setSevrityMsg("success");
+											                                         }
+											 }else {
+												 listPieceCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+														   new WhereClause("COR_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+											                        if (!listPieceCorrection.isEmpty()) {
+												                           correction = listPieceCorrection.get(0);
+								
+												                           
+												                             newCorrection.setDcoPidCode(String.valueOf(sltPiece.getPidCode()));
+																			  newCorrection.setDcoDacCode(newDao.getDacCode());
+																			  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+																			  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+																			  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+																			  newCorrection.setTempType("DAC_CORRECTION");
+																			  iservice.addObject(newCorrection);
+												                       
+
+														                     //Message de confirmation
+														                     userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
+														                     userController.setRenderMsg(true);
+														                     userController.setSevrityMsg("success");
+														                     
+											                          }else { 
+											        	 
+												                                  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+															                                 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+														                                  if (!listDao.isEmpty()) { newDao= listDao.get(0);}
+												                                      
+												                                          newCorrection.setDcoPidCode(String.valueOf(sltPiece.getPidCode()));
+																						  newCorrection.setDcoDacCode(newDao.getDacCode());
+																						  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+																						  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+																						  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+																						  newCorrection.setTempType("DAC_CORRECTION");
+																						  iservice.addObject(newCorrection);
+												     
+											 				                                //Message de confirmation
+											 				                                userController.setTexteMsg("Correction(s) effectuée(s) avec succès!");
+											 				                                userController.setRenderMsg(true);
+											 				                                userController.setSevrityMsg("success");
+											                                         }
+											                     }
+										  
+									               }
+									    	//Fin de la methode examinerCsv 
 								
 									  
 									  @Transactional
