@@ -158,6 +158,7 @@ public class ControleController {
 	private boolean btn_valider_dao_dmp =false;
 	private boolean panelD =false;
 	private boolean btn_fermer_saisie_dao =false;
+	private boolean btn_fermer_ratt_dao =false;
 	private boolean btn_fermer_saisie_daoPs =false;
 	public boolean fermerSaiDao=false;
 	public boolean fermerValDao=false;
@@ -3220,7 +3221,7 @@ public class ControleController {
    			       btn_fermer_saisie_ami = false ;
    			       btn_fermer_saisie_prq = false;                     
 			    }else 
-			    	if(action.equalsIgnoreCase("MODDAO")) {
+			    	if(action.equalsIgnoreCase("MODDAO")) { 
 			    		typePlan ="PN";
 			    		type = "DAC";
 			    		ecran="modification";
@@ -3236,10 +3237,34 @@ public class ControleController {
 					     panelRegister=true;
 					     panelUpdate=false;
 					     btn_fermer_saisie_dao = true;
+					     btn_fermer_ratt_dao =false;
 					     btn_fermer_saisie_ami = false ;
 					     btn_fermer_saisie_prq = false  ;
 					     btn_mod = true;
 					 	 btn_ratt = false;
+			    	}else
+			    		if(action.equalsIgnoreCase("DAORAT")) { 
+			    		typePlan ="PN";
+			    		type = "DAC";
+			    		ecran="modification";
+			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL D'OFFRES N° ";
+			    		libelle1="Données à rattraper";
+			    		 update_fermer_dao=true;
+			    		 update_fermer_ami=false;
+			    		 update_fermer_prq=false;
+			    		 update_fermer_dps=false;
+					     panelDetail=false;
+						 panelForm=true;
+						 panelTraitement=false;
+					     panelRegister=true;
+					     panelUpdate=false;
+					     btn_fermer_saisie_dao = false;
+					     btn_fermer_saisie_ami = false;
+					     btn_fermer_saisie_prq = false;
+					     btn_mod = false;
+					 	 btn_ratt = true;
+					 	 btn_fermer_saisie_dao = false;
+					 	 btn_fermer_ratt_dao =true;
 			    	}else
 		    			if(action.equalsIgnoreCase("HISDAC")) {
 		    				
@@ -11030,6 +11055,15 @@ public class ControleController {
 	public void setBtn_ratt(boolean btn_ratt) {
 		this.btn_ratt = btn_ratt;
 	}
-	
+
+
+	public boolean isBtn_fermer_ratt_dao() {
+		return btn_fermer_ratt_dao;
+	}
+
+
+	public void setBtn_fermer_ratt_dao(boolean btn_fermer_ratt_dao) {
+		this.btn_fermer_ratt_dao = btn_fermer_ratt_dao;
+	}
 	
 }

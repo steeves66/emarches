@@ -5478,7 +5478,8 @@ TDacSpecs dao = new TDacSpecs();
 								    		  //newVbTemp.setTempLaaMtLot("0");
 								    		  //newVbTemp.setTempLaaCautLot("0");
 								    		  newVbTemp.setTempLaaImputation(imputation);
-								    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(slctdTd.getAaoNbrLot()));//Convertir un long en String
+								    		  //newVbTemp.setTempLaaNbrTotLot(String.valueOf(slctdTd.getAaoNbrLot()));//Convertir un long en String 
+								    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(lotNbre));
 								    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 								    		  newVbTemp.setTempType("LOT");
 								    		  iservice.addObject(newVbTemp);
@@ -5497,7 +5498,8 @@ TDacSpecs dao = new TDacSpecs();
 										    		  //newVbTemp.setTempLaaMtLot("0");
 										    		  //newVbTemp.setTempLaaCautLot("0");
 										    		  newVbTemp.setTempLaaImputation(imputation);
-										    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(slctdTd.getAaoNbrLot()));//Convertir un long en String
+										    		  //newVbTemp.setTempLaaNbrTotLot(String.valueOf(slctdTd.getAaoNbrLot()));//Convertir un long en String
+										    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(lotNbre));
 										    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 										    		  newVbTemp.setTempType("LOT");
 										    		  iservice.addObject(newVbTemp);
@@ -5777,6 +5779,7 @@ TDacSpecs dao = new TDacSpecs();
 								if(!AVI.isEmpty()) avis = AVI.get(0);
 										
 				    		 newLot.setTDacSpecs(dao);
+				    		 newLot.setLaaLbgImputation(imputation);
 				    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				    		 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
 				    		 newLot.setLaaCoutLot(coutLot);
@@ -5805,6 +5808,7 @@ TDacSpecs dao = new TDacSpecs();
 											if(!AVI.isEmpty()) avis = AVI.get(0);
 											
 					    		                 newLot.setTDacSpecs(dao);
+					    		                 newLot.setLaaLbgImputation(imputation);
 					    		                 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 					    		                 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
 					    		                 newLot.setLaaCoutLot(coutLot);

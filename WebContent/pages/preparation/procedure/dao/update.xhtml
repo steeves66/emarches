@@ -1760,19 +1760,20 @@
      
            <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		</p:commandLink>
+		   </p:commandLink>
 		
-		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_ami}" action="#{daoController.renderPage('dao1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+		   <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_ratt_dao}" action="#{daoController.renderPage('dao1','RATTRA')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		</p:commandLink>
+		   </p:commandLink>
 		
-		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_prq}" action="#{daoController.renderPage('dao1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
+		   <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_ami}" action="#{daoController.renderPage('dao1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		</p:commandLink>
+		   </p:commandLink>
 		
-		 <p:commandLink rendered="false" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
-		<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Générer le DAO
-		</p:commandLink>
+		   <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_prq}" action="#{daoController.renderPage('dao1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		   </p:commandLink>
+		
 				      
 		<p:commandLink rendered="#{daoController.btn_dao_modif}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff; margin-right:5px" action="#{daoController.imprimeSynthese()}" ajax="false">
 		<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
@@ -1780,8 +1781,8 @@
 		    
        <h:panelGroup rendered="false">
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
-				      </p:commandLink>
+			<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+	</p:commandLink>
 			
 			   	      
 				       <p:commandLink rendered = "false" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
