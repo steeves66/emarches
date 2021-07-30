@@ -1025,6 +1025,29 @@ public class CommissionController {
 		 }
 		 
 
+		 //Differer un avis d'appel d'Offres au niveau de l'Analyse
+		 public void reOuverture() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 statutUpdate ="APU";
+			      }else {
+				    statutUpdate ="";
+			       }
+			 
+			 listeAvisAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			    if (! listeAppelOffre.isEmpty()) {
+			    	TAvisAppelOffre avis = new TAvisAppelOffre();
+				     avis= listeAvisAppelOffre.get(0);
+				     avis.setAvisRetour("1");
+				     avis.setTStatut(new TStatut(statutUpdate));
+				     iservice.updateObject(avis);
+				     chargeListe("APU");
+				     
+				     userController.setTexteMsg(" Désolé, votre avis a été retourné à la séance d'ouverture des plis!");
+					 userController.setRenderMsg(true);
+					 userController.setSevrityMsg("success");
+			    }
+		 }
 		 
 		//Liste des offres VBdetaiOffre
 		 public void chargeOffres() {

@@ -709,7 +709,7 @@ TDacSpecs dao = new TDacSpecs();
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
 							 chargeDataByAction("PRQ","PN");
 						    }else{
-						    	if(controleController.type == "RAT" && controleController.typePlan == "PN") {
+						    	if(controleController.modeType == "RAT" && controleController.typePlan == "PN") {
 									 chargeDataByAction("PRQ","PN");
 								    }
 						    }/*else { {

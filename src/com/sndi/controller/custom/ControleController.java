@@ -364,6 +364,7 @@ public class ControleController {
 	private boolean btn_apercuAna =false;
 	private boolean btn_apercuJug =false;
 	private boolean btn_retourJug =false;
+	private boolean btn_retourAna =false;
 	public boolean etatLoveAgpm = false;
 	private boolean etatLoveAgpmPs = false;
 	
@@ -404,6 +405,7 @@ public class ControleController {
 	private String statutUpdate="";
 	
 	private String fonctionalite="";
+	public String modeType ="";
 	
 	//Colonnes bootstrap
 	private String numero="";
@@ -423,6 +425,7 @@ public class ControleController {
 	public boolean etatPsoTrans =false;
 	public boolean btn_rat =false;
 	public boolean btn_rat_mod =false;
+	
 	//String actionPrivilèges ="";
 	
 	//Colonnes pour les consultations
@@ -3440,8 +3443,9 @@ public class ControleController {
 								 
 				    		}else
 					    		if(action.equalsIgnoreCase("RATTRA")) {
+					    			modeType ="RAT";
 					    			typePlan ="PN";
-					    			type = "RAT";
+					    			type = "DAC";
 					    			fonctionalite = "listSaisieRat";
 					    			libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 					    			libelle1="LISTE DES DAO A RATTRAPER";
@@ -7064,6 +7068,7 @@ public class ControleController {
 												 btn_apercuAna =false;
 												 btn_apercuJug =false;
 												 btn_retourJug = false;
+												 btn_retourAna = false;
 										
 								    		}else
 								    			//DETAIL OUVERTURE
@@ -7110,7 +7115,8 @@ public class ControleController {
 													 btn_apercuAna =true;
 													 btn_apercuJug =false;
 													 btn_retourJug = false;
-									    			btn_membre = false;
+													 btn_retourAna = true;
+									    			 btn_membre = false;
 													 panel1 =false;
 									    		}else
 									    			//DETAIL ANALYSE DES OFFRES
@@ -7150,8 +7156,9 @@ public class ControleController {
 														btn_apercuAna =false;
 														btn_apercuJug =true;
 														btn_retourJug = true;
+														btn_retourAna = false;
 										    			btn_membre = false;
-														 panel1 =false;
+														panel1 = false;
 										    		}else
 										    			//DETAIL JUGEMENT
 										    			if(action.equalsIgnoreCase("DETJUG")) {
@@ -11064,6 +11071,26 @@ public class ControleController {
 
 	public void setBtn_fermer_ratt_dao(boolean btn_fermer_ratt_dao) {
 		this.btn_fermer_ratt_dao = btn_fermer_ratt_dao;
+	}
+
+
+	public String getModeType() {
+		return modeType;
+	}
+
+
+	public void setModeType(String modeType) {
+		this.modeType = modeType;
+	}
+
+
+	public boolean isBtn_retourAna() {
+		return btn_retourAna;
+	}
+
+
+	public void setBtn_retourAna(boolean btn_retourAna) {
+		this.btn_retourAna = btn_retourAna;
 	}
 	
 }
