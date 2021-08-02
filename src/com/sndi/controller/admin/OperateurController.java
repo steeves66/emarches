@@ -353,7 +353,7 @@ public class OperateurController {
 		test.clear();
 		getObjetListe().clear();
 		test.add("a");
-		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("ADM")) {
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("ADM")||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("EXP")) {
 		objetListe = iservice.getObjects("TOperateur", new ArrayList<String>(Arrays.asList("opeNom")));
 		currentOpeListe = new ArrayList<TOperateur>(objetListe);
 		_logger.info("objetListe size: "+objetListe.size());
