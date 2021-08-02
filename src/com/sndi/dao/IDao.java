@@ -35,6 +35,7 @@ public interface IDao {
 	 * @param  Object Object
 	 */
 	public void mergeObject(Object object);
+	public Object mergeAndReturnObject(Object object);
 	
 	/**
 	 * Delete Object

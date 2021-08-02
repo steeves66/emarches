@@ -46,6 +46,12 @@ public class Dao implements IDao {
 		// TODO Auto-generated method stub
 		getSessionFactory().getCurrentSession().merge(object);
 	}
+	
+	@Override
+	public Object mergeAndReturnObject(Object object) 
+	{
+		return getSessionFactory().getCurrentSession().merge(object);
+	}
 
 	@Override
 	public void deleteObject(Object Object) {
@@ -1060,8 +1066,4 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
 	}
-	
-
-
-	
 }

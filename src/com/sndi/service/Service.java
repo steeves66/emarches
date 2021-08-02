@@ -45,6 +45,12 @@ public class Service implements Iservice {
 			getDao().mergeObject(object);
 		}
 		
+		@Override
+		public Object mergeAndReturnObject(Object object) 
+		{
+			return getDao().mergeAndReturnObject(object);
+		}
+		
 		@Transactional(readOnly = false)
 		@Override
 		public void deleteObject(Object object) {
@@ -428,6 +434,8 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnInInstrConsultPpmDmp(objet,strSource);
 		}
+
+		
 		
 		
 		

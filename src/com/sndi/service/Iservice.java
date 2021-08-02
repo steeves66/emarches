@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sndi.dao.WhereClause;
+import com.sndi.model.TAssignation;
 import com.sndi.model.TOperateur;
 
 public interface Iservice {
@@ -144,5 +145,7 @@ public interface Iservice {
 	public int countTableByColumnInPspmInstr(String objet, String conditionColumn, String strSource);
 	public int countTableByColumnInPpmValInstr(String objet,String conditionColumn,String statut ,String strSource);
 	public int countTableByColumnInPpmDiffInstr(String objet,String conditionColumn,String stat1,String stat2, String typePlan, String strSource);
+
+	public Object mergeAndReturnObject(Object object);
 
 }
