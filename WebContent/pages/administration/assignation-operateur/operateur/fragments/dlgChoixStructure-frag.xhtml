@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">	
+	<ui:composition>
+		<h:form id="dlogStructure">
+			<p:dialog widgetVar="structureDlg" modal="true" showEffect="fade"
+				hideEffect="fade" width="70%" height="75%" closable="true"
+				header="Selectionnez la structure">
+				<div class="contentpanel">
+					<div class="g12">
+						<div class="panel-body panel-body-nopadding">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="input-group input-group-sm col-md-12">
+										<span class="input-group-btn"> 
+										<p:commandLink
+												action="#{assignationOperateurController.initialiserListStructures()}"
+												styleClass="btn btn-warning btn-flat" value="Initialiser"
+												style=" background-color: #f88b2e" update="tblStructures critereRechercheStructure" />
+										</span>
+										<p:inputText id="critereRechercheStructure" type="text"
+											value="#{assignationOperateurController.critereRechercheStructure}"
+											placeholder="Saisir le code de la structure"
+											styleClass="gui-input" style="width: 100%" />
+										<span class="input-group-btn"> <p:commandLink
+												action="#{assignationOperateurController.rechercherStrucure()}"
+												styleClass="btn btn-warning btn-flat" value="Rechercher"
+												style=" background-color: #f88b2e" update="tblStructures" />
+										</span>
+									</div>		
+								</div>
+							</div>
+		
+							<div class="form-bordered form-horizontal">
+								<div class="form-group">
+									<h:panelGrid style="width:100%; vertical-align: top;">
+										<p:dataTable id="tblStructures"
+											styleClass="table table-bordered table-hover" var="structure"
+											value="#{assignationOperateurController.listStructures}"
+											selectionMode="single" rowKey="#{structure.strCode}"
+											emptyMessage="Aucune structure" rows="10" paginator="true"
+											rowsPerPageTemplate="5,10,15">
+											
+											<p:column headerText="Code" styleClass="col-sm-2">
+												<p:commandLink id="strCode" title="Structure" oncomplete="PF('structureDlg').hide()"
+													 style="font-size:18px;" update="frmOperateur:strLibelleLong frmOperateur:codeStructure">
+													<h:outputText value="#{structure.strCode}" />
+													<f:setPropertyActionListener value="#{structure}"
+														target="#{assignationOperateurController.operateur.TStructure}" />
+												</p:commandLink>
+											</p:column>
+											
+											<p:column headerText="Libelle" styleClass="col-sm-10">
+												<p:commandLink id="Structure" title="Structure" oncomplete="PF('structureDlg').hide()"
+													style="font-size:18px;" update="frmOperateur:strLibelleLong frmOperateur:codeStructure">
+													<h:outputText value="#{structure.strLibelleLong}" />
+													<f:setPropertyActionListener value="#{structure}"
+														target="#{assignationOperateurController.operateur.TStructure}" />
+												</p:commandLink>
+											</p:column>
+										</p:dataTable>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</p:dialog>
+		</h:form>
+	</ui:composition>
+</html>

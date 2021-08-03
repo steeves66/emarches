@@ -35,13 +35,14 @@ public class OperateurController2
 	@Autowired KeyGen keyGen = new KeyGen();
 	@Autowired private OperateurValidator operateurValidator;
 	@Autowired private IStructureDao StructureDao;
-	@Autowired private AssignationController2 assignationController;
+	@Autowired private AssignationOperateurController assignationController;
 	
 	private TOperateur operateur = new TOperateur();
 	private List<TStructure> listStructures =  new ArrayList<>();
 	private List<TOperateur> listOperateurs =  new ArrayList<>();
 	private String critereLibre = "";
 	private String critereRechercheStructure = "";
+	private String formMode = "new"; // new & update
 	private static String globalMsg="";
 	@Autowired private ProjetReport projetReport;
 	
@@ -49,7 +50,7 @@ public class OperateurController2
 	@PostConstruct
 	void init()
 	{
-		this.listStructures = this.iservice.getObjects("TStructure");
+		this.listStructures = this.StructureDao.findAll();
 		this.operateur.setOpeMatricule(keyGen.getOperateurCode());
 		this.listOperateurs = this.operateurDao.getListOperateurs();
 	}
@@ -57,7 +58,14 @@ public class OperateurController2
 	public String goToListOperateurs()
 	{
 		this.listOperateurs = this.operateurDao.getListOperateurs();;
-		return "/pages/administration/test-leni/operateur/index.xhtml?faces-redirect=true";
+		return "/pages/administration/assignation-operateur/index.xhtml?faces-redirect=true";
+	}
+	public void beforeNewOperateur()
+	{
+		this.operateurValidator.setValid(true);
+		this.operateur = new TOperateur();
+		this.operateur.setOpeMatricule(keyGen.getOperateurCode());
+		this.formMode = "new";
 	}
 	public String goToUpdateOperateurForm(TOperateur operateurToBeUpdated)
 	{

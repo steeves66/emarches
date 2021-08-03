@@ -55,6 +55,7 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public TOperateur save(TOperateur operateur) 
 	{
+		System.out.println("Debut save OperateurDao : L58");
 		 operateur = (TOperateur)iservice.mergeAndReturnObject(operateur);
 		 this.doAddOnListOperateurs(operateur);
 		 return operateur;
@@ -63,6 +64,7 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public TOperateur update(TOperateur operateur) 
 	{
+		System.out.println("Debut update OperateurDao : L67");
 		if(!this.existsById(operateur.getOpeMatricule()) || operateur.getOpeMatricule()==null)
 		{
 			throw new RuntimeException("Impossible de mettre à jour un opérateur qui n'existe pas dans la base");
@@ -73,9 +75,8 @@ public class OperateurDao implements IOperateurDao
 	}
 
 	@Override
-	public void deleteById(String opeMatricule) {
-		// TODO Auto-generated method stub
-		
+	public void deleteById(String opeMatricule) 
+	{
 	}
 
 	@Override
@@ -143,10 +144,10 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public List<TOperateur> findByCritereLibre(String critereLibre) 
 	{
-		//List<VOperateurRech> operateurRetrouves = iservice.getObjectsByColumn("VOperateurRech", new WhereClause("OPE_CLE_RECHER", WhereClause.Comparateur.LIKE, "%" + critereLibre.toUpperCase() +"%" ));
-		List<VOperateurRech> operateurRetrouves = this.listOperateursRech.stream()
-																		 .filter(vOpe->vOpe.getOpeCleRech().toUpperCase().contains(critereLibre.toUpperCase()))
-																		 .collect(Collectors.toList());
+		List<VOperateurRech> operateurRetrouves = iservice.getObjectsByColumn("VOperateurRech", new WhereClause("OPE_CLE_RECHER", WhereClause.Comparateur.LIKE, "%" + critereLibre.toUpperCase() +"%" ));
+		//List<VOperateurRech> operateurRetrouves = this.listOperateursRech.stream()
+																		 //.filter(vOpe->vOpe.getOpeCleRech().toUpperCase().contains(critereLibre.toUpperCase()))
+																		 //.collect(Collectors.toList());
 		return operateurRetrouves.stream().map(vOperateur-> vOperateur.getTOperateur()).collect(Collectors.toList());
 	}
 	@Override

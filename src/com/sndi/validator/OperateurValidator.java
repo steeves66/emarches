@@ -14,6 +14,7 @@ import javax.faces.validator.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sndi.controller.admin.AssignationOperateurController;
 import com.sndi.controller.admin.OperateurController2;
 import com.sndi.dao.IOperateurDao;
 import com.sndi.dao.IStructureDao;
@@ -29,7 +30,7 @@ public class OperateurValidator implements Validator
 {
 	@Autowired private Iservice iservice; 
 	@Autowired private IOperateurDao operateurDao;
-	@Autowired private OperateurController2 operateurController;
+	@Autowired private AssignationOperateurController assignationOperateurController;
 	@Autowired private IStructureDao structureDao;
 	
 	private final String ID_MATRICULE = "matricule";
@@ -46,7 +47,10 @@ public class OperateurValidator implements Validator
 	@Override
 	public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException 
 	{
+		System.out.println("Operateur matricule = " + assignationOperateurController.getOperateur().getOpeMatricule());
 		this.valid = true; // Avant toute validation j'initialise isValid à true. Si la validation échoue, la méthode setErrorMassage sera appelée et le changera à false
+		this.assignationOperateurController.setErrorMsgVisible(true);
+		this.assignationOperateurController.setSuccessMsgVisible(false);
 		final String componentId = component.getId();
 	         switch (componentId)
 	         {
@@ -73,6 +77,8 @@ public class OperateurValidator implements Validator
 	private void setErrorMassage(String errorMsg) //Cette méthode est appelée chaque fois qu'une validation échoue
     {
 		this.valid = false;
+		this.assignationOperateurController.setErrorMsgVisible(true);
+		this.assignationOperateurController.setSuccessMsgVisible(false);
         FacesMessage msg = new FacesMessage(errorMsg);
 	    msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 	    throw new ValidatorException(msg);
@@ -80,7 +86,7 @@ public class OperateurValidator implements Validator
 	
 	private void validateLogin(String login) 
 	{
-		String opeMatricule = operateurController.getOperateur().getOpeMatricule();
+		String opeMatricule = assignationOperateurController.getOperateur().getOpeMatricule();
 		List<TOperateur> operateurs = operateurDao.findByOpeLogin(login);
 		System.out.println("Nbre d'operateurs existant avec le matricule " + opeMatricule + " = "+ operateurs.size());
 		if(operateurs.size()>1)
@@ -98,7 +104,7 @@ public class OperateurValidator implements Validator
 	}
 	private void validateMail(String mail)
 	{
-		String opeMatricule = operateurController.getOperateur().getOpeMatricule();
+		String opeMatricule = assignationOperateurController.getOperateur().getOpeMatricule();
 		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher matcher = pattern.matcher(mail);
 		List<TOperateur> operateurs = operateurDao.findByOpeEmail(mail);
@@ -118,7 +124,7 @@ public class OperateurValidator implements Validator
 	
 	private void validateContact(String contact) 
 	{
-		String opeMatricule = operateurController.getOperateur().getOpeMatricule();
+		String opeMatricule = assignationOperateurController.getOperateur().getOpeMatricule();
 		List<TOperateur> operateurs = operateurDao.findByOpeContact(contact);
 		if(operateurs.size()>1)
 		{
@@ -131,7 +137,7 @@ public class OperateurValidator implements Validator
 	}
 	private void validateMatFonc(String matFonc) 
 	{
-		String opeMatricule = operateurController.getOperateur().getOpeMatricule();
+		String opeMatricule = assignationOperateurController.getOperateur().getOpeMatricule();
 		List<TOperateur> operateurs = operateurDao.findByOpeMatriculeFonc(matFonc);
 		if(operateurs.size()>1)
 		{

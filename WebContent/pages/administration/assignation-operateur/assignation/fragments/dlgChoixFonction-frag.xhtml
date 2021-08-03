@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">	
+	<ui:composition>
+		<h:form id="dlgChoixFonction">
+			<p:dialog widgetVar="dlgChoixFonction" modal="true" showEffect="fade"
+				hideEffect="fade" width="60%" closable="true"
+				header="Selectionnez la fonction">
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<div class="col-md-3">
+							<div style="color: #fff">LISTE DES FONCTIONS</div>
+						</div>
+						<div class="col-md-12">
+							<div class="input-group input-group-sm col-md-12">
+								<span class="input-group-btn"> <p:commandLink
+										action="#{assignationOperateurController.initialiserListFonctions()}"
+										styleClass="btn btn-warning btn-flat" value="Initialiser"
+										style=" background-color: #f88b2e" update="critereRechercheFonction tblFonctions" />
+								</span>
+								<p:inputText id="critereRechercheFonction" type="text"
+									value="#{assignationOperateurController.critereRechercheFonction}"
+									placeholder="saisir un critère de recherche sur la fonction" styleClass="gui-input"
+									style="width: 100%" />
+								<span class="input-group-btn"> <p:commandLink
+										action="#{assignationOperateurController.rechercherFonction()}"
+										styleClass="btn btn-warning btn-flat" value="Rechercher"
+										style=" background-color: #f88b2e" update="tblFonctions" />
+								</span>
+							</div>
+						</div>
+						
+					</div>
+					<div class="box-body">
+	
+						<p:dataTable id="tblFonctions"
+							styleClass="table table-bordered table-hover table-condensed" var="fonction"
+							value="#{assignationOperateurController.listFonctions}"
+							selectionMode="single" rowKey="#{fonction.fonCod}"
+							emptyMessage="Aucune fonction trouvée" rows="10" paginator="true"
+							rowsPerPageTemplate="5,10,15">
+							
+							<p:column headerText="Code fonction" styleClass="col-sm-1">
+								<p:commandLink id="nb" title="Code fonction" update="frmAssignation:fonctionAssignation"  oncomplete="PF('dlgChoixFonction').hide()"
+									style="font-size:15px;">
+									<h:outputText value="#{fonction.fonCod}" />
+									<f:setPropertyActionListener value="#{fonction}" target="#{assignationOperateurController.assignation.TFonction}" />
+								</p:commandLink>
+							</p:column>
+							<p:column headerText="Fonction" styleClass="col-sm-10">
+								<p:commandLink id="fonction" title="Fonction" style="font-size:15px;" update="frmAssignation:fonctionAssignation" oncomplete="PF('dlgChoixFonction').hide()">
+									<h:outputText value="#{fonction.fonLibelle}" />
+									<f:setPropertyActionListener value="#{fonction}" target="#{assignationOperateurController.assignation.TFonction}" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</div>
+				</div>
+				<div class="contentpanel">
+					<div class="g12">
+						<div class="panel-body panel-body-nopadding"></div>
+					</div>
+				</div>
+			</p:dialog>
+		</h:form>
+	</ui:composition>
+</html>

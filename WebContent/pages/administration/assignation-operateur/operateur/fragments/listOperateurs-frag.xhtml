@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition>
+		<h:form id="frmRechercheOperateurs" class="form-horizontal">
+			<div class="form-group">
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<div class="col-md-5">
+							<div class="input-group input-group-sm col-md-12">
+								<span class="input-group-btn"> <p:commandLink
+										action="#{assignationOperateurController.initialiserCritereRechercheOperateur()}"
+										styleClass="btn btn-warning btn-flat" value="Initialiser"
+										style=" background-color: #f88b2e" update="tblOperateur critereRechercheOperateur" />
+								</span>
+								<p:inputText id="critereRechercheOperateur" value="#{assignationOperateurController.critereRechercheOperateur}" type="text"
+									
+									placeholder="saisir un critère de recherche sur l'opérateur" styleClass="gui-input"
+									style="width: 100%" />
+								<span class="input-group-btn"> <p:commandLink
+										action="#{assignationOperateurController.rechercherOperateur()}" update="tblOperateur"
+										styleClass="btn btn-warning btn-flat" value="Rechercher"
+										style=" background-color: #f88b2e"/>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<p:commandLink
+								action="#{assignationOperateurController.beforeNewOperateur()}" oncomplete="PF('frmOperateurDlg').show()"
+								update="frmOperateur"
+								styleClass="btn btn-warning btn-rounded"
+								style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span>
+								<span class="hidden-xs"></span>Nouvelle opérateur
+							</p:commandLink>
+						</div>
+						<span style="color: #fff; margin-right: 10px;" class="pull-right" title="#{operateurDao.countAll()} opérateurs enregistrés">
+								<b>Nombre d'opérateurs : </b>
+								<span class="badge">#{operateurDao.countAll()}</span>
+						</span>
+					</div>
+				</div>
+				
+				<p:dataTable id="tblOperateur"
+					styleClass="table mb0 dt-on-steroids dataTable" var="operateur"
+					value="#{assignationOperateurController.listOperateurs}"
+					emptyMessage="Aucun opérateur enregistrée" rows="10" paginator="true" paginatorPosition="bottom"
+					rowsPerPageTemplate="5,10,15">
+			
+					<p:column headerText="Matricule" styleClass="col-sm-1">
+						<h:outputText value="#{operateur.opeMatriculeFonc}" />
+					</p:column>
+			
+					<p:column headerText="Nom et prénom" styleClass="col-sm-2">
+						<h:outputText value="#{operateur.opeNom}" />
+					</p:column>
+			
+					<p:column headerText="Structure" styleClass="col-sm-3">
+						<h:outputText value="#{operateur.TStructure.strLibelleLong}" />
+					</p:column>
+			
+					<p:column headerText="Fonction" styleClass="col-sm-2">
+						<h:outputText value="#{operateur.opeFonctionAdminist}" />
+					</p:column>
+					
+					<p:column headerText="Login" styleClass="col-sm-1">
+						<h:outputText value="#{operateur.opeLogin}" />
+					</p:column>
+			
+					<p:column headerText="Contact" styleClass="col-sm-1">
+						<h:outputText value="#{operateur.opeContact}" />
+					</p:column>
+			
+					<p:column headerText="E-mail" styleClass="col-sm-1">
+						<h:outputText value="#{operateur.opeMail}" />
+					</p:column>
+					<p:column headerText="Actions" styleClass="col-sm-1">
+						<p:commandButton 
+							styleClass="btn btn-xs" style="width:20px; height:20px;"
+							action="#{assignationOperateurController.printOperateur(operateur)}" title="Editer"
+							ajax="false"
+							rendered="#{assignationDao.countByOpeMatricule(operateur.opeMatricule) > 0}"
+							icon="ace-icon fa fa-file-pdf-o bigger-120">
+						</p:commandButton>
+			
+						<!-- <i class="fa fa-exchange"></i> -->
+			
+						<p:commandButton title="Modifier" action="#{assignationOperateurController.beforeUpdateOperateur(operateur)}" 
+							styleClass="btn btn-xs" update="frmOperateur" style=" width:20px; height:20px; margin-left:2px;" icon="ace-icon fa fa-pencil bigger-120" oncomplete="PF('frmOperateurDlg').show()">
+						</p:commandButton >
+						
+						<p:commandButton title="Assigner" action="#{assignationOperateurController.beforeNewAssignation(operateur)}" 
+							update="frmAssignation" styleClass="btn btn-xs" style="width:20px; height:20px; margin-left:2px;" icon="fa fa-tasks bigger-120" oncomplete="PF('frmAssignationDlg').show()">
+						</p:commandButton >
+					</p:column>
+			
+					<f:facet name="paginatorTopLeft">
+						<p:commandButton type="button" icon="fa fa-sync" />
+					</f:facet>
+			
+					<f:facet name="paginatorBottomRight">
+						<p:commandButton type="button" icon="fa fa-cloud-upload" />
+					</f:facet>
+				</p:dataTable>
+			</div>
+		</h:form>
+	</ui:composition>
+</html>

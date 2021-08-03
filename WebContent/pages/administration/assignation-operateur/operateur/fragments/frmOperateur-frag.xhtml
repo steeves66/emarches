@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition>
+		<p:dialog widgetVar="frmOperateurDlg" modal="true" showEffect="fade"
+					hideEffect="fade" height="75%" closable="true"
+					header="Enregistrement / Modification des opérateurs">
+			<h:form id="frmOperateur" class="form-horizontal">
+					<div class="container">
+						<h:panelGroup id="successMsg"
+							rendered="#{assignationOperateurController.successMsgVisible}">
+							<br />
+							<div class="alert alert-success light alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">X</button>
+								<i class="fa fa-check pr10"></i> <strong>Succès!</strong>
+								Opération réaliser avec succès
+							</div>
+						</h:panelGroup>
+						
+						<h:panelGroup id="errorMsg"
+							rendered="#{assignationOperateurController.errorMsgVisible}">
+							<br />
+							<div class="alert alert-danger light alert-dismissable">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">X</button>
+								<i class="fa fa-check pr10"></i> <strong>Echèc de l'opération</strong>
+								Veuillez renseigner correctement les champs du formulaire
+							</div>
+						</h:panelGroup>
+					
+						<div class="row">
+							<div class="form-group " >
+								<label for="matricule" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b>Code opérateur <span style="color: red;"> *</span></b></label>
+								<div class="col-md-6">
+									<p:inputText value="#{assignationOperateurController.operateur.opeMatricule}"
+										type="text" styleClass="form-control" readonly="true" id="matricule"
+										style="width: 100%" />
+								</div>
+							</div>	
+						</div>
+					
+						<div class="row">
+							<div class="form-group">
+								<label for="matFonc" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b>Matricule fonctionnaire </b></label>
+								<div class="col-md-6">	
+									<p:inputText
+										value="#{assignationOperateurController.operateur.opeMatriculeFonc}"
+										type="text" styleClass="form-control" id="matFonc"
+										style="width: 100%">
+										<f:validator binding="#{operateurValidator}" validatorId="operateurValidator" />
+									</p:inputText>
+								</div>
+								<h:message id="matFoncErrorMsg" for = "matFonc" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="form-group">
+								<label for="civilite" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;">
+									<b>Civilité</b><span style="color: red;"> *</span>
+								</label>
+								<div class="col-md-6">
+									<p:selectOneMenu id="civilite"
+										value="#{assignationOperateurController.operateur.opeEtatCivil}"
+										style="width:100%;" required="true" requiredMessage="*Champ obligatoire">
+										<f:selectItem itemLabel="Choisir..." itemValue="" />
+										<f:selectItem itemLabel="Mr" itemValue="Mr" />
+										<f:selectItem itemLabel="Mlle" itemValue="Mlle" />
+										<f:selectItem itemLabel="Mme" itemValue="Mme" />
+									</p:selectOneMenu>
+								</div>
+								<h:message for = "civilite" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group ">
+								<label for="nom" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b> Nom et Prenom(s) <span style="color: red;"> *</span></b></label>
+								<div class="col-md-6">
+									<p:inputText value="#{assignationOperateurController.operateur.opeNom}" 
+												 type="text" styleClass="form-control" id="nom" style="width: 100%"
+												 required="true" requiredMessage="*Champ obligatoire">
+										
+									</p:inputText>
+								</div>
+								<h:message for = "nom" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group ">
+								<label for="contact" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;">
+									<b>Contact</b><span style="color: red;"> *</span>
+								</label>
+								
+								<div class="col-md-6">
+									<p:inputText value="#{assignationOperateurController.operateur.opeContact}" class="form-control" id="contact">
+									</p:inputText>
+								</div>
+								<h:message id="contactErrorMsg" for = "contact" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group ">
+								<label for="mail" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;">
+									<b>Email</b><span style="color: red;"> *</span>
+								</label>
+								
+								<div class="col-md-6">
+									
+									<p:inputText value="#{assignationOperateurController.operateur.opeMail}" 
+												 required="true" requiredMessage="*Champ obligatoire"
+												 type="text" styleClass="form-control" id="mail" style="width: 100%" >
+										<f:validator binding="#{operateurValidator}" validatorId="operateurValidator"/>
+									</p:inputText>
+								</div>
+								<h:message id="mailErrorMessage" for = "mail" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group ">
+								<label for="login" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b>Login<span style="color: red;"> *</span></b></label>
+								<div class="col-md-6">
+									<p:inputText value="#{assignationOperateurController.operateur.opeLogin}"
+										type="text" styleClass="form-control" id="login"
+										style="width: 100%" required="true" requiredMessage="*Champ obligatoire">
+										<f:validator binding="#{operateurValidator}" validatorId="operateurValidator"/>
+										<f:ajax execute="matricule" event="blur" render="loginErrorMessage"/>
+									</p:inputText>
+								</div>
+								<h:message id="loginErrorMessage" for = "login" style = "color:red; font-size: 10px;" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group ">
+								<label for="foncAdm" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b>Fonction Administrative</b></label>
+								<div class="col-md-6">
+									<p:inputText placeholder="Fonction Administrative"
+										value="#{assignationOperateurController.operateur.opeFonctionAdminist}"
+										type="text" styleClass="form-control" id="foncAdm"
+										style="width: 100%"/>
+								</div>
+								<h:message for = "foncAdm" style = "color:red; font-size: 10px;"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="minStr" class="control-label col-md-offset-1 col-md-2" style="margin-top: 5px; text-align: right;"><b>Structure<span style="color: red;"> *</span></b></label>
+							
+								<div class="col-md-2" style="margin-right: 0px;">
+									<p:inputTextarea rows="2" placeholder="Code structure" readonly="true" required="true" id="codeStructure"
+										requiredMessage="*Champ obligatoire" value="#{assignationOperateurController.operateur.TStructure.strCode}"
+										type="text" styleClass="form-control"
+										style="width: 100%"/>
+								</div>
+								
+								<div class="col-md-4" style="margin-right: 0px; margin-left: 0px;">
+									<table>
+										<tr>
+											<td style="width: 95%;">
+												<p:inputTextarea rows="2" placeholder="Libellé structure" required="true" 
+															requiredMessage="*Champ obligatoire"
+															id="strLibelleLong" cols="33"
+															value="#{assignationOperateurController.operateur.TStructure.strLibelleLong}"
+															readonly="true" styleClass="form-control">
+													<f:validator binding="#{operateurValidator}" validatorId="operateurValidator"/>
+												</p:inputTextarea>
+											</td>
+											<td>
+												<p:commandLink oncomplete="PF('structureDlg').show()"
+														styleClass="btn btn-warning"
+														style="color:#fff;background-color: #f88b2e">
+													<i class="fa fa-search-plus"></i>
+												</p:commandLink>
+												<h:message for = "codeStructure" style = "color:red; font-size: 10px;"/>
+											</td>
+										</tr>
+									</table>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div class="box-footer">
+							<p:commandLink ajax="true" styleClass="btn btn-warning" style="background-color: red; color:white; font-weight: bolder ; margin-top: 5px;" oncomplete="PF('frmOperateurDlg').hide()">
+								<i style="color:white;" class="glyphicon glyphicon-remove-sign"></i> Fermer
+							</p:commandLink>
+							
+							<p:commandLink ajax="false" rendered="#{assignationOperateurController.printable}"
+								action="#{assignationOperateurController.printOperateur()}"
+								class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnPrintOprateur">
+								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer fiche operateur
+							</p:commandLink>
+							
+							<p:commandLink value="Nouveau" update="frmOperateur"
+													action="#{assignationOperateurController.beforeNewOperateur()}"
+													class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnNewOprateur">
+													<i class="glyphicon glyphicon-refresh"></i>
+							</p:commandLink>
+							
+							<p:commandLink value="Enregistrer" update="frmRechercheOperateurs:tblOperateur frmOperateur"
+													action="#{assignationOperateurController.saveOperateurAndReinitializeForm()}"
+													class="btn btn-success pull-right" style="background-color: #036b3d; font-weight: bolder; color: white;" id="btnSaveOprateur">
+													<i class="glyphicon glyphicon-refresh"></i>
+													<f:ajax execute="@form" render="@form" />
+													<p:confirm header="Confirmation"
+														message="Etes-vous sûre de vouloir enregistrer cet opérateur?"
+														icon="pi pi-exclamation-triangle" />
+							</p:commandLink>
+							
+						</div>
+						
+					</div>
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</html>

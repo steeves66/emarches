@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition>
+		<p:dialog widgetVar="frmAssignationDlg" modal="true" showEffect="fade"
+					hideEffect="fade" width="75%" height="75%" closable="true"
+					header="Enregistrement / Modification des opérateurs">
+			<h:form id="frmAssignation" class="form-horizontal">
+				
+					<div class="box box-success box-solid">
+						<div class="box-header with-border">
+							<div class="col-md-9">
+								<div style="color: #fff">SAISIE DES ASSIGNATIONS DE
+									L'OPERATEUR #{assignationOperateurController.assignation.TOperateur.opeNom}</div>
+							</div>
+						</div>
+						<p:outputPanel class="box-body" style="display:block; padding: 5px 5%" id="saisieAssignationBody">
+							<div class="row">
+								<div class="form-group">
+									<label for="nom" class="col-sm-2 control-label"> 
+										<b>Operateur<span style="color: red;"> *</span></b>
+									</label>
+									<div class="col-sm-3">
+										<p:inputText value="#{assignationOperateurController.assignation.TOperateur.opeNom}"
+											type="text" styleClass="form-control" readonly="true"
+											/>
+									</div>
+								</div>
+								<div class="form-group ">
+									<label for="typeFonction" class="col-sm-2 control-label"><b>Type
+											Fonction <span style="color: red;"> *</span>
+									</b></label>
+									<div class="col-sm-6">
+										<p:selectOneMenu id="typeFonction" rendered="true" requiredMessage="Champ obligatoire"
+											effect="fade"
+											style="width:100%" filter="true" filterMatchMode="startsWith" value="#{assignationOperateurController.tyfCod}">
+											
+											<f:ajax event="change" execute="typeFonction" listener="#{assignationOperateurController.onSelectTypeFonction()}" render="dlgChoixFonction fonctionAssignation"></f:ajax>
+											<f:selectItem itemLabel ="Choisir le type de la fonction.." itemValue="" />
+											<f:selectItems value="#{typeFonctionDao.findByOpeMatricule(assignationOperateurController.assignation.TOperateur.opeMatricule)}"
+												var="typeFonction" itemLabel="#{typeFonction.tyfCod} : #{typeFonction.tyfLibelle}"
+												itemValue="#{typeFonction.tyfCod}" />
+										</p:selectOneMenu>
+									</div>
+									<h:message for="typeFonction" styleClass="text-danger"/>
+								</div>
+			
+								<div class="form-group">
+									<label class="col-sm-2 control-label"><b>Fonction <span
+											style="color: red;"> *</span>
+									</b></label>
+									<div class="col-sm-6">
+										<table>
+											<tr>
+												<td style="width: 100%"><p:inputText id="fonctionAssignation"
+														value="#{(assignationOperateurController.assignation.TFonction.fonCod eq '' || assignationOperateurController.assignation.TFonction.fonCod eq null) ? '' : ''.concat(assignationOperateurController.assignation.TFonction.fonCod).concat(':').concat(assignationOperateurController.assignation.TFonction.fonLibelle)}"
+														type="text" styleClass="form-control" readonly="true" rendered="true" required="true" requiredMessage="Champ obligatoire"
+														style="width: 100%" /></td>
+												<td><p:commandLink
+														oncomplete="PF('dlgChoixFonction').show()"
+														
+														styleClass="btn btn-warning"
+														style="color:#fff;background-color: #f88b2e"
+														update=":dlgChoixFonction">
+														<i class="fa fa-search-plus"></i>
+													</p:commandLink>
+												</td>
+											</tr>
+										</table>
+										<h:message for="fonctionAssignation" styleClass="text-danger"/>
+									</div>
+								</div>
+			
+								<div class="form-group">
+									<label for="debut" class="col-sm-2 control-label" style="text-align: right;"><b>
+											Du <span style="color: red;"> *</span>
+									</b></label>
+									<div class="col-md-2">
+										<p:calendar id="debut"
+											value="#{assignationOperateurController.assignation.assDatDeb}"
+											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
+									</div>
+									<label for="fin" class="col-sm-1 control-label" style="text-align: right;"><b> Au
+											<span style="color: red;"> *</span>
+									</b></label>
+									<div class="col-md-2">
+										<p:calendar id="fin"
+											value="#{assignationOperateurController.assignation.assDatFin}"
+											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
+									</div>
+								</div>
+			
+			
+								
+									<div class="form-group">
+										<label for="asscstart" class="col-md-offset-1  col-md-2 col-sm-2 control-label" style="text-align: right; margin: 0xp;"><b>
+												Assignation courante ? <span style="color: red;"> *</span>
+										</b></label>
+										<div class="col-md-4" style="margin: 0xp;">
+											<p:selectOneRadio id="asscstart"
+												value="#{assignationOperateurController.assignation.assCourant}">
+												<f:selectItem itemLabel="OUI" itemValue="O" />
+												<f:selectItem itemLabel="NON" itemValue="N" />
+											</p:selectOneRadio>
+										</div>
+										<label for="statut" class="col-sm-2 control-label"><b>
+												Staut <span style="color: red;"> *</span>
+										</b></label>
+										<div class="col-md-4">
+											<p:selectOneRadio id="statut"
+												value="#{assignationOperateurController.assignation.assStatut}">
+												<f:selectItem itemLabel="Actif" itemValue="true" />
+												<f:selectItem itemLabel="Inactif" itemValue="false" />
+											</p:selectOneRadio>
+										</div>
+									</div>
+							</div>
+						</p:outputPanel>
+						<div class="box-footer">
+							<p:commandLink styleClass="btn btn-success row pull-right"
+								action="#{assignationOperateurController.enregistrerAssignation()}"
+								style="background-color: #036d3b; margin-right:5px;color:#fff"
+								update="frmAssignation">
+								<i class="ace-icon fa fa-save"></i>Enregistrer
+							</p:commandLink>
+						</div>
+					</div>
+					
+					<div class="box box-success box-solid">
+						<div class="box-header with-border">
+							<div class="col-md-9">
+								<div style="color: #fff">LISTE DES ASSIGNATIONS DE
+									L'OPERATEUR #{assignationOperateurController.assignation.TOperateur.opeNom}</div>
+							</div>
+						</div>
+						<div class="box-body">
+							<p:dataTable id="tblAssignation"
+								styleClass="table mb0 dt-on-steroids dataTable" var="assignation"
+								value="#{assignationOperateurController.assignation.TOperateur.TAssignations}"
+								emptyMessage="Aucune assignation enregistrée" scrollable="true"
+								scrollHeight="150">
+								<p:column headerText="Fonction" styleClass="col-sm-6">
+									<h:outputText value="#{assignation.TFonction.fonLibelle}" />
+								</p:column>
+			
+								<p:column headerText="Par defaut?" styleClass="col-sm-1">
+									<h:outputText value="#{assignation.assCourant == 'O'?'OUI':'NON'}" />
+								</p:column>
+			
+								<p:column headerText="Actif ?" styleClass="col-sm-1">
+									<h:outputText value="#{assignation.assStatut ?'ACTIF':'INACTIF'}" />
+								</p:column>
+								<p:column headerText="Debut" styleClass="col-sm-1">
+									<h:outputText value="#{assignation.assDatDeb}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+			
+								<p:column headerText="Fin" styleClass="col-sm-1">
+									<h:outputText value="#{assignation.assDatFin}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+			
+								<p:column headerText="Action" styleClass="col-sm-2">
+									<p:commandLink oncomplete="PF('dlgModifAssignation').show()"
+										class="btn btn-xs btn-warning"
+										style="background-color: #f88b2e; margin-left:5px;"
+										update="frmModifAssignation"
+										 title="Modifier">
+										<i class="ace-icon fa fa-pencil bigger-120" style="color: white"></i>
+										<f:setPropertyActionListener value="#{assignation}"
+											target="#{assignationOperateurController.updatedAssignation}" />
+									</p:commandLink>
+			
+									<p:commandLink action="#{assignationOperateurController.deleteAssignation(assignation)}"
+										class="btn btn-xs btn-danger" style="margin-left:5px;"
+										update="frmAssignation"
+										title="Suprrimer">
+										<i class="ace-icon fa fa-remove bigger-120" style="color: white"></i>
+										<p:confirm header="Confirmation"
+											message="Confirmez vous la suppression de l'assignation?"
+											icon="ui-icon-alert" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+						</div>
+					</div>
+			</h:form>
+		</p:dialog>
+	</ui:composition>
+</html>

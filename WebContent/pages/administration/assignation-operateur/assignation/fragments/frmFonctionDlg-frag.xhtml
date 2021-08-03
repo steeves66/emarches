@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">	
+	<ui:composition>
+		<h:form id="frmFonctionDlg">
+				<p:dialog widgetVar="frmFonctionDlg" modal="true" showEffect="fade"
+					hideEffect="fade" width="50%" closable="true">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-success box-solid">
+								<div class="box-header with-border">
+									<div style="color: #fff">NOUVELLE FONCTION</div>
+								</div>
+								<div class="box-body">
+	
+									<div class="row">
+										<h:panelGroup layout="block" class="form-group" rendered="#{fonctionController2.mode eq 'new'}">
+											<label for="foncode" class="col-sm-3 control-label"><b>
+													Code Fonction <span style="color: red;"> *</span>
+											</b></label>
+											<div class="col-sm-9">
+												<p:inputText value="#{fonctionController2.fonction.fonCod}"
+													type="text" styleClass="form-control" id="foncode"
+													style="width: 100%" />
+											</div>
+										</h:panelGroup>
+	
+										<h:panelGroup layout="block" class="form-group">
+											<label class="col-sm-3 control-label"><b>Structure
+												<span style="color: red;"> *</span>
+											</b></label>
+											<div class="col-sm-9">
+												<table>
+													<tr>
+														<td style="width: 750px"><p:inputTextarea rows="2"
+																cols="33" styleClass="form-control"
+																value="#{fonctionController2.fonction.TStructure.strLibelleCourt}"
+																readonly="true" style="width: 100%" /></td>
+	
+													</tr>
+												</table>
+											</div>
+										</h:panelGroup>
+	
+										<div class="form-group ">
+											<label for="typeFonction" class="col-sm-3 control-label"><b>Type
+													Fonction <span style="color: red;"> *</span>
+											</b></label>
+											<div class="col-sm-9">
+												<h:inputText type="text" styleClass="form-control" value="#{fonctionController2.fonction.TTypeFonction.tyfLibelle}" readonly="true"/>
+												<!-- <p:selectOneMenu id="typeFonction"
+													value="#{fonctionController2.fonction.TTypeFonction.tyfLibelle}" effect="fade"
+													style="width:100%" filter="true"
+													filterMatchMode="startsWith">
+													<f:selectItem itemLabel="Choisir le type de la fonction.."
+														itemValue="empty" />
+													<f:selectItems
+														var="typeFonction"
+														itemLabel="#{typeFonction.tyfCod} : #{typeFonction.tyfLibelle}"
+														itemValue="#{typeFonction.tyfCod}" />
+													<p:ajax
+														listener="#{operateurController.genereCodeFonction()}"
+														update=":dlogFonction:foncode" />
+												</p:selectOneMenu> -->
+											</div>
+										</div>
+	
+	
+										<div class="form-group ">
+											<label for="fon" class="col-sm-3 control-label"><b>
+													Libelle Fonction <span style="color: red;"> *</span>
+											</b></label>
+											<div class="col-sm-9">
+												<h:panelGroup id="fonlib">
+													<p:inputText
+														value="#{fonctionController2.fonction.fonLibelle}"
+														type="text" styleClass="form-control" id="fon"
+														style="width: 100%" />
+												</h:panelGroup>
+											</div>
+										</div>
+									</div>
+	
+								</div>
+								<div class="row">
+									<div class="col-sm-8"></div>
+									<div class="col-sm-4">
+	
+										<div class="pull-right ">
+											<p:commandLink action="#{fonctionController2.saveFonction()}"
+												styleClass="btn btn-success row pull-right"
+												style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px"
+												oncomplete="PF('frmFonctionDlg').hide()"
+												update="dlgChoixFonction:tblFonctions">
+												<i class="ace-icon fa fa-save"></i> Enregistrer
+				            				</p:commandLink>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</p:dialog>
+			</h:form>
+	</ui:composition>
+</html>

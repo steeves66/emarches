@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/template/templatePage.xhtml">
+		<ui:define name="contents">
+			<section class="content-header">
+					<h1>
+						Opérateur <small>Nouvel Operateur</small>
+					</h1>
+					<ol class="breadcrumb">
+						<p:commandLink action="#{userController.renderPage('accueil')}"
+							update=":content">
+							<li><a><i class="fa fa-dashboard"></i> Acueil</a></li>
+						</p:commandLink>
+						<li class="active">Nouvel Operateur</li>
+					</ol>
+			</section>
+			<section >
+				<h:form id="frmAssignationWorkFlow">
+					<h:panelGroup id="globalMsg"
+						rendered="#{operateurController2.base64UrlDecode(param.successMsg) != ''  }">
+						<br />
+						<div class="alert alert-success light alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">X</button>
+							<i class="fa fa-check pr10"></i> <strong>Succès!</strong>
+							#{operateurController2.base64UrlDecode(param.successMsg)}
+						</div>
+					</h:panelGroup>
+					
+					<p:wizard nextLabel="Enregistrer et assigner"
+						backLabel="Précédent" id="pwz"
+						flowListener="#{assignationController2.onFlowProcess}">
+						<div class="container">
+							<p:tab id="tabFrmOperateur" title="Opérateur"
+								titleStyle="background-color: #f88b2e;background-image: none">
+								<p:panel>
+									<div class="box box-success box-solid">
+										<div class="box-header with-border" >Enregistrer un nouvel
+											opérateur
+										</div>
+										<div class="box-body">
+											<h:panelGroup id="globalErrorMsg" style="margin-top: 0px;"
+												rendered="#{!operateurValidator.valid}">
+												<br />
+												<div class="alert alert-danger light alert-dismissable">
+													<button type="button" class="close" data-dismiss="alert"
+														aria-hidden="true">X</button>
+													<i class="fa fa-ban pr10"></i> <strong>Erreur!</strong>
+													Veuillez renseigner correctement tous les champs obligatoires du formulaire
+												</div>
+											</h:panelGroup>
+											<ui:insert>
+												<ui:include
+													src="/pages/administration/test-leni/operateur/fragments/frmOperateur-frag.xhtml" />
+											</ui:insert>
+											<div class="box-footer">
+												<p:commandLink value="Enregistrer"
+													update="globalMsg globalErrorMsg frmAssignationWorkFlow"
+													action="#{operateurController2.saveOperateurAndReinitializeForm()}"
+													class="btn btn-success pull-right" style="background-color: #036b3d; font-weight: bolder; color: white;" id="btnSaveOprateur">
+													<i class="glyphicon glyphicon-refresh"></i>
+													<f:ajax execute="@form" render="@form" />
+													<p:confirm header="Confirmation"
+														message="Etes-vous sûre de vouloir enregistrer cet opérateur?"
+														icon="pi pi-exclamation-triangle" />
+		
+												</p:commandLink>
+											</div>
+												
+										</div>
+									</div>
+								</p:panel>
+							</p:tab>
+							<p:tab id="tabAssignationOperateur" title="Assignation"
+								titleStyle="background-color: #f88b2e;background-image: none">
+								<p:panel>
+									<ui:insert name="frmSaisieAssignation">
+										<ui:include
+											src="/pages/administration/test-leni/assignation/fragments/saisieAssignation-frag.xhtml" />
+									</ui:insert>
+	
+									<ui:insert name="tblAssignation">
+										<ui:include
+											src="/pages/administration/test-leni/assignation/fragments/listAssignation-frag.xhtml" />
+									</ui:insert>
+								</p:panel>
+							</p:tab>
+							
+							
+						</div>
+						
+					</p:wizard>
+							<p:commandLink styleClass="btn btn-warning row pull-right"  
+											action="#{operateurController2.printOperateur()}" id="btnPrintOperateur" 
+											title="Editer la fiche operateur" ajax="false" 
+											style="margin-top: 5px; background-color: #f88b2e; margin-right:5px;color:#fff"
+											rendered="#{assignationController2.printable}">
+																				   
+								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer fiche operateur
+							</p:commandLink>
+							
+				</h:form>
+							
+							<p:commandLink ajax="true" styleClass="btn btn-warning" style="background-color: red; margin-top: 5px;" action="#{operateurController2.goToListOperateurs()}">
+								<i class="glyphicon glyphicon-remove-sign"></i> Fermer
+							</p:commandLink>
+					
+				
+			</section>
+				
+			<ui:insert name="dlgChoixStructure">
+				<ui:include src="/pages/administration/test-leni/operateur/fragments/dlgChoixStructure-frag.xhtml" />
+			</ui:insert>
+			
+			<ui:insert name="dlgChoixFonction">
+				<ui:include src="/pages/administration/test-leni/assignation/fragments/dlgChoixFonction-frag.xhtml" />
+			</ui:insert>
+			
+			<ui:insert name="frmModifAssignation">
+				<ui:include src="/pages/administration/test-leni/assignation/fragments/frmModifAssignation-frag.xhtml" />
+			</ui:insert>
+			
+			<ui:insert name="frmFonctionDlg">
+				<ui:include src="/pages/administration/test-leni/assignation/fragments/frmFonctionDlg-frag.xhtml" />
+			</ui:insert>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="30%" height="25%">
+				<div align="center">
+					<p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</div>
+			</p:confirmDialog>			
+			
+		</ui:define>
+	</ui:composition>
+</html>

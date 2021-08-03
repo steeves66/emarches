@@ -40,7 +40,7 @@ public class StructureDao implements IStructureDao
 	@Override
 	public List<TStructure> findAll() 
 	{
-		return null;
+		return this.iservice.getObjects(tableClassName);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class FonctionController2
 	private String mode = "new";
 	@Autowired IFonctionDao fonctionDao;
 	@Autowired ITypeFonctionDao typeFonctionDao;
-	@Autowired private AssignationController2 assignationController;
+	@Autowired private AssignationOperateurController assignationController;
 	@Autowired private KeyGen keyGen;
 	
 	//@PostConstruct
