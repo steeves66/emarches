@@ -49,7 +49,7 @@ public class OperateurValidator implements Validator
 	{
 		System.out.println("Operateur matricule = " + assignationOperateurController.getOperateur().getOpeMatricule());
 		this.valid = true; // Avant toute validation j'initialise isValid à true. Si la validation échoue, la méthode setErrorMassage sera appelée et le changera à false
-		this.assignationOperateurController.setErrorMsgVisible(true);
+		this.assignationOperateurController.setErrorMsgVisible(false);
 		this.assignationOperateurController.setSuccessMsgVisible(false);
 		final String componentId = component.getId();
 	         switch (componentId)

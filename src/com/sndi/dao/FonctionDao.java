@@ -124,7 +124,8 @@ public class FonctionDao implements IFonctionDao
 	}
 	@Override
 	public List<VFonctionAssignationRech> findFonctionAssignationByStrCodeAndTyfCodAndCritereLibre(String strCode, String tyfCod, String critereRechercheFonction) 
-	{		
+	{	
+		this.listFonctionAssignationRech = this.iservice.getObjects(fonctionAssignationRechView);
 		return this.listFonctionAssignationRech.stream().filter(fonctionAssignation->
 			{
 				return (fonctionAssignation.getFonRech().toUpperCase().contains(critereRechercheFonction.toUpperCase()) && 
@@ -136,6 +137,7 @@ public class FonctionDao implements IFonctionDao
 	public List<TFonction> findByStrCodeAndTyfCodAndCritereLibre(String strCode, String tyfCod,
 			String critereRechercheFonction) 
 	{
+		this.listFonctionAssignationRech = this.iservice.getObjects(fonctionAssignationRechView);
 		return this.listFonctionAssignationRech.stream().filter(fonctionAssignation->
 			{
 				return (fonctionAssignation.getFonRech().toUpperCase().contains(critereRechercheFonction.toUpperCase()) && 

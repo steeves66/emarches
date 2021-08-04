@@ -61,7 +61,6 @@ public class AssignationOperateurController
 	private String critereRechercheOperateur = "";
 	private String formOperateurMode = "new"; // new & update
 	private String formAssignationMode;
-	private static String globalMsg="";
 	private boolean successMsgVisible = false;
 	private boolean errorMsgVisible = false;
 	
@@ -70,7 +69,7 @@ public class AssignationOperateurController
 	{
 		this.listStructures = this.StructureDao.getListStructures();
 		this.operateur.setOpeMatricule(keyGen.getOperateurCode());
-		this.listOperateurs = this.operateurDao.getListOperateurs();
+		this.listOperateurs = this.operateurDao.findAll();
 	}
 	public void rechercherOperateur()
 	{
@@ -97,7 +96,7 @@ public class AssignationOperateurController
 	{
 		this.operateurValidator.setValid(true);
 		this.operateur = operateur;
-		this.printable = this.assignationDao.countByOpeMatricule(this.operateur.getOpeMatricule())>=1;
+		this.printable = this.isPrintable(this.operateur);
 		this.successMsgVisible = false;
 		this.errorMsgVisible = false;
 		this.formOperateurMode = "update";
@@ -108,11 +107,11 @@ public class AssignationOperateurController
 		try
 		{
 			this.operateurService.createOrUpdateOperateur(this.operateur);
-			System.out.println("Fin CreateOrUpdate : AssignationOperateurContr L103" );
 			this.operateur = new TOperateur();
 			this.operateur.setOpeMatricule(keyGen.getOperateurCode());
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
+			this.listOperateurs = this.operateurDao.findAll();
 		}
 		catch(Exception e)
 		{
@@ -128,19 +127,21 @@ public class AssignationOperateurController
 			this.operateur = this.operateurService.createOrUpdateOperateur(this.operateur);
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
+			this.listOperateurs = this.operateurDao.findAll();
 		}
 		catch(Exception e)
 		{
 			this.successMsgVisible = false;
 			this.errorMsgVisible = true;
+			e.printStackTrace();
 		}
-		
 	}
 	
 	public void saveOperateurAndGoToAssignation() throws ParseException
 	{
 		this.operateur = operateurService.createOrUpdateOperateur(this.operateur);
 		this.beforeNewAssignation(this.operateur);
+		this.listOperateurs = this.operateurDao.findAll();
 	}
 	public void printOperateur() throws IOException, DocumentException
 	{
@@ -161,9 +162,16 @@ public class AssignationOperateurController
 		this.assignation.setAssDatDeb(new Date());
 		this.assignation.setAssDatFin(dernierJourAnne);
 		this.assignation.setAssStatut(true);
-		assignation.setAssCourant("N");
-		this.operateurService.createOrUpdateOperateur(this.assignation.getTOperateur());
+		int nbrAssignation = this.assignationDao.countByOpeMatricule(this.operateur.getOpeMatricule());
+		assignation.setAssCourant((nbrAssignation>=1 ? "N": "O"));
+		this.printable = this.isPrintable(this.operateur);
 		this.refreshListAssignation();
+	}
+	
+	public boolean isPrintable(TOperateur operateur)
+	{
+		return this.assignationDao.findAssignationsByOpeMatricule(operateur.getOpeMatricule()).stream()
+			.anyMatch(ass->ass.getAssCourant().equals("O"));
 	}
 	
 	public void beforeUpdateAssignation(TAssignation assignation)
@@ -179,14 +187,13 @@ public class AssignationOperateurController
 		fonction.setFonLibelle("");
 		this.assignation.setTFonction(fonction);
 		this.listFonctions = fonctionDao.findByStrCodeAndTyfCodAndCritereLibre(this.assignation.getTOperateur().getTStructure().getStrCode(), this.tyfCod, "");
-		this.printable = this.assignationDao.countByOpeMatricule(this.operateur.getOpeMatricule())>=1;
+		this.printable = this.isPrintable(this.operateur);
 	}
 	
 	public void enregistrerAssignation() throws ParseException
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dernierJourAnne = sdf.parse(LocalDate.now().getYear() + "-" + "12-31");
-		
 		this.assignationDao.save(this.assignation);
 		this.refreshListAssignation();
 		TAssignation newAssignation = new TAssignation();
@@ -196,15 +203,14 @@ public class AssignationOperateurController
 		newAssignation.setAssStatut(true);
 		newAssignation.setAssCourant("N");
 		this.assignation = newAssignation;
-		
-		this.printable = this.assignationDao.countByOpeMatricule(this.operateur.getOpeMatricule())>=1;
+		this.printable = this.isPrintable(this.operateur);
 	}
 	
 	public void deleteAssignation(TAssignation assignation)
 	{
 		assignationDao.delete(assignation);
 		this.refreshListAssignation();
-		this.printable = this.assignationDao.countByOpeMatricule(this.operateur.getOpeMatricule())>=1;
+		this.printable = this.isPrintable(this.operateur);
 	}
 	
 	public void updateAssignation() throws ParseException
@@ -226,18 +232,16 @@ public class AssignationOperateurController
 	{
 		return "/pages/administration/assignation-operateur/index.xhtml?faces-redirect=true";
 	}
-	
 	private void refreshListAssignation() //Rafraichit la liste des assignation de l'opérateur en cours de modification
 	{
 		TOperateur operateur = this.assignation.getTOperateur();
 		Set<TAssignation> opeAssignations = assignationDao.findAssignationsByOpeMatricule(operateur.getOpeMatricule()).stream().collect(Collectors.toSet());
 		this.assignation.getTOperateur().setTAssignations(opeAssignations);
 	}
-	
 	public void initialiserListStructures()
 	{
 		this.critereRechercheStructure = "";
-		this.listStructures = this.StructureDao.getListStructures();
+		this.listStructures = this.StructureDao.findAll();
 	}
 	public void rechercherStrucure()
 	{

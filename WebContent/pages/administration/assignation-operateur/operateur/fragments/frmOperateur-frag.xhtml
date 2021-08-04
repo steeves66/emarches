@@ -195,17 +195,17 @@
 							<p:commandLink ajax="false" rendered="#{assignationOperateurController.printable}"
 								action="#{assignationOperateurController.printOperateur()}"
 								class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnPrintOprateur">
-								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i>Imprimer fiche operateur
+								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Imprimer la fiche operateur
 							</p:commandLink>
 							
-							<p:commandLink value="Nouveau" update="frmOperateur"
+							<p:commandLink value="Reinitialiser" update="frmOperateur"
 													action="#{assignationOperateurController.beforeNewOperateur()}"
 													class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnNewOprateur">
 													<i class="glyphicon glyphicon-refresh"></i>
 							</p:commandLink>
 							
 							<p:commandLink value="Enregistrer" update="frmRechercheOperateurs:tblOperateur frmOperateur"
-													action="#{assignationOperateurController.saveOperateurAndReinitializeForm()}"
+													action="#{assignationOperateurController.saveOperateur()}"
 													class="btn btn-success pull-right" style="background-color: #036b3d; font-weight: bolder; color: white;" id="btnSaveOprateur">
 													<i class="glyphicon glyphicon-refresh"></i>
 													<f:ajax execute="@form" render="@form" />

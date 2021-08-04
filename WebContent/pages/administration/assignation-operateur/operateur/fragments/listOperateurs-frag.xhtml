@@ -82,9 +82,9 @@
 					<p:column headerText="Actions" styleClass="col-sm-1">
 						<p:commandButton 
 							styleClass="btn btn-xs" style="width:20px; height:20px;"
-							action="#{assignationOperateurController.printOperateur(operateur)}" title="Editer"
+							action="#{assignationOperateurController.printOperateur(operateur)}" title="Imprimer"
 							ajax="false"
-							rendered="#{assignationDao.countByOpeMatricule(operateur.opeMatricule) > 0}"
+							rendered="#{assignationOperateurController.isPrintable(operateur)}"
 							icon="ace-icon fa fa-file-pdf-o bigger-120">
 						</p:commandButton>
 			

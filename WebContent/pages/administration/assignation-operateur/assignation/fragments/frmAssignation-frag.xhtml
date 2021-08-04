@@ -12,35 +12,33 @@
 					header="Enregistrement / Modification des opérateurs">
 			<h:form id="frmAssignation" class="form-horizontal">
 				
-					<div class="box box-success box-solid">
-						<div class="box-header with-border">
-							<div class="col-md-9">
-								<div style="color: #fff">SAISIE DES ASSIGNATIONS DE
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<div class="col-md-9">
+							<div style="color: #fff">SAISIE DES ASSIGNATIONS DE
 									L'OPERATEUR #{assignationOperateurController.assignation.TOperateur.opeNom}</div>
-							</div>
 						</div>
-						<p:outputPanel class="box-body" style="display:block; padding: 5px 5%" id="saisieAssignationBody">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label"><b>Operateur<span style="color: red;"> *</span></b></label>
-									<p:inputText value="#{assignationOperateurController.assignation.TOperateur.opeNom}" type="text" styleClass="form-control" readonly="true"/>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<label for="typeFonction" class="control-label"><b>Type Fonction <span style="color: red;"> *</span></b></label>
-								<p:selectOneMenu styleClass="form-control" id="typeFonction" rendered="true" requiredMessage="Champ obligatoire" effect="fade"
+					</div>
+					<p:outputPanel class="box-body" style="display:block; padding: 5px 5%" id="saisieAssignationBody">
+						<div class="col-md-6">
+							<label class="control-label"><b>Operateur<span style="color: red;"> *</span></b></label>
+							<p:inputText value="#{assignationOperateurController.assignation.TOperateur.opeNom}" type="text" styleClass="form-control" readonly="true"/>
+						</div>
+						<div class="col-md-6">
+							<label for="typeFonction" class="control-label"><b>Type Fonction <span style="color: red;"> *</span></b></label>
+							<p:selectOneMenu id="typeFonction" rendered="true" requiredMessage="Champ obligatoire" effect="fade"
 											style="width:100%" filter="true" filterMatchMode="startsWith" value="#{assignationOperateurController.tyfCod}">
 											
-											<f:ajax event="change" execute="typeFonction" listener="#{assignationOperateurController.onSelectTypeFonction()}" render="dlgChoixFonction fonctionAssignation"></f:ajax>
-											<f:selectItem itemLabel ="Choisir le type de la fonction.." itemValue="" />
-											<f:selectItems value="#{typeFonctionDao.findByOpeMatricule(assignationOperateurController.assignation.TOperateur.opeMatricule)}"
+								<f:ajax event="change" execute="typeFonction" listener="#{assignationOperateurController.onSelectTypeFonction()}" render="dlgChoixFonction fonctionAssignation"></f:ajax>
+								<f:selectItem itemLabel ="Choisir le type de la fonction.." itemValue="" />
+								<f:selectItems value="#{typeFonctionDao.findByOpeMatricule(assignationOperateurController.assignation.TOperateur.opeMatricule)}"
 												var="typeFonction" itemLabel="#{typeFonction.tyfCod} : #{typeFonction.tyfLibelle}"
 												itemValue="#{typeFonction.tyfCod}" />
-								</p:selectOneMenu>
-								<h:message for="typeFonction" styleClass="text-danger"/>
-							</div>
-							<div class="col-md-12">
-								<label class="col-sm-2 control-label"><b>Fonction <span
+							</p:selectOneMenu>
+							<h:message for="typeFonction" styleClass="text-danger"/>
+						</div>
+						<div class="col-md-12">
+								<label class="control-label"><b>Fonction <span
 											style="color: red;"> *</span>
 									</b></label>
 								<table>
@@ -64,13 +62,15 @@
 							</div>
 							
 							<div class="col-md-3">
-									<label for="debut" class="control-label" style="text-align: right;"><b> Du <span style="color: red;"> *</span> </b></label>
+								<label for="debut" style="text-align: right;"><b> Du <span style="color: red;"> *</span> </b></label>
+								<br/>
 								<p:calendar id="debut"
 											value="#{assignationOperateurController.assignation.assDatDeb}"
 											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
 							</div>
 							<div class="col-md-3">
 								<label for="fin" class="control-label" style="text-align: right;"><b> Au <span style="color: red;"> *</span></b></label>
+								<br/>
 								<p:calendar id="fin"
 											value="#{assignationOperateurController.assignation.assDatFin}"
 											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
@@ -80,7 +80,7 @@
 								<label for="asscstart" class="control-label" style="text-align: right; margin: 0xp;"><b>
 												Assignation courante ? <span style="color: red;"> *</span>
 										</b></label>
-								<p:selectOneRadio id="asscstart"
+								<p:selectOneRadio id="asscstart" styleClass="form-control"
 												value="#{assignationOperateurController.assignation.assCourant}">
 												<f:selectItem itemLabel="OUI" itemValue="O" />
 												<f:selectItem itemLabel="NON" itemValue="N" />
@@ -91,7 +91,7 @@
 								<label for="statut" class="control-label"><b>
 												Staut <span style="color: red;"> *</span>
 										</b></label>
-								<p:selectOneRadio id="statut"
+								<p:selectOneRadio id="statut" styleClass="form-control"
 												value="#{assignationOperateurController.assignation.assStatut}">
 												<f:selectItem itemLabel="Actif" itemValue="true" />
 												<f:selectItem itemLabel="Inactif" itemValue="false" />
@@ -99,17 +99,18 @@
 							</div>
 							
 								
-						</p:outputPanel>		
-						</div>
+					</p:outputPanel>	
+					<div class="box-footer">
+						<p:commandLink styleClass="btn btn-success row pull-right"
+									action="#{assignationOperateurController.enregistrerAssignation()}"
+									style="background-color: #036d3b; margin-right:5px;color:#fff"
+									update="frmAssignation frmRechercheOperateurs:tblOperateur frmOperateur">
+									<i class="ace-icon fa fa-save"></i>Enregistrer
+						</p:commandLink>
+					</div>	
+				</div>
 						
-						<div class="box-footer">
-							<p:commandLink styleClass="btn btn-success row pull-right"
-								action="#{assignationOperateurController.enregistrerAssignation()}"
-								style="background-color: #036d3b; margin-right:5px;color:#fff"
-								update="frmAssignation">
-								<i class="ace-icon fa fa-save"></i>Enregistrer
-							</p:commandLink>
-						</div>
+						
 					
 					<div class="box box-success box-solid">
 						<div class="box-header with-border">
@@ -171,6 +172,11 @@
 							</p:dataTable>
 						</div>
 					</div>
+					<p:commandLink ajax="false" rendered="#{assignationOperateurController.printable}"
+								action="#{assignationOperateurController.printOperateur()}"
+								class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnPrintOprateur">
+								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Imprimer la fiche operateur
+					</p:commandLink>
 			</h:form>
 		</p:dialog>
 	</ui:composition>

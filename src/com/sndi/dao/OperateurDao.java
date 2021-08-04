@@ -1,4 +1,6 @@
 package com.sndi.dao;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
@@ -49,7 +51,8 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public List<TOperateur> findAll() 
 	{
-		return iservice.getObjects(tableClassName);
+		this.listOperateursRech =  iservice.getObjects("VOperateurRech", new ArrayList<String>(Arrays.asList("")));
+		return  this.listOperateursRech.stream().map(vOpe->vOpe.getTOperateur()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -57,20 +60,17 @@ public class OperateurDao implements IOperateurDao
 	{
 		System.out.println("Debut save OperateurDao : L58");
 		 operateur = (TOperateur)iservice.mergeAndReturnObject(operateur);
-		 this.doAddOnListOperateurs(operateur);
 		 return operateur;
 	}
 
 	@Override
 	public TOperateur update(TOperateur operateur) 
 	{
-		System.out.println("Debut update OperateurDao : L67");
 		if(!this.existsById(operateur.getOpeMatricule()) || operateur.getOpeMatricule()==null)
 		{
 			throw new RuntimeException("Impossible de mettre à jour un opérateur qui n'existe pas dans la base");
 		}
 		operateur = (TOperateur)iservice.mergeAndReturnObject(operateur);
-		this.doUpdateOnListOperateurs(operateur);
 		return operateur;
 	}
 

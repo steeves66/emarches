@@ -13,7 +13,7 @@
 						<div class="col-md-12">
 							<div class="box box-success box-solid">
 								<div class="box-header with-border">
-									<div style="color: #fff">MODIFICATION : #{assignationController2.updatedAssignation.TOperateur.opeNom}</div>
+									<div style="color: #fff">MODIFICATION : #{assignationOperateurController.updatedAssignation.TOperateur.opeNom}</div>
 								</div>
 								<div class="box-body">
 	
@@ -23,7 +23,7 @@
 										</b></label>
 										<div class="col-md-3">
 											<p:calendar id="debut"
-												value="#{assignationController2.updatedAssignation.assDatDeb}"
+												value="#{assignationOperateurController.updatedAssignation.assDatDeb}"
 												navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
 										</div>
 										<label for="fin" class="col-sm-1 control-label"><b>
@@ -31,7 +31,7 @@
 										</b></label>
 										<div class="col-md-3">
 											<p:calendar id="fin"
-												value="#{assignationController2.updatedAssignation.assDatFin}"
+												value="#{assignationOperateurController.updatedAssignation.assDatFin}"
 												navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
 										</div>
 									</div>
@@ -43,7 +43,7 @@
 										</b></label>
 										<div class="col-md-3">
 											<p:selectOneRadio id="asscstart"
-												value="#{assignationController2.updatedAssignation.assCourant}">
+												value="#{assignationOperateurController.updatedAssignation.assCourant}">
 												<f:selectItem itemLabel="OUI" itemValue="O" />
 												<f:selectItem itemLabel="NON" itemValue="N" />
 											</p:selectOneRadio>
@@ -53,7 +53,7 @@
 										</b></label>
 										<div class="col-md-4">
 											<p:selectOneRadio id="statut"
-												value="#{assignationController2.updatedAssignation.assStatut}">
+												value="#{assignationOperateurController.updatedAssignation.assStatut}">
 												<f:selectItem itemLabel="Actif" itemValue="true" />
 												<f:selectItem itemLabel="Inactif" itemValue="false" />
 											</p:selectOneRadio>
@@ -67,10 +67,10 @@
 	
 										<div class="pull-right ">
 											<p:commandLink
-												action="#{assignationController2.updateAssignation()}"
+												action="#{assignationOperateurController.updateAssignation()}"
 												styleClass="btn btn-success row pull-right"
 												style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px"
-												oncomplete="PF('dlgModifAssignation').hide()" update="frmAssignation:tblAssignation">
+												oncomplete="PF('dlgModifAssignation').hide()" update="frmAssignation frmRechercheOperateurs">
 												<i class="ace-icon fa fa-save"></i> Modifier
 				             					<p:confirm header="Confirmation"
 													message="Confirmez vous la modification de l'assignation?"

@@ -87,7 +87,8 @@ public class StructureDao implements IStructureDao
 	@Override
 	public List<TStructure> findByStrCodeOrLibelle(String critere) 
 	{
-		return this.listStructures.stream().filter(str->
+		List<TStructure> structuresTrouves =  this.iservice.getObjects(tableClassName);
+		return structuresTrouves.stream().filter(str->
 		{
 			return (str.getStrCode().toUpperCase().contains(critere.toUpperCase()) ||
 					str.getStrLibelleLong().toUpperCase().contains(critere.toUpperCase()));
