@@ -20,24 +20,15 @@
 							</div>
 						</div>
 						<p:outputPanel class="box-body" style="display:block; padding: 5px 5%" id="saisieAssignationBody">
-							<div class="row">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label for="nom" class="col-sm-2 control-label"> 
-										<b>Operateur<span style="color: red;"> *</span></b>
-									</label>
-									<div class="col-sm-3">
-										<p:inputText value="#{assignationOperateurController.assignation.TOperateur.opeNom}"
-											type="text" styleClass="form-control" readonly="true"
-											/>
-									</div>
+									<label class="control-label"><b>Operateur<span style="color: red;"> *</span></b></label>
+									<p:inputText value="#{assignationOperateurController.assignation.TOperateur.opeNom}" type="text" styleClass="form-control" readonly="true"/>
 								</div>
-								<div class="form-group ">
-									<label for="typeFonction" class="col-sm-2 control-label"><b>Type
-											Fonction <span style="color: red;"> *</span>
-									</b></label>
-									<div class="col-sm-6">
-										<p:selectOneMenu id="typeFonction" rendered="true" requiredMessage="Champ obligatoire"
-											effect="fade"
+							</div>
+							<div class="col-md-6">
+								<label for="typeFonction" class="control-label"><b>Type Fonction <span style="color: red;"> *</span></b></label>
+								<p:selectOneMenu styleClass="form-control" id="typeFonction" rendered="true" requiredMessage="Champ obligatoire" effect="fade"
 											style="width:100%" filter="true" filterMatchMode="startsWith" value="#{assignationOperateurController.tyfCod}">
 											
 											<f:ajax event="change" execute="typeFonction" listener="#{assignationOperateurController.onSelectTypeFonction()}" render="dlgChoixFonction fonctionAssignation"></f:ajax>
@@ -45,23 +36,20 @@
 											<f:selectItems value="#{typeFonctionDao.findByOpeMatricule(assignationOperateurController.assignation.TOperateur.opeMatricule)}"
 												var="typeFonction" itemLabel="#{typeFonction.tyfCod} : #{typeFonction.tyfLibelle}"
 												itemValue="#{typeFonction.tyfCod}" />
-										</p:selectOneMenu>
-									</div>
-									<h:message for="typeFonction" styleClass="text-danger"/>
-								</div>
-			
-								<div class="form-group">
-									<label class="col-sm-2 control-label"><b>Fonction <span
+								</p:selectOneMenu>
+								<h:message for="typeFonction" styleClass="text-danger"/>
+							</div>
+							<div class="col-md-12">
+								<label class="col-sm-2 control-label"><b>Fonction <span
 											style="color: red;"> *</span>
 									</b></label>
-									<div class="col-sm-6">
-										<table>
-											<tr>
-												<td style="width: 100%"><p:inputText id="fonctionAssignation"
+								<table>
+									<tr>
+										<td style="width: 100%"><p:inputText id="fonctionAssignation"
 														value="#{(assignationOperateurController.assignation.TFonction.fonCod eq '' || assignationOperateurController.assignation.TFonction.fonCod eq null) ? '' : ''.concat(assignationOperateurController.assignation.TFonction.fonCod).concat(':').concat(assignationOperateurController.assignation.TFonction.fonLibelle)}"
 														type="text" styleClass="form-control" readonly="true" rendered="true" required="true" requiredMessage="Champ obligatoire"
 														style="width: 100%" /></td>
-												<td><p:commandLink
+										<td><p:commandLink
 														oncomplete="PF('dlgChoixFonction').show()"
 														
 														styleClass="btn btn-warning"
@@ -69,58 +57,51 @@
 														update=":dlgChoixFonction">
 														<i class="fa fa-search-plus"></i>
 													</p:commandLink>
-												</td>
-											</tr>
-										</table>
-										<h:message for="fonctionAssignation" styleClass="text-danger"/>
-									</div>
-								</div>
-			
-								<div class="form-group">
-									<label for="debut" class="col-sm-2 control-label" style="text-align: right;"><b>
-											Du <span style="color: red;"> *</span>
-									</b></label>
-									<div class="col-md-2">
-										<p:calendar id="debut"
+										</td>
+									</tr>
+								</table>
+								<h:message for="fonctionAssignation" styleClass="text-danger"/>
+							</div>
+							
+							<div class="col-md-3">
+									<label for="debut" class="control-label" style="text-align: right;"><b> Du <span style="color: red;"> *</span> </b></label>
+								<p:calendar id="debut"
 											value="#{assignationOperateurController.assignation.assDatDeb}"
 											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
-									</div>
-									<label for="fin" class="col-sm-1 control-label" style="text-align: right;"><b> Au
-											<span style="color: red;"> *</span>
-									</b></label>
-									<div class="col-md-2">
-										<p:calendar id="fin"
+							</div>
+							<div class="col-md-3">
+								<label for="fin" class="control-label" style="text-align: right;"><b> Au <span style="color: red;"> *</span></b></label>
+								<p:calendar id="fin"
 											value="#{assignationOperateurController.assignation.assDatFin}"
 											navigator="true" pattern="dd/MM/yyyy" mask="true" locale="fr" />
-									</div>
-								</div>
-			
-			
-								
-									<div class="form-group">
-										<label for="asscstart" class="col-md-offset-1  col-md-2 col-sm-2 control-label" style="text-align: right; margin: 0xp;"><b>
+									
+							</div>
+							<div class="col-md-3">
+								<label for="asscstart" class="control-label" style="text-align: right; margin: 0xp;"><b>
 												Assignation courante ? <span style="color: red;"> *</span>
 										</b></label>
-										<div class="col-md-4" style="margin: 0xp;">
-											<p:selectOneRadio id="asscstart"
+								<p:selectOneRadio id="asscstart"
 												value="#{assignationOperateurController.assignation.assCourant}">
 												<f:selectItem itemLabel="OUI" itemValue="O" />
 												<f:selectItem itemLabel="NON" itemValue="N" />
 											</p:selectOneRadio>
-										</div>
-										<label for="statut" class="col-sm-2 control-label"><b>
+								
+							</div>
+							<div class="col-md-3">
+								<label for="statut" class="control-label"><b>
 												Staut <span style="color: red;"> *</span>
 										</b></label>
-										<div class="col-md-4">
-											<p:selectOneRadio id="statut"
+								<p:selectOneRadio id="statut"
 												value="#{assignationOperateurController.assignation.assStatut}">
 												<f:selectItem itemLabel="Actif" itemValue="true" />
 												<f:selectItem itemLabel="Inactif" itemValue="false" />
 											</p:selectOneRadio>
-										</div>
-									</div>
 							</div>
-						</p:outputPanel>
+							
+								
+						</p:outputPanel>		
+						</div>
+						
 						<div class="box-footer">
 							<p:commandLink styleClass="btn btn-success row pull-right"
 								action="#{assignationOperateurController.enregistrerAssignation()}"
@@ -129,7 +110,6 @@
 								<i class="ace-icon fa fa-save"></i>Enregistrer
 							</p:commandLink>
 						</div>
-					</div>
 					
 					<div class="box box-success box-solid">
 						<div class="box-header with-border">
