@@ -190,6 +190,7 @@
 						<div class="box-footer">
 							<p:commandLink ajax="true" styleClass="btn btn-warning" style="background-color: red; color:white; font-weight: bolder ; margin-top: 5px;" oncomplete="PF('frmOperateurDlg').hide()">
 								<i style="color:white;" class="glyphicon glyphicon-remove-sign"></i> Fermer
+								<f:ajax />
 							</p:commandLink>
 							
 							<p:commandLink ajax="false" rendered="#{assignationOperateurController.printable}"
@@ -198,13 +199,14 @@
 								<i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Imprimer la fiche operateur
 							</p:commandLink>
 							
-							<p:commandLink value="Reinitialiser" update="frmOperateur"
+							<h:commandButton value="Reinitialiser" update="frmOperateur"
 													action="#{assignationOperateurController.beforeNewOperateur()}"
 													class="btn btn-default pull-right" style="background-color: #f88b2e; font-weight: bolder; color: white;" id="btnNewOprateur">
-													<i class="glyphicon glyphicon-refresh"></i>
-							</p:commandLink>
+													
+								<f:ajax execute="@this" render="@form" />
+							</h:commandButton>
 							
-							<p:commandLink value="Enregistrer" update="frmRechercheOperateurs:tblOperateur frmOperateur"
+							<p:commandLink value="Enregistrer" update="frmRechercheOperateurs frmOperateur"
 													action="#{assignationOperateurController.saveOperateur()}"
 													class="btn btn-success pull-right" style="background-color: #036b3d; font-weight: bolder; color: white;" id="btnSaveOprateur">
 													<i class="glyphicon glyphicon-refresh"></i>

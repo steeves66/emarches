@@ -1,17 +1,13 @@
 package com.sndi.dao;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.sndi.dao.WhereClause;
 import com.sndi.model.TOperateur;
 import com.sndi.model.VOperateurRech;
 import com.sndi.service.Iservice;
@@ -51,14 +47,13 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public List<TOperateur> findAll() 
 	{
-		this.listOperateursRech =  iservice.getObjects("VOperateurRech", new ArrayList<String>(Arrays.asList("")));
+		this.listOperateursRech =  iservice.getObjects("VOperateurRech");
 		return  this.listOperateursRech.stream().map(vOpe->vOpe.getTOperateur()).collect(Collectors.toList());
 	}
 
-	@Override
+	@Override 
 	public TOperateur save(TOperateur operateur) 
 	{
-		System.out.println("Debut save OperateurDao : L58");
 		 operateur = (TOperateur)iservice.mergeAndReturnObject(operateur);
 		 return operateur;
 	}
@@ -159,37 +154,35 @@ public class OperateurDao implements IOperateurDao
 	}
 
 	@Override
-	public TOperateur saveOrUpdate(TOperateur entity) 
+	public TOperateur saveOrUpdate(TOperateur operateur) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		if(operateur.getOpeMatricule() != null)
+		{
+			if(this.existsById(operateur.getOpeMatricule()))
+			{
+				operateur  = this.update(operateur);
+			}
+			else
+			{
+				operateur = this.save(operateur);
+			}
+		}
+		else
+		{
+			operateur = this.save(operateur);
+		}
+		return operateur;
 	}
 
 	@Override
-	public void delete(TOperateur entity) {
-		// TODO Auto-generated method stub
+	public void delete(TOperateur operateur) 
+	{
+		this.iservice.deleteObject(operateur);
 	}
 
 	@Override
 	public long countAll() 
 	{
 		return iservice.countTableByColumn(tableName, idColumn, new WhereClause(idColumn, WhereClause.Comparateur.NEQ, null));
-	}
-	
-	private void doAddOnListOperateurs(TOperateur operateur)
-	{
-		this.listOperateurs.add(0, operateur);
-	}
-	
-	private void doUpdateOnListOperateurs(TOperateur operateur)
-	{
-		OptionalInt updatedOperateurIndex = IntStream.range(0, this.listOperateurs.size())
-	    .filter(i -> this.listOperateurs.get(i).getOpeMatricule().equals(operateur.getOpeMatricule()))
-	    .findFirst();
-		
-		if(updatedOperateurIndex.isPresent())
-		{
-			this.listOperateurs.set(updatedOperateurIndex.getAsInt(), operateur);
-		}
 	}
 }

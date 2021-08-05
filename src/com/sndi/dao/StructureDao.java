@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TStructure;
@@ -14,7 +15,7 @@ import com.sndi.service.Iservice;
 
 import lombok.Getter;
 
-@Component
+@Component @Transactional
 public class StructureDao implements IStructureDao 
 {
 	@Autowired private Iservice iservice;
@@ -31,9 +32,8 @@ public class StructureDao implements IStructureDao
 		this.listStructures = this.iservice.getObjects(tableClassName);
 	}
 	@Override
-	public TStructure findById(String id) 
+	public TStructure findById(String strCode) 
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -56,33 +56,32 @@ public class StructureDao implements IStructureDao
 	}
 
 	@Override
-	public TStructure saveOrUpdate(TStructure entity) {
-		// TODO Auto-generated method stub
+	public TStructure saveOrUpdate(TStructure entity) 
+	{
 		return null;
 	}
 
 	@Override
 	public void deleteById(String id) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public void delete(TStructure entity) {
-		// TODO Auto-generated method stub
-
+	public void delete(TStructure structure) 
+	{
+		this.iservice.deleteObject(structure);
 	}
 
 	@Override
-	public long countAll() {
-		// TODO Auto-generated method stub
+	public long countAll() 
+	{
 		return 0;
 	}
 
 	@Override
-	public boolean existsById(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existsById(String strCode) 
+	{
+		return this.iservice.countTableByColumn(tableName, idColumn, new WhereClause(idColumn, WhereClause.Comparateur.EQ, strCode))>=1;
 	}
 	@Override
 	public List<TStructure> findByStrCodeOrLibelle(String critere) 
@@ -95,7 +94,7 @@ public class StructureDao implements IStructureDao
 		}).collect(Collectors.toList());
 	}
 	@Override
-	public boolean existsByStrCode() 
+	public boolean existsByStrCode(String strCode) 
 	{
 		return this.iservice.countTableByColumn(tableName, idColumn, new WhereClause(idColumn, WhereClause.Comparateur.EQ, idColumn))>=1;
 	}

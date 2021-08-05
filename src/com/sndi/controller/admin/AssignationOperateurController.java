@@ -106,7 +106,7 @@ public class AssignationOperateurController
 	{
 		try
 		{
-			this.operateurService.createOrUpdateOperateur(this.operateur);
+			this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.operateur = new TOperateur();
 			this.operateur.setOpeMatricule(keyGen.getOperateurCode());
 			this.successMsgVisible = true;
@@ -124,7 +124,7 @@ public class AssignationOperateurController
 	{
 		try
 		{
-			this.operateur = this.operateurService.createOrUpdateOperateur(this.operateur);
+			this.operateur = this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
 			this.listOperateurs = this.operateurDao.findAll();
@@ -139,7 +139,7 @@ public class AssignationOperateurController
 	
 	public void saveOperateurAndGoToAssignation() throws ParseException
 	{
-		this.operateur = operateurService.createOrUpdateOperateur(this.operateur);
+		this.operateur = operateurService.saveOrUpdateOperateur(this.operateur);
 		this.beforeNewAssignation(this.operateur);
 		this.listOperateurs = this.operateurDao.findAll();
 	}

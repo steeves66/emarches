@@ -45,7 +45,7 @@ public class Service implements Iservice {
 			getDao().mergeObject(object);
 		}
 		
-		@Override
+		@Override @Transactional(readOnly = false)
 		public Object mergeAndReturnObject(Object object) 
 		{
 			return getDao().mergeAndReturnObject(object);

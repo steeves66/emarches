@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Component
-@Transactional
 public class AssignationDao implements IAssignationDao
 {
 	@Getter @Setter

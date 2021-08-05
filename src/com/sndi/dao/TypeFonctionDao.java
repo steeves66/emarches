@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TTypeFonction;
@@ -39,8 +40,7 @@ public class TypeFonctionDao implements ITypeFonctionDao
 	@Override
 	public TTypeFonction save(TTypeFonction typeFonction) 
 	{
-		iservice.persist(typeFonction);
-		return typeFonction;
+		return  (TTypeFonction) iservice.mergeAndReturnObject(typeFonction);
 	}
 
 	@Override

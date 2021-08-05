@@ -22,27 +22,27 @@
 		  
 		<section class="content">
 			<ui:insert name="listOperateurs">
-				<ui:include src="/pages/administration/assignation-operateur/operateur/fragments/listOperateurs-frag.xhtml" />
+				<ui:include src="/pages/administration/assignation-operateur/operateur/listOperateurs-frag.xhtml" />
 			</ui:insert>
 		 	<p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 				<i class="ace-icon fa fa-close bigger-130"></i> Fermer
 			</p:commandLink>
 		</section>
 		<ui:insert name="frmOperateur">
-			<ui:include src="/pages/administration/assignation-operateur/operateur/fragments/frmOperateur-frag.xhtml" />
+			<ui:include src="/pages/administration/assignation-operateur/operateur/frmOperateur-frag.xhtml" />
 		</ui:insert>
 	    <ui:insert name="dlgChoixStructure">
-			<ui:include src="/pages/administration/assignation-operateur/operateur/fragments/dlgChoixStructure-frag.xhtml" />
+			<ui:include src="/pages/administration/assignation-operateur/operateur/dlgChoixStructure-frag.xhtml" />
 		</ui:insert>
 		
 		<ui:insert name="frmAssignation">
-			<ui:include src="/pages/administration/assignation-operateur/assignation/fragments/frmAssignation-frag.xhtml" />
+			<ui:include src="/pages/administration/assignation-operateur/assignation/frmAssignation-frag.xhtml" />
 		</ui:insert>
 		<ui:insert name="frmModifAssignation">
-			<ui:include src="/pages/administration/assignation-operateur/assignation/fragments/frmModifAssignation-frag.xhtml" />
+			<ui:include src="/pages/administration/assignation-operateur/assignation/frmModifAssignation-frag.xhtml" />
 		</ui:insert>
 		<ui:insert name="dlgChoixFonction">
-			<ui:include src="/pages/administration/assignation-operateur/assignation/fragments/dlgChoixFonction-frag.xhtml" />
+			<ui:include src="/pages/administration/assignation-operateur/assignation/dlgChoixFonction-frag.xhtml" />
 		</ui:insert>
 		
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="32%" height="25%" >

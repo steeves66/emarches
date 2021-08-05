@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sndi.controller.admin.AssignationOperateurController;
-import com.sndi.controller.admin.OperateurController2;
 import com.sndi.dao.IOperateurDao;
 import com.sndi.dao.IStructureDao;
 import com.sndi.model.TOperateur;

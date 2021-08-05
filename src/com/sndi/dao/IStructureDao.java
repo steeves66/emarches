@@ -8,6 +8,5 @@ public interface IStructureDao extends ICrudDao<TStructure, String>
 {
 	List<TStructure> findByStrCodeOrLibelle(String critere);
 	List<TStructure> getListStructures();
-	
-	boolean existsByStrCode();
+	boolean existsByStrCode(String strCode);
 }
