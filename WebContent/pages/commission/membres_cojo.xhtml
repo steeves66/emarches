@@ -71,7 +71,7 @@
             <div class="col-sm-3">
             </div>
               <div class="col-sm-1">
-				                  <p:commandLink oncomplete="PF('dlogMemebre').show()" action="#{commissionController.chargeMembre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				                  <p:commandLink oncomplete="PF('dlogMemebre').show()" action="#{commissionController.chargeMembreCommiteParam()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER MEMBRE</span>
 								  </p:commandLink>
 			</div> 
@@ -192,7 +192,7 @@
               </div>
          </div>
               
-		      <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeCommite}" emptyMessage="Aucun membre trouvé" rows="10"
+		      <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeMembresCommiteParam}" emptyMessage="Aucun membre trouvé" rows="10"
 					    rowKey="#{slctdTb.dcsNum}" selection="#{commissionController.selectionMembresCommite}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="250"
                           >

@@ -178,6 +178,7 @@ public class CommissionController {
 	 private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
 	 /*private List<TDetCommissionSeance> membresCommite = new ArrayList<TDetCommissionSeance>(); */
 	 private List<VDetCommissionSeance> membresCommite = new ArrayList<VDetCommissionSeance>(); 
+	 private List<VDetCommissionSeance> listeMembresCommiteParam = new ArrayList<VDetCommissionSeance>(); 
 	 private List<TDetCommissionSeance> listMbrSup = new ArrayList<TDetCommissionSeance>();
 	 private List<VDetCommissionSeance> listeCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VDetCommissionSeance> listeMembreCojo = new ArrayList<VDetCommissionSeance>(); 
@@ -604,13 +605,25 @@ public class CommissionController {
 		//Liste des membres du commite d'evaluation
 	 public void chargeMembreCommite() {
 		 membresCommite.clear(); 
-		 membresCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+		 membresCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
 				 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"COJ"),
 				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 				// ); 
 		      heureDeb = "";
 			  heureFin = "";
 				_logger.info("membreCommite size: "+membresCommite.size());	
+				
+	 }
+	 
+	 //Afficher la liste parametre des membres du comité
+	 public void chargeMembreCommiteParam() {
+		 listeMembresCommiteParam.clear(); 
+		 selectionMembresCommite.clear();
+		 listeMembresCommiteParam = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
+				 new WhereClause("COM_TCO_CODE",Comparateur.EQ,"COJ"),
+				    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+		      heureDeb = "";
+			  heureFin = "";	 
 	 }
 	 
 	 public void activeBtnOuv() {
@@ -621,7 +634,7 @@ public class CommissionController {
 		 public void chargeMembre() {
 			 selectionMembresCommite.clear();
 			 listeCommite.clear();
-			 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+			 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
 					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
@@ -632,7 +645,7 @@ public class CommissionController {
 		 public void chargeMembreCojo() {
 			 selectionMembresCommite.clear();
 			 listeMembreCojo.clear();
-			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
 					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
@@ -1482,31 +1495,37 @@ public class CommissionController {
 							FacesContext.getCurrentInstance().addMessage(null, msg);		
 						}else {
 						for(VDetCommissionSeance mbr : selectionMembresCommite) {
-						
-									membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
-									membre.setTempDteSaisi(Calendar.getInstance().getTime());
-									membre.setDcsComTcoCode(""+typeComm);
-									//newmbrCommite.setDcsComTctCode(mbr.getTctCode());
-									membre.setDcsNomMbm(mbr.getDcsNomMbm());
-									membre.setDcsPreMbm(mbr.getDcsPreMbm());
-									membre.setDcsTelMbm(mbr.getDcsTelMbm());
-									membre.setDcsRepMandate(mbr.getDcsRepMandate());
-									membre.setDcsObservation(mbr.getDcsObservation());
-									membre.setDcsFonAdmin(mbr.getDcsFonAdmin());
-									membre.setDcsStrCom(mbr.getDcsStrCom());
-									membre.setTempType("COM");
-									membre.setDcsFonCod(mbr.getDcsFonCod());
-									membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
-									membre.setDcsDacCode(slctdTd.getAaoDacCode());
-									membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
-									membre.setDcsSeaTseNum(""+typeSeance); 
-									membre.setDcsDteSea(dateSeance);
-									membre.setDcsHeureDeb(heureDeb);
-									membre.setDcsSeaNum(mbr.getDcsSeaNum().toString());
-									//membre.setDcsHeureFin(heureFin);
-									membre.setDcsSeaLieu(lieuSeance);
-									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
-								   iservice.addObject(membre);		
+							membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
+							membre.setTempDteSaisi(Calendar.getInstance().getTime());
+							membre.setDcsComTcoCode(""+typeComm);
+							//newmbrCommite.setDcsComTctCode(mbr.getTctCode());
+							if(mbr.getDcsNum().longValue()==0) {
+								
+							}else {
+							 membre.setDcsDcsNum(mbr.getDcsNum().toString());	
+							}
+							membre.setDcsNomMbm(mbr.getDcsNomMbm());
+							membre.setDcsComNum(mbr.getDcsComNum().toString());
+							membre.setDcsPreMbm(mbr.getDcsPreMbm());
+							membre.setDcsTelMbm(mbr.getDcsTelMbm());
+							membre.setDcsRepMandate(mbr.getDcsRepMandate());
+							membre.setDcsObservation(mbr.getDcsObservation());
+							membre.setDcsFonAdmin(mbr.getDcsFonAdmin());
+							membre.setDcsStrCom(mbr.getDcsStrCom());
+							membre.setTempType("COM");
+							//membre.setDcsComTcoCode(mbr.getComTcoCode());
+							membre.setDcsFonCod(mbr.getDcsFonCod());
+							membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
+							membre.setDcsDacCode(slctdTd.getAaoDacCode());
+							membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+							membre.setDcsSeaTseNum(""+typeSeance); 
+							membre.setDcsDteSea(dateSeance);
+							membre.setDcsHeureDeb(heureDeb);
+							//membre.setDcsSeaNum(mbr.getDcsSeaNum().toString());
+							//membre.setDcsHeureFin(heureFin);
+							membre.setDcsSeaLieu(lieuSeance);
+							membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+						   iservice.addObject(membre);			
 							}
 							
 						}
@@ -2309,8 +2328,8 @@ public class CommissionController {
 						 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
 						 			
 						 			if(lignes.getDcadCommentaire() == null) {
-						 				//FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
-										//FacesContext.getCurrentInstance().addMessage(null, msg);
+						 			/*	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+										FacesContext.getCurrentInstance().addMessage(null, msg);*/
 						 			}else {
 						 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
 							 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
@@ -4390,6 +4409,14 @@ public class CommissionController {
 
 	public void setListeTcritereOuvDelete(List<TCritereAnalyseDacOuv> listeTcritereOuvDelete) {
 		this.listeTcritereOuvDelete = listeTcritereOuvDelete;
+	}
+
+	public List<VDetCommissionSeance> getListeMembresCommiteParam() {
+		return listeMembresCommiteParam;
+	}
+
+	public void setListeMembresCommiteParam(List<VDetCommissionSeance> listeMembresCommiteParam) {
+		this.listeMembresCommiteParam = listeMembresCommiteParam;
 	}
 
 

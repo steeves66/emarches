@@ -19,6 +19,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_DET_COMMISSION_SEANCE")
 public class VDetCommissionSeance implements java.io.Serializable {
 
+	private BigDecimal RId;
 	private BigDecimal dcsNum;
 	private String dcsDacCode;
 	private String dcsFonCod;
@@ -39,19 +40,22 @@ public class VDetCommissionSeance implements java.io.Serializable {
 	private String dcsRepMandate;
 	private String dcsFonAdmin;
 	private String dcsStrCom;
+	private String comDacCode;
+	private String comTcoCode;
 
 	public VDetCommissionSeance() {
 	}
 
-	public VDetCommissionSeance(BigDecimal dcsNum) {
-		this.dcsNum = dcsNum;
+	public VDetCommissionSeance(BigDecimal RId) {
+		this.RId = RId;
 	}
 
-	public VDetCommissionSeance(BigDecimal dcsNum, String dcsDacCode, String dcsFonCod, String dcsOpeMatricule,
+	public VDetCommissionSeance(BigDecimal RId,BigDecimal dcsNum, String dcsDacCode, String dcsFonCod, String dcsOpeMatricule,
 			BigDecimal dcsSeaNum, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
 			BigDecimal dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
 			String dcsComStrCode, String dcsOpeMatSaisi, String dcsMbmRespo, String dcsRepMandate,String dcsFonAdmin,
-			String dcsStrCom) {
+			String dcsStrCom,String comDacCode, String comTcoCode) {
+		this.RId = RId;
 		this.dcsNum = dcsNum;
 		this.dcsDacCode = dcsDacCode;
 		this.dcsFonCod = dcsFonCod;
@@ -72,9 +76,20 @@ public class VDetCommissionSeance implements java.io.Serializable {
 		this.dcsRepMandate = dcsRepMandate;
 		this.dcsFonAdmin = dcsFonAdmin;
 		this.dcsStrCom = dcsStrCom;
+		this.comDacCode = comDacCode;
+		this.comTcoCode = comTcoCode;
 	}
 
 	@Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+	
 	@Column(name = "DCS_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDcsNum() {
 		return this.dcsNum;
@@ -246,13 +261,31 @@ public class VDetCommissionSeance implements java.io.Serializable {
 		this.dcsFonAdmin = dcsFonAdmin;
 	}
 
-	@Column(name = "DCS_STR_COM", length = 500)
+	@Column(name = "DCS_STR_COM")
 	public String getDcsStrCom() {
 		return this.dcsStrCom;
 	}
 
 	public void setDcsStrCom(String dcsStrCom) {
 		this.dcsStrCom = dcsStrCom;
+	}
+	
+	@Column(name = "COM_DAC_CODE")
+	public String getComDacCode() {
+		return this.comDacCode;
+	}
+
+	public void setComDacCode(String comDacCode) {
+		this.comDacCode = comDacCode;
+	}
+
+	@Column(name = "COM_TCO_CODE")
+	public String getComTcoCode() {
+		return this.comTcoCode;
+	}
+
+	public void setComTcoCode(String comTcoCode) {
+		this.comTcoCode = comTcoCode;
 	}
 
 }
