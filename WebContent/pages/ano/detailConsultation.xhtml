@@ -18,7 +18,7 @@
 </style>
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{anoController.slctdTdDem.aaoCode} : <strong>#{anoController.slctdTdDem.aaoLibelle}</strong>
+        #{controleController.libelle} #{anoController.slctdTd.aaoCode} : <strong>#{anoController.slctdTd.aaoLibelle}</strong>
         <small>
         <!-- #{controleController.libelle1} -->
         </small>
@@ -67,86 +67,7 @@
                <div class="col-md-12">
                 <div class="row">
                 
-                 <div class="col-md-12">
-                   <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-8"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">INFORMATIONS SUR LA DEMANDE #{anoController.slctdTdDem.demRef} : #{anoController.slctdTdDem.demObjet} </span></div></div> 
-			    
-				   <div class="col-md-2">
-					  <p:commandLink rendered="false" oncomplete="PF('chargeDocDlg').show()" title="Joindre le PV d'analyse" action="#{anoController.chargeDossierRapport()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e">
-					  <span class="btn-label"><i class="fa fa-download"></i></span><span class="hidden-xs">Joindre le rapport d'analyse</span>
-					  </p:commandLink>
-				   </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	            
-	             <div class="row">                   
-		         <div class="col-md-6 align justify-content-center">
-		          <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>Joindre le(s) document(s)</small></legend>
-                
-	      
-                   </fieldset>
-                     <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>Liste des documents joints</small></legend>
-	                    <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeDmp}"
-	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
-			           <p:column headerText="Nom du document " styleClass="col-md-6">
-			            <h:outputText value="#{doss.dodLibelle}" />
-			        </p:column>
-			        
-			        <p:column headerText="Nature" styleClass="col-md-4">
-			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
-			        </p:column>
-			        <p:column headerText="Actions" styleClass="col-md-2">
-                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
-			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
-				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
-				            </p:commandLink>
-				            
-						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDemDmp()}" title="Supprimer" update="gnl">
-		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
-		                </p:commandLink>
-		               
-		 	        </p:column>
-			    </p:dataTable>
-			    </fieldset>
-		         </div>
-		         <div class="col-md-6 align justify-content-center">
-		            <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>Liste des documents joints par l'AC</small></legend>
-	                    <p:dataTable id="tabDossierChargeAc" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeAc}"
-	                   scrollable="true" scrollHeight="291" emptyMessage="Aucun Document enrégistré">
-			           <p:column headerText="Nom du document " styleClass="col-md-6">
-			            <h:outputText value="#{doss.dodLibelle}" />
-			        </p:column>
-			        
-			        <p:column headerText="Nature" styleClass="col-md-4">
-			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
-			        </p:column>
-			        <p:column headerText="Actions" styleClass="col-md-2">
-                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
-			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
-				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
-				            </p:commandLink>
-				            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDem()}" title="Supprimer" update="gnl">
-		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
-		                </p:commandLink>
-		                </h:panelGroup>
-		 	        </p:column>
-			    </p:dataTable>
-			    </fieldset>
-		         </div>
-                 </div>   
-	            </div>
-	           </div>
-                 </div>
+                 
                  
                  <div class="col-md-12">
                  <h:panelGroup id="info">
@@ -228,46 +149,41 @@
 				        </p:column>
 				        
 				       		        
-				        <p:column width="3%">
-				              <p:commandLink action="#{anoController.chargeDialogueMotif()}" oncomplete="PF('motifDlg').show()" styleClass="btn btn-warning" title="Ajouter un motif" style="color:#fff;background-color: #f88b2e" update=":motifDlg">
-				              <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />
-							<i class="fa fa-plus"></i>
-						  </p:commandLink>
-				        </p:column>
+				       
 				        <p:column headerText="Observations #{controleController.structureLibAbrege}"  styleClass="col-sm-4">
                            <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
 				        </p:column>
 				        
 				         <p:column  headerText="Avis de la #{controleController.structureLibAbrege}" width="16%">
 				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
-                            <p:commandLink action="#{anoController.saveAno('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
 				               title="Avis de non objection">  
                                 <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
                             </p:commandLink>
                           
                            
-                            <p:commandLink action="#{anoController.saveAno('N')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="gnl:finance, gnl:info"
 				               title="Avis d'objection">
                                 <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
                             </p:commandLink>
                             
-                            <p:commandLink action="#{anoController.saveAno('I')}" class="btn btn-xs btn-danger" style="margin-left:5px;" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-danger" style="margin-left:5px;" update="gnl:finance, gnl:info"
 				               title="Lot infructueux">
                                 <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">INF</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
                             </p:commandLink>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{slctdTb.laaAno == 'OUI'}">  
-                            <p:commandLink action="#{anoController.saveAno(' ')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
 				               title="Avis de non objection">
                                 <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
                             </p:commandLink>
                             </h:panelGroup>
                              <h:panelGroup rendered="#{slctdTb.laaAno == 'NON'}">  
-                            <p:commandLink action="#{anoController.saveAno(' ')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance, gnl:info"
 				               title="Avis d'objection">
                                 <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
@@ -275,21 +191,13 @@
                             </h:panelGroup>
                             
                               <h:panelGroup rendered="#{slctdTb.laaAno == 'INFRUCTUEUX'}">  
-                            <p:commandLink action="#{anoController.saveAno(' ')}" class="btn btn-xs btn-danger btn-block" update="gnl:finance, gnl:info"
+                            <p:commandLink class="btn btn-xs btn-danger btn-block" update="gnl:finance, gnl:info"
 				               title="Lot infructueux">
                                 <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
                             </p:commandLink>
                             </h:panelGroup>
                             
-		 	        </p:column>
-				        
-				            <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
-                            <p:commandLink oncomplete="PF('anoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
-				               title="Traitement de l'ANO">
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
-                            </p:commandLink>
 		 	        </p:column>
 				        
 
@@ -301,7 +209,82 @@
 	            </div>
 	           </div>
                  </div>
-<!--                  <ui:include src="inclusions/histoDemande.xhtml"  />  -->
+                  <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-8"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">INFORMATIONS SUR LA DEMANDE #{anoController.slctdTdDem.demRef} : #{anoController.slctdTdDem.demObjet} </span></div></div> 
+			    
+				   <div class="col-md-2">
+					  <p:commandLink rendered="false" oncomplete="PF('chargeDocDlg').show()" title="Joindre le PV d'analyse" action="#{anoController.chargeDossierRapport()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e">
+					  <span class="btn-label"><i class="fa fa-download"></i></span><span class="hidden-xs">Joindre le rapport d'analyse</span>
+					  </p:commandLink>
+				   </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	             <div class="row">                   
+		         <div class="col-md-6 align justify-content-center">
+		  
+                     <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Liste des documents joints par la DGMP</small></legend>
+	                    <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeDmp}"
+	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-6">
+			            <h:outputText value="#{doss.dodLibelle}" />
+			        </p:column>
+			        
+			        <p:column headerText="Nature" styleClass="col-md-4">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
+			        </p:column>
+			        <p:column headerText="Actions" styleClass="col-md-2">
+                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+				            </p:commandLink>
+				            
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDemDmp()}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+		                </p:commandLink>
+		               
+		 	        </p:column>
+			    </p:dataTable>
+			    </fieldset>
+		         </div>
+		         <div class="col-md-6 align justify-content-center">
+		            <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Liste des documents joints par l'AC</small></legend>
+	                    <p:dataTable id="tabDossierChargeAc" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeAc}"
+	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-6">
+			            <h:outputText value="#{doss.dodLibelle}" />
+			        </p:column>
+			        
+			        <p:column headerText="Nature" styleClass="col-md-4">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
+			        </p:column>
+			        <p:column headerText="Actions" styleClass="col-md-2">
+                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+				            </p:commandLink>
+				            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDem()}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+		                </p:commandLink>
+		                </h:panelGroup>
+		 	        </p:column>
+			    </p:dataTable>
+			    </fieldset>
+		         </div>
+                 </div>   
+	            </div>
+	           </div>
+                 </div>
                  </div>
                </div>
 
@@ -316,13 +299,17 @@
 		</div> 
     
 		 <div class="row">
-		     <p:commandLink  action="#{anoController.validationAnoDMP()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
-		     <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />  
-				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
-				      </p:commandLink>
-		 <p:commandLink styleClass="btn btn-warning" action="#{anoController.renderPage('ano1','LISANODMP')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+		 <p:commandLink styleClass="btn btn-warning" action="#{anoController.renderPage('ano1','DEMANO')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SDO'}">
+		 <p:commandLink styleClass="btn btn-warning" action="#{anoController.renderPage('ano1','DEMANO')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		</h:panelGroup>
 	          </div>
 		
     </section>
