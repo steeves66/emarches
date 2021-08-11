@@ -127,6 +127,7 @@ public interface IDao {
 	public List getObjectByColumnNotInPpmInstrChCritppm(String objet,String strSource,String critere);
 
 	public List getObjectByColumnInPpmDmpInstr(String objet, String typePlan, String strSource);
+	public List getObjectByColumnBudgetInstr(String objet, String lbgCodeAc, String lbgMopCode) ;
 
 
 	public int countTableByColumnInPmmInstr(String objet, String conditionColumn, String strSource);

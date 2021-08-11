@@ -40,6 +40,7 @@ import com.sndi.model.VFonction;
 import com.sndi.model.VFonctionAssignation;
 import com.sndi.model.VLotCritere;
 import com.sndi.model.VOperateur;
+import com.sndi.model.VOperateurAdmin;
 import com.sndi.model.VPrqAo;
 import com.sndi.model.VStructure;
 import com.sndi.model.VTypeMarcheFils;
@@ -75,6 +76,8 @@ public class OperateurController {
 	
 	private List<TOperateur> objetListe = new ArrayList<TOperateur>();
 	private List<TOperateur> currentOpeListe = new ArrayList<TOperateur>();
+	/*private List<VOperateurAdmin> objetListe = new ArrayList<VOperateurAdmin>();
+	private List<VOperateurAdmin> currentOpeListe = new ArrayList<>();*/
 	private List<TTypeFonction> listTypefonction = new ArrayList<TTypeFonction>();
 	private List<TTypeFonction> listTypefonctionSelect = new ArrayList<TTypeFonction>();
 	
@@ -349,6 +352,18 @@ public class OperateurController {
 			iservice.deleteObject(assignation);
 			chargeFonctionByOperateurMod(); 
 	 }
+	/*public void chargeData(){
+		test.clear();
+		getObjetListe().clear();
+		test.add("a");
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("ADM")||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("EXP")) {
+		objetListe = iservice.getObjects("TOperateur", new ArrayList<String>(Arrays.asList("opeNom")));
+		currentOpeListe = new ArrayList<TOperateur>(objetListe);
+		_logger.info("objetListe size: "+objetListe.size());
+		filterLetter = "ALL";
+		}
+	}*/
+	
 	public void chargeData(){
 		test.clear();
 		getObjetListe().clear();
@@ -360,6 +375,7 @@ public class OperateurController {
 		filterLetter = "ALL";
 		}
 	}
+	
 	public void add() {
 		test.add("a");
 		boutonSupp=true;

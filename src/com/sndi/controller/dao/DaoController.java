@@ -135,10 +135,10 @@ public class DaoController {
 	 private List<VLigneLot> listeImputationsModif = new ArrayList<VLigneLot>();
 	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
-	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
-	 //private List<VDossierDac> dossListe = new ArrayList<VDossierDac>();
-	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
-	 //private List<VDossierDac> dossDacListe = new ArrayList<VDossierDac>();
+	 //private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
+	 private List<VDossierDac> dossListe = new ArrayList<VDossierDac>();
+	 //private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
+	 private List<VDossierDac> dossDacListe = new ArrayList<VDossierDac>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listePpmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listePpmDaoModif = new ArrayList<VPpmDao>();
@@ -249,7 +249,8 @@ public class DaoController {
 	 private TAvisAppelOffre newAvis = new TAvisAppelOffre();
 	 private TLotAao newLot = new TLotAao();
 	 private TLotAao lot = new TLotAao();
-	 private TDossierDacs selectedDossier = new TDossierDacs();
+	 //private TDossierDacs selectedDossier = new TDossierDacs();
+	 private VDossierDac selectedDossier = new VDossierDac();
 	 private TDossierDacs doss =new TDossierDacs();
 	 private List<TDacSpecs> daoTab = new ArrayList<TDacSpecs>();
 	 private TDossierDacs dos =new TDossierDacs(); 
@@ -519,6 +520,7 @@ public class DaoController {
 	  private boolean ouverture = false;
 	  private boolean ouvertureAmi = false;
 	  private boolean pavet_lot = false;
+	  private boolean pavet_infoG = false;
 	  private boolean pavet_offre = false;
 	  private boolean pavet_critere = false;
 	  private boolean pavet_commission = false;
@@ -584,6 +586,14 @@ public class DaoController {
 						 FacesContext.getCurrentInstance().addMessage(null,
 								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 						 return "criterebyLot";
+					 }else 
+					 {
+						 if(lotCrit.getChildOk() != 0)
+						 {
+							 FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il n' y a pas de critères d'évaluation pour : "+lotCrit.getLibChild(), ""));
+							 return "criterebyLot";
+						 }
 					 }
 			     }
 			 }
@@ -617,6 +627,7 @@ public class DaoController {
 			     //Controle Pav avis modification
 			      if(event.getOldStep().equals("avisModif") && event.getNewStep().equals("tabLotModif")) {
 			    	actionsPavetLot();
+			    	actualisationDac();
 				  }
 			      
 			    //Controle Pav lot modification
@@ -647,6 +658,14 @@ public class DaoController {
 								 FacesContext.getCurrentInstance().addMessage(null,
 										 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 								 return "criterebyLotModif";
+							 }else 
+							 {
+								 if(lotCrit.getChildOk() != 0)
+								 {
+									 FacesContext.getCurrentInstance().addMessage(null,
+									new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il n' y a pas de critères d'évaluation pour : "+lotCrit.getLibChild(), ""));
+									 return "criterebyLotModif";
+								 }  
 							 }
 					     }
 			    	  actionPavetCojo();
@@ -1005,6 +1024,7 @@ TDacSpecs dao = new TDacSpecs();
 					    	              if(!listeDaoAff.isEmpty()) { 
 					    		              supDaoAff=listeDaoAff.get(0);
 					    		              supDaoAff.setDafDcsMbmRespo("N");
+					    		              supDaoAff.setDafStaCode(newDao.getTStatut().getStaCode());
 					    		              iservice.updateObject(supDaoAff);
 					    		              }else {
 					    		            	//Enregistrement dans TDaoAffectation
@@ -1029,7 +1049,7 @@ TDacSpecs dao = new TDacSpecs();
 						   		//Chargement des fonctions Ã  imputer 
 						   		 chargeFonctionImput();
 						   		//Message de Confirmation 
-						   		userController.setTexteMsg("Responsabilité Attribu2E avec succès!");
+						   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 								userController.setRenderMsg(true);
 								userController.setSevrityMsg("success");
 			       }else {
@@ -1078,6 +1098,7 @@ TDacSpecs dao = new TDacSpecs();
 		    	              if(!listeDaoAff.isEmpty()) { 
 		    		              supDaoAff=listeDaoAff.get(0);
 		    		              supDaoAff.setDafDcsMbmRespo("N");
+		    		              supDaoAff.setDafStaCode(newDao.getTStatut().getStaCode());
 		    		              iservice.updateObject(supDaoAff);
 		    		              }else {
 		    		            	//Enregistrement dans TDaoAffectation
@@ -1131,7 +1152,7 @@ TDacSpecs dao = new TDacSpecs();
 			    		              supDaoAff.setDafDcsMbmRespo(""+respo);
 			    		              iservice.updateObject(supDaoAff);
 		    	 }
-		    	//Chargement des fonctions imputer 
+		    	//Chargement des fonctions imputées 
 		   		 chargeFonctionImput();
 		   		//Message de Confirmation 
 		   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
@@ -1184,7 +1205,7 @@ TDacSpecs dao = new TDacSpecs();
 					userController.setSevrityMsg("success");
 			     }else {
 			    	 FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette fonction n'a encore fait objet d'une affectation", ""));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette fonction n'a encore fait objet d'une affectation", ""));
 			     }
 			 }
 		     
@@ -3014,42 +3035,42 @@ TDacSpecs dao = new TDacSpecs();
 		 
 		
 		 //Methode de Chargement des Dossiers chez l'AutoritÃ¯Â¿Â½ Contractante
-		public void chargeDossier() {
+		/*public void chargeDossier() {
 		 		 dossListe.clear();
 		 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
-		 	 } 
+		 	 } */
 		  
 		  //Methode de Chargement des Dossiers chez l'AutoritÃ¯Â¿Â½ Contractante
-		 /* public void chargeDossier() {
+		  public void chargeDossier() {
 		 		 dossListe.clear();
 		 			 dossListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
+		 	 } 
+		  
+		//Methode de Chargement des Dossiers chez le Charg d'Etudes
+	  /*public void chargeDossierCharge() {
+		    	 dossDacListe.clear();
+		    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));	
+		    	 }else {
+		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
+		    	 } 		
 		 	 } */
 		  
 		//Methode de Chargement des Dossiers chez le Charg d'Etudes
 	  public void chargeDossierCharge() {
 		    	 dossDacListe.clear();
 		    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
-		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));	
 		    	 }else {
-		    		 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
 		    	 } 		
 		 	 } 
-		  
-		/*//Methode de Chargement des Dossiers chez le Charg d'Etudes
-		  public void chargeDossierCharge() {
-		    	 dossDacListe.clear();
-		    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
-		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
-		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));	
-		    	 }else {
-		    		 dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
-		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
-		    	 } 		
-		 	 } */
 		  
 		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
 		  public void chargeNatureDocTrans() {
@@ -3201,7 +3222,7 @@ TDacSpecs dao = new TDacSpecs();
 			        	if(dos.getDdaNom()==null || dos.getDdaReference() == null ) {
 			        		//Message d'erreur
 					          FacesContext.getCurrentInstance().addMessage(null,
-				      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier ou choisir la mention avant Transmission du DAO", ""));
+				      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier ou choisir la mention avant la transmission du DAO", ""));
 			        	      }else { 
 			        	    	     verifCheckrans();
 									 if(newCheckTrans.getCheckTrans().equalsIgnoreCase("1")) {
@@ -3251,7 +3272,7 @@ TDacSpecs dao = new TDacSpecs();
 						 }else {
 							 chargeDossier();	 
 						 }
-					    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprim!", "");
+					    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprimé!", "");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
 					}
 		    
@@ -3262,7 +3283,7 @@ TDacSpecs dao = new TDacSpecs();
 				 iservice.deleteObject(selectedDossier);
 				 chargeDossierAutorisation();	
 				 
-			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprim!", "");
+			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprimé!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
 			}
 		    
@@ -3270,64 +3291,23 @@ TDacSpecs dao = new TDacSpecs();
 		    
 		    public void transmettreCpmp() {
 		    	
-		    	if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO")) {
-		    		     
-		    		if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
-   		    		    statutTrans = "DPU"; 
-   		    	      }else
-   		    	          {  
-   		    	    	       if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
-		    	    	           statutTrans = "D5V";
-		    	                 }
-   		    	          }
-		    		
-		    		listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-							new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-							if (!listAvis.isEmpty()) {
-								//Mis à jour du statut
-								majAvis= listAvis.get(0);
-								majAvis.setTStatut(new TStatut("APU"));
-								majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-								iservice.updateObject(majAvis);
-							}
-							
-		    	      }else {
-
-		   		    	     if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
-		   		    		    statutTrans = "DPU"; 
-		   		    		
-		   		    	      }else
-		   		    	          {  if(slctdTd.getDacTypePlan().equalsIgnoreCase("PS") && slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")) {
-		   		    	    	       statutTrans = "D5V";
-		   		    	            }else {
-		   		    	            	 statutTrans = "D2T";
-		   		    	             } 
-		   		    	       }
-		    	           }
+		   		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+		   		    statutTrans  ="D2T";
+				 	}
 	        	
+		   		    
 				listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-					if (!listDao.isEmpty()) {
-						newDao= listDao.get(0);
-						newDao.setTStatut(new TStatut(statutTrans));
-						newDao.setDacStatutRetour("0");
-				        iservice.updateObject(newDao); 
-		   	                 }
-					
-					
-					 daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
- 							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
- 							if (!daoBinome.isEmpty()) {
- 								//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
- 								for(TDaoAffectation dao : daoBinome) {
- 									 dao.setDafStaCode(statutTrans);
- 									 iservice.updateObject(dao);
- 								       }
-                        }
-			
-				    constantService.getStatut(statutTrans);
-	 				//Historisation du DAC
-	 				historiser(""+statutTrans,slctdTd.getDacCode(),"");
+					       if (!listDao.isEmpty()) {
+								newDao= listDao.get(0);
+								newDao.setTStatut(new TStatut(statutTrans));
+								newDao.setDacStatutRetour("0");
+						        iservice.updateObject(newDao); 
+				   	                 }
+							
+				         constantService.getStatut(statutTrans);
+	 				    //Historisation du DAC
+	 				    historiser(""+statutTrans,slctdTd.getDacCode(),"");
 						//chargeDataAExaminer();
 						
 						chargeData();
@@ -4056,6 +4036,7 @@ TDacSpecs dao = new TDacSpecs();
 		 							 aaoNbrOuv = daoDetail.getDppNbOuv();
 		 							 //Dsactivation du bouton d'enregistrement du DAO
 		 							 controleController.btn_dao_pn = false;
+		 							 pavet_infoG = true;
 		 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
 		 							  btn_save_avis = true;
 		 							  
@@ -4066,7 +4047,7 @@ TDacSpecs dao = new TDacSpecs();
 		 							  newAvis.aaoOffAnormal = "N";
 		 							  //listeMarge();
 		 							  
-		 							  //Création de l'avis de l'Appel d'Offres
+		 							  //Création de l'avis de l'Appel d'Offresva
 		 							   newAvis.setAaoCode(keyGen.getCodeAvis());
 				            	       newAvis.setTDacSpecs(dao);
 				            	       newAvis.setTStatut(new TStatut("D1S")); 
@@ -4178,6 +4159,14 @@ TDacSpecs dao = new TDacSpecs();
 		    	      dao = listDao.get(0);
 		        }
 		     }
+	      
+	      public void actualisationDac() {
+	    	  listeDAO= (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	 		       if (!listeDAO.isEmpty()) {
+	 		    	  slctdTd = listeDAO.get(0);
+	 		        }
+	 		     }
 	     
 	 	//Methode d'historisation
 		 public void historiser(String statut,String dacCode, String motif) {
@@ -5130,12 +5119,12 @@ TDacSpecs dao = new TDacSpecs();
 				  //Enregistrement d'adresse dans l'ecran de modification
 				  public void saveDetailAdresseModif() {
 						 if(slctdTd.getAdaNum()>0) {
-							 newDtailAdresse.setTAdresseAvis(new TAdresseAvis(slctdTd.getAdaNum()));
+							 newDtailAdresse.setTAdresseAvis(new TAdresseAvis(adaNum));
 							 newDtailAdresse.setTLibelleAdresse(new TLibelleAdresse(numLibAdr)); 
 							 iservice.addObject(newDtailAdresse); 
 							 chargeDetailAdresseModif();
 						  }else {
-							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Slectionnez le type d'adresse!", ""));
+							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sélectionnez le type d'adresse!", ""));
 						  }
 						
 					  }
@@ -5228,6 +5217,7 @@ TDacSpecs dao = new TDacSpecs();
 										 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 									_logger.info("lots size: "+listeLots.size());	
 									//montantTotalLot(); 
+									lotTotal = getNbreLotTotalModif();
 						   }
 							
 						}
@@ -5240,7 +5230,8 @@ TDacSpecs dao = new TDacSpecs();
 									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 								_logger.info("listeLots size: "+listeLots.size());	
 								//montantTotalLot();
-								lotTotal = getNbreLotTotal();
+								//lotTotal = getNbreLotTotal();
+								lotTotal = getNbreLotTotalModif();
 						}
 				   
 				  
@@ -5248,6 +5239,13 @@ TDacSpecs dao = new TDacSpecs();
 				   public int getNbreLotTotal(){ 
 						int i = iservice.countTableByColumn("T_LOT_AAO", "LAA_ID",
 								new WhereClause("LAA_AAO_CODE", WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+						return	i;	
+					}
+				   
+				   //le nombre de lots pour cet avis en cours (Modification)
+				   public int getNbreLotTotalModif(){ 
+						int i = iservice.countTableByColumn("T_LOT_AAO", "LAA_ID",
+								new WhereClause("LAA_AAO_CODE", WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 						return	i;	
 					}
 				   
@@ -5459,7 +5457,7 @@ TDacSpecs dao = new TDacSpecs();
 				    		 
 				    	    }else {
 				    		 					    	 
-							       if(slctdTd.getAaoNbrLot() > lotTotal) {
+							       if(lotNbre > lotTotal) {
 							    	    str = ""+newVbTemp.getLaaMtEst();
 								        Double  mtEstim = Double.parseDouble(str);
 								        
@@ -5757,7 +5755,7 @@ TDacSpecs dao = new TDacSpecs();
 					 @Transactional
 				    public void saveLotModif(){
 				    	  //getNbreLotTotal();
-				    	 if(slctdTd.getAaoNbrLot() > lotTotal) {
+				    	 if(lotNbre > lotTotal) {
 				    		 String str = ""+newLot.getLaaMtEst();
 						        Double  mtEstim = Double.parseDouble(str);
 						        
@@ -5901,6 +5899,20 @@ TDacSpecs dao = new TDacSpecs();
 					    	 }
 						}
 				     */
+					 
+					 public void fermer() throws IOException { 
+						 userController.initMessage();
+						 if(controleController.getTypePlan().equalsIgnoreCase("PN")) {
+							 renderPage("dao1","SAIDAO");
+						 }else
+						 {	
+							 renderPage("dao1","SAIDPS");
+						 }
+						 //chargeData("PN");
+					     //chargeDataPgspm();
+						 //vider();
+						 //return userController.renderPage(value);
+					 }
 					 
 					 //Mis  jour du libell de lot
 				        public void updateLibLot() {
@@ -6759,7 +6771,7 @@ TDacSpecs dao = new TDacSpecs();
 								//Insertion des chargs d'tudes choisis 
 									if (listSelectionFonctImput.size()==0) {
 												FacesContext.getCurrentInstance().addMessage(null,
-												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun Charg d'Etudes selectionné", ""));
+												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun Chargé d'Etudes selectionné", ""));
 											}
 									 		else{
 									 			    
@@ -6812,24 +6824,36 @@ TDacSpecs dao = new TDacSpecs();
 										 	    		 det.setDcsMbmRespo(n.getStrOpeRespo());
 										 	    		 iservice.addObject(det);
 										 	    		 
-										 	    		//Enregistrement dans TDaoAffectation
-											 	    	 TDaoAffectation newAff = new TDaoAffectation(); 
-											 			 newAff.setDafDacCode(newDao.getDacCode());
-											 			 newAff.setDafOpeMatricule(n.getOpeMatricule());
-											 			 newAff.setDafStaCode(newDao.getTStatut().getStaCode());
-											 			 newAff.setDafStatutRetour(newDao.getDacStatutRetour());
-											 			 newAff.setDafDacObjet(newDao.getDacObjet());
-											 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
-											 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
-											 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
-											 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
-											 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
-											 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
-											 			 newAff.setTDetCommissionSeance(det);
-											 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
-											 			 newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
-											 			 newAff.setDafMention(newDao.getDacMention());
-											 			 iservice.addObject(newAff);
+										 	    daoBinome = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+										 	    		      new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
+														      new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
+										 						if (!daoBinome.isEmpty()) {
+										 							//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+										 							for(TDaoAffectation dao : daoBinome) {
+										 								 dao.setDafStaCode(newDao.getTStatut().getStaCode());
+										 								 iservice.updateObject(dao);
+										 								       }
+										                            }else {
+													 	    		//Enregistrement dans TDaoAffectation
+														 	    	 TDaoAffectation newAff = new TDaoAffectation(); 
+														 			 newAff.setDafDacCode(newDao.getDacCode());
+														 			 newAff.setDafOpeMatricule(n.getOpeMatricule());
+														 			 newAff.setDafStaCode(newDao.getTStatut().getStaCode());
+														 			 newAff.setDafStatutRetour(newDao.getDacStatutRetour());
+														 			 newAff.setDafDacObjet(newDao.getDacObjet());
+														 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
+														 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+														 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
+														 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+														 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
+														 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
+														 			 newAff.setTDetCommissionSeance(det);
+														 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
+														 			 newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
+														 			 newAff.setDafMention(newDao.getDacMention());
+														 			 iservice.addObject(newAff);
+										                        }
+										 	    	
 										 	   	   }
 									 				 
 									 				chargeData();
@@ -7705,7 +7729,7 @@ TDacSpecs dao = new TDacSpecs();
 										  listeArticle = ((List<VArticlesCom>)iservice.getObjectsByColumn("VArticlesCom"));		
 									 	 } 
 									//Methode de Chargement des Dossiers chez le Chargés d'Etudes
-									public void chargeDossierAutorisation() {
+								/*public void chargeDossierAutorisation() {
 									    	 dossDacListe.clear();
 									    	 //ECRAN DE SAISIE
 											   if(controleController.ecran=="saisie") {
@@ -7717,10 +7741,10 @@ TDacSpecs dao = new TDacSpecs();
 												   dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
 											   }		
-									 	 } 
+									 	 } */
 									  
 									//Methode de Chargement des Dossiers chez le Chargé d'Etudes
-									/*  public void chargeDossierAutorisation() {
+									  public void chargeDossierAutorisation() {
 									    	 dossDacListe.clear();
 									    	 //ECRAN DE SAISIE
 											   if(controleController.ecran=="saisie") {
@@ -7732,7 +7756,7 @@ TDacSpecs dao = new TDacSpecs();
 												   dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
 										 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));	 
 											   }		
-									 	 }*/ 
+									 	 }
 									
 									public void addCodeAutorisation() {
 										if((dao.getDacAutComSpec() == null || "".equals(dao.getDacAutComSpec()))){
@@ -7749,7 +7773,7 @@ TDacSpecs dao = new TDacSpecs();
 									}
 									
 									
-									public void activieComboxAutoSpec() {
+							/*		public void activieComboxAutoSpec() {
 										if(listeMembreComSpec.size()==0) {
 											dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
 											new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));
@@ -7764,9 +7788,9 @@ TDacSpecs dao = new TDacSpecs();
 											spec = false;
 											norm=false;
 										}
-									}
+									}*/
 									
-								/*	public void activieComboxAutoSpec() {
+									public void activieComboxAutoSpec() {
 										if(listeMembreComSpec.size()==0) {
 											dossDacListe = ((List<VDossierDac>)iservice.getObjectsByColumn("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_ID")),
 											new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));
@@ -7781,7 +7805,7 @@ TDacSpecs dao = new TDacSpecs();
 											spec = false;
 											norm=false;
 										}
-									}*/
+									}
 									
 									public void activieComboxAutoNorm() {
 										if(listeMembre.size()==0) {
@@ -8970,7 +8994,8 @@ TDacSpecs dao = new TDacSpecs();
 		         chargeAdresse();
 		         checkMargePrefModif();
 		         listeMargePrefModif();
-		         chargeLibelleAdresse();  
+		         chargeLibelleAdresse();
+		         actualisationDac();
 			  }
 			  
 		public void actionsPavetLot() {
@@ -9087,6 +9112,7 @@ TDacSpecs dao = new TDacSpecs();
 					 btn_ad_expert = false;
 					 selectionMembres.clear();
 					 selectionlisteExpert.clear();
+                     pavet_infoG = false;
 					 pavet_critere = false;
 					 pavet_lot = false;
 					 pavet_offre = false;
@@ -9251,17 +9277,28 @@ TDacSpecs dao = new TDacSpecs();
 		this.lot = lot;
 	}
 
-	public TDossierDacs getSelectedDossier() {
+/*	public TDossierDacs getSelectedDossier() {
 		return selectedDossier;
 	}
 
 	public void setSelectedDossier(TDossierDacs selectedDossier) {
 		this.selectedDossier = selectedDossier;
+	}*/
+	
+
+	public VDossierDac getSelectedDossier() {
+		return selectedDossier;
 	}
+
+	public void setSelectedDossier(VDossierDac selectedDossier) {
+		this.selectedDossier = selectedDossier;
+	}
+	
 
 	public TDossierDacs getDoss() {
 		return doss;
 	}
+
 
 	public void setDoss(TDossierDacs doss) {
 		this.doss = doss;
@@ -17578,7 +17615,7 @@ TDacSpecs dao = new TDacSpecs();
 		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
-	public List<TDossierDacs> getDossListe() {
+/*	public List<TDossierDacs> getDossListe() {
 		return dossListe;
 	}
 
@@ -17592,9 +17629,9 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setDossDacListe(List<TDossierDacs> dossDacListe) {
 		this.dossDacListe = dossDacListe;
-	}
+	}*/
 
-	/*public List<VDossierDac> getDossListe() {
+	public List<VDossierDac> getDossListe() {
 		return dossListe;
 	}
 
@@ -17608,7 +17645,15 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setDossDacListe(List<VDossierDac> dossDacListe) {
 		this.dossDacListe = dossDacListe;
-	}*/
+	}
+
+	public boolean isPavet_infoG() {
+		return pavet_infoG;
+	}
+
+	public void setPavet_infoG(boolean pavet_infoG) {
+		this.pavet_infoG = pavet_infoG;
+	}
 	
 	
 	

@@ -24,6 +24,8 @@ public class VLotCritere implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private String laaDacCode;
 	private long critOk;
+	private long childOk;
+	private String libChild;
 
 	public VLotCritere() {
 	}
@@ -34,13 +36,15 @@ public class VLotCritere implements java.io.Serializable {
 	}
 
 	public VLotCritere(String laaObjet, BigDecimal laaId, String laaAaoCode, BigDecimal laaNum, String laaDacCode,
-			long critOk) {
+			long critOk, long childOk, String libChild) {
 		this.laaObjet = laaObjet;
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaNum = laaNum;
 		this.laaDacCode = laaDacCode;
 		this.critOk = critOk;
+		this.childOk = childOk;
+		this.libChild = libChild;
 	}
 
 	@Column(name = "LAA_OBJET", length = 1025)
@@ -89,13 +93,31 @@ public class VLotCritere implements java.io.Serializable {
 		this.laaDacCode = laaDacCode;
 	}
 	
-	@Column(name = "CRIT_OK", precision = 22, scale = 0)
+	@Column(name = "CRIT_OK")
 	public long getCritOk() {
 		return this.critOk;
 	}
 
 	public void setCritOk(long critOk) {
 		this.critOk = critOk;
+	}
+	
+	@Column(name = "CHILD_OK")
+	public long getChildOk() {
+		return this.childOk;
+	}
+
+	public void setChildOk(long childOk) {
+		this.childOk = childOk;
+	}
+
+	@Column(name = "LIB_CHILD", length = 4000)
+	public String getLibChild() {
+		return this.libChild;
+	}
+
+	public void setLibChild(String libChild) {
+		this.libChild = libChild;
 	}
 
 }

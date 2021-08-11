@@ -32,6 +32,7 @@ public class VResultPropAttribLot implements java.io.Serializable {
 	private BigDecimal dofMtAtt;
 	private BigDecimal noteCombinee;
 	private BigDecimal delai;
+	private BigDecimal delai2;
 	private String offSouNcc;
 	private String dofStatut;
 	private String offSouSigleSte;
@@ -42,7 +43,7 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 
 	public VResultPropAttribLot(BigDecimal RId, BigDecimal ordre, BigDecimal dofNum,String rang, String laaDacCode,
-			BigDecimal lot,BigDecimal dofLaaId ,String entreprise, BigDecimal montant,BigDecimal dofMtAtt, BigDecimal noteCombinee, BigDecimal delai, 
+			BigDecimal lot,BigDecimal dofLaaId ,String entreprise, BigDecimal montant,BigDecimal dofMtAtt, BigDecimal noteCombinee, BigDecimal delai, BigDecimal delai2,
 			String offSouNcc, String offSouSigleSte,Date dofAttribDte,String dofStatut) {
        this.RId = RId;
        this.ordre = ordre;
@@ -54,6 +55,7 @@ public class VResultPropAttribLot implements java.io.Serializable {
        this.montant = montant;
        this.noteCombinee = noteCombinee;
        this.delai = delai;
+       this.delai2 = delai2;
        this.offSouNcc = offSouNcc;
        this.offSouSigleSte = offSouSigleSte;
        this.dofNum = dofNum;
@@ -170,6 +172,15 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 	public void setDelai(BigDecimal delai) {
 		this.delai = delai;
+	}
+	
+	@Column(name = "DELAI2", precision = 20, scale = 0)
+	public BigDecimal getDelai2() {
+		return this.delai2;
+	}
+
+	public void setDelai2(BigDecimal delai2) {
+		this.delai2 = delai2;
 	}
 
 	@Column(name = "OFF_SOU_NCC", length = 20)

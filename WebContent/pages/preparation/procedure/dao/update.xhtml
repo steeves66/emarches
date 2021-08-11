@@ -516,8 +516,7 @@
 				  <div class="col-sm-2"> 
                   <p:selectOneMenu value="#{daoController.aaoNbrOuv}" disabled="true" effect="fade" style="width:100%">   
 			            <f:selectItem itemLabel="1" itemValue="1" /> 
-                        <f:selectItem itemLabel="2" itemValue="2" />
-                       <!--  <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/> -->				   	   				    				   
+                        <f:selectItem itemLabel="2" itemValue="2" />				   	   				    				   
 			       </p:selectOneMenu>
                      
                   </div>
@@ -686,6 +685,8 @@
            </div>
           </p:panel>
          </p:tab>
+         
+         
          
 		 <p:tab id="tabLotModif" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
 		 <p:messages id="message22" showDetail="false" autoUpdate="true"  closable="true"/>
@@ -1761,6 +1762,10 @@
            <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		   </p:commandLink>
+		   
+		    <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dps}" action="#{daoController.renderPage('dao1','SAIDPS')}" style="background-color: #f88b2e;" update=":content">
+            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		    </p:commandLink>
 		
 		   <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_ratt_dao}" action="#{daoController.renderPage('dao1','RATTRA')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer

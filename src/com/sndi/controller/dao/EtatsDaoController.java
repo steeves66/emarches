@@ -31,6 +31,7 @@ import com.sndi.model.VAvisPublie;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoPieces;
 import com.sndi.model.VDetailDao;
+import com.sndi.model.VDossierDac;
 import com.sndi.model.VLotDao;
 import com.sndi.model.VPiecesDao;
 import com.sndi.model.VPpmDetails;
@@ -67,12 +68,14 @@ public class EtatsDaoController {
 	private List<VDetailDao> objetListe = new ArrayList<VDetailDao>(); 
 	private List<VDetailDao> objetAffectes = new ArrayList<VDetailDao>();
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
+	//private List<VDossierDac> dossListe = new ArrayList<VDossierDac>();
 	private List<TDetailPlanPassation> ppmListe = new ArrayList<TDetailPlanPassation>();
 	private List<VPiecesDao> piecesListe = new ArrayList<VPiecesDao>();
 	private List<TAvisAppelOffre> avisListe = new ArrayList<TAvisAppelOffre>();
 	private List<VAdresseAvis> listDetailAdresse = new ArrayList<VAdresseAvis>();
 	private List<VLotDao> lotListe = new ArrayList<VLotDao>();
 	private TDossierDacs selectedDossier = new TDossierDacs(); 
+	//private VDossierDac selectedDossier = new VDossierDac();
 	
 	private VDacliste slctdTd = new VDacliste();
 	private VAvisPublie slctdTdPub = new VAvisPublie();
@@ -135,6 +138,13 @@ public class EtatsDaoController {
  	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
     
+  //Afficher les dossiers du DAO selectionné
+ /*   public void chargeDossier() {
+ 	dossListe.clear();
+ 	dossListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+ 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
+ 		 }
+    */
     
   //Afficher le(s) PPM du DAO selectionné
     public void chargeDaoPpm() {
@@ -181,7 +191,7 @@ public class EtatsDaoController {
   //Afficher les pièces du DAO selectionné
 	public void chargePieces() {
 	//piecesListe.clear();
-	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
+	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",
 	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
 		 }
 
@@ -192,7 +202,7 @@ public class EtatsDaoController {
 	//Afficher les pièces du DAO affecté
     public void chargePiecesAff() {
  	piecesListe.clear();
- 	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
+ 	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",
  	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()))); 		 
  		 }
     
@@ -215,11 +225,18 @@ public class EtatsDaoController {
  		 }
     
   //Afficher les dossiers du DAO selectionné
-    public void chargeDossierAff() {
+   public void chargeDossierAff() {
  	dossListe.clear();
  	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
  	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()))); 		 
  		 }
+    
+  //Afficher les dossiers du DAO selectionné
+    /*public void chargeDossierAff() {
+ 	dossListe.clear();
+ 	dossListe = ((List<VDossierDac>)iservice.getObjectsByColumn("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_ID")),
+ 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()))); 		 
+ 		 }*/
     
   //Afficher le(s) PPM du DAO selectionné
     public void chargeDaoPpmAff() {
@@ -247,8 +264,7 @@ public class EtatsDaoController {
   //Afficher les pièces du DAO selectionné
   	public void chargePiecesPub() {
   	//piecesListe.clear();
-  	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
-  	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+  	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao", new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
   		 }
   	
   	
@@ -280,6 +296,14 @@ public class EtatsDaoController {
  	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumnDesc("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
  	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
  		 }
+    
+    
+    //Afficher les dossiers du DAO selectionné
+   /* public void chargeDossierPub() {
+ 	dossListe.clear();
+ 	dossListe = ((List<VDossierDac>)iservice.getObjectsByColumnDesc("VDossierDac",new ArrayList<String>(Arrays.asList("DDA_DTE_SAISI")),
+ 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTdPub.getDacCode()))); 		 
+ 		 }*/
     
     //Fin DAO PUBLIE
 	
@@ -463,13 +487,23 @@ public class EtatsDaoController {
 
 
 
-	public TDossierDacs getSelectedDossier() {
+ public TDossierDacs getSelectedDossier() {
 		return selectedDossier;
 	}
 
 	public void setSelectedDossier(TDossierDacs selectedDossier) {
 		this.selectedDossier = selectedDossier;
 	}
+	
+
+ /*  public VDossierDac getSelectedDossier() {
+	return selectedDossier;
+	}
+
+	public void setSelectedDossier(VDossierDac selectedDossier) {
+	 this.selectedDossier = selectedDossier;
+	}*/
+
 
 	public List<TDossierDacs> getDossListe() {
 		return dossListe;
@@ -478,18 +512,24 @@ public class EtatsDaoController {
 	public void setDossListe(List<TDossierDacs> dossListe) {
 		this.dossListe = dossListe;
 	}
+	
 
+/*	public List<VDossierDac> getDossListe() {
+		return dossListe;
+	}
+
+	public void setDossListe(List<VDossierDac> dossListe) {
+		this.dossListe = dossListe;
+	}
+*/
 
 	public List<VDetailDao> getObjetListe() {
 		return objetListe;
 	}
 
-
 	public void setObjetListe(List<VDetailDao> objetListe) {
 		this.objetListe = objetListe;
 	}
-
-
 
 	public VDetailDao getDetail() {
 		return detail;
@@ -633,18 +673,15 @@ public class EtatsDaoController {
 
 
 
-
-
 	public VAvisPublie getSlctdTdPub() {
 		return slctdTdPub;
 	}
 
 
-
-
-
 	public void setSlctdTdPub(VAvisPublie slctdTdPub) {
 		this.slctdTdPub = slctdTdPub;
 	}
+	
+	
 	
 }
