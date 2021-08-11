@@ -7223,7 +7223,7 @@ public class ControleController {
 															    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
 															    		}else
 													    			if(action.equalsIgnoreCase("DEMANO")) {
-														    			type = "Commission";
+														    			type = "ANO";
 														    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";
 														    			libelleDmp="DGMP";
 														    		}else
@@ -7231,15 +7231,27 @@ public class ControleController {
 														    			if(action.equalsIgnoreCase("TRAIANO")) {
 														    				libelleDmp="DGMP";
 															    			type = "Commission";
-															    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
+															    			libelle="TRAITEMENT DES DEMANDES";	
 															    		}
 														    			else
 															    			//TRAITEMENT ANO DMP
 															    			if(action.equalsIgnoreCase("TRAIDMP")) {
-																    			type = "Commission";
+																    			type = "ANO";
 																    			libelleDmp="DGMP";
-																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	//hhh
+																    			libelle="TRAITEMENT DES DEMANDES";	
 																    		}else
+																    			//LES DEMANDES DE L'AC TRAITEES PAR LA DGMP
+																    			if(action.equalsIgnoreCase("TRAIDGMP")) {
+																	    			type = "ANO";
+																	    			libelleDmp="DGMP";
+																	    			libelle="MES DEMANDES TRAITEES PAR LA DGMP";	
+																	    		}else
+																	    			//DETAIL CONSULTATION ANO TRAITE
+																	    			if(action.equalsIgnoreCase("DETDEMANO")) {
+																		    			type = "ANO";
+																		    			libelleDmp="DGMP";
+																		    			libelle="DESTAIL DEMANDE ";	
+																		    		}else
 															    			//LISTE TRANSMISSION A LA NUMEROTATION
 															    			if(action.equalsIgnoreCase("LISNUM")) {
 																    			type = "Commission";

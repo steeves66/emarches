@@ -85,28 +85,8 @@
 		         <div class="col-md-6 align justify-content-center">
 		          <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend style="font-weight: bold"><small>Joindre le(s) document(s)</small></legend>
-                     <div class="form-group ">
-	                  <label for="min" class="col-sm-3 control-label"><b>Nature du document </b></label>
-	                  <div class="col-sm-9">
-	                    <p:selectOneMenu value="#{anoController.docNatureDemDmp}"
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Sélectionnez la nature de la demande" itemValue="empty" />
-			         <f:selectItems value="#{anoController.natureDocListe}" var="v" itemLabel="#{v.nadLibelle}" itemValue="#{v.nadCode}"/>   		   
-       		        </p:selectOneMenu>
-	                  </div>
-	                </div>
-	                 <div class="form-group ">
-	                  <label for="foncode" class="col-sm-3 control-label"><b>Joindre le document </b></label>
-	                  <div class="col-sm-9">
-	                  
-	                  <p:fileUpload fileUploadListener="#{anoController.uploadDossDemDmp}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
-			                      mode="advanced" dragDropSupport="true"
-			                        update=":content"   sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
-			                          
-	                    	            
-	                  </div>
-	                  </div>
+                
+	      
                    </fieldset>
                      <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend style="font-weight: bold"><small>Liste des documents joints</small></legend>
@@ -348,10 +328,6 @@
     </section>
     </h:form>
    
-    
-     <!--  <ui:include src="inclusions/dialogHisto.xhtml"  />  -->
-
-        <ui:include src="inclusions/dialogMotif.xhtml"  /> 
 		 
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

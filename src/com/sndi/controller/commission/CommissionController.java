@@ -71,6 +71,7 @@ import com.sndi.model.VCritereAnalyseDacOff;
 import com.sndi.model.VCritereAnalyseDacOfftec;
 import com.sndi.model.VCritereAnalyseDacOuv;
 import com.sndi.model.VDacMembre;
+import com.sndi.model.VDacliste;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetOffreAnalyse;
 import com.sndi.model.VDetOffreNonRecevable;
@@ -635,10 +636,8 @@ public class CommissionController {
 			 selectionMembresCommite.clear();
 			 listeCommite.clear();
 			 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
-					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
+					 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
-					// );
-					_logger.info("membreCommite size: "+listeCommite.size());	
 		 }
 		 
 		//Liste des membres du commite d'evaluation
@@ -646,7 +645,7 @@ public class CommissionController {
 			 selectionMembresCommite.clear();
 			 listeMembreCojo.clear();
 			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
-					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
+					 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
 					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
@@ -2129,8 +2128,7 @@ public class CommissionController {
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if (!LS.isEmpty()) {
 				avis= LS.get(0);
-			}
-			
+			}			
 			avis.setTStatut(new TStatut(statUpdate));
 			avis.setAvisRetour("0");
 			avis.setAaoHeurFinOuv(slctdTd.getAaoHeurFinOuv());

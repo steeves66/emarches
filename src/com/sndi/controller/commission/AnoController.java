@@ -154,7 +154,7 @@ public class AnoController {
 		 
 	 }
 	 
-	 public void chargeDemandeDmp() {
+	 public void chargeDemandeDmp() { 
 		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp",
 				  new WhereClause("DEM_STA_CODE",Comparateur.EQ,"AND"));
 		_logger.info("listeDemande size: "+listeDemande.size()
@@ -238,13 +238,13 @@ public class AnoController {
 	     //Fin de la validation de l'ANO par la DMP
 	 
 	 public void validationAnoDMP() throws IOException {
-		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
+		/* List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			if(!Lot.isEmpty()) infolot = Lot.get(0);
-		 if(infolot.getChecktrt()==0) {
+		 if(infolot.getChecktrt()==0) {*/
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if(!LS.isEmpty()) avis = LS.get(0);
-			avis.setTStatut(new TStatut("JUG"));
+			//avis.setTStatut(new TStatut("JUG"));
 			avis.setAaoStatut("4");
 		    iservice.updateObject(avis);
 		    
@@ -258,11 +258,11 @@ public class AnoController {
 		 userController.setTexteMsg("Validé avec succès !");
          userController.setRenderMsg(true);
          userController.setSevrityMsg("success");
-		 }
+		/* }
 		 else {
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Vous devez absolument traiter tout les lots! ","");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
-		 }
+		 }*/
 	 }
 	 
 	 
@@ -414,7 +414,7 @@ public class AnoController {
 	 public void chargeLot() {
 		 listeLots.clear();
 		 listeLots=(List<VLotAvisdmp>) iservice.getObjectsByColumn("VLotAvisdmp", new ArrayList<String>(Arrays.asList("LAA_NUM")),
-				 new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L2D"),
+				 //new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L2D"),
 				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 		_logger.info("listeLots size: "+listeLots.size());
 	 }
@@ -501,7 +501,7 @@ public class AnoController {
 				if(avis.equalsIgnoreCase("O")) {
 					lot.setLaaStaCode("L3A");
 				}
-				lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
+				//lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
 			    iservice.updateObject(lot);
 			    chargeLotDmp();
 			    recupResultatLot();
@@ -955,14 +955,15 @@ public class AnoController {
 					saveDemande();
 					break;
 				case "ano5":
-		
+					chargeData("JUG", "AAO_FON_COD_AC","AAO_ANO");
 					break;
 				case "ano6":
 					chargeLotAnumeroter();
 					break;
 				case "ano7":
-				
+			
 					break;
+				
 					
 			    }
 		     

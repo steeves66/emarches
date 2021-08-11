@@ -116,11 +116,6 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTd}" />                             
                             </p:commandLink>
                             
-                            <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('ano6','TRANSNUM')}"
-				               title="Transmission à la numérotation" update=":content">
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTd}" />                             
-                            </p:commandLink>
                             </h:panelGroup>
                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SDO'}">  
                              <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('ano3','TRAIANO')}"
@@ -189,7 +184,7 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTdDem}" />                             
                             </p:commandLink>
                             
-                            <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{anoController.finAno()}"
+                            <p:commandLink rendered="false" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{anoController.finAno()}"
                                 title="Fin de la validation" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la validation de la demande N° #{slctdTb.demNum} ?" icon="ui-icon-alert" /> 

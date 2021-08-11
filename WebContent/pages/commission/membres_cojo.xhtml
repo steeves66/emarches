@@ -130,6 +130,11 @@
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{commissionController.renderPage('com1','LISJUG')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink>
+		     
+		     
+		      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{commissionController.boutonEdit}" action="#{commissionController.imprimerFicheMbr()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Imprimer la liste 
+				      </p:commandLink>  
   
        </section>
          

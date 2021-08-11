@@ -609,15 +609,20 @@
             <i class="fa fa-circle-o"></i>Demande d'ANO
              </p:commandLink>
             </li>
+            <li>
+            <p:commandLink action="#{anoController.renderPage('ano5','DETDEMANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Demandes traitées <br/> par la DGMP
+             </p:commandLink>
+            </li>
           </ul>
         </li>   
-       <h:panelGroup rendered="false">
+       
         <li>
             <p:commandLink action="#{numerotationController.renderPage('num1','LISNUM')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Transmission à la numérotation
              </p:commandLink>
             </li>
-            </h:panelGroup> 
+            
          <!-- FIN M4 -->
 
         
