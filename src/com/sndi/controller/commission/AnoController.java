@@ -807,7 +807,13 @@ public class AnoController {
 	    	dossListeDemandeDmp = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
 	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"REP"),
 	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum())));			
-	 	 } 
+	 	 }
+	    public void chargeDossierDemandeDmpCons() {
+	    	dossListeDemandeDmp.clear();
+	    	dossListeDemandeDmp = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"REP"),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum())));			
+	 	 }
 	    
 	    public void chargeDossierDemandeDmpAut() {
 	    	dossListeDemandeDmp.clear();
@@ -875,9 +881,15 @@ public class AnoController {
 	 public void recupResultatLot() {
 		 _logger.info("AAO: "+slctdTdDem.getAaoCode());
 	    			List<VLotAvisdmp> LS  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
-	    			if(!LS.isEmpty()) infolot = LS.get(0);
-	    			
+	    			if(!LS.isEmpty()) infolot = LS.get(0);  			
 	 }
+	 
+	//Methode de récupération de t_pgpm dans t_affichage
+		 public void recupResultatLotConsult() {
+			 _logger.info("AAO: "+slctdTd.getAaoCode());
+		    			List<VLotAvisdmp> LS  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+		    			if(!LS.isEmpty()) infolot = LS.get(0);  			
+		 }
 	 
 	 public void recupResultatLotAut() {
 		 _logger.info("AAO: "+slctdTd.getAaoCode());
@@ -961,7 +973,8 @@ public class AnoController {
 					chargeLotAnumeroter();
 					break;
 				case "ano7":
-			
+					recupResultatLotConsult();
+					chargeLot();
 					break;
 				
 					

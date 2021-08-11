@@ -7252,6 +7252,12 @@ public class ControleController {
 																		    			libelleDmp="DGMP";
 																		    			libelle="DESTAIL DEMANDE ";	
 																		    		}else
+																		    			//ANO TRAITES PAR LA DGMP
+																		    			if(action.equalsIgnoreCase("ANOTRAIDMP")) {
+																			    			type = "ANO";
+																			    			libelleDmp="DGMP";
+																			    			libelle="DEMANDES TRAITEES";	
+																			    		}else
 															    			//LISTE TRANSMISSION A LA NUMEROTATION
 															    			if(action.equalsIgnoreCase("LISNUM")) {
 																    			type = "Commission";
