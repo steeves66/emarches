@@ -1066,4 +1066,15 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 		return list;
 	}
+	
+
+ @Override
+public List getObjectByColumnBudgetInstr(String objet, String lbgCodeAc, String lbgMopCode) {
+	// TODO Auto-generated method stub
+	String query = "FROM "+objet+" WHERE LBG_FON_CODE_AC ='"+lbgCodeAc+"' AND INSTR(LBG_MOP_CODE,'"+lbgMopCode+"') > 0 ORDER BY LBG_CODE" ; 
+
+	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+	return list;
+}
+
 }

@@ -30,6 +30,8 @@ public class VDossierDac implements java.io.Serializable {
 	private String ddaNadCode;
 	private String opeMatricule;
 	private String ddaFonCod;
+	private String nadLibelle;
+	private String opeNom;
 
 	public VDossierDac() {
 	}
@@ -40,7 +42,7 @@ public class VDossierDac implements java.io.Serializable {
 
 	public VDossierDac(BigDecimal ddaId, String ddaNom, Date ddaDteSaisi, String ddaStaCode, String ddaDacCode,
 			BigDecimal ddaPidCode, String ddaReference, String ddaCommentaire, String ddaNadCode, String opeMatricule,
-			String ddaFonCod) {
+			String ddaFonCod, String nadLibelle,String opeNom) {
 		this.ddaId = ddaId;
 		this.ddaNom = ddaNom;
 		this.ddaDteSaisi = ddaDteSaisi;
@@ -52,6 +54,7 @@ public class VDossierDac implements java.io.Serializable {
 		this.ddaNadCode = ddaNadCode;
 		this.opeMatricule = opeMatricule;
 		this.ddaFonCod = ddaFonCod;
+		this.nadLibelle = nadLibelle;
 	}
 
 	
@@ -153,6 +156,24 @@ public class VDossierDac implements java.io.Serializable {
 
 	public void setDdaFonCod(String ddaFonCod) {
 		this.ddaFonCod = ddaFonCod;
+	}
+	
+	@Column(name = "NAD_LIBELLE", length = 500)
+	public String getNadLibelle() {
+		return this.nadLibelle;
+	}
+
+	public void setNadLibelle(String nadLibelle) {
+		this.nadLibelle = nadLibelle;
+	}
+	
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
 	}
 
 }

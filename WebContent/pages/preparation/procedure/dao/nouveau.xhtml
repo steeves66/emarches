@@ -226,7 +226,7 @@
        
          </p:tab>
          
-       <p:tab id="avis" title="Informations Générales" titleStyle="background-color: #f88b2e;background-image: none">
+       <p:tab id="avis" title="Informations Générales" rendered="#{daoController.pavet_infoG}" titleStyle="background-color: #f88b2e;background-image: none">
          <p:panel>
             <div class="row">    
             <div class="col-md-12">
@@ -1803,10 +1803,14 @@
              
             
            
-            </p:wizard>
+            </p:wizard>  
      
-      <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
-           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+        <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dao}" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+         <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+		 <p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_dps}" action="#{daoController.renderPage('dao1','SAIDPS')}" style="background-color: #f88b2e;" update=":content">
+         <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		
 		<p:commandLink styleClass="btn btn-warning" rendered="#{controleController.btn_fermer_saisie_ami}" action="#{daoController.renderPage('dao1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
@@ -1822,7 +1826,7 @@
     
    
     <h:form id="dlogLign">
-	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="Selectionnez la ligne Budgétaire">
+	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="Sélectionnez la ligne Budgétaire">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">

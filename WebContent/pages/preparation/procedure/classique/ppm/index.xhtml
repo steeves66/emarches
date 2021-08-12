@@ -780,7 +780,7 @@
                 </h:panelGroup>
                  
                
-                      <p:column headerText="Actions" styleClass="col-sm-2">
+                  <p:column headerText="Actions" styleClass="col-sm-2">
                       
                   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                       <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'  || slctdTb.dppStatutRetour == '2'}">
@@ -855,7 +855,7 @@
                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                                <p:commandLink action="#{ppmController.deleteOperation()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer l'opération" update=":content">
                                 <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>
-                                <p:confirm header="Confirmation" message="Confirmez vous la supression de l'operation : #{slctdTb.dppObjet}?" icon="ui-icon-alert" />                           
+                                <p:confirm header="Confirmation" message="Confirmez-vous la supression de l'operation : #{slctdTb.dppObjet}?" icon="ui-icon-alert" />                           
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                </p:commandLink>  
                               </h:panelGroup> 

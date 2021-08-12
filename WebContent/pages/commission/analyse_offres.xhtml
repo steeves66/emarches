@@ -521,7 +521,7 @@
 		                               
 			                          </p:column>
 				                               
-				                             <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
+				                             <p:column headerText="OBSERVATION (*)" styleClass="col-sm-4" >
                                                 <p:cellEditor>
                                                    <f:facet name="output">
                                                     <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -655,7 +655,7 @@
 				                </f:facet>
 				                <f:facet name="input">
 				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}"> 
-				                <p:inputText id="val2" styleClass="form-control text-right" value="#{slctdTb.valRegQual}" style="width:100%; float :rigth">
+				                <p:inputText id="val2" styleClass="form-control text-right" value="#{slctdTb.valRegQual}" style="width:100%; float :right">
 				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				                 </p:inputText>
 				                 </h:panelGroup>
@@ -702,7 +702,7 @@
                             
 				        </p:column>
 				        
-				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-5" >
+				        <p:column headerText="COMMENTAIRE (*)" styleClass="col-sm-5" >
                           <p:cellEditor>
                           <f:facet name="output">
                           <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -735,6 +735,7 @@
 			                  </div>
 			                </div>
 		           </div>
+		           <span  style="color:red; font-size:16px;">(*) Veuillez commenter vos pièces de recevabilité et vos critères d'évaluation.</span>
 	            </div>
 	           </div>
 	           <h:panelGroup rendered="false">

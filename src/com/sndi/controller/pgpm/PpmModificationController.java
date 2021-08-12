@@ -765,14 +765,8 @@ public class PpmModificationController {
 	 //MAJ du DAO-TYpe
 	 public void updatePieces() { 
 		      if(tydCode.equalsIgnoreCase("")) {
-		    	  listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
-					    if (!listeTsPpm.isEmpty()) {
-						       detPass= listeTsPpm.get(0);
-						       detPass.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
-						       iservice.updateObject(detPass);
-						       recupModeleDao();
-					      }
+		    	  FacesContext.getCurrentInstance().addMessage(null,
+				  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, choisir votre dossier type avant de poursuivre", ""));
 
 		      }else {
 
@@ -2343,7 +2337,7 @@ public class PpmModificationController {
 						detPass = listeTsPpm.get(0);
 						
 		   if(date.equalsIgnoreCase("dppDateDaoTrans")) {
-			   detPass.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+			   detPass.setDppDateDaoTrans(geneDate.getDppDateDaoTrans());
 				iservice.updateObject(detPass);
 				recupDateGenere();
 				_logger.info("Date de Transmission : "+geneDate.getDppDateDaoTrans());

@@ -2323,10 +2323,11 @@ public class PpmController {
 	    
 	    public void chargeImputationPros() {
    		 listeImputations.clear();
-			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+		/*	 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 			         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
-					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
-			 filtreLigne="";
+					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,*/			
+   		listeImputations = (List<VLigneImputation>) iservice.getObjectByColumnBudgetInstr("VLigneImputation",""+userController.getSlctd().getTFonction().getFonCod(), ""+passationListe.getMopCode());
+   		 filtreLigne="";
 			 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
 			 _logger.info("Type de plan: "+modePassation.getMopTypPlan());
    }
@@ -5076,6 +5077,7 @@ public class PpmController {
 		     //chargeDataPgspm();
 			 //vider();
 		     tydCode = "";
+		     detailPass = new TDetailPlanPassation();
 			 return userController.renderPage(value);
 		 }
 	  	 
@@ -5087,6 +5089,7 @@ public class PpmController {
 		     //chargeDataPgspm();
 			 //vider();
 			 tydCode="";
+			 detailPass = new TDetailPlanPassation();
 			 return userController.renderPage(value);
 		 }
 		 
@@ -5449,7 +5452,7 @@ public class PpmController {
 				             	chargePpmPubDmp();
 				         }
 					//Message de confirmation		  
-					 userController.setTexteMsg(" Publication effectuée avec succès !");
+					 userController.setTexteMsg("Publication effectuée avec succès !");
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 					//return null;

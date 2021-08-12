@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-03-06T12:54:48 -->
+<!-- 2021-08-09T12:40:05 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#11BA55">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -67,7 +67,7 @@ and dps.dpp_acteur_saisie = f.fon_cod
 and dps.dpp_str_code = st.str_code
 and st.str_min_code = min.min_code
 and dps.dpp_lbg_code = leb.lbg_code(+)
-and leb.lbg_nat_code = nat.nat_code
+and leb.lbg_nat_code = nat.nat_code (+)
 and dps.dpp_id= $P{param_code}]]>
 	</queryString>
 	<field name="DPP_ID" class="java.lang.Long"/>
@@ -327,7 +327,7 @@ and dps.dpp_id= $P{param_code}]]>
 				<textField isBlankWhenNull="true">
 					<reportElement x="1" y="45" width="175" height="21" uuid="ef6fd5b2-fd86-4c95-9236-72331891ff43"/>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Validation DC par CPMP : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_APPROB_DMP})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Validation DC par CPMP : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_ATT_APPROB_CPMP})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
 					<reportElement x="1" y="67" width="175" height="21" uuid="5945402c-fa3b-44d4-9831-2a3a69abe59b">
