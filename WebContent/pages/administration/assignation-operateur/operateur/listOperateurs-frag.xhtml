@@ -47,54 +47,54 @@
 				</div>
 				
 				<p:dataTable id="tblOperateur"
-					styleClass="table mb0 dt-on-steroids dataTable" var="operateur"
-					value="#{assignationOperateurController.listOperateurs}"
+					styleClass="table mb0 dt-on-steroids dataTable" var="vOperateurRech"
+					value="#{assignationOperateurController.listVOperateursRech}"
 					emptyMessage="Aucun opérateur enregistrée" rows="10" paginator="true" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15">
 			
 					<p:column headerText="Matricule" styleClass="col-sm-1">
-						<h:outputText value="#{operateur.opeMatriculeFonc}" />
+						<h:outputText value="#{vOperateurRech.opeMatriculeFonc}" />
 					</p:column>
 			
 					<p:column headerText="Nom et prénom" styleClass="col-sm-2">
-						<h:outputText value="#{operateur.opeNom}" />
+						<h:outputText value="#{vOperateurRech.opeNom}" />
 					</p:column>
 			
 					<p:column headerText="Structure" styleClass="col-sm-3">
-						<h:outputText value="#{operateur.TStructure.strLibelleLong}" />
+						<h:outputText value="#{vOperateurRech.strLibelleLong}" />
 					</p:column>
 			
 					<p:column headerText="Fonction" styleClass="col-sm-2">
-						<h:outputText value="#{operateur.opeFonctionAdminist}" />
+						<h:outputText value="#{vOperateurRech.opeFonctionAdminist}" />
 					</p:column>
 					
 					<p:column headerText="Login" styleClass="col-sm-1">
-						<h:outputText value="#{operateur.opeLogin}" />
+						<h:outputText value="#{vOperateurRech.opeLogin}" />
 					</p:column>
 			
 					<p:column headerText="Contact" styleClass="col-sm-1">
-						<h:outputText value="#{operateur.opeContact}" />
+						<h:outputText value="#{vOperateurRech.opeContact}" />
 					</p:column>
 			
 					<p:column headerText="E-mail" styleClass="col-sm-1">
-						<h:outputText value="#{operateur.opeMail}" />
+						<h:outputText value="#{vOperateurRech.opeMail}" />
 					</p:column>
 					<p:column headerText="Actions" styleClass="col-sm-1">
 						<p:commandButton 
 							styleClass="btn btn-xs" style="width:20px; height:20px;"
-							action="#{assignationOperateurController.printOperateur(operateur)}" title="Imprimer"
+							action="#{assignationOperateurController.printOperateur(vOperateurRech.getTOperateur())}" title="Imprimer"
 							ajax="false"
-							rendered="#{assignationOperateurController.isPrintable(operateur)}"
+							rendered="#{assignationOperateurController.isPrintable(vOperateurRech.getTOperateur())}"
 							icon="ace-icon fa fa-file-pdf-o bigger-120">
 						</p:commandButton>
 			
 						<!-- <i class="fa fa-exchange"></i> -->
 			
-						<p:commandButton title="Modifier" action="#{assignationOperateurController.beforeUpdateOperateur(operateur)}" 
+						<p:commandButton title="Modifier" action="#{assignationOperateurController.beforeUpdateOperateur(vOperateurRech.getTOperateur())}" 
 							styleClass="btn btn-xs" update="frmOperateur" style=" width:20px; height:20px; margin-left:2px;" icon="ace-icon fa fa-pencil bigger-120" oncomplete="PF('frmOperateurDlg').show()">
 						</p:commandButton >
 						
-						<p:commandButton title="Assigner" action="#{assignationOperateurController.beforeNewAssignation(operateur)}" 
+						<p:commandButton title="Assigner" action="#{assignationOperateurController.beforeNewAssignation(vOperateurRech.getTOperateur())}" 
 							update="frmAssignation" styleClass="btn btn-xs" style="width:20px; height:20px; margin-left:2px;" icon="fa fa-tasks bigger-120" oncomplete="PF('frmAssignationDlg').show()">
 						</p:commandButton >
 					</p:column>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sndi.dao.WhereClause;
+import com.sndi.model.TOperateur;
 import com.sndi.model.TStructure;
 import com.sndi.service.Iservice;
 
@@ -24,17 +25,11 @@ public class StructureDao implements IStructureDao
 	private final String tableClassName = "TStructure";
 	private final String idColumn = "STR_CODE";
 	
-	@Getter private List<TStructure> listStructures;
-	
-	@PostConstruct
-	void init()
-	{
-		this.listStructures = this.iservice.getObjects(tableClassName);
-	}
 	@Override
 	public TStructure findById(String strCode) 
 	{
-		return null;
+		TStructure structure = (TStructure) iservice.getObjectsByColumn(tableClassName, new WhereClause(idColumn, WhereClause.Comparateur.EQ, strCode)).get(0);
+		return structure;
 	}
 
 	@Override

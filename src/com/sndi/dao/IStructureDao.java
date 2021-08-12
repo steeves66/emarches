@@ -7,6 +7,5 @@ import com.sndi.model.TStructure;
 public interface IStructureDao extends ICrudDao<TStructure, String>
 {
 	List<TStructure> findByStrCodeOrLibelle(String critere);
-	List<TStructure> getListStructures();
 	boolean existsByStrCode(String strCode);
 }

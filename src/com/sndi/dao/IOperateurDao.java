@@ -7,14 +7,15 @@ import com.sndi.model.VOperateurRech;
 
 public interface IOperateurDao extends ICrudDao<TOperateur, String>
 {
-	List<TOperateur> getListOperateurs();
-	List<VOperateurRech> getListOperateursRech();
 	List<TOperateur> findByCritereLibre(String critereLibre);
 	List<TOperateur> findByOpeLogin(String opeLogin);
 	List<TOperateur> findByOpeEmail(String opeEmail);
 	List<TOperateur> findByOpeMatriculeFonc(String opeMatriculeFonc);
 	List<TOperateur> findByOpeContact(String opeContact);
 	
+	List<VOperateurRech> findAllVOperateurRech();
+	List<VOperateurRech> findVOperateurRechByCritereLibre(String critereLibre);
+	List<VOperateurRech> findVOperateurRechByOpeLogin(String opeLogin);
 	
 	List<TOperateur> findByOpeNom(String opeNom);
 	

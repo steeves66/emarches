@@ -24,11 +24,7 @@ public class VOperateurRech
 	@Id
 	@Column(name = "OPE_MATRICULE", unique = true, nullable = false, length = 25)
 	private String opeMatricule;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "OPE_STR_CODE")
-	private TStructure TStructure;
-	
+
 	@Column(name = "OPE_NOM")
 	private String opeNom;
 	
@@ -80,7 +76,7 @@ public class VOperateurRech
 		operateur.setOpeMinCode(opeMinCode);
 		operateur.setOpeNom(opeNom);
 		operateur.setOpeMatriculeFonc(opeMatriculeFonc);
-		operateur.setTStructure(TStructure);
+		operateur.setTStructure(new TStructure(strCode));
 		return operateur;
 	}
 }
