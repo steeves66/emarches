@@ -2,23 +2,15 @@ package com.sndi.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.sndi.dao.WhereClause;
 import com.sndi.model.TAssignation;
 import com.sndi.service.Iservice;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Component
 public class AssignationDao implements IAssignationDao
 {
-	@Getter @Setter
-	private SessionFactory sessionFactory;
 	@Autowired private Iservice iservice;
 	private final String tableName = "T_ASSIGNATION";
 	private final String tableClassName = "TAssignation";

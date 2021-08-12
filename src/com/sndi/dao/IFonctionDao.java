@@ -12,5 +12,4 @@ public interface IFonctionDao extends ICrudDao<TFonction, String>
 	List<TFonction> findByTyfCodAndCritereLibre(String tyfCod, String critereRechercheFonction);
 	List<TFonction> findByStrCodeAndTyfCodAndCritereLibre(String strCode, String tyfCod, String critereRechercheFonction);
 	List<VFonctionAssignationRech> findFonctionAssignationByStrCodeAndTyfCodAndCritereLibre(String strCode, String tyfCod, String critereRechercheFonction);
-	List<VFonctionAssignationRech> getListFonctionAssignationRech();
 }

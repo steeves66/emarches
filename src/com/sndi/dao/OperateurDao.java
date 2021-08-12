@@ -2,28 +2,20 @@ package com.sndi.dao;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.sndi.model.TOperateur;
 import com.sndi.model.VOperateurRech;
 import com.sndi.service.Iservice;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Component
 public class OperateurDao implements IOperateurDao
 {
 	@Autowired Iservice iservice;
-	@Getter @Setter private List<TOperateur> listOperateurs;
-	@Getter @Setter private List<VOperateurRech> listOperateursRech;
-	
 	private final String tableName = "T_OPERATEUR";
 	private final String tableClassName = "TOperateur";
+	private final String vOperateurRechClassName = "VOperateurRech";
 	private final String idColumn = "OPE_MATRICULE";
 	private final String matFoncColumn = "OPE_MATRICULE_FONC";
 	private final String mailColumn = "OPE_MAIL";
@@ -31,12 +23,6 @@ public class OperateurDao implements IOperateurDao
 	private final String contactColumn = "OPE_CONTACT";
 	private final String nomColumn = "OPE_NOM";
 	
-	@PostConstruct
-	void init()
-	{
-		 this.listOperateursRech =  iservice.getObjects("VOperateurRech");
-		 this.listOperateurs = this.listOperateursRech.stream().map(vOpe->vOpe.getTOperateur()).collect(Collectors.toList());
-	}
 	@Override
 	public TOperateur findById(String opeMatricule) 
 	{
@@ -47,8 +33,7 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public List<TOperateur> findAll() 
 	{
-		this.listOperateursRech =  iservice.getObjects("VOperateurRech");
-		return  this.listOperateursRech.stream().map(vOpe->vOpe.getTOperateur()).collect(Collectors.toList());
+		return  iservice.getObjects(tableClassName);
 	}
 
 	@Override 
@@ -139,10 +124,7 @@ public class OperateurDao implements IOperateurDao
 	@Override
 	public List<TOperateur> findByCritereLibre(String critereLibre) 
 	{
-		List<VOperateurRech> operateurRetrouves = iservice.getObjectsByColumn("VOperateurRech", new WhereClause("OPE_CLE_RECHER", WhereClause.Comparateur.LIKE, "%" + critereLibre.toUpperCase() +"%" ));
-		//List<VOperateurRech> operateurRetrouves = this.listOperateursRech.stream()
-																		 //.filter(vOpe->vOpe.getOpeCleRech().toUpperCase().contains(critereLibre.toUpperCase()))
-																		 //.collect(Collectors.toList());
+		List<VOperateurRech> operateurRetrouves = iservice.getObjectsByColumn(vOperateurRechClassName, new WhereClause("OPE_CLE_RECHER", WhereClause.Comparateur.LIKE, "%" + critereLibre.toUpperCase() +"%" ));
 		return operateurRetrouves.stream().map(vOperateur-> vOperateur.getTOperateur()).collect(Collectors.toList());
 	}
 	@Override
@@ -184,5 +166,23 @@ public class OperateurDao implements IOperateurDao
 	public long countAll() 
 	{
 		return iservice.countTableByColumn(tableName, idColumn, new WhereClause(idColumn, WhereClause.Comparateur.NEQ, null));
+	}
+
+	@Override
+	public List<VOperateurRech> findAllVOperateurRech() 
+	{
+		return iservice.getObjects(vOperateurRechClassName);
+	}
+
+	@Override
+	public List<VOperateurRech> findVOperateurRechByCritereLibre(String critereLibre) 
+	{
+		return iservice.getObjectsByColumn(vOperateurRechClassName, new WhereClause("OPE_CLE_RECHER", WhereClause.Comparateur.LIKE, "%" + critereLibre.toUpperCase() +"%" ));
+	}
+
+	@Override
+	public List<VOperateurRech> findVOperateurRechByOpeLogin(String opeLogin) 
+	{
+		return iservice.getObjectsByColumn(vOperateurRechClassName, new WhereClause(loginColumn, WhereClause.Comparateur.EQ, opeLogin));
 	}
 }

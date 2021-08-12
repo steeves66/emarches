@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,9 +12,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
-import org.primefaces.event.FlowEvent;
-import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.itextpdf.text.DocumentException;
@@ -27,6 +25,7 @@ import com.sndi.model.TAssignation;
 import com.sndi.model.TFonction;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TStructure;
+import com.sndi.model.VOperateurRech;
 import com.sndi.report.ProjetReport;
 import com.sndi.service.IOperateurService;
 import com.sndi.utilitaires.KeyGen;
@@ -56,7 +55,7 @@ public class AssignationOperateurController
 	
 	private List<TFonction> listFonctions; //List des fonctions, On les charge après chaque changement du typeFonction (on charge unique les fonctions du typeFonction choisi, voir la fonction onSelectTypeFonction L36)
 	private List<TStructure> listStructures =  new ArrayList<>();
-	private List<TOperateur> listOperateurs =  new ArrayList<>();
+	private List<VOperateurRech> listVOperateursRech =  new ArrayList<>();
 	private String critereRechercheStructure = "";
 	private String critereRechercheOperateur = "";
 	private String formOperateurMode = "new"; // new & update
@@ -67,19 +66,18 @@ public class AssignationOperateurController
 	@PostConstruct
 	void init()
 	{
-		this.listStructures = this.StructureDao.getListStructures();
 		this.operateur.setOpeMatricule(keyGen.getOperateurCode());
-		this.listOperateurs = this.operateurDao.findAll();
+		
 	}
 	public void rechercherOperateur()
 	{
-		this.listOperateurs = this.operateurService.findByCritereLibre(this.critereRechercheOperateur);
+		this.listVOperateursRech = this.operateurDao.findVOperateurRechByCritereLibre(this.critereRechercheOperateur);
 	}
 	
 	public void initialiserCritereRechercheOperateur()
 	{
 		this.critereRechercheOperateur = "";
-		this.listOperateurs = this.operateurDao.getListOperateurs();
+		this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
 	}
 	
 	public void beforeNewOperateur()
@@ -94,6 +92,7 @@ public class AssignationOperateurController
 	}
 	public void beforeUpdateOperateur(TOperateur operateur)
 	{
+		operateur.setTStructure(StructureDao.findById(operateur.getTStructure().getStrCode()));
 		this.operateurValidator.setValid(true);
 		this.operateur = operateur;
 		this.printable = this.isPrintable(this.operateur);
@@ -106,19 +105,19 @@ public class AssignationOperateurController
 	{
 		try
 		{
+			this.operateur.setOpeMinCode(this.operateur.getTStructure().getTMinistere().getMinCode());
 			this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.operateur = new TOperateur();
 			this.operateur.setOpeMatricule(keyGen.getOperateurCode());
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
-			this.listOperateurs = this.operateurDao.findAll();
+			this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
 		}
 		catch(Exception e)
 		{
 			this.successMsgVisible = false;
 			this.errorMsgVisible = true;
 		}
-		
 	}
 	public void saveOperateur()
 	{
@@ -127,7 +126,7 @@ public class AssignationOperateurController
 			this.operateur = this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
-			this.listOperateurs = this.operateurDao.findAll();
+			this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
 		}
 		catch(Exception e)
 		{
@@ -141,7 +140,7 @@ public class AssignationOperateurController
 	{
 		this.operateur = operateurService.saveOrUpdateOperateur(this.operateur);
 		this.beforeNewAssignation(this.operateur);
-		this.listOperateurs = this.operateurDao.findAll();
+		this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
 	}
 	public void printOperateur() throws IOException, DocumentException
 	{
@@ -154,10 +153,12 @@ public class AssignationOperateurController
 	
 	public void beforeNewAssignation(TOperateur operateur) throws ParseException
 	{
+		operateur.setTStructure(StructureDao.findById(operateur.getTStructure().getStrCode()));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dernierJourAnne = sdf.parse(LocalDate.now().getYear() + "-" + "12-31");
 		this.assignation = new TAssignation();
 		this.formAssignationMode = "new";
+		this.operateur = operateur;
 		this.assignation.setTOperateur(operateur);
 		this.assignation.setAssDatDeb(new Date());
 		this.assignation.setAssDatFin(dernierJourAnne);
@@ -186,6 +187,7 @@ public class AssignationOperateurController
 		fonction.setFonCod("");
 		fonction.setFonLibelle("");
 		this.assignation.setTFonction(fonction);
+		System.out.println("TYF_COD = " + this.tyfCod);
 		this.listFonctions = fonctionDao.findByStrCodeAndTyfCodAndCritereLibre(this.assignation.getTOperateur().getTStructure().getStrCode(), this.tyfCod, "");
 		this.printable = this.isPrintable(this.operateur);
 	}
@@ -230,6 +232,7 @@ public class AssignationOperateurController
 	
 	public String goToListOperateurs()
 	{
+		this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
 		return "/pages/administration/assignation-operateur/index.xhtml?faces-redirect=true";
 	}
 	private void refreshListAssignation() //Rafraichit la liste des assignation de l'opérateur en cours de modification
