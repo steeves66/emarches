@@ -18,7 +18,8 @@
 </style>
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{anoController.slctdTd.aaoCode} : <strong>#{anoController.slctdTd.aaoLibelle}</strong>
+        <!-- #{controleController.libelle} #{anoController.slctdTd.aaoCode} : <strong>#{anoController.slctdTd.aaoLibelle}</strong> -->
+        TRANSMISSION A LA NUMEROTATION
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -73,12 +74,12 @@
                    <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS A TRANSMETTRE A LA NUMEROTATION</div></div> 
-			         <div class="col-md-2 "> </div>
+			         <div class="col-md-2 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">Nombre de lot(s) : #{numerotationController.listeLotNumerotation.size()}</div></div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
                    <div class="row">                   
-		            <div class="col-md-12">
+		            <div class="col-md-6">
 		                <div class="input-group input-group-sm col-md-12">
 				                <span class="input-group-btn">
 				                <p:commandLink action="#{numerotationController.chargeLotAnumeroter()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:finance"/>
