@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 13 juil. 2021 18:20:56 by Hibernate Tools 4.3.5.Final
+// Generated 12 août 2021 15:51:53 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,23 +19,19 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_LOT_NUMEROTATION")
 public class VLotNumerotation implements java.io.Serializable {
 
+	private BigDecimal attNum;
 	private BigDecimal laaId;
 	private String laaAaoCode;
 	private String laaObjet;
 	private String laaObservation;
 	private BigDecimal laaMtCaut;
 	private BigDecimal laaMtEst;
-	private String laaAno;
-	private BigDecimal checktrt;
-	private String laaObservationDmp;
-	private String libAno;
-	private String libAo;
-	private String liblotnara;
 	private Date laaDteSaisi;
 	private String laaStaCode;
 	private String laaFonCodSaisi;
 	private String laaFonCodCpmp;
 	private String laaOpeMatricule;
+	private String attStaCode;
 	private String laaLieuExe;
 	private String laaLbgImputation;
 	private BigDecimal laaNum;
@@ -44,39 +40,37 @@ public class VLotNumerotation implements java.io.Serializable {
 	private String attSouNcc;
 	private BigDecimal attMtAttr;
 	private String souSigleSte;
+	private Date attDteSaisi;
 
 	public VLotNumerotation() {
 	}
 
-	public VLotNumerotation(BigDecimal laaId, String laaAaoCode, String laaObjet, BigDecimal laaNum) {
+	public VLotNumerotation(BigDecimal attNum,BigDecimal laaId, String laaAaoCode,String attStaCode, String laaObjet, BigDecimal laaNum) {
+		this.attNum = attNum;
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
+		this.attStaCode = attStaCode;
 		this.laaNum = laaNum;
 	}
 
-	public VLotNumerotation(BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
-			BigDecimal laaMtCaut, BigDecimal laaMtEst, String laaAno, BigDecimal checktrt, String laaObservationDmp,
-			String libAno, String libAo, String liblotnara, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi,
-			String laaFonCodCpmp, String laaOpeMatricule, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
-			BigDecimal laaCoutLot, String laaDacCode, String attSouNcc, BigDecimal attMtAttr, String souSigleSte) {
+	public VLotNumerotation(BigDecimal attNum,BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
+			BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi,
+			String laaFonCodCpmp, String laaOpeMatricule, String attStaCode, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
+			BigDecimal laaCoutLot, String laaDacCode, String attSouNcc, BigDecimal attMtAttr, String souSigleSte, Date attDteSaisi) {
+		this.attNum = attNum;
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
 		this.laaObservation = laaObservation;
 		this.laaMtCaut = laaMtCaut;
 		this.laaMtEst = laaMtEst;
-		this.laaAno = laaAno;
-		this.checktrt = checktrt;
-		this.laaObservationDmp = laaObservationDmp;
-		this.libAno = libAno;
-		this.libAo = libAo;
-		this.liblotnara = liblotnara;
 		this.laaDteSaisi = laaDteSaisi;
 		this.laaStaCode = laaStaCode;
 		this.laaFonCodSaisi = laaFonCodSaisi;
 		this.laaFonCodCpmp = laaFonCodCpmp;
 		this.laaOpeMatricule = laaOpeMatricule;
+		this.attStaCode = attStaCode;
 		this.laaLieuExe = laaLieuExe;
 		this.laaLbgImputation = laaLbgImputation;
 		this.laaNum = laaNum;
@@ -85,9 +79,20 @@ public class VLotNumerotation implements java.io.Serializable {
 		this.attSouNcc = attSouNcc;
 		this.attMtAttr = attMtAttr;
 		this.souSigleSte = souSigleSte;
+		this.attDteSaisi = attDteSaisi;
+		
 	}
 
 	@Id
+	@Column(name = "ATT_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getAttNum() {
+		return this.attNum;
+	}
+
+	public void setAttNum(BigDecimal attNum) {
+		this.attNum = attNum;
+	}
+	
 	@Column(name = "LAA_ID", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaId() {
 		return this.laaId;
@@ -142,60 +147,6 @@ public class VLotNumerotation implements java.io.Serializable {
 		this.laaMtEst = laaMtEst;
 	}
 
-	@Column(name = "LAA_ANO", length = 3)
-	public String getLaaAno() {
-		return this.laaAno;
-	}
-
-	public void setLaaAno(String laaAno) {
-		this.laaAno = laaAno;
-	}
-
-	@Column(name = "CHECKTRT", precision = 22, scale = 0)
-	public BigDecimal getChecktrt() {
-		return this.checktrt;
-	}
-
-	public void setChecktrt(BigDecimal checktrt) {
-		this.checktrt = checktrt;
-	}
-
-	@Column(name = "LAA_OBSERVATION_DMP", length = 4000)
-	public String getLaaObservationDmp() {
-		return this.laaObservationDmp;
-	}
-
-	public void setLaaObservationDmp(String laaObservationDmp) {
-		this.laaObservationDmp = laaObservationDmp;
-	}
-
-	@Column(name = "LIB_ANO", length = 4000)
-	public String getLibAno() {
-		return this.libAno;
-	}
-
-	public void setLibAno(String libAno) {
-		this.libAno = libAno;
-	}
-
-	@Column(name = "LIB_AO", length = 4000)
-	public String getLibAo() {
-		return this.libAo;
-	}
-
-	public void setLibAo(String libAo) {
-		this.libAo = libAo;
-	}
-
-	@Column(name = "LIBLOTNARA", length = 63)
-	public String getLiblotnara() {
-		return this.liblotnara;
-	}
-
-	public void setLiblotnara(String liblotnara) {
-		this.liblotnara = liblotnara;
-	}
-
 	@Column(name = "LAA_DTE_SAISI", length = 7)
 	public Date getLaaDteSaisi() {
 		return this.laaDteSaisi;
@@ -239,6 +190,15 @@ public class VLotNumerotation implements java.io.Serializable {
 
 	public void setLaaOpeMatricule(String laaOpeMatricule) {
 		this.laaOpeMatricule = laaOpeMatricule;
+	}
+
+	@Column(name = "ATT_STA_CODE", nullable = false, length = 3)
+	public String getAttStaCode() {
+		return this.attStaCode;
+	}
+
+	public void setAttStaCode(String attStaCode) {
+		this.attStaCode = attStaCode;
 	}
 
 	@Column(name = "LAA_LIEU_EXE", length = 1000)
@@ -285,7 +245,7 @@ public class VLotNumerotation implements java.io.Serializable {
 	public void setLaaDacCode(String laaDacCode) {
 		this.laaDacCode = laaDacCode;
 	}
-	
+
 	@Column(name = "ATT_SOU_NCC", length = 20)
 	public String getAttSouNcc() {
 		return this.attSouNcc;
@@ -304,7 +264,7 @@ public class VLotNumerotation implements java.io.Serializable {
 		this.attMtAttr = attMtAttr;
 	}
 
-	@Column(name = "SOU_SIGLE_STE", length = 300)
+	@Column(name = "SOU_SIGLE_STE", length = 500)
 	public String getSouSigleSte() {
 		return this.souSigleSte;
 	}
@@ -312,5 +272,13 @@ public class VLotNumerotation implements java.io.Serializable {
 	public void setSouSigleSte(String souSigleSte) {
 		this.souSigleSte = souSigleSte;
 	}
+	
+	@Column(name = "ATT_DTE_SAISI", length = 7)
+	public Date getAttDteSaisi() {
+		return this.attDteSaisi;
+	}
 
+	public void setAttDteSaisi(Date attDteSaisi) {
+		this.attDteSaisi = attDteSaisi;
+	}
 }

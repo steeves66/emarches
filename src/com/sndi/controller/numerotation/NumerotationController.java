@@ -18,8 +18,10 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
+import com.sndi.model.TAttributions;
 import com.sndi.model.TDemande;
 import com.sndi.model.TLotAao;
+import com.sndi.model.TStatut;
 import com.sndi.model.VAaoNumerotation;
 import com.sndi.model.VAvisAppelOffreAno;
 import com.sndi.model.VLotNumerotation;
@@ -60,6 +62,7 @@ Logger _logger = Logger.getLogger(AnoController.class);
 	 private List<VLotNumerotation> listeLotNumerotation = new ArrayList<VLotNumerotation>();
 	 private List<VLotNumerotation> selectionLotNumerotation= new ArrayList<VLotNumerotation>();
 	 
+	 
 	//Objet
 		 private VAaoNumerotation slctdTd = new VAaoNumerotation();
 	 
@@ -67,9 +70,8 @@ Logger _logger = Logger.getLogger(AnoController.class);
 		 //Liste des lots à numeroter
 		 public void chargeLotAnumeroter() {
 			 listeLotNumerotation.clear();
-			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumn("VLotNumerotation", new ArrayList<String>(Arrays.asList("LAA_NUM")),
-					 new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L3A"),
-					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"));
 			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
 		 }
 		 
@@ -79,15 +81,14 @@ Logger _logger = Logger.getLogger(AnoController.class);
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez au moin un lot", ""));
 				}
 		 		else{
-			 		for(VLotNumerotation ligne : listeLotNumerotation) {
-			 			List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", 
-			 					new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
-			 					new WhereClause("LAA_NUM",Comparateur.EQ,""+ligne.getLaaNum()));
-			 			TLotAao updateLot = new TLotAao();
+			 		for(VLotNumerotation ligne : selectionLotNumerotation) {
+			 			List<TAttributions> LS  = iservice.getObjectsByColumn("TAttributions", 
+			 					new WhereClause("ATT_NUM",Comparateur.EQ,""+ligne.getAttNum()));
+			 			TAttributions updateAttrib = new TAttributions();
 						if(!LS.isEmpty()) {
-							updateLot = LS.get(0);	
-							updateLot.setLaaStaCode("LAD");
-			 			iservice.updateObject(updateLot);
+							updateAttrib = LS.get(0);	
+							updateAttrib.setTStatut(new TStatut("ATD"));
+			 			iservice.updateObject(updateAttrib);
 				     }	
 						
 						//Mettre l'attribution ATD
@@ -125,7 +126,8 @@ Logger _logger = Logger.getLogger(AnoController.class);
 						if(fonct.equalsIgnoreCase("listNumerotationAc")) {
 							_logger.info("fonctionalité: "+fonct);	
 							_logger.info("value: "+value+" action: "+action);
-							chargeData("AAO_FON_COD_AC");
+							//chargeData("AAO_FON_COD_AC");
+							chargeLotAnumeroter();
 						 }else {
 							 if(fonct.equalsIgnoreCase("listAutoSaiDmp")) {
 					    		  //chargeAvisDmp();

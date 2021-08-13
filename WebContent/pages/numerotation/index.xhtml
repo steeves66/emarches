@@ -1,42 +1,53 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
 
-      <ui:composition template="/template/templatePage.xhtml">
+	
 	<ui:define name="contents">
-<h:form id="gnl">	
- <section class="content-header">
-      <h3>
-        #{controleController.libelle}  
+	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{anoController.slctdTd.aaoCode} : <strong>#{anoController.slctdTd.aaoLibelle}</strong>
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
-        <!-- <h2>Travaux en Commission</h2> -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
         </small>
         
       </h3>
       <ol class="breadcrumb">
-        <li>
+      <li>
         <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
             <i class="fa fa-dashboard"></i>Accueil
              </p:commandLink>
             </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>ANO | Index
+             </p:commandLink>
+            </li>
         <li class="active">
-         <p:commandLink action="#{agpmController.renderPage('com1')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>#{controleController.type} | Liste
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>ANO 
              </p:commandLink>
         </li>
       </ol>
     </section>
-  
+    
     <section class="content">
      <div class="box"></div>
-
-		<h:panelGroup rendered="#{userController.renderMsg}">
+     <h:panelGroup rendered="#{userController.renderMsg}">
 				<br/>
 				<div class="alert alert-success light alert-dismissable" >
 				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
@@ -44,101 +55,109 @@
 				<span class="hidden-xs"> x</span>
 				</p:commandLink>
 				<i class="fa fa-check pr10"></i>
-				<strong>Succ�s!</strong> #{userController.texteMsg}.</div>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
-			
-             <div class="row">
+				 <div class="row">
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
             </div>
-            <div class="row">  
-                  
-            <div class="col-md-4">
-                <div class="input-group input-group-sm col-md-12">
-                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero de l'avis"></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
-                    </span>
-					 </div>
-					 
-            </div>
-            
-            
-            </div>
-            
-					<p:dataTable id="TbleOuv" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{numerotationController.listeAvisAppelOffre}" emptyMessage="Aucun Avis d'Appel d'Offre trouv�" rows="10"
-                         paginator="true" draggableColumns="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
-                          <p:column headerText="CODE" styleClass="col-sm-1" >
-         				      <h:outputText value="#{slctdTb.aaoCode}" />
-				        </p:column>	
-				        
-				        <p:column headerText="LIBELLE" styleClass="col-sm-7" >
-         				     <h:outputText value="#{slctdTb.aaoLibelle}"  />
-				        </p:column>
-				        
-				         <p:column headerText="DATE DE PUB" styleClass="col-sm-1" >
-         				     <h:outputText value="#{slctdTb.aaoDtePub}">
-         				  <f:convertDateTime pattern="dd/MM/yyyy" />
-         				  </h:outputText>
-
-				        </p:column>	
-				        
-				         <p:column headerText="NBRE LOT" styleClass="col-sm-1" >
-         				  <h:outputText value="#{slctdTb.aaoNbrLot}"/>
-
-				        </p:column>	
-				        	
-                        <p:column headerText="NBRE OUV" styleClass="col-sm-1" >
-         				 <h:outputText value="#{slctdTb.aaoNbrOuv}" />
-
-         				  
-				        </p:column>	
-				        		        
-				         <p:column headerText="ACTIONS" styleClass="col-sm-2" >
-				           <!-- BOUTONS APERCU -->
-         				   <p:commandLink rendered="false" action="#{etatsnumerotationController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsnumerotationController.slctdTd}" />  
-                             </p:commandLink>
-                             
-                            
-                             <!--FIN BOUTONS APERCU -->
-                             
-                           <!-- BOUTONS COMMISSION -->
-                           
-                       
-                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">  
-                            <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{numerotationController.renderPage('ano6','TRANSNUM')}"
-				               title="Transmission � la num�rotation" update=":content">
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{numerotationController.slctdTd}" />                             
-                            </p:commandLink>
-                            </h:panelGroup>
-                            
-                                
-				        </p:column>
-    </p:dataTable>
-    
-    
+				 <div class="row">
+          
+    <div class="box box-success">
      
-    
- <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
-		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		     </p:commandLink> 
-       </section>
+              <div class="box-body">
+              <div class="row">
+               <div class="col-md-12">
+                <div class="row">
+                
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS A TRANSMETTRE A LA NUMEROTATION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-12">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{anoController.chargeLotByAvis()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
+				                </span>
+			                      <p:inputText value="#{anoController.laaNum}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{anoController.chargeLotFilterLot()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"/>
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{numerotationController.listeLotNumerotation}" rowKey="#{slctdTb.attNum}"
+                  selection="#{numerotationController.selectionLotNumerotation}" 
+               scrollable="true" scrollHeight="600" emptyMessage="Aucun Lot enregistré">
+                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                           <p:column headerText="N°Lot" style="width:70px;text-align:center">
+                            <h:outputText value="#{slctdTb.laaNum}" />
+				        </p:column>
+
+				         <p:column headerText="Objet" styleClass="col-sm-7">
+				         <h:outputText value="#{slctdTb.laaObjet}" />
+				        </p:column>
+				        
+				         <p:column headerText="Soumissionnaire" styleClass="col-sm-3">
+				          <h:outputText value="#{slctdTb.attSouNcc} : #{slctdTb.souSigleSte}" />
+				        </p:column>
+				         <p:column headerText="Montant attribué" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.attMtAttr}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				 </h:outputText>
+				        </p:column>
+				        
+				        
+				        		        
+				  
+                         <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
+                            <p:commandLink oncomplete="PF('anoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				               title="Traitement de l'ANO">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+		 	        </p:column>
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+               </div>
+
+              </div>
+                
+            </div>
+            <!-- /.box-body -->
+          </div>
          
-
-</h:form>
-
-   
-
-<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+				      
+     
+		</div> 
+    
+		 <div class="row">
+		     <p:commandLink  action="#{numerotationController.transmettrePourNumerotation()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+		     <p:confirm header="Confirmation" message="Confirmez-vous la transmission a la numérotation ?" icon="ui-icon-alert" />  
+				     <i class="ace-icon fa fa-exchange bigger-120"></i> Transmettre à la numérotation
+				      </p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning" action="#{userController.renderPage('accueil')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+	          </div>
+		
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
         <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </div>
     </p:confirmDialog>
-    </ui:define>
+    
+</ui:define>
 </ui:composition>
 </html>
