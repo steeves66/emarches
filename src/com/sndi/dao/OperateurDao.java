@@ -185,4 +185,11 @@ public class OperateurDao implements IOperateurDao
 	{
 		return iservice.getObjectsByColumn(vOperateurRechClassName, new WhereClause(loginColumn, WhereClause.Comparateur.EQ, opeLogin));
 	}
+
+	@Override
+	public VOperateurRech findVOperateurRechByOpeMatricule(String opeMatricule) 
+	{
+		VOperateurRech vOperateurRech = (VOperateurRech) iservice.getObjectsByColumn(vOperateurRechClassName, new WhereClause(idColumn, WhereClause.Comparateur.EQ, opeMatricule)).get(0);
+		return vOperateurRech;
+	}
 }

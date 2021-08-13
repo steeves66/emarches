@@ -121,7 +121,6 @@ public class FonctionDao implements IFonctionDao
 												new WhereClause(this.strCodeColumn, WhereClause.Comparateur.EQ,strCode),
 												new WhereClause(this.fontyfCodColumn, WhereClause.Comparateur.EQ,tyfCod)
 											);
-	
 		return listFonctionAssignationRech;
 	}
 	@Override

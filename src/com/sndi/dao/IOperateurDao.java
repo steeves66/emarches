@@ -13,6 +13,7 @@ public interface IOperateurDao extends ICrudDao<TOperateur, String>
 	List<TOperateur> findByOpeMatriculeFonc(String opeMatriculeFonc);
 	List<TOperateur> findByOpeContact(String opeContact);
 	
+	VOperateurRech findVOperateurRechByOpeMatricule(String opeMatricule);
 	List<VOperateurRech> findAllVOperateurRech();
 	List<VOperateurRech> findVOperateurRechByCritereLibre(String critereLibre);
 	List<VOperateurRech> findVOperateurRechByOpeLogin(String opeLogin);

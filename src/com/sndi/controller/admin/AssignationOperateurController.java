@@ -63,12 +63,6 @@ public class AssignationOperateurController
 	private boolean successMsgVisible = false;
 	private boolean errorMsgVisible = false;
 	
-	@PostConstruct
-	void init()
-	{
-		this.operateur.setOpeMatricule(keyGen.getOperateurCode());
-		
-	}
 	public void rechercherOperateur()
 	{
 		this.listVOperateursRech = this.operateurDao.findVOperateurRechByCritereLibre(this.critereRechercheOperateur);
@@ -101,24 +95,6 @@ public class AssignationOperateurController
 		this.formOperateurMode = "update";
 	}
 	
-	public void saveOperateurAndReinitializeForm()
-	{
-		try
-		{
-			this.operateur.setOpeMinCode(this.operateur.getTStructure().getTMinistere().getMinCode());
-			this.operateurService.saveOrUpdateOperateur(this.operateur);
-			this.operateur = new TOperateur();
-			this.operateur.setOpeMatricule(keyGen.getOperateurCode());
-			this.successMsgVisible = true;
-			this.errorMsgVisible = false;
-			this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
-		}
-		catch(Exception e)
-		{
-			this.successMsgVisible = false;
-			this.errorMsgVisible = true;
-		}
-	}
 	public void saveOperateur()
 	{
 		try
@@ -126,7 +102,7 @@ public class AssignationOperateurController
 			this.operateur = this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
-			this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
+			this.listVOperateursRech.set(0, this.operateurDao.findVOperateurRechByOpeMatricule(this.operateur.getOpeMatricule())) ;
 		}
 		catch(Exception e)
 		{
@@ -136,12 +112,6 @@ public class AssignationOperateurController
 		}
 	}
 	
-	public void saveOperateurAndGoToAssignation() throws ParseException
-	{
-		this.operateur = operateurService.saveOrUpdateOperateur(this.operateur);
-		this.beforeNewAssignation(this.operateur);
-		this.listVOperateursRech = this.operateurDao.findAllVOperateurRech();
-	}
 	public void printOperateur() throws IOException, DocumentException
 	{
  		projetReport.showOperateurPDF(this.operateur.getOpeMatricule())	;
@@ -219,7 +189,6 @@ public class AssignationOperateurController
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dernierJourAnne = sdf.parse(LocalDate.now().getYear() + "-" + "12-31");
-		
 		this.assignationDao.save(this.updatedAssignation);
 		TAssignation newAssignation = new TAssignation();
 		newAssignation.setTOperateur(this.assignation.getTOperateur());
