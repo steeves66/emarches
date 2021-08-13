@@ -81,11 +81,11 @@
 		            <div class="col-md-12">
 		                <div class="input-group input-group-sm col-md-12">
 				                <span class="input-group-btn">
-				                <p:commandLink action="#{anoController.chargeLotByAvis()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
+				                <p:commandLink action="#{numerotationController.chargeLotAnumeroter()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:finance"/>
 				                </span>
-			                      <p:inputText value="#{anoController.laaNum}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                      <p:inputText value="#{numerotationController.critere}" styleClass="form-control" type="text"  placeholder="critère de recherche"/>
 			                       <span class="input-group-btn">
-			                      <p:commandLink action="#{anoController.chargeLotFilterLot()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"/>
+			                      <p:commandLink action="#{numerotationController.chargeLotAnumeroterFilter()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:finance"/>
 			                    </span>
 						  </div> 
 		                 </div>

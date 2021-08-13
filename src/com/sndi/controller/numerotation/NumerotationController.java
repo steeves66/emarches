@@ -62,6 +62,8 @@ Logger _logger = Logger.getLogger(AnoController.class);
 	 private List<VLotNumerotation> listeLotNumerotation = new ArrayList<VLotNumerotation>();
 	 private List<VLotNumerotation> selectionLotNumerotation= new ArrayList<VLotNumerotation>();
 	 
+	 private String critere="";
+	 
 	 
 	//Objet
 		 private VAaoNumerotation slctdTd = new VAaoNumerotation();
@@ -71,10 +73,25 @@ Logger _logger = Logger.getLogger(AnoController.class);
 		 public void chargeLotAnumeroter() {
 			 listeLotNumerotation.clear();
 			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"));
 			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
 		 }
 		 
+		 
+		 //Liste des lots à numeroter
+		 public void chargeLotAnumeroterFilter() {
+			 listeLotNumerotation.clear();
+			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"),
+					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"));
+			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
+		 }
+		 
+		 
+		 
+		
 		 
 		 public void transmettrePourNumerotation() {
 			 if (selectionLotNumerotation.size()<=0) {
@@ -182,6 +199,16 @@ Logger _logger = Logger.getLogger(AnoController.class);
 
 	public void setSelectionLotNumerotation(List<VLotNumerotation> selectionLotNumerotation) {
 		this.selectionLotNumerotation = selectionLotNumerotation;
+	}
+
+
+	public String getCritere() {
+		return critere;
+	}
+
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 

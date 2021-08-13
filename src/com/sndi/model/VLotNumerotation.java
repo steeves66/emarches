@@ -41,6 +41,8 @@ public class VLotNumerotation implements java.io.Serializable {
 	private BigDecimal attMtAttr;
 	private String souSigleSte;
 	private Date attDteSaisi;
+	private String attFonCodeSaisi;
+	private String critere;
 
 	public VLotNumerotation() {
 	}
@@ -57,7 +59,7 @@ public class VLotNumerotation implements java.io.Serializable {
 	public VLotNumerotation(BigDecimal attNum,BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
 			BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi,
 			String laaFonCodCpmp, String laaOpeMatricule, String attStaCode, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
-			BigDecimal laaCoutLot, String laaDacCode, String attSouNcc, BigDecimal attMtAttr, String souSigleSte, Date attDteSaisi) {
+			BigDecimal laaCoutLot, String laaDacCode, String attSouNcc, BigDecimal attMtAttr, String souSigleSte, Date attDteSaisi, String attFonCodeSaisi, String critere) {
 		this.attNum = attNum;
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
@@ -80,6 +82,8 @@ public class VLotNumerotation implements java.io.Serializable {
 		this.attMtAttr = attMtAttr;
 		this.souSigleSte = souSigleSte;
 		this.attDteSaisi = attDteSaisi;
+		this.attFonCodeSaisi = attFonCodeSaisi;
+		this.critere = critere;
 		
 	}
 
@@ -280,5 +284,22 @@ public class VLotNumerotation implements java.io.Serializable {
 
 	public void setAttDteSaisi(Date attDteSaisi) {
 		this.attDteSaisi = attDteSaisi;
+	}
+	@Column(name = "ATT_FON_CODE_SAISI", length = 50)
+	public String getAttFonCodeSaisi() {
+		return this.attFonCodeSaisi;
+	}
+
+	public void setAttFonCodeSaisi(String attFonCodeSaisi) {
+		this.attFonCodeSaisi = attFonCodeSaisi;
+	}
+	
+	@Column(name = "CRITERE", length = 3672)
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 }
