@@ -2695,6 +2695,7 @@ public class CommissionController {
 				case "com8":
 					chargeMembreCommite();
 					chargeMembre();
+					btnFinOuv = true;
 					break;
 				
 				case "com9":

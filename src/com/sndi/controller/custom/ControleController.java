@@ -158,6 +158,7 @@ public class ControleController {
 	private boolean btn_valider_dao_dmp =false;
 	private boolean panelD =false;
 	private boolean btn_fermer_saisie_dao =false;
+	private boolean btn_fermer_saisie_dps =false;
 	private boolean btn_fermer_ratt_dao =false;
 	private boolean btn_fermer_saisie_daoPs =false;
 	public boolean fermerSaiDao=false;
@@ -3220,6 +3221,7 @@ public class ControleController {
 			       panelRegister=true;
 			       panelUpdate=false;
 			       btn_fermer_saisie_dao = true;
+			       btn_fermer_saisie_dps = false;
    			       btn_fermer_saisie_daoPs =false;
    			       btn_fermer_saisie_ami = false ;
    			       btn_fermer_saisie_prq = false;                     
@@ -3240,6 +3242,7 @@ public class ControleController {
 					     panelRegister=true;
 					     panelUpdate=false;
 					     btn_fermer_saisie_dao = true;
+					     btn_fermer_saisie_dps = false;
 					     btn_fermer_ratt_dao =false;
 					     btn_fermer_saisie_ami = false ;
 					     btn_fermer_saisie_prq = false  ;
@@ -3267,6 +3270,7 @@ public class ControleController {
 					     btn_mod = false;
 					 	 btn_ratt = true;
 					 	 btn_fermer_saisie_dao = false;
+					 	 btn_fermer_saisie_dps = false;
 					 	 btn_fermer_ratt_dao =true;
 			    	}else
 		    			if(action.equalsIgnoreCase("HISDAC")) {
@@ -3351,7 +3355,8 @@ public class ControleController {
 							 btn_valider_prq_cpmp = false;
 							 btn_valider_ami_dmp = false;
 							 btn_valider_prq_dmp = false;
-							 btn_fermer_saisie_dao = true; 
+							 btn_fermer_saisie_dao = true;
+							 btn_fermer_saisie_dps = false;
 							 btn_fermer_saisie_ami = false; 
 							 btn_fermer_saisie_prq = false; 
 							 btn_rat = false;
@@ -3435,7 +3440,8 @@ public class ControleController {
 								 btn_valider_prq_cpmp = false;
 								 btn_valider_ami_dmp = false;
 								 btn_valider_prq_dmp = false;
-								 btn_fermer_saisie_dao = true; 
+								 btn_fermer_saisie_dao = true;
+								 btn_fermer_saisie_dps = false;
 								 btn_fermer_saisie_ami = false; 
 								 btn_fermer_saisie_prq = false; 
 								 btn_rat = false;
@@ -3521,6 +3527,7 @@ public class ControleController {
 									 btn_valider_ami_dmp = false;
 									 btn_valider_prq_dmp = false;
 									 btn_fermer_saisie_dao = false; 
+									 btn_fermer_saisie_dps = false;
 									 btn_fermer_saisie_ami = false; 
 									 btn_fermer_saisie_prq = false; 
 									 btn_rat = true;
@@ -3592,6 +3599,7 @@ public class ControleController {
 								 btn_valider_ami_dmp = false;
 								 btn_valider_prq_dmp = false;
 								 btn_fermer_saisie_dao = true; 
+								 btn_fermer_saisie_dps = false;
 								 btn_fermer_saisie_ami = false; 
 								 btn_fermer_saisie_prq = false; 
 								 btn_rat = false;
@@ -3670,6 +3678,7 @@ public class ControleController {
 								btn_fermer_saisie_ami = false; 
 								btn_fermer_saisie_prq = false;
 								btn_fermer_saisie_dao = true;
+								btn_fermer_saisie_dps = false;
 								btn_rat = false;
 							    btn_rat_mod = false;
 			    			}else
@@ -3781,7 +3790,8 @@ public class ControleController {
 											 btn_valider_prq_cpmp = false;
 											 btn_valider_ami_dmp = false;
 											 btn_valider_prq_dmp = false;
-											 btn_fermer_saisie_dao = false; 
+											 btn_fermer_saisie_dao = false;
+											 btn_fermer_saisie_dps = false;
 											 btn_fermer_saisie_ami = false; 
 											 btn_fermer_saisie_prq = false; 
 											 btn_rat = false;
@@ -3860,6 +3870,7 @@ public class ControleController {
 												 btn_valider_ami_dmp = false;
 												 btn_valider_prq_dmp = false;
 												 btn_fermer_saisie_dao = false; 
+												 btn_fermer_saisie_dps = false;
 												 btn_fermer_saisie_ami = false; 
 												 btn_fermer_saisie_prq = false; 
 												 btn_rat = false;
@@ -4021,6 +4032,7 @@ public class ControleController {
 													 btn_valider_ami_dmp = false;
 													 btn_valider_prq_dmp = false;
 													 btn_fermer_saisie_dao = false; 
+													 btn_fermer_saisie_dps = false;
 													 btn_fermer_saisie_ami = false; 
 													 btn_fermer_saisie_prq = false;
 													 nbreAchat = true;  
@@ -4102,7 +4114,8 @@ public class ControleController {
 														 btn_valider_prq_cpmp = false;
 														 btn_valider_ami_dmp = false;
 														 btn_valider_prq_dmp = false;
-														 btn_fermer_saisie_dao = false; 
+														 btn_fermer_saisie_dao = false;
+														 btn_fermer_saisie_dps = false;
 														 btn_fermer_saisie_ami = false; 
 														 btn_fermer_saisie_prq = false;
 				    								     nbreAchat = false;
@@ -4184,7 +4197,8 @@ public class ControleController {
 															 btn_valider_prq_cpmp = false;
 															 btn_valider_ami_dmp = false;
 															 btn_valider_prq_dmp = false;
-															 btn_fermer_saisie_dao = false; 
+															 btn_fermer_saisie_dao = false;
+															 btn_fermer_saisie_dps = false;
 															 btn_fermer_saisie_ami = false; 
 															 btn_fermer_saisie_prq = false;
 															 nbreAchat = false;   
@@ -4267,6 +4281,7 @@ public class ControleController {
 																 btn_valider_ami_dmp = false;
 																 btn_valider_prq_dmp = false;
 																 btn_fermer_saisie_dao = false; 
+																 btn_fermer_saisie_dps = false;
 																 btn_fermer_saisie_ami = false; 
 																 btn_fermer_saisie_prq = false;
 																 nbreAchat = false;  
@@ -4348,6 +4363,7 @@ public class ControleController {
 																	 btn_valider_ami_dmp = false;
 																	 btn_valider_prq_dmp = false;
 																	 btn_fermer_saisie_dao = false; 
+																	 btn_fermer_saisie_dps = false;
 																	 btn_fermer_saisie_ami = false; 
 																	 btn_fermer_saisie_prq = false;
 																	 nbreAchat = false;  
@@ -4422,6 +4438,7 @@ public class ControleController {
 																 btn_valider_ami_dmp = false;
 																 btn_valider_prq_dmp = false;
 																 btn_fermer_saisie_dao = false; 
+																 btn_fermer_saisie_dps = false;
 																 btn_fermer_saisie_ami = false; 
 																 btn_fermer_saisie_prq = false;
 																 nbreAchat = false; 
@@ -4492,7 +4509,8 @@ public class ControleController {
 																	 btn_valider_prq_cpmp = false;
 																	 btn_valider_ami_dmp = false;
 																	 btn_valider_prq_dmp = false;
-																	 btn_fermer_saisie_dao = false; 
+																	 btn_fermer_saisie_dao = false;
+																	 btn_fermer_saisie_dps = false;
 																	 btn_fermer_saisie_ami = false; 
 																	 btn_fermer_saisie_prq = false;
 																	 nbreAchat = false; 
@@ -4662,6 +4680,7 @@ public class ControleController {
 																			 btn_valider_ami_dmp = false;
 																			 btn_valider_prq_dmp = false;
 																			 btn_fermer_saisie_dao = false; 
+																			 btn_fermer_saisie_dps = false;
 																			 btn_fermer_saisie_ami = false; 
 																			 btn_fermer_saisie_prq = false;
 																			 nbreAchat = false;  
@@ -4750,7 +4769,8 @@ public class ControleController {
 																				 btn_valider_prq_cpmp = false;
 																				 btn_valider_ami_dmp = false;
 																				 btn_valider_prq_dmp = false;
-																				 btn_fermer_saisie_dao = false; 
+																				 btn_fermer_saisie_dao = false;
+																				 btn_fermer_saisie_dps = false;
 																				 btn_fermer_saisie_ami = false; 
 																				 btn_fermer_saisie_prq = false;
 																				 nbreAchat = false;
@@ -4769,7 +4789,8 @@ public class ControleController {
 				                                            			       panelRegister=true;
 				                                            			       panelUpdate=false;
 				                                            			       //btn_fermer_saisie_dao = false;
-				                                            			       btn_fermer_saisie_dao = true;
+				                                            			       btn_fermer_saisie_dao = false;
+				                                            			       btn_fermer_saisie_dps = true;
 				                            				   			       btn_fermer_saisie_daoPs =true;
 				                            				   			       btn_fermer_saisie_ami = false ;
 				                            				   			       btn_fermer_saisie_prq = false;
@@ -4872,7 +4893,8 @@ public class ControleController {
 							    														 btn_valider_prq_cpmp = false;
 							    														 btn_valider_ami_dmp = false;
 							    														 btn_valider_prq_dmp = false;
-							    														 btn_fermer_saisie_dao = true; 
+							    														 btn_fermer_saisie_dao = false;
+							    														 btn_fermer_saisie_dps = true;
 							    														 btn_fermer_saisie_ami = false; 
 							    														 btn_fermer_saisie_prq = false;
 							    														 nbreAchat = false; 
@@ -4945,7 +4967,8 @@ public class ControleController {
 								    													btn_valider_dao_dmp = true;
 								    													btn_fermer_saisie_ami = false; 
 								    													btn_fermer_saisie_prq = false;
-								    													btn_fermer_saisie_dao = true;
+								    													btn_fermer_saisie_dao = false;
+								    													btn_fermer_saisie_dps = true;
 								    													nbreAchat = false;
 								    													btn_rat = false;
 								    												    btn_rat_mod = false;
@@ -5050,6 +5073,7 @@ public class ControleController {
 																							 btn_valider_ami_dmp = false;
 																							 btn_valider_prq_dmp = false;
 																							 btn_fermer_saisie_dao = false; 
+																							 btn_fermer_saisie_dps = false;
 																							 btn_fermer_saisie_ami = false; 
 																							 btn_fermer_saisie_prq = false;
 																							 nbreAchat = false;
@@ -5129,6 +5153,7 @@ public class ControleController {
 										    												 btn_fermer_saisie_dao = false; 
 										    												 btn_fermer_saisie_ami = false; 
 										    												 btn_fermer_saisie_prq = false; 
+										    												 btn_fermer_saisie_dps = false;
 														    							     nbreAchat = false;
 														    							     btn_rat = false;
 														    								 btn_rat_mod = false;
@@ -5208,6 +5233,7 @@ public class ControleController {
 											    													 btn_fermer_saisie_dao = false; 
 											    													 btn_fermer_saisie_ami = false; 
 											    													 btn_fermer_saisie_prq = false; 
+											    													 btn_fermer_saisie_dps = false;
 															    							         nbreAchat = false;
 															    							         btn_rat = false;
 															    									 btn_rat_mod = false;
@@ -5288,6 +5314,7 @@ public class ControleController {
 																									 btn_fermer_saisie_dao = false; 
 																									 btn_fermer_saisie_ami = false; 
 																									 btn_fermer_saisie_prq = false;
+																									 btn_fermer_saisie_dps = false;
 																									 nbreAchat = false;  
 																									 btn_rat = false;
 																									 btn_rat_mod = false;
@@ -5368,6 +5395,7 @@ public class ControleController {
 																										 btn_fermer_saisie_dao = false; 
 																										 btn_fermer_saisie_ami = false; 
 																										 btn_fermer_saisie_prq = false;
+																										 btn_fermer_saisie_dps = false;
 																	    						         nbreAchat = true;
 																	    						         btn_rat = false;
 																	    								 btn_rat_mod = false;
@@ -5437,6 +5465,7 @@ public class ControleController {
 																											 btn_valider_ami_dmp = false;
 																											 btn_valider_prq_dmp = false;
 																											 btn_fermer_saisie_dao = false; 
+																											 btn_fermer_saisie_dps = false;
 																											 btn_fermer_saisie_ami = false; 
 																											 btn_fermer_saisie_prq = false;
 																											 nbreAchat = false; 
@@ -5506,6 +5535,7 @@ public class ControleController {
 																													 btn_fermer_saisie_dao = false; 
 																													 btn_fermer_saisie_ami = false; 
 																													 btn_fermer_saisie_prq = false;
+																													 btn_fermer_saisie_dps = false;
 																													 nbreAchat = false;  
 																													 btn_rat = false;
 																													 btn_rat_mod = false;
@@ -11110,5 +11140,16 @@ public class ControleController {
 	public void setBtn_retourAna(boolean btn_retourAna) {
 		this.btn_retourAna = btn_retourAna;
 	}
+
+
+	public boolean isBtn_fermer_saisie_dps() {
+		return btn_fermer_saisie_dps;
+	}
+
+
+	public void setBtn_fermer_saisie_dps(boolean btn_fermer_saisie_dps) {
+		this.btn_fermer_saisie_dps = btn_fermer_saisie_dps;
+	}
+	
 	
 }

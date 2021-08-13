@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-01T11:50:25 -->
+<!-- 2021-08-13T16:29:57 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
@@ -335,7 +335,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 			<staticText>
 				<reportElement x="10" y="15" width="510" height="46" uuid="003d38fd-d64e-44a7-af04-3d7a02e28966"/>
 				<textElement textAlignment="Center" verticalAlignment="Top"/>
-				<text><![CDATA[Abidjan, Cité Financière, Immeuble des Finances , Tour F Tel : (+225) 20 21 15 19 / 22 51 48 52  Fax : (+225) 20 21 53 90 Email: info@marchespublics.gouv.ci  Site Web : www.marchespublics.ci]]></text>
+				<text><![CDATA[Abidjan, Riviéra Bonoumin,Tel : (+225) 27 22 55 88 88 / 05 74 88 88 88  Fax : (+225) 20 21 53 90 Email: info@marchespublics.gouv.ci  Site Web : www.marchespublics.ci]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
