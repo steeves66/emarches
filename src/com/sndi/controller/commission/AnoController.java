@@ -76,6 +76,7 @@ public class AnoController {
 	 private List<VLotCandidatAnoPrequalif> listeEntreprise = new ArrayList<VLotCandidatAnoPrequalif>();
 	 //private List<VLotCandidatAno> listeEntreprise = new ArrayList<VLotCandidatAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
+	 private List<VAvisAppelOffreAnodmp> listeDemandeTraiteDmp = new ArrayList<VAvisAppelOffreAnodmp>();
 	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
 	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
@@ -154,13 +155,28 @@ public class AnoController {
 		 
 	 }
 	 
+	 //Liste des demandes d'ANO en attente de tratement par la DGMP
 	 public void chargeDemandeDmp() { 
-		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp",
-				  new WhereClause("DEM_STA_CODE",Comparateur.EQ,"AND"));
-		_logger.info("listeDemande size: "+listeDemande.size()
-		);		
+		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectByColumnInInstrValAno("VAvisAppelOffreAnodmp", ""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("listeDemande size: "+listeDemande.size());	
 	 }
 	 
+	//Liste des demandes d'ANO deja traté par la DGMP
+	 public void chargeDemandeTraiteDmpDmp() { 
+		 listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectByColumnInInstrValAno("VAvisAppelOffreAnodmp", ""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("listeDemandeTraiteDmp size: "+listeDemandeTraiteDmp.size());	
+	 }
+	 
+	//Liste des demandes d'ANO de l'AC deja traté par la DGMP
+		 public void chargeDemandeTraiteDmpAc() { 
+			 listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectByColumnInInstrValAno("VAvisAppelOffreAnodmp", ""+userController.getSlctd().getTFonction().getFonCod());
+				_logger.info("listeDemandeTraiteDmp size: "+listeDemandeTraiteDmp.size());	
+				
+				listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp", 
+						  new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
+		 }
+	 
+	
 	 public void chargeAvisDmp() {
 		 listeAvisAppelOffreDmp.clear();
 		 listeAvisAppelOffreDmp = (List<VAvisAppelOffreAno>) iservice.getObjectsByColumn("VAvisAppelOffreAno",
@@ -967,7 +983,15 @@ public class AnoController {
 					saveDemande();
 					break;
 				case "ano5":
-					chargeData("JUG", "AAO_FON_COD_AC","AAO_ANO");
+					String fonction = controleController.getFonctionalite();	
+					//Liste des demandes d'ANO de l'AC deja traté par la DGMP
+					if(fonction.equalsIgnoreCase("listDemTraiByDgmp")) {
+						chargeDemandeTraiteDmpAc();
+					}else
+						//Liste des demandes d'ANO deja traté par la DGMP
+						if(fonction.equalsIgnoreCase("listDemTraiDgmp")) {
+							chargeDemandeTraiteDmpDmp();
+						}	
 					break;
 				case "ano6":
 					chargeLotAnumeroter();
@@ -1456,6 +1480,16 @@ public class AnoController {
 
 	public void setSelectionLotNumerotation(List<VLotNumerotation> selectionLotNumerotation) {
 		this.selectionLotNumerotation = selectionLotNumerotation;
+	}
+
+
+	public List<VAvisAppelOffreAnodmp> getListeDemandeTraiteDmp() {
+		return listeDemandeTraiteDmp;
+	}
+
+
+	public void setListeDemandeTraiteDmp(List<VAvisAppelOffreAnodmp> listeDemandeTraiteDmp) {
+		this.listeDemandeTraiteDmp = listeDemandeTraiteDmp;
 	}
 
 	

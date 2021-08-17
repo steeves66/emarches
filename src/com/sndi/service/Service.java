@@ -168,6 +168,8 @@ public class Service implements Iservice {
 			return getDao().getObjectByColumnInInstrValDaoFiltre(objet,statut,strSource);
 		}
 		
+		
+		
 		//Methode de comptage en region
 		@Override
 		public int countTableByColumnInInstr(String objet,String conditionColumn, String strSource, String typeDac) {
@@ -293,6 +295,8 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnInInstrValDao(objet,strSource);
 		}
+		
+		
 
 		@Override
 		public List getObjectByColumnInInstrValAmi(String objet, String strSource) {
@@ -440,6 +444,12 @@ public class Service implements Iservice {
 		public List getObjectByColumnBudgetInstr(String objet, String lbgCodeAc, String lbgMopCode) {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnBudgetInstr(objet,lbgCodeAc,lbgMopCode);
+		}
+
+		@Override
+		public List getObjectByColumnInInstrValAno(String objet, String strSource) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectByColumnInInstrValAno(objet,strSource);
 		}
 
 		/*@Override

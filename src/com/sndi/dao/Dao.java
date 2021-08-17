@@ -662,6 +662,13 @@ public List getObjectByColumnInPspmInstr(String objet,String strSource) {
 				return list;
 	}
 	
+	public List getObjectByColumnInInstrValAno(String objet, String strSource) { 
+		// TODO Auto-generated method stub
+			String query = "FROM "+objet+" WHERE DEM_STA_CODE ='AND' AND INSTR('"+strSource+"',FON_CODE_CVA) > 0 " ;       
+		 List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+			return list;
+}
+	
 	public List getObjectByColumnInInstrConsultPpmDmp(String objet, String strSource) { 
 		// TODO Auto-generated method stub
 		String query = "FROM "+objet+" WHERE DPP_STA_CODE NOT IN('S1S','S1T','S2V','S2D','S2R') AND INSTR('"+strSource+"',FON_CODE_SPP) > 0 ORDER BY DPP_DTE_MODIF DESC" ;      

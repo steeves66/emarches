@@ -7273,6 +7273,7 @@ public class ControleController {
 																    			//LES DEMANDES DE L'AC TRAITEES PAR LA DGMP
 																    			if(action.equalsIgnoreCase("TRAIDGMP")) {
 																	    			type = "ANO";
+																	    			fonctionalite = "listDemTraiByDgmp";
 																	    			libelleDmp="DGMP";
 																	    			libelle="MES DEMANDES TRAITEES PAR LA DGMP";	
 																	    		}else
@@ -7285,6 +7286,7 @@ public class ControleController {
 																		    			//ANO TRAITES PAR LA DGMP
 																		    			if(action.equalsIgnoreCase("ANOTRAIDMP")) {
 																			    			type = "ANO";
+																			    			fonctionalite = "listDemTraiDgmp";
 																			    			libelleDmp="DGMP";
 																			    			libelle="DEMANDES TRAITEES";	
 																			    		}else
