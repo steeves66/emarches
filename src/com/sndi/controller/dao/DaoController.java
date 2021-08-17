@@ -115,6 +115,7 @@ public class DaoController {
 	 private List<VDacliste> dacVente = new ArrayList<VDacliste>();
 	 private List<VDacliste> detailDacDiff = new ArrayList<VDacliste>();
 	 private List<TDacSpecs> listDao = new ArrayList<TDacSpecs>(); 
+	 private List<TPiecesDacs> listePieceDac = new ArrayList<TPiecesDacs>();
 	 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	 private List<TAvisAppelOffre> avisTab = new ArrayList<TAvisAppelOffre>(); 
 	 private List<TDaoAffectation> daoExamen = new ArrayList<TDaoAffectation>();
@@ -1230,7 +1231,25 @@ TDacSpecs dao = new TDacSpecs();
 	 
 	 
 	 public void saveObservation(){	
-		 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
+		 listePieceDac = (List<TPiecesDacs>) iservice.getObjectsByColumn("TPiecesDacs", new ArrayList<String>(Arrays.asList("PID_CODE")),
+				 new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidDacCode()),
+				 new WhereClause("PID_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidCode()));
+		 if(!listePieceDac.isEmpty()) { 
+			 piece=listePieceDac.get(0);
+			 piece.setPidObservation(sltPiece.getPidObservation());
+			 iservice.updateObject(piece);
+			 examinerCsv();
+			 
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+				 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
+							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidDacCode()));	
+			 }else {
+				 listePicesCsv= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
+							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidDacCode()));	 
+			 }
+		   }
+		 
+	/*	 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
 	 if(!LS.isEmpty()) piece = LS.get(0);
 	 piece.setPidObservation(sltPiece.getPidObservation());
 	 iservice.updateObject(piece);
@@ -1242,7 +1261,7 @@ TDacSpecs dao = new TDacSpecs();
 	 }else {
 		 listePicesCsv= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
 					new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+sltPiece.getPidDacCode()));	 
-	 }
+	 }*/
 	 
 }
 
@@ -4180,7 +4199,9 @@ TDacSpecs dao = new TDacSpecs();
 		     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
 		     iservice.addObject(dacStatut);
 	 }
-	 
+		 
+		 
+	
 		 //Cration du Tableau de Bord AC
 		 public void tableauAc(String statut, String dac, String ac, String plan, String matricule, String dacCode) {
 			   VbTempParamTabBord tempTabBord = new VbTempParamTabBord();
@@ -7953,26 +7974,32 @@ TDacSpecs dao = new TDacSpecs();
 									@Transactional 
 									 public void resultatCorrection() {
 										
-                                                        if(resultat.equalsIgnoreCase("Valide")){
+                                                   if(resultat.equalsIgnoreCase("Valide")){
 										        	  
-													  
-													        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
-														        statutSanction ="DPU";
-														          statutSanRetour ="0";
-														    	
-													                  }else{
-													                         if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")){
-													    	                   statutSanction ="D5V";
-															                   statutSanRetour ="0";
-													                         }
-										                                }
-                                                                          
+                                                        	if(slctdTd.getDacMopCode().equalsIgnoreCase("AOR") || slctdTd.getDacMopCode().equalsIgnoreCase("DPA") ||
+                                                        			slctdTd.getDacMopCode().equalsIgnoreCase("DPS")) {
+														                 statutSanction ="DAP";
+														                 statutSanRetour ="0";
+													                  }else {
+
+																	        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+																		        statutSanction ="DPU";
+																		          statutSanRetour ="0";
+																		    	
+																	                  }else{
+																	                         if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")){
+																	    	                   statutSanction ="D5V";
+																			                   statutSanRetour ="0";
+																	                         }
+														                                }
+													                  }
+                                                        	
 													        correctionVal();
 													        
 										                         }else{
 
 										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
-												                                  statutSanction ="D1S";
+												                                  statutSanction ="D1R";
 												                                  statutSanRetour ="1";
 												                                  
 												                                //Appel de la methode de correction         
@@ -8293,8 +8320,18 @@ TDacSpecs dao = new TDacSpecs();
 											      			  		    
 											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
-											     			  				    
+												 						       //historiser("DVE",newDao.getDacCode(),"DAO payé");
+												 				     
+												 						     THistoDac dacStatut = new THistoDac();
+												 						     dacStatut.setHacDate(Calendar.getInstance().getTime());
+												 						     dacStatut.setHacCommentaire("DAO payé");
+												 						     dacStatut.setTStatut(new TStatut("DVE"));
+												 						     dacStatut.setTDacSpecs(newDao);
+												 						     dacStatut.setHacDveNum(venteDetail.getDveNum());
+												 						     dacStatut.setTFonction(userController.getSlctd().getTFonction());
+												 						     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
+												 						     iservice.addObject(dacStatut);	
+												 						     
 											     			  				   //Activation du bouton dition du rcu
 											     			  				   confirmPaie = true;
 											     			  				   confirmInter = false;
@@ -17654,7 +17691,14 @@ TDacSpecs dao = new TDacSpecs();
 	public void setPavet_infoG(boolean pavet_infoG) {
 		this.pavet_infoG = pavet_infoG;
 	}
-	
+
+	public List<TPiecesDacs> getListePieceDac() {
+		return listePieceDac;
+	}
+
+	public void setListePieceDac(List<TPiecesDacs> listePieceDac) {
+		this.listePieceDac = listePieceDac;
+	}
 	
 	
 	/*******  Fin document  *************/
