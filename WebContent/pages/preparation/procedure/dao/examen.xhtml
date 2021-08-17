@@ -705,7 +705,7 @@
 								<p:fileUpload fileUploadListener="#{pgpmAcController.upload}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                          update=":uplog:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+			                          update=":uplog:tabDossier" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
 								</div>
               </div>
               <br/>
@@ -776,7 +776,7 @@
 	              <p:fileUpload fileUploadListener="#{daoController.uploadCharge}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
 			                    update=":content"  mode="advanced" dragDropSupport="true"
-			                           sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                            allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	            </div>
 
       </p:dialog>

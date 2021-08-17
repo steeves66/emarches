@@ -650,7 +650,7 @@ public class CommissionController {
 					// );
 					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
 		 }
-	 
+		 
 		 
 		 
 	 public void checkMontantVar() {
@@ -2116,7 +2116,7 @@ public class CommissionController {
 						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
 					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
-						 updateStatulot();
+						 //updateStatulot();
 						 statUpdate = "JUG";
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {	 
