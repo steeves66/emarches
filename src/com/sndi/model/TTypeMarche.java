@@ -103,14 +103,14 @@ public class TTypeMarche implements java.io.Serializable {
 		this.tymGroupe = tymGroupe;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")
 	public Set<TModeleDacType> getTModeleDacTypes() {
 		return this.TModeleDacTypes;
 	}
 
 	public void setTModeleDacTypes(Set<TModeleDacType> TModeleDacTypes) {
 		this.TModeleDacTypes = TModeleDacTypes;
-	}
+	}*/
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")
 	public Set<TDetailPlanPassation> getTDetailPlanPassations() {

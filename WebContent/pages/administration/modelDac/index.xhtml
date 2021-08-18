@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templatePage.xhtml">
+
+
+	<ui:define name="contents">
+		<h:form id="gnl">
+			<section class="content-header">
+			<h1>
+				MODELE TYPE DE DOSSIER D'APPEL A LA CONCCURENCE <small>Saisie
+					des Types de dossier</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+				<li class="active">Type dossier</li>
+			</ol>
+			</section>
+
+			<section class="content">
+
+
+			<div class="row">
+				<div class="box box-success box-solid ">
+					<div class="box-header with-border ">
+
+						<div class="form-inline col-md-12">
+							<div class="col-md-4 ">
+								<div style="color: #fff">Saisie des types de dossier</div>
+
+							</div>
+							<div class="form-group has-feedback">
+								<p:commandLink styleClass="btn btn-success m-r-5"
+									style="background-color: #036d3b; border: #036d3b"
+									value="Initialiser"
+									action="#{modelDacTypeController.chargeData()}" update=":gnl">
+								</p:commandLink>
+							</div>
+							<div class="form-group has-feedback">
+								<p:inputText type="text"
+									value="#" class="form-control"
+									placeholder="Saisire le type de fonction">
+								</p:inputText>
+								<i class="glyphicon glyphicon-search form-control-feedback"></i>
+							</div>
+							<!-- 
+							<div class="form-group has-feedback">
+								<p:commandLink styleClass="btn btn-primary m-r-5"
+									style="background-color: #f88b2e; border: #f88b2e"
+									value="Rechercher"
+									action="#"
+									update=":gnl">
+								</p:commandLink>
+							</div> -->
+
+							<div class="pull-right">
+								<p:commandLink action="#{modelDacTypeController.renderPage('mdl2')}"
+									styleClass="btn btn-warning btn-rounded waves-effect waves-light"
+									style="background-color: #f88b2e">
+									<span class="btn-label"><i class="fa fa-plus"></i></span>
+									<span class="hidden-xs">Nouveau</span>
+								</p:commandLink>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="box-body">
+						<p:dataTable id="ndTble"
+							styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"
+							value="#{modelDacTypeController.listeModel}"
+							emptyMessage="Aucun membre trouvé" draggableColumns="true"
+							scrollable="true" scrollHeight="250" rows="15" paginator="true" rowsPerPageTemplate="5,10,15">
+							<p:column headerText="CODE" styleClass="col-sm-2">
+								<div align="center">
+									<h:outputText value="#{slctdTb.mdtCode}" />
+								</div>
+							</p:column>
+							<p:column headerText="LIBELLE" styleClass="col-sm-5">
+								<h:outputText value="#{slctdTb.mdtLibelleLong}" />
+							</p:column>
+							<p:column headerText="MODE DE PASSATION" styleClass="col-sm-2">
+								<h:outputText value="#{slctdTb.mdtLibelleCourt}" />
+							</p:column>
+							<p:column headerText="CHAIN" styleClass="col-sm-2 center">
+								<h:outputText value="#{slctdTb.mdtDacTypeChain}" />
+							</p:column>
+							<p:column headerText="Actions" styleClass="col-sm-1">
+
+
+								<p:commandLink class="btn btn-xs btn-warning"
+									action="#{modelDacTypeController.renderPage('mdl3')}" title="Modifier"
+									style="background-color: #f88b2e;" update=":content">
+									<i class="ace-icon fa fa-pencil bigger-120"
+										style="color: white"></i>
+									<f:setPropertyActionListener value="#{slctdTb}"
+										target="#{modelDacTypeController.slctdTb}" />
+								</p:commandLink>
+
+
+								<p:commandLink class="btn btn-xs btn-danger"
+									style="margin-left:5px;"
+									action="#{modelDacTypeController.delete()}" title="Suprimmer"
+									update=":gnl">
+									<i class="ace-icon fa fa-remove bigger-120"
+										style="color: white"></i>
+									<f:setPropertyActionListener value="#{slctdTb}"
+										target="#{modelDacTypeController.slctdTb}" />
+								</p:commandLink>
+
+							</p:column>
+
+
+						</p:dataTable>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="pull-left ">
+				<p:commandLink styleClass="btn btn-danger mr10" value="Fermer"
+					style="margin-top:10px;"
+					action="#{userController.renderPage('accueil')}" update=":content" />
+
+			</div>
+
+			</section>
+
+
+		</h:form>
+
+
+
+
+	</ui:define>
+</ui:composition>
+
+
+<!-- 
+		 ConfirmDialog 
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog> -->
+</html>

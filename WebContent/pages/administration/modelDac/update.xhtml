@@ -1,0 +1,140 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+<section class="content-header">
+      <h1>
+        Modèle type de DAC
+        <small>MODIFICATION DU MODELE #{modelDacTypeController.slctdTb.mdtLibelleLong}</small>
+      </h1>
+      <ol class="breadcrumb">
+       <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+        <li><a><i class="fa fa-dashboard"></i> Accueil</a></li>
+        </p:commandLink>
+        <li class="active">Modification</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <div class="spacer" style="margin-top:50px"></div>
+       <div class="box-body col-md-10 col-md-offset-1 form-horizontal">
+        <h:form id="gnl">
+                     <div class="form-group ">
+	                  <label for="codemdl" class="col-sm-2 control-label"><b> Code Modèle</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText value="#{modelDacTypeController.slctdTb.mdtCode}" type="text"  styleClass="form-control" readonly="true"  id="codemdl" style="width: 100%"/>
+	                  </div>
+	                </div> 
+	                
+	                 <div class="form-group " hidden="true">
+	                  <label for="min" class="col-sm-2 control-label"><b>Bailleur  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-10">
+	                      <p:inputText value="#{modelDacTypeController.bail}" style="width:100%;"/>   
+	                  </div>
+	                </div> 
+
+	                  <div class="form-group ">
+	                  <label for="min" class="col-sm-2 control-label"><b>Libellé  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-10">
+	                      <p:inputText value="#{modelDacTypeController.slctdTb.mdtLibelleLong}" style="width:100%;"/>   
+	                  </div>
+	                </div> 
+	                
+	                <div class="form-group ">
+						<label for="tym" class="col-sm-2 control-label"><b>Type	de marché</b></label>
+						<div class="col-sm-10">
+							<p:inputText value="#{modelDacTypeController.slctdTb.mdtLibelleCourt}" style="width:100%;" readonly="true"/> 
+						</div>
+					</div>
+	                
+	                <h:panelGroup id="marche">
+						<div class="form-group ">
+							<label for="dtm" class="col-sm-2 control-label"><b>Type de marché (détails)</b></label>
+							<div class="col-sm-10">
+								<p:selectManyMenu id="dtm"
+								value="#{modelDacTypeController.typeDeMarche}" effect="fade"
+								style="width:100%;" filter="true"	showCheckbox="true" scrollHeight="100">
+								<f:selectItems value="#{modelDacTypeController.listeMarche}"
+									var="typeMarche"
+									itemLabel="    #{typeMarche.tymCode}  :  #{typeMarche.tymLibelleLong}"
+									itemValue="#{typeMarche.tymCode}" />
+							</p:selectManyMenu>
+							</div>
+						</div>
+					</h:panelGroup>
+					
+					<div class="form-group ">
+						<label for="mdt" class="col-sm-2 control-label"><b>Mode	de passation</b></label>
+						<div class="col-sm-10">
+							<p:selectManyMenu id="mdt"
+								value="#{modelDacTypeController.modeDePassation}" effect="fade"
+								style="width:100%;" filter="true" showCheckbox="true" scrollHeight="100">
+								<f:selectItems value="#{modelDacTypeController.listeModeP}"
+									var="modePassation"
+									itemLabel="   #{modePassation.mopCode} : #{modePassation.mopLibelleLong}"
+									itemValue="#{modePassation.mopCode}" />
+							</p:selectManyMenu>
+						</div>
+					</div>
+
+					<div class="form-group ">
+						<div class="pull-right ">
+							<p:commandLink action="#{modelDacTypeController.chaineConstr()}"
+								styleClass="btn btn-success row pull-right"	style="background-color: #036d3b; margin-right:5px;color:#fff" update="chain">
+								<p:confirm header="Confirmation"
+									message="Confirmez-vous les modes de passation?"
+									icon="ui-icon-alert" />
+								<i class="ace-icon fa fa-save"></i> Selectionner	
+								            
+			             </p:commandLink>
+						</div>
+					</div>
+	                
+	                <div class="form-group ">
+						<label for="chain" class="col-sm-2 control-label"><b>CHAINE</b></label>
+						<div class="col-sm-10">
+							<p:inputText type="text" styleClass="form-control" id="chain"
+								value="#{modelDacTypeController.chaine}" style="width: 100%"
+								readonly="true">
+							</p:inputText>
+						</div>
+					</div>
+	                
+	                    <div class="row">
+	                <div class="col-sm-3"></div> 
+	             <div class="col-sm-9">   
+					                 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{modelDacTypeController.renderPage('mdl1')}"  update=":content">
+				     <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+				      </p:commandLink>
+				      
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{modelDacTypeController.update()}"  update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			            </p:commandLink>
+			            </div>
+		       </div>
+		       </div>
+       
+        </h:form>
+       </div>    
+    </section>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

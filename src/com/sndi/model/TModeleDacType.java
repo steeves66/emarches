@@ -23,15 +23,17 @@ import javax.persistence.TemporalType;
 public class TModeleDacType implements java.io.Serializable {
 
 	private String mdtCode;
-	private TTypeMarche TTypeMarche;
-	private TOperateur TOperateur;
+	private String mdtTymCode;
+	private String TOperateur;
 	private String mdtLibelleLong;
 	private String mdtLibelleCourt;
 	private Date mdtDteSaisi;
 	private String mdtDacTypeChain;
 	private Set<TTypePiecesDac> TTypePiecesDacs = new HashSet<TTypePiecesDac>(0);
-	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
-	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
+	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0); private
+	Set<TDetailPlanPassation> TDetailPlanPassations = new
+	HashSet<TDetailPlanPassation>(0);
+
 
 	public TModeleDacType() {
 	}
@@ -40,18 +42,17 @@ public class TModeleDacType implements java.io.Serializable {
 		this.mdtCode = mdtCode;
 	}
 
-	public TModeleDacType(String mdtCode, TTypeMarche TTypeMarche, TOperateur TOperateur, String mdtLibelleLong,
-			String mdtLibelleCourt, Date mdtDteSaisi, String mdtDacTypeChain, Set<TTypePiecesDac> TTypePiecesDacs,
-			Set<TDacSpecs> TDacSpecses, Set<TDetailPlanPassation> TDetailPlanPassations) {
+	public TModeleDacType(String mdtCode, String mdtTymCode, String TOperateur, String mdtLibelleLong,
+			String mdtLibelleCourt, Date mdtDteSaisi, String mdtDacTypeChain, Set<TTypePiecesDac> TTypePiecesDacs, Set<TDacSpecs> TDacSpecses,
+									  Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.mdtCode = mdtCode;
-		this.TTypeMarche = TTypeMarche;
+		this.mdtTymCode = mdtTymCode;
 		this.TOperateur = TOperateur;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtDteSaisi = mdtDteSaisi;
 		this.mdtDacTypeChain = mdtDacTypeChain;
-		this.TTypePiecesDacs = TTypePiecesDacs;
-		this.TDacSpecses = TDacSpecses;
+		this.TTypePiecesDacs = TTypePiecesDacs; this.TDacSpecses = TDacSpecses;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
 
@@ -66,23 +67,21 @@ public class TModeleDacType implements java.io.Serializable {
 		this.mdtCode = mdtCode;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MDT_TYM_CODE")
-	public TTypeMarche getTTypeMarche() {
-		return this.TTypeMarche;
+	@Column(name = "MDT_TYM_CODE")
+	public String getMdtTymCode() {
+		return this.mdtTymCode;
 	}
 
-	public void setTTypeMarche(TTypeMarche TTypeMarche) {
-		this.TTypeMarche = TTypeMarche;
+	public void setMdtTymCode(String mdtTymCode) {
+		this.mdtTymCode = mdtTymCode;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MDT_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
+	@Column(name = "MDT_OPE_MATRICULE")
+	public String getTOperateur() {
 		return this.TOperateur;
 	}
 
-	public void setTOperateur(TOperateur TOperateur) {
+	public void setTOperateur(String TOperateur) {
 		this.TOperateur = TOperateur;
 	}
 
@@ -122,32 +121,26 @@ public class TModeleDacType implements java.io.Serializable {
 	public void setMdtDacTypeChain(String mdtDacTypeChain) {
 		this.mdtDacTypeChain = mdtDacTypeChain;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")
-	public Set<TTypePiecesDac> getTTypePiecesDacs() {
-		return this.TTypePiecesDacs;
-	}
-
-	public void setTTypePiecesDacs(Set<TTypePiecesDac> TTypePiecesDacs) {
-		this.TTypePiecesDacs = TTypePiecesDacs;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")
-	public Set<TDacSpecs> getTDacSpecses() {
-		return this.TDacSpecses;
-	}
-
-	public void setTDacSpecses(Set<TDacSpecs> TDacSpecses) {
-		this.TDacSpecses = TDacSpecses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")
-	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
-		return this.TDetailPlanPassations;
-	}
-
-	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
-		this.TDetailPlanPassations = TDetailPlanPassations;
-	}
+	
+	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType") public
+	  Set<TTypePiecesDac> getTTypePiecesDacs() { return this.TTypePiecesDacs; }
+	  
+	  public void setTTypePiecesDacs(Set<TTypePiecesDac> TTypePiecesDacs) {
+	  this.TTypePiecesDacs = TTypePiecesDacs; }
+	  
+	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType") public
+	  Set<TDacSpecs> getTDacSpecses() { return this.TDacSpecses; }
+	  
+	  public void setTDacSpecses(Set<TDacSpecs> TDacSpecses) { this.TDacSpecses =
+	  TDacSpecses; }
+	  
+	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType") public
+	  Set<TDetailPlanPassation> getTDetailPlanPassations() { return
+	  this.TDetailPlanPassations; }
+	  
+	  public void setTDetailPlanPassations(Set<TDetailPlanPassation>
+	  TDetailPlanPassations) { this.TDetailPlanPassations = TDetailPlanPassations;
+	  }
+	 
 
 }

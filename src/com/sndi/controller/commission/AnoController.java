@@ -940,13 +940,7 @@ public class AnoController {
 							 }else {
 								 if(fonct.equalsIgnoreCase("listDemAnoDmp")) {
 									 chargeDemandeDmp();
-								 }else {
-									 if(fonct.equalsIgnoreCase("listNumerotationAc")) {
-										 _logger.info("value: "+value+" action: "+action);
-											chargeData("JUG", "AAO_FON_COD_AC","AAO_ANO");
-										 //chargeDemandeDmp();
-									 }
-								 }	 
+								 } 
 							 }
 						 }
 						
