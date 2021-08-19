@@ -133,6 +133,7 @@ public class DaoController {
 	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
 	//private List<VDelaiValiditeOffre> delaiValidite = new ArrayList<VDelaiValiditeOffre>();
 	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
+	 private List<VInfoNcc> listOffreCandidat = new ArrayList<VInfoNcc>(); 
 	 private List<VLigneLot> listeImputationsModif = new ArrayList<VLigneLot>();
 	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
@@ -179,6 +180,7 @@ public class DaoController {
 	private VFonctionImputation sltImput = new VFonctionImputation();
 	private VbTempParametreCorDac newTempCor = new VbTempParametreCorDac();
 	private VCheckTransDac newCheckTrans = new VCheckTransDac();
+	 private VInfoNcc offreCandidat = new VInfoNcc(); 
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
@@ -234,6 +236,12 @@ public class DaoController {
 	private TLotAao sltLot = new TLotAao();
 	private VPieceDac sltPiecesDac =new VPieceDac();
 	private TPiecesDacs pieceDac =new TPiecesDacs();
+	//DELETE VENTE
+	private List<THistoDac> listeHisto  = new ArrayList<THistoDac>();
+	private List<TDetailVente> listeDetVet  = new ArrayList<TDetailVente>();
+	private List<TVenteDac> listeVetDac  = new ArrayList<TVenteDac>();
+	private List<TCandidats> listeCanDac  = new ArrayList<TCandidats>();
+	//DFIN DELETE VENTE
 	//variables
 	private long gesCode;
 	private long modifAdr;
@@ -8376,6 +8384,48 @@ TDacSpecs dao = new TDacSpecs();
 					      			  		             if (!listeDetailVente.isEmpty()) {
 					      			  			            detailVente= listeDetailVente.get(0);
 					      			  				    }
+					      			  		         recupNcc() ;  
+											  }
+											  
+											  //Methode de récupération des NCC
+											  public void recupNcc() {
+												  listOffreCandidat = (List<VInfoNcc>) iservice.getObjectsByColumn("VInfoNcc", new ArrayList<String>(Arrays.asList("V_ID")),
+									      			  		 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+											  }
+											  
+											  //Suppression de la vente
+											  public void removeNcc() {
+												  
+												  listeHisto = ((List<THistoDac>)iservice.getObjectsByColumn("THistoDac",
+														    new WhereClause("HAC_DVE_NUM",Comparateur.EQ,""+offreCandidat.getDveNum())));
+										    				for(THistoDac histo : listeHisto) {	
+										    				    iservice.deleteObject(histo);
+										    			}
+										    			
+										    				listeDetVet = ((List<TDetailVente>)iservice.getObjectsByColumn("TDetailVente",
+										    					    new WhereClause("DVE_NUM",Comparateur.EQ,""+offreCandidat.getDveNum())));
+										    	    				for(TDetailVente detailVente : listeDetVet) {	
+										    	    				iservice.deleteObject(detailVente);
+										    	    			}
+										    				
+										    	    				listeVetDac = ((List<TVenteDac>)iservice.getObjectsByColumn("TVenteDac",
+														               new WhereClause("VEN_NUM",Comparateur.EQ,""+offreCandidat.getVenNum())));
+										    	    				       for(TVenteDac vente : listeVetDac) {	
+											    	    				     iservice.deleteObject(vente);
+											    	    			          }	
+										    			
+										    			
+										    	    				         listeCanDac = ((List<TCandidats>)iservice.getObjectsByColumn("TCandidats",
+																	               new WhereClause("CAN_CODE",Comparateur.EQ,""+offreCandidat.getVenNum())));
+													    	    				       for(TCandidats candidat : listeCanDac) {	
+														    	    				     iservice.deleteObject(candidat);
+														    	    			          }	
+													    	    				       
+													    	    				       
+													    	    				 recupNcc();
+													    	    				 //Message de Suppression
+													    	           		  	FacesContext.getCurrentInstance().addMessage(null,
+																				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Suppression éffectuée avec succès!", ""));
 											  }
 											  
 											  
@@ -17698,6 +17748,54 @@ TDacSpecs dao = new TDacSpecs();
 
 	public void setListePieceDac(List<TPiecesDacs> listePieceDac) {
 		this.listePieceDac = listePieceDac;
+	}
+
+	public List<VInfoNcc> getListOffreCandidat() {
+		return listOffreCandidat;
+	}
+
+	public void setListOffreCandidat(List<VInfoNcc> listOffreCandidat) {
+		this.listOffreCandidat = listOffreCandidat;
+	}
+
+	public VInfoNcc getOffreCandidat() {
+		return offreCandidat;
+	}
+
+	public void setOffreCandidat(VInfoNcc offreCandidat) {
+		this.offreCandidat = offreCandidat;
+	}
+
+	public List<THistoDac> getListeHisto() {
+		return listeHisto;
+	}
+
+	public void setListeHisto(List<THistoDac> listeHisto) {
+		this.listeHisto = listeHisto;
+	}
+
+	public List<TDetailVente> getListeDetVet() {
+		return listeDetVet;
+	}
+
+	public void setListeDetVet(List<TDetailVente> listeDetVet) {
+		this.listeDetVet = listeDetVet;
+	}
+
+	public List<TVenteDac> getListeVetDac() {
+		return listeVetDac;
+	}
+
+	public void setListeVetDac(List<TVenteDac> listeVetDac) {
+		this.listeVetDac = listeVetDac;
+	}
+
+	public List<TCandidats> getListeCanDac() {
+		return listeCanDac;
+	}
+
+	public void setListeCanDac(List<TCandidats> listeCanDac) {
+		this.listeCanDac = listeCanDac;
 	}
 	
 	

@@ -630,7 +630,10 @@
     
     <h:form id="paiementDlg">
 	  <p:dialog  widgetVar="paiementDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
-	    <div class="row">    
+	    
+	    <div class="row">   
+	    
+	     <div class="col-xs-12"><p:messages id="messageXX" showDetail="false" autoUpdate="true"  closable="true"/></div> 
             <div class="col-md-12">
              <div class="box box-success box-solid">
                <div class="box-header with-border">
@@ -665,6 +668,37 @@
                    </label>
                   </div>
 	             </div>
+	             
+	             
+		            <div class="form-group ">
+	             
+						 <p:dataTable id="ndTbleCandidat" styleClass="table table-bordered table-hover"  var="slctdTb" value="#{daoController.listOffreCandidat}"
+						  emptyMessage="Aucune Entreprise" scrollable="true" scrollHeight="100" >
+
+                         <p:column headerText="N° Lot" styleClass="col-sm-2" >
+         				<h:outputText  value="#{slctdTb.laaNum}" />
+				        </p:column>
+				        
+                        <p:column headerText="NCC" styleClass="col-sm-2" >
+         				<h:outputText  value="#{slctdTb.souNcc}" />
+				        </p:column>
+				        
+				        <p:column headerText="SIGLE" styleClass="col-sm-8" >
+         				<h:outputText value="#{slctdTb.souSigleSte}" />
+				        </p:column>
+				        
+				        <p:column headerText="" styleClass="col-sm-1" >
+         				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeNcc()}" title="Supprimer" update="paiementDlg:ndTbleCandidat, paiementDlg:messageXX">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.offreCandidat}" />
+		                </p:commandLink>
+				        </p:column>
+				        
+						</p:dataTable>
+	                   
+	                </div>
+		           
 	               
 	             </div>
 	             </div>
