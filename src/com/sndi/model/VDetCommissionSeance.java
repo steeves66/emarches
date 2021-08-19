@@ -108,7 +108,7 @@ public class VDetCommissionSeance implements java.io.Serializable {
 		this.dcsDacCode = dcsDacCode;
 	}
 
-	@Column(name = "DCS_FON_COD", length = 100)
+	@Column(name = "DCS_FON_COD")
 	public String getDcsFonCod() {
 		return this.dcsFonCod;
 	}

@@ -145,4 +145,9 @@ public interface IDao {
 	public int countTableByColumnInPpmDiffInstr(String objet, String conditionColumn, String stat1, String stat2, String typePlan,String strSource);
 	
 	public int countTableByColumnNotIn(String tableName,String conditionColumn, List<WhereClause>conditionList,  List<String> columnList, String notCondition,  List<String> notList);
+	
+	
+	  /*** Module  ***/
+	//For Laurent
+	public List getObjectByColumnInInstrValNull(String objet);
 }

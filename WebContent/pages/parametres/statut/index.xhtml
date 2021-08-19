@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/template/templatePage.xhtml">
+		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/portail/img/icons/icone.ico" />
+		<ui:define name="contents">      
+			<h:form id="gnl">
+			
+				<div class="row">
+	            	<div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+	            </div>
+				
+				<section class="content-header">
+					<h1>
+						Statuts <small>Liste des statuts</small>
+					</h1>
+					
+					<ol class="breadcrumb">
+						<li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+						<li class="active">Statuts</li>
+					</ol>
+				</section>
+				<br></br>
+				<div class="box"></div>
+				
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<div class="col-md-1 ">
+							<h:panelGroup id="badge" layout="block">
+								<span class="badge badge-success">#{statutController.listStatut.size()}</span>
+								Statuts
+							</h:panelGroup>
+						</div>
+
+						<div class="col-md-2 ">
+						</div>
+						
+						<div class="col-md-5 ">
+							<div class="input-group input-group-sm col-md-12">
+								<span class="input-group-btn">
+									<p:commandLink action="#{statutController.initialiserDatatable()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+								</span>
+							
+								<p:inputText styleClass="form-control" type="text" value="#{statutController.critereRecherche}"  placeholder="Effectuer une recherche" ></p:inputText> 
+								
+								<span class="input-group-btn">
+									<p:commandLink action="#{statutController.chercherStatut()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+								</span>
+							</div>
+						</div>
+						
+						<div class="col-md-2 ">
+						</div>
+						
+						<div class="col-md-2 ">
+							<p:commandLink oncomplete="PF('formAddStat').show()"
+							action = "#{statutController.setAddMode}"
+							update="frmStatut"
+							data-toggle="modal" 
+							data-target="#modal-reglement"
+							styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"
+							style="background-color: #f88b2e"
+							data-original-title="Nouvelle Opération">
+							<span class="btn-label"><i class="fa fa-plus"></i></span>
+							<span class="hidden-xs">Nouveau Statut</span>
+							</p:commandLink>
+							<div  style="color: #fff"></div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-md-12">		
+							<p:dataTable id="tblStatuts" styleClass="table mb0 dt-on-steroids dataTable" var="s" value="#{statutController.listStatut}" 
+								emptyMessage="Aucun statut enregistré" scrollable="true" scrollHeight="600">
+								
+								<p:column headerText="Code" styleClass="col-sm-1" >
+									<h:outputText value="#{s.staCode}"/>
+								</p:column>
+								
+								<p:column headerText="Libellé" styleClass="col-sm-2" >
+									<h:outputText value="#{s.staLibelleCourt}"/>
+								</p:column>
+								
+								<p:column headerText="Description" styleClass="col-sm-2" >
+									<h:outputText value="#{s.staLibelleLong}"/>
+								</p:column> 
+								
+								<p:column headerText="Libellé AC" styleClass="col-sm-1" >
+									<h:outputText value="#{s.acLibelle}"/>
+								</p:column> 
+								
+								<p:column headerText="Libellé CPMP" styleClass="col-sm-1" >
+									<h:outputText value="#{s.cpmpLibelle}"/>
+								</p:column> 
+								
+								<p:column headerText="Libellé SODE" styleClass="col-sm-1" >
+									<h:outputText value="#{s.sodeLibelle}"/>
+								</p:column> 
+								
+								<p:column headerText="Libellé DRMP" styleClass="col-sm-1" >
+									<h:outputText value="#{s.drmpLibelle}"/>
+								</p:column>   
+								
+								<p:column headerText="Libellé DGMP" styleClass="col-sm-1" >
+									<h:outputText value="#{s.dgmpLibelle}"/>
+								</p:column>
+								
+								<p:column headerText="Actions" styleClass="col-sm-1">
+									
+									<p:commandLink action="#{statutController.deleteStatut(s)}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer le statut" update=":content :gnl:badge">
+										<i class="ace-icon fa fa-trash bigger-130" style="color: white"> </i>
+										<p:confirm header="Confirmation" message="Voulez-vous confirmer la suppression du statut #{s.staCode} ?" icon="ui-icon-alert" />                          
+									</p:commandLink>
+									
+									<p:commandLink action="#{statutController.setEditMode(s)}" 
+													oncomplete="PF('formAddStat').show()" 
+													class="btn btn-xs btn-danger" 
+													style="margin-left: 3px" 
+													title="Modifier le statut" 
+													update="frmStatut">                        
+										<i class="ace-icon fa fa-pencil bigger-130" style="color: white"> </i>
+									</p:commandLink>
+									
+									<p:commandLink rendered ="false" action="#{statutController.deleteStatut()}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer le statut" update=":content">
+										<i class="ace-icon fa fa-trash bigger-130" style="color: white"> </i>
+										<p:confirm header="Confirmation" message="Voulez-vous confirmer la suppression du statut #{s.staCode} ?" icon="ui-icon-alert" />                          
+										<f:setPropertyActionListener value="#{s}" target="#{statutController.delStatut}" />
+									</p:commandLink>
+									
+								</p:column> 
+							</p:dataTable>
+							
+							<p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" action="#{userController.renderPage('accueil')}"  update=":content"/>
+						</div>
+					</div>
+				</div>
+			</h:form>
+			
+			<!-- LES FENETRES MODALES -->
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+				<div align="center">
+					<p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</div>
+			</p:confirmDialog> 
+			
+			
+			<h:form id="frmStatut" styleClass="form-horizontal">
+				<p:dialog widgetVar="formAddStat" modal="true" showEffect="fade" hideEffect="fade" width="40%" closable="true">
+					<div class="box box-success box-solid">
+				     	<div class="box-header with-border">
+				     		<div class="col-md-10 ">
+				     			<div  style="color: #fff">Ajout de nouveau statut</div>
+				     		</div>
+				     		<div class="col-md-2 ">	</div>
+				     	</div>
+	
+				     	<p:messages rendered="false" id="message23" showDetail="false" autoUpdate="true"  closable="true"/>
+	
+				     	<div class="box-body with-border">
+							<div class="form-group ">
+								<label for="stacode" class="col-sm-3 control-label"><b>Code Statut</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.staCode}" id="stacode" style="width: 100%" />
+								</div>
+							</div>
+														
+							<div class="form-group">
+								<label for="stalibelle" class="col-sm-3 control-label"><b>Libellé</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<h:inputTextarea type="text" styleClass="form-control" value="#{statutController.statut.staLibelleCourt}" id="stalibelle" rows="3" cols="40" />
+								</div>
+							</div>
+						
+							<div class="form-group">
+								<label for="stadescription" class="col-sm-3 control-label"><b>Description</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<h:inputTextarea type="text" styleClass="form-control" value="#{statutController.statut.staLibelleLong}" id="stadescription" rows="3" cols="40" />
+								</div>
+							</div>
+				
+							<div class="form-group ">
+								<label for="stalibac" class="col-sm-3 control-label"><b>Libellé AC</b></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.acLibelle}" id="stalibac" style="width: 100%" />
+								</div>
+							</div>
+						
+							<div class="form-group">
+								<label for="stalibcpmp" class="col-sm-3 control-label"><b>Libellé CPMP</b></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.cpmpLibelle}" id="stalibcpmp" style="width: 100%" />
+								</div>
+							</div>
+														
+							<div class="form-group">
+								<label for="stalibsode" class="col-sm-3 control-label"><b>Libellé SODE</b></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.sodeLibelle}" id="stalibsode" style="width: 100%" />
+								</div>
+							</div>
+														
+							<div class="form-group">
+								<label for="stalibdrmp" class="col-sm-3 control-label"><b>Libellé DRMP</b></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.drmpLibelle}" id="stalibdrmp" style="width: 100%" />
+								</div>
+							</div>
+															
+							<div class="form-group">
+								<label for="stalibdgmp" class="col-sm-3 control-label"><b>Libellé DGMP</b></label>
+								<div class="col-sm-9">
+									<p:inputText type="text" styleClass="form-control" value="#{statutController.statut.dgmpLibelle}" id="stalibdgmp" style="width: 100%" />
+								</div>
+							</div>
+							
+							<div class="box-footer">
+								<div class="pull-left">
+									<p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" action="#{userController.renderPage('accueil')}"  update=":content"/>
+								</div>
+									   
+								<div class="pull-right">
+									<h:panelGroup style="margin-top:10px" rendered="#{ statutController.mode eq 'add' }" layout="block">
+										<p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" 
+														action="#{statutController.saveStatut}" update=":gnl:tblStatuts :gnl:badge" oncomplete="PF('formAddStat').hide()">
+										<i class="ace-icon fa fa-save"></i>Ajouter
+										</p:commandLink>
+									</h:panelGroup>
+											
+									<h:panelGroup style="margin-top:10px" rendered="#{ statutController.mode eq 'edit' }" layout="block">
+										<p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" 
+														action="#{statutController.updateStatut}" update=":gnl:tblStatuts" oncomplete="PF('formAddStat').hide()">
+										<i class="ace-icon fa fa-save"></i>Mettre à jour
+										</p:commandLink>
+									</h:panelGroup>
+								</div>
+				     		</div>					
+				     	</div>
+	    			</div>
+				</p:dialog>
+			</h:form>
+			
+
+			<!-- FIN DES FENETRES MODALES -->	
+			
+			
+		</ui:define>
+	</ui:composition>
+
+</html>

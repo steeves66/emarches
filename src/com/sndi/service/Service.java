@@ -451,6 +451,12 @@ public class Service implements Iservice {
 			// TODO Auto-generated method stub
 			return getDao().getObjectByColumnInInstrValAno(objet,strSource);
 		}
+		
+		
+		//For Laurent
+		public List getObjectByColumnInInstrValNull(String objet) {
+			return getDao().getObjectByColumnInInstrValNull(objet);
+		}
 
 		/*@Override
 		public List getObjectByColumnInPublicationCsvInstr(String objet, String stat1, String strSource) {

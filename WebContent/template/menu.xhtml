@@ -613,13 +613,13 @@
             </li>
           </ul>
         </li>   
-       
+       <h:panelGroup rendered="false">
         <li>
             <p:commandLink action="#{numerotationController.renderPage('num1','LISNUM')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Transmission à la numérotation
              </p:commandLink>
             </li>
-            
+         </h:panelGroup>   
          <!-- FIN M4 -->
 
         
@@ -2610,6 +2610,20 @@
             <i class="fa fa-circle-o"></i>Changement de statut
              </p:commandLink>
             </li>
+            
+            <li>
+            <p:commandLink action="#{ statutController.renderPage('stat') }" update=":content" > 
+            <i class="fa fa-circle-o"></i>Statut
+             </p:commandLink>
+            </li>
+            
+               <li>
+            <p:commandLink action="#{ motifController.renderPage('mtf') }" update=":content" > 
+            <i class="fa fa-circle-o"></i>Motif
+             </p:commandLink>
+            </li>
+            
+            
            
            
           </ul>     

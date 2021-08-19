@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/template/templatePage.xhtml">
+		<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/portail/img/icons/icone.ico" />
+		<ui:define name="contents">      
+			<h:form id="gnl">
+			
+				<div class="row">
+	            	<div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+	            </div>
+				
+				<section class="content-header">
+					<h1>
+						Motifs <small>Liste des motifs</small>
+					</h1>
+					
+					<ol class="breadcrumb">
+						<li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+						<li class="active">Motifs</li>
+					</ol>
+				</section>
+				<br></br>
+				<div class="box"></div>
+				
+				<div class="box box-success box-solid">
+					<div class="box-header with-border">
+						<div class="col-md-1 ">
+							<h:panelGroup id="badge" layout="block">
+								<span class="badge badge-success" id="">#{motifController.listMotifs.size()}</span>
+								Motifs
+							</h:panelGroup>
+						</div>
+
+						<div class="col-md-2">
+						</div>
+						
+						<div class="col-md-5">
+							<div class="input-group input-group-sm col-md-12">
+								<span class="input-group-btn">
+									<p:commandLink action="#{motifController.initialiserDatatable()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+								</span>
+							
+								<p:inputText styleClass="form-control" type="text" value="#{motifController.critereRecherche}"  placeholder="Effectuer une recherche" ></p:inputText> 
+								
+								<span class="input-group-btn">
+									<p:commandLink action="#{motifController.chercherMotif()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+								</span>
+							</div>
+						</div>
+						
+						<div class="col-md-2 ">
+						</div>
+						
+						<div class="col-md-2 ">
+							<p:commandLink oncomplete="PF('formAddMtf').show()"
+							action = "#{motifController.setAddMode}"
+							update="frmMtf"
+							data-toggle="modal" 
+							data-target="#modal-reglement"
+							styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"
+							style="background-color: #f88b2e"
+							data-original-title="Nouvelle Opération">
+								<span class="btn-label"><i class="fa fa-plus"></i></span>
+								<span class="hidden-xs">Nouveau Motif</span>
+							</p:commandLink>
+							<div  style="color: #fff"></div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-md-12">		
+							<p:dataTable id="tblMtf" styleClass="table mb0 dt-on-steroids dataTable" var="i" value="#{motifController.listMotifs}" 
+								emptyMessage="Aucun motif enregistré" scrollable="true" scrollHeight="600">
+								<p:column headerText="Code" styleClass="col-sm-1" >
+									<h:outputText value="#{i.mtfNum}"/>
+								</p:column>
+								<p:column headerText="Libellé" styleClass="col-sm-2" >
+									<h:outputText value="#{i.mtfLibelle}"/>
+								</p:column>
+								<p:column headerText="Libellé court" styleClass="col-sm-2" >
+									<h:outputText value="#{i.mtfLibelleCrt}"/>
+								</p:column> 
+								<p:column headerText="type de motif" styleClass="col-sm-2" >
+									<h:outputText value="#{i.mtfType}"/>
+								</p:column> 
+								<p:column headerText="Motif motif num" styleClass="col-sm-2" >
+									<h:outputText value="#{i.mtfMtfNum}"/>
+								</p:column>
+								<p:column headerText="Actions" styleClass="col-sm-1">
+									<p:commandLink action="#{motifController.deleteMotif(i)}" class="btn btn-xs btn-danger" style="margin-left: 3px" title="Supprimer le motif" update=":content :gnl:badge">
+										<i class="ace-icon fa fa-trash bigger-130" style="color: white"> </i>
+										<p:confirm header="Confirmation" message="Voulez-vous confirmer la suppression le motif #{i.mtfNum} ?" icon="ui-icon-alert" />                          
+									</p:commandLink>
+									<p:commandLink action="#{motifController.setEditMode(i)}" 
+													oncomplete="PF('formAddMtf').show()" 
+													class="btn btn-xs btn-danger" 
+													style="margin-left: 3px" 
+													title="Modifier le motif" 
+													update="frmMtf">                        
+										<i class="ace-icon fa fa-pencil bigger-130" style="color: white"> </i>
+									</p:commandLink>
+								</p:column> 
+							</p:dataTable>
+							
+							<p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" action="#{userController.renderPage('accueil')}"  update=":content"/>
+						</div>
+					</div>
+				</div>
+			</h:form>
+			
+			<!-- LES FENETRES MODALES -->
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+				<div align="center">
+					<p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</div>
+			</p:confirmDialog> 
+			
+				<!-- Fenêtres modales des motifs -->
+					
+				<p:dialog widgetVar="formAddMtf" modal="true" showEffect="fade" hideEffect="fade" width="40%" closable="true" id="bd">
+				<h:form id="frmMtf" styleClass="form-horizontal">
+					<div class="box box-success box-solid">
+				     	<div class="box-header with-border">
+				     		<div class="col-md-10 ">
+				     			<div  style="color: #fff">Ajout de nouveau motif</div>
+				     		</div>
+				     		<div class="col-md-2 ">	</div>
+				     	</div>
+	
+				     	<p:messages rendered="false" id="message23" showDetail="false" autoUpdate="true"  closable="true"/>
+	
+				     	<div class="box-body with-border">
+							<div class="form-group">
+					     		<label for="mtftype" class="col-sm-3 control-label"><b>Type de motif ?</b><span style="color:red;"> *</span></label>
+					     		<div class="col-sm-9">
+									<p:selectBooleanCheckbox value="#{motifController.motifType}">
+										<p:ajax update="frmMtf" listener="#{motifController.renderListMotif}" />
+									</p:selectBooleanCheckbox>
+								</div>
+				     		</div>
+
+						<div class="form-group">
+								<label for="mtflib" class="col-sm-3 control-label"><b>Libellé court</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<h:inputText type="text" styleClass="form-control" value="#{motifController.motif.mtfLibelleCrt}" id="mtflib" rows="3" cols="40" />
+								</div>
+							</div>
+							
+							<div class="form-group ">
+								<label for="mtfdesc" class="col-sm-3 control-label"><b>Libellé</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<p:inputTextarea type="text" styleClass="form-control" value="#{motifController.motif.mtfLibelle}" id="mtfdesc" style="width: 100%" />
+								</div>
+							</div>
+							
+						<h:panelGroup rendered ="#{motifController.listeMotif eq 'Checked' }">
+							<div class="form-group ">
+								<label for="mtftyp" class="col-sm-3 control-label"><b>Type de motif</b><span style="color:red;"> *</span></label>
+								<div class="col-sm-9">
+									<h:inputText type="text" styleClass="form-control" value="#{motifController.motif.mtfType}" id="mtftyp" style="width: 100%" />
+								</div>
+							</div>
+						</h:panelGroup>
+
+						<h:panelGroup style="margin-top:10px" rendered="#{ motifController.listeMotif eq 'Unchecked' }" layout="block" id="mtfdescriptionpg4">
+							<div class="form-group ">
+								<label for="blr" class="col-sm-3 control-label"><b>Motif type</b></label>
+								<div class="col-sm-9">
+									<p:selectOneMenu id="blr" value="#{motifController.motifPere.mtfNum}" effect="fade" style="width:100%;">
+										<f:selectItem itemLabel="Sélectionner le type de motif" />
+										<f:selectItems value="#{motifController.listTypMotif}" var="mtf" itemLabel="#{mtf.mtfType}" itemValue="#{mtf.mtfNum}" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</h:panelGroup>
+
+						<div class="box-footer">
+								<div class="pull-left">
+									<p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" oncomplete="PF('formAddMtf').hide()"  update=":content"/>
+								</div>
+									   
+								<div class="pull-right">
+									<h:panelGroup style="margin-top:10px" rendered="#{ motifController.mode eq 'add' }" layout="block">
+										<p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" 
+														action="#{motifController.saveMotif}" update=":gnl:tblMtf :gnl:badge" oncomplete="PF('formAddMtf').hide()">
+										<i class="ace-icon fa fa-save"></i>Ajouter
+										</p:commandLink>
+									</h:panelGroup>
+											
+									<h:panelGroup style="margin-top:10px" rendered="#{ motifController.mode eq 'edit'}" layout="block">
+										<p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" 
+														action="#{motifController.updateMotif}" update=":gnl:tblMtf" oncomplete="PF('formAddMtf').hide()">
+										<i class="ace-icon fa fa-save"></i>Mettre à jour
+										</p:commandLink>
+									</h:panelGroup>
+								</div>
+				     		</div>					
+				     	</div>
+	    			</div>
+	    		</h:form>
+				</p:dialog>
+
+			<!-- FIN DES FENETRES MODALES -->	
+			
+		</ui:define>
+	</ui:composition>
+
+</html>

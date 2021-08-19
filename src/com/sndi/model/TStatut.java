@@ -20,6 +20,11 @@ public class TStatut implements java.io.Serializable {
 	private String staCode;
 	private String staLibelleCourt;
 	private String staLibelleLong;
+	private String acLibelle;
+	private String sodeLibelle;
+	private String cpmpLibelle;
+	private String drmpLibelle;
+	private String dgmpLibelle;
 	private Set<THistoPlanGeneral> THistoPlanGenerals = new HashSet<THistoPlanGeneral>(0);
 	private Set<TAffichageAgpm> TAffichageAgpms = new HashSet<TAffichageAgpm>(0);
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
@@ -65,6 +70,52 @@ public class TStatut implements java.io.Serializable {
 	@Column(name = "STA_LIBELLE_COURT", length = 500)
 	public String getStaLibelleCourt() {
 		return this.staLibelleCourt;
+	}
+	
+	
+	@Column(name = "AC_LIBELLE", length = 500)
+	public String getAcLibelle() {
+		return acLibelle;
+	}
+
+	public void setAcLibelle(String acLibelle) {
+		this.acLibelle = acLibelle;
+	}
+	
+	@Column(name = "SODE_LIBELLE", length = 500)
+	public String getSodeLibelle() {
+		return sodeLibelle;
+	}
+
+	public void setSodeLibelle(String sodeLibelle) {
+		this.sodeLibelle = sodeLibelle;
+	}
+
+	@Column(name = "CPMP_LIBELLE", length = 500)
+	public String getCpmpLibelle() {
+		return cpmpLibelle;
+	}
+
+	public void setCpmpLibelle(String cpmpLibelle) {
+		this.cpmpLibelle = cpmpLibelle;
+	}
+
+	@Column(name = "DRMP_LIBELLE", length = 500)
+	public String getDrmpLibelle() {
+		return drmpLibelle;
+	}
+
+	public void setDrmpLibelle(String drmpLibelle) {
+		this.drmpLibelle = drmpLibelle;
+	}
+
+	@Column(name = "DGMP_LIBELLE", length = 500)
+	public String getDgmpLibelle() {
+		return dgmpLibelle;
+	}
+
+	public void setDgmpLibelle(String dgmpLibelle) {
+		this.dgmpLibelle = dgmpLibelle;
 	}
 
 	public void setStaLibelleCourt(String staLibelleCourt) {

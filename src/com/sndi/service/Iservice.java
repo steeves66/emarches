@@ -149,5 +149,7 @@ public interface Iservice {
 	public int countTableByColumnInPpmDiffInstr(String objet,String conditionColumn,String stat1,String stat2, String typePlan, String strSource);
 
 	public Object mergeAndReturnObject(Object object);
+	//For Laurent
+	public List getObjectByColumnInInstrValNull(String objet);
 
 }

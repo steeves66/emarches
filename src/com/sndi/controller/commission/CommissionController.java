@@ -2699,7 +2699,7 @@ public class CommissionController {
 					break;
 				case "com8":
 					chargeMembreCommite();
-					chargeMembre();
+					//chargeMembre();
 					btnFinOuv = true;
 					break;
 				

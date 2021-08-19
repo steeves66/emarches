@@ -159,7 +159,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.TSeances = TSeances;
 	}
 
-	@Column(name = "DCS_FON_COD", length = 100)
+	@Column(name = "DCS_FON_COD")
 	public String getDcsFonCod() {
 		return this.dcsFonCod;
 	}
@@ -168,7 +168,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsFonCod = dcsFonCod;
 	}
 
-	@Column(name = "DCS_OPE_MATRICULE", length = 20)
+	@Column(name = "DCS_OPE_MATRICULE")
 	public String getDcsOpeMatricule() {
 		return this.dcsOpeMatricule;
 	}
