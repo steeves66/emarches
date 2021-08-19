@@ -636,16 +636,31 @@ public class CommissionController {
 			 selectionMembresCommite.clear();
 			 listeCommite.clear();
 			 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
+					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
 					 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 		 }
 		 
-		//Liste des membres du commite d'evaluation
+		//Liste des membres du commite d'evaluation(Parametre)
 		 public void chargeMembreCojo() {
 			 selectionMembresCommite.clear();
 			 listeMembreCojo.clear();
 			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
+					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
 					 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
+					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+					// );
+					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
+		 }
+		 
+		 
+		//Liste des membres du commite d'evaluation
+		 public void chargeMembreCojoListe() {
+			 selectionMembresCommite.clear();
+			 listeMembreCojo.clear();
+			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
+					 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
+					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
 					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
 					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
