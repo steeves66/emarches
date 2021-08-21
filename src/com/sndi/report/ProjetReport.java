@@ -340,6 +340,45 @@ public class ProjetReport {
 				}
 				//Fin Print Fiche avec 3 parametres de type String
 				
+				//Print Fiche avec 2 parametres de type String et long
+				public void stringparam4(String code,long dev_num,String reportName, String jrxmlName ){
+					
+					String pathdir ="";
+					 
+					 pathdir = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/report/images/");
+						pathdir += "/";
+						
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("param_code_1", code);
+						param.put("param_dev_num", dev_num);
+						param.put("param_image", pathdir);
+						try {
+						Connection conn = connectionUtils.getConnection();
+						String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext()
+								.getRealPath("/report/" + jrxmlName + ".jrxml");
+						InputStream input = new FileInputStream(new File(jrxmlFile));
+						JasperReport jasperReport = JasperCompileManager.compileReport(input);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, conn);
+						
+						HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance()
+								.getExternalContext().getResponse();
+						httpServletResponse.addHeader("contentType", "application/pdf");
+						httpServletResponse.addHeader("Content-disposition",
+								"attachment; filename=" + reportName + "-" + code+ ".pdf");
+
+						ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+						JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+						servletOutputStream.flush();
+						servletOutputStream.close();
+						FacesContext.getCurrentInstance().responseComplete();
+						 
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+
+				}
+				//Fin Print Fiche avec 3 parametres de type String
+				
 				//Print Document Opérateur
 				public void showOperateurPDF(String opeMatricule){
 					

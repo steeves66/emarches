@@ -47,6 +47,7 @@ import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFonction;
 import com.sndi.model.THistoAgpm;
+import com.sndi.model.THistoDac;
 import com.sndi.model.THistoPlanGeneral;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TNatureDocuments;
@@ -1051,6 +1052,19 @@ public class CommissionController {
 			    }
 		 }
 		 
+		//Methode d'historisation
+		 public void historiser(String statut,String dacCode, String motif) {
+		     TStatut statuts = constantService.getStatut(statut);
+		     THistoDac dacStatut = new THistoDac();
+		     dacStatut.setHacDate(Calendar.getInstance().getTime());
+		     dacStatut.setHacCommentaire(motif);
+		     dacStatut.setTStatut(statuts);
+		     dacStatut.setHacAaoCode(slctdTd.getAaoCode());
+		     dacStatut.setTDacSpecs(new TDacSpecs(slctdTd.getAaoDacCode()));
+		     dacStatut.setTFonction(userController.getSlctd().getTFonction());
+		     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
+		     iservice.addObject(dacStatut);
+	 }
 
 		 //Differer un avis d'appel d'Offres au niveau de l'Analyse
 		 public void reOuverture() {
@@ -2668,6 +2682,7 @@ public class CommissionController {
 					//Chargement de la liste des demandes
 					 listeAppelOffre.clear();
 					 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+							 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"),
 							 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 					         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
 					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());	

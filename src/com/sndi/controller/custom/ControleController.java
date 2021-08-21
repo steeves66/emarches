@@ -426,6 +426,7 @@ public class ControleController {
 	public boolean etatPsoTrans =false;
 	public boolean btn_rat =false;
 	public boolean btn_rat_mod =false;
+	public boolean btn_retour_vente = false;
 	
 	//String actionPrivilèges ="";
 	
@@ -3361,7 +3362,7 @@ public class ControleController {
 							 btn_fermer_saisie_prq = false; 
 							 btn_rat = false;
 							 btn_rat_mod = false;
-							 
+							 btn_retour_vente = false;
 			    		}else
 				    		if(action.equalsIgnoreCase("SAIDAO")) {
 				    			typePlan ="PN";
@@ -3446,7 +3447,7 @@ public class ControleController {
 								 btn_fermer_saisie_prq = false; 
 								 btn_rat = false;
 								 btn_rat_mod = false;
-								 
+								 btn_retour_vente = false;
 				    		}else
 					    		if(action.equalsIgnoreCase("RATTRA")) {
 					    			modeType ="RAT";
@@ -3534,6 +3535,7 @@ public class ControleController {
 								     btn_rat_mod =true;
 								     btn_mod = false;
 								 	 btn_ratt = true;
+								 	btn_retour_vente = false;
 					    		}else
 				    		        if(action.equalsIgnoreCase("DAOPS")) {
 				    			     typePlan ="PN";
@@ -3604,6 +3606,7 @@ public class ControleController {
 								 btn_fermer_saisie_prq = false; 
 								 btn_rat = false;
 							     btn_rat_mod = false;
+							     btn_retour_vente = false;
 				    		}else
 			    			    if(action.equalsIgnoreCase("VALDAO")) {
 			    			    typePlan ="PN";
@@ -3681,6 +3684,7 @@ public class ControleController {
 								btn_fermer_saisie_dps = false;
 								btn_rat = false;
 							    btn_rat_mod = false;
+							    btn_retour_vente = false;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEDAO")) {
 				    				typePlan ="PN";
@@ -3796,6 +3800,7 @@ public class ControleController {
 											 btn_fermer_saisie_prq = false; 
 											 btn_rat = false;
 											 btn_rat_mod = false;
+											 btn_retour_vente = false;
 				    				 }else
 					    				 if(action.equalsIgnoreCase("DOSAFF")) {
 					    					 typePlan ="PN";
@@ -3875,6 +3880,7 @@ public class ControleController {
 												 btn_fermer_saisie_prq = false; 
 												 btn_rat = false;
 												 btn_rat_mod = false;
+												 btn_retour_vente = false;
 					    				 }else
 				    					      if(action.equalsIgnoreCase("EXADAO")) {
 				    						     typePlan ="PN";
@@ -3954,6 +3960,7 @@ public class ControleController {
 												 btn_fermer_saisie_prq = false; 
 												 btn_rat = false;
 												 btn_rat_mod = false;
+												 btn_retour_vente = false;
 				    					  }else
 				    						   if(action.equalsIgnoreCase("VETDAO")) {
 				    							     typePlan ="PN";
@@ -4038,6 +4045,7 @@ public class ControleController {
 													 nbreAchat = true;  
 													 btn_rat = false;
 													 btn_rat_mod = false;
+													 btn_retour_vente = false;
 				    						   }else
 				    							   if(action.equalsIgnoreCase("CHADAO")) {
 				    								     typePlan ="PN";
@@ -4121,6 +4129,7 @@ public class ControleController {
 				    								     nbreAchat = false;
 				    								     btn_rat = false;
 				    									 btn_rat_mod = false;
+				    									 btn_retour_vente = false;
 				    							   }else 
 				    								   if(action.equalsIgnoreCase("PUBDAO")) {
 				    									    typePlan ="PN";
@@ -4204,6 +4213,7 @@ public class ControleController {
 															 nbreAchat = false;   
 															 btn_rat = false;
 															 btn_rat_mod = false;
+															 btn_retour_vente = false;
 				    								   }else 
 					    								   if(action.equalsIgnoreCase("DPUBDAO")) {
 					    									    typePlan ="PN";
@@ -4287,6 +4297,7 @@ public class ControleController {
 																 nbreAchat = false;  
 																 btn_rat = false;
 																 btn_rat_mod = false;
+																 btn_retour_vente = false;
 					    								   }else 
 						    								   if(action.equalsIgnoreCase("DPUBDAOS")) {
 						    									    typePlan ="PN";
@@ -4369,6 +4380,7 @@ public class ControleController {
 																	 nbreAchat = false;  
 																	 btn_rat = false;
 																	 btn_rat_mod = false;
+																	 btn_retour_vente = false;
 						    								   }else
 				    									        if(action.equalsIgnoreCase("TRADAO")) {
 				    									    	 typePlan ="PN";
@@ -4444,20 +4456,23 @@ public class ControleController {
 																 nbreAchat = false; 
 																 btn_rat = false;
 																 btn_rat_mod = false;
+																 btn_retour_vente = false;
+																 btn_retour_vente = false;
 				    									     }else
 				    									    	 if(action.equalsIgnoreCase("RETDAO")) {
 				    									    		 typePlan ="PN";
-								    							     type = "DAO";
-								    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-													    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL D'OFFRES";
+								    							     type = "DAC";
+								    							     fonctionalite = "listeDacVendu";
+								    							     libelle1="LISTE DES DAC DEJA VENDUS";
+													    			 libelleDao3="VENTE DES DOSSIERS D'APPEL D'OFFRES";
 													    			 btn_new =false;
 													    			 btn_affec = false;
 													    			 btn_exam = false;
-													    			 btn_retrait = true;
+													    			 btn_retrait = false;
 													    			 btn_valid = false;
 													    			 saisie=false;
 													    			 publication=false;
-													    			 vente=true;
+													    			 vente=false;
 													    			 correction=false;
 													    			 panel1 =true;
 																	 panel2 =false;
@@ -4466,14 +4481,14 @@ public class ControleController {
 																	 panel5 = false;
 																	 affDao=false;
 																	 exaDao=false;
-																	 retDao = true;
-																	 valDao = true;
+																	 retDao = false;
+																	 valDao = false;
 																	 panelDaoTableauBordSai = false;
 																	 panelDaoTableauBordVal = false;
 																	 panelDaoTableauBordTra = false;
 																	 panelDaoTableauBordAff =false;
 																	 panelDaoTableauBordExa =false; 
-																	 panelDaoTableauBordRet =true; 
+																	 panelDaoTableauBordRet =false; 
 																	 panelDaoTableauBordVet =false;
 																	 panelDaoTableauBordCha = false;
 																	 panelDaoTableauBordPub = false;
@@ -4516,6 +4531,7 @@ public class ControleController {
 																	 nbreAchat = false; 
 																	 btn_rat = false;
 																	 btn_rat_mod = false;
+																	 btn_retour_vente = true;
 								    						   }else
 					    									    	 if(action.equalsIgnoreCase("OBSDAO")) {
 					    									    		 typePlan ="PN";
@@ -4598,6 +4614,7 @@ public class ControleController {
 																		 nbreAchat = false;  
 																		 btn_rat = false;
 																		 btn_rat_mod = false;
+																		 btn_retour_vente = false;
 									    						   }else 
 								    								   if(action.equalsIgnoreCase("PUBCSV")) {
 								    									     typePlan ="PN";
@@ -4686,6 +4703,7 @@ public class ControleController {
 																			 nbreAchat = false;  
 																			 btn_rat = false;
 																			 btn_rat_mod = false;
+																			 btn_retour_vente = false;
 								    								   }else 
 									    								   if(action.equalsIgnoreCase("DPUBCSV")) {
 									    									     typePlan ="PN";
@@ -4776,6 +4794,7 @@ public class ControleController {
 																				 nbreAchat = false;
 																				 btn_rat = false;
 																				 btn_rat_mod = false;
+																				 btn_retour_vente = false;
 									    								   }else
 				                                                             if(action.equalsIgnoreCase("ENGDPS")) {
 				                                                        	  typePlan ="PS";
@@ -4900,6 +4919,7 @@ public class ControleController {
 							    														 nbreAchat = false; 
 							    														 btn_rat = false;
 							    														 btn_rat_mod = false;
+							    														 btn_retour_vente = false;
 											    						     }else
 								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
 								    									    		   typePlan ="PS";
@@ -4972,6 +4992,7 @@ public class ControleController {
 								    													nbreAchat = false;
 								    													btn_rat = false;
 								    												    btn_rat_mod = false;
+								    												    btn_retour_vente = false;
 												    						    }else
 									    									    	if(action.equalsIgnoreCase("APEDPS")) {
 									    									    		typePlan ="PS";
@@ -5079,6 +5100,7 @@ public class ControleController {
 																							 nbreAchat = false;
 																							 btn_rat = false;
 																							 btn_rat_mod = false;
+																							 btn_retour_vente = false;
 													    						    }else
 										    									    	 if(action.equalsIgnoreCase("EXADPS")) {
 										    									    		 typePlan ="PS";
@@ -5157,6 +5179,7 @@ public class ControleController {
 														    							     nbreAchat = false;
 														    							     btn_rat = false;
 														    								 btn_rat_mod = false;
+														    								 btn_retour_vente = false;
 														    						   }else
 											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
 											    									    		     typePlan ="PS";
@@ -5237,6 +5260,7 @@ public class ControleController {
 															    							         nbreAchat = false;
 															    							         btn_rat = false;
 															    									 btn_rat_mod = false;
+															    									 btn_retour_vente = false;
 															    						   }else
 												    									    	 if(action.equalsIgnoreCase("PUBDPS")) {
 												    									    		 typePlan ="PS";
@@ -5318,6 +5342,7 @@ public class ControleController {
 																									 nbreAchat = false;  
 																									 btn_rat = false;
 																									 btn_rat_mod = false;
+																									 btn_retour_vente = false;
 																    						   }else
 													    									    	 if(action.equalsIgnoreCase("VETDPS")) {
 													    									    		 typePlan ="PS";
@@ -5399,6 +5424,7 @@ public class ControleController {
 																	    						         nbreAchat = true;
 																	    						         btn_rat = false;
 																	    								 btn_rat_mod = false;
+																	    								 btn_retour_vente = false;
 																	    						     }else
 														    									    	 if(action.equalsIgnoreCase("TRADPS")) {
 														    									    		 typePlan ="PS";
@@ -5469,6 +5495,7 @@ public class ControleController {
 																											 btn_fermer_saisie_ami = false; 
 																											 btn_fermer_saisie_prq = false;
 																											 nbreAchat = false; 
+																											 btn_retour_vente = false;
 																		    						      }else
 																    									      if(action.equalsIgnoreCase("RETDPS")) {
 																    									    	  typePlan ="PS";
@@ -5539,6 +5566,7 @@ public class ControleController {
 																													 nbreAchat = false;  
 																													 btn_rat = false;
 																													 btn_rat_mod = false;
+																													 btn_retour_vente = false;
 																				    						   }else
 																    									    	if(action.equalsIgnoreCase("OBSDPS")) {
 																    									    		 typePlan ="PS";
@@ -5619,6 +5647,7 @@ public class ControleController {
 																													 nbreAchat = false;  
 																													 btn_rat = false;
 																													 btn_rat_mod = false;
+																													 btn_retour_vente = false;
 																				    						   }else 
 																			    								   if(action.equalsIgnoreCase("DPSPUBCSV")) {
 																			    									    typePlan ="PS";
@@ -5706,6 +5735,7 @@ public class ControleController {
 																														 nbreAchat = false;  
 																														 btn_rat = false;
 																														 btn_rat_mod = false;
+																														 btn_retour_vente = false;
 																			    								   }else 
 																				    								   if(action.equalsIgnoreCase("DDPSPUBCSV")) {
 																				    									    typePlan ="PS";
@@ -5791,7 +5821,8 @@ public class ControleController {
 																															 btn_fermer_saisie_dao = false; 
 																															 btn_fermer_saisie_ami = false; 
 																															 btn_fermer_saisie_prq = false;
-																															 nbreAchat = false;   
+																															 nbreAchat = false;  
+																															 btn_retour_vente = false;
 																				    								   }else
 				 
 				 
@@ -5915,6 +5946,7 @@ public class ControleController {
 																    															 nbreAchat = false;
 																    															 btn_rat = false;
 																    															 btn_rat_mod = false;
+																    															 btn_retour_vente = false;
 																    											    		}else
 																    												    		if(action.equalsIgnoreCase("PRQPS")) {
 																    												    			 type = "PRQ";
@@ -5982,6 +6014,7 @@ public class ControleController {
 																    																 nbreAchat = false;
 																    																 btn_rat = false;
 																    																 btn_rat_mod = false;
+																    																 btn_retour_vente = false;
 																    												    		}else
 																    											    			    if(action.equalsIgnoreCase("VALPRQ")) {
 																    											    			    	 type = "PRQ";
@@ -6050,6 +6083,7 @@ public class ControleController {
 																    																nbreAchat = false;
 																    																btn_rat = false;
 																    															    btn_rat_mod = false;
+																    															    btn_retour_vente = false;
 																    											    			}else
 																    												    			if(action.equalsIgnoreCase("APEPRQ")) {
 																    												    				 type = "PRQ";
@@ -6153,6 +6187,7 @@ public class ControleController {
 																    																			 nbreAchat = false; 
 																    																			 btn_rat = false;
 																    																			 btn_rat_mod = false;
+																    																			 btn_retour_vente = false;
 																    												    				 }else
 																    												    					  if(action.equalsIgnoreCase("EXAPRQ")) {
 																    												    						  type = "PRQ";
@@ -6228,6 +6263,7 @@ public class ControleController {
 																    																				 nbreAchat = false; 
 																    																				 btn_rat = false;
 																    																				  btn_rat_mod = false;
+																    																				  btn_retour_vente = false;
 																    												    					  }else
 																    												    						   if(action.equalsIgnoreCase("VETPRQ")) {
 																    												    							   type = "PRQ";
@@ -6305,6 +6341,7 @@ public class ControleController {
 																    																					 nbreAchat = true; 
 																    																					 btn_rat = false;
 																	    																				  btn_rat_mod = false;
+																	    																				  btn_retour_vente = false;
 																    												    						   }else
 																    												    							   if(action.equalsIgnoreCase("CHAPRQ")) {
 																    												    								   type = "PRQ";
@@ -6380,6 +6417,7 @@ public class ControleController {
 																    												    								     nbreAchat = false;
 																    												    								     btn_rat = false;
 																		    																				  btn_rat_mod = false;
+																		    																				  btn_retour_vente = false;
 																    												    							   }else 
 																    												    								   if(action.equalsIgnoreCase("PUBPRQ")) {
 																    												    									   type = "PRQ";
@@ -6458,6 +6496,7 @@ public class ControleController {
 																    																							 nbreAchat = false;  
 																    																							 btn_rat = false;
 																			    																				  btn_rat_mod = false;
+																			    																				  btn_retour_vente = false;
 																    												    								   }else
 																    												    									     if(action.equalsIgnoreCase("TRAPRQ")) {
 																    												    									    	 type = "PRQ";
@@ -6525,6 +6564,7 @@ public class ControleController {
 																    																								 nbreAchat = false; 
 																    																								 btn_rat = false;
 																				    																				  btn_rat_mod = false;
+																				    																				  btn_retour_vente = false;
 																    												    									     }else
 																    												    									    	 if(action.equalsIgnoreCase("RETPRQ")) {
 																    												    									    		 type = "PRQ";
@@ -6591,6 +6631,7 @@ public class ControleController {
 																    																									 nbreAchat = false; 
 																    																									 btn_rat = false;
 																					    																				 btn_rat_mod = false;
+																					    																				 btn_retour_vente = false;
 																    																    						   }else
 																    													    									    	 if(action.equalsIgnoreCase("OBSPRQ")) {
 																    													    									    		 type = "PRQ";
@@ -6667,6 +6708,7 @@ public class ControleController {
 																    																										 nbreAchat = false; 
 																    																										 btn_rat = false;
 																						    																				 btn_rat_mod = false;
+																						    																				 btn_retour_vente = false;
 																    																	    						   }else 
 																    																    								   if(action.equalsIgnoreCase("PRQCSV")) {
 																    																    									     typePlan ="PN";
@@ -6753,6 +6795,7 @@ public class ControleController {
 																    																											 nbreAchat = false;  
 																    																											 btn_rat = false;
 																							    																				  btn_rat_mod = false;
+																							    																				  btn_retour_vente = false;
 																    																    								   }else 
 																    																	    								   if(action.equalsIgnoreCase("DPRQCSV")) {
 																    																	    									     typePlan ="PN";
@@ -6840,6 +6883,7 @@ public class ControleController {
 																    																												 nbreAchat = false;
 																    																												 btn_rat = false;
 																								    																				 btn_rat_mod = false;
+																								    																				 btn_retour_vente = false;
 																    																	    								   }else 
 																    																		    								   if(action.equalsIgnoreCase("PRQDPS")) {
 																    																		    									     typePlan ="PS";
@@ -6926,6 +6970,7 @@ public class ControleController {
 																    																													 nbreAchat = false;  
 																    																													 btn_rat = false;
 																									    																				 btn_rat_mod = false;
+																									    																				 btn_retour_vente = false;
 																    																		    								   }else 
 																    																			    								   if(action.equalsIgnoreCase("DPRQDPS")) {
 																    																			    									    typePlan ="PS";
@@ -7015,6 +7060,7 @@ public class ControleController {
 																    																														 nbreAchat = false;   
 																    																														 btn_rat = false;
 																										    																				 btn_rat_mod = false;
+																										    																				 btn_retour_vente = false;
 																    																			    								   }else
 				    		//GESTION DES DEPOTS D'APPLEL D'OFFRE
 				    				if(action.equalsIgnoreCase("LISAAO")) {
@@ -11151,6 +11197,16 @@ public class ControleController {
 
 	public void setBtn_fermer_saisie_dps(boolean btn_fermer_saisie_dps) {
 		this.btn_fermer_saisie_dps = btn_fermer_saisie_dps;
+	}
+
+
+	public boolean isBtn_retour_vente() {
+		return btn_retour_vente;
+	}
+
+
+	public void setBtn_retour_vente(boolean btn_retour_vente) {
+		this.btn_retour_vente = btn_retour_vente;
 	}
 	
 	

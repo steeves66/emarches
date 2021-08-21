@@ -21,6 +21,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	private String aaoCode;
 	private String aaoDacCode;
+	private String dacStaCode;
 	private String aaoLibelle;
 	private long aaoNbrLot;
 	private long aaoNbrOuv;
@@ -53,7 +54,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.aaoCode = aaoCode;
 	}
 
-	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String aaoLibelle, long aaoNbrLot,
+	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String dacStaCode, String aaoLibelle, long aaoNbrLot,
 			long aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
 			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv, Date aaoDteOuvFin,
 			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,
@@ -103,6 +104,15 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoDacCode(String aaoDacCode) {
 		this.aaoDacCode = aaoDacCode;
+	}
+	
+	@Column(name = "DAC_STA_CODE", length = 3)
+	public String getDacStaCode() {
+		return this.dacStaCode;
+	}
+
+	public void setDacStaCode(String dacStaCode) {
+		this.dacStaCode = dacStaCode;
 	}
 
 	@Column(name = "AAO_LIBELLE", length = 1000)

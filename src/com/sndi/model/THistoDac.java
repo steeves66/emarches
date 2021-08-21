@@ -30,6 +30,7 @@ public class THistoDac implements java.io.Serializable {
 	private Date hacDate;
 	private String hacCommentaire;
 	private long hacDveNum;
+	private String hacAaoCode;
 
 	public THistoDac() {
 	}
@@ -43,7 +44,7 @@ public class THistoDac implements java.io.Serializable {
 	}
 
 	public THistoDac(long hacId, TFonction TFonction, TOperateur TOperateur, TDacSpecs TDacSpecs, TStatut TStatut,
-			Date hacDate, String hacCommentaire, long hacDveNum) {
+			Date hacDate, String hacCommentaire, long hacDveNum, String hacAaoCode) {
 		this.hacId = hacId;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
@@ -52,6 +53,7 @@ public class THistoDac implements java.io.Serializable {
 		this.hacDate = hacDate;
 		this.hacCommentaire = hacCommentaire;
 		this.hacDveNum = hacDveNum;
+		this.hacAaoCode = hacAaoCode;
 	}
 
 	@Id
@@ -132,6 +134,15 @@ public class THistoDac implements java.io.Serializable {
 
 	public void setHacDveNum(long hacDveNum) {
 		this.hacDveNum = hacDveNum;
+	}
+	
+	@Column(name = "HAC_AAO_CODE", length = 22)
+	public String getHacAaoCode() {
+		return this.hacAaoCode;
+	}
+
+	public void setHacAaoCode(String hacAaoCode) {
+		this.hacAaoCode = hacAaoCode;
 	}
 
 }

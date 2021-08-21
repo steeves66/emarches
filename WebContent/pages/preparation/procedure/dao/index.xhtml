@@ -473,6 +473,13 @@
                               <i class="ace-icon fa fa-eye bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                           </p:commandLink>
+                          
+                          <!--BOUTON DE RETOUR -->
+                             <p:commandLink rendered="#{controleController.btn_retour_vente}" action="#{daoController.retourVente()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer à la vente" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                              <p:confirm header="Confirmation" message="Voulez-vous retourner le DAC N°#{slctdTb.dacCode} à la vente ?" icon="ui-icon-alert" />
+                              </p:commandLink>
                             
 				         </p:column>   
 				    </p:dataTable>

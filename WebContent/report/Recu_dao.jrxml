@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-08-16T20:26:19 -->
+<!-- 2021-08-21T23:45:24 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_PROD"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="param_code_1" class="java.lang.String"/>
-	<parameter name="param_nom" class="java.lang.String"/>
-	<parameter name="param_prenom" class="java.lang.String"/>
+	<parameter name="param_dev_num" class="java.lang.Long"/>
 	<queryString language="SQL">
-		<![CDATA[select distinct dc.dac_code,dc.dac_objet,av.aao_libelle,av.aao_code,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_sou_ncc,can.can_sou_sigle_ste,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
-from t_dac_specs dc,t_avis_appel_offre av ,t_candidats can, t_vente_dac v, t_detail_vente dv, t_histo_dac hd,t_fonction f, t_assignation a, t_operateur op
-where dc.dac_code = hd.hac_dac_code
-and hd.hac_fon_cod = f.fon_cod
-and dc.dac_code = av.aao_dac_code
-and can.can_code = v.ven_can_code
-and v.ven_num = dv.dve_ven_num
-and dc.dac_code = dv.dve_dac_code
-and hd.hac_fon_cod = a.ass_fon_cod
-and a.ass_statut = 1
-and a.ass_ope_matricule = op.ope_matricule
-and hd.hac_sta_code = 'DVE'
-and dc.dac_code = $P{param_code_1}
-and can.can_nom = $P{param_nom}
-and can.can_prenoms = $P{param_prenom}]]>
+		<![CDATA[select * from v_recu_dac rd 
+where rd.dac_code = $P{param_code_1}
+and rd.dve_num = $P{param_dev_num}]]>
 	</queryString>
-	<field name="DAC_CODE" class="java.lang.String"/>
-	<field name="DAC_OBJET" class="java.lang.String"/>
+	<field name="V_ID" class="java.math.BigDecimal"/>
 	<field name="AAO_LIBELLE" class="java.lang.String"/>
-	<field name="AAO_CODE" class="java.lang.String"/>
-	<field name="VEN_PAIE_CODE" class="java.lang.String"/>
-	<field name="DVE_COUT" class="java.math.BigDecimal"/>
-	<field name="DVE_COUT_LETTRE" class="java.lang.String"/>
-	<field name="CANDIDAT" class="java.lang.String"/>
+	<field name="DAC_CODE" class="java.lang.String"/>
+	<field name="LAA_AAO_CODE" class="java.lang.String"/>
+	<field name="LAA_NUM" class="java.math.BigDecimal"/>
+	<field name="SOU_NCC" class="java.lang.String"/>
+	<field name="CAN_CODE" class="java.math.BigDecimal"/>
 	<field name="CAN_SOU_NCC" class="java.lang.String"/>
-	<field name="CAN_SOU_SIGLE_STE" class="java.lang.String"/>
+	<field name="CANDIDAT" class="java.lang.String"/>
 	<field name="CAN_TEL" class="java.lang.String"/>
 	<field name="FONLIBELLE" class="java.lang.String"/>
+	<field name="SOU_SIGLE_STE" class="java.lang.String"/>
+	<field name="DVE_NUM" class="java.math.BigDecimal"/>
+	<field name="HAC_DVE_NUM" class="java.math.BigDecimal"/>
+	<field name="DVE_COUT" class="java.math.BigDecimal"/>
+	<field name="DVE_COUT_LETTRE" class="java.lang.String"/>
+	<field name="VEN_NUM" class="java.math.BigDecimal"/>
+	<field name="VEN_PAIE_CODE" class="java.lang.String"/>
 	<field name="HAC_DATE" class="java.sql.Timestamp"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -228,7 +221,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{AAO_CODE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{LAA_AAO_CODE}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="397" y="206" width="112" height="30" uuid="38dcdb7b-2f5b-404e-b06e-847299e32499"/>
@@ -326,7 +319,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{CAN_SOU_SIGLE_STE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{SOU_SIGLE_STE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

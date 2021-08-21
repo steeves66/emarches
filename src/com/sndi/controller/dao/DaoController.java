@@ -2294,6 +2294,17 @@ TDacSpecs dao = new TDacSpecs();
 			typeActionTb(); 
 	 }
 	 
+	 //Affichage des AC en lui passant en parametre les statuts concernÃ¯Â¿Â½ (1 statut)
+	 public void chargeDataAcV1(){
+		 listeDAO.clear();
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
+					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
 	 
 	 //Affichage des AC en lui passant en parametre les statuts concernÃ¯Â¿Â½ (1 statut)
 	 public void chargeDataAc1Filtre(){
@@ -2459,6 +2470,10 @@ TDacSpecs dao = new TDacSpecs();
 									 }else { 
 										 if(fonct.equalsIgnoreCase("listSaisieRat")) {
 											 chargeDataRat();
+										 }else {
+											    if(fonct.equalsIgnoreCase("listeDacVendu")) {
+											    	chargeDataAcV1();
+											  }
 										 }
 									 }
 								 }	 
@@ -7248,7 +7263,30 @@ TDacSpecs dao = new TDacSpecs();
 										  userController.setSevrityMsg("success");		
 								    }
 									  
-									  
+									
+									  //Differer un DAC à la vente
+								 public void retourVente() {
+											 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+												 statutUpdate ="DAP";
+											      }else {
+												    statutUpdate ="";
+											       }
+											 
+											 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												        new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+											                if (!listDao.isEmpty()) {
+											                newDao= listDao.get(0); 
+											                newDao.setTStatut(new TStatut(statutUpdate));
+											                iservice.updateObject(newDao);
+											                } 
+											 
+											        historiser(""+statutUpdate,newDao.getDacCode(),"DAC différé à la vente");
+											        
+											         chargeData();
+												     userController.setTexteMsg("Désolé, votre dossier est retourné à la vente!");
+													 userController.setRenderMsg(true);
+													 userController.setSevrityMsg("success");
+										 }
 									  
 									//Validation des corrections
 									  //@Transactional 
@@ -7984,11 +8022,11 @@ TDacSpecs dao = new TDacSpecs();
 										
                                                    if(resultat.equalsIgnoreCase("Valide")){
 										        	  
-                                                        	if(slctdTd.getDacMopCode().equalsIgnoreCase("AOR") || slctdTd.getDacMopCode().equalsIgnoreCase("DPA") ||
+                                                        	/*if(slctdTd.getDacMopCode().equalsIgnoreCase("AOR") || slctdTd.getDacMopCode().equalsIgnoreCase("DPA") ||
                                                         			slctdTd.getDacMopCode().equalsIgnoreCase("DPS")) {
 														                 statutSanction ="DAP";
 														                 statutSanRetour ="0";
-													                  }else {
+													                  }else {*/
 
 																	        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
 																		        statutSanction ="DPU";
@@ -8000,7 +8038,7 @@ TDacSpecs dao = new TDacSpecs();
 																			                   statutSanRetour ="0";
 																	                         }
 														                                }
-													                  }
+													                  //}
                                                         	
 													        correctionVal();
 													        
@@ -8059,7 +8097,6 @@ TDacSpecs dao = new TDacSpecs();
 												 
 												
 												listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-														//new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 									 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 									 				if (!listDao.isEmpty()) {
 									 					newDao= listDao.get(0);
@@ -8304,6 +8341,7 @@ TDacSpecs dao = new TDacSpecs();
 												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
 											 		               }
 											 		               
+											 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -8341,7 +8379,8 @@ TDacSpecs dao = new TDacSpecs();
 												 						     iservice.addObject(dacStatut);	
 												 						     
 											     			  				   //Activation du bouton dition du rcu
-											     			  				   confirmPaie = true;
+											     			  				   //confirmPaie = true;
+												 						       confirmPaie = false;
 											     			  				   confirmInter = false;
 											     			  				   etatRecu = true;
 											     			  				   clean = true;
@@ -8352,7 +8391,7 @@ TDacSpecs dao = new TDacSpecs();
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											      					           userController.setTexteMsg("Paiement effectué avec succs");
+											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
 													                 }
@@ -8371,6 +8410,7 @@ TDacSpecs dao = new TDacSpecs();
 												  newSouncc ="";
 												  etatRecu = false;
 												  clean = false;
+												  confirmPaie = true;
 												  //confirmInter = false;
 												  //confirmPaie = false;
 											  }
@@ -8389,6 +8429,7 @@ TDacSpecs dao = new TDacSpecs();
 											  
 											  //Methode de récupération des NCC
 											  public void recupNcc() {
+												  listOffreCandidat.clear();
 												  listOffreCandidat = (List<VInfoNcc>) iservice.getObjectsByColumn("VInfoNcc", new ArrayList<String>(Arrays.asList("V_ID")),
 									      			  		 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 											  }
@@ -8606,7 +8647,6 @@ TDacSpecs dao = new TDacSpecs();
 															message="Fin de la vente du Dossier d'Appel d'Offres N° "+slctdTd.getDacCode();
 														 }
 														
-														if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL")) {
 															listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
 																	new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 																	if (!listAvis.isEmpty()) {
@@ -8616,7 +8656,7 @@ TDacSpecs dao = new TDacSpecs();
 																		majAvis.setAaoDtePub(Calendar.getInstance().getTime());
 																		iservice.updateObject(majAvis);
 																}
-														 }
+	
 														//Recupration du DAO dans T_DAC_SPECS
 											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 								     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -8738,8 +8778,13 @@ TDacSpecs dao = new TDacSpecs();
 														 } 
 														 
 														//Edition du recu de paiement
-														 public void imprimerRecu() {
+														 /*public void imprimerRecu() {
 																projetReport.stringparam3(slctdTd.getDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
+															}*/
+														 
+														//Edition du recu de paiement
+														 public void imprimerRecu() {
+																projetReport.stringparam4(slctdTd.getDacCode(), venteDetail.getDveNum(), "Recu_dao", "Recu_dao");
 															}
 								
 														//chargement des listes pour la publication
