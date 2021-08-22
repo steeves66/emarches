@@ -653,7 +653,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Montant du DAC (F CFA)  : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText value="#{daoController.slctdTd.aaoCoutDac}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   <label><h:outputText  value="#{daoController.slctdTd.aaoCoutDac}" styleClass="text-muted" style="width: 100%" readonly="true">
                    <f:convertNumber pattern="##,###.##" />
                    </h:outputText>
                    </label>
@@ -663,7 +663,7 @@
                   <div class="col-sm-3"><label class="pull-right">Nombre de Vente  : </label></div>
                   <div class="col-sm-9">
                    <label>
-                   <h:outputText value="#{daoController.detailVente.dacnbrvendu}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   <h:outputText id="mtDac" value="#{daoController.detailVente.dacnbrvendu}" styleClass="text-muted" style="width: 100%" readonly="true">
                    </h:outputText>
                    </label>
                   </div>
@@ -688,7 +688,7 @@
 				        </p:column>
 				        
 				        <p:column headerText="" styleClass="col-sm-1" >
-         				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeNcc()}" title="Supprimer" update="paiementDlg:ndTbleCandidat, paiementDlg:messageXX">
+         				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeNcc()}" title="Supprimer" update="paiementDlg:ndTbleCandidat, paiementDlg:messageXX, paiementDlg:mtDac">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 		                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 		                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.offreCandidat}" />
