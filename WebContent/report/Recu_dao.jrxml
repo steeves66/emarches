@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2021-08-21T23:45:24 -->
+<!-- 2021-08-22T20:41:07 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -109,7 +109,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 	<detail>
 		<band height="432" splitType="Stretch">
 			<staticText>
-				<reportElement x="39" y="51" width="93" height="20" uuid="1b94e0c4-085c-405c-b77b-ab6ee944c7ca">
+				<reportElement x="39" y="70" width="93" height="20" uuid="1b94e0c4-085c-405c-b77b-ab6ee944c7ca">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -120,7 +120,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[M. \  Mme \ Mlle :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="133" y="51" width="346" height="20" uuid="d9f7e65a-1fd9-404d-bb87-249b6575a41f">
+				<reportElement x="133" y="70" width="423" height="20" uuid="d9f7e65a-1fd9-404d-bb87-249b6575a41f">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -131,7 +131,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<textFieldExpression><![CDATA[$F{CANDIDAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="39" y="72" width="68" height="18" uuid="0bd62ee2-3161-40d7-88cb-0ceeabb6ca45">
+				<reportElement x="39" y="91" width="68" height="18" uuid="0bd62ee2-3161-40d7-88cb-0ceeabb6ca45">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -140,7 +140,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[Téléphone :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="108" y="72" width="372" height="25" uuid="b90ac5c3-1618-4bcc-ae3b-d6cdb9c05e8c">
+				<reportElement x="108" y="91" width="448" height="25" uuid="b90ac5c3-1618-4bcc-ae3b-d6cdb9c05e8c">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -190,7 +190,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<textFieldExpression><![CDATA["Par "+$F{FONLIBELLE}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="20" y="128" width="491" height="161" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
+				<reportElement x="20" y="128" width="491" height="169" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
@@ -214,7 +214,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[Avis d'Appel d'Offres N°]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="175" y="189" width="222" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
+				<reportElement x="162" y="189" width="235" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -238,14 +238,14 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[Montant (FCFA)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="337" y="290" width="62" height="30" uuid="26f57a7e-a9a5-4809-b9e4-1094c8e0295a"/>
+				<reportElement x="337" y="297" width="62" height="30" uuid="26f57a7e-a9a5-4809-b9e4-1094c8e0295a"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="398" y="291" width="112" height="30" uuid="8dd2d36d-81d8-4c0c-85f7-82285186ff52"/>
+				<reportElement x="398" y="298" width="112" height="30" uuid="8dd2d36d-81d8-4c0c-85f7-82285186ff52"/>
 				<textElement textAlignment="Right">
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -268,17 +268,17 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[Objet :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="65" y="223" width="332" height="48" uuid="031af476-41b6-4c3b-be38-2a386e831144">
+				<reportElement x="65" y="225" width="332" height="65" uuid="031af476-41b6-4c3b-be38-2a386e831144">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<textElement textAlignment="Justified">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{AAO_LIBELLE}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="134" y="10" width="345" height="20" uuid="bec069b0-78e3-4de4-b665-dc198abcfa9b">
+				<reportElement x="134" y="11" width="422" height="20" uuid="bec069b0-78e3-4de4-b665-dc198abcfa9b">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -300,7 +300,7 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[NCC :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="40" y="31" width="93" height="20" uuid="c6ff797a-9641-4742-b4d2-4b301685ffe3">
+				<reportElement x="40" y="33" width="93" height="20" uuid="c6ff797a-9641-4742-b4d2-4b301685ffe3">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -311,13 +311,13 @@ and rd.dve_num = $P{param_dev_num}]]>
 				<text><![CDATA[Sigle :]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="134" y="31" width="345" height="20" uuid="8a338cad-9727-4faf-a15c-aaf9135c042b">
+				<reportElement x="134" y="35" width="422" height="29" uuid="8a338cad-9727-4faf-a15c-aaf9135c042b">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SOU_SIGLE_STE}]]></textFieldExpression>
 			</textField>

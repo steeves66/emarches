@@ -189,6 +189,7 @@ public class CommissionController {
 	 private List<TNatureDocuments> natureDocListeRapport = new ArrayList<TNatureDocuments>();
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
+	 private List<TDacSpecs> listeDac = new ArrayList<TDacSpecs>();
 	 private List<TAvisAppelOffre> listeAvisAppelOffre = new ArrayList<TAvisAppelOffre>();
 	 private List<TDetOffres> listeDetOff = new ArrayList<TDetOffres>();
 	 private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
@@ -236,6 +237,7 @@ public class CommissionController {
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
+	private TDacSpecs newDao = new TDacSpecs();
 	private VLotCandidat selectLot =new VLotCandidat();
 	//private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
 	private VCritereAnalyseDacOfftec sltCritere =new VCritereAnalyseDacOfftec();
@@ -324,6 +326,7 @@ public class CommissionController {
 	 private boolean reserveOui=false;
 	 private boolean reserveNon=false; 
 	 private boolean btnPvJug=false;
+	 private boolean affAvis = false;
 	 //Début Ouverture
 	 private boolean pvFin=false;
 	 private boolean btnFinOuv=true;
@@ -352,6 +355,8 @@ public class CommissionController {
 	 private long montRab=0;
 	 private long numSeance=0;
 	 private String numVente = "";
+	 private String dacCode = "";
+	 private String avisAppel = "";
 	 private String dofTyp;
 	 private String ncc;
 	 private BigDecimal dofNum;
@@ -1045,7 +1050,9 @@ public class CommissionController {
 				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
 				     chargeListe("ANA");
-				     
+				     //Historisation de l'avis
+				     historiser(""+statutUpdate, "");
+				     //Message de confirmation
 				     userController.setTexteMsg(" Désolé, votre avis a été retourné pour réanalyse!");
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
@@ -1053,7 +1060,7 @@ public class CommissionController {
 		 }
 		 
 		//Methode d'historisation
-		 public void historiser(String statut,String dacCode, String motif) {
+		 public void historiser(String statut, String motif) {
 		     TStatut statuts = constantService.getStatut(statut);
 		     THistoDac dacStatut = new THistoDac();
 		     dacStatut.setHacDate(Calendar.getInstance().getTime());
@@ -1083,7 +1090,9 @@ public class CommissionController {
 				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
 				     chargeListe("APU");
-				     
+				     //Historisation de l'avis
+				     historiser(""+statutUpdate, "");
+				     //Message de confirmation
 				     userController.setTexteMsg(" Désolé, votre avis a été retourné à la séance d'ouverture des plis!");
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
@@ -1788,6 +1797,55 @@ public class CommissionController {
 						 new WhereClause("PV_NAD_CODE",Comparateur.EQ,""+natpv)));
 		    }
 		 */
+		 
+		 //Chargement de la liste des DAC
+         public void chargeDac() {
+        	 listeDac.clear();
+        	 listeDac  = (List<TDacSpecs>) iservice.getObjectsByColumnDesc("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")));
+					 _logger.info("Nbre de DAC size: "+listeDac.size());	
+		 }
+		 
+		//Liste des Avis en fonction du DAC choisi
+		 public void openAvis() {
+			 listeAvisAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+newDao.getDacCode()));
+			 
+			 _logger.info("Nbre d'Avis size: "+listeAvisAppelOffre.size());
+		 }
+		 
+		 //Liste des DAC en fonction de l'avis choisi
+         public void openDac() {
+        	 listeDac  = (List<TDacSpecs>) iservice.getObjectsByColumnDesc("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dacCode));
+					 if(!listeDac.isEmpty()) { 
+				    	 newDao=listeDac.get(0);
+				    	 affAvis = true;
+				    	 //Chargement des avis en fonction du DAC choisi
+				    	 openAvis(); 
+				     }	
+					 _logger.info("Nbre de DAC size: "+listeDac.size());	
+		 }
+         
+         
+		 
+         @Transactional
+		 public void rattrapOffre() { 
+			 listeAnalyse = (List<TAnalyseOffre>) iservice.getObjectsByColumnIn("TAnalyseOffre", new ArrayList<String>(Arrays.asList("ANF_NUM")),
+					     "ANF_VALEUR_CONF", new ArrayList<String>(Arrays.asList("CONFORME","NON CONFORME")),
+					       new WhereClause("ANF_DAC_CODE",WhereClause.Comparateur.EQ,""+dacCode),
+						  new WhereClause("ANF_PRESENCE",WhereClause.Comparateur.EQ,"N")); 
+		                       for(TAnalyseOffre mbr : listeAnalyse) {
+				                         mbr.setAnfPresence("O");
+				                         iservice.updateObject(mbr);
+		                 }
+		                       
+		                 //Message de confirmation
+		                 userController.setTexteMsg("Mis à jour des offres du DAC avec succès !");
+						 userController.setRenderMsg(true);
+						 userController.setSevrityMsg("success");
+		 }
+		 
+		 
 		 public void chargeDossierJus() {
 			 justifListe.clear();
 			 justifListe = ((List<TDossierAnalyse>)iservice.getObjectsByColumnDesc("TDossierAnalyse",new ArrayList<String>(Arrays.asList("DANA_ID")),
@@ -2164,11 +2222,13 @@ public class CommissionController {
 			avis.setAaoDteFinOuv(slctdTd.getAaoDteFinOuv());
 			avis.setAaoObsOuv(slctdTd.getAaoObsOuv());
 			iservice.updateObject(avis);
+			//Historisation de l'avis
+			historiser(""+statUpdate, "");
+			//Message de confirmation
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");  
 			chargementListe();
-			
 		}
 		
 		
@@ -2222,6 +2282,7 @@ public class CommissionController {
 						avis.setAaoDteFinOuv(slctdTd.getAaoDteFinOuv());
 						avis.setAaoObsOuv(slctdTd.getAaoObsOuv());
 						iservice.updateObject(avis);
+						historiser(""+statUpdate, "");
 						pvFin = true;
 						btnFinOuv = false;
 						userController.setTexteMsg(message);
@@ -2749,11 +2810,12 @@ public class CommissionController {
 					break;
 					
 				case "com11":
-					
 					break;
 					
+                 case "com12":
+                	chargeDac();
+					break;
 			    }
-		     
 		     
 		     
 		    return userController.renderPage(value);   
@@ -4453,5 +4515,44 @@ public class CommissionController {
 		this.listeMembresCommiteParam = listeMembresCommiteParam;
 	}
 
+	public String getDacCode() {
+		return dacCode;
+	}
+
+	public void setDacCode(String dacCode) {
+		this.dacCode = dacCode;
+	}
+
+	public List<TDacSpecs> getListeDac() {
+		return listeDac;
+	}
+
+	public void setListeDac(List<TDacSpecs> listeDac) {
+		this.listeDac = listeDac;
+	}
+
+	public TDacSpecs getNewDao() {
+		return newDao;
+	}
+
+	public void setNewDao(TDacSpecs newDao) {
+		this.newDao = newDao;
+	}
+
+	public String getAvisAppel() {
+		return avisAppel;
+	}
+
+	public void setAvisAppel(String avisAppel) {
+		this.avisAppel = avisAppel;
+	}
+
+	public boolean isAffAvis() {
+		return affAvis;
+	}
+
+	public void setAffAvis(boolean affAvis) {
+		this.affAvis = affAvis;
+	}
 
 }

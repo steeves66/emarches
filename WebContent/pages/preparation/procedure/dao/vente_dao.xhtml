@@ -288,7 +288,7 @@
 	            
 	             <div class="box-footer">
 	             
-	             <p:commandLink styleClass="btn btn-danger mr10 pull-right" rendered="#{daoController.clean}" action="#{daoController.cleanPaiement()}" style="background-color: red; color:#fff" update=":content">
+	             <p:commandLink styleClass="btn btn-danger mr10 pull-right" rendered="#{daoController.clean}" action="#{daoController.cleanPaiement()}" style="background-color: red; color:#fff;  margin-left:3px" update=":content">
 				   <i class="ace-icon fa fa-trash bigger-120"></i> Vider 									        	
 				   </p:commandLink>
 	             
@@ -303,7 +303,7 @@
 																        	
 				   </p:commandLink>
 				      
-				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.etatRecu}" action="#{daoController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff;border-color:#f88b2e" ajax="false" update=":content">
+				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.etatRecu}" action="#{daoController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff;border-color:#f88b2e; margin-right:3px" ajax="false" update=":content">
 				    <i class="ace-icon fa fa-save bigger-120"></i> Editer Recu
 				    </p:commandLink>
 	            </div> 

@@ -407,7 +407,7 @@ public class PpmModificationController {
 					          return "ope222";
 					   } else
 					   {
-						   updatePieces(); 
+						   misejPieces(); 
 					   }
 				     }
 				 //Fin de Contrôle pour les PPM
@@ -423,7 +423,7 @@ public class PpmModificationController {
 					          return "ope223";
 					   } else
 					   {
-						   updatePieces();
+						   misejPieces();
 					   }
 				     }
 				 //Fin de Contrôle pour les AMI
@@ -438,7 +438,7 @@ public class PpmModificationController {
 					          return "ope224";
 					   } else
 					   {
-						   updatePieces(); 
+						   misejPieces(); 
 					   }
 				     }
 				 //Fin de Contrôle pour les PRQ
@@ -454,7 +454,7 @@ public class PpmModificationController {
 					          return "dpami";
 					   } else
 					   {
-						   updatePieces();
+						   misejPieces();
 					   }
 				     }
 				 //Fin de Contrôle pour les DPAMI
@@ -469,7 +469,8 @@ public class PpmModificationController {
 					          return "dpPrq";
 					   } else
 					   {
-						   updatePieces();
+						   //updatePieces();
+						   misejPieces(); 
 					   }
 				     }
 				 //Fin de Contrôle pour les DPPRQ
@@ -781,6 +782,27 @@ public class PpmModificationController {
 		        }
 	
 			}
+	 
+	 
+	//MAJ du DAO-TYpe
+		 public void misejPieces() { 
+			      if(updatePpm.getMdtCode().equalsIgnoreCase("")) {
+			    	  FacesContext.getCurrentInstance().addMessage(null,
+					  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, choisir votre dossier type avant de poursuivre", ""));
+
+			      }else {
+
+			    	  listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+						    if (!listeTsPpm.isEmpty()) {
+							       detPass= listeTsPpm.get(0);
+							       detPass.setTModeleDacType(new TModeleDacType(tydCode));
+							       iservice.updateObject(detPass);
+							       recupModeleDao();
+						      }
+			        }
+		
+				}
 
  
 		//Methode de validation des PPM

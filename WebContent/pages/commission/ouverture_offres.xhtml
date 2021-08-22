@@ -418,7 +418,7 @@
 		                      
 	            </div>
 	            <div class="box-footer">
-	               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{commissionController.saveOuverture()}"  update=":gnl,candidatDlg:ndTbleCand, :content">
+	               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{commissionController.saveOuverture()}"  update="gnl, candidatDlg:ndTbleCand, :gnl:cc">
 	               <p:confirm header="Confirmation" message="Confirmez-vous la saisie de l'offre ?" icon="ui-icon-alert" />
 				     <i class="ace-icon fa fa-save bigger-120"></i> Ajouter
 				      </p:commandLink>

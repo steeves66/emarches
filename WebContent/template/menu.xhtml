@@ -2618,7 +2618,7 @@
             </li>
             
             <li>
-            <p:commandLink action="#{ statutController.renderPage('stat') }" update=":content" > 
+            <p:commandLink action="#{statutController.renderPage('stat') }" update=":content" > 
             <i class="fa fa-circle-o"></i>Statut
              </p:commandLink>
             </li>
@@ -2638,6 +2638,32 @@
           
          </h:panelGroup>
          <!-- FIN TRAITEMENT DU MENU EXPLOITATION-->
+         
+           <!-- DEBUT TRAITEMENT DU MENU EXPLOITATION -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ALL'}">
+
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Gestion des Rattraoages</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+	         <p:commandLink action="#{commissionController.renderPage('com12')}" update=":content" > 
+	         <i class="fa fa-circle-o"></i>Offres
+	         </p:commandLink>
+            </li> 
+        
+          </ul>     
+         </li>
+         
+          
+         </h:panelGroup>
+         <!-- FIN TRAITEMENT DU MENU EXPLOITATION-->
+         
+         
          <h:panelGroup rendered="false">
           <!-- FIN TRAITEMENT DU MENU ADMINISTRATEUR-->
           <li class="treeview">

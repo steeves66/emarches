@@ -7248,9 +7248,9 @@ TDacSpecs dao = new TDacSpecs();
 																	     iservice.updateObject(daoCorr);
 															           }
 								       
-										   constantService.getStatut("D4V");
+										   //constantService.getStatut("D4V");
 			 							   //Historisation du / des retraits
-			 						       //historiser("D4V",getSlctdTda().getDafDacCode(),"");
+			 						       historiser("D4V",getSlctdTda().getDafDacCode(),"");
 											
 			 						      tableauBordController.saveTempTabord("D4V", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 										  chargeData();
@@ -7922,6 +7922,8 @@ TDacSpecs dao = new TDacSpecs();
 								     			 etatValiderCsv = false;
 								     			//Methode d'historisation 
 								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
+								     			//Rafraîchissement de la liste principale V_Dacliste
+								     			 chargeData();
 								     			//Mesage de confirmation
 												 userController.setTexteMsg("Dac validé avec succès!");
 												 userController.setRenderMsg(true);
@@ -7954,7 +7956,9 @@ TDacSpecs dao = new TDacSpecs();
 								     			 etatValiderCsv = false;
 								     			
 								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC rejeté par le chef de service");
-								     			
+								     			//Rafraîchissement de la liste principale V_Dacliste
+								     			chargeData();
+								     			//Message de confirmation
 												 userController.setTexteMsg("Dac validé avec succès!");
 												 userController.setRenderMsg(true);
 												 userController.setSevrityMsg("success");
@@ -8001,6 +8005,8 @@ TDacSpecs dao = new TDacSpecs();
 								     			 etatValiderCsv = false;
 								     			//Methode d'historisation 
 								     			historiser(""+statutSanction,newDao.getDacCode(),"DAC validé par le chef de service");
+								     			//Rafraîchissement de la liste principale V_Dacliste
+								     			chargeData();
 								     			//Mesage de confirmation
 												 userController.setTexteMsg("Dac validé avec succès!");
 												 userController.setRenderMsg(true);
@@ -8010,7 +8016,6 @@ TDacSpecs dao = new TDacSpecs();
 											 //Message d'erreur
 												FacesContext.getCurrentInstance().addMessage(null,
 														new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce dossier d'appel à la concurrence n'a pas fait l'objet de correction", ""));
-											  
 										   }  
 									}
 				
@@ -8021,13 +8026,7 @@ TDacSpecs dao = new TDacSpecs();
 									 public void resultatCorrection() {
 										
                                                    if(resultat.equalsIgnoreCase("Valide")){
-										        	  
-                                                        	/*if(slctdTd.getDacMopCode().equalsIgnoreCase("AOR") || slctdTd.getDacMopCode().equalsIgnoreCase("DPA") ||
-                                                        			slctdTd.getDacMopCode().equalsIgnoreCase("DPS")) {
-														                 statutSanction ="DAP";
-														                 statutSanRetour ="0";
-													                  }else {*/
-
+										        	
 																	        if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
 																		        statutSanction ="DPU";
 																		          statutSanRetour ="0";
@@ -8037,9 +8036,7 @@ TDacSpecs dao = new TDacSpecs();
 																	    	                   statutSanction ="D5V";
 																			                   statutSanRetour ="0";
 																	                         }
-														                                }
-													                  //}
-                                                        	
+														                                }             	
 													        correctionVal();
 													        
 										                         }else{
@@ -8047,7 +8044,6 @@ TDacSpecs dao = new TDacSpecs();
 										                         	     if(resultat.equalsIgnoreCase("Rejete")) {
 												                                  statutSanction ="D1R";
 												                                  statutSanRetour ="1";
-												                                  
 												                                //Appel de la methode de correction         
 							                                                        correction();
 											                                }else{
@@ -8060,8 +8056,6 @@ TDacSpecs dao = new TDacSpecs();
 										                                        }
 										                                 }
                                                                   }
-                                                   //Appel de la methode de correction         
-                                                       // correction();
 									}
 								//Fin de la validation des corrections
 			
@@ -8463,7 +8457,8 @@ TDacSpecs dao = new TDacSpecs();
 														    	    			          }	
 													    	    				       
 													    	    				       
-													    	    				 recupNcc();
+													    	    				 //recupNcc();
+													    	    				detailVente();
 													    	    				 //Message de Suppression
 													    	           		  	FacesContext.getCurrentInstance().addMessage(null,
 																				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Suppression éffectuée avec succès!", ""));
