@@ -363,12 +363,13 @@ public class OperateurController {
 		filterLetter = "ALL";
 		}
 	}*/
-	
+	///
 	public void chargeData(){
 		test.clear();
 		getObjetListe().clear();
 		test.add("a");
-		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("ADM")||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("EXP")) {
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("ADM")||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("EXP")
+				||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equals("DEV")) {
 		objetListe = iservice.getObjects("TOperateur", new ArrayList<String>(Arrays.asList("opeNom")));
 		currentOpeListe = new ArrayList<TOperateur>(objetListe);
 		_logger.info("objetListe size: "+objetListe.size());
