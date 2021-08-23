@@ -34,6 +34,7 @@ public class VLigneImputation implements java.io.Serializable {
 	private String lbgMp;
 	private String lbgReglMp;
 	private long lbgTotDot;
+	private long lbgDotation;
 	private String lbgUtilSaisi;
 	private String lbgDesCode;
 	private Date lbgDteModif;
@@ -98,7 +99,7 @@ public class VLigneImputation implements java.io.Serializable {
 	public VLigneImputation(String lbgCode, String lbgStrCode, long lbgGesCode, long lbgResDon,
 			String lbgImputation, Long lbgAnoCode, String lbgNatCode, long lbgResTr, Date lbgDteSaisi,
 			long lbgAeTr, long lbgAeDon, long lbgAeEmp, String lbgMp, String lbgReglMp,
-			long lbgTotDot, String lbgUtilSaisi, String lbgDesCode, Date lbgDteModif, long lbgResEmp,
+			long lbgTotDot, long lbgDotation, String lbgUtilSaisi, String lbgDesCode, Date lbgDteModif, long lbgResEmp,
 			long lbgResTot, String lbgUtilModif, String lbgFonCode, long lbgDisTre, long lbgDisDon,
 			long lbgDisEmp, long lbgDisTot, String lbgFonCodeAc, String lbgStaCode, String lbgActNumModif,
 			Date lbgDteVal, String lbgFonCodeVal, String lbgTraitmt, String lbgTraitmtNotif, Date lbgDteStaCour,
@@ -122,6 +123,7 @@ public class VLigneImputation implements java.io.Serializable {
 		this.lbgMp = lbgMp;
 		this.lbgReglMp = lbgReglMp;
 		this.lbgTotDot = lbgTotDot;
+		this.lbgDotation = lbgDotation;
 		this.lbgUtilSaisi = lbgUtilSaisi;
 		this.lbgDesCode = lbgDesCode;
 		this.lbgDteModif = lbgDteModif;
@@ -299,6 +301,15 @@ public class VLigneImputation implements java.io.Serializable {
 
 	public void setLbgTotDot(long lbgTotDot) {
 		this.lbgTotDot = lbgTotDot;
+	}
+	
+	@Column(name = "LBG_DOTATION", precision = 22, scale = 0)
+	public long getLbgDotation() {
+		return this.lbgDotation;
+	}
+
+	public void setLbgDotation(long lbgDotation) {
+		this.lbgDotation = lbgDotation;
 	}
 
 	@Column(name = "LBG_UTIL_SAISI", length = 10)
