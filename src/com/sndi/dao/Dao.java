@@ -1087,7 +1087,7 @@ public List getObjectByColumnBudgetInstr(String objet, String lbgCodeAc, String 
 @Override
 public List getObjectByColumnInInstrValNull(String objet) {
 	// TODO Auto-generated method stub
-	String query = "FROM "+objet+" WHERE MTF_MTF_TYPE IS NULL"; 
+	String query = "FROM "+objet+" WHERE MTF_MTF_NUM IS NULL"; 
 	List list = getSessionFactory().getCurrentSession().createQuery(query).list();
 	return list;
 }

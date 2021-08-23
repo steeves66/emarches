@@ -2533,7 +2533,6 @@
          </li>
          
          
-       
 		  <li class="treeview">
           <a href="#">
             <i class="fa fa-gear"></i> <span>Données Paramètres</span>
@@ -2543,33 +2542,32 @@
           </a> 
            <ul class="treeview-menu">
             <li>
-            <p:commandLink action="#{ministereController.renderPage('min1')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Ministère
-             </p:commandLink>
+	            <p:commandLink action="#{ministereController.renderPage('min1')}" update=":content" > 
+		        	<i class="fa fa-circle-o"></i>Ministère
+		        </p:commandLink>
             </li>
+            <li> 
+            	<p:commandLink action="#{ motifController.renderPage('mtf') }" update=":content" > 
+	            	<i class="fa fa-circle-o"></i>Motif
+	            </p:commandLink>
+            </li>
+            
             <li>
-            <p:commandLink action="#" update=":content" > 
-            <i class="fa fa-circle-o"></i>
-             </p:commandLink>
+	            <p:commandLink action="#{ statutController.renderPage('stat') }" update=":content" > 
+		            <i class="fa fa-circle-o"></i>Statut
+		        </p:commandLink>
             </li>
             
             <li>
             <p:commandLink action="#" update=":content" > 
-            <i class="fa fa-circle-o"></i>
-             </p:commandLink>
+	            <i class="fa fa-circle-o"></i>
+	            </p:commandLink>
             </li>
-            
+
             <li>
-            <p:commandLink action="#" update=":content" > 
-            <i class="fa fa-circle-o"></i>
-             </p:commandLink>
-            </li>
-            
-             
-            <li>
-            <p:commandLink action="#" update=":content" > 
-            <i class="fa fa-circle-o"></i>
-             </p:commandLink>
+	            <p:commandLink action="#" update=":content" > 
+		        	<i class="fa fa-circle-o"></i>
+		        </p:commandLink>
             </li>
           </ul>     
          </li>
