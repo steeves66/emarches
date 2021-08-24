@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sndi.dao.IFonctionDao;
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TAssignation;
 import com.sndi.model.TFonction;
@@ -28,8 +29,12 @@ import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.KeyGen;
 
+import jdk.nashorn.internal.objects.annotations.Where;
+import lombok.Data;
+
 @Component
 @Scope(value="session")
+@Data
 public class FonctionController {
 	Logger _logger = Logger.getLogger(FonctionController.class);
 	@Autowired
@@ -42,6 +47,9 @@ public class FonctionController {
 	UserController userController;
 	
 	@Autowired
+	IFonctionDao iFonctionDao;
+	
+	@Autowired
 	ProjetReport projetReport;
 	@Autowired
 	ConstantService constantService;
@@ -49,6 +57,7 @@ public class FonctionController {
 	private String filterCode="";
 	private TFonction fonction= new TFonction();
 	private List <TFonction> fonctionListe = new ArrayList<TFonction>();
+	private List <TFonction> listeFoncEnr = new ArrayList<TFonction>();
 	private List<TTypeFonction> listTypefonction = new ArrayList<TTypeFonction>();
 	private List<TMinistere> listMinistere = new ArrayList<TMinistere>();
 	private List<TStructure> listStructure = new ArrayList<TStructure>();
@@ -78,6 +87,12 @@ public class FonctionController {
 		 fonctionListe= iservice.getObjectsByColumnDesc("TFonction", new ArrayList<String>(Arrays.asList("FON_DTE_SAISI")));
 	 }
 	 
+	 public void chargeFoncEnr() {
+		 listeFoncEnr.clear();
+		 listeFoncEnr=iservice.getObjectsByColumn("TFonction", new ArrayList<String>(Arrays.asList("fonCod")),
+				 new WhereClause("FON_TYF_COD",WhereClause.Comparateur.EQ, typefonc),
+				 new WhereClause("FON_STR_CODE", WhereClause.Comparateur.EQ, strCode));
+	 }
 	 
 	 public void chargeTypeFonction(){
 			listTypefonction.clear();
@@ -107,6 +122,7 @@ public class FonctionController {
 		   }else{
 	    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));;
 	      }
+		 chargeFoncEnr();
 	 }
 	 
 	 public void genereCodeFonctionModif() {
@@ -116,6 +132,7 @@ public class FonctionController {
 			slctdTd.setTTypeFonction(listTypefonction.get(i));
 			slctdTd.setFonCod(keyGen.getCodeFonction(typefonc,strCode));
 			slctdTd.setFonLibelle(listTypefonction.get(i).getTyfLibelle());
+			chargeFoncEnr();
 		   }else{
 	    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR," selectionnez le type fonction ou le ministère", ""));;
 	      }
@@ -176,7 +193,12 @@ public class FonctionController {
 		userController.setTexteMsg("Modification effectué avec succès !");
 		userController.setRenderMsg(true);
 		userController.setSevrityMsg("success");
-		return	userController.renderPage("fon1");
+		if(strCode.isEmpty()) {
+			return	userController.renderPage("fon1");
+		}else {
+			return	userController.renderPage("fon2");
+		}
+		
 	}
 	
 	
