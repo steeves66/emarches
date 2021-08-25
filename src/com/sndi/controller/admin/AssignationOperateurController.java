@@ -49,6 +49,7 @@ public class AssignationOperateurController
 	private TAssignation assignation = new TAssignation();
 	private TAssignation updatedAssignation = new TAssignation();
 	private TOperateur operateur = new TOperateur();
+	private int operateurIndex = 0;
 	private String tyfCod = "";
 	private String critereRechercheFonction= "";
 	private boolean printable = false;
@@ -83,9 +84,12 @@ public class AssignationOperateurController
 		this.successMsgVisible = false;
 		this.errorMsgVisible = false;
 		this.formOperateurMode = "new";
+		this.operateurIndex = 0;
 	}
-	public void beforeUpdateOperateur(TOperateur operateur)
+	public void beforeUpdateOperateur(TOperateur operateur, int index)
 	{
+		this.operateurIndex = index;
+		System.out.println("index " + index);
 		operateur.setTStructure(StructureDao.findById(operateur.getTStructure().getStrCode()));
 		this.operateurValidator.setValid(true);
 		this.operateur = operateur;
@@ -102,7 +106,14 @@ public class AssignationOperateurController
 			this.operateur = this.operateurService.saveOrUpdateOperateur(this.operateur);
 			this.successMsgVisible = true;
 			this.errorMsgVisible = false;
-			this.listVOperateursRech.set(0, this.operateurDao.findVOperateurRechByOpeMatricule(this.operateur.getOpeMatricule())) ;
+			if(this.formOperateurMode.equalsIgnoreCase("new"))
+			{
+				this.listVOperateursRech.set(0, this.operateurDao.findVOperateurRechByOpeMatricule(this.operateur.getOpeMatricule())) ;
+			}
+			else
+			{
+				this.listVOperateursRech.set(this.operateurIndex, this.operateurDao.findVOperateurRechByOpeMatricule(this.operateur.getOpeMatricule())) ;
+			}
 		}
 		catch(Exception e)
 		{
