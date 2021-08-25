@@ -114,6 +114,7 @@ public interface IDao {
 	
 	public List getObjectByColumnInInstrValDao(String objet, String strSource);
 	public List getObjectByColumnInInstrValAno(String objet, String strSource);
+	public List getObjectByColumnInstrTraiAno(String objet, String strSource);
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);

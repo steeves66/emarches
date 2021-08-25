@@ -76,6 +76,7 @@ public class AnoController {
 	 private List<VLotCandidatAnoPrequalif> listeEntreprise = new ArrayList<VLotCandidatAnoPrequalif>();
 	 //private List<VLotCandidatAno> listeEntreprise = new ArrayList<VLotCandidatAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
+	 private List<VAnodmpTraite> listeDemandeAnoTratite = new ArrayList<VAnodmpTraite>();
 	 private List<VAvisAppelOffreAnodmp> listeDemandeTraiteDmp = new ArrayList<VAvisAppelOffreAnodmp>();
 	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
@@ -96,6 +97,7 @@ public class AnoController {
 	 
 	 //Objet
 	 private VAvisAppelOffreAno slctdTd = new VAvisAppelOffreAno();
+	 private VAnodmpTraite detailDem = new VAnodmpTraite();
 	 private VAvisAppelOffreAnodmp slctdTdDem = new VAvisAppelOffreAnodmp();
 	 private VbTempParamAvis newTempAvis = new VbTempParamAvis();
 	 private TDemande newDem = new TDemande();
@@ -125,6 +127,27 @@ public class AnoController {
 		//chargeData();
 	 }		
 	
+	 //Ensemeble des methode pour afficher la love de detail de traitement
+	 public void loveDetailDemande() {
+		 //Dossiers JOINTS PAR DGMP
+		 dossListeDemandeDmp.clear();
+	    	dossListeDemandeDmp = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"REP"),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+detailDem.getDemNum())));
+	    	//Dossiers JOINTS PAR AC
+	    	dossListeDemandeAc.clear();
+	    	dossListeDemandeAc = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"DEM"),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+detailDem.getDemNum())));	
+	    	
+	    	List<VLotAvisdmp> LS  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+detailDem.getAaoCode()));
+			if(!LS.isEmpty()) infolot = LS.get(0);
+			
+			listeLots.clear();
+			 listeLots=(List<VLotAvisdmp>) iservice.getObjectsByColumn("VLotAvisdmp", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					 //new WhereClause("LAA_STA_CODE",WhereClause.Comparateur.EQ,"L2D"),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+detailDem.getAaoCode()));
+	 }
 	 
 	 public void transmettrePourNumerotation() {
 		 if (selectionLotNumerotation.size()<=0) {
@@ -163,17 +186,18 @@ public class AnoController {
 	 
 	//Liste des demandes d'ANO deja traté par la DGMP
 	 public void chargeDemandeTraiteDmpDmp() { 
-		 listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectByColumnInInstrValAno("VAvisAppelOffreAnodmp", ""+userController.getSlctd().getTFonction().getFonCod());
-			_logger.info("listeDemandeTraiteDmp size: "+listeDemandeTraiteDmp.size());	
+		 listeDemandeAnoTratite .clear();
+		 listeDemandeAnoTratite  = (List<VAnodmpTraite>) iservice.getObjectByColumnInstrTraiAno("VAnodmpTraite", ""+userController.getSlctd().getTFonction().getFonCod());
+			_logger.info("listeDemandeAnoTratite  size: "+listeDemandeAnoTratite .size());	
 	 }
 	 
 	//Liste des demandes d'ANO de l'AC deja traté par la DGMP
 		 public void chargeDemandeTraiteDmpAc() { 
-			 listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectByColumnInInstrValAno("VAvisAppelOffreAnodmp", ""+userController.getSlctd().getTFonction().getFonCod());
-				_logger.info("listeDemandeTraiteDmp size: "+listeDemandeTraiteDmp.size());	
-				
-				listeDemandeTraiteDmp = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp", 
-						  new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
+			 listeDemandeAnoTratite.clear();
+			 listeDemandeAnoTratite = (List<VAnodmpTraite>) iservice.getObjectsByColumn("VAnodmpTraite",
+					  new WhereClause("DEM_FON_CODE_AC",Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("listeDemandeAnoTratite size: "+listeDemandeAnoTratite.size());	
+
 		 }
 	 
 	
@@ -1484,6 +1508,26 @@ public class AnoController {
 
 	public void setListeDemandeTraiteDmp(List<VAvisAppelOffreAnodmp> listeDemandeTraiteDmp) {
 		this.listeDemandeTraiteDmp = listeDemandeTraiteDmp;
+	}
+
+
+	public List<VAnodmpTraite> getListeDemandeAnoTratite() {
+		return listeDemandeAnoTratite;
+	}
+
+
+	public void setListeDemandeAnoTratite(List<VAnodmpTraite> listeDemandeAnoTratite) {
+		this.listeDemandeAnoTratite = listeDemandeAnoTratite;
+	}
+
+
+	public VAnodmpTraite getDetailDem() {
+		return detailDem;
+	}
+
+
+	public void setDetailDem(VAnodmpTraite detailDem) {
+		this.detailDem = detailDem;
 	}
 
 	

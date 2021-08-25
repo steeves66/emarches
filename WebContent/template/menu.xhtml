@@ -2493,18 +2493,20 @@
              </p:commandLink>
             </li>
             
+           
             <li>
             <p:commandLink action="#{assignationOperateurController.goToListOperateurs()}" update=":content" > 
             <i class="fa fa-circle-o"></i>Opérateur2
              </p:commandLink>
             </li>
             
+             <h:panelGroup rendered="false">
             <li>
             <p:commandLink action="#{fonctionController.renderPage('fon1')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Fonction
              </p:commandLink>
             </li>
-            
+            </h:panelGroup>
             <li>
             <p:commandLink action="#{assignationController.renderPage('ass1')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Assignation
@@ -2596,8 +2598,14 @@
             </h:panelGroup>
             <li>
 	            <p:commandLink action="#{assignationOperateurController.goToListOperateurs()}" update=":content" > 
-	            <i class="fa fa-circle-o"></i>Opérateur
+	            <i class="fa fa-circle-o"></i>Opérateur 1
 	            </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink action="#{fonctionController.renderPage('fon1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Fonction
+             </p:commandLink>
             </li>
             
             <li>

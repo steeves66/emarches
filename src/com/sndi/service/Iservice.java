@@ -113,6 +113,7 @@ public interface Iservice {
 	//public List getObjectByColumnInInstrPrq(String objet, String stat1, String stat2, String typePlan, String strSource);
 	public List getObjectByColumnInInstrValDao(String objet, String strSource);
 	public List getObjectByColumnInInstrValAno(String objet, String strSource);
+	public List getObjectByColumnInstrTraiAno(String objet, String strSource);
 	public List getObjectByColumnInInstrValAmi(String objet, String strSource);
 	public List getObjectByColumnInInstrValPrq(String objet, String strSource);
 	public List getObjectByColumnInInstrDejaAff(String objet, String strSource);
