@@ -84,12 +84,14 @@
 			            </div>
 		       </div>
 		       </div>
-		       <div class="form-group col-md-offset-3">
+		       <div class="spacer" style="margin-top:10px"></div>
+		       <div class="form-group form-inline">
+		       <label for="fon" class="col-sm-3 control-label"><b> Fonction(s) de la structure </b></label>
+	                  <div class="col-sm-9">
 						<p:dataTable id="ndTble"
 							styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"
 							value="#{fonctionController.listeFoncEnr}"
-							emptyMessage="Aucune fonction enregistrée" rows="10"
-							paginator="true" rowsPerPageTemplate="5,10,15">
+							emptyMessage="Aucune fonction enregistrée" rows="10" scrollable="true">
 
 							<p:column headerText="Code" styleClass="col-sm-1">
 								<h:outputText value="#{slctdTb.fonCod}" />
@@ -98,34 +100,8 @@
 								<h:outputText value="#{slctdTb.TTypeFonction.tyfLibelle}" />
 							</p:column>
 
-							<p:column headerText="Libellé" styleClass="col-sm-7">
-								<h:outputText value="#{slctdTb.fonLibelle}" />
-							</p:column>
-
-							<p:column headerText="Actions" styleClass="col-sm-1">
-
-								<p:commandLink class="btn btn-xs btn-warning"
-									style="background-color: #f88b2e;"
-									action="#{fonctionController.renderPage('fon3')}"
-									title="Modifier" update=":content">
-									<i class="ace-icon fa fa-pencil bigger-120"
-										style="color: white"></i>
-									<f:setPropertyActionListener value="#{slctdTb}"
-										target="#{fonctionController.slctdTd}" />
-								</p:commandLink>
-
-								<p:commandLink class="btn btn-xs btn-danger"
-									style="margin-left:5px;"
-									action="#{fonctionController.delete()}" title="Suprimer"
-									update=":gnl">
-									<i class="ace-icon fa fa-remove bigger-120"
-										style="color: white"></i>
-									<f:setPropertyActionListener value="#{slctdTb}"
-										target="#{fonctionController.slctdTd}" />
-									<p:confirm header="Confirmation"
-										message="Confirmez vous la supression de la fonction #{slctdTb.fonCod} : #{slctdTb.fonLibelle} ?"
-										icon="ui-icon-alert" />
-								</p:commandLink>
+							<p:column headerText="Libellé" styleClass="col-sm-8">
+								<h:outputText value="#{slctdTb.fonLibelle}"/>
 							</p:column>
 
 							<f:facet name="paginatorTopLeft">
@@ -138,7 +114,7 @@
 						</p:dataTable>
 
 					</div>
-       
+				</div>     
         
        </div>   
         <div class="row">
