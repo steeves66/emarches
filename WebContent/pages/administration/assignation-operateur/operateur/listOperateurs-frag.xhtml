@@ -50,7 +50,8 @@
 					styleClass="table mb0 dt-on-steroids dataTable" var="vOperateurRech"
 					value="#{assignationOperateurController.listVOperateursRech}"
 					emptyMessage="Aucun opérateur enregistrée" rows="30" paginator="true" paginatorPosition="bottom"
-					rowsPerPageTemplate="5,10,15">
+					rowsPerPageTemplate="5,10,15"
+					rowIndexVar="operateurIndex">
 			
 					<p:column headerText="Matricule" styleClass="col-sm-1">
 						<h:outputText value="#{vOperateurRech.opeMatriculeFonc}" />
@@ -90,7 +91,7 @@
 			
 						<!-- <i class="fa fa-exchange"></i> -->
 			
-						<p:commandButton title="Modifier" action="#{assignationOperateurController.beforeUpdateOperateur(vOperateurRech.getTOperateur())}" 
+						<p:commandButton title="Modifier" action="#{assignationOperateurController.beforeUpdateOperateur(vOperateurRech.getTOperateur(), operateurIndex)}" 
 							styleClass="btn btn-xs" update="frmOperateur" style=" width:20px; height:20px; margin-left:2px;" icon="ace-icon fa fa-pencil bigger-120" oncomplete="PF('frmOperateurDlg').show()">
 						</p:commandButton >
 						
