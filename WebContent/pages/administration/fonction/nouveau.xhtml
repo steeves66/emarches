@@ -25,46 +25,48 @@
     
     <section class="content">
      <div class="box"></div>
-     <div class="spacer" style="margin-top:150px"></div>
-       <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
+     <div class="spacer" style="margin-top:50px"></div>
+       <div class="box-body form-horizontal">
         
-                     <div class="form-group ">
-	                  <label for="foncode" class="col-sm-3 control-label"><b> Code Fonction  <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText value="#{fonctionController.fonction.fonCod}" type="text"  styleClass="form-control" readonly="true"  id="foncode" style="width: 100%"/>
-	                  </div>
-	                </div> 
-               
-	                <div class="form-group ">
+                   <div class="form-group ">
 	                  <label for="min" class="col-sm-3 control-label"><b>Structure <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-9">
 	                    <p:selectOneMenu id="min" value="#{fonctionController.strCode}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir la structure.." itemValue="empty" />  
-			       <f:selectItems value="#{fonctionController.listStructure}" var="str" itemLabel="#{str.strLibelleLong}" itemValue="#{mi.strCode}" /> 
+			       <f:selectItems value="#{fonctionController.listStructure}" var="str" itemLabel="#{str.strCode} : #{str.strLibelleCourt}" itemValue="#{str.strCode}"/> 
                    <p:ajax listener="#{fonctionController.genereCodeFonction()}" update=":gnl:fonlib, :gnl:foncode"/>				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
 	                
-	                 <div class="form-group ">
+	                <div class="form-group ">
 	                  <label for="typeFonction" class="col-sm-3 control-label"><b>Type Fonction <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-9">
 	                     <p:selectOneMenu id="typeFonction" value="#{fonctionController.typefonc}"
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+	                         effect="fade" style="width:50%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
 			            <f:selectItems value="#{fonctionController.listTypefonction}" var="tif" itemLabel="#{tif.tyfCod} : #{tif.tyfLibelle}" itemValue="#{tif.tyfCod}" />
-			              <p:ajax listener="#{fonctionController.genereCodeFonction()}" update=":gnl:fonlib, :gnl:foncode"/>	
+			              <p:ajax listener="#{fonctionController.genereCodeFonction()}" update="gnl fonlib foncode ndTble"/>	
        		        </p:selectOneMenu> 
 	                  </div>
 	                </div> 
+	                
+	                 <div class="form-group ">
+	                  <label for="foncode" class="col-sm-3 control-label"><b> Code Fonction  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{fonctionController.fonction.fonCod}" type="text"  styleClass="form-control" readonly="true"  id="foncode" style="width: 30%"/>
+	                  </div>
+	                </div>
+	                
+	                 
 	                 
 	                
 	                  <div class="form-group ">
 	                  <label for="fon" class="col-sm-3 control-label"><b> Libelle Fonction  <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-9">
 	                   <h:panelGroup id="fonlib">
-	                    <p:inputText value="#{fonctionController.fonction.fonLibelle}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/>
+	                    <p:inputTextarea value="#{fonctionController.fonction.fonLibelle}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/>
 	                    </h:panelGroup>
 	                  </div>
 	                </div> 
@@ -73,9 +75,6 @@
 	                    <div class="row">
 	                <div class="col-sm-3"></div> 
 	             <div class="col-sm-9">   
-					                 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{fonctionController.renderPage('fon1')}"  update=":content">
-				     <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-				      </p:commandLink>
 				      
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{fonctionController.saveFonction}"  update=":content">
@@ -85,9 +84,71 @@
 			            </div>
 		       </div>
 		       </div>
+		       <div class="form-group col-md-offset-3">
+						<p:dataTable id="ndTble"
+							styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"
+							value="#{fonctionController.listeFoncEnr}"
+							emptyMessage="Aucune fonction enregistrée" rows="10"
+							paginator="true" rowsPerPageTemplate="5,10,15">
+
+							<p:column headerText="Code" styleClass="col-sm-1">
+								<h:outputText value="#{slctdTb.fonCod}" />
+							</p:column>
+							<p:column headerText="Type" styleClass="col-sm-3">
+								<h:outputText value="#{slctdTb.TTypeFonction.tyfLibelle}" />
+							</p:column>
+
+							<p:column headerText="Libellé" styleClass="col-sm-7">
+								<h:outputText value="#{slctdTb.fonLibelle}" />
+							</p:column>
+
+							<p:column headerText="Actions" styleClass="col-sm-1">
+
+								<p:commandLink class="btn btn-xs btn-warning"
+									style="background-color: #f88b2e;"
+									action="#{fonctionController.renderPage('fon3')}"
+									title="Modifier" update=":content">
+									<i class="ace-icon fa fa-pencil bigger-120"
+										style="color: white"></i>
+									<f:setPropertyActionListener value="#{slctdTb}"
+										target="#{fonctionController.slctdTd}" />
+								</p:commandLink>
+
+								<p:commandLink class="btn btn-xs btn-danger"
+									style="margin-left:5px;"
+									action="#{fonctionController.delete()}" title="Suprimer"
+									update=":gnl">
+									<i class="ace-icon fa fa-remove bigger-120"
+										style="color: white"></i>
+									<f:setPropertyActionListener value="#{slctdTb}"
+										target="#{fonctionController.slctdTd}" />
+									<p:confirm header="Confirmation"
+										message="Confirmez vous la supression de la fonction #{slctdTb.fonCod} : #{slctdTb.fonLibelle} ?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+							</p:column>
+
+							<f:facet name="paginatorTopLeft">
+								<p:commandButton type="button" icon="fa fa-sync" />
+							</f:facet>
+
+							<f:facet name="paginatorBottomRight">
+								<p:commandButton type="button" icon="fa fa-cloud-upload" />
+							</f:facet>
+						</p:dataTable>
+
+					</div>
        
         
-       </div>    
+       </div>   
+        <div class="row">
+					<p:commandLink styleClass="btn btn-warning mr10 "
+						style=" background-color: #f88b2e"
+						action="#{fonctionController.renderPage('fon1')}"
+						update=":content">
+						<i class="ace-icon fa fa-close bigger-130"></i> Fermer
+				      </p:commandLink>
+				</div>
     </section>
     </h:form>
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

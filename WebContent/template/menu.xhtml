@@ -2587,6 +2587,42 @@
             </span>
           </a> 
            <ul class="treeview-menu">
+           <h:panelGroup rendered="false">
+            <li>
+	            <p:commandLink action="#{operateurController.renderPage('ope1')}" update=":content" > 
+	            <i class="fa fa-circle-o"></i>Opérateur
+	            </p:commandLink>
+            </li> 
+            </h:panelGroup>
+            <li>
+	            <p:commandLink action="#{assignationOperateurController.goToListOperateurs()}" update=":content" > 
+	            <i class="fa fa-circle-o"></i>Opérateur
+	            </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#{assignationController.renderPage('ass1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Assignation
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+          
+         </h:panelGroup>
+         
+         
+            <!-- DEBUT TRAITEMENT DU MENU DEVELOPPEUR -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DEV'}">
+
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Gestion des acteurs</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
             <li>
 	            <p:commandLink action="#{operateurController.renderPage('ope1')}" update=":content" > 
 	            <i class="fa fa-circle-o"></i>Opérateur
@@ -2604,7 +2640,17 @@
             <i class="fa fa-circle-o"></i>Assignation
              </p:commandLink>
             </li>
-            
+          </ul>    
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Gestion des données parametres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
             <li>
              <p:commandLink action="#{modelDacTypeController.renderPage('mdl1')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Modèle de type DAC
@@ -2628,15 +2674,15 @@
             <i class="fa fa-circle-o"></i>Motif
              </p:commandLink>
             </li>
+          </ul>   
+          
             
-            
-           
-           
-          </ul>     
          </li>
          
           
          </h:panelGroup>
+         <!-- FIN TRAITEMENT DU MENU DEVELOPPEUR-->
+         
          <!-- FIN TRAITEMENT DU MENU EXPLOITATION-->
          
            <!-- DEBUT TRAITEMENT DU MENU EXPLOITATION -->

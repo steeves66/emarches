@@ -627,7 +627,7 @@ public class CommissionController {
 		 listeMembresCommiteParam.clear(); 
 		 selectionMembresCommite.clear();
 		 listeMembresCommiteParam = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
-				 new WhereClause("COM_TCO_CODE",Comparateur.EQ,"COJ"),
+				 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"COJ"),
 				    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 		      heureDeb = "";
 			  heureFin = "";	 
@@ -2266,10 +2266,17 @@ public class CommissionController {
 							  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 							_logger.info("listeCommite size: "+listeCommite.size());*/
 							
-							 listeCommite.clear();
+							/* listeCommite.clear();
 							 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
 									 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
-									    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+									    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));*/
+					 
+					 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",
+							 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
+							 new WhereClause("DCS_NUM",Comparateur.NEQ,"0"),
+							    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+					 
+					 
 							
 					if(listeCommite.size()==0 || listeCommite.size()<3) {
 						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le comité doit comporter au moin trois(3) membres! ","");
