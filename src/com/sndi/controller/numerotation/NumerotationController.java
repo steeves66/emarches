@@ -3,6 +3,7 @@ package com.sndi.controller.numerotation;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -25,6 +26,7 @@ import com.sndi.model.TStatut;
 import com.sndi.model.VAaoNumerotation;
 import com.sndi.model.VAvisAppelOffreAno;
 import com.sndi.model.VLotNumerotation;
+import com.sndi.model.VbAttribMarche;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -98,15 +100,29 @@ Logger _logger = Logger.getLogger(AnoController.class);
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez au moin un lot", ""));
 				}
 		 		else{
-			 		for(VLotNumerotation ligne : selectionLotNumerotation) {
+			 		/*
+			 		 * Mise a jour directement dans la table t_attribution
+			 		 for(VLotNumerotation ligne : selectionLotNumerotation) {
 			 			List<TAttributions> LS  = iservice.getObjectsByColumn("TAttributions", 
 			 					new WhereClause("ATT_NUM",Comparateur.EQ,""+ligne.getAttNum()));
 			 			TAttributions updateAttrib = new TAttributions();
 						if(!LS.isEmpty()) {
 							updateAttrib = LS.get(0);	
 							updateAttrib.setTStatut(new TStatut("ATD"));
-			 			iservice.updateObject(updateAttrib);
+			 			iservice.updateObject(updateAttrib);*/
+		 			
+			 			//Enregistrement dans le temps VbAttribMarche
+			 			for(VLotNumerotation ligne : selectionLotNumerotation) {
+			 				VbAttribMarche attribMarche = new VbAttribMarche();
+			 				attribMarche.setAtmAttNum(ligne.getAttNum());
+			 				attribMarche.setAtmDteSaisie(Calendar.getInstance().getTime());
+			 				attribMarche.setAtmFonCode(userController.getSlctd().getTFonction().getFonCod());
+			 				attribMarche.setAtmOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 				attribMarche.setAtmStaCode("ATD");
+			 			iservice.addObject(attribMarche);
 				     }	
+						
+		 			
 						
 						//Mettre l'attribution ATD
 						chargeLotAnumeroter();
@@ -114,7 +130,7 @@ Logger _logger = Logger.getLogger(AnoController.class);
 				        userController.setRenderMsg(true);
 				        userController.setSevrityMsg("success");
 			 		}
-		         }
+		         
 		 }
 		 
 		 
