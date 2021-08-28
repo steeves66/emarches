@@ -783,7 +783,7 @@ public class CommissionController {
 	 
 	 
 	 public void majPiecesGarantie(String presence) {
-
+		 //listPiecesOuv.clear();
 		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()),
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
@@ -1049,7 +1049,7 @@ public class CommissionController {
 				     //Historisation de l'avis
 				     historiser(""+statutUpdate, "");
 				     //Message de confirmation
-				     userController.setTexteMsg(" Désolé, votre avis a été retourné pour réanalyse!");
+				     userController.setTexteMsg(" Désolé, votre avis a été retourné pour jugement!");
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 			    }
@@ -1085,7 +1085,7 @@ public class CommissionController {
 				     avis.setAvisRetour("1");
 				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
-				     chargeListe("APU");
+				     chargeListe("OUV");
 				     //Historisation de l'avis
 				     historiser(""+statutUpdate, "");
 				     //Message de confirmation
