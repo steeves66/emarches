@@ -81,7 +81,7 @@ public class ControleController {
 	private boolean panel13 =false;
 	private boolean panelPgpm =false;
 	private boolean panelPgspm =true;
-	private boolean validDMP = false;
+	public boolean validDMP = false;
 	private boolean validCPMP = false;
 	private boolean panelOuverture =false;
 	private boolean panelAnalyse =false;
@@ -365,6 +365,7 @@ public class ControleController {
 	private boolean btn_apercuAna =false;
 	private boolean btn_apercuJug =false;
 	private boolean btn_retourJug =false;
+	private boolean btn_retourJugDej =false;
 	private boolean btn_retourAna =false;
 	public boolean etatLoveAgpm = false;
 	private boolean etatLoveAgpmPs = false;
@@ -7145,10 +7146,21 @@ public class ControleController {
 												 btn_apercuJug =false;
 												 btn_retourJug = false;
 												 btn_retourAna = false;
+												 btn_retourJugDej = false;
 										
 								    		}else
+								    			//OUVERTURE
+								    			if(action.equalsIgnoreCase("OFFRAT")) {
+									    			type = "Commission";
+									    			fonctionalite = "listOuvertureAc";
+									    			libelleDmp="DGMP";
+									    			libelle="RATTRAPAGE / OFFRES NON CONFORMES";
+									    			libelleTravaux="Joindre le PV d'ouverture";
+									    			libelle2 = "Offres non conformes";
+									    			
+									    		}else
 								    			//DETAIL OUVERTURE
-								    			if(action.equalsIgnoreCase("DETOUV")) {
+								    			  if(action.equalsIgnoreCase("DETOUV")) {
 									    			type = "Commission";
 									    			libelleDmp="DGMP";
 									    			opdPiece = "Ouverture";
@@ -7193,6 +7205,7 @@ public class ControleController {
 													 btn_retourJug = false;
 													 btn_retourAna = true;
 									    			 btn_membre = false;
+									    			 btn_retourJugDej = false;
 													 panel1 =false;
 									    		}else
 									    			//DETAIL ANALYSE DES OFFRES
@@ -7220,7 +7233,6 @@ public class ControleController {
 								    			else
 									    			if(action.equalsIgnoreCase("LISJUG")) {
 										    			type = "Commission";
-										    			fonctionalite = "listJugementAc";
 										    			libelleDmp="DGMP";
 										    			libelle2 = "Fin Jugement";
 										    			libelle1 = "Heure de Fin";
@@ -7233,6 +7245,7 @@ public class ControleController {
 														btn_apercuJug =true;
 														btn_retourJug = true;
 														btn_retourAna = false;
+														btn_retourJugDej = false;
 										    			btn_membre = false;
 														panel1 = false;
 										    		}else
@@ -7247,7 +7260,26 @@ public class ControleController {
 											    			btn_fermerJugement =true;
 											    			libelleTravaux="Joindre le PV de Jugement";
 											    		}
-									    			else
+										    			 //OFFRES DEJA JUGEES
+										    			else
+											    			if(action.equalsIgnoreCase("DEJAJUG")) {
+												    			type = "Commission";
+												    			fonctionalite = "listJugementDej";
+												    			libelleDmp="DGMP";
+												    			libelle2 = "Fin Jugement";
+												    			libelle1 = "Heure de Fin";
+												    			libelle="OFFRES DEJA JUGEES";
+												    			libelleFinCom = "Fin du jugement de l'appel d'offre";
+												    			libelleConfirm = "Confirmez-vous la fin du jugement de l'avis d'appel d'Offre N°";
+												    			btn_apercuOuv =false;
+																btn_apercuAna =false;
+																btn_apercuJug =false;
+																btn_retourJugDej = true;
+																btn_retourJug = false;
+																btn_retourAna = false;
+												    			btn_membre = false;
+																panel1 = false;
+												    		}else
 										    			if(action.equalsIgnoreCase("SAIJUG")) {
 											    			type = "Commission";
 											    			libelleDmp="DGMP";
@@ -11207,6 +11239,16 @@ public class ControleController {
 
 	public void setBtn_retour_vente(boolean btn_retour_vente) {
 		this.btn_retour_vente = btn_retour_vente;
+	}
+
+
+	public boolean isBtn_retourJugDej() {
+		return btn_retourJugDej;
+	}
+
+
+	public void setBtn_retourJugDej(boolean btn_retourJugDej) {
+		this.btn_retourJugDej = btn_retourJugDej;
 	}
 	
 	

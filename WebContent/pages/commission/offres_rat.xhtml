@@ -10,17 +10,27 @@
 	<h:form id="gnl">
 <section class="content-header">
       <h1>
-        Assignation
-        <small>Creation d'une nouvelle assignation</small>
+         #{controleController.libelle}
+        <small> #{controleController.libelle2}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Creation d'une nouvelle assignation</li>
+        <li class="active">Affichage des offres non conformes</li>
       </ol>
     </section>
     
     <section class="content">
      <div class="box"></div>
+      <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
      <div class="spacer" style="margin-top:100px"></div>
        <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
        <div class="form-group ">
@@ -30,19 +40,21 @@
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le DAC..." itemValue="empty" />  
 			            <f:selectItems value="#{commissionController.listeDac}" var="dac" itemLabel="#{dac.dacCode} : #{dac.dacObjet}" itemValue="#{dac.dacCode}" />
-			            <p:ajax listener="#{commissionController.openDac()}" update=":gnl:typeAvis"/>
+			            <p:ajax listener="#{commissionController.openDac()}" update="gnl"/>
        		        </p:selectOneMenu> 
 	                  </div>
 	                </div>
 	                
 	                 <div class="form-group ">
 	                  <label for="fonction" class="col-sm-3 control-label"><b> Avis d'Appel d'offres</b></label>
+	                  <h:panelGroup rendered="#{commissionController.affAvis}">
 	                  <div class="col-sm-9">
-	                   <p:selectOneMenu id="typeAvis" rendered="#{commissionController.affAvis}" value="#{commissionController.avisAppel}"
+	                   <p:selectOneMenu id="typeAvis" value="#{commissionController.avisAppel}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItems value="#{commissionController.listeAvisAppelOffre}" var="avs" itemLabel="#{avs.aaoCode} : #{avs.aaoLibelle}" itemValue="#{avs.aaoCode}" />
        		        </p:selectOneMenu> 
 	                  </div>
+	                  </h:panelGroup>
 	                </div>
 	               
 	                <br/>       

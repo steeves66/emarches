@@ -592,9 +592,16 @@
             <i class="fa fa-circle-o"></i>Analyse des Offres
              </p:commandLink>
             </li>
+            
             <li>
             <p:commandLink action="#{commissionController.renderPage('com1','LISJUG')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Jugement des Offres
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','DEJAJUG')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Offre(s) déjà jugée(s)
              </p:commandLink>
             </li>
             
@@ -2700,15 +2707,15 @@
 
            <li class="treeview">
           <a href="#">
-            <i class="fa fa-user"></i> <span>Gestion des Rattraoages</span>
+            <i class="fa fa-user"></i> <span>Gestion des Rattrapages</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
            <ul class="treeview-menu">
             <li>
-	         <p:commandLink action="#{commissionController.renderPage('com12')}" update=":content" > 
-	         <i class="fa fa-circle-o"></i>Offres
+	         <p:commandLink action="#{commissionController.renderPage('com12','OFFRAT')}" update=":content" > 
+	         <i class="fa fa-circle-o"></i>Offres non conformes
 	         </p:commandLink>
             </li> 
         

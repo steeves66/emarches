@@ -1769,23 +1769,26 @@ public class PpmModificationController {
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
-				 controleController.setLibelleValid(false);
+				 controleController.libelleValid = false;
+				 controleController.validDMP = false;
 			 }else {
 				   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
-						 controleController.setLibelleValid(true);
+						 controleController.libelleValid = true;
 						 controleController.etatPsoTrans = true;
+						 controleController.validDMP = false;
 				   }else {
 					   
-					   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSL")) {
+					   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSL") || slctdTd.getDppMopCode().equalsIgnoreCase("PSI") ) {
 						     controleController.etatPsc = false;
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
-							 controleController.setLibelleValid(true);
+							 controleController.libelleValid = true;
+							 controleController.validDMP = false;
 					   }
 				   }
 			 }

@@ -24,72 +24,47 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
-import com.sndi.model.TAgpm;
 import com.sndi.model.TAnalyseOffre;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TBanques;
-import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCommissionType;
 import com.sndi.model.TCritereAnalyseDacOuv;
 import com.sndi.model.TDacSpecs;
-import com.sndi.model.TDaoAffectation;
-import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetCritAnalyseDac;
 import com.sndi.model.TDetOffres;
-import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
 import com.sndi.model.TDossierAao;
 import com.sndi.model.TDossierAnalyse;
 import com.sndi.model.TDossierMbr;
-import com.sndi.model.TDossierPlanGeneral;
-import com.sndi.model.TFinancementPgpm;
-import com.sndi.model.TFonction;
-import com.sndi.model.THistoAgpm;
 import com.sndi.model.THistoDac;
-import com.sndi.model.THistoPlanGeneral;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TNatureDocuments;
-import com.sndi.model.TNaturePiece;
-import com.sndi.model.TOperateur;
 import com.sndi.model.TPiecesOffres;
-import com.sndi.model.TPlanPassation;
 import com.sndi.model.TSeances;
 import com.sndi.model.TSoumissions;
 import com.sndi.model.TStatut;
 import com.sndi.model.TTypeCommission;
-import com.sndi.model.TTypeMarche;
-import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
-import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAppelOffre;
-import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
-import com.sndi.model.VCritereAnalyseDac;
-import com.sndi.model.VCritereAnalyseDacOff;
 import com.sndi.model.VCritereAnalyseDacOfftec;
 import com.sndi.model.VCritereAnalyseDacOuv;
 import com.sndi.model.VDacMembre;
-import com.sndi.model.VDacliste;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetOffreAnalyse;
-import com.sndi.model.VDetOffreNonRecevable;
 import com.sndi.model.VDetOffreRecevable;
 import com.sndi.model.VDetailOffres;
 import com.sndi.model.VDofTyp;
-import com.sndi.model.VFonctionMinistere;
-import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotAnalyseFin;
-import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VLotJugement;
-import com.sndi.model.VMargeDePreference;
 import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VOffreNonRecevableLot;
 import com.sndi.model.VOffreRecevableLot;
@@ -97,24 +72,19 @@ import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VPiecesOffreNonRecev;
 import com.sndi.model.VRecapSeuilAnormal;
-import com.sndi.model.VReeditCojo;
 import com.sndi.model.VRepSoumissionnaire;
 import com.sndi.model.VResultEvalClassLot;
 import com.sndi.model.VResultPropAttribLot;
 import com.sndi.model.VSeqTravail;
-import com.sndi.model.VTypeMarcheFils;
-import com.sndi.model.VVerifOffin;
+import com.sndi.model.VVerifcorOffin;
 import com.sndi.model.VbAnalyseOffre;
 import com.sndi.model.VbCommissionSpecifique;
-import com.sndi.model.VbDetCritAnalyseDac;
-import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamAnalyseOff;
 import com.sndi.model.VbTempParamAtrib;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParamOuv;
 import com.sndi.model.VbTempParametreCom;
 import com.sndi.model.VbTempParametreFactAn;
-import com.sndi.model.VVerifcorOffin;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
@@ -1059,6 +1029,32 @@ public class CommissionController {
 			    }
 		 }
 		 
+		 //Differer un avis d'appel d'Offres au niveau du Jugement
+		 public void jugementDiff() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 statutUpdate ="ANA";
+			      }else {
+				    statutUpdate ="";
+			       }
+			 
+			 listeAvisAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			    if (! listeAppelOffre.isEmpty()) {
+			    	TAvisAppelOffre avis = new TAvisAppelOffre();
+				     avis= listeAvisAppelOffre.get(0);
+				     avis.setAvisRetour("1");
+				     avis.setTStatut(new TStatut(statutUpdate));
+				     iservice.updateObject(avis);
+				     chargeListe("JUG");
+				     //Historisation de l'avis
+				     historiser(""+statutUpdate, "");
+				     //Message de confirmation
+				     userController.setTexteMsg(" Désolé, votre avis a été retourné pour réanalyse!");
+					 userController.setRenderMsg(true);
+					 userController.setSevrityMsg("success");
+			    }
+		 }
+		 
 		//Methode d'historisation
 		 public void historiser(String statut, String motif) {
 		     TStatut statuts = constantService.getStatut(statut);
@@ -1832,8 +1828,8 @@ public class CommissionController {
 		 public void rattrapOffre() { 
 			 listeAnalyse = (List<TAnalyseOffre>) iservice.getObjectsByColumnIn("TAnalyseOffre", new ArrayList<String>(Arrays.asList("ANF_NUM")),
 					     "ANF_VALEUR_CONF", new ArrayList<String>(Arrays.asList("CONFORME","NON CONFORME")),
-					       new WhereClause("ANF_DAC_CODE",WhereClause.Comparateur.EQ,""+dacCode),
-						  new WhereClause("ANF_PRESENCE",WhereClause.Comparateur.EQ,"N")); 
+					       new WhereClause("ANF_DAC_CODE",WhereClause.Comparateur.EQ,""+newDao.getDacCode()),
+						   new WhereClause("ANF_PRESENCE",WhereClause.Comparateur.EQ,"N")); 
 		                       for(TAnalyseOffre mbr : listeAnalyse) {
 				                         mbr.setAnfPresence("O");
 				                         iservice.updateObject(mbr);
@@ -2736,11 +2732,19 @@ public class CommissionController {
 									_logger.info("fonctionalité: "+fonct);	
 									_logger.info("value: "+value+" action: "+action);
 							 }else {
-								 if(fonct.equalsIgnoreCase("listValidationDmp")) {
-									 statutAffiche = "D2T";	 
+								 
+								 if(fonct.equalsIgnoreCase("listJugementDej")) {
+									 statutAffiche = "JUG";	
+										_logger.info("staut: "+statutAffiche);	
+										_logger.info("fonctionalité: "+fonct);	
+										_logger.info("value: "+value+" action: "+action);
 								 }else {
 									 if(fonct.equalsIgnoreCase("listValidationDmp")) {
-										// statutAffiche = "D2T";	
+										 statutAffiche = "D2T";	 
+									 }else {
+										 if(fonct.equalsIgnoreCase("listValidationDmp")) {
+											// statutAffiche = "D2T";	
+										 }
 									 }
 								 }
 							 }	 

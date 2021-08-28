@@ -3123,22 +3123,25 @@ public class PpmController {
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
 				 controleController.libelleValid =false;
+				 controleController.validDMP = false;
 			 }else {
 				   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
-						 controleController.libelleValid =true;
+						 controleController.libelleValid = true;
 						 controleController.etatPsoTrans = true;
+						 controleController.validDMP = false;
 				   }else {
 					   
-					   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
+					   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSL") || detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSI") ) {
 						     controleController.etatPsc = false;
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
 							 controleController.etatPsl_Pso = true;
 							 controleController.libelleValid = true;
+							 controleController.validDMP = false;
 					   }
 				   }
 			 }
