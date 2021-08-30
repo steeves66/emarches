@@ -251,6 +251,7 @@ public class ControleController {
 	private boolean btn_fermerOuverture =false;
 	private boolean btn_fermerAnalyse =false;
 	private boolean btn_fermerJugement =false;
+	private boolean btn_fermerDejJugement =false;
     boolean btn_differerPgspm_cpdmp =false;
 	private boolean btn_fermer_saisie_pgpm =false;
 	public  boolean btn_edit_pgpm =false;
@@ -364,6 +365,7 @@ public class ControleController {
 	private boolean btn_apercuOuv =false;
 	private boolean btn_apercuAna =false;
 	private boolean btn_apercuJug =false;
+	private boolean btn_apercuDetJug =false;
 	private boolean btn_retourJug =false;
 	private boolean btn_retourJugDej =false;
 	private boolean btn_retourAna =false;
@@ -7147,6 +7149,7 @@ public class ControleController {
 												 btn_retourJug = false;
 												 btn_retourAna = false;
 												 btn_retourJugDej = false;
+												 btn_apercuDetJug = false;
 										
 								    		}else
 								    			//OUVERTURE
@@ -7168,6 +7171,7 @@ public class ControleController {
 									    			btn_fermerOuverture =true;
 									    			btn_fermerAnalyse =false;
 									    			btn_fermerJugement =false;
+									    			btn_fermerDejJugement =false;
 									    			libelleTravaux="Joindre le PV d'ouverture";
 									    		}
 							    			else
@@ -7206,6 +7210,7 @@ public class ControleController {
 													 btn_retourAna = true;
 									    			 btn_membre = false;
 									    			 btn_retourJugDej = false;
+									    			 btn_apercuDetJug = false;
 													 panel1 =false;
 									    		}else
 									    			//DETAIL ANALYSE DES OFFRES
@@ -7213,10 +7218,11 @@ public class ControleController {
 										    			type = "Commission";
 										    			libelleDmp="DGMP";
 										    			opdPiece = "Analyse";
-										    			libelle="DETAILS DE L'OFFRRE N°";
+										    			libelle="DETAILS DE L'OFFRE N°";
 										    			btn_fermerOuverture =false;
 										    			btn_fermerAnalyse =true;
 										    			btn_fermerJugement =false;
+										    			btn_fermerDejJugement =false;
 										    			libelleTravaux="Joindre le PV d'Analyse";
 										    		}
 								    			else
@@ -7246,6 +7252,7 @@ public class ControleController {
 														btn_retourJug = true;
 														btn_retourAna = false;
 														btn_retourJugDej = false;
+														btn_apercuDetJug = false;
 										    			btn_membre = false;
 														panel1 = false;
 										    		}else
@@ -7254,10 +7261,11 @@ public class ControleController {
 											    			type = "Commission";
 											    			libelleDmp="DGMP";
 											    			opdPiece = "Jugement";
-											    			libelle="DETAILS DE L'OFFRRE N°";
+											    			libelle="DETAILS DE L'OFFRE N°";
 											    			btn_fermerOuverture =false;
 											    			btn_fermerAnalyse =false;
 											    			btn_fermerJugement =true;
+											    			btn_fermerDejJugement =false;
 											    			libelleTravaux="Joindre le PV de Jugement";
 											    		}
 										    			 //OFFRES DEJA JUGEES
@@ -7268,18 +7276,30 @@ public class ControleController {
 												    			libelleDmp="DGMP";
 												    			libelle2 = "Fin Jugement";
 												    			libelle1 = "Heure de Fin";
-												    			libelle="OFFRES DEJA JUGEES";
+												    			libelle="OFFRES JUGEES";
 												    			libelleFinCom = "Fin du jugement de l'appel d'offre";
 												    			libelleConfirm = "Confirmez-vous la fin du jugement de l'avis d'appel d'Offre N°";
 												    			btn_apercuOuv =false;
 																btn_apercuAna =false;
 																btn_apercuJug =false;
 																btn_retourJugDej = true;
+																btn_apercuDetJug = true;
 																btn_retourJug = false;
 																btn_retourAna = false;
 												    			btn_membre = false;
 																panel1 = false;
 												    		}else
+												    			if(action.equalsIgnoreCase("DETAJUG")) {
+												    			type = "Commission";
+												    			libelleDmp="DGMP";
+												    			opdPiece = "Jugement";
+												    			libelle="DETAILS DE L'OFFRE N°";
+												    			btn_fermerOuverture =false;
+												    			btn_fermerAnalyse =false;
+												    			btn_fermerJugement =false;
+												    			btn_fermerDejJugement =true;
+												    			libelleTravaux="Joindre le PV de Jugement";
+												    		}
 										    			if(action.equalsIgnoreCase("SAIJUG")) {
 											    			type = "Commission";
 											    			libelleDmp="DGMP";
@@ -11249,6 +11269,26 @@ public class ControleController {
 
 	public void setBtn_retourJugDej(boolean btn_retourJugDej) {
 		this.btn_retourJugDej = btn_retourJugDej;
+	}
+
+
+	public boolean isBtn_apercuDetJug() {
+		return btn_apercuDetJug;
+	}
+
+
+	public void setBtn_apercuDetJug(boolean btn_apercuDetJug) {
+		this.btn_apercuDetJug = btn_apercuDetJug;
+	}
+
+
+	public boolean isBtn_fermerDejJugement() {
+		return btn_fermerDejJugement;
+	}
+
+
+	public void setBtn_fermerDejJugement(boolean btn_fermerDejJugement) {
+		this.btn_fermerDejJugement = btn_fermerDejJugement;
 	}
 	
 	

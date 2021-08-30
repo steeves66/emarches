@@ -20,6 +20,7 @@ import com.sndi.model.TAffichageDao;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.TOffres;
+import com.sndi.model.VAvisAppelOffre;
 import com.sndi.model.VDetailCommission;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VLotDao;
@@ -59,7 +60,9 @@ public class EtatsCommissionController {
 	 private List<VPiecesOffre> piecesListe = new ArrayList<VPiecesOffre>();
 	 private List<VLotDao> lotListe = new ArrayList<VLotDao>();
 	 //private TOffres slctdTd = new TOffres();
-	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
+	 //private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
+	 
+	 private VAvisAppelOffre slctdTd = new VAvisAppelOffre();
 	 //Les variables
 	 private VDetailCommission detail = new VDetailCommission(); 
 	 
@@ -165,13 +168,24 @@ public class EtatsCommissionController {
 	}
 
 
+
+
+	public VAvisAppelOffre getSlctdTd() {
+		return slctdTd;
+	}
+
+	public void setSlctdTd(VAvisAppelOffre slctdTd) {
+		this.slctdTd = slctdTd;
+	}
+
+/*
 	public TAvisAppelOffre getSlctdTd() {
 		return slctdTd;
 	}
 
 	public void setSlctdTd(TAvisAppelOffre slctdTd) {
 		this.slctdTd = slctdTd;
-	}
+	}*/
 	
 	  
 }

@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.libelle}#{commissionController.slctdTd.aaoCode}
+       #{controleController.libelle} #{commissionController.slctdTd.aaoCode}
         <small>
         <!--  #{controleController.libelle1}  -->
        <!--  Liste des AGPM Saisis  -->
@@ -182,7 +182,7 @@
 	             <div class="col-md-12">
 	                 <div class="box box-success box-solid">
 		               <div class="box-header with-border">
-		                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE SOUMISSIONNAITE...</div></div> 
+		                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE SOUMISSIONNAIRE...</div></div> 
 					         <div class="col-md-2 "> </div>
 			               </div>
 			                <!-- /.box-header -->
@@ -370,6 +370,9 @@
 	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 			</p:commandLink>
 			<p:commandLink rendered="#{controleController.btn_fermerJugement}" styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISJUG')}" style="background-color: #f88b2e;" update=":content">
+	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+			</p:commandLink>
+			<p:commandLink rendered="#{controleController.btn_fermerDejJugement}" styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','DEJAJUG')}" style="background-color: #f88b2e;" update=":content">
 	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 			</p:commandLink>
     </section>

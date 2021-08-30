@@ -137,6 +137,11 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
+                             
+                               <p:commandLink rendered="#{controleController.btn_apercuDetJug}" action="#{etatsCommissionController.renderPage('detc1','DETAJUG')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
+                             </p:commandLink>
                              <!--FIN BOUTONS APERCU -->
                              
                            <!-- BOUTONS COMMISSION -->
