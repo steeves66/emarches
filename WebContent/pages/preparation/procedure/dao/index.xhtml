@@ -397,6 +397,15 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                             </p:commandLink>
                             </h:panelGroup>
+                            
+                              
+                             <p:commandLink rendered="#{controleController.btnRetourAffecte}" action="#{daoController.retourner()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer pour affectation" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                              <p:confirm header="Confirmation" message="Voulez-vous retourner le DAC N°#{slctdTb.dacCode} à l'Affectation ?" icon="ui-icon-alert" />
+                              </p:commandLink>
+                           
+                            
                             </h:panelGroup>
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
                              <p:commandLink rendered="#{controleController.btn_exam}" action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
@@ -405,11 +414,12 @@
                             </p:commandLink>
                             </h:panelGroup>
                             
-                               <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                               <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAC" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <p:confirm header="Confirmation" message="Confirmez-vous la publication du DAO ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
+                             
                              
                              <h:panelGroup rendered="#{controleController.vente}">
                                <h:panelGroup rendered="#{controleController.retDao}">   
@@ -687,11 +697,18 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                             </p:commandLink>
                             
-                              <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                              <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAC" style="background-color: #036d3b;margin-right:3px;margin-left:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <p:confirm header="Confirmation" message="Confirmez-vous la publication du DAO ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
+                             
+                               <p:commandLink rendered="#{controleController.btnDejPub}" action="#{daoController.retourPublier()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer pour affectation" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                              <p:confirm header="Confirmation" message="Voulez-vous retourner le DAC N°#{slctdTb.dacCode} ?" icon="ui-icon-alert" />
+                              </p:commandLink>
+                              
 				         </p:column>   
 				    </p:dataTable>
 				   </h:panelGroup> 

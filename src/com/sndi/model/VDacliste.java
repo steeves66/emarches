@@ -244,6 +244,7 @@ public class VDacliste implements java.io.Serializable {
 	private String checkTrans;
 	private String checkTransMsg;
 	private String dacMentionAffecte;
+	private String checkAffectation;
 	private BigDecimal checkCor;
 
 	public VDacliste() {
@@ -307,7 +308,7 @@ public class VDacliste implements java.io.Serializable {
 			BigDecimal dacMargePrefSouVal,Long adaNum,double cautValMin,
 			double cautValMax, String aaoOffAnormal,String adaLibelle,
 			String fonCodeDmp,String fonCodeCsv, String fonCodeSpp,String staLibelleLong,String checkTrans,String checkTransMsg,
-			String dacMentionAffecte, BigDecimal checkCor) {
+			String dacMentionAffecte, BigDecimal checkCor, String checkAffectation) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -533,6 +534,7 @@ public class VDacliste implements java.io.Serializable {
 		this.checkTransMsg = checkTransMsg;
 		this.dacMentionAffecte = dacMentionAffecte;
 		this.checkCor = checkCor;
+		this.checkAffectation = checkAffectation;
 	}
 
 	@Id
@@ -2571,5 +2573,16 @@ public class VDacliste implements java.io.Serializable {
 	public void setCheckCor(BigDecimal checkCor) {
 		this.checkCor = checkCor;
 	}
+	
+
+	@Column(name = "CHECK_AFFECTATION")
+	public String getCheckAffectation() {
+		return this.checkAffectation;
+	}
+
+	public void setCheckAffectation(String checkAffectation) {
+		this.checkAffectation = checkAffectation;
+	}
+
 
 }

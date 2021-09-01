@@ -3201,6 +3201,7 @@ TDacSpecs dao = new TDacSpecs();
 		 	   	          }
 			 }
 			 
+			 
 			 		 
 			  @Transactional
 				public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
@@ -3428,6 +3429,40 @@ TDacSpecs dao = new TDacSpecs();
 		 		}
 		 
 		 	 }
+		 	 
+		 	 //Début - Differer un DAC après une mauvaise affectation
+			 public void retourner() {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+					 statutUpdate ="D2T";
+				      }else {
+					    statutUpdate ="";
+				       }
+				 
+				 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		  					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		  				if (!listDao.isEmpty()) {
+		  					newDao= listDao.get(0);
+		  					newDao.setTStatut(new TStatut(statutUpdate));
+		  			        iservice.updateObject(newDao); 
+		  	   	                 }
+				 
+		  			  daoBinome = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+						      new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		 						if (!daoBinome.isEmpty()) {
+		 							//Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+		 							for(TDaoAffectation dao : daoBinome) {
+		 								 dao.setDafStaCode(newDao.getTStatut().getStaCode());
+		 								 iservice.updateObject(dao);
+		 								       }
+		                            }
+		 						
+		 						 chargeData();
+		 						 //Message de confirmation
+							     userController.setTexteMsg("Désolé, votre avis a été retourné pour réanalyse!");
+								 userController.setRenderMsg(true);
+								 userController.setSevrityMsg("success");
+			 }
+			 //Fin - Differer un DAC après une mauvaise affectation
 		 	 
 		 	 
 		 	 
@@ -8127,6 +8162,71 @@ TDacSpecs dao = new TDacSpecs();
 									   }
 	
 										  
+										//Retour apPublication du DAO
+											//@Transactional
+										public void retourPublier() throws IOException {
+												
+										  
+										  if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
+										        statutUpdate="DPU";
+										          statutSanRetour ="0";
+										    	
+									                  }else{
+									                         if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour  l'AC")){
+									    	                   statutUpdate ="D5V";
+											                   statutSanRetour ="0";
+									                         }
+						                                }    
+												  
+												listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+														new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+														if (!listAvis.isEmpty()) {
+															//Mis à  jour du statut
+															majAvis= listAvis.get(0);
+															majAvis.setTStatut(new TStatut("D1S"));
+															majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+															iservice.updateObject(majAvis);
+														}
+												 
+												
+												listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+									 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+									 				if (!listDao.isEmpty()) {
+									 					newDao= listDao.get(0);
+									 					newDao.setTStatut(new TStatut(statutUpdate));
+									 					newDao.setDacStatutRetour("0");
+									 			        iservice.updateObject(newDao); 
+									 	   	                 }
+									 				
+									 				daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+						                    				new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+						                    					if (!daoBinome.isEmpty()) {
+						                    					 //Mis  jour de tous les DAO dans T_DAO_AFFECTATION
+						                    						for(TDaoAffectation dao : daoBinome) {
+						                    								dao.setDafStaCode(statutUpdate);
+						                    								iservice.updateObject(dao);
+						                    							}
+					                                               }
+									 				
+									 			  constantService.getStatut(statutUpdate);
+					 							  	//Historisation du / des retraits
+					 						      historiser(""+statutUpdate,newDao.getDacCode(),"DAO Retourné avec succès");
+					 						       
+					 						      //tableauBordController.saveTempTabord(""+statutUpdate, newDao.getTTypeDacSpecs().getTdcCode(), ""+userController.getSlctd().getTFonction().getFonCod(), newDao.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), newDao.getDacCode());
+
+					 						      chargetataPub();
+														
+												  //chargeData();
+												  //Actualisation du tableau de bord
+												  typeActionTb();
+												  //Message de confirmation
+												  userController.setTexteMsg("DAO Retourné avec succès!");
+												  userController.setRenderMsg(true);
+												  userController.setSevrityMsg("success");		
+									   }
+	  
+
+										  
 										  public void chargetataPub() throws IOException {
 											  if(controleController.type == "DAC" && controleController.typePlan == "PN" 
 													  && userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -8674,39 +8774,47 @@ TDacSpecs dao = new TDacSpecs();
 											        //Fin de la vente du DAO
 													
 													
-													 //Dbut de l'affectation du DAO
+													 //Début de l'affectation du DAO
 													public void finAffectation() {
-														String statUpdate = "";
-														String message = "";
-														if(slctdTd.getDacStaCode().equalsIgnoreCase("D2T")) {
-															statUpdate = "D3A";
-															message="Fin de l'affectation du Dossier d'Appel d'Offres N° "+slctdTd.getDacCode();
-														 }
-														//Recupration du DAO dans T_DAC_SPECS
-											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-								     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-								     			  		    if (!listDao.isEmpty()) {
-								     			  			  newDao= listDao.get(0);
-								     			  			  newDao.setTStatut(new TStatut(statUpdate));
-										                      iservice.updateObject(newDao);
-								     			  			}
-								     			  		    
-								     			  	    //Changement de Statut dans T_Dao_Affectation
-								     			  		 daoExamen = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-							          	     					 new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-							          	     				   if (!daoExamen.isEmpty()) {
-							          	     					      for(TDaoAffectation ligneDac : daoExamen) {
-							          	     					    	     ligneDac.setDafStaCode("D3A");
-							          	     					    	     iservice.updateObject(ligneDac); 
-							          	     					           }
-							          	     				      }
-							          	     				historiser(""+statUpdate,slctdTd.getDacCode(),"");
-														//Chargement de la liste des ventes et celle du tableau de Bord
-														chargeData();
-														typeActionTb();
-														userController.setTexteMsg(message);
-														userController.setRenderMsg(true);
-														userController.setSevrityMsg("success");  
+														
+														if(slctdTd.getCheckAffectation().equalsIgnoreCase("0")){
+							      							 FacesContext.getCurrentInstance().addMessage(null,
+							      									new FacesMessage(FacesMessage.SEVERITY_ERROR, "Desolé ! Veuillez affecter le DAC avant de mettre fin", ""));
+														}else {
+															
+															String statUpdate = "";
+															String message = "";
+															if(slctdTd.getDacStaCode().equalsIgnoreCase("D2T")) {
+																statUpdate = "D3A";
+																message="Fin de l'affectation du Dossier d'Appel d'Offres N° "+slctdTd.getDacCode();
+															 }
+															
+															//Recupration du DAO dans T_DAC_SPECS
+												            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+									     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+									     			  		    if (!listDao.isEmpty()) {
+									     			  			  newDao= listDao.get(0);
+									     			  			  newDao.setTStatut(new TStatut(statUpdate));
+											                      iservice.updateObject(newDao);
+									     			  			}
+									     			  		    
+									     			  	    //Changement de Statut dans T_Dao_Affectation
+									     			  		 daoExamen = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+								          	     					 new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+								          	     				   if (!daoExamen.isEmpty()) {
+								          	     					      for(TDaoAffectation ligneDac : daoExamen) {
+								          	     					    	     ligneDac.setDafStaCode("D3A");
+								          	     					    	     iservice.updateObject(ligneDac); 
+								          	     					           }
+								          	     				      }
+								          	     				historiser(""+statUpdate,slctdTd.getDacCode(),"");
+															//Chargement de la liste des ventes et celle du tableau de Bord
+															chargeData();
+															typeActionTb();
+															userController.setTexteMsg(message);
+															userController.setRenderMsg(true);
+															userController.setSevrityMsg("success");  
+														}
 													}
 											        //Fin de l'affectation du DAO
 													

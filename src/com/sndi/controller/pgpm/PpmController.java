@@ -3457,6 +3457,23 @@ public class PpmController {
 							     libellePsl= true;
 							     libellePsl1 = true;
 							     mode="PSL";
+					    }else 
+					    	 if(modePassation.getMopCode().equalsIgnoreCase("PSI")) {
+					    		 pavetPPM = true;
+							     pavetAMI = false; 
+							     pavetPRQ = false;
+							     pavetDPAMI= false;
+								 pavetDPPRQ= false;
+							     libelleDPAMI = false;
+							     libelleDPPRQ = false;
+							     pavetPSC= false;
+							     libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+							     libellePsc= false;
+							     libellePsl= true;
+							     libellePsl1 = true;
+							     mode="PSL";
 					    }else
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
 					    	     pavetPPM = false;
@@ -3539,6 +3556,27 @@ public class PpmController {
 						     libellePsl1 = true;
 						     mode ="PSL";
 							 _logger.info("Panel PSL Activé: "+pavetPPM);
+						     
+				    }else 
+				    	 if(passationListe.getMopCode().equalsIgnoreCase("PSI")) {
+				    		 pavetPPM = true;
+							 pavetAMI = false;
+							 pavetPRQ = false;
+							 pavetDPAMI= false;
+							 pavetDPPRQ= false;
+							 pavetPSC= false;
+							 pscOui = false; 
+							 pscNon = true;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
+							 libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= false;
+						     libellePsc= false;
+						     libellePsl = true;
+						     libellePsl1 = true;
+						     mode ="PSI";
+							 _logger.info("Panel PSI Activé: "+pavetPPM);
 						     
 				    }else 
 				    	  if(passationListe.getMopCode().equalsIgnoreCase("DPS")) {
