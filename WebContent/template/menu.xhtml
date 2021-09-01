@@ -625,14 +625,7 @@
              </p:commandLink>
             </li>
           </ul>
-        </li>   
-       <h:panelGroup rendered="false">
-        <li>
-            <p:commandLink action="#{numerotationController.renderPage('num1','LISNUM')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Transmission à la numérotation
-             </p:commandLink>
-            </li>
-         </h:panelGroup>   
+        </li>     
          <!-- FIN M4 -->
 
         
@@ -641,6 +634,30 @@
          <!-- FIN M4 -->
          
          <!-- DEBUT M5 :  -->
+         
+             <!-- DEBUT M4 :  -->
+             <h:panelGroup rendered="false">
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Numérotation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{numerotationController.renderPage('num1','LISNUM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Transmission à la numérotation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{numerotationController.renderPage('num1','DEJANUM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Déja numéroté
+             </p:commandLink>
+            </li>
+          </ul>
+        </li>   
+        </h:panelGroup>
          <h:panelGroup rendered="false">
          <li class="treeview">
           <a href="#">

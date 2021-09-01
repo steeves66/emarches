@@ -162,8 +162,9 @@ Logger _logger = Logger.getLogger(AnoController.class);
 							//chargeData("AAO_FON_COD_AC");
 							chargeLotAnumeroter();
 						 }else {
-							 if(fonct.equalsIgnoreCase("listAutoSaiDmp")) {
-					    		  //chargeAvisDmp();
+							 if(fonct.equalsIgnoreCase("listDejaNumeroteAc")) {
+								 //une fois la vue deja numerotée disponible j'adapte la methode ci-dessous.
+								 chargeLotAnumeroter();;
 								
 							 }else {
 								 if(fonct.equalsIgnoreCase("listDemAnoDmp")) {

@@ -7463,10 +7463,10 @@ public class ControleController {
 																			    		}else
 															    			//LISTE TRANSMISSION A LA NUMEROTATION
 															    			if(action.equalsIgnoreCase("LISNUM")) {
-																    			type = "Commission";
+																    			type = "Numerotation";
 																    			fonctionalite = "listNumerotationAc";
 																    			libelleDmp="DGMP";
-																    			libelle=" LISTE DES AVIS D'APPEL D'OFFRE";
+																    			libelle=" TRANSMISSION A LA NUMEROTATION";
 																    			libelleTravaux="Joindre le PV d'ouverture";
 																    			libelle2 = "Date Fin Ouverture";
 																    			typePlan = "L'OUVERTURE";
@@ -7482,7 +7482,27 @@ public class ControleController {
 																		
 																    		}
 													    		      	else
-													    				
+													    		      	//LISTE TRANSMISSION A LA NUMEROTATION
+															    			if(action.equalsIgnoreCase("DEJANUM")) {
+																    			type = "Numerotation";
+																    			fonctionalite = "listDejaNumeroteAc";
+																    			libelleDmp="DGMP";
+																    			libelle="LOT(S) DEJA NUMEROTE";
+																    			libelleTravaux="Joindre le PV d'ouverture";
+																    			libelle2 = "Date Fin Ouverture";
+																    			typePlan = "L'OUVERTURE";
+																    			libelle1 = "Heure de Fin";
+																    			libelleFinCom = "Fin de la séance d'ouverture";
+																    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
+																				 panel1 =false;
+																				 btn_membre = true;
+																				 btn_apercuOuv =true;
+																				 btn_apercuAna =false;
+																				 btn_apercuJug =false;
+																				 btn_retourJug = false;
+																		
+																    		}
+															    			else
 													    				
 													    				//DEBUT MODULE NUMEROTATION
 													    				//Liste des avis d'appel d'offres
