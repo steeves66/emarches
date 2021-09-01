@@ -244,6 +244,8 @@ public class AnoController {
 			if(!LS.isEmpty()) avis = LS.get(0);
 			avis.setTStatut(new TStatut("ANO"));
 		    iservice.updateObject(avis);
+		    
+		    historiser("ANO", "");
 		    //chargeData();
 		   // renderPage("LISANO" ,"ano1");
 		 userController.setTexteMsg("Demande envoyée avec succès !");
@@ -288,23 +290,25 @@ public class AnoController {
 			avis.setAaoStatut("4");
 		    iservice.updateObject(avis);
 		    
-		  /*  List<TDemande> DS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
-		    TDemande dem = new TDemande();
-			if(!LS.isEmpty()) dem = DS.get(0);
-			dem.setTStatut(new TStatut("ARC"));
-		    iservice.updateObject(dem);*/
-		    //chargeData();
-		   // renderPage("LISANO" ,"ano1");
+		
 		 userController.setTexteMsg("Validé avec succès !");
          userController.setRenderMsg(true);
          userController.setSevrityMsg("success");
-		/* }
-		 else {
-			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Vous devez absolument traiter tout les lots! ","");
-				FacesContext.getCurrentInstance().addMessage(null, msg);	
-		 }*/
 	 }
 	 
+		//Methode d'historisation
+	 public void historiser(String statut, String motif) {
+	     TStatut statuts = constantService.getStatut(statut);
+	     THistoDac dacStatut = new THistoDac();
+	     dacStatut.setHacDate(Calendar.getInstance().getTime());
+	     dacStatut.setHacCommentaire(motif);
+	     dacStatut.setTStatut(statuts);
+	     dacStatut.setHacAaoCode(slctdTd.getAaoCode());
+	     dacStatut.setTDacSpecs(new TDacSpecs(slctdTd.getAaoDacCode()));
+	     dacStatut.setTFonction(userController.getSlctd().getTFonction());
+	     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
+	     iservice.addObject(dacStatut);
+ }
 	 
 	 //Chargement des observations
 	 public void chargeObservations() {
@@ -486,11 +490,6 @@ public class AnoController {
 		_logger.info("listeLots size: "+listeLots.size());
 	 }
 	 
-	/* public void chargeNatureDocData() {
-		 natureDocListe.clear();
-			natureDocListe=(List<VNatureDocAno>) iservice.getObjectsByColumn("VNatureDocAno");
-		}
-	 */
 	 
 	 //Pour Traiement ANO DPM
 	 public void chargeNatureDocData() {
