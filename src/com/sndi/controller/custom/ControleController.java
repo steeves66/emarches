@@ -89,6 +89,8 @@ public class ControleController {
 	private boolean selectOneMenuPassation =false;
 	private boolean anoDmp =false;
 	private boolean anoBail =false;
+	private boolean panelAnumeroter =false;
+	private boolean panelDejaNumerote =false;
 	
 	private boolean panelDaoTableauBordPslpso = false;
 	private boolean panelAgpmTableauBordSai =false;
@@ -7474,6 +7476,8 @@ public class ControleController {
 																    			libelleFinCom = "Fin de la séance d'ouverture";
 																    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
 																				 panel1 =false;
+																				 panelAnumeroter =true;
+																				 panelDejaNumerote =false;
 																				 btn_membre = true;
 																				 btn_apercuOuv =true;
 																				 btn_apercuAna =false;
@@ -7494,6 +7498,8 @@ public class ControleController {
 																    			libelle1 = "Heure de Fin";
 																    			libelleFinCom = "Fin de la séance d'ouverture";
 																    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
+																    			panelAnumeroter =false;
+																				panelDejaNumerote =true;
 																				 panel1 =false;
 																				 btn_membre = true;
 																				 btn_apercuOuv =true;
@@ -11402,6 +11408,26 @@ public class ControleController {
 
 	public void setBtnDejPub(boolean btnDejPub) {
 		this.btnDejPub = btnDejPub;
+	}
+
+
+	public boolean isPanelAnumeroter() {
+		return panelAnumeroter;
+	}
+
+
+	public void setPanelAnumeroter(boolean panelAnumeroter) {
+		this.panelAnumeroter = panelAnumeroter;
+	}
+
+
+	public boolean isPanelDejaNumerote() {
+		return panelDejaNumerote;
+	}
+
+
+	public void setPanelDejaNumerote(boolean panelDejaNumerote) {
+		this.panelDejaNumerote = panelDejaNumerote;
 	}
 	
 	

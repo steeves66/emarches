@@ -82,19 +82,26 @@
 		            <div class="col-md-6">
 		                <div class="input-group input-group-sm col-md-12">
 				                <span class="input-group-btn">
-				                <p:commandLink action="#{numerotationController.chargeLotAnumeroter()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:finance"/>
+				                <p:commandLink action="#{numerotationController.reinitialiserLotNumerotation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"/>
 				                </span>
 			                      <p:inputText value="#{numerotationController.critere}" styleClass="form-control" type="text"  placeholder="critère de recherche"/>
 			                       <span class="input-group-btn">
-			                      <p:commandLink action="#{numerotationController.chargeLotAnumeroterFilter()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:finance"/>
+			                      <p:commandLink action="#{numerotationController.chargeLotAnumeroterFilter()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl"/>
 			                    </span>
 						  </div> 
 		                 </div>
-                      </div>         
+                      </div>    
+                       <h:panelGroup rendered="#{controleController.panelAnumeroter}">     
                  <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{numerotationController.listeLotNumerotation}" rowKey="#{slctdTb.attNum}"
                   selection="#{numerotationController.selectionLotNumerotation}" 
                scrollable="true" scrollHeight="600" emptyMessage="Aucun Lot enregistré">
                        <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         <p:column headerText="num att" styleClass="col-sm-1">
+				         <h:outputText value="#{slctdTb.attNum}" />
+				        </p:column>
+                             <p:column headerText="Avis" styleClass="col-sm-1">
+				         <h:outputText value="#{slctdTb.laaAaoCode}" />
+				        </p:column>
                            <p:column headerText="N°Lot" style="width:70px;text-align:center">
                             <h:outputText value="#{slctdTb.laaNum}" />
 				        </p:column>
@@ -111,6 +118,44 @@
          				<f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				 </h:outputText>
 				        </p:column>
+                         <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
+                            <p:commandLink oncomplete="PF('anoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				               title="Traitement de l'ANO">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+		 	        </p:column>
+                        </p:dataTable>  
+                        </h:panelGroup>
+                        
+                        
+                        
+                          <h:panelGroup rendered="#{controleController.panelDejaNumerote}">     
+                 <p:dataTable var="slctdTb"  id="finance1" styleClass="table mb0 dt-on-steroids dataTable" value="#{numerotationController.listeLotNumerotation}" 
+               scrollable="true" scrollHeight="600" emptyMessage="Aucun Lot enregistré">
+                           <p:column headerText="N°Lot" style="width:70px;text-align:center">
+                            <h:outputText value="#{slctdTb.laaNum}" />
+				        </p:column>
+				        
+				        <p:column headerText="Avis" styleClass="col-sm-1">
+				         <h:outputText value="#{slctdTb.laaAaoCode}" />
+				        </p:column>
+
+                        <p:column headerText="N°marché" styleClass="col-sm-1">
+				         <h:outputText value="#{slctdTb.marCode}" />
+				        </p:column> 
+				         <p:column headerText="Objet" styleClass="col-sm-7">
+				         <h:outputText value="#{slctdTb.marObjet}" />
+				        </p:column>
+				        
+				         <p:column headerText="Soumissionnaire" styleClass="col-sm-3">
+				          <h:outputText value="#{slctdTb.attSouNcc} : #{slctdTb.souSigleSte}" />
+				        </p:column>
+				         <p:column headerText="Montant attribué" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.marMtTotMar}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				 </h:outputText>
+				        </p:column>
 				        
 				        
 				        		        
@@ -123,9 +168,11 @@
                             </p:commandLink>
 		 	        </p:column>
                         </p:dataTable>  
+                        </h:panelGroup>
 	            </div>
 	           </div>
                  </div>
+            
                  </div>
                </div>
 
@@ -140,7 +187,7 @@
 		</div> 
     
 		 <div class="row">
-		     <p:commandLink  action="#{numerotationController.transmettrePourNumerotation()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+		     <p:commandLink rendered="#{controleController.panelAnumeroter}" action="#{numerotationController.transmettrePourNumerotation()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
 		     <p:confirm header="Confirmation" message="Confirmez-vous la transmission a la numérotation ?" icon="ui-icon-alert" />  
 				     <i class="ace-icon fa fa-exchange bigger-120"></i> Transmettre à la numérotation
 				      </p:commandLink>

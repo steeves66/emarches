@@ -76,7 +76,8 @@ Logger _logger = Logger.getLogger(AnoController.class);
 			 listeLotNumerotation.clear();
 			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
 					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"));
+					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"),
+					 new WhereClause("MAR_DEJA_NUMEROTE",Comparateur.EQ,"1"));
 			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
 		 }
 		 
@@ -84,14 +85,53 @@ Logger _logger = Logger.getLogger(AnoController.class);
 		 //Liste des lots à numeroter
 		 public void chargeLotAnumeroterFilter() {
 			 listeLotNumerotation.clear();
-			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
-					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"),
-					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"));
+			 if(controleController.getFonctionalite().equalsIgnoreCase("listNumerotationAc")) {
+				 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+						 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+						 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATS"),
+						 new WhereClause("MAR_DEJA_NUMEROTE",Comparateur.EQ,"1"),
+						 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"));
+			 }else
+				 if(controleController.getFonctionalite().equalsIgnoreCase("listDejaNumeroteAc")) {
+					 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+							 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+							 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATD"),
+							 new WhereClause("MAR_DEJA_NUMEROTE",Comparateur.EQ,"2"),
+							 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%")); 
+				 }
+			
 			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
 		 }
 		 
 		 
+		 //Liste des lots deja numeroté
+		 public void chargeLotDejaNumerote() {
+			 listeLotNumerotation.clear();
+			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATD"),
+					 new WhereClause("MAR_DEJA_NUMEROTE",Comparateur.EQ,"2"));
+			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
+		 }
+		 
+		 public void chargeLotDejaNumeroteFilter() {
+			 listeLotNumerotation.clear();
+			 listeLotNumerotation=(List<VLotNumerotation>) iservice.getObjectsByColumnDesc("VLotNumerotation", new ArrayList<String>(Arrays.asList("ATT_DTE_SAISI")),
+					 new WhereClause("ATT_FON_CODE_SAISI",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					 new WhereClause("ATT_STA_CODE",Comparateur.EQ,"ATD"),
+					 new WhereClause("MAR_DEJA_NUMEROTE",Comparateur.EQ,"2"),
+					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+critere+"%"));
+			_logger.info("listeLotNumerotation size: "+listeLotNumerotation.size());
+		 }
+		 
+		 public void reinitialiserLotNumerotation() {
+			 if(controleController.getFonctionalite().equalsIgnoreCase("listNumerotationAc")) {
+				 chargeLotAnumeroter();
+			 }else
+				 if(controleController.getFonctionalite().equalsIgnoreCase("listDejaNumeroteAc")) {
+					 chargeLotDejaNumerote();
+				 }
+		 }
 		 
 		
 		 
@@ -163,8 +203,8 @@ Logger _logger = Logger.getLogger(AnoController.class);
 							chargeLotAnumeroter();
 						 }else {
 							 if(fonct.equalsIgnoreCase("listDejaNumeroteAc")) {
-								 //une fois la vue deja numerotée disponible j'adapte la methode ci-dessous.
-								 chargeLotAnumeroter();;
+								 //Lots deja numerote.
+								 chargeLotDejaNumerote();
 								
 							 }else {
 								 if(fonct.equalsIgnoreCase("listDemAnoDmp")) {
