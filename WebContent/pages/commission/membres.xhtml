@@ -114,7 +114,7 @@
             
             
          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeMembre}" emptyMessage="Aucun membre trouvé" 
-					    rowKey="#{slctdTb.tctCode}" selection="#{commissionController.selectionMembres}"   editable="true" editMode="cell"
+					    rowKey="#{slctdTb.tctId}" selection="#{commissionController.selectionMembres}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="250"
                           >
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>

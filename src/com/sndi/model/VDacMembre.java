@@ -16,6 +16,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_DAC_MEMBRE")
 public class VDacMembre implements java.io.Serializable {
 
+	private BigDecimal tctId;
 	private String tctCode;
 	private String tctLibelle;
 	private String tctTitre;
@@ -47,11 +48,12 @@ public class VDacMembre implements java.io.Serializable {
 		this.tctCode = tctCode;
 	}
 
-	public VDacMembre(String tctCode, String tctLibelle, String tctTitre, String tctTstCode, String tctTcoCode,
+	public VDacMembre(BigDecimal tctId, String tctCode, String tctLibelle, String tctTitre, String tctTstCode, String tctTcoCode,
 			Date tctDteSaisi, String tctOpeMatricule, String tctGrpCode, String tctNomMbm, String tctPreMbm,
 			String tctTelMbm, String tctRepMandate, BigDecimal comNum, Date comDteSaisi, String comStrCode,
 			String comTctCode, String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode,
 			String comTcoCode,String comStrCom, String comFonAdmin) {
+		this.tctId = tctId;
 		this.tctCode = tctCode;
 		this.tctLibelle = tctLibelle;
 		this.tctTitre = tctTitre;
@@ -78,6 +80,15 @@ public class VDacMembre implements java.io.Serializable {
 	}
 
 	@Id
+	@Column(name = "TCT_ID", precision = 22, scale = 0)
+	public BigDecimal getTctId() {
+		return this.tctId;
+	}
+
+	public void setTctId(BigDecimal tctId) {
+		this.tctId = tctId;
+	}
+	
 	@Column(name = "TCT_CODE", nullable = false, length = 3)
 	public String getTctCode() {
 		return this.tctCode;
