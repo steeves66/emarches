@@ -66,6 +66,7 @@ import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VPgpm;
+import com.sndi.model.VPgpmGestion;
 import com.sndi.model.VPgpmPub;
 import com.sndi.model.VPgpmStatut;
 import com.sndi.model.VPgpmliste;
@@ -191,7 +192,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private List<TFinancement> listeFinancementAgpm = new ArrayList<TFinancement>();
 		 
 		 
-		 private List<TGestion> listeGestion = new ArrayList<TGestion>();
+		 private List<VPgpmGestion> listeGestion = new ArrayList<VPgpmGestion>();
 		 private List<TFinancementPgpm> listeFinancement = new ArrayList<TFinancementPgpm>();
 		 private List<VFinancementPgpm> listeFinancementPgpm = new ArrayList<VFinancementPgpm>();
 		 private List<TFinancementPgpm> financementListe = new ArrayList<TFinancementPgpm>();
@@ -1991,7 +1992,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		//ACombobox Gestions
 		 public void chargeGestions(){
-			 listeGestion=new ArrayList<>(constantService.getListeGestion());
+			 listeGestion=(List<VPgpmGestion>) iservice.getObjectsByColumn("VPgpmGestion");
+			 //listeGestion=new ArrayList<>(constantService.getListeGestion());
 		 } 
 		 
 		/*//Combobox Bailleur
@@ -2566,7 +2568,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			  controleController.btn_save_pgpm = false;
        			  controleController.btn_save_pgspm = false;
                  }else {
-          	          plan.setTGestion(new TGestion(gesCode));
+          	          plan.setTGestion(new TGestion(gesCode)); ///ici
          		      plan.setTFonction(userController.getSlctd().getTFonction());
          		      plan.setTStructure(userController.getSlctd().getTFonction().getTStructure());
          		      iservice.addObject(plan);
@@ -4238,17 +4240,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-
-	public List<TGestion> getListeGestion() {
+	public List<VPgpmGestion> getListeGestion() {
 		return listeGestion;
 	}
 
-
-
-	public void setListeGestion(List<TGestion> listeGestion) {
+	public void setListeGestion(List<VPgpmGestion> listeGestion) {
 		this.listeGestion = listeGestion;
 	}
-
 
 	public long getGesCode() {
 		return gesCode;
