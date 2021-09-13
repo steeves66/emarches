@@ -12,12 +12,11 @@
 		<h:form id="gnl">
 			<section class="content-header">
 			<h1>
-				CHANGEMENT DE STATUT D'UNE OPERATION <small>Sélectionner une
-					opération</small>
+				CHANGEMENT DE STATUT D'UNE OPERATION <small>Slectionner une opration</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-				<li class="active">Opération</li>
+				<li class="active">Opration</li>
 			</ol>
 			</section>
 
@@ -49,14 +48,13 @@
 						<div style="color: #fff">CHOIX DU TYPE D'OPERATION</div>
 
 						<div class="form-group form-inline">
-							<label for="ac" class="col-sm-2 control-label"><b>Sélectionner
-									la structure</b></label>
+							<label for="ac" class="col-sm-2 control-label"><b>Sélectionner la structure</b></label>
 							<div class="col-sm-10">
 								<table>
 									<tr>
 										<td style="width: 650px"><p:inputText id="str2"
 												type="text"
-												value="#{changeStatutController.struct.strCode} : #{changeStatutController.struct.strLibelleLong}"
+												value="#{changeStatutController.struct.fonCod} : #{changeStatutController.struct.fonLibelle}"
 												styleClass="form-control" readonly="true"
 												style="width: 100%" /></td>
 										<td><p:commandLink oncomplete="PF('structureDlg').show()"
@@ -71,25 +69,24 @@
 							</div>
 						</div>
 						<div class="form-group ">
-							<label for="tyd" class="col-sm-2 control-label"><b>Opération
+							<label for="tyd" class="col-sm-2 control-label"><b>Type d'opération
 									: </b></label>
 							<div class="col-sm-10">
 								<p:selectOneRadio id="operation"
 									value="#{changeStatutController.choixOpe}" unselectable="true">
 									<f:selectItem itemLabel="Plan de passation" itemValue="ppm" />
-									<f:selectItem itemLabel="Dossier d'appel à concurrence"
-										itemValue="dac" />
+									<f:selectItem itemLabel="Dossier d'appel  concurrence"	itemValue="dac" />
 									<f:selectItem itemLabel="Avis d'appel d'offres" itemValue="aao" />
+									<f:selectItem itemLabel="Attributions" itemValue="att" />
 									<p:ajax listener="#{changeStatutController.operationListe()}"
-										event="change" process="@this" update="gnl" />
+										event="change" process="@this" update=":gnl operation opl" />
 								</p:selectOneRadio>
 							</div>
 						</div>
 
-
-						<div class="form-group form-inline">
-							<label for="ope" class="col-sm-2 control-label"><b>Sélectionner
-									l'opération</b></label>
+						<h:panelGroup id="opl">
+						<div class="form-group form-inline" >
+							<label for="ope" class="col-sm-2 control-label"><b>Sélectionner	l'opération</b></label>
 							<div class="col-sm-10">
 								<table>
 									<tr>
@@ -108,11 +105,11 @@
 								</table>
 							</div>
 						</div>
+						</h:panelGroup>
 
-						<h:panelGroup id="ppmFm"
-							style="display:#{changeStatutController.ppmFrm};">
+						<h:panelGroup id="ppmFm" style="display:#{changeStatutController.ppmFrm};">
 							<div class="form-group ">
-								<label for="dpId" class="col-sm-2 control-label"><b>N°
+								<label for="dpId" class="col-sm-2 control-label"><b>N
 										plan :</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text" styleClass="form-control"
@@ -132,55 +129,55 @@
 								</div>
 							</div>
 							<div class="form-group form-inline">
-								<label for="dpMop" class="col-sm-2 control-label"><b>Mode
+								<label for="attMop" class="col-sm-2 control-label"><b>Mode
 										de passation :</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.slctdPpm.getTModePassation().getMopCode()}"
-										id="dpMop" style="width: 100%" readonly="true">
+										id="attMop" style="width: 100%" readonly="true">
 									</p:inputText>
 								</div>
 								<div class="col-sm-7">
 									<p:inputText type="text"
 										value="#{changeStatutController.ppm.mopLibelleLong}"
-										id="dpMopL" style="width: 100%" readonly="true">
+										id="dacCode" style="width: 100%" readonly="true">
 									</p:inputText>
 								</div>
 							</div>
 							<div class="form-group form-inline">
-								<label for="dpTym" class="col-sm-2 control-label"><b>Type
-										de marché:</b></label>
+								<label for="attTym" class="col-sm-2 control-label"><b>Type
+										de march:</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.slctdPpm.getTTypeMarche().getTymCode()}"
-										id="dpTym" style="width: 100%" readonly="true">
+										id="attTym" style="width: 100%" readonly="true">
 									</p:inputText>
 								</div>
 								<div class="col-sm-7">
 									<p:inputText type="text"
 										value="#{changeStatutController.ppm.tymLibelleCourt}"
-										id="dpTy" style="width: 100%" readonly="true">
+										id="attTy" style="width: 100%" readonly="true">
 									</p:inputText>
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="dpDte" class="col-sm-2 control-label"><b>Date
+								<label for="attDate" class="col-sm-2 control-label"><b>Date
 										saisi:</b></label>
 								<div class="col-sm-3">
 									<p:inputText type="text" styleClass="form-control"
 										value="#{changeStatutController.slctdPpm.dppDateSaisie}"
-										id="dpDte" style="width: 40%" readonly="true">
+										id="attDate" style="width: 40%" readonly="true">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</p:inputText>
 								</div>
 							</div>
 							<div class="form-group form-inline ">
-								<label for="dpSta" class="col-sm-2 control-label"><b>Statut
+								<label for="attSta" class="col-sm-2 control-label"><b>Statut
 										actuel:</b></label>
 								<div class="col-sm-4">
 									<p:inputText type="text"
 										value="#{changeStatutController.slctdPpm.getTStatut().getStaCode()}"
-										id="dpSta" style="width: 100%" readonly="true">
+										id="attSta" style="width: 100%" readonly="true">
 									</p:inputText>
 								</div>
 								
@@ -190,7 +187,7 @@
 						<h:panelGroup id="dacFm"
 							style="display:#{changeStatutController.dacFrm};">
 							<div class="form-group ">
-								<label for="dacId" class="col-sm-2 control-label"><b>N°
+								<label for="dacId" class="col-sm-2 control-label"><b>N
 										DAC :</b></label>
 								<div class="col-sm-5">
 									<p:inputText type="text" styleClass="form-control"
@@ -227,7 +224,7 @@
 							</div>
 							<div class="form-group form-inline">
 								<label for="dacTym" class="col-sm-2 control-label"><b>Type
-										de marché:</b></label>
+										de march:</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.dac.getTTypeMarche().getTymCode()}"
@@ -257,8 +254,7 @@
 								</div>
 							</div>
 							<div class="form-group form-inline">
-								<label for="dacSta" class="col-sm-2 control-label"><b>Statut
-										actuel:</b></label>
+								<label for="dacSta" class="col-sm-2 control-label"><b>Statut actuel:</b></label>
 								<div class="col-sm-10">
 									<p:inputText type="text" styleClass="form-control"
 										value="#{changeStatutController.dac.getTStatut().getStaCode()}"
@@ -269,10 +265,9 @@
 							</div>
 
 						</h:panelGroup>
-						<h:panelGroup id="aaoFm"
-							style="display:#{changeStatutController.aaoFrm};">
+						<h:panelGroup id="aaoFm" style="display:#{changeStatutController.aaoFrm};">
 							<div class="form-group ">
-								<label for="aaoId" class="col-sm-2 control-label"><b>N°
+								<label for="aaoId" class="col-sm-2 control-label"><b>N
 										Avis :</b></label>
 								<div class="col-sm-10">
 									<p:inputText type="text" styleClass="form-control"
@@ -282,8 +277,7 @@
 								</div>
 							</div>
 							<div class="form-group ">
-								<label for="aaoOb" class="col-sm-2 control-label"><b>Objet
-										Avis :</b></label>
+								<label for="aaoOb" class="col-sm-2 control-label"><b>Objet	Avis :</b></label>
 								<div class="col-sm-10">
 									<p:inputText type="text" styleClass="form-control"
 										value="#{changeStatutController.aao.aaoLibelle}" id="aaoOb"
@@ -292,8 +286,7 @@
 								</div>
 							</div>
 							<div class="form-group form-inline">
-								<label for="aaoMop" class="col-sm-2 control-label"><b>Mode
-										de passation :</b></label>
+								<label for="aaoMop" class="col-sm-2 control-label"><b>Mode de passation :</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.dac.getTModePassation().getMopCode()}"
@@ -308,8 +301,7 @@
 								</div>
 							</div>
 							<div class="form-group form-inline">
-								<label for="aaoTym" class="col-sm-2 control-label"><b>Type
-										de marché:</b></label>
+								<label for="aaoTym" class="col-sm-2 control-label"><b>Type de march:</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.dac.getTTypeMarche().getTymCode()}"
@@ -361,7 +353,83 @@
 							</div>
 
 						</h:panelGroup>
-						<div class="form-group form-inline ">
+						<h:panelGroup id="attFm" style="display:#{changeStatutController.attFrm};">
+							
+							<div class="form-group ">
+								<label for="attAvis" class="col-sm-2 control-label"><b>Avis :</b></label>
+								<div class="col-sm-3">
+									<p:inputText type="text" styleClass="form-control"	value="#{changeStatutController.slctdAtt.attDofAaoCode}" id="attAvis"
+										style="width: 100%" readonly="true">
+									</p:inputText>
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label for="attLot" class="col-sm-2 control-label"><b>Lot :</b></label>
+								<div class="col-sm-10">
+									<p:inputText type="text" value="#{changeStatutController.lot}" styleClass="form-control"
+										id="attLot" style="width: 100%" readonly="true">
+									</p:inputText>
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="attId" class="col-sm-2 control-label"><b>Soumissionnaire :</b></label>
+								<div class="col-sm-10">
+									<p:inputText type="text" styleClass="form-control" value="#{changeStatutController.slctdAtt.attNum} : #{changeStatutController.etpre}" id="attId"
+										style="width: 100%" readonly="true">
+									</p:inputText>
+								</div>
+							</div>
+							<div class="form-group form-inline">
+								<label for="attr" class="col-sm-2 control-label"><b>Montant attribu:</b></label>
+								<div class="col-sm-2">
+									<p:inputText type="text" value="#{changeStatutController.slctdAtt.attMtAttr}" styleClass="form-control"
+										id="attr" style="width: 100%" readonly="true">
+										<f:convertNumber pattern="#,##0 F CFA"/>
+									</p:inputText>
+								</div>
+								<label for="attDef" class="col-sm-2 control-label"><b>attribution definitive:</b></label>
+								<div class="col-sm-1">
+									<p:inputText type="text" styleClass="form-control"
+										value="#{changeStatutController.slctdAtt.attDef}" id="attDef" style="width: 100%" readonly="true">
+									</p:inputText>
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="attDte" class="col-sm-2 control-label"><b>Date d'attribution:</b></label>
+								<div class="col-sm-3">
+									<p:inputText type="text" styleClass="form-control"	value="#{changeStatutController.slctdAtt.attDteAtt}"
+										id="attDte" style="width: 40%" readonly="true">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</p:inputText>
+								</div>
+							</div>
+							<div class="form-group form-inline ">
+								<label for="dpSta" class="col-sm-2 control-label"><b>Statut	actuel:</b></label>
+								<div class="col-sm-1">
+									<p:inputText type="text" value="#{changeStatutController.slctdAtt.attStaCode}"	id="dpSta" style="width: 100%" 
+									styleClass="form-control" readonly="true">
+									</p:inputText>
+								</div>
+								
+							</div>
+
+						</h:panelGroup>
+
+						<div class="row"></div>
+						<div  align="center">
+						<div class="form-group form-inline">
+						<label for="aaoSta" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
+							<div class="col-sm-6 control-label">
+								<p:selectOneMenu id="atm"
+									value="#{changeStatutController.statut.staCode}" effect="fade"
+									style="width:70%;" filter="true" showCheckbox="true" scrollHeight="100">
+									<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"
+										itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
+										itemValue="#{stat.staCode}" />
+								</p:selectOneMenu>
+							</div>
+							</div>
+						<div class="form-group form-inline col-sm-10">
 							
 						
 						<div class="pull-left ">
@@ -370,28 +438,15 @@
 								action="#{userController.renderPage('accueil')}"
 								update=":content" />
 						</div>
-						<div  align="center">
-						<label for="aaoSta" class="col-sm-2 control-label"><b>Statut
-									voulu:</b></label>
-							<div class="col-sm-10">
-								<p:selectOneMenu id="atm"
-									value="#{changeStatutController.statut.staCode}" effect="fade"
-									style="width:70%;" filter="true" showCheckbox="true"
-									scrollHeight="100">
-									<f:selectItems value="#{changeStatutController.listeStatut}"
-										var="stat"
-										itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
-										itemValue="#{stat.staCode}" />
-								</p:selectOneMenu>
-							</div>
+						
 							</div>
 						<div class="pull-right ">
 							<p:commandLink styleClass="btn btn-success"
 								style="background-color: #036d3b"
 								action="#{changeStatutController.update()}" update=":content">
 								<p:confirm header="Confirmation"
-									message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-								<i class="ace-icon fa fa-save"></i> Mise à jour
+									message="Confirmez vous la mise à jour ?" icon="ui-icon-alert" />
+								<i class="ace-icon fa fa-save"></i> Mise  jour
 			            </p:commandLink>
 						</div>
 						</div>
@@ -409,7 +464,23 @@
 				<div class="contentpanel">
 					<div class="g12">
 						<div class="panel-body panel-body-nopadding">
-							<div class="row"></div>
+							<div class="row">
+								<div class="col-md-5 ">
+							<div class="input-group input-group-sm col-md-12">
+								<span class="input-group-btn">
+									<p:commandLink action="#{changeStatutController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+								</span>
+							
+								<p:inputText type="text" value="#{changeStatutController.critereRecherche}"  placeholder="Rechercher la fonction par le code..." readonly="false" >
+								<p:ajax event="blur" listener="#{changeStatutController.chargeStructure()}" update="gnl ndTblePass"> </p:ajax>
+								</p:inputText> 
+								
+								<!-- <span class="input-group-btn">
+									<p:commandLink action="#{changeStatutController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="gnl ndTblePass" />
+								</span> -->
+							</div>
+						</div>
+							</div>
 						</div>
 
 						<div class="form-bordered form-horizontal">
@@ -418,15 +489,15 @@
 									<p:dataTable id="ndTblePass"
 										styleClass="table table-bordered table-hover" var="slctdTb"
 										value="#{changeStatutController.listeStruc}"
-										emptyMessage="Aucune structure enregistrée" scrollable="true"
+										emptyMessage="Aucune structure enregistre" scrollable="true"
 										scrollHeight="400" rows="10" paginator="true"
 										rowsPerPageTemplate="5,10,15">
 
 										<p:column headerText="Code" styleClass="col-sm-1">
-											<h:outputText value="#{slctdTb.strCode}" />
+											<h:outputText value="#{slctdTb.fonCod}" />
 										</p:column>
-										<p:column headerText="Libellé Long" styleClass="col-sm-10">
-											<h:outputText value="#{slctdTb.strLibelleLong}" />
+										<p:column headerText="Libell" styleClass="col-sm-10">
+											<h:outputText value="#{slctdTb.fonLibelle}" />
 										</p:column>
 										<p:column headerText="Actions" styleClass="col-sm-1">
 											<p:commandLink class="btn btn-xs btn-warning"
@@ -450,15 +521,68 @@
 
 			</p:dialog>
 		</h:form>
-		<h:form id="dlogAaao">
-			<p:dialog widgetVar="aaoDlg" modal="true" showEffect="fade"
+		<h:form id="dlogAtt">
+			<p:dialog widgetVar="attDlg" modal="true" showEffect="fade"
 				hideEffect="fade" width="70%" closable="true"
-				header="Selectionnez une structure">
+				header="Selectionnez une attribution">
 				<div class="contentpanel">
 					<div class="g12">
 						<div class="panel-body panel-body-nopadding">
-							<div class="row"></div>
+							<div class="row">
+								
+							</div>
 						</div>
+
+						<div class="form-bordered form-horizontal">
+							<div class="form-group">
+								<h:panelGrid style="width:100%; vertical-align: top;">
+									<p:dataTable id="ndTbleAtt"
+										styleClass="table table-bordered table-hover" var="slctdTb"
+										value="#{changeStatutController.listAttribution}"
+										emptyMessage="Aucune structure enregistre" scrollable="true"
+										scrollHeight="400" rows="10" paginator="true"
+										rowsPerPageTemplate="5,10,15">
+										<p:column headerText="Code" styleClass="col-sm-1">
+											<h:outputText value="#{slctdTb.attNum}" />
+										</p:column>
+										<p:column headerText="Objet" styleClass="col-sm-6">
+											<h:outputText value="#{slctdTb.attDofAaoCode}" />
+										</p:column>
+										<p:column headerText="Attributaire" styleClass="col-sm-2">
+											<h:outputText value="#{slctdTb.attSouNcc}" />
+										</p:column>
+										<p:column headerText="Montant" styleClass="col-sm-2">
+											<h:outputText value="#{slctdTb.attMtAttr} F CFA" />
+										</p:column>
+										<p:column headerText="Actions" styleClass="col-sm-1">
+											<p:commandLink class="btn btn-success"
+												action="#{changeStatutController.recupChoix()}"
+												title="Slectionner" style="background-color: #f88b2e;"
+												update=":content">
+												<i class="fa fa-check-square-o bigger-120"
+													style="color: white"></i>
+												<f:setPropertyActionListener value="#{slctdTb}"
+													target="#{changeStatutController.slctdAtt}" />
+											</p:commandLink>
+										</p:column>
+
+									</p:dataTable>
+								</h:panelGrid>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+
+			</p:dialog>
+		</h:form>
+		<h:form id="dlogAaao">
+			<p:dialog widgetVar="aaoDlg" modal="true" showEffect="fade"
+				hideEffect="fade" width="70%" closable="true"
+				header="Selectionnez un avis d'appel d'offres">
+				<div class="contentpanel">
+					<div class="g12">
 
 						<div class="form-bordered form-horizontal">
 							<div class="form-group">
@@ -466,7 +590,7 @@
 									<p:dataTable id="ndTbleAao"
 										styleClass="table table-bordered table-hover" var="slctdTb"
 										value="#{changeStatutController.listeDac}"
-										emptyMessage="Aucune structure enregistrée" scrollable="true"
+										emptyMessage="Aucune structure enregistre" scrollable="true"
 										scrollHeight="400" rows="10" paginator="true"
 										rowsPerPageTemplate="5,10,15">
 										<p:column headerText="Code" styleClass="col-sm-1">
@@ -475,7 +599,7 @@
 										<p:column headerText="Objet" styleClass="col-sm-8">
 											<h:outputText value="#{slctdTb.aaoLibelle}" />
 										</p:column>
-										<p:column headerText="Type marché" styleClass="col-sm-1">
+										<p:column headerText="Type march" styleClass="col-sm-1">
 											<h:outputText value="#{slctdTb.tymCode}" />
 										</p:column>
 										<p:column headerText="Mode passation" styleClass="col-sm-1">
@@ -484,7 +608,7 @@
 										<p:column headerText="Actions" styleClass="col-sm-1">
 											<p:commandLink class="btn btn-success"
 												action="#{changeStatutController.recupChoix()}"
-												title="Sélectionner" style="background-color: #f88b2e;"
+												title="Slectionner" style="background-color: #f88b2e;"
 												update=":content">
 												<i class="fa fa-check-square-o bigger-120"
 													style="color: white"></i>
@@ -508,12 +632,9 @@
 		<h:form id="dlogDAC">
 			<p:dialog widgetVar="dacDlg" modal="true" showEffect="fade"
 				hideEffect="fade" width="70%" closable="true"
-				header="Selectionnez une structure">
+				header="Selectionnez un dossier d'appel à la concurrence">
 				<div class="contentpanel">
 					<div class="g12">
-						<div class="panel-body panel-body-nopadding">
-							<div class="row"></div>
-						</div>
 
 						<div class="form-bordered form-horizontal">
 							<div class="form-group">
@@ -521,7 +642,7 @@
 									<p:dataTable id="ndTbleDac"
 										styleClass="table table-bordered table-hover" var="slctdTb"
 										value="#{changeStatutController.listeDac}"
-										emptyMessage="Aucune structure enregistrée" scrollable="true"
+										emptyMessage="Aucune structure enregistre" scrollable="true"
 										scrollHeight="400" rows="10" paginator="true"
 										rowsPerPageTemplate="5,10,15">
 										<p:column headerText="Code" styleClass="col-sm-2">
@@ -530,7 +651,7 @@
 										<p:column headerText="Objet" styleClass="col-sm-8">
 											<h:outputText value="#{slctdTb.dacObjet}" />
 										</p:column>
-										<p:column headerText="Type marché" styleClass="col-sm-1">
+										<p:column headerText="Type march" styleClass="col-sm-1">
 											<h:outputText value="#{slctdTb.tymCode}" />
 										</p:column>
 										<p:column headerText="Mode passation" styleClass="col-sm-1">
@@ -539,7 +660,7 @@
 										<p:column headerText="Actions" styleClass="col-sm-1">
 											<p:commandLink class="btn btn-xs btn-warning"
 												action="#{changeStatutController.recupChoix()}"
-												title="Sélectionner" style="background-color: #f88b2e;"
+												title="Slectionner" style="background-color: #f88b2e;"
 												update=":content">
 												<i class="fa fa-check-square-o  bigger-120"
 													style="color: white"></i>
@@ -562,20 +683,17 @@
 		<h:form id="dlogPpm">
 			<p:dialog widgetVar="ppmDlg" modal="true" showEffect="fade"
 				hideEffect="fade" width="70%" closable="true"
-				header="Selectionnez une structure">
+				header="Selectionnez un plan de passation">
 				<div class="contentpanel">
 					<div class="g12">
-						<div class="panel-body panel-body-nopadding">
-							<div class="row"></div>
-						</div>
 
 						<div class="form-bordered form-horizontal">
 							<div class="form-group">
 								<h:panelGrid style="width:100%; vertical-align: top;">
 									<p:dataTable id="ndTblePpm"
 										styleClass="table table-bordered table-hover" var="slctdTb"
-										value="#{changeStatutController.listePpm}"
-										emptyMessage="Aucune structure enregistrée" scrollable="true"
+										value="#{changeStatutController.listeDac}"
+										emptyMessage="Aucune structure enregistre" scrollable="true"
 										scrollHeight="400" rows="10" paginator="true"
 										rowsPerPageTemplate="5,10,15">
 										<p:column headerText="Code" styleClass="col-sm-1">
@@ -584,7 +702,7 @@
 										<p:column headerText="Objet" styleClass="col-sm-8">
 											<h:outputText value="#{slctdTb.dppObjet}" />
 										</p:column>
-										<p:column headerText="Type marché" styleClass="col-sm-1">
+										<p:column headerText="Type march" styleClass="col-sm-1">
 											<h:outputText value="#{slctdTb.dppMopCode}" />
 										</p:column>
 										<p:column headerText="Mode passation" styleClass="col-sm-1">
@@ -593,12 +711,12 @@
 										<p:column headerText="Actions" styleClass="col-sm-1">
 											<p:commandLink class="btn btn-xs btn-warning"
 												action="#{changeStatutController.recupChoix()}"
-												title="Sélectionner" style="background-color: #f88b2e;"
+												title="Slectionner" style="background-color: #f88b2e;"
 												update=":content">
 												<i class="fa fa-check-square-o  bigger-120"
 													style="color: white"></i>
 												<f:setPropertyActionListener value="#{slctdTb}"
-													target="#{changeStatutController.ppm}" />
+													target="#{changeStatutController.mixDacAao}" />
 											</p:commandLink>
 										</p:column>
 
@@ -613,6 +731,7 @@
 
 			</p:dialog>
 		</h:form>
+		
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
 			width="30%" height="25%">
 			<div align="center">
