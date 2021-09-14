@@ -17,16 +17,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sndi.dao.WhereClause;
+import com.sndi.model.TAttributions;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDetailPlanPassation;
+import com.sndi.model.TFonction;
+import com.sndi.model.TLotAao;
 import com.sndi.model.TOperateur;
+import com.sndi.model.TSoumissions;
 import com.sndi.model.TStatut;
-import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.VAvisAppelOffre;
 import com.sndi.model.VDacliste;
+import com.sndi.model.VLot;
 import com.sndi.model.VPpmliste;
+import com.sndi.model.VbAttributions;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -50,18 +55,22 @@ public class ChangeStatutController {
 	@Autowired
 	ConstantService constantService;
 	
-	private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
+	//les listes
 	private List<VDacliste> listeDac = new ArrayList<VDacliste>();
-	private List<TStructure> listeStruc = new ArrayList<TStructure>();
+	private List<TFonction> listeStruc = new ArrayList<TFonction>();
 	private List<TStatut> listeStatut = new ArrayList<TStatut>();
+	private List<VbAttributions> listAttribution = new ArrayList<VbAttributions>();
 	
+	//les objets des listes
 	private VPpmliste ppm = new VPpmliste();
 	private TDetailPlanPassation slctdPpm = new TDetailPlanPassation();
 	private VDacliste mixDacAao = new VDacliste();
 	private TDacSpecs dac = new TDacSpecs();
 	private TAvisAppelOffre aao = new TAvisAppelOffre();
-	private TStructure struct = new TStructure();
+	private TFonction struct = new TFonction();
 	private TStatut statut = new TStatut();
+	private TAttributions attrib = new TAttributions();
+	private VbAttributions slctdAtt = new VbAttributions();
 	
 	private String OpeMat;
 	private String operateur;
@@ -74,10 +83,14 @@ public class ChangeStatutController {
 	private String ppmFrm="none";
 	private String dacFrm="none";
 	private String aaoFrm="none";
+	private String attFrm="none";
+	private String critereRecherche="";
+	private String lot="";
+	private String etpre="";
 	
 	public void chargeData() {
 		recupActeur();
-		chargeStructure();
+		//chargeStructure();
 	}
 	
 	@PostConstruct
@@ -113,7 +126,7 @@ public class ChangeStatutController {
 		switch(choixOpe) {
 		
 		case "ppm":
-			listePpm=iservice.getObjectsByColumn("VPpmliste", new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,struct.getStrCode()),
+			listeDac=iservice.getObjectsByColumn("VDacliste", new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,struct.getFonCod()),
 					new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"));
 			affDial="ppmDlg";
 			affForm="dlogPpm";
@@ -121,10 +134,11 @@ public class ChangeStatutController {
 			ppmFrm="block";
 			dacFrm="none";
 			aaoFrm="none";
+			attFrm="none";
 		break;
 		case "dac":
 			listeDac=iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("dacCode")),
-					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,struct.getStrCode()),
+					new WhereClause("DAC_FON_COD_AC",WhereClause.Comparateur.EQ,struct.getFonCod()),
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"));
 			affDial="dacDlg";
 			affForm="dlogDAC";
@@ -132,10 +146,11 @@ public class ChangeStatutController {
 			ppmFrm="none";
 			dacFrm="block";
 			aaoFrm="none";
+			attFrm="none";
 		break;
 		case "aao":
 			listeDac=iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("aaoCode")),
-					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,struct.getStrCode()),
+					new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,struct.getFonCod()),
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"));
 			affDial="aaoDlg";
 			affForm="dlogAaao";
@@ -145,7 +160,20 @@ public class ChangeStatutController {
 			ppmFrm="none";
 			dacFrm="none";
 			aaoFrm="block";
-		break;		
+			attFrm="none";
+		break;	
+		case "att":
+			listAttribution=iservice.getObjectsByColumn("VbAttributions", new ArrayList<String>(Arrays.asList("attNum")),
+					new WhereClause("ATT_FON_CODE_ATT",WhereClause.Comparateur.EQ,struct.getFonCod()),
+					new WhereClause("ATT_STA_CODE",WhereClause.Comparateur.NEQ,"SDS"));
+			affDial="attDlg";
+			affForm="dlogAtt";
+			listeStatut=iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",WhereClause.Comparateur.LIKE,"AT%"));
+			ppmFrm="none";
+			dacFrm="none";
+			aaoFrm="none";
+			attFrm="block";
+		break;
 
 		}
 	}
@@ -155,8 +183,8 @@ public class ChangeStatutController {
 		switch(choixOpe) {
 		
 		case "ppm":
-			affValue=ppm.getDppId()+" : "+ppm.getDppObjet();
-			slctdPpm=(TDetailPlanPassation) iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",WhereClause.Comparateur.EQ, String.valueOf(ppm.getDppId())),
+			affValue=mixDacAao.getDppId()+" : "+mixDacAao.getDppObjet();
+			slctdPpm=(TDetailPlanPassation) iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",WhereClause.Comparateur.EQ, String.valueOf(mixDacAao.getDppId())),
 					new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
 		break;
 		case "dac":
@@ -169,12 +197,48 @@ public class ChangeStatutController {
 			aao=(TAvisAppelOffre) iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,mixDacAao.getAaoCode()),
 					new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
 		break;	
+		case "att":
+			affValue="Attribution n"+slctdAtt.getAttNum()+" de l'appel d'offres n "+slctdAtt.getAttDofAaoCode();
+			attrib=(TAttributions) iservice.getObjectsByColumn("TAttributions", new WhereClause("ATT_NUM",WhereClause.Comparateur.EQ,slctdAtt.getAttNum().toString()),
+					new WhereClause("ATT_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
+
+			TSoumissions sou = (TSoumissions) iservice.getObjectsByColumn("TSoumissions", new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,attrib.getAttSouNcc())).get(0);
+			etpre=sou.getSouNcc()+" - "+sou.getSouSigleDmp()+" - "+sou.getSouSigleSte();
+			
+			VLot avisLot = (VLot) iservice.getObjectsByColumn("VLot", new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,attrib.getAttDofAaoCode()),
+					new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,attrib.getAttLaaId().toString())).get(0);
+			lot="Lot n "+avisLot.getLaaNum()+" : "+avisLot.getLaaObjet();
+		break;
+		}
+		System.out.println(struct.getFonCod()+" - "+struct.getFonLibelle());
+	}
+	
+	public void chargeStructure() {
+		
+		viderDonnees();
+		if(critereRecherche.equals("")) {
+			listeStruc=(List<TFonction>)iservice.getObjectsByColumn("TFonction", new ArrayList<String>(Arrays.asList("fonCod")),
+					new WhereClause("FON_TYF_COD", WhereClause.Comparateur.EQ, "ACR"));
+		}else {
+			listeStruc=(List<TFonction>)iservice.getObjectsByColumn("TFonction", new ArrayList<String>(Arrays.asList("fonCod")),
+					new WhereClause("FON_TYF_COD", WhereClause.Comparateur.EQ, "ACR"),
+					new WhereClause("FON_COD", WhereClause.Comparateur.LIKE, "%"+critereRecherche.toUpperCase()+"%"));
 		}
 		
 	}
 	
-	public void chargeStructure() {
-		listeStruc=(List<TStructure>)iservice.getObjectsByColumn("TStructure", new ArrayList<String>(Arrays.asList("strCode")));
+	public void viderDonnees() {
+
+		ppm = new VPpmliste();
+		slctdPpm = new TDetailPlanPassation();
+		mixDacAao = new VDacliste();
+		dac = new TDacSpecs();
+		aao = new TAvisAppelOffre();
+		statut = new TStatut();
+		attrib = new TAttributions();
+		slctdAtt = new VbAttributions();
+		affValue="";
+		choixOpe="";
 	}
 	
 	public void update() {
@@ -194,8 +258,12 @@ public class ChangeStatutController {
 			aao.setTStatut(statut);
 			iservice.updateObject(aao);
 			break;	
+		case "att":
+			attrib.setAttStaCode(statut.getStaCode());
+			iservice.updateObject(attrib);
+			break;
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Opération mise à jour ! ", "")); 
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Opration mise  jour ! ", "")); 
 		System.out.println(statut.getStaCode()+" : "+statut.getStaLibelleLong());
 	}
 
