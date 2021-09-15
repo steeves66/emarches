@@ -52,7 +52,6 @@ public class TGestion implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "GES_CODE", unique = true, nullable = false, precision = 4, scale = 0)
 	public long getGesCode() {
 		return this.gesCode;

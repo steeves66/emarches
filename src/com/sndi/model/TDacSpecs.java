@@ -37,7 +37,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private TTypeDacSpecs TTypeDacSpecs;
 	private String dacObjet;
 	private Date dacDteSaisi;
-	private long dacNbrOuv;
+	private Long dacNbrOuv;
 	private Date dacDteValCpmp;
 	private Date dacDteValDmp;
 	private Date dacDateReception;
@@ -85,7 +85,7 @@ public class TDacSpecs implements java.io.Serializable {
 	public TDacSpecs(String dacCode, TFonction TFonctionByDacFonCodeCpmp, TFonction TFonctionByDacFonCodAc,
 			TModePassation TModePassation, TStatut TStatut, TStructure TStructure,
 			TGestion TGestion, TTypeMarche TTypeMarche, TModeleDacType TModeleDacType, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
-			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
+			Long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
 			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,String dacCraCodeExclus,
@@ -266,11 +266,11 @@ public class TDacSpecs implements java.io.Serializable {
 
 
 	@Column(name = "DAC_NBR_OUV", precision = 22, scale = 0)
-	public long getDacNbrOuv() {
+	public Long getDacNbrOuv() {
 		return this.dacNbrOuv;
 	}
 
-	public void setDacNbrOuv(long dacNbrOuv) {
+	public void setDacNbrOuv(Long dacNbrOuv) {
 		this.dacNbrOuv = dacNbrOuv;
 	}
 

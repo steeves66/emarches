@@ -40,6 +40,7 @@ import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFinancementPpm;
 import com.sndi.model.TFonction;
 import com.sndi.model.TGestion;
+import com.sndi.model.TGestionPgpm;
 import com.sndi.model.THistoAgpm;
 import com.sndi.model.THistoPlanGeneral;
 import com.sndi.model.TMinistere;
@@ -123,7 +124,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		chargeData();	
 		//chargeBailleur();
 		//chargeDevise();
-		chargeGestions();
+		//chargeGestions();
+		chargePgpmGestions();
 		chargeMinisteres();
 		chargeFonctionCpm();
 		chargeMarches();
@@ -192,7 +194,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private List<TFinancement> listeFinancementAgpm = new ArrayList<TFinancement>();
 		 
 		 
-		 private List<VPgpmGestion> listeGestion = new ArrayList<VPgpmGestion>();
+		 private List<TGestionPgpm> listePgmGest = new ArrayList<TGestionPgpm>();
+		 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 		 private List<TFinancementPgpm> listeFinancement = new ArrayList<TFinancementPgpm>();
 		 private List<VFinancementPgpm> listeFinancementPgpm = new ArrayList<VFinancementPgpm>();
 		 private List<TFinancementPgpm> financementListe = new ArrayList<TFinancementPgpm>();
@@ -237,6 +240,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private VAcMin recupMin = new VAcMin();
 		 private VAcPf recupCell = new VAcPf();
 		 private TPlanGeneral plan = new TPlanGeneral();
+		 //private VPgpmGestion objetGestion = new VPgpmGestion();
+		 private TGestion objetGestion = new TGestion();
 		 private VPgpmStatut pgpmstatut= new VPgpmStatut();
 		 private TDetailPlanGeneral detailPlan = new TDetailPlanGeneral();
 		 private VUpdatePgpm updateOperation = new VUpdatePgpm();
@@ -1989,12 +1994,32 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		/* public void chargeGestions(){
 			 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
 		 }*/
+			//ACombobox Gestions
+			 public void chargeGestions(){
+				 listeGestion=new ArrayList<>(constantService.getListeGestion());
+			 } 
 		 
-		//ACombobox Gestions
+			 
+			//ACombobox Gestions
+			 public void chargePgpmGestions(){
+				 listePgmGest=new ArrayList<>(constantService.getListePgmGest());
+			 }
+		/*//ACombobox Gestions
 		 public void chargeGestions(){
-			 listeGestion=(List<VPgpmGestion>) iservice.getObjectsByColumn("VPgpmGestion");
+			 listeGestion=(List<TGestions>) iservice.getObjectsByColumn("TGestion",
+					 new WhereClause("GES_COURANT",WhereClause.Comparateur.EQ,"N"));
 			 //listeGestion=new ArrayList<>(constantService.getListeGestion());
-		 } 
+		 } */
+		 
+		/* public void recupGestions(){
+			 listeGestion=(List<TGestion>) iservice.getObjectsByColumn("TGestion",
+					 new WhereClause("GES_COURANT",WhereClause.Comparateur.EQ,"N"));
+		                 if (!listeGestion.isEmpty()) {
+			                  objetGestion=listeGestion.get(0);
+			                  gesCode = Long.valueOf(objetGestion.getGesCode());
+			                    } 
+		                 _logger.info("Gestion : "+gesCode);
+		 } */
 		 
 		/*//Combobox Bailleur
 	  public void chargeBailleur() {
@@ -4069,7 +4094,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					
 					chargeBailleur();
 					chargeDevise();
-					chargeGestions();
+					//chargeGestions();
+					chargePgpmGestions();
+					//recupGestions();
 					//chargeMarches();
 					//chargeModePassation();
 					//chargeMode();
@@ -4240,13 +4267,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-	public List<VPgpmGestion> getListeGestion() {
+	/*public List<VPgpmGestion> getListeGestion() {
 		return listeGestion;
 	}
 
 	public void setListeGestion(List<VPgpmGestion> listeGestion) {
 		this.listeGestion = listeGestion;
-	}
+	}*/
 
 	public long getGesCode() {
 		return gesCode;
@@ -5417,5 +5444,39 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	public void setPlgFonCodAc(String plgFonCodAc) {
 		this.plgFonCodAc = plgFonCodAc;
 	}
+
+	/*public VPgpmGestion getObjetGestion() {
+		return objetGestion;
+	}
+
+	public void setObjetGestion(VPgpmGestion objetGestion) 
+		this.objetGestion = objetGestion;
+	}*/
+
+	public List<TGestion> getListeGestion() {
+		return listeGestion;
+	}
+
+	public void setListeGestion(List<TGestion> listeGestion) {
+		this.listeGestion = listeGestion;
+	}
+
+	public TGestion getObjetGestion() {
+		return objetGestion;
+	}
+
+	public void setObjetGestion(TGestion objetGestion) {
+		this.objetGestion = objetGestion;
+	}
+
+	public List<TGestionPgpm> getListePgmGest() {
+		return listePgmGest;
+	}
+
+	public void setListePgmGest(List<TGestionPgpm> listePgmGest) {
+		this.listePgmGest = listePgmGest;
+	}
+	
+	
 
 }

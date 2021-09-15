@@ -19,6 +19,7 @@ import com.sndi.model.TBanques;
 import com.sndi.model.TContenuAgpm;
 import com.sndi.model.TDevise;
 import com.sndi.model.TGestion;
+import com.sndi.model.TGestionPgpm;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TModePassation;
 import com.sndi.model.TSoumissions;
@@ -30,6 +31,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.VDatePub;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
+import com.sndi.model.VPgpmGestion;
 import com.sndi.model.VStructure;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VTypeStructConduc;
@@ -61,6 +63,9 @@ public class ConstantService {
 	
 	private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	private Map<String, TGestion> HM_GESTION = new HashMap<String, TGestion>();
+	
+	private List<TGestionPgpm> listePgmGest = new ArrayList<TGestionPgpm>();
+	private Map<String, TGestionPgpm> HM_PGPM_GESTION = new HashMap<String, TGestionPgpm>();
 	
 	private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
 	private Map<String, TTypeMarche> HM_TYPE_MARCHE = new HashMap<String, TTypeMarche>();
@@ -127,6 +132,7 @@ public class ConstantService {
 		 chargeTSourceFinancementTable();
 		 chargeTMinitereTable();
 		 chargeTGestionTable();
+		 chargeTGestionPgpmTable();
 		 chargeTContenuAgpmTable();
 		 chargeTTypeMarcheTable();
 		 chargeTModePassationTable();
@@ -252,6 +258,21 @@ public class ConstantService {
 				
 				public TGestion getTGestion(String GES_CODE){
 					return HM_GESTION.get(GES_CODE);
+				}
+				
+				 //GESTION PGPM
+				public void chargeTGestionPgpmTable(){
+					listePgmGest=(List<TGestionPgpm>) iservice.getObjectsByColumnDesc("TGestionPgpm", new ArrayList<String>(Arrays.asList("GES_CODE")));	
+					HashMap<String, TGestionPgpm> aMap = new HashMap<String, TGestionPgpm>();
+					for (TGestionPgpm st: listePgmGest) {
+						aMap.put(""+st.getGesCode(), st);
+					}
+					HM_PGPM_GESTION =  Collections.unmodifiableMap(aMap);	
+					_logger.info("HM_PGPM_GESTION.size :"+ HM_PGPM_GESTION.size());	
+				}
+				
+				public TGestionPgpm getTGestionPgpm(String GES_CODE){
+					return HM_PGPM_GESTION.get(GES_CODE);
 				}
 				
 		        //TTYPE_MARCHE
@@ -716,6 +737,18 @@ public class ConstantService {
 	}
 	public void setHM_STRUCTURE(Map<String, VStructure> hM_STRUCTURE) {
 		HM_STRUCTURE = hM_STRUCTURE;
+	}
+	public List<TGestionPgpm> getListePgmGest() {
+		return listePgmGest;
+	}
+	public void setListePgmGest(List<TGestionPgpm> listePgmGest) {
+		this.listePgmGest = listePgmGest;
+	}
+	public Map<String, TGestionPgpm> getHM_PGPM_GESTION() {
+		return HM_PGPM_GESTION;
+	}
+	public void setHM_PGPM_GESTION(Map<String, TGestionPgpm> hM_PGPM_GESTION) {
+		HM_PGPM_GESTION = hM_PGPM_GESTION;
 	}
 
 }

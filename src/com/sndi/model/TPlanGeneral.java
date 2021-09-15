@@ -1,6 +1,7 @@
 package com.sndi.model;
 // Generated 30 nov. 2019 13:40:49 by Hibernate Tools 4.3.5.Final
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -30,6 +33,7 @@ public class TPlanGeneral implements java.io.Serializable {
 	private TGestion TGestion;
 	private String plgCode;
 	private String plgLibelle;
+	private Date plgDteSaisie;
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 
 	public TPlanGeneral() {
@@ -39,22 +43,15 @@ public class TPlanGeneral implements java.io.Serializable {
 		this.plgId = plgId;
 	}
 
-	public TPlanGeneral(long plgId, TStructure TStructure,TFonction TFonction, TGestion TGestion) {
-		this.plgId = plgId;
-		this.TStructure = TStructure;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
-	}
-
 	public TPlanGeneral(long plgId, TStructure TStructure, TFonction TFonction, TGestion TGestion, String plgCode,
-			String plgLibelle, Set<TDetailPlanGeneral> TDetailPlanGenerals) {
+			String plgLibelle, Date plgDteSaisie, Set<TDetailPlanGeneral> TDetailPlanGenerals) {
 		this.plgId = plgId;
 		this.TStructure = TStructure;
-		//this.TMinistere = TMinistere;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
 		this.plgCode = plgCode;
 		this.plgLibelle = plgLibelle;
+		this.plgDteSaisie = plgDteSaisie;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 	}
 
@@ -71,16 +68,6 @@ public class TPlanGeneral implements java.io.Serializable {
 	public void setPlgId(long plgId) {
 		this.plgId = plgId;
 	}
-
-/*	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLG_MIN_CODE", nullable = false)
-	public TMinistere getTMinistere() {
-		return this.TMinistere;
-	}
-
-	public void setTMinistere(TMinistere TMinistere) {
-		this.TMinistere = TMinistere;
-	}*/
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PLG_STR_CODE", nullable = false)
@@ -103,7 +90,7 @@ public class TPlanGeneral implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLG_GES_CODE", nullable = false)
+	@JoinColumn(name = "PLG_GES_CODE")
 	public TGestion getTGestion() {
 		return this.TGestion;
 	}
@@ -128,6 +115,17 @@ public class TPlanGeneral implements java.io.Serializable {
 
 	public void setPlgLibelle(String plgLibelle) {
 		this.plgLibelle = plgLibelle;
+	}
+	
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "PLG_DTE_SAISIE", length = 7)
+	public Date getPlgDteSaisie() {
+		return this.plgDteSaisie;
+	}
+
+	public void setPlgDteSaisie(Date plgDteSaisie) {
+		this.plgDteSaisie = plgDteSaisie;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPlanGeneral")
