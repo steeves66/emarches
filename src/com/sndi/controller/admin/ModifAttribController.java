@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
@@ -46,11 +47,13 @@ public class ModifAttribController {
 	
 	private List<TAttributions> listAttribution = new ArrayList<TAttributions>();
 	private TAttributions slctdTb = new TAttributions();
+	private TAttributions choix = new TAttributions();
 	
-	private BigDecimal montantAttrib= BigDecimal.ZERO;
+	private String montantAttrib;
 	private String critere="";
 	private String entreprise="";
 	private String lotAtt="";
+	
 	
 	@PostConstruct
 	public void postConstru() {	
@@ -86,7 +89,6 @@ public class ModifAttribController {
 	}
 	
 	public void infoAttrib() {
-		
 		TSoumissions sou = (TSoumissions) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("souNcc")),
 				new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,slctdTb.getAttSouNcc())).get(0);
 		entreprise=sou.getSouNcc()+" : "+sou.getSouSigleSte()+" - "+sou.getSouNomCom();
@@ -94,13 +96,22 @@ public class ModifAttribController {
 		TLotAao lot = (TLotAao) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("laaId")),
 				new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,""+slctdTb.getAttLaaId().longValue())).get(0);
 		lotAtt = "Lot n°"+lot.getLaaNum()+" : "+lot.getLaaObjet();
+		System.out.println(slctdTb.getAttNum()+" : "+slctdTb.getAttDofAaoCode()+" : "+slctdTb.getAttSouNcc()+" : "+slctdTb.getAttMtAttr()+" F CFA");
 	}
 	
+	@Transactional
 	public void update() {
-		
-		//slctdTb.setAttMtAttr(montantAttrib);
-		iservice.updateObject(slctdTb);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Montant attribué mis  jour ! ", "")); 
+		System.out.println(montantAttrib);
+		if(!(null == slctdTb.getAttNum())&&!(null == montantAttrib)||"".equals(montantAttrib)) {
+			System.out.println(montantAttrib);
+			int i = listAttribution.indexOf(slctdTb);
+			choix =(TAttributions) iservice.getObjectsByColumn("TAttributions",	new WhereClause("ATT_NUM",WhereClause.Comparateur.EQ,slctdTb.getAttNum().toString())).get(0);
+			choix.setAttMtAttr(new BigDecimal(montantAttrib));
+			iservice.updateObject(choix);
+			listAttribution.set(i, choix);
+			chargeData();
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Montant attribué mis à jour ! ", "")); 
 		System.out.println(slctdTb.getAttNum()+" : "+slctdTb.getAttDofAaoCode()+" : "+slctdTb.getAttSouNcc()+" : "+slctdTb.getAttMtAttr()+" F CFA");
 	}
 	

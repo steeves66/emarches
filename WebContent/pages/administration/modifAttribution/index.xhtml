@@ -134,6 +134,7 @@
 		</h:form>
 
 		<h:panelGroup id="attFrm" style="block">
+		 <h:form>
 			<p:dialog widgetVar="attDlg" modal="true" showEffect="fade"
 				hideEffect="fade" width="70%" closable="true" header="Attribution">
 				<div class="contentpanel">
@@ -143,9 +144,8 @@
 						</div>
 
 						<div class="form-group form-inline row">
-							<label for="attAvis" class="col-sm-2 control-label"><b>Avis
-									:</b></label>
-							<div class="col-sm-3">
+							<label for="attAvis" class="col-sm-2 control-label"><b>Avis :</b></label>
+							<div class="col-sm-2">
 								<p:inputText type="text" styleClass="form-control"
 									value="#{modifAttribController.slctdTb.attDofAaoCode}"
 									id="attAvis" style="width: 100%" readonly="true">
@@ -153,8 +153,7 @@
 							</div>
 						</div>
 						<div class="form-group form-inline row">
-							<label for="attLot" class="col-sm-2 control-label"><b>Lot
-									:</b></label>
+							<label for="attLot" class="col-sm-2 control-label"><b>Lot :</b></label>
 							<div class="col-sm-10">
 								<p:inputText type="text" value="#{modifAttribController.lotAtt}"
 									styleClass="form-control" id="attLot" style="width: 100%"
@@ -163,8 +162,7 @@
 							</div>
 						</div>
 						<div class="form-group form-inline row">
-							<label for="attSou" class="col-sm-2 control-label"><b>Soumissionnaire
-									:</b></label>
+							<label for="attSou" class="col-sm-2 control-label"><b>Soumissionnaire :</b></label>
 							<div class="col-sm-10">
 								<p:inputText type="text" styleClass="form-control"
 									value="#{modifAttribController.entreprise}"
@@ -173,20 +171,15 @@
 							</div>
 						</div>
 						<div class="form-group form-inline row">
-							<label for="attr" class="col-sm-2 control-label"><b>Montant
-									attribué:</b></label>
-							<div class="col-sm-2">
-								<p:inputText type="text"
-									value="#{modifAttribController.slctdTb.attMtAttr}"
-									styleClass="form-control" id="attr" style="width: 100%"
-									readonly="false">
-									<f:convertNumber pattern="#,##0" />
-									<p:ajax listener="#{modifAttribController.montantAttrib}"
-										event="blur" process="@this" update=":gnl attFrm" />
+							<label for="attDte" class="col-sm-2 control-label"><b>Date	d'attribution:</b></label>
+							<div class="col-sm-3">
+								<p:inputText type="text" styleClass="form-control"
+									value="#{modifAttribController.slctdTb.attDteAtt}" id="attDte"
+									style="width: 40%" readonly="true">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</p:inputText>
-								
 							</div>
-							<label for="cfa" class="col-sm-1 control-label"><b>F CFA</b></label>
+
 							<label for="attDef" class="col-sm-2 control-label"><b>Attribution
 									definitive:</b></label>
 							<div class="col-sm-1">
@@ -197,25 +190,37 @@
 							</div>
 						</div>
 						<div class="form-group form-inline row">
-							<label for="attDte" class="col-sm-2 control-label"><b>Date
-									d'attribution:</b></label>
-							<div class="col-sm-3">
-								<p:inputText type="text" styleClass="form-control"
-									value="#{modifAttribController.slctdTb.attDteAtt}" id="attDte"
-									style="width: 40%" readonly="true">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
+							<label for="attr" class="col-sm-2 control-label"><b>Montant	attribué:</b></label>
+							<div class="col-sm-2">
+								<p:inputText type="text"
+									value="#{modifAttribController.slctdTb.attMtAttr}"
+									styleClass="form-control" id="attr" style="width: 100%"
+									readonly="true" placeholder="#{modifAttribController.slctdTb.attMtAttr}">
+									<f:convertNumber pattern="#,##0" />
 								</p:inputText>
 							</div>
+								<label for="cfa" class="col-sm-1"><b>F CFA</b></label>
+								<label for="mtd" class="col-sm-2 control-label"><b>Montant	corrigé:</b></label>
+							<div class="col-sm-2">
+								<p:inputText value="#{modifAttribController.montantAttrib}"
+									styleClass="form-control" id="mtd" style="width: 100%">
+									<f:convertNumber pattern="#,##0" />
+									<p:ajax event="blur" process="@this" update="mtd" />
+								</p:inputText>
+									
+								<label for="cfa" class="col-sm-1"><b>F CFA</b></label>
+							</div>
+							
+							
 						</div>
-					<!-- 	<div class="pull-right row">
+						<div class="pull-right row">
 							<p:commandLink class="btn btn-xs btn-warning"
 								action="#{modifAttribController.update()}" title="Modifier"
 								style="background-color: #f88b2e;" update=":content">
 								<i class="ace-icon fa fa-pencil bigger-120" style="color: white"></i>
-								<f:setPropertyActionListener value="#{slctdTb}"
-									target="#{modifAttribController.slctdTb}" />
+								<f:setPropertyActionListener value="#{slctdTb}"	target="#{modifAttribController.slctdTb}" />
 							</p:commandLink>
-						</div> -->
+						</div>
 						<div class="pull-right row">
 							<p:commandLink styleClass="btn btn-success"
 								style="background-color: #036d3b"
@@ -230,7 +235,7 @@
 				</div>
 
 			</p:dialog>
-
+		</h:form>
 		</h:panelGroup>
 
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
