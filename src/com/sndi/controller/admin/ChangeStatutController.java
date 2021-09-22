@@ -87,6 +87,7 @@ public class ChangeStatutController {
 	private String critereRecherche="";
 	private String lot="";
 	private String etpre="";
+	private String attribStatut="";
 	
 	public void chargeData() {
 		recupActeur();
@@ -186,16 +187,19 @@ public class ChangeStatutController {
 			affValue=mixDacAao.getDppId()+" : "+mixDacAao.getDppObjet();
 			slctdPpm=(TDetailPlanPassation) iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",WhereClause.Comparateur.EQ, String.valueOf(mixDacAao.getDppId())),
 					new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
+			System.out.println(slctdPpm.getDppId()+" - "+slctdPpm.getDppObjet());
 		break;
 		case "dac":
 			affValue=mixDacAao.getDacCode()+" : "+mixDacAao.getDacObjet();
 			dac=(TDacSpecs) iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,mixDacAao.getDacCode()),
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
+			System.out.println(dac.getDacCode()+" - "+dac.getDacObjet());
 		break;
 		case "aao":
 			affValue=mixDacAao.getAaoCode()+" : "+mixDacAao.getAaoLibelle();
 			aao=(TAvisAppelOffre) iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,mixDacAao.getAaoCode()),
 					new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.NEQ,"SDS")).get(0);
+			System.out.println(aao.getAaoCode()+" - "+aao.getAaoLibelle());
 		break;	
 		case "att":
 			affValue="Attribution n"+slctdAtt.getAttNum()+" de l'appel d'offres n "+slctdAtt.getAttDofAaoCode();
@@ -207,7 +211,8 @@ public class ChangeStatutController {
 			
 			VLot avisLot = (VLot) iservice.getObjectsByColumn("VLot", new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,attrib.getAttDofAaoCode()),
 					new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,attrib.getAttLaaId().toString())).get(0);
-			lot="Lot n "+avisLot.getLaaNum()+" : "+avisLot.getLaaObjet();
+			lot="Lot n° "+avisLot.getLaaNum()+" : "+avisLot.getLaaObjet();
+			System.out.println(attrib.getAttNum()+" - "+attrib.getAttSouNcc());
 		break;
 		}
 		System.out.println(struct.getFonCod()+" - "+struct.getFonLibelle());
@@ -215,7 +220,7 @@ public class ChangeStatutController {
 	
 	public void chargeStructure() {
 		
-		viderDonnees();
+		//viderDonnees();
 		if(critereRecherche.equals("")) {
 			listeStruc=(List<TFonction>)iservice.getObjectsByColumn("TFonction", new ArrayList<String>(Arrays.asList("fonCod")),
 					new WhereClause("FON_TYF_COD", WhereClause.Comparateur.EQ, "ACR"));
@@ -235,8 +240,8 @@ public class ChangeStatutController {
 		dac = new TDacSpecs();
 		aao = new TAvisAppelOffre();
 		statut = new TStatut();
-		attrib = new TAttributions();
-		slctdAtt = new VbAttributions();
+		//attrib = new TAttributions();
+		//slctdAtt = new VbAttributions();
 		affValue="";
 		choixOpe="";
 	}
@@ -244,26 +249,28 @@ public class ChangeStatutController {
 	public void update() {
 		System.out.println(statut.getStaCode()+" : "+statut.getStaLibelleLong());
 		System.out.println(choixOpe);
+		attribStatut=statut.getStaCode();
+		TStatut choixStat =(TStatut) iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",WhereClause.Comparateur.EQ,attribStatut)).get(0);
 		switch(choixOpe) {
 
 		case "ppm":
-			slctdPpm.setTStatut(statut);
+			slctdPpm.setTStatut(choixStat);
 			iservice.updateObject(slctdPpm);
 			break;
 		case "dac":
-			dac.setTStatut(statut);
+			dac.setTStatut(choixStat);
 			iservice.updateObject(dac);
 			break;
 		case "aao":
-			aao.setTStatut(statut);
+			aao.setTStatut(choixStat);
 			iservice.updateObject(aao);
 			break;	
-		case "att":
-			attrib.setAttStaCode(statut.getStaCode());
+		case "att":			
+			attrib.setAttStaCode(attribStatut);
 			iservice.updateObject(attrib);
 			break;
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Opration mise  jour ! ", "")); 
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Opération mise  jour ! ", "")); 
 		System.out.println(statut.getStaCode()+" : "+statut.getStaLibelleLong());
 	}
 

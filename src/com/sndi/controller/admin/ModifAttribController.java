@@ -47,7 +47,6 @@ public class ModifAttribController {
 	
 	private List<TAttributions> listAttribution = new ArrayList<TAttributions>();
 	private TAttributions slctdTb = new TAttributions();
-	private TAttributions choix = new TAttributions();
 	
 	private String montantAttrib;
 	private String critere="";
@@ -103,9 +102,8 @@ public class ModifAttribController {
 	public void update() {
 		System.out.println(montantAttrib);
 		if(!(null == slctdTb.getAttNum())&&!(null == montantAttrib)||"".equals(montantAttrib)) {
-			System.out.println(montantAttrib);
 			int i = listAttribution.indexOf(slctdTb);
-			choix =(TAttributions) iservice.getObjectsByColumn("TAttributions",	new WhereClause("ATT_NUM",WhereClause.Comparateur.EQ,slctdTb.getAttNum().toString())).get(0);
+			TAttributions choix =(TAttributions) iservice.getObjectsByColumn("TAttributions",	new WhereClause("ATT_NUM",WhereClause.Comparateur.EQ,slctdTb.getAttNum().toString())).get(0);
 			choix.setAttMtAttr(new BigDecimal(montantAttrib));
 			iservice.updateObject(choix);
 			listAttribution.set(i, choix);
