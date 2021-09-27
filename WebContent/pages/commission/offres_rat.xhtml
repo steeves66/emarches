@@ -39,7 +39,7 @@
 	                   <p:selectOneMenu id="site" value="#{commissionController.dacCode}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le DAC..." itemValue="empty" />  
-			            <f:selectItems value="#{commissionController.listeDac}" var="dac" itemLabel="#{dac.dacCode} : #{dac.dacObjet}" itemValue="#{dac.dacCode}" />
+			            <f:selectItems value="#{commissionController.listeDac}" var="dac" itemLabel="#{dac.dacCode}" itemValue="#{dac.dacCode}" />
 			            <p:ajax listener="#{commissionController.openDac()}" update="gnl"/>
        		        </p:selectOneMenu> 
 	                  </div>

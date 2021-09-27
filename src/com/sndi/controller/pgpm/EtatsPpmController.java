@@ -93,6 +93,7 @@ public class EtatsPpmController {
      public boolean ppmAmiPso = false;
      public boolean ppmPso = false;
      public boolean ppmPsl = false;
+     public boolean ppmPsi = false;
      public boolean ppmPrq = false;
      public boolean ppmPsc = false;
      public boolean ppmAor = false;
@@ -141,6 +142,7 @@ public class EtatsPpmController {
 			     ppmPsc = false;
 			     ppmAmiPso = false;
 			     ppmAor = false;
+			     ppmPsi = false;
 			 }else {
 				 
 				 if(slctdTd.getDppMopCode().equalsIgnoreCase("AMS")){
@@ -152,6 +154,7 @@ public class EtatsPpmController {
 			     ppmPrq = false;
 			     ppmPsc = false;
 			     ppmAor = false;
+			     ppmPsi = false;
 			 }else {
 				 /*if(slctdTd.getDppMopCode().equalsIgnoreCase("PRQ")){
 					 ppmNormal = false;
@@ -170,7 +173,21 @@ public class EtatsPpmController {
 					     ppmPsc = false;
 					     ppmAmiPso = false;
 					     ppmAor = false;
+					     ppmPsi = false;
 					 }else {
+						 
+						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSI")){
+							 ppmNormal = false;
+						     ppmAmi = false;
+						     ppmPso = false;
+						     ppmPsl = false;
+						     ppmPrq = false;
+						     ppmPsc = false;
+						     ppmAmiPso = false;
+						     ppmAor = false;
+						     ppmPsi = true;
+						 }else {
+						 
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")){
 							 ppmNormal = false;
 						     ppmAmi = false;
@@ -180,6 +197,7 @@ public class EtatsPpmController {
 						     ppmPsc = true;
 						     ppmAmiPso = false;
 						     ppmAor = false;
+						     ppmPsi = false;
 						 }else {
 						 
 						 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")){
@@ -191,6 +209,7 @@ public class EtatsPpmController {
 						     ppmPrq = false;
 						     ppmPsc = false;
 						     ppmAmiPso = false;
+						     ppmPsi = false;
 						 }else {
 							 
 							 if(slctdTd.getDppMopCode().equalsIgnoreCase("AOR")){
@@ -202,6 +221,7 @@ public class EtatsPpmController {
 							     ppmPrq = false; 
 							     ppmPsc = false;
 							     ppmAmiPso = false;
+							     ppmPsi = false;
 							 }else {   
 							 ppmNormal = true;
 							 ppmAor = false;
@@ -211,11 +231,13 @@ public class EtatsPpmController {
 						     ppmPrq = false; 
 						     ppmPsc = false;
 						     ppmAmiPso = false;
+						     ppmPsi = false;
 						 }
 					   }
 					 }
 				 }
 			  }
+			 }
 			 }
 			}
 		 	 
@@ -585,6 +607,12 @@ public class EtatsPpmController {
 		this.ppmAor = ppmAor;
 	}
 
-	
+	public boolean isPpmPsi() {
+		return ppmPsi;
+	}
+
+	public void setPpmPsi(boolean ppmPsi) {
+		this.ppmPsi = ppmPsi;
+	}
 
 }

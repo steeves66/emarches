@@ -4054,6 +4054,7 @@ TDacSpecs dao = new TDacSpecs();
 		 				    	 dao.setTTypeDacSpecs(new TTypeDacSpecs(""+typeDac));
 		 				    	 dao.setTModeleDacType(new TModeleDacType(""+daoDetail.getDppPieceDao()));
 		 				    	 dao.setDacTypePlan(""+daoDetail.getDppTypePlan());
+		 				    	 dao.setDacNbrOuv(daoDetail.getDppNbOuv());
 		 				    	 dao.setDacBailleur(daoDetail.getDppBailleur());
 		 				    	 iservice.addObject(dao);
                                 //Recherche

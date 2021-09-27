@@ -31,6 +31,7 @@ public class THistoDac implements java.io.Serializable {
 	private String hacCommentaire;
 	private long hacDveNum;
 	private String hacAaoCode;
+	private Long hacLaaId;
 
 	public THistoDac() {
 	}
@@ -44,7 +45,7 @@ public class THistoDac implements java.io.Serializable {
 	}
 
 	public THistoDac(long hacId, TFonction TFonction, TOperateur TOperateur, TDacSpecs TDacSpecs, TStatut TStatut,
-			Date hacDate, String hacCommentaire, long hacDveNum, String hacAaoCode) {
+			Date hacDate, String hacCommentaire, long hacDveNum, String hacAaoCode, Long hacLaaId) {
 		this.hacId = hacId;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
@@ -54,6 +55,7 @@ public class THistoDac implements java.io.Serializable {
 		this.hacCommentaire = hacCommentaire;
 		this.hacDveNum = hacDveNum;
 		this.hacAaoCode = hacAaoCode;
+		this.hacLaaId = hacLaaId;
 	}
 
 	@Id
@@ -99,7 +101,7 @@ public class THistoDac implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAC_STA_CODE", nullable = false)
+	@JoinColumn(name = "HAC_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
 	}
@@ -118,7 +120,7 @@ public class THistoDac implements java.io.Serializable {
 		this.hacDate = hacDate;
 	}
 
-	@Column(name = "HAC_COMMENTAIRE", length = 1000)
+	@Column(name = "HAC_COMMENTAIRE")
 	public String getHacCommentaire() {
 		return this.hacCommentaire;
 	}
@@ -144,5 +146,15 @@ public class THistoDac implements java.io.Serializable {
 	public void setHacAaoCode(String hacAaoCode) {
 		this.hacAaoCode = hacAaoCode;
 	}
+	
+	@Column(name = "HAC_LAA_ID")
+	public Long getHacLaaId() {
+		return this.hacLaaId;
+	}
+
+	public void setHacLaaId(Long hacLaaId) {
+		this.hacLaaId = hacLaaId;
+	}
+
 
 }
