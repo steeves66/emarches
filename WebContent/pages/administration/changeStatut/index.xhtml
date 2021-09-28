@@ -12,11 +12,11 @@
 		<h:form id="gnl">
 			<section class="content-header">
 			<h1>
-				CHANGEMENT DE STATUT D'UNE OPERATION <small>Slectionner une opration</small>
+				CHANGEMENT DE STATUT D'UNE OPERATION <small>Sélectionner une opration</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-				<li class="active">Opration</li>
+				<li class="active">Oépration</li>
 			</ol>
 			</section>
 
@@ -25,22 +25,7 @@
 			<div class="row">
 				<div class="box box-success box-solid ">
 					<div class="box-header with-border ">
-						<div class="form-inline col-md-12">
-							<div class="col-md-4">
-								<label for="act" class="control-label"><b>Acteur</b></label>
-								<p:inputText type="text" styleClass="form-control"
-									value="#{changeStatutController.operateur}" id="act"
-									style="width: 100%">
-								</p:inputText>
-							</div>
-							<div class="col-md-8">
-								<label for="act" class="control-label"><b>Structure</b></label>
-								<p:inputText type="text" styleClass="form-control"
-									value="#{changeStatutController.structure}" id="str"
-									style="width: 100%">
-								</p:inputText>
-							</div>
-						</div>
+						
 
 					</div>
 
@@ -106,7 +91,7 @@
 							</div>
 						</div>
 						</h:panelGroup>
-
+				<h:form>
 						<h:panelGroup id="ppmFm" style="display:#{changeStatutController.ppmFrm};">
 							<div class="form-group ">
 								<label for="dpId" class="col-sm-2 control-label"><b>N
@@ -146,7 +131,7 @@
 							</div>
 							<div class="form-group form-inline">
 								<label for="attTym" class="col-sm-2 control-label"><b>Type
-										de march:</b></label>
+										de marché :</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.slctdPpm.getTTypeMarche().getTymCode()}"
@@ -162,7 +147,7 @@
 							</div>
 							<div class="form-group ">
 								<label for="attDate" class="col-sm-2 control-label"><b>Date
-										saisi:</b></label>
+										saisi :</b></label>
 								<div class="col-sm-3">
 									<p:inputText type="text" styleClass="form-control"
 										value="#{changeStatutController.slctdPpm.dppDateSaisie}"
@@ -173,7 +158,7 @@
 							</div>
 							<div class="form-group form-inline ">
 								<label for="attSta" class="col-sm-2 control-label"><b>Statut
-										actuel:</b></label>
+										actuel :</b></label>
 								<div class="col-sm-4">
 									<p:inputText type="text"
 										value="#{changeStatutController.slctdPpm.getTStatut().getStaCode()}"
@@ -182,6 +167,27 @@
 								</div>
 								
 							</div>
+							<div  align="center">
+						<div class="form-group form-inline">
+						<label for="atmp" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
+							<div class="col-sm-6 control-label">
+								<p:selectOneMenu id="atmp" value="#{changeStatutController.statut.staCode}" effect="fade"
+									style="width:70%;" filter="true" showCheckbox="true" scrollHeight="100">
+									<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"	itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
+										itemValue="#{stat.staCode}" />
+								</p:selectOneMenu>
+							</div>
+							</div>
+						<div class="form-group form-inline col-sm-10 pull-right">
+
+							<p:commandLink styleClass="btn btn-success"
+								style="background-color: #036d3b"
+								action="#{changeStatutController.update()}" update=":content">
+								<p:confirm header="Confirmation"
+									message="Confirmez vous la mise à jour ?" icon="ui-icon-alert" />
+								<i class="ace-icon fa fa-save"></i> Mise  jour </p:commandLink>
+						</div>
+						</div>
 
 						</h:panelGroup>
 						<h:panelGroup id="dacFm"
@@ -224,7 +230,7 @@
 							</div>
 							<div class="form-group form-inline">
 								<label for="dacTym" class="col-sm-2 control-label"><b>Type
-										de march:</b></label>
+										de marché:</b></label>
 								<div class="col-sm-2">
 									<p:inputText type="text"
 										value="#{changeStatutController.dac.getTTypeMarche().getTymCode()}"
@@ -257,12 +263,33 @@
 								<label for="dacSta" class="col-sm-2 control-label"><b>Statut actuel:</b></label>
 								<div class="col-sm-10">
 									<p:inputText type="text" styleClass="form-control"
-										value="#{changeStatutController.dac.getTStatut().getStaCode()}"
+										value="#{changeStatutController.dac.getTStatut()}"
 										id="dacSta" style="width: 40%" readonly="true">
 									</p:inputText>
 								</div>
 								
 							</div>
+							<div  align="center">
+						<div class="form-group form-inline">
+						<label for="aaoSta" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
+							<div class="col-sm-6 control-label">
+								<p:selectOneMenu id="atmd" value="#{changeStatutController.statut.staCode}" effect="fade"
+									style="width:70%;" filter="true" showCheckbox="true" scrollHeight="100">
+									<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"	itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
+										itemValue="#{stat.staCode}" />
+								</p:selectOneMenu>
+							</div>
+							</div>
+						<div class="form-group form-inline col-sm-10 pull-right">
+
+							<p:commandLink styleClass="btn btn-success"
+								style="background-color: #036d3b"
+								action="#{changeStatutController.update()}" update=":content">
+								<p:confirm header="Confirmation"
+									message="Confirmez vous la mise à jour ?" icon="ui-icon-alert" />
+								<i class="ace-icon fa fa-save"></i> Mise  jour </p:commandLink>
+						</div>
+						</div>
 
 						</h:panelGroup>
 						<h:panelGroup id="aaoFm" style="display:#{changeStatutController.aaoFrm};">
@@ -351,6 +378,27 @@
 								</div>
 
 							</div>
+							<div  align="center">
+						<div class="form-group form-inline">
+						<label for="aaoSta" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
+							<div class="col-sm-6 control-label">
+								<p:selectOneMenu id="atmo" value="#{changeStatutController.statut.staCode}" effect="fade"
+									style="width:70%;" filter="true" showCheckbox="true" scrollHeight="100">
+									<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"	itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
+										itemValue="#{stat.staCode}" />
+								</p:selectOneMenu>
+							</div>
+							</div>
+						<div class="form-group form-inline col-sm-10 pull-right">
+							
+							<p:commandLink styleClass="btn btn-success"
+								style="background-color: #036d3b"
+								action="#{changeStatutController.update()}" update=":content">
+								<p:confirm header="Confirmation"
+									message="Confirmez vous la mise à jour ?" icon="ui-icon-alert" />
+								<i class="ace-icon fa fa-save"></i> Mise  jour </p:commandLink>
+						</div>
+						</div>
 
 						</h:panelGroup>
 						<h:panelGroup id="attFm" style="display:#{changeStatutController.attFrm};">
@@ -412,44 +460,42 @@
 								</div>
 								
 							</div>
+							<div align="center" class="row">
+								<div class="form-group form-inline">
+									<label for="atma" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
+									<div class="col-sm-6 control-label">
+										<p:selectOneMenu id="atma"	value="#{changeStatutController.attribStatut}"
+											effect="fade" style="width:70%;" filter="true"
+											showCheckbox="true" scrollHeight="100">
+											<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"
+												itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"	itemValue="#{stat.staCode}" />
+												<p:ajax event="change" process="@this" update="atma" />
+										</p:selectOneMenu>
+									</div>
+								</div>
+
+								<div class="pull-right ">
+									<p:commandLink styleClass="btn btn-success"
+										style="background-color: #036d3b"	action="#{changeStatutController.update()}" update=":content">
+										<p:confirm header="Confirmation"
+											message="Confirmez vous la mise à jour ?"
+											icon="ui-icon-alert" />
+										<i class="ace-icon fa fa-save"></i> Mise  jour
+			            			</p:commandLink>
+								</div>
+							</div>
 
 						</h:panelGroup>
-
+					</h:form>
 						<div class="row"></div>
-						<div  align="center">
-						<div class="form-group form-inline">
-						<label for="aaoSta" class="col-sm-2 control-label"><b>Statut voulu:</b></label>
-							<div class="col-sm-6 control-label">
-								<p:selectOneMenu id="atm"
-									value="#{changeStatutController.statut.staCode}" effect="fade"
-									style="width:70%;" filter="true" showCheckbox="true" scrollHeight="100">
-									<f:selectItems value="#{changeStatutController.listeStatut}" var="stat"
-										itemLabel="    #{stat.staCode}  :  #{stat.staLibelleCourt}"
-										itemValue="#{stat.staCode}" />
-								</p:selectOneMenu>
-							</div>
-							</div>
-						<div class="form-group form-inline col-sm-10">
-							
 						
-						<div class="pull-left ">
-							<p:commandLink styleClass="btn btn-danger mr10 form-control"
-								value="Fermer" style="margin-top:10px;"
-								action="#{userController.renderPage('accueil')}"
-								update=":content" />
-						</div>
-						
-							</div>
-						<div class="pull-right ">
-							<p:commandLink styleClass="btn btn-success"
-								style="background-color: #036d3b"
-								action="#{changeStatutController.update()}" update=":content">
-								<p:confirm header="Confirmation"
-									message="Confirmez vous la mise à jour ?" icon="ui-icon-alert" />
-								<i class="ace-icon fa fa-save"></i> Mise  jour
-			            </p:commandLink>
-						</div>
-						</div>
+
+									<div class="pull-left ">
+										<p:commandLink styleClass="btn btn-danger mr10 form-control"
+											value="Fermer" style="margin-top:10px;"
+											action="#{userController.renderPage('accueil')}"
+											update=":content" />
+									</div>
 					</div>
 				</div>
 			</div>
@@ -474,10 +520,7 @@
 								<p:inputText type="text" value="#{changeStatutController.critereRecherche}"  placeholder="Rechercher la fonction par le code..." readonly="false" >
 								<p:ajax event="blur" listener="#{changeStatutController.chargeStructure()}" update="gnl ndTblePass"> </p:ajax>
 								</p:inputText> 
-								
-								<!-- <span class="input-group-btn">
-									<p:commandLink action="#{changeStatutController.chargeStructure()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="gnl ndTblePass" />
-								</span> -->
+
 							</div>
 						</div>
 							</div>
@@ -496,7 +539,7 @@
 										<p:column headerText="Code" styleClass="col-sm-1">
 											<h:outputText value="#{slctdTb.fonCod}" />
 										</p:column>
-										<p:column headerText="Libell" styleClass="col-sm-10">
+										<p:column headerText="Libellé" styleClass="col-sm-10">
 											<h:outputText value="#{slctdTb.fonLibelle}" />
 										</p:column>
 										<p:column headerText="Actions" styleClass="col-sm-1">
