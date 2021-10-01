@@ -185,6 +185,9 @@ public class GRFProperties {
 	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx");
 	public static final String FICHIER_UPLOAD_DAO_ASSURANCE_LINUX = getProperty("destinationTravaux", "/wildfly8/standalone/Fichiers/dao_assurance_automobile_global_dommages.docx");
 	
+	// Bailleur
+	public static final String FICHIER_UPLOAD_DAO_BID_FOURNITURE = getProperty("destinationTravaux", "/wildfly8/standalone/Fichiers/bid_dao_fourniture.docx");
+	
 	/* Procedures simplifiées */    /* A créer*/
 	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSL_LINUX = getProperty("destinationTravaux","/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSL_FINAL.docx");
 	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSO_LINUX = getProperty("destinationTravaux","/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSO.docx"); 
